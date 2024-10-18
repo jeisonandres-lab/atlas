@@ -7,7 +7,6 @@
     <meta name="description" content="Inicia sesión en tu cuenta para acceder a todas las funcionalidades de ATLAS, nuestro sistema de gestión de recursos humanos">
     <title>Inicio de Sesión | ATLAS</title>
 </head>
-
 <body>
     <header class="cabeza">
         <h1 class="titulo1">ATLAS SITEMAS</h1>
