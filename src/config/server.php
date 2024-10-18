@@ -1,6 +1,9 @@
 <?php
-namespace Analista\Atlas\config\server;
-const DB_SERVER = "localhost";
-const DB_NAME = "";
-const DB_USER = "root";
-const DB_PASS = '';
+namespace Analista\Atlas\config;
+
+class Constantes {
+    public const DB_SERVER = "localhost";
+    public const DB_NAME = "recursos_humanos";
+    public const DB_USER = "root";
+    public const DB_PASS = '';
+}
