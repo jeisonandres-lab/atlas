@@ -1,13 +1,12 @@
 <?php
 namespace Analista\Atlas\config;
-
 require_once '../../vendor/autoload.php';
+use Analista\Atlas\config\server; 
 
-use Analista\Atlas\config\server;
 use PDO;
 use PDOException;
 
-class Database{
+class Conexion{
 
     private $host;
     private $db;
@@ -17,8 +16,8 @@ class Database{
 
    public function __construct(){
       
-      $this->host = 'localhost' ;
-      $this->db = 'recursos_humanos' ;
+      $this->host = server::DB_SERVER ;
+      $this->db = server::DB_NAME ;
       $this->user = 'root';
       $this->password = '';
       $this->charset = 'utf8mb4';
@@ -58,7 +57,7 @@ class Database{
    }
 }
 
-$constante= new Constantes();
-$database = new Database();
+$database2 = new server();
+$database = new Conexion();
 $database->validateConnection();
 ?>
