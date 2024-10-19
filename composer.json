@@ -1,13 +1,13 @@
 {
-    "name": "analista/atlas",
+    "name": "jeison/atlas",
     "autoload": {
         "psr-4": {
-            "Analista\\Atlas\\": "src/"
+            "App\\Atlas\\": "src/"
         }
     },
     "authors": [
         {
-            "name": "jeison",
+            "name": "Jeison Balduz",
             "email": "jeisonbalduz12@gmail.com"
         }
     ],

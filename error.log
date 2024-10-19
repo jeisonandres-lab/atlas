@@ -1,0 +1,264 @@
+[19-Oct-2024 12:51:24 Europe/Berlin] PHP Warning:  Undefined variable $errorHandler in C:\xampp\htdocs\atlas\index.php on line 24
+[19-Oct-2024 12:51:24 Europe/Berlin] PHP Fatal error:  Uncaught TypeError: set_error_handler(): Argument #1 ($callback) must be a valid callback or null, first array member is not a valid class name or object in C:\xampp\htdocs\atlas\index.php:24
+Stack trace:
+#0 C:\xampp\htdocs\atlas\index.php(24): set_error_handler(Array)
+#1 {main}
+  thrown in C:\xampp\htdocs\atlas\index.php on line 24
+[19-Oct-2024 12:51:24 Europe/Berlin] PHP Warning:  Undefined variable $errorHandler in C:\xampp\htdocs\atlas\index.php on line 24
+[19-Oct-2024 12:51:24 Europe/Berlin] PHP Fatal error:  Uncaught TypeError: set_error_handler(): Argument #1 ($callback) must be a valid callback or null, first array member is not a valid class name or object in C:\xampp\htdocs\atlas\index.php:24
+Stack trace:
+#0 C:\xampp\htdocs\atlas\index.php(24): set_error_handler(Array)
+#1 {main}
+  thrown in C:\xampp\htdocs\atlas\index.php on line 24
+[19-Oct-2024 12:51:25 Europe/Berlin] PHP Warning:  Undefined variable $errorHandler in C:\xampp\htdocs\atlas\index.php on line 24
+[19-Oct-2024 12:51:25 Europe/Berlin] PHP Fatal error:  Uncaught TypeError: set_error_handler(): Argument #1 ($callback) must be a valid callback or null, first array member is not a valid class name or object in C:\xampp\htdocs\atlas\index.php:24
+Stack trace:
+#0 C:\xampp\htdocs\atlas\index.php(24): set_error_handler(Array)
+#1 {main}
+  thrown in C:\xampp\htdocs\atlas\index.php on line 24
+[19-Oct-2024 12:51:25 Europe/Berlin] PHP Warning:  Undefined variable $errorHandler in C:\xampp\htdocs\atlas\index.php on line 24
+[19-Oct-2024 12:51:25 Europe/Berlin] PHP Fatal error:  Uncaught TypeError: set_error_handler(): Argument #1 ($callback) must be a valid callback or null, first array member is not a valid class name or object in C:\xampp\htdocs\atlas\index.php:24
+Stack trace:
+#0 C:\xampp\htdocs\atlas\index.php(24): set_error_handler(Array)
+#1 {main}
+  thrown in C:\xampp\htdocs\atlas\index.php on line 24
+[19-Oct-2024 12:51:25 Europe/Berlin] PHP Warning:  Undefined variable $errorHandler in C:\xampp\htdocs\atlas\index.php on line 24
+[19-Oct-2024 12:51:25 Europe/Berlin] PHP Fatal error:  Uncaught TypeError: set_error_handler(): Argument #1 ($callback) must be a valid callback or null, first array member is not a valid class name or object in C:\xampp\htdocs\atlas\index.php:24
+Stack trace:
+#0 C:\xampp\htdocs\atlas\index.php(24): set_error_handler(Array)
+#1 {main}
+  thrown in C:\xampp\htdocs\atlas\index.php on line 24
+[19-Oct-2024 12:51:33 Europe/Berlin] PHP Warning:  Undefined variable $errorHandler in C:\xampp\htdocs\atlas\index.php on line 24
+[19-Oct-2024 12:51:33 Europe/Berlin] PHP Fatal error:  Uncaught TypeError: set_error_handler(): Argument #1 ($callback) must be a valid callback or null, first array member is not a valid class name or object in C:\xampp\htdocs\atlas\index.php:24
+Stack trace:
+#0 C:\xampp\htdocs\atlas\index.php(24): set_error_handler(Array)
+#1 {main}
+  thrown in C:\xampp\htdocs\atlas\index.php on line 24
+[19-Oct-2024 12:51:34 Europe/Berlin] PHP Warning:  Undefined variable $errorHandler in C:\xampp\htdocs\atlas\index.php on line 24
+[19-Oct-2024 12:51:34 Europe/Berlin] PHP Fatal error:  Uncaught TypeError: set_error_handler(): Argument #1 ($callback) must be a valid callback or null, first array member is not a valid class name or object in C:\xampp\htdocs\atlas\index.php:24
+Stack trace:
+#0 C:\xampp\htdocs\atlas\index.php(24): set_error_handler(Array)
+#1 {main}
+  thrown in C:\xampp\htdocs\atlas\index.php on line 24
+[19-Oct-2024 12:51:35 Europe/Berlin] PHP Warning:  Undefined variable $errorHandler in C:\xampp\htdocs\atlas\index.php on line 24
+[19-Oct-2024 12:51:35 Europe/Berlin] PHP Fatal error:  Uncaught TypeError: set_error_handler(): Argument #1 ($callback) must be a valid callback or null, first array member is not a valid class name or object in C:\xampp\htdocs\atlas\index.php:24
+Stack trace:
+#0 C:\xampp\htdocs\atlas\index.php(24): set_error_handler(Array)
+#1 {main}
+  thrown in C:\xampp\htdocs\atlas\index.php on line 24
+[19-Oct-2024 12:51:35 Europe/Berlin] PHP Warning:  Undefined variable $errorHandler in C:\xampp\htdocs\atlas\index.php on line 24
+[19-Oct-2024 12:51:35 Europe/Berlin] PHP Fatal error:  Uncaught TypeError: set_error_handler(): Argument #1 ($callback) must be a valid callback or null, first array member is not a valid class name or object in C:\xampp\htdocs\atlas\index.php:24
+Stack trace:
+#0 C:\xampp\htdocs\atlas\index.php(24): set_error_handler(Array)
+#1 {main}
+  thrown in C:\xampp\htdocs\atlas\index.php on line 24
+[19-Oct-2024 12:51:35 Europe/Berlin] PHP Warning:  Undefined variable $errorHandler in C:\xampp\htdocs\atlas\index.php on line 24
+[19-Oct-2024 12:51:35 Europe/Berlin] PHP Fatal error:  Uncaught TypeError: set_error_handler(): Argument #1 ($callback) must be a valid callback or null, first array member is not a valid class name or object in C:\xampp\htdocs\atlas\index.php:24
+Stack trace:
+#0 C:\xampp\htdocs\atlas\index.php(24): set_error_handler(Array)
+#1 {main}
+  thrown in C:\xampp\htdocs\atlas\index.php on line 24
+[19-Oct-2024 12:51:35 Europe/Berlin] PHP Warning:  Undefined variable $errorHandler in C:\xampp\htdocs\atlas\index.php on line 24
+[19-Oct-2024 12:51:35 Europe/Berlin] PHP Fatal error:  Uncaught TypeError: set_error_handler(): Argument #1 ($callback) must be a valid callback or null, first array member is not a valid class name or object in C:\xampp\htdocs\atlas\index.php:24
+Stack trace:
+#0 C:\xampp\htdocs\atlas\index.php(24): set_error_handler(Array)
+#1 {main}
+  thrown in C:\xampp\htdocs\atlas\index.php on line 24
+[19-Oct-2024 12:51:35 Europe/Berlin] PHP Warning:  Undefined variable $errorHandler in C:\xampp\htdocs\atlas\index.php on line 24
+[19-Oct-2024 12:51:35 Europe/Berlin] PHP Fatal error:  Uncaught TypeError: set_error_handler(): Argument #1 ($callback) must be a valid callback or null, first array member is not a valid class name or object in C:\xampp\htdocs\atlas\index.php:24
+Stack trace:
+#0 C:\xampp\htdocs\atlas\index.php(24): set_error_handler(Array)
+#1 {main}
+  thrown in C:\xampp\htdocs\atlas\index.php on line 24
+[19-Oct-2024 12:51:35 Europe/Berlin] PHP Warning:  Undefined variable $errorHandler in C:\xampp\htdocs\atlas\index.php on line 24
+[19-Oct-2024 12:51:35 Europe/Berlin] PHP Fatal error:  Uncaught TypeError: set_error_handler(): Argument #1 ($callback) must be a valid callback or null, first array member is not a valid class name or object in C:\xampp\htdocs\atlas\index.php:24
+Stack trace:
+#0 C:\xampp\htdocs\atlas\index.php(24): set_error_handler(Array)
+#1 {main}
+  thrown in C:\xampp\htdocs\atlas\index.php on line 24
+[19-Oct-2024 12:51:36 Europe/Berlin] PHP Warning:  Undefined variable $errorHandler in C:\xampp\htdocs\atlas\index.php on line 24
+[19-Oct-2024 12:51:36 Europe/Berlin] PHP Fatal error:  Uncaught TypeError: set_error_handler(): Argument #1 ($callback) must be a valid callback or null, first array member is not a valid class name or object in C:\xampp\htdocs\atlas\index.php:24
+Stack trace:
+#0 C:\xampp\htdocs\atlas\index.php(24): set_error_handler(Array)
+#1 {main}
+  thrown in C:\xampp\htdocs\atlas\index.php on line 24
+[19-Oct-2024 12:51:36 Europe/Berlin] PHP Warning:  Undefined variable $errorHandler in C:\xampp\htdocs\atlas\index.php on line 24
+[19-Oct-2024 12:51:36 Europe/Berlin] PHP Fatal error:  Uncaught TypeError: set_error_handler(): Argument #1 ($callback) must be a valid callback or null, first array member is not a valid class name or object in C:\xampp\htdocs\atlas\index.php:24
+Stack trace:
+#0 C:\xampp\htdocs\atlas\index.php(24): set_error_handler(Array)
+#1 {main}
+  thrown in C:\xampp\htdocs\atlas\index.php on line 24
+[19-Oct-2024 12:51:46 Europe/Berlin] PHP Warning:  Undefined variable $errorHandler in C:\xampp\htdocs\atlas\index.php on line 24
+[19-Oct-2024 12:51:46 Europe/Berlin] PHP Fatal error:  Uncaught TypeError: set_error_handler(): Argument #1 ($callback) must be a valid callback or null, first array member is not a valid class name or object in C:\xampp\htdocs\atlas\index.php:24
+Stack trace:
+#0 C:\xampp\htdocs\atlas\index.php(24): set_error_handler(Array)
+#1 {main}
+  thrown in C:\xampp\htdocs\atlas\index.php on line 24
+[19-Oct-2024 12:51:47 Europe/Berlin] PHP Warning:  Undefined variable $errorHandler in C:\xampp\htdocs\atlas\index.php on line 24
+[19-Oct-2024 12:51:47 Europe/Berlin] PHP Fatal error:  Uncaught TypeError: set_error_handler(): Argument #1 ($callback) must be a valid callback or null, first array member is not a valid class name or object in C:\xampp\htdocs\atlas\index.php:24
+Stack trace:
+#0 C:\xampp\htdocs\atlas\index.php(24): set_error_handler(Array)
+#1 {main}
+  thrown in C:\xampp\htdocs\atlas\index.php on line 24
+[19-Oct-2024 12:51:47 Europe/Berlin] PHP Warning:  Undefined variable $errorHandler in C:\xampp\htdocs\atlas\index.php on line 24
+[19-Oct-2024 12:51:47 Europe/Berlin] PHP Fatal error:  Uncaught TypeError: set_error_handler(): Argument #1 ($callback) must be a valid callback or null, first array member is not a valid class name or object in C:\xampp\htdocs\atlas\index.php:24
+Stack trace:
+#0 C:\xampp\htdocs\atlas\index.php(24): set_error_handler(Array)
+#1 {main}
+  thrown in C:\xampp\htdocs\atlas\index.php on line 24
+[19-Oct-2024 12:51:47 Europe/Berlin] PHP Warning:  Undefined variable $errorHandler in C:\xampp\htdocs\atlas\index.php on line 24
+[19-Oct-2024 12:51:47 Europe/Berlin] PHP Fatal error:  Uncaught TypeError: set_error_handler(): Argument #1 ($callback) must be a valid callback or null, first array member is not a valid class name or object in C:\xampp\htdocs\atlas\index.php:24
+Stack trace:
+#0 C:\xampp\htdocs\atlas\index.php(24): set_error_handler(Array)
+#1 {main}
+  thrown in C:\xampp\htdocs\atlas\index.php on line 24
+[19-Oct-2024 12:51:47 Europe/Berlin] PHP Warning:  Undefined variable $errorHandler in C:\xampp\htdocs\atlas\index.php on line 24
+[19-Oct-2024 12:51:47 Europe/Berlin] PHP Fatal error:  Uncaught TypeError: set_error_handler(): Argument #1 ($callback) must be a valid callback or null, first array member is not a valid class name or object in C:\xampp\htdocs\atlas\index.php:24
+Stack trace:
+#0 C:\xampp\htdocs\atlas\index.php(24): set_error_handler(Array)
+#1 {main}
+  thrown in C:\xampp\htdocs\atlas\index.php on line 24
+[19-Oct-2024 12:51:47 Europe/Berlin] PHP Warning:  Undefined variable $errorHandler in C:\xampp\htdocs\atlas\index.php on line 24
+[19-Oct-2024 12:51:47 Europe/Berlin] PHP Fatal error:  Uncaught TypeError: set_error_handler(): Argument #1 ($callback) must be a valid callback or null, first array member is not a valid class name or object in C:\xampp\htdocs\atlas\index.php:24
+Stack trace:
+#0 C:\xampp\htdocs\atlas\index.php(24): set_error_handler(Array)
+#1 {main}
+  thrown in C:\xampp\htdocs\atlas\index.php on line 24
+[19-Oct-2024 12:51:48 Europe/Berlin] PHP Warning:  Undefined variable $errorHandler in C:\xampp\htdocs\atlas\index.php on line 24
+[19-Oct-2024 12:51:48 Europe/Berlin] PHP Fatal error:  Uncaught TypeError: set_error_handler(): Argument #1 ($callback) must be a valid callback or null, first array member is not a valid class name or object in C:\xampp\htdocs\atlas\index.php:24
+Stack trace:
+#0 C:\xampp\htdocs\atlas\index.php(24): set_error_handler(Array)
+#1 {main}
+  thrown in C:\xampp\htdocs\atlas\index.php on line 24
+[19-Oct-2024 12:51:49 Europe/Berlin] PHP Warning:  Undefined variable $errorHandler in C:\xampp\htdocs\atlas\index.php on line 24
+[19-Oct-2024 12:51:49 Europe/Berlin] PHP Fatal error:  Uncaught TypeError: set_error_handler(): Argument #1 ($callback) must be a valid callback or null, first array member is not a valid class name or object in C:\xampp\htdocs\atlas\index.php:24
+Stack trace:
+#0 C:\xampp\htdocs\atlas\index.php(24): set_error_handler(Array)
+#1 {main}
+  thrown in C:\xampp\htdocs\atlas\index.php on line 24
+[19-Oct-2024 12:51:50 Europe/Berlin] PHP Warning:  Undefined variable $errorHandler in C:\xampp\htdocs\atlas\index.php on line 24
+[19-Oct-2024 12:51:50 Europe/Berlin] PHP Fatal error:  Uncaught TypeError: set_error_handler(): Argument #1 ($callback) must be a valid callback or null, first array member is not a valid class name or object in C:\xampp\htdocs\atlas\index.php:24
+Stack trace:
+#0 C:\xampp\htdocs\atlas\index.php(24): set_error_handler(Array)
+#1 {main}
+  thrown in C:\xampp\htdocs\atlas\index.php on line 24
+[19-Oct-2024 12:51:51 Europe/Berlin] PHP Warning:  Undefined variable $errorHandler in C:\xampp\htdocs\atlas\index.php on line 24
+[19-Oct-2024 12:51:51 Europe/Berlin] PHP Fatal error:  Uncaught TypeError: set_error_handler(): Argument #1 ($callback) must be a valid callback or null, first array member is not a valid class name or object in C:\xampp\htdocs\atlas\index.php:24
+Stack trace:
+#0 C:\xampp\htdocs\atlas\index.php(24): set_error_handler(Array)
+#1 {main}
+  thrown in C:\xampp\htdocs\atlas\index.php on line 24
+[19-Oct-2024 12:53:22 Europe/Berlin] PHP Warning:  Undefined variable $errorHandler in C:\xampp\htdocs\atlas\index.php on line 24
+[19-Oct-2024 12:53:22 Europe/Berlin] PHP Fatal error:  Uncaught TypeError: set_error_handler(): Argument #1 ($callback) must be a valid callback or null, first array member is not a valid class name or object in C:\xampp\htdocs\atlas\index.php:24
+Stack trace:
+#0 C:\xampp\htdocs\atlas\index.php(24): set_error_handler(Array)
+#1 {main}
+  thrown in C:\xampp\htdocs\atlas\index.php on line 24
+[19-Oct-2024 12:53:22 Europe/Berlin] PHP Warning:  Undefined variable $errorHandler in C:\xampp\htdocs\atlas\index.php on line 24
+[19-Oct-2024 12:53:22 Europe/Berlin] PHP Fatal error:  Uncaught TypeError: set_error_handler(): Argument #1 ($callback) must be a valid callback or null, first array member is not a valid class name or object in C:\xampp\htdocs\atlas\index.php:24
+Stack trace:
+#0 C:\xampp\htdocs\atlas\index.php(24): set_error_handler(Array)
+#1 {main}
+  thrown in C:\xampp\htdocs\atlas\index.php on line 24
+[19-Oct-2024 12:53:22 Europe/Berlin] PHP Warning:  Undefined variable $errorHandler in C:\xampp\htdocs\atlas\index.php on line 24
+[19-Oct-2024 12:53:22 Europe/Berlin] PHP Fatal error:  Uncaught TypeError: set_error_handler(): Argument #1 ($callback) must be a valid callback or null, first array member is not a valid class name or object in C:\xampp\htdocs\atlas\index.php:24
+Stack trace:
+#0 C:\xampp\htdocs\atlas\index.php(24): set_error_handler(Array)
+#1 {main}
+  thrown in C:\xampp\htdocs\atlas\index.php on line 24
+[19-Oct-2024 12:53:22 Europe/Berlin] PHP Warning:  Undefined variable $errorHandler in C:\xampp\htdocs\atlas\index.php on line 24
+[19-Oct-2024 12:53:22 Europe/Berlin] PHP Fatal error:  Uncaught TypeError: set_error_handler(): Argument #1 ($callback) must be a valid callback or null, first array member is not a valid class name or object in C:\xampp\htdocs\atlas\index.php:24
+Stack trace:
+#0 C:\xampp\htdocs\atlas\index.php(24): set_error_handler(Array)
+#1 {main}
+  thrown in C:\xampp\htdocs\atlas\index.php on line 24
+[19-Oct-2024 12:53:23 Europe/Berlin] PHP Warning:  Undefined variable $errorHandler in C:\xampp\htdocs\atlas\index.php on line 24
+[19-Oct-2024 12:53:23 Europe/Berlin] PHP Fatal error:  Uncaught TypeError: set_error_handler(): Argument #1 ($callback) must be a valid callback or null, first array member is not a valid class name or object in C:\xampp\htdocs\atlas\index.php:24
+Stack trace:
+#0 C:\xampp\htdocs\atlas\index.php(24): set_error_handler(Array)
+#1 {main}
+  thrown in C:\xampp\htdocs\atlas\index.php on line 24
+[19-Oct-2024 12:53:23 Europe/Berlin] PHP Warning:  Undefined variable $errorHandler in C:\xampp\htdocs\atlas\index.php on line 24
+[19-Oct-2024 12:53:23 Europe/Berlin] PHP Fatal error:  Uncaught TypeError: set_error_handler(): Argument #1 ($callback) must be a valid callback or null, first array member is not a valid class name or object in C:\xampp\htdocs\atlas\index.php:24
+Stack trace:
+#0 C:\xampp\htdocs\atlas\index.php(24): set_error_handler(Array)
+#1 {main}
+  thrown in C:\xampp\htdocs\atlas\index.php on line 24
+[19-Oct-2024 12:53:40 Europe/Berlin] PHP Warning:  Undefined variable $errorHandler in C:\xampp\htdocs\atlas\index.php on line 24
+[19-Oct-2024 12:53:40 Europe/Berlin] PHP Fatal error:  Uncaught TypeError: set_error_handler(): Argument #1 ($callback) must be a valid callback or null, first array member is not a valid class name or object in C:\xampp\htdocs\atlas\index.php:24
+Stack trace:
+#0 C:\xampp\htdocs\atlas\index.php(24): set_error_handler(Array)
+#1 {main}
+  thrown in C:\xampp\htdocs\atlas\index.php on line 24
+[19-Oct-2024 12:53:40 Europe/Berlin] PHP Warning:  Undefined variable $errorHandler in C:\xampp\htdocs\atlas\index.php on line 24
+[19-Oct-2024 12:53:40 Europe/Berlin] PHP Fatal error:  Uncaught TypeError: set_error_handler(): Argument #1 ($callback) must be a valid callback or null, first array member is not a valid class name or object in C:\xampp\htdocs\atlas\index.php:24
+Stack trace:
+#0 C:\xampp\htdocs\atlas\index.php(24): set_error_handler(Array)
+#1 {main}
+  thrown in C:\xampp\htdocs\atlas\index.php on line 24
+[19-Oct-2024 12:53:40 Europe/Berlin] PHP Warning:  Undefined variable $errorHandler in C:\xampp\htdocs\atlas\index.php on line 24
+[19-Oct-2024 12:53:40 Europe/Berlin] PHP Fatal error:  Uncaught TypeError: set_error_handler(): Argument #1 ($callback) must be a valid callback or null, first array member is not a valid class name or object in C:\xampp\htdocs\atlas\index.php:24
+Stack trace:
+#0 C:\xampp\htdocs\atlas\index.php(24): set_error_handler(Array)
+#1 {main}
+  thrown in C:\xampp\htdocs\atlas\index.php on line 24
+[19-Oct-2024 12:53:40 Europe/Berlin] PHP Warning:  Undefined variable $errorHandler in C:\xampp\htdocs\atlas\index.php on line 24
+[19-Oct-2024 12:53:40 Europe/Berlin] PHP Fatal error:  Uncaught TypeError: set_error_handler(): Argument #1 ($callback) must be a valid callback or null, first array member is not a valid class name or object in C:\xampp\htdocs\atlas\index.php:24
+Stack trace:
+#0 C:\xampp\htdocs\atlas\index.php(24): set_error_handler(Array)
+#1 {main}
+  thrown in C:\xampp\htdocs\atlas\index.php on line 24
+[19-Oct-2024 12:53:41 Europe/Berlin] PHP Warning:  Undefined variable $errorHandler in C:\xampp\htdocs\atlas\index.php on line 24
+[19-Oct-2024 12:53:41 Europe/Berlin] PHP Fatal error:  Uncaught TypeError: set_error_handler(): Argument #1 ($callback) must be a valid callback or null, first array member is not a valid class name or object in C:\xampp\htdocs\atlas\index.php:24
+Stack trace:
+#0 C:\xampp\htdocs\atlas\index.php(24): set_error_handler(Array)
+#1 {main}
+  thrown in C:\xampp\htdocs\atlas\index.php on line 24
+[19-Oct-2024 12:53:41 Europe/Berlin] PHP Warning:  Undefined variable $errorHandler in C:\xampp\htdocs\atlas\index.php on line 24
+[19-Oct-2024 12:53:41 Europe/Berlin] PHP Fatal error:  Uncaught TypeError: set_error_handler(): Argument #1 ($callback) must be a valid callback or null, first array member is not a valid class name or object in C:\xampp\htdocs\atlas\index.php:24
+Stack trace:
+#0 C:\xampp\htdocs\atlas\index.php(24): set_error_handler(Array)
+#1 {main}
+  thrown in C:\xampp\htdocs\atlas\index.php on line 24
+[19-Oct-2024 12:53:41 Europe/Berlin] PHP Warning:  Undefined variable $errorHandler in C:\xampp\htdocs\atlas\index.php on line 24
+[19-Oct-2024 12:53:41 Europe/Berlin] PHP Fatal error:  Uncaught TypeError: set_error_handler(): Argument #1 ($callback) must be a valid callback or null, first array member is not a valid class name or object in C:\xampp\htdocs\atlas\index.php:24
+Stack trace:
+#0 C:\xampp\htdocs\atlas\index.php(24): set_error_handler(Array)
+#1 {main}
+  thrown in C:\xampp\htdocs\atlas\index.php on line 24
+[19-Oct-2024 12:53:41 Europe/Berlin] PHP Warning:  Undefined variable $errorHandler in C:\xampp\htdocs\atlas\index.php on line 24
+[19-Oct-2024 12:53:41 Europe/Berlin] PHP Fatal error:  Uncaught TypeError: set_error_handler(): Argument #1 ($callback) must be a valid callback or null, first array member is not a valid class name or object in C:\xampp\htdocs\atlas\index.php:24
+Stack trace:
+#0 C:\xampp\htdocs\atlas\index.php(24): set_error_handler(Array)
+#1 {main}
+  thrown in C:\xampp\htdocs\atlas\index.php on line 24
+[19-Oct-2024 12:53:41 Europe/Berlin] PHP Warning:  Undefined variable $errorHandler in C:\xampp\htdocs\atlas\index.php on line 24
+[19-Oct-2024 12:53:41 Europe/Berlin] PHP Fatal error:  Uncaught TypeError: set_error_handler(): Argument #1 ($callback) must be a valid callback or null, first array member is not a valid class name or object in C:\xampp\htdocs\atlas\index.php:24
+Stack trace:
+#0 C:\xampp\htdocs\atlas\index.php(24): set_error_handler(Array)
+#1 {main}
+  thrown in C:\xampp\htdocs\atlas\index.php on line 24
+[19-Oct-2024 12:54:20 Europe/Berlin] PHP Warning:  Undefined variable $errorHandler in C:\xampp\htdocs\atlas\index.php on line 24
+[19-Oct-2024 12:54:20 Europe/Berlin] PHP Fatal error:  Uncaught TypeError: set_error_handler(): Argument #1 ($callback) must be a valid callback or null, first array member is not a valid class name or object in C:\xampp\htdocs\atlas\index.php:24
+Stack trace:
+#0 C:\xampp\htdocs\atlas\index.php(24): set_error_handler(Array)
+#1 {main}
+  thrown in C:\xampp\htdocs\atlas\index.php on line 24
+[19-Oct-2024 12:54:21 Europe/Berlin] PHP Warning:  Undefined variable $errorHandler in C:\xampp\htdocs\atlas\index.php on line 24
+[19-Oct-2024 12:54:21 Europe/Berlin] PHP Fatal error:  Uncaught TypeError: set_error_handler(): Argument #1 ($callback) must be a valid callback or null, first array member is not a valid class name or object in C:\xampp\htdocs\atlas\index.php:24
+Stack trace:
+#0 C:\xampp\htdocs\atlas\index.php(24): set_error_handler(Array)
+#1 {main}
+  thrown in C:\xampp\htdocs\atlas\index.php on line 24
+[19-Oct-2024 12:54:21 Europe/Berlin] PHP Warning:  Undefined variable $errorHandler in C:\xampp\htdocs\atlas\index.php on line 24
+[19-Oct-2024 12:54:21 Europe/Berlin] PHP Fatal error:  Uncaught TypeError: set_error_handler(): Argument #1 ($callback) must be a valid callback or null, first array member is not a valid class name or object in C:\xampp\htdocs\atlas\index.php:24
+Stack trace:
+#0 C:\xampp\htdocs\atlas\index.php(24): set_error_handler(Array)
+#1 {main}
+  thrown in C:\xampp\htdocs\atlas\index.php on line 24
+[19-Oct-2024 12:54:21 Europe/Berlin] PHP Warning:  Undefined variable $errorHandler in C:\xampp\htdocs\atlas\index.php on line 24
+[19-Oct-2024 12:54:21 Europe/Berlin] PHP Fatal error:  Uncaught TypeError: set_error_handler(): Argument #1 ($callback) must be a valid callback or null, first array member is not a valid class name or object in C:\xampp\htdocs\atlas\index.php:24
+Stack trace:
+#0 C:\xampp\htdocs\atlas\index.php(24): set_error_handler(Array)
+#1 {main}
+  thrown in C:\xampp\htdocs\atlas\index.php on line 24

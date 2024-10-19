@@ -6,5 +6,5 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
-    'Analista\\Atlas\\' => array($baseDir . '/src'),
+    'App\\Atlas\\' => array($baseDir . '/src'),
 );
