@@ -10,7 +10,10 @@ class App
 
     public static function zonaHoraria()
     {
+        session_name(App::APP_SESSION_NAME);
         date_default_timezone_set("America/Caracas");
+       
+
     }
 }
 

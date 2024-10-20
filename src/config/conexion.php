@@ -3,10 +3,11 @@
 namespace App\Atlas\config;
 
 use App\Atlas\config\Server;
+use App\Atlas\config\error;
 use PDO;
 use PDOException;
 
-class Conexion
+class Conexion extends error
 {
 
     private $host;
@@ -36,7 +37,12 @@ class Conexion
             $pdo = new PDO($connection, $this->user, $this->password, $options);
             return $pdo;
         } catch (PDOException $th) {
+            error::captureError();
             print_r('Error connection: ' . $th->getMessage());
+        } catch (\Throwable $th) {
+            // Capturar cualquier otra excepción
+            print_r('Error connection: ' . $th->getMessage());
+            error::captureError();
         }
     }
     public function validarConexion()
@@ -53,11 +59,10 @@ class Conexion
                 echo "Error al ejecutar la consulta o la tabla está vacía.\n";
             }
         } catch (PDOException $e) {
+            error::captureError();
             echo "Error de conexión: " . $e->getMessage() . "\n";
             echo "Código del error: " . $e->getCode() . "\n";
             echo "Información del error: " . print_r($e->errorInfo, true);
         }
     }
 }
-
-
