@@ -4,6 +4,7 @@ namespace App\Atlas\config;
 
 use App\Atlas\config\App;
 
+
 class error extends App
 {
     private $errorReportingLevel = -1;
@@ -14,9 +15,20 @@ class error extends App
 
     public function __construct() {}
 
+    private function registrarError($tipoError, $mensaje, $archivo, $linea)
+    {
+        $mensajeError = "======================================================" . PHP_EOL;
+        $mensajeError .= "$tipoError: $mensaje" . PHP_EOL;
+        $mensajeError .= "Archivo: $archivo" . PHP_EOL;
+        $mensajeError .= "Línea: $linea" . PHP_EOL;
+        $mensajeError .= "Fecha y hora: " . date("Y-m-d H:i:s") . PHP_EOL;
+        $mensajeError .= "======================================================" . PHP_EOL;
+        error_log($mensajeError, 3, "php-error.log");
+        // Aquí puedes agregar más acciones, como enviar un correo, notificar por Slack, etc.
+    }
+
     private function configuracion()
     {
-
         App::zonaHoraria();
         error_reporting($this->errorReportingLevel); // Informe de errores: informe todos los errores excepto los avisos
         ini_set('ignore_repeated_errors', $this->ignoreRepeatedErrors); // Ignorar errores repetidos: siempre use TRUE
@@ -25,21 +37,17 @@ class error extends App
         ini_set("error_log", $this->errorLogFile); // Ruta del archivo de registro de errores: especificar la ruta del archivo donde se registrarán los errores
         // error_log("Hello, errors!"); // Registrar mensaje de error: registrar un mensaje de error personalizado
         ob_start();
-        set_exception_handler(function ($exception) use (&$haOcurridoUnError) {
-            $haOcurridoUnError = true;
-            // Crear un mensaje de error detallado
-            $mensajeError = "======================================================" . PHP_EOL;
-            $mensajeError .= "Excepción: " . $exception->getMessage() . PHP_EOL;
-            $mensajeError .= "Archivo: " . $exception->getFile() . PHP_EOL;
-            $mensajeError .= "Línea: " . $exception->getLine() . PHP_EOL;
-            $mensajeError .= "Trace de la pila:" . PHP_EOL . $exception->getTraceAsString() . PHP_EOL;
-            $mensajeError .= "Fecha y hora: " . date("Y-m-d H:i:s") . PHP_EOL;
-            $mensajeError .= "======================================================" . PHP_EOL;
+        // Manejador de excepciones
+        set_exception_handler(function ($exception) {
+            error::registrarError('Excepción', $exception->getMessage(), $exception->getFile(), $exception->getLine());
+    
+            exit();
+        });
 
-            // Registrar el error en un archivo
-            error_log($mensajeError, 3, "php-error.log");
-            // Redirigir al usuario a la página de error o mostrar un mensaje personalizado
-            header("Location: ./src/config/error.html");
+        // Manejador de errores
+        set_error_handler(function ($errno, $errstr, $errfile, $errline) {
+            error::registrarError('Error', $errstr, $errfile, $errline);
+
             exit();
         });
     }
@@ -48,7 +56,6 @@ class error extends App
         error::configuracion();
     }
 }
-
 // Crear una instancia y configurar el manejador de errores
 
 

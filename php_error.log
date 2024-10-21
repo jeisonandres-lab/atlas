@@ -1,9 +1,0 @@
-======================================================
-Excepción: Call to a member function query() on null
-Archivo: C:\xampp\htdocs\atlas\src\config\conexion.php
-Línea: 53
-Trace de la pila:
-#0 C:\xampp\htdocs\atlas\index.php(10): App\Atlas\config\Conexion->validarConexion()
-#1 {main}
-Fecha y hora: 2024-10-20 14:47:06
-======================================================

@@ -32,7 +32,7 @@
                         <input type="text" name="" id="">
                     </label>
                 </div>
-                <button type="submit" class="botonLogin" id="botonLogin">Aceptar</button>
+                <a class="botonLogin" id="botonLogin" href="?view=home">Aceptar</a>
                 <span class="barraInferior"></span>
             </form>
         </section>
