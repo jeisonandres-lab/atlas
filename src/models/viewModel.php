@@ -14,7 +14,7 @@ class viewModel extends error
 
         // Configuración de rutas de vistas
         $vistas = [
-            'logear' => 'src/views/start/login.php',
+            'logear' => 'src/views/start/login2.php',
             'inicio' => 'src/views/home/home.php',
             'error' => "src/config/error.html",
         ];
