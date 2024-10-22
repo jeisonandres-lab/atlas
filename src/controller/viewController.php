@@ -15,7 +15,7 @@ class viewController extends viewModel
         if ($vista != "") {
             $respuesta = $this->obtenerVistasModelo($vista);
         } else {
-            $respuesta = "login";
+            $respuesta = "logear";
         }
         return $respuesta;
     }

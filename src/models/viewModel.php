@@ -14,8 +14,8 @@ class viewModel extends error
 
         // Configuración de rutas de vistas
         $vistas = [
-            'login' => 'src/views/start/login.php',
-            'home' => 'src/views/home/hom.php',
+            'logear' => 'src/views/start/login.php',
+            'inicio' => 'src/views/home/home.php',
             'error' => "src/config/error.html",
         ];
         // Obtener la ruta completa de la vista
@@ -24,8 +24,8 @@ class viewModel extends error
         // Verificar si la ruta existe y retornar la ruta o un 404
         if ($rutaVista && file_exists($rutaVista)) {
             return $rutaVista;
-        } elseif ($vista == "login" || $vista == "index") {
-            echo "login";
+        } elseif ($vista == "logear" || $vista == "index") {
+            echo "logear";
         } else {
             error::captureError("Vista no encontrada: $vista");
             header("location:error ");
