@@ -3,6 +3,7 @@
     "ajax": "^0.0.4",
     "bootstrap": "^5.3.3",
     "boxicons": "^2.1.4",
-    "jquery": "^3.7.1"
+    "jquery": "^3.7.1",
+    "particles.js": "^2.0.0"
   }
 }
