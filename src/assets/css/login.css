@@ -29,7 +29,7 @@
      width: 170px;
      top: -75px;
      border-radius: 50%;
-     background: #1929bb;
+
      padding: 10px;
      text-align: center;
  }
@@ -40,6 +40,8 @@
     border-radius: 50%;
     border: 2px solid white;
     background-color: whitesmoke;
+    border-color: #1929bb;
+    border-width: 3px;
  }
 .brand_logo_img{
     height: 110px;
@@ -84,7 +86,10 @@
     height: 100%;
     top: 0;
     z-index: -1;
-    background: #1929bb !important;
+    background: url(../../../bg.jpg)!important;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-position: -80px;
 }
 
 .principal{
