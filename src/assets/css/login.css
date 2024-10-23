@@ -8,7 +8,6 @@
  }
 
  .user_card {
-     height: 400px;
      width: 350px;
      margin-top: auto;
      margin-bottom: auto;
@@ -17,7 +16,6 @@
      display: flex;
      justify-content: center;
      flex-direction: column;
-     padding: 10px;
      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
      -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
      -moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -31,7 +29,7 @@
      width: 170px;
      top: -75px;
      border-radius: 50%;
-     background: #60a3bc;
+     background: #1929bb;
      padding: 10px;
      text-align: center;
  }
@@ -53,7 +51,7 @@
 
  .login_btn {
      width: 100%;
-     background: #3243E2 !important;
+     background: #1929bb !important;
      color: white !important;
      border: 0px;
  }
@@ -69,7 +67,7 @@
  }
 
  .input-group-text {
-     background: #3243E2 !important;
+     background: #1929bb !important;
      color: white !important;
      border: 0 !important;
      border-radius: 0.25rem 0 0 0.25rem !important;
@@ -86,10 +84,17 @@
     height: 100%;
     top: 0;
     z-index: -1;
-    background: #60a3bc !important;
+    background: #1929bb !important;
 }
 
 .principal{
     z-index: 1;
     height: 100vh;
+    width: 100%;
+}
+.barraNaranja{
+    background-color: #FE9001;
+    color: transparent;
+    border-radius: 0px 0px 5px 5px;
+    height: 10px;
 }

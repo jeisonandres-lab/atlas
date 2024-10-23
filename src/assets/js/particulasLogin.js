@@ -1,63 +1,4 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Inicia sesión en tu cuenta para acceder a todas las funcionalidades de ATLAS, nuestro sistema de gestión de recursos humanos">
-    <title>Inicio de Sesión | ATLAS</title>
-    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
-    <link rel="stylesheet" href="./src/assets/css/login.css">
-</head>
-
-<body>
-    <main class="principal container-fluid d-flex justify-content-center align-items-center">
-        <div class="container h-100">
-            <div class="row h-100 justify-content-center align-items-center">
-                <div class="col-md-4 col-sm-8 user_card">
-                    <div class="d-flex justify-content-center">
-                        <div class="brand_logo_container">
-                            <div class=" brand_logo d-flex align-items-center justify-content-center ">
-                                <img src="./src/assets/img/icons/dasdad-transformed-removebg.png" class="brand_logo_img" alt="Logo">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="d-flex justify-content-center form_container">
-                        <form>
-                            <div class="mb-3">
-                                <div class="input-group mb-3 ">
-                                    <span class="input-group-text"><i class="fas fa-user"></i></span>
-                                    <input type="text" name="" class="form-control input_user px-3" value="" placeholder="Usuario">
-                                </div>
-                                <div class="input-group">
-                                    <span class="input-group-text"><i class="fas fa-key"></i></span>
-                                    <input type="password" name="" class="form-control input_pass px-3" value="" placeholder="Contraseña">
-                                </div>
-                            </div>
-                            <div class="d-flex justify-content-center mt-3 login_container">
-                                <button type="button" name="button" class="btn btn-primary login_btn">Iniciar</button>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="mt-4">
-                        <div class="d-flex justify-content-center links">
-                            Olvidaste Los Datos De Tu Cuenta?
-                        </div>
-                        <div
-                            class="d-flex justify-content-center links">
-                            <a href="#">Recuperar Datos?</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </main>
-    <div id="particles-js"></div>
-    <script src="./node_modules/particles.js/particles.js"></script>
-    <script>
-        particlesJS({
+ particlesJS({
             "particles": {
                 "number": {
                     "value": 50,
@@ -167,7 +108,3 @@
             },
             "retina_detect": false
         })
-    </script>
-</body>
-
-</html>
