@@ -11,7 +11,7 @@ class error extends App
     private $ignoreRepeatedErrors = TRUE;
     private $displayErrors = FALSE;
     private $logErrors = TRUE;
-    private $errorLogFile = "./php-error.log";
+    private $errorLogFile = "./src/error/php-error.log";
 
     public function __construct() {}
 
@@ -23,7 +23,7 @@ class error extends App
         $mensajeError .= "Línea: $linea" . PHP_EOL;
         $mensajeError .= "Fecha y hora: " . date("Y-m-d H:i:s") . PHP_EOL;
         $mensajeError .= "======================================================" . PHP_EOL;
-        error_log($mensajeError, 3, "php-error.log");
+        error_log($mensajeError, 3, "./src/error/php-error.log");
         // Aquí puedes agregar más acciones, como enviar un correo, notificar por Slack, etc.
     }
 

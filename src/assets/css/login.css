@@ -86,7 +86,7 @@
     height: 100%;
     top: 0;
     z-index: -1;
-    background: url(../../../bg.jpg)!important;
+    background: url(../../../src/assets/img/images/bg.jpg)!important;
     background-position: center;
     background-repeat: no-repeat;
     background-position: -80px;
@@ -102,4 +102,8 @@
     color: transparent;
     border-radius: 0px 0px 5px 5px;
     height: 10px;
+}
+
+#candado{
+    cursor: pointer;
 }

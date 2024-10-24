@@ -5,9 +5,10 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <!-- Boxicons CSS -->
-    <link rel="stylesheet" href="../../../node_modules/boxicons/css/boxicons.min.css">
-    <link rel="stylesheet" href="menu.css" />
+    <link rel="stylesheet" href="../../assets/css/menu.css" />
+    <!-- ICONOS DEL SISTEMA -->
+    <?php require_once "./icons.php";?>
+   
 </head>
 
 <body>
@@ -28,7 +29,7 @@
             <i class='bx bx-sun' id="darkLight"></i>
             <i class='bx bx-bell'></i>
             <!-- foto de perfil -->
-            <img src="../../assets/img/images/avtar_1.png" alt="" class="profile" />
+            <img src="../../assets/img/icons/avtar_1.png" alt="" class="profile" />
         </div>
     </nav>
 
@@ -207,7 +208,7 @@
                 </li>
     -->
     <!-- JavaScript -->
-    <script src="menu.js"></script>
+    <script src="../../assets/js/menu.js"></script>
     <script type="module" src="/src/libs/ionicons/ionicons.esm.js"></script>
     <script nomodule src="../../libs/ionicons/ionicons.js"></script>
 </body>
