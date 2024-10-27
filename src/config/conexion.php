@@ -25,7 +25,7 @@ class Conexion extends error
         $this->charset = server::DB_CHARSET;
     }
 
-    function conectar()
+    public function conectar()
     {
         try {
             $connection = "mysql:host=" . $this->host . ";dbname=" . $this->db . ";charset=" . $this->charset;
@@ -64,5 +64,87 @@ class Conexion extends error
             echo "Código del error: " . $e->getCode() . "\n";
             echo "Información del error: " . print_r($e->errorInfo, true);
         }
+    }
+
+    public function ejecutarConsulta($consulta, array $parametros = [])
+    {
+        try {
+            $stmt = $this->conectar()->prepare($consulta);
+            $stmt->execute($parametros);
+
+            // Si la consulta devuelve resultados, los obtenemos
+            if ($stmt->rowCount() > 0) {
+                return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            } else {
+                return [];
+            }
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+            return false;
+        }
+    }
+
+    public function limpiarCadena($cadena)
+    {
+
+        $palabras = ["<script>", "</script>", "<script src", "<script type=", "SELECT * FROM", "SELECT ", " SELECT ", "DELETE FROM", "INSERT INTO", "DROP TABLE", "DROP DATABASE", "TRUNCATE TABLE", "SHOW TABLES", "SHOW DATABASES", "<?php", "?>", "--", "^", "<", ">", "==", "=", ";", "::"];
+
+        $cadena = trim($cadena);
+        $cadena = stripslashes($cadena);
+
+        foreach ($palabras as $palabra) {
+            $cadena = str_ireplace($palabra, "", $cadena);
+        }
+
+        $cadena = trim($cadena);
+        $cadena = stripslashes($cadena);
+
+        return $cadena;
+    }
+
+    protected function verificarDatos($filtro, $cadena)
+    {
+        $patron = "/^" . $filtro . "$/";
+        return !preg_match($patron, $cadena);
+    }
+
+    protected function actualizarDatos($tabla, $datos, $condicion)
+    {
+
+        $query = "UPDATE $tabla SET ";
+
+        $C = 0;
+        foreach ($datos as $clave) {
+            if ($C >= 1) {
+                $query .= ",";
+            }
+            $query .= $clave["campo_nombre"] . "=" . $clave["campo_marcador"];
+            $C++;
+        }
+
+        $query .= " WHERE " . $condicion["condicion_campo"] . "=" . $condicion["condicion_marcador"];
+
+        $sql = $this->conectar()->prepare($query);
+
+        foreach ($datos as $clave) {
+            $sql->bindParam($clave["campo_marcador"], $clave["campo_valor"]);
+        }
+
+        $sql->bindParam($condicion["condicion_marcador"], $condicion["condicion_valor"]);
+
+        $sql->execute();
+
+        return $sql;
+    }
+
+
+    /*---------- Funcion eliminar registro ----------*/
+    protected function eliminarRegistro($tabla, $campo, $id)
+    {
+        $sql = $this->conectar()->prepare("DELETE FROM $tabla WHERE $campo=:id");
+        $sql->bindParam(":id", $id);
+        $sql->execute();
+
+        return $sql;
     }
 }
