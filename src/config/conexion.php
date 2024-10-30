@@ -86,7 +86,6 @@ class Conexion extends error
 
     public function limpiarCadena($cadena)
     {
-
         $palabras = [
             "<script>",
             "</script>",
@@ -179,7 +178,6 @@ class Conexion extends error
         $sql->execute();
         return $sql;
     }
-
 
     /*---------- Funcion eliminar registro ----------*/
     protected function eliminarRegistro($tabla, $campo, $id)

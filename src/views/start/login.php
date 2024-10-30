@@ -11,7 +11,8 @@
     <link rel="stylesheet" href="./node_modules/@fortawesome/fontawesome-free/css/fontawesome.min.css">
     <link rel="stylesheet" href="./node_modules/@fortawesome/fontawesome-free/css/regular.min.css">
     <link rel="stylesheet" href="./node_modules/@fortawesome/fontawesome-free/css/solid.min.css">
-    <link rel="stylesheet" href="./node_modules/@fortawesome/fontawesome-free/css/brands.min.css">   
+    <link rel="stylesheet" href="./node_modules/@fortawesome/fontawesome-free/css/brands.min.css">
+    <link rel="stylesheet" href="./node_modules/sweetalert2/dist/sweetalert2.min.css">
     <link rel="stylesheet" href="./src/assets/css/login.css">
 
 </head>
@@ -29,22 +30,22 @@
                         </div>
                     </div>
                     <div class="d-flex justify-content-center mt-5">
-                        <form>
+                        <form class="formularioEnviar" method="POST" action="http://localhost/atlas/hola.php">
                             <div class="inicioSesion container-fluid d-flex justify-content-center mt-2 ">
                                 <h4 class=" text-muted">INICIO DE SESION</h4>
                             </div>
                             <div class="mb-3 mt-3">
                                 <div class="input-group mb-3 ">
                                     <span class="input-group-text" style="height: 40px; width: 40px;"><i class="user fas fa-user"></i></span>
-                                    <input type="text" name="" id="usuario" class="form-control input_user px-3" value="" placeholder="Usuario">
+                                    <input type="text" name="usuario" id="usuario" class="form-control input_user px-3" value="" placeholder="Usuario">
                                 </div>
                                 <div class="input-group">
-                                    <span class="input-group-text" id="candado"  style="height: 40px; width: 40px;"><i class="password fa-solid fa-lock "></i></span>
-                                    <input type="password" name="" id="password" class="form-control input_pass px-3" value="" placeholder="Contraseña">
+                                    <span class="input-group-text" id="candado" style="height: 40px; width: 40px;"><i class="password fa-solid fa-lock "></i></span>
+                                    <input type="password" name="password" id="password" class="form-control input_pass px-3" value="" placeholder="Contraseña">
                                 </div>
                             </div>
                             <div class="d-flex justify-content-center mt-3 mb-2 login_container">
-                                <button type="button" name="button" class="btn btn-primary login_btn">Iniciar </button>
+                                <button type="submit" name="button" class="btn btn-primary login_btn">Iniciar </button>
                             </div>
                         </form>
                     </div>
@@ -65,7 +66,7 @@
     <script src="./node_modules/sweetalert2/dist/sweetalert2.min.js"></script>
     <script src="./node_modules/particles.js/particles.js"></script>
     <script src="./src/assets/js/particulasLogin.js"></script>
-    <script src="./src/assets/js/login.js"></script>
+    <script src="./src/assets/js/login.js" type="module"></script>
 </body>
 
 </html>
