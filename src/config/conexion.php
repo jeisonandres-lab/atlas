@@ -9,7 +9,6 @@ use PDOException;
 
 class Conexion extends error
 {
-
     private $host;
     private $db;
     private $user;
@@ -28,21 +27,22 @@ class Conexion extends error
     public function conectar()
     {
         try {
-            $connection = "mysql:host=" . $this->host . ";dbname=" . $this->db . ";charset=" . $this->charset;
+            $conexion = "mysql:host=" . $this->host . ";dbname=" . $this->db . ";charset=" . $this->charset;
             $options = [
                 PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
                 PDO::ATTR_EMULATE_PREPARES   => false,
             ];
 
-            $pdo = new PDO($connection, $this->user, $this->password, $options);
+            $pdo = new PDO($conexion, $this->user, $this->password, $options);
             return $pdo;
         } catch (PDOException $th) {
             error::captureError();
             print_r('Error connection: ' . $th->getMessage());
         } catch (\Throwable $th) {
             // Capturar cualquier otra excepción
-            print_r('Error connection: ' . $th->getMessage());
             error::captureError();
+            print_r('Error connection: ' . $th->getMessage());
+
         }
     }
     public function validarConexion()
@@ -79,6 +79,7 @@ class Conexion extends error
                 return [];
             }
         } catch (PDOException $e) {
+            error::captureError();
             echo "Error: " . $e->getMessage();
             return false;
         }

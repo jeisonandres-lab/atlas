@@ -66,6 +66,8 @@
     <script src="./node_modules/sweetalert2/dist/sweetalert2.min.js"></script>
     <script src="./node_modules/particles.js/particles.js"></script>
     <script src="./src/assets/js/particulasLogin.js"></script>
+    <script src="./node_modules/crypto-js/crypto-js.js"></script>
+    <script src="./node_modules/crypto-js/md5.js"></script>
     <script src="./src/assets/js/login.js" type="module"></script>
 </body>
 
