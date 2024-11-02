@@ -1,4 +1,4 @@
-import { enviarFormulario } from "./ajax/formularioAjax.js";
+import { enviarFormulario, generarHashContrasena } from "./ajax/formularioAjax.js";
 
 let formulariosAJAX=document.querySelector(".formularioEnviar");
 let cerradura = document.getElementById("candado");
@@ -35,25 +35,10 @@ formulariosAJAX.addEventListener('submit', (e) => {
         alert('Por favor, ingresa tu contraseña.');
     } else {
         // Si ambos campos están llenos, enviar el formulario
-        enviarFormulario(formulariosAJAX);
+        let contrseñatring = contrasenaInput.toString();
+        let contraseñaEncrip = generarHashContrasena(contrseñatring);
+        let formData = new FormData();
+        formData.append('contrasenaEncriptada', contraseñaEncrip);
+        enviarFormulario( formData);
     }
 });
-async function generarHashContrasena(contrasena) {
-  const salt = await CryptoJS.lib.WordArray.random(16);
-  const hash = await CryptoJS.MD5(contrasena, salt, { keySize: 32/16 });
-  const total= await salt.toString() + hash.toString();
-  console.log(total);
-  return total;
-}
-
-generarHashContrasena('hola');
-function verificarContrasena(contrasena, hashAlmacenado) {
-  const salt = CryptoJS.lib.WordArray.random(16);
-  salt.words = CryptoJS.enc.Hex.parse(hashAlmacenado.substring(0, 32));
-  const hashCalculado = CryptoJS.PBKDF2(contrasena, salt, { keySize: 32/16 });
-  const total = hashCalculado.toString() === hashAlmacenado.substring(32);
-    console.log(total);
-    return total;
-}
-
-verificarContrasena('hola', 'MD5')

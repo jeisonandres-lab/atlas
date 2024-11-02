@@ -41,3 +41,30 @@ export function enviarFormulario(formulario) {
 }
 
 
+export function generarHashContrasena(contrasena) {
+  const salt = CryptoJS.lib.WordArray.random(128/8); // Sal de 128 bits
+  const hash = CryptoJS.PBKDF2(contrasena, salt, {
+    keySize: 256/32, // Tamaño de la clave en bits (256 bits)
+    iterations: 100000 // Número de iteraciones (ajustable)
+  });
+  return salt.toString() + hash.toString();
+}
+
+// Función para verificar una contraseña
+export  function verificarContrasena(contrasena, hashAlmacenado) {
+  const salt = CryptoJS.enc.Hex.parse(hashAlmacenado.substring(0, 32));
+  const hashCalculado = CryptoJS.PBKDF2(contrasena, salt, {
+    keySize: 256/32,
+    iterations: 100000
+  });
+  return hashCalculado.toString() === hashAlmacenado.substring(32);
+}
+
+// // Ejemplo de uso
+// const contrasena = 'micontraseñasegura';
+// const hash = generarHashContrasena(contrasena);
+// console.log(hash);
+
+// // Verificar la contraseña
+// const esValida = verificarContrasena('micontraseñasegura', hash);
+// console.log(esValida);
