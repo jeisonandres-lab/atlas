@@ -27,6 +27,7 @@ export function enviarFormulario(formulario) {
             .then(data => {
                 if (data.exito) {
                     // Mostrar un mensaje de éxito más específico
+                    console.table(data)
                     alert('¡Los datos se enviaron correctamente!');
                 } else {
                     // Mostrar un mensaje de error basado en la respuesta del servidor

@@ -35,6 +35,7 @@
                             <div class="inicioSesion container-fluid d-flex justify-content-center mt-2 ">
                                 <h4 class=" text-muted">INICIO DE SESION</h4>
                             </div>
+                            <input type="text" name="modulo_usuario" id="" value="login" hidden>
                             <div class="mb-3 mt-3">
                                 <div class="input-group mb-3 ">
                                     <span class="input-group-text" style="height: 40px; width: 40px;"><i class="user fas fa-user"></i></span>
@@ -69,7 +70,7 @@
     <script src="./src/assets/js/particulasLogin.js"></script>
     <script src="./node_modules/crypto-js/crypto-js.js"></script>
     <script src="./node_modules/crypto-js/md5.js"></script>
-    
+    <script src="./src/assets/js/login.js" type="module"></script>
 </body>
 
 </html>
