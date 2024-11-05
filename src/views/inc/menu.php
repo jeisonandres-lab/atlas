@@ -7,8 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="../../assets/css/menu.css" />
     <!-- ICONOS DEL SISTEMA -->
-    <?php require_once "./icons.php";?>
-   
+    <?php require_once "./icons.php"; ?>
+
 </head>
 
 <body>
