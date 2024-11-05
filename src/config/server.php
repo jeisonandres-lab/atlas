@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Atlas\config;
-Class Server
+Class server
 {
     public const DB_SERVER = "localhost";
     public const DB_NAME = "recursos_humanos";

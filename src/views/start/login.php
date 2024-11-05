@@ -18,6 +18,11 @@
 </head>
 
 <body>
+    <?php
+
+use const App\Atlas\config\APP_URL;
+
+ require_once './src/config/app.php';?>
     <main class="principal container-fluid ">
         <div class="h-100 d-flex justify-content-center align-items-center">
             <div class="col-md-4 col-sm-8 user_card">
@@ -30,7 +35,7 @@
                         </div>
                     </div>
                     <div class="d-flex justify-content-center mt-5">
-                        <form class="formularioEnviar" method="POST" action="http://localhost/atlas/hola.php">
+                        <form class="formularioEnviar" method="POST" action="<?php echo APP_URL;?>src/ajax/userAjax.php">
                             <div class="inicioSesion container-fluid d-flex justify-content-center mt-2 ">
                                 <h4 class=" text-muted">INICIO DE SESION</h4>
                             </div>
@@ -68,7 +73,7 @@
     <script src="./src/assets/js/particulasLogin.js"></script>
     <script src="./node_modules/crypto-js/crypto-js.js"></script>
     <script src="./node_modules/crypto-js/md5.js"></script>
-    <script src="./src/assets/js/login.js" type="module"></script>
+    
 </body>
 
 </html>

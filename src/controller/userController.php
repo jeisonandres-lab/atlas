@@ -7,11 +7,8 @@ use App\Atlas\config\Conexion;
 class userController extends Conexion
 {
 
-    protected function registrar() {
-
-    }
-
-    protected function login($contraseña, $usuario){
-
+    const APP_URL = "http://localhost/atlas/";
+    public function hola(){
+        echo 'hola';
     }
 }

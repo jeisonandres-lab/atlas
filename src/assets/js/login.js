@@ -39,6 +39,6 @@ formulariosAJAX.addEventListener('submit', (e) => {
         let contraseñaEncrip = generarHashContrasena(contrseñatring);
         let formData = new FormData();
         formData.append('contrasenaEncriptada', contraseñaEncrip);
-        enviarFormulario( formData);
+        enviarFormulario( formulariosAJAX);
     }
 });

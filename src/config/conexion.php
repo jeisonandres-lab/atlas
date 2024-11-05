@@ -2,7 +2,7 @@
 //require_once '../../vendor/autoload.php';
 namespace App\Atlas\config;
 
-use App\Atlas\config\Server;
+use App\Atlas\config\server;
 use App\Atlas\config\error;
 use PDO;
 use PDOException;
@@ -209,3 +209,7 @@ class Conexion extends error
         return $sql;
     }
 }
+
+$base = new Conexion();
+
+$base->validarConexion();
