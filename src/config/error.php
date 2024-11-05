@@ -2,10 +2,10 @@
 
 namespace App\Atlas\config;
 
-require_once './src/config/app.php';
+require_once './app.php';
 
 
-class error
+class Error
 {
     private $errorReportingLevel = -1;
     private $ignoreRepeatedErrors = TRUE;

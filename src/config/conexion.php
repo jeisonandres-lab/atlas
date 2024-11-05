@@ -2,12 +2,12 @@
 //require_once '../../vendor/autoload.php';
 namespace App\Atlas\config;
 
-use App\Atlas\config\server;
-use App\Atlas\config\error;
+use App\Atlas\config\Server;
+use App\Atlas\config\Error;
 use PDO;
 use PDOException;
 
-class Conexion extends error
+class Conexion extends Error
 {
     private $host;
     private $db;
@@ -210,6 +210,3 @@ class Conexion extends error
     }
 }
 
-$base = new Conexion();
-
-$base->validarConexion();

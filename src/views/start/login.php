@@ -18,11 +18,7 @@
 </head>
 
 <body>
-    <?php
-
-use const App\Atlas\config\APP_URL;
-
- require_once './src/config/app.php';?>
+    <?php use const App\Atlas\config\APP_URL;?>
     <main class="principal container-fluid ">
         <div class="h-100 d-flex justify-content-center align-items-center">
             <div class="col-md-4 col-sm-8 user_card">
