@@ -1,11 +1,9 @@
 <?php
 
 namespace App\Atlas\config;
+use App\Atlas\config\App;
 
-require_once './app.php';
-
-
-class Error
+class Error extends App
 {
     private $errorReportingLevel = -1;
     private $ignoreRepeatedErrors = TRUE;
@@ -29,6 +27,7 @@ class Error
 
     private function configuracion()
     {
+        App::zonaHoraria();
         error_reporting($this->errorReportingLevel); // Informe de errores: informe todos los errores excepto los avisos
         ini_set('ignore_repeated_errors', $this->ignoreRepeatedErrors); // Ignorar errores repetidos: siempre use TRUE
         ini_set('display_errors', $this->displayErrors); // Mostrar errores: use FALSE solo en entornos de producción o servidores reales. Use TRUE en entornos de desarrollo

@@ -18,7 +18,7 @@
 </head>
 
 <body>
-    <?php use const App\Atlas\config\APP_URL;?>
+    <?php use App\Atlas\config\App;?>
     <main class="principal container-fluid ">
         <div class="h-100 d-flex justify-content-center align-items-center">
             <div class="col-md-4 col-sm-8 user_card">
@@ -31,7 +31,7 @@
                         </div>
                     </div>
                     <div class="d-flex justify-content-center mt-5">
-                        <form class="formularioEnviar" method="POST" action="<?php echo APP_URL;?>src/ajax/userAjax.php">
+                        <form class="formularioEnviar" method="POST" action="<?php echo App::APP_URL;?>src/ajax/userAjax.php">
                             <div class="inicioSesion container-fluid d-flex justify-content-center mt-2 ">
                                 <h4 class=" text-muted">INICIO DE SESION</h4>
                             </div>
