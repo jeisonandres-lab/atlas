@@ -35,16 +35,18 @@ class userController extends Conexion
         // }
         $respue = $this->ejecutarConsulta("SELECT * FROM users WHERE nameUser = '$usuario'");
         if ($respue == true) {
-            $alerta = array(
-                "exit" => true,
-                "name" => "si existe este usuario",
-                "titulo" => "Usuario registrado",
-                "texto" => "El usuario " . $usuario,
-                'mensaje' => 'Datos recibidos correctamente.'
-            );
-        }
-        // Enviar la respuesta como JSON
+            $datos_json = array();
+            foreach ($respue as $usuario) {
+                    $datos_json = array(
+                        'exito' => true,
+                        'id' => $usuario['nameUser'],
+                        'nombre' => $usuario['userPassword'],
+                        'mensaje' => 'Datos recibidos correctamente.'
+                        // Agrega más campos según tu estructura de datos
+                    );
+                }
+            }
         header('Content-Type: application/json');
-        echo json_encode($alerta);
+        echo json_encode($datos_json);
     }
 }

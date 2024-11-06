@@ -70,7 +70,9 @@ export async function enviarFormularioUsuarios(formulario, password) {
             })
             .then(data => {
                 if (data.exito) {
-                    console.table(data)
+                       console.table(data)
+                    return data
+                 
                 } else {
                     alert(data.mensaje);
                 }
@@ -88,9 +90,9 @@ export async function enviarFormularioUsuarios(formulario, password) {
 
 
 export function generarHashContrasena(contrasena) {
-  const salt = CryptoJS.lib.WordArray.random(128/8); // Sal de 128 bits
+  const salt = CryptoJS.lib.WordArray.random(8/8); // Sal de 128 bits
   const hash = CryptoJS.PBKDF2(contrasena, salt, {
-    keySize: 256/32, // Tamaño de la clave en bits (256 bits)
+    keySize: 8/8, // Tamaño de la clave en bits (256 bits)
     iterations: 100000 // Número de iteraciones (ajustable)
   });
   return salt.toString() + hash.toString();
