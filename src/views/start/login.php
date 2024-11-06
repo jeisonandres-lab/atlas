@@ -18,7 +18,17 @@
 </head>
 
 <body>
-    <?php use App\Atlas\config\App;?>
+    <div class="loading" id="cargando" style="
+    position:
+    absolute;
+    z-index: 10000;
+    top: 0;
+    background: black;
+    height: 100%;
+    width: 100%;
+    display:none">
+    </div>
+    <?php use App\Atlas\config\App; ?>
     <main class="principal container-fluid ">
         <div class="h-100 d-flex justify-content-center align-items-center">
             <div class="col-md-4 col-sm-8 user_card">
@@ -31,7 +41,7 @@
                         </div>
                     </div>
                     <div class="d-flex justify-content-center mt-5">
-                        <form class="formularioEnviar" method="POST" action="<?php echo App::APP_URL;?>src/ajax/userAjax.php">
+                        <form class="formularioEnviar" method="POST" action="<?php echo App::APP_URL; ?>src/ajax/userAjax.php">
                             <div class="inicioSesion container-fluid d-flex justify-content-center mt-2 ">
                                 <h4 class=" text-muted">INICIO DE SESION</h4>
                             </div>
@@ -64,6 +74,7 @@
             </div>
         </div>
     </main>
+
     <div id="particles-js"></div>
     <script src="./node_modules/sweetalert2/dist/sweetalert2.min.js"></script>
     <script src="./node_modules/particles.js/particles.js"></script>
