@@ -1,4 +1,3 @@
-import { data } from "jquery";
 import { enviarFormularioUsuarios, generarHashContrasena } from "./ajax/formularioAjax.js";
 
 let formulariosAJAX=document.querySelector(".formularioEnviar");
@@ -27,7 +26,9 @@ formulariosAJAX.addEventListener('submit', (e) => {
     let usuarioInput = document.getElementById('usuario');
     let contrasenaInput = document.getElementById('password');
     // Validar los campos
-
+    function alert(data){
+      
+    }
     if (usuarioInput.value.trim() === '' && contrasenaInput.value.trim() === '') {
         alert('Por favor, llena todos los campos.');
     } else if (usuarioInput.value.trim() === '') {
@@ -40,10 +41,9 @@ formulariosAJAX.addEventListener('submit', (e) => {
         let contraseñaEncrip = generarHashContrasena(contrseñatring);
         contrasenaInput.value = contraseñaEncrip;
         const cargando = document.getElementById('cargando');
-        cargando.style.display = 'block';
-      setTimeout(() => {
-          enviarFormularioUsuarios(formulariosAJAX, contraseñaEncrip);
-      }, 1000); // 5000 milisegundos = 5 segundos
+        cargando.style.display = 'flex';
+      
+      enviarFormularioUsuarios(formulariosAJAX, contraseñaEncrip, alert);
   
     }
 });
