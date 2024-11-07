@@ -36,11 +36,12 @@ class userController extends Conexion
         $respue = $this->ejecutarConsulta("SELECT * FROM users WHERE nameUser = '$usuario'");
         if ($respue == true) {
             $datos_json = array();
-            foreach ($respue as $usuario) {
+            foreach ($respue as $usuario2) {
                     $datos_json = array(
                         'exito' => true,
-                        'id' => $usuario['nameUser'],
-                        'nombre' => $usuario['userPassword'],
+                        'nombre' => $usuario2['nameUser'],
+                        'passwordAlmacenado' => $usuario2['userPassword'],
+                        'passwordEnviado'=> $password,
                         'mensaje' => 'Datos recibidos correctamente.'
                         // Agrega más campos según tu estructura de datos
                     );

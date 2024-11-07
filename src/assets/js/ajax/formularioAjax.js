@@ -28,7 +28,6 @@ export async function enviarFormularioUsuarios(formulario, password, collback) {
             .then(data => {
                 if (data.exito) {
                     collback(data);
-                    console.log('datos correctos')
                 } else {
                     alert(data.mensaje);
                 }
@@ -44,31 +43,21 @@ export async function enviarFormularioUsuarios(formulario, password, collback) {
 }
 
 
-
+// Función para generar un hash seguro con sal
 export function generarHashContrasena(contrasena) {
-  const salt = CryptoJS.lib.WordArray.random(8/8); // Sal de 128 bits
-  const hash = CryptoJS.PBKDF2(contrasena, salt, {
-    keySize: 8/8, // Tamaño de la clave en bits (256 bits)
-    iterations: 100000 // Número de iteraciones (ajustable)
-  });
-  return salt.toString() + hash.toString();
-}
-
+    // Generar una sal aleatoria de 16 bytes (32 caracteres hexadecimales)
+    const salt = CryptoJS.lib.WordArray.random(16);
+    const hash = CryptoJS.SHA256(contrasena + salt);
+    return hash.toString() + salt.toString();
+  }
+  
 // Función para verificar una contraseña
-export  function verificarContrasena(contrasena, hashAlmacenado) {
-  const salt = CryptoJS.enc.Hex.parse(hashAlmacenado.substring(0, 32));
-  const hashCalculado = CryptoJS.PBKDF2(contrasena, salt, {
-    keySize: 256/32,
-    iterations: 100000
-  });
-  return hashCalculado.toString() === hashAlmacenado.substring(32);
+export function verificarContrasena(contrasena, hashAlmacenado) {
+    // Separar el hash y la sal del string almacenado
+    const hashParte = hashAlmacenado.substring(0, 64); // Hash SHA-256 tiene 64 caracteres hexadecimales
+    const saltParte = hashAlmacenado.substring(64);
+    // Reconstruir el hash original con la sal
+    const hashCalculado = CryptoJS.SHA256(contrasena + saltParte);
+    // Comparar los hashes
+    return hashCalculado.toString() === hashParte;
 }
-
-// // Ejemplo de uso
-// const contrasena = 'micontraseñasegura';
-// const hash = generarHashContrasena(contrasena);
-// console.log(hash);
-
-// // Verificar la contraseña
-// const esValida = verificarContrasena('micontraseñasegura', hash);
-// console.log(esValida);

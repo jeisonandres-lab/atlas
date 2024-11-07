@@ -1,4 +1,4 @@
-import { enviarFormularioUsuarios, generarHashContrasena } from "./ajax/formularioAjax.js";
+import { enviarFormularioUsuarios, generarHashContrasena, verificarContrasena } from "./ajax/formularioAjax.js";
 
 let formulariosAJAX=document.querySelector(".formularioEnviar");
 let cerradura = document.getElementById("candado");
@@ -25,10 +25,9 @@ formulariosAJAX.addEventListener('submit', (e) => {
     // Obtener los elementos del formulario
     let usuarioInput = document.getElementById('usuario');
     let contrasenaInput = document.getElementById('password');
+    let passwordSinEncrip = contrasenaInput.value;
     // Validar los campos
-    function alert(data){
-      
-    }
+   
     if (usuarioInput.value.trim() === '' && contrasenaInput.value.trim() === '') {
         alert('Por favor, llena todos los campos.');
     } else if (usuarioInput.value.trim() === '') {
@@ -37,13 +36,20 @@ formulariosAJAX.addEventListener('submit', (e) => {
         alert('Por favor, ingresa tu contraseña.');
     } else {
         // Si ambos campos están llenos, enviar el formulario
-        let contrseñatring = contrasenaInput.toString();
-        let contraseñaEncrip = generarHashContrasena(contrseñatring);
-        contrasenaInput.value = contraseñaEncrip;
-        const cargando = document.getElementById('cargando');
-        cargando.style.display = 'flex';
+      let contrseñatring = contrasenaInput.toString();
+      let contraseñaEncrip = generarHashContrasena(contrseñatring);
+      contrasenaInput.value = contraseñaEncrip;
+      const cargando = document.getElementById('cargando');
+      cargando.style.display = 'flex';
       
-      enviarFormularioUsuarios(formulariosAJAX, contraseñaEncrip, alert);
+      function collback(data){
+        let hashAlmacenado = data.passwordAlmacenado;
+        const esValida = verificarContrasena(passwordSinEncrip, hashAlmacenado);
+        console.log(esValida);
+      }
+      
+    
+      enviarFormularioUsuarios(formulariosAJAX, contraseñaEncrip, collback);
   
     }
 });
