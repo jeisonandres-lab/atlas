@@ -120,7 +120,7 @@ class Conexion extends Error
         }
         $cadena = trim($cadena);
         $cadena = stripslashes($cadena);
-        return $cadena;
+        return  $cadena;
     }
 
     protected function verificarDatos($filtro, $cadena)

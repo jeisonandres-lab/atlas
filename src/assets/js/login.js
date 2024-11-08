@@ -1,4 +1,4 @@
-import { enviarFormularioUsuarios, generarHashContrasena, verificarContrasena } from "./ajax/formularioAjax.js";
+import { enviarFormulario, enviarFormularioUsuarios, generarHashContrasena, verificarContrasena } from "./ajax/formularioAjax.js";
 
 let formulariosAJAX=document.querySelector(".formularioEnviar");
 let cerradura = document.getElementById("candado");
@@ -42,14 +42,50 @@ formulariosAJAX.addEventListener('submit', (e) => {
       const cargando = document.getElementById('cargando');
       cargando.style.display = 'flex';
       
-      function collback(data){
-        let hashAlmacenado = data.passwordAlmacenado;
-        const esValida = verificarContrasena(passwordSinEncrip, hashAlmacenado);
-        console.log(esValida);
-      }
+      function callbackExito(parsedData){
+        // let hashAlmacenado = data.password;
+        // let id = data.id;
+        // let usuario = data.usuario;
+        // let metodoAcceso = "inicioSesion";
+        // const esValida = verificarContrasena(passwordSinEncrip, hashAlmacenado);
+        // let formData = new FormData();
+        // formData.append('hash', hashAlmacenado);
+        // formData.append('id', id);
+        // formData.append('usuario', usuario);
+        // formData.append('modulo_usuario', metodoAcceso);
+        let hashAlmacenado =parsedData.password;
+        let id =parsedData.id;
+        let usuario =parsedData.usuario;
+        let metodoAcceso = "inicioSesion";
+        let formData = new FormData();
+        formData.append('hash', hashAlmacenado);
+        formData.append('id', id);
+        formData.append('usuario', usuario);
+        formData.append('modulo_usuario', metodoAcceso);
+        $.ajax({
+          type: "POST",
+          url: "http://localhost/atlas/src/ajax/userAjax.php",
+          data: formData ,
+          processData: false,
+          contentType: false,
+          cache: false,
+          success: function(response) {
+              console.log(response);
+          },
+          error: function(jqXHR, textStatus, errorThrown)   
+       {
+              console.error("Error:", textStatus, errorThrown);   
       
-    
-      enviarFormularioUsuarios(formulariosAJAX, contraseñaEncrip, collback);
-  
+          }
+      });
+        
+      }
+      let url = "http://localhost/atlas/src/ajax/userAjax.php";
+      const data = new FormData(formulariosAJAX);
+      enviarFormulario(url,data,callbackExito);
+      //enviarFormularioUsuarios(formulariosAJAX, contraseñaEncrip, collback);
+      contrasenaInput.value = passwordSinEncrip;
+
+      
     }
 });

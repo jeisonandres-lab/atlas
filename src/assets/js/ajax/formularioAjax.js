@@ -42,6 +42,31 @@ export async function enviarFormularioUsuarios(formulario, password, collback) {
     });
 }
 
+export async function enviarFormulario(url, datos, callbackExito, metodo = 'POST' ) {
+    return new Promise((resolve, reject) => {
+        $.ajax({
+            url: url,
+            type: metodo,
+            data: datos,
+            processData: false,
+            contentType: false,
+            cache: false,
+            success: function(data, status, response) {
+                try {
+                    // Intenta parsear los datos como JSON
+                    const parsedData = JSON.stringify(data);
+                    callbackExito(parsedData);
+                    cargando.style.display = 'none';                
+                } catch (error) {
+                    console.error('Error al parsear los datos JSON:', error);
+                }
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.log (jqXHR, textStatus, errorThrown);
+            }
+        });
+    });
+}
 
 // Función para generar un hash seguro con sal
 export function generarHashContrasena(contrasena) {
