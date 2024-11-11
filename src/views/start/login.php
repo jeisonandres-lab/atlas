@@ -18,25 +18,7 @@
 </head>
 
 <body>
-    <div class="loading justify-content-center align-items-center  flex-column" id="cargando" style="
-    position:
-    absolute;
-    z-index: 10000;
-    top: 0;
-    background: white;
-    height: 100%;
-    width: 100%;
-    display: none
-    ">
-        <div class="container1">
-            <div class="cargando1">
-                <div class="pelotas"></div>
-                <div class="pelotas"></div>
-                <div class="pelotas"></div>
-                <span class="texto-cargando">Cargando...</span>
-            </div>
-        </div>
-    </div>
+    <?php require("./src/views/inc/load.php");?>
     <?php use App\Atlas\config\App; ?>
     <main class="principal container-fluid ">
         <div class="h-100 d-flex justify-content-center align-items-center">
@@ -54,7 +36,6 @@
                             <div class="inicioSesion container-fluid d-flex justify-content-center mt-2 ">
                                 <h4 class=" text-muted">INICIO DE SESION</h4>
                             </div>
-                            <input type="text" name="modulo_usuario" id="" value="login" hidden>
                             <div class="mb-3 mt-3">
                                 <div class="input-group mb-3 ">
                                     <span class="input-group-text" style="height: 40px; width: 40px;"><i class="user fas fa-user"></i></span>

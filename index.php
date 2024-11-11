@@ -1,14 +1,37 @@
 <?php
 require_once './vendor/autoload.php';
 
-if (isset($_GET['views'])) {
-    $url = explode("/", $_GET['views']);
+use App\Atlas\config\App;
+use App\Atlas\controller\viewController;
+use App\Atlas\controller\userController;
+
+
+$login = new userController();
+$viewsController = new viewController();
+$app= new App();
+
+if (isset($_GET['vista'])) {
+    $url = $_SERVER['REQUEST_URI']; // Obtener la URL completa
+    $datosURL =$app->analizarURL($url);
+    $vista = $datosURL['vista'];
+    $parametros = $datosURL['parametros'];
+    if ($parametros == "") {
+        $parametros = null;
+    }
 } else {
-    $url = ["login"];
+    $vista = "login";
+}
+$vista2 = $viewsController->obtenerVistasControlador( $vista);
+switch ($vista) {
+    case 'Identificarse':
+        require_once $vista2;
+    break;
+    default:
+        $app->inicioSession($parametros);
+        require_once $vista2;
+        require_once "./src/views/inc/menu.php";
+    break;
 }
 
-use App\Atlas\controller\viewController;
-
-$viewsController = new viewController();
-$vista = $viewsController->obtenerVistasControlador($url[0]);
-require_once $vista;
+ require_once App::URL_INC."/scrips.php";
+?>

@@ -1,3 +1,14 @@
-<?php
+<?php use App\Atlas\config\App;?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="icon" href="<?php echo App::URL_ICONS."01.png";?>" type="image/x-icon">
+    <?php require_once "./src/views/inc/icons.php"; ?>
+</head>
+<body>
 
-echo "esto es el home";
+</body>
+</html>

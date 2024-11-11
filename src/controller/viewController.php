@@ -9,9 +9,19 @@ class viewController extends viewModel
 {
 
     /*---------- Controlador obtener vistas ----------*/
-    public function obtenerVistasControlador(string $vista)
+    public function obtenerVistasControlador(string $vista, string $query = null)
     {
         error::captureError();
+        // Procesar parámetros GET
+    if ($query) {
+        parse_str($query, $params);
+        // Utilizar los parámetros $params en tu lógica
+        // Ejemplo:
+        if (isset($params['usuario'])) {
+            $usuario = $params['usuario'];
+            // Hacer algo con el usuario
+        }
+    }
         if ($vista != "") {
             $respuesta = $this->obtenerVistasModelo($vista);
         } else {
@@ -19,4 +29,5 @@ class viewController extends viewModel
         }
         return $respuesta;
     }
+
 }

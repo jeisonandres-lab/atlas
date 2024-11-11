@@ -1,23 +1,10 @@
-<!DOCTYPE html>
-<!-- Coding by CodingNepal || www.codingnepalweb.com -->
-<html lang="en">
 
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="../../assets/css/menu.css" />
-    <!-- ICONOS DEL SISTEMA -->
-    <?php require_once "./icons.php"; ?>
-
-</head>
-
-<body>
     <!-- navbar -->
     <nav class="navbar">
         <div class="logo_item">
             <i class="bx bx-menu" id="sidebarOpen"></i>
 
-            <img src="../../assets/img/icons/dasdad-transformed-removebg.png" alt=""></i>Atlas
+            <img src="./src/assets/img/icons/dasdad-transformed-removebg.png" alt=""></i>Atlas
         </div>
 
         <div class="search_bar">
@@ -29,7 +16,7 @@
             <i class='bx bx-sun' id="darkLight"></i>
             <i class='bx bx-bell'></i>
             <!-- foto de perfil -->
-            <img src="../../assets/img/icons/avtar_1.png" alt="" class="profile" />
+            <img src="./src/assets/img/icons/avtar_1.png" alt="" class="profile" />
         </div>
     </nav>
 
@@ -208,9 +195,5 @@
                 </li>
     -->
     <!-- JavaScript -->
-    <script src="../../assets/js/menu.js"></script>
-    <script type="module" src="/src/libs/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="../../libs/ionicons/ionicons.js"></script>
-</body>
 
-</html>
+

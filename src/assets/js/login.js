@@ -1,4 +1,4 @@
-import { enviarFormulario, enviarFormularioUsuarios, generarHashContrasena, verificarContrasena } from "./ajax/formularioAjax.js";
+import { enviarDatos, enviarFormulario, generarHashContrasena, verificarContrasena } from "./ajax/formularioAjax.js";
 
 let formulariosAJAX=document.querySelector(".formularioEnviar");
 let cerradura = document.getElementById("candado");
@@ -35,7 +35,6 @@ formulariosAJAX.addEventListener('submit', (e) => {
     } else if (contrasenaInput.value.trim() === '') {
         alert('Por favor, ingresa tu contraseña.');
     } else {
-        // Si ambos campos están llenos, enviar el formulario
       let contrseñatring = contrasenaInput.toString();
       let contraseñaEncrip = generarHashContrasena(contrseñatring);
       contrasenaInput.value = contraseñaEncrip;
@@ -43,49 +42,21 @@ formulariosAJAX.addEventListener('submit', (e) => {
       cargando.style.display = 'flex';
       
       function callbackExito(parsedData){
-        // let hashAlmacenado = data.password;
-        // let id = data.id;
-        // let usuario = data.usuario;
-        // let metodoAcceso = "inicioSesion";
-        // const esValida = verificarContrasena(passwordSinEncrip, hashAlmacenado);
-        // let formData = new FormData();
-        // formData.append('hash', hashAlmacenado);
-        // formData.append('id', id);
-        // formData.append('usuario', usuario);
-        // formData.append('modulo_usuario', metodoAcceso);
         let hashAlmacenado =parsedData.password;
-        let id =parsedData.id;
-        let usuario =parsedData.usuario;
-        let metodoAcceso = "inicioSesion";
-        let formData = new FormData();
-        formData.append('hash', hashAlmacenado);
-        formData.append('id', id);
-        formData.append('usuario', usuario);
-        formData.append('modulo_usuario', metodoAcceso);
-        $.ajax({
-          type: "POST",
-          url: "http://localhost/atlas/src/ajax/userAjax.php",
-          data: formData ,
-          processData: false,
-          contentType: false,
-          cache: false,
-          success: function(response) {
-              console.log(response);
-          },
-          error: function(jqXHR, textStatus, errorThrown)   
-       {
-              console.error("Error:", textStatus, errorThrown);   
-      
-          }
-      });
-        
+        const esValida = verificarContrasena(passwordSinEncrip, hashAlmacenado);
+        if (esValida === true) {
+          let formData = new FormData();
+          formData.append('url', 'inicio?usuario='+ parsedData.usuario);
+          const url = "http://localhost/atlas/src/ajax/userAjax.php?modulo_usuario=redireccionar";
+          enviarDatos(url, formData)
+        } else {
+          console.log("la contraseña no es correcta");
+        }
       }
-      let url = "http://localhost/atlas/src/ajax/userAjax.php";
+      let url = "http://localhost/atlas/src/ajax/userAjax.php?modulo_usuario=login";
       const data = new FormData(formulariosAJAX);
+      data.append('modulo_usuario', 'login');
       enviarFormulario(url,data,callbackExito);
-      //enviarFormularioUsuarios(formulariosAJAX, contraseñaEncrip, collback);
       contrasenaInput.value = passwordSinEncrip;
-
-      
     }
 });

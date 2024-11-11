@@ -28,7 +28,7 @@ class viewModel extends error
             echo "Identificarse";
         } else {
             error::captureError("Vista no encontrada: $vista");
-            header("location:error ");
+            header("location:Identificarse ");
         }
     }
 }
