@@ -29,7 +29,7 @@ switch ($vista) {
     default:
         $app->inicioSession($parametros);
         require_once $vista2;
-        require_once "./src/views/inc/menu.php";
+
     break;
 }
 

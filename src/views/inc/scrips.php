@@ -1,3 +1,4 @@
-<script src="./src/assets/js/menu.js"></script>
-<script type="module" src="./src/libs/ionicons/ionicons.esm.js"></script>
-<script nomodule src=".src/libs/ionicons/ionicons.js"></script>
+<?php use App\Atlas\config\App;?>
+<script src="<?php echo App::URL_SCRIPS."menu.js";?>"></script>
+<script type="module" src="<?php echo App::URL_LIBRARY."ionicons/ionicons.esm.js";?>"></script>
+<script type="module" src="<?php echo App::URL_LIBRARY."ionicons/ionicons.js";?>"></script>

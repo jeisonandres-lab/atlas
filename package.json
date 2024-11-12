@@ -4,6 +4,7 @@
     "ajax": "^0.0.4",
     "bcrypt": "^5.1.1",
     "bootstrap": "^5.3.3",
+    "bootstrap-icons": "^1.11.3",
     "boxicons": "^2.1.4",
     "crypto-js": "^4.2.0",
     "i": "^0.3.7",

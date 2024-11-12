@@ -1,48 +1,480 @@
 ======================================================
-Error: require_once(./src/assets/icons/01.png): Failed to open stream: No such file or directory
-Archivo: C:\xampp\htdocs\atlas\src\views\home\home.php
-Línea: 8
-Fecha y hora: 2024-11-11 01:32:17
+Error: Undefined array key "usuario"
+Archivo: C:\xampp\htdocs\atlas\src\config\app.php
+Línea: 37
+Fecha y hora: 2024-11-11 19:33:48
 ======================================================
 ======================================================
-Error: require_once(./src/assets/icons/01.png): Failed to open stream: No such file or directory
-Archivo: C:\xampp\htdocs\atlas\src\views\home\home.php
-Línea: 8
-Fecha y hora: 2024-11-11 01:32:17
+Error: Undefined array key "usuario"
+Archivo: C:\xampp\htdocs\atlas\src\config\app.php
+Línea: 37
+Fecha y hora: 2024-11-11 19:33:48
 ======================================================
 ======================================================
-Error: require_once(./src/assets/icons/): Failed to open stream: No such file or directory
-Archivo: C:\xampp\htdocs\atlas\src\views\home\home.php
-Línea: 8
-Fecha y hora: 2024-11-11 01:33:50
+Error: Undefined array key "usuario"
+Archivo: C:\xampp\htdocs\atlas\src\config\app.php
+Línea: 37
+Fecha y hora: 2024-11-11 19:33:48
 ======================================================
 ======================================================
-Error: require_once(./src/assets/icons//01.png): Failed to open stream: No such file or directory
-Archivo: C:\xampp\htdocs\atlas\src\views\home\home.php
-Línea: 8
-Fecha y hora: 2024-11-11 01:34:26
+Error: Undefined array key "usuario"
+Archivo: C:\xampp\htdocs\atlas\src\config\app.php
+Línea: 37
+Fecha y hora: 2024-11-11 19:33:48
 ======================================================
 ======================================================
-Error: require_once(./src/assets/icons//01.png): Failed to open stream: No such file or directory
-Archivo: C:\xampp\htdocs\atlas\src\views\home\home.php
-Línea: 8
-Fecha y hora: 2024-11-11 01:35:22
+Error: Undefined array key "usuario"
+Archivo: C:\xampp\htdocs\atlas\src\config\app.php
+Línea: 37
+Fecha y hora: 2024-11-11 19:33:48
 ======================================================
 ======================================================
-Error: require_once(./src/assets/icons//01.png): Failed to open stream: No such file or directory
-Archivo: C:\xampp\htdocs\atlas\src\views\home\home.php
-Línea: 8
-Fecha y hora: 2024-11-11 01:35:23
+Error: Undefined array key "usuario"
+Archivo: C:\xampp\htdocs\atlas\src\config\app.php
+Línea: 37
+Fecha y hora: 2024-11-11 19:33:48
 ======================================================
 ======================================================
-Error: require_once(./src/assets/icons//01.png): Failed to open stream: No such file or directory
-Archivo: C:\xampp\htdocs\atlas\src\views\home\home.php
-Línea: 8
-Fecha y hora: 2024-11-11 01:35:23
+Error: Undefined array key "usuario"
+Archivo: C:\xampp\htdocs\atlas\src\config\app.php
+Línea: 37
+Fecha y hora: 2024-11-11 19:33:48
 ======================================================
 ======================================================
-Error: include(./src/assets/icons//01.png): Failed to open stream: No such file or directory
-Archivo: C:\xampp\htdocs\atlas\src\views\home\home.php
-Línea: 8
-Fecha y hora: 2024-11-11 01:35:53
+Error: Undefined array key "usuario"
+Archivo: C:\xampp\htdocs\atlas\src\config\app.php
+Línea: 37
+Fecha y hora: 2024-11-11 19:33:49
+======================================================
+======================================================
+Error: Undefined array key "usuario"
+Archivo: C:\xampp\htdocs\atlas\src\config\app.php
+Línea: 37
+Fecha y hora: 2024-11-11 19:33:49
+======================================================
+======================================================
+Error: Undefined array key "usuario"
+Archivo: C:\xampp\htdocs\atlas\src\config\app.php
+Línea: 37
+Fecha y hora: 2024-11-11 19:33:49
+======================================================
+======================================================
+Error: Undefined array key "usuario"
+Archivo: C:\xampp\htdocs\atlas\src\config\app.php
+Línea: 37
+Fecha y hora: 2024-11-11 19:33:49
+======================================================
+======================================================
+Error: Undefined array key "usuario"
+Archivo: C:\xampp\htdocs\atlas\src\config\app.php
+Línea: 37
+Fecha y hora: 2024-11-11 19:33:49
+======================================================
+======================================================
+Error: Undefined array key "usuario"
+Archivo: C:\xampp\htdocs\atlas\src\config\app.php
+Línea: 37
+Fecha y hora: 2024-11-11 19:33:49
+======================================================
+======================================================
+Error: Undefined array key "usuario"
+Archivo: C:\xampp\htdocs\atlas\src\config\app.php
+Línea: 37
+Fecha y hora: 2024-11-11 19:33:49
+======================================================
+======================================================
+Error: Undefined array key "usuario"
+Archivo: C:\xampp\htdocs\atlas\src\config\app.php
+Línea: 37
+Fecha y hora: 2024-11-11 19:33:49
+======================================================
+======================================================
+Error: Undefined array key "usuario"
+Archivo: C:\xampp\htdocs\atlas\src\config\app.php
+Línea: 37
+Fecha y hora: 2024-11-11 19:33:49
+======================================================
+======================================================
+Error: Undefined array key "usuario"
+Archivo: C:\xampp\htdocs\atlas\src\config\app.php
+Línea: 37
+Fecha y hora: 2024-11-11 19:33:49
+======================================================
+======================================================
+Error: Undefined array key "usuario"
+Archivo: C:\xampp\htdocs\atlas\src\config\app.php
+Línea: 37
+Fecha y hora: 2024-11-11 19:33:49
+======================================================
+======================================================
+Error: Undefined array key "usuario"
+Archivo: C:\xampp\htdocs\atlas\src\config\app.php
+Línea: 37
+Fecha y hora: 2024-11-11 19:33:49
+======================================================
+======================================================
+Error: Undefined array key "usuario"
+Archivo: C:\xampp\htdocs\atlas\src\config\app.php
+Línea: 37
+Fecha y hora: 2024-11-11 19:33:49
+======================================================
+======================================================
+Error: Undefined array key "usuario"
+Archivo: C:\xampp\htdocs\atlas\src\config\app.php
+Línea: 37
+Fecha y hora: 2024-11-11 19:33:50
+======================================================
+======================================================
+Error: Undefined array key "usuario"
+Archivo: C:\xampp\htdocs\atlas\src\config\app.php
+Línea: 37
+Fecha y hora: 2024-11-11 19:33:50
+======================================================
+======================================================
+Error: Undefined array key "usuario"
+Archivo: C:\xampp\htdocs\atlas\src\config\app.php
+Línea: 37
+Fecha y hora: 2024-11-11 19:33:50
+======================================================
+======================================================
+Error: Undefined array key "usuario"
+Archivo: C:\xampp\htdocs\atlas\src\config\app.php
+Línea: 37
+Fecha y hora: 2024-11-11 19:33:50
+======================================================
+======================================================
+Error: Undefined array key "usuario"
+Archivo: C:\xampp\htdocs\atlas\src\config\app.php
+Línea: 37
+Fecha y hora: 2024-11-11 19:33:50
+======================================================
+======================================================
+Error: Undefined array key "usuario"
+Archivo: C:\xampp\htdocs\atlas\src\config\app.php
+Línea: 37
+Fecha y hora: 2024-11-11 19:33:50
+======================================================
+======================================================
+Error: Undefined array key "usuario"
+Archivo: C:\xampp\htdocs\atlas\src\config\app.php
+Línea: 37
+Fecha y hora: 2024-11-11 19:33:50
+======================================================
+======================================================
+Error: Undefined array key "usuario"
+Archivo: C:\xampp\htdocs\atlas\src\config\app.php
+Línea: 37
+Fecha y hora: 2024-11-11 19:33:50
+======================================================
+======================================================
+Error: Undefined array key "usuario"
+Archivo: C:\xampp\htdocs\atlas\src\config\app.php
+Línea: 37
+Fecha y hora: 2024-11-11 19:33:51
+======================================================
+======================================================
+Error: Undefined array key "usuario"
+Archivo: C:\xampp\htdocs\atlas\src\config\app.php
+Línea: 37
+Fecha y hora: 2024-11-11 19:33:51
+======================================================
+======================================================
+Error: Undefined array key "usuario"
+Archivo: C:\xampp\htdocs\atlas\src\config\app.php
+Línea: 37
+Fecha y hora: 2024-11-11 19:33:51
+======================================================
+======================================================
+Error: Undefined array key "usuario"
+Archivo: C:\xampp\htdocs\atlas\src\config\app.php
+Línea: 37
+Fecha y hora: 2024-11-11 19:33:51
+======================================================
+======================================================
+Error: Undefined array key "usuario"
+Archivo: C:\xampp\htdocs\atlas\src\config\app.php
+Línea: 37
+Fecha y hora: 2024-11-11 19:33:51
+======================================================
+======================================================
+Error: Undefined array key "usuario"
+Archivo: C:\xampp\htdocs\atlas\src\config\app.php
+Línea: 37
+Fecha y hora: 2024-11-11 19:33:51
+======================================================
+======================================================
+Error: Undefined array key "usuario"
+Archivo: C:\xampp\htdocs\atlas\src\config\app.php
+Línea: 37
+Fecha y hora: 2024-11-11 19:33:51
+======================================================
+======================================================
+Error: Undefined array key "usuario"
+Archivo: C:\xampp\htdocs\atlas\src\config\app.php
+Línea: 37
+Fecha y hora: 2024-11-11 19:33:51
+======================================================
+======================================================
+Error: Undefined array key "usuario"
+Archivo: C:\xampp\htdocs\atlas\src\config\app.php
+Línea: 37
+Fecha y hora: 2024-11-11 19:33:51
+======================================================
+======================================================
+Error: Undefined array key "usuario"
+Archivo: C:\xampp\htdocs\atlas\src\config\app.php
+Línea: 37
+Fecha y hora: 2024-11-11 19:33:51
+======================================================
+======================================================
+Error: Undefined array key "usuario"
+Archivo: C:\xampp\htdocs\atlas\src\config\app.php
+Línea: 37
+Fecha y hora: 2024-11-11 19:33:51
+======================================================
+======================================================
+Error: Undefined array key "usuario"
+Archivo: C:\xampp\htdocs\atlas\src\config\app.php
+Línea: 37
+Fecha y hora: 2024-11-11 19:33:51
+======================================================
+======================================================
+Error: Undefined array key "usuario"
+Archivo: C:\xampp\htdocs\atlas\src\config\app.php
+Línea: 37
+Fecha y hora: 2024-11-11 19:33:56
+======================================================
+======================================================
+Error: Undefined array key "usuario"
+Archivo: C:\xampp\htdocs\atlas\src\config\app.php
+Línea: 37
+Fecha y hora: 2024-11-11 19:33:56
+======================================================
+======================================================
+Error: Undefined array key "usuario"
+Archivo: C:\xampp\htdocs\atlas\src\config\app.php
+Línea: 37
+Fecha y hora: 2024-11-11 19:33:56
+======================================================
+======================================================
+Error: Undefined array key "usuario"
+Archivo: C:\xampp\htdocs\atlas\src\config\app.php
+Línea: 37
+Fecha y hora: 2024-11-11 19:33:56
+======================================================
+======================================================
+Error: Undefined array key "usuario"
+Archivo: C:\xampp\htdocs\atlas\src\config\app.php
+Línea: 37
+Fecha y hora: 2024-11-11 19:33:56
+======================================================
+======================================================
+Error: Undefined array key "usuario"
+Archivo: C:\xampp\htdocs\atlas\src\config\app.php
+Línea: 37
+Fecha y hora: 2024-11-11 19:33:56
+======================================================
+======================================================
+Error: Undefined array key "usuario"
+Archivo: C:\xampp\htdocs\atlas\src\config\app.php
+Línea: 37
+Fecha y hora: 2024-11-11 19:33:56
+======================================================
+======================================================
+Error: Undefined array key "usuario"
+Archivo: C:\xampp\htdocs\atlas\src\config\app.php
+Línea: 37
+Fecha y hora: 2024-11-11 19:33:57
+======================================================
+======================================================
+Error: Undefined array key "usuario"
+Archivo: C:\xampp\htdocs\atlas\src\config\app.php
+Línea: 37
+Fecha y hora: 2024-11-11 19:33:57
+======================================================
+======================================================
+Error: Undefined array key "usuario"
+Archivo: C:\xampp\htdocs\atlas\src\config\app.php
+Línea: 37
+Fecha y hora: 2024-11-11 19:33:57
+======================================================
+======================================================
+Error: Undefined array key "usuario"
+Archivo: C:\xampp\htdocs\atlas\src\config\app.php
+Línea: 37
+Fecha y hora: 2024-11-11 19:33:57
+======================================================
+======================================================
+Error: Undefined array key "usuario"
+Archivo: C:\xampp\htdocs\atlas\src\config\app.php
+Línea: 37
+Fecha y hora: 2024-11-11 19:33:57
+======================================================
+======================================================
+Error: Undefined array key "usuario"
+Archivo: C:\xampp\htdocs\atlas\src\config\app.php
+Línea: 37
+Fecha y hora: 2024-11-11 19:33:57
+======================================================
+======================================================
+Error: Undefined array key "usuario"
+Archivo: C:\xampp\htdocs\atlas\src\config\app.php
+Línea: 37
+Fecha y hora: 2024-11-11 19:33:57
+======================================================
+======================================================
+Error: Undefined array key "usuario"
+Archivo: C:\xampp\htdocs\atlas\src\config\app.php
+Línea: 37
+Fecha y hora: 2024-11-11 19:33:57
+======================================================
+======================================================
+Error: Undefined array key "usuario"
+Archivo: C:\xampp\htdocs\atlas\src\config\app.php
+Línea: 37
+Fecha y hora: 2024-11-11 19:33:57
+======================================================
+======================================================
+Error: Undefined array key "usuario"
+Archivo: C:\xampp\htdocs\atlas\src\config\app.php
+Línea: 37
+Fecha y hora: 2024-11-11 19:33:57
+======================================================
+======================================================
+Error: Undefined array key "usuario"
+Archivo: C:\xampp\htdocs\atlas\src\config\app.php
+Línea: 37
+Fecha y hora: 2024-11-11 19:33:57
+======================================================
+======================================================
+Error: Undefined array key "usuario"
+Archivo: C:\xampp\htdocs\atlas\src\config\app.php
+Línea: 37
+Fecha y hora: 2024-11-11 19:33:57
+======================================================
+======================================================
+Error: Undefined array key "usuario"
+Archivo: C:\xampp\htdocs\atlas\src\config\app.php
+Línea: 37
+Fecha y hora: 2024-11-11 19:33:57
+======================================================
+======================================================
+Error: Undefined array key "usuario"
+Archivo: C:\xampp\htdocs\atlas\src\config\app.php
+Línea: 37
+Fecha y hora: 2024-11-11 19:34:27
+======================================================
+======================================================
+Error: Undefined array key "usuario"
+Archivo: C:\xampp\htdocs\atlas\src\config\app.php
+Línea: 37
+Fecha y hora: 2024-11-11 19:34:27
+======================================================
+======================================================
+Error: Undefined array key "usuario"
+Archivo: C:\xampp\htdocs\atlas\src\config\app.php
+Línea: 37
+Fecha y hora: 2024-11-11 19:34:27
+======================================================
+======================================================
+Error: Undefined array key "usuario"
+Archivo: C:\xampp\htdocs\atlas\src\config\app.php
+Línea: 37
+Fecha y hora: 2024-11-11 19:34:27
+======================================================
+======================================================
+Error: Undefined array key "usuario"
+Archivo: C:\xampp\htdocs\atlas\src\config\app.php
+Línea: 37
+Fecha y hora: 2024-11-11 19:34:27
+======================================================
+======================================================
+Error: Undefined array key "usuario"
+Archivo: C:\xampp\htdocs\atlas\src\config\app.php
+Línea: 37
+Fecha y hora: 2024-11-11 19:34:27
+======================================================
+======================================================
+Error: Undefined array key "usuario"
+Archivo: C:\xampp\htdocs\atlas\src\config\app.php
+Línea: 37
+Fecha y hora: 2024-11-11 19:34:27
+======================================================
+======================================================
+Error: Undefined array key "usuario"
+Archivo: C:\xampp\htdocs\atlas\src\config\app.php
+Línea: 37
+Fecha y hora: 2024-11-11 19:34:28
+======================================================
+======================================================
+Error: Undefined array key "usuario"
+Archivo: C:\xampp\htdocs\atlas\src\config\app.php
+Línea: 37
+Fecha y hora: 2024-11-11 19:34:28
+======================================================
+======================================================
+Error: Undefined array key "usuario"
+Archivo: C:\xampp\htdocs\atlas\src\config\app.php
+Línea: 37
+Fecha y hora: 2024-11-11 19:34:28
+======================================================
+======================================================
+Error: Undefined array key "usuario"
+Archivo: C:\xampp\htdocs\atlas\src\config\app.php
+Línea: 37
+Fecha y hora: 2024-11-11 19:34:28
+======================================================
+======================================================
+Error: Undefined array key "usuario"
+Archivo: C:\xampp\htdocs\atlas\src\config\app.php
+Línea: 37
+Fecha y hora: 2024-11-11 19:34:28
+======================================================
+======================================================
+Error: Undefined array key "usuario"
+Archivo: C:\xampp\htdocs\atlas\src\config\app.php
+Línea: 37
+Fecha y hora: 2024-11-11 19:34:28
+======================================================
+======================================================
+Error: Undefined array key "usuario"
+Archivo: C:\xampp\htdocs\atlas\src\config\app.php
+Línea: 37
+Fecha y hora: 2024-11-11 19:34:28
+======================================================
+======================================================
+Error: Undefined array key "usuario"
+Archivo: C:\xampp\htdocs\atlas\src\config\app.php
+Línea: 37
+Fecha y hora: 2024-11-11 19:34:28
+======================================================
+======================================================
+Error: Undefined array key "usuario"
+Archivo: C:\xampp\htdocs\atlas\src\config\app.php
+Línea: 37
+Fecha y hora: 2024-11-11 19:34:28
+======================================================
+======================================================
+Error: Undefined array key "usuario"
+Archivo: C:\xampp\htdocs\atlas\src\config\app.php
+Línea: 37
+Fecha y hora: 2024-11-11 19:34:28
+======================================================
+======================================================
+Error: Undefined array key "usuario"
+Archivo: C:\xampp\htdocs\atlas\src\config\app.php
+Línea: 37
+Fecha y hora: 2024-11-11 19:34:28
+======================================================
+======================================================
+Error: Undefined array key "usuario"
+Archivo: C:\xampp\htdocs\atlas\src\config\app.php
+Línea: 37
+Fecha y hora: 2024-11-11 19:34:28
+======================================================
+======================================================
+Error: Undefined array key "usuario"
+Archivo: C:\xampp\htdocs\atlas\src\config\app.php
+Línea: 37
+Fecha y hora: 2024-11-11 19:34:28
 ======================================================
