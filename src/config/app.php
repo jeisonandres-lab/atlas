@@ -32,10 +32,15 @@ class App
     }
 
     public function inicioSession($parametros){
-        session_name(App::APP_SESSION_NAME);
-        session_start();
-        $_SESSION['usuario'] = $parametros['usuario'];
-
+        if (!empty($parametros)) {
+            // El array tiene elementos
+            session_name(App::APP_SESSION_NAME);
+            session_start();
+            $_SESSION['usuario'] = $parametros['usuario'];
+        } else {
+            // El array está vacío
+            session_destroy();
+        }
     }
 
 

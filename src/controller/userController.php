@@ -27,13 +27,11 @@ class  userController extends userModel  {
                             $data_json['usuario'] = $row['nameUser'];
                             $data_json['mensaje'] = 'Usuario encontrado con exito';
                             $data_json['password'] = $row['userPassword'];
+                            $data_json['activo'] = 'desactivado';
                         }else{
                             $data_json['mensaje'] = 'Usuario no coincide';
                         }
                     }
-                    session_name('holasoy');
-                    session_start();
-                    $_SESSION['usuario'] = $user;
                 }
             }
         }

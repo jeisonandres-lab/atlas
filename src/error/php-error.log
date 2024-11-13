@@ -478,3 +478,165 @@ Archivo: C:\xampp\htdocs\atlas\src\config\app.php
 Línea: 37
 Fecha y hora: 2024-11-11 19:34:28
 ======================================================
+======================================================
+Error: Undefined variable $parametros
+Archivo: C:\xampp\htdocs\atlas\index.php
+Línea: 31
+Fecha y hora: 2024-11-12 22:16:30
+======================================================
+======================================================
+Error: Undefined array key "activo"
+Archivo: C:\xampp\htdocs\atlas\index.php
+Línea: 32
+Fecha y hora: 2024-11-12 22:31:30
+======================================================
+======================================================
+Error: Undefined array key "usuario"
+Archivo: C:\xampp\htdocs\atlas\src\config\app.php
+Línea: 37
+Fecha y hora: 2024-11-12 22:55:30
+======================================================
+======================================================
+Error: Undefined array key "usuario"
+Archivo: C:\xampp\htdocs\atlas\src\config\app.php
+Línea: 39
+Fecha y hora: 2024-11-12 22:58:53
+======================================================
+======================================================
+Error: Undefined array key "usuario"
+Archivo: C:\xampp\htdocs\atlas\src\config\app.php
+Línea: 39
+Fecha y hora: 2024-11-12 22:58:55
+======================================================
+======================================================
+Error: Undefined array key "usuario"
+Archivo: C:\xampp\htdocs\atlas\src\config\app.php
+Línea: 39
+Fecha y hora: 2024-11-12 22:58:57
+======================================================
+======================================================
+Error: Undefined array key "usuario"
+Archivo: C:\xampp\htdocs\atlas\src\config\app.php
+Línea: 39
+Fecha y hora: 2024-11-12 23:03:54
+======================================================
+======================================================
+Error: Undefined array key "usuario"
+Archivo: C:\xampp\htdocs\atlas\src\config\app.php
+Línea: 39
+Fecha y hora: 2024-11-12 23:04:01
+======================================================
+======================================================
+Error: Undefined array key "usuario"
+Archivo: C:\xampp\htdocs\atlas\src\config\app.php
+Línea: 39
+Fecha y hora: 2024-11-12 23:04:02
+======================================================
+======================================================
+Error: Undefined array key "usuario"
+Archivo: C:\xampp\htdocs\atlas\src\config\app.php
+Línea: 39
+Fecha y hora: 2024-11-12 23:04:02
+======================================================
+======================================================
+Error: Undefined array key "usuario"
+Archivo: C:\xampp\htdocs\atlas\src\config\app.php
+Línea: 39
+Fecha y hora: 2024-11-12 23:04:02
+======================================================
+======================================================
+Error: Undefined array key "usuario"
+Archivo: C:\xampp\htdocs\atlas\src\config\app.php
+Línea: 39
+Fecha y hora: 2024-11-12 23:04:02
+======================================================
+======================================================
+Error: Undefined array key "usuario"
+Archivo: C:\xampp\htdocs\atlas\src\config\app.php
+Línea: 39
+Fecha y hora: 2024-11-12 23:04:03
+======================================================
+======================================================
+Error: Undefined array key "usuario"
+Archivo: C:\xampp\htdocs\atlas\src\config\app.php
+Línea: 39
+Fecha y hora: 2024-11-12 23:04:03
+======================================================
+======================================================
+Error: session_destroy(): Trying to destroy uninitialized session
+Archivo: C:\xampp\htdocs\atlas\src\config\app.php
+Línea: 42
+Fecha y hora: 2024-11-12 23:22:59
+======================================================
+======================================================
+Error: session_destroy(): Trying to destroy uninitialized session
+Archivo: C:\xampp\htdocs\atlas\src\config\app.php
+Línea: 42
+Fecha y hora: 2024-11-12 23:23:11
+======================================================
+======================================================
+Error: Undefined array key "encrypted_params"
+Archivo: C:\xampp\htdocs\atlas\index.php
+Línea: 31
+Fecha y hora: 2024-11-12 23:30:51
+======================================================
+======================================================
+Error: Undefined array key "encrypted_params"
+Archivo: C:\xampp\htdocs\atlas\index.php
+Línea: 31
+Fecha y hora: 2024-11-12 23:30:57
+======================================================
+======================================================
+Error: Undefined array key "usuario"
+Archivo: C:\xampp\htdocs\atlas\src\config\app.php
+Línea: 39
+Fecha y hora: 2024-11-12 23:31:09
+======================================================
+======================================================
+Error: Undefined array key "usuario"
+Archivo: C:\xampp\htdocs\atlas\src\config\app.php
+Línea: 39
+Fecha y hora: 2024-11-12 23:31:29
+======================================================
+======================================================
+Error: Undefined array key "usuario"
+Archivo: C:\xampp\htdocs\atlas\src\config\app.php
+Línea: 39
+Fecha y hora: 2024-11-12 23:31:33
+======================================================
+======================================================
+Error: Undefined array key "usuario"
+Archivo: C:\xampp\htdocs\atlas\src\config\app.php
+Línea: 39
+Fecha y hora: 2024-11-12 23:31:40
+======================================================
+======================================================
+Error: Undefined array key "usuario"
+Archivo: C:\xampp\htdocs\atlas\src\config\app.php
+Línea: 39
+Fecha y hora: 2024-11-12 23:38:08
+======================================================
+======================================================
+Error: Undefined array key "usuario"
+Archivo: C:\xampp\htdocs\atlas\src\config\app.php
+Línea: 39
+Fecha y hora: 2024-11-12 23:38:10
+======================================================
+======================================================
+Excepción: Class "App\Atlas\models\ed" not found
+Archivo: C:\xampp\htdocs\atlas\index.php
+Línea: 32
+Fecha y hora: 2024-11-12 23:51:09
+======================================================
+======================================================
+Excepción: Class "App\Atlas\models\ed" not found
+Archivo: C:\xampp\htdocs\atlas\index.php
+Línea: 32
+Fecha y hora: 2024-11-12 23:51:10
+======================================================
+======================================================
+Excepción: Class "App\Atlas\models\ed" not found
+Archivo: C:\xampp\htdocs\atlas\index.php
+Línea: 32
+Fecha y hora: 2024-11-12 23:51:11
+======================================================

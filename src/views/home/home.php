@@ -1,4 +1,5 @@
 <?php use App\Atlas\config\App;?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -9,8 +10,7 @@
 </head>
 <body class="layout-fixed sidebar-expand-lg bg-body-tertiary">
 <div class="app-wrapper">
-    <?php require_once App::URL_INC."/menu_header.php";?>
-    <?php require_once App::URL_INC."/menu_lateral.php";?>
+    <?php require_once App::URL_INC."/menu.php";?>
     <main class="app-main">
         hola
     </main>
