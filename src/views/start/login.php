@@ -32,7 +32,7 @@
                         </div>
                     </div>
                     <div class="d-flex justify-content-center mt-5">
-                        <form class="formularioEnviar" method="POST" action="<?php echo App::APP_URL; ?>src/ajax/userAjax.php">
+                        <form class="formularioEnviar" method="POST" action="./src/ajax/userAjax.php">
                             <div class="inicioSesion container-fluid d-flex justify-content-center mt-2 ">
                                 <h4 class=" text-muted">INICIO DE SESION</h4>
                             </div>

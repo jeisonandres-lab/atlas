@@ -12,7 +12,7 @@ export async function enviarFormulario(url, datos, callbackExito, metodo = 'POST
                     // Intenta parsear los datos como JSON
                     const parsedData = data;
                     // console.table(parsedData)
-                    // callbackExito(parsedData);
+                 callbackExito(parsedData);
                     cargando.style.display = 'none';                
                 } catch (error) {
                     console.error('Error al parsear los datos JSON:', error);

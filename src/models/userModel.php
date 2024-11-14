@@ -5,7 +5,7 @@ use App\Atlas\config\Conexion;
 class userModel extends Conexion {
 
     private function existeUsuario(string $user){
-        $sql = $this->ejecutarConsulta("SELECT nameUser, userPassword FROM users WHERE nameUser = '$user'");
+        $sql = $this->ejecutarConsulta("SELECT id_user, nameUser, userPassword, activo FROM users WHERE nameUser = '$user'");
         return $sql;
     }
 

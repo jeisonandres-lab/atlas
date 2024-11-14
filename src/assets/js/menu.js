@@ -1,4 +1,6 @@
 const body = document.querySelector("body");
+const main = document.querySelector("main");
+const footer = document.querySelector("footer");
 const darkLight = document.querySelector("#darkLight");
 const sidebar = document.querySelector(".sidebar");
 const submenuItems = document.querySelectorAll(".submenu_item");
@@ -16,6 +18,9 @@ sidebar.addEventListener("mouseleave", () => {
 
 darkLight.addEventListener("click", () => {
   body.classList.toggle("dark");
+  main.classList.toggle("dark");
+  footer.classList.toggle("dark");
+
   if (body.classList.contains("dark")) {
     document.setI
     darkLight.classList.replace("bx-sun", "bx-moon");

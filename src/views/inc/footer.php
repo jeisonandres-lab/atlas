@@ -1,7 +1,7 @@
-<footer class="app-footer"> <!--begin::To the end-->
-    <div class="float-end d-none d-sm-inline">Anything you want</div> <strong>
-        Copyright &copy; 2014-2024&nbsp;
-        <a href="https://adminlte.io" class="text-decoration-none">AdminLTE.io</a>.
+<footer class="app-footer aling-items-center" style="padding: 0.5rem;">
+    <strong>
+        Copyright &copy;2024&nbsp;
+        <a href="http://upta.edu.ve/" class="text-decoration-none">UPTA</a>.
     </strong>
-    All rights reserved.
+    Reservados todos los derechos.
 </footer>

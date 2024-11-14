@@ -41,19 +41,19 @@ formulariosAJAX.addEventListener('submit', (e) => {
       const cargando = document.getElementById('cargando');
       cargando.style.display = 'flex';
       
-      // function callbackExito(parsedData){
-      //   let hashAlmacenado =parsedData.password;
-      //   const esValida = verificarContrasena(passwordSinEncrip, hashAlmacenado);
-      //   if (esValida === true) {
-      //     let formData = new FormData();
-      //     formData.append('url', `inicio?usuario=${parsedData.usuario}&activado=${parsedData.activo}`);
-      //     const url = "http://localhost/atlas/src/ajax/userAjax.php?modulo_usuario=redireccionar";
-      //     enviarDatos(url, formData)
-      //   } else {
-      //     console.log("la contraseña no es correcta");
-      //   }
-      // }
-      let url = "http://localhost/atlas/src/ajax/userAjax.php?modulo_usuario=login";
+      function callbackExito(parsedData){
+        let hashAlmacenado =parsedData.password;
+        const esValida = verificarContrasena(passwordSinEncrip, hashAlmacenado);
+        if (esValida === true) {
+          let formData = new FormData();
+          formData.append('url', `inicio`);
+          const url = "./src/ajax/userAjax.php?modulo_usuario=redireccionar";
+          enviarDatos(url, formData)
+        } else {
+          console.log("la contraseña no es correcta");
+        }
+      }
+      let url = "./src/ajax/userAjax.php?modulo_usuario=login";
       const data = new FormData(formulariosAJAX);
       data.append('modulo_usuario', 'login');
       enviarFormulario(url,data,callbackExito);

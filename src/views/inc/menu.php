@@ -21,10 +21,10 @@
                 <i data-lte-icon="minimize" class="bi bi-fullscreen-exit" style="display: none;"></i>
             </a>
         </li>
-        <i class="bi bi-grid"></i>
         <i class='bx bx-sun' id="darkLight"></i>
         <i class='bx bx-bell'></i>
         <!-- foto de perfil -->
+
         <img src="./src/assets/img/icons/avtar_1.png" alt="" class="profile" />
         <span class="d-none d-md-inline"><?php echo $datosUser ?></span>
     </div>
@@ -33,9 +33,9 @@
 <!-- sidebar -->
 <nav class="sidebar app-sidebar ">
     <div class="logo_item sidebar-brand">
-        <a href="./index.html" class="brand-link">
+        <a href="./inicio" class="brand-link">
             <img src="./src/assets/img/icons/dasdad-transformed-removebg.png" alt="" class="brand-image ">
-            <span class="brand-text fw-light">ATLAS</span>
+            <span class="ms-3 fw-bold">ATLAS</span>
         </a>
     </div>
 

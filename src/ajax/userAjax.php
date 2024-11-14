@@ -10,6 +10,7 @@ use App\Atlas\controller\loginController;
 $usercontroller = new userController();
 $userLogin = new userController();
 
+
 switch ($_GET['modulo_usuario']) {
     case 'login':
         $user = $userLogin->limpiarCadena($_POST['usuario']);
