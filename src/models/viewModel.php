@@ -16,6 +16,8 @@ class viewModel extends error
         $vistas = [
             'Identificarse' => 'src/views/start/login.php',
             'inicio' => 'src/views/home/home.php',
+            'personal' => "src/views/personal/registro.php",
+            'datosPersonal' => "src/views/personal/datosPersonal.php",
             'error' => "src/error/error.html",
         ];
         // Obtener la ruta completa de la vista

@@ -72,7 +72,7 @@
             <div class="menu_title menu_personal"></div>
             <!-- Start -->
             <li class="item">
-                <a href="#" class="nav_link">
+                <a href="personal" class="nav_link">
                     <span class="navlink_icon">
                         <i class='bx bx-notepad'></i>
                     </span>
@@ -82,7 +82,7 @@
             <!-- End -->
 
             <li class="item">
-                <a href="#" class="nav_link">
+                <a href="datosPersonal" class="nav_link">
                     <span class="navlink_icon">
                         <i class='bx bx-hotel'></i>
                     </span>

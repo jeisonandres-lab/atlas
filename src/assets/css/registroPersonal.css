@@ -1,0 +1,10 @@
+@font-face {
+    font-family: "Poppins" !important;
+    src: url("../../assets/fonts/Poppins-SemiBold.ttf") format("ttf");
+    font-weight: 600;
+  }
+
+  html::-webkit-scrollbar {
+    display: none;
+  }
+  
