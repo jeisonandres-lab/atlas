@@ -10,7 +10,7 @@ use App\Atlas\config\App;
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro | ATLAS</title>
     <?php require_once App::URL_INC . "icons.php"; ?>
-    <link rel="stylesheet" href="<?php echo App::URL_CSS. "registroPersonal.css";?>">
+    <link rel="stylesheet" href="<?php echo App::URL_CSS . "registroPersonal.css"; ?>">
 </head>
 
 <body class="layout-fixed sidebar-expand-lg bg-body-tertiary">
@@ -26,7 +26,7 @@ use App\Atlas\config\App;
             <div class="contenForm m-2 h-100">
                 <form action="#" class="contact-form form-validate h-100" novalidate="novalidate">
                     <div class="row m-0 w-50 h-100 row2">
-                        <div class="col-sm-6 mb-3">
+                        <div class="col-sm-6 mb-2">
                             <label class="form-label mb-0" for="primerNombre">Primer Nombre</label>
                             <div class="input-group">
                                 <span class="input-group-text">@</span>
@@ -34,7 +34,7 @@ use App\Atlas\config\App;
                             </div>
                         </div>
 
-                        <div class="col-sm-6 mb-3">
+                        <div class="col-sm-6 mb-1">
                             <div class="form-group">
                                 <label for="segundoNombre">Segundo Nombre</label>
                                 <div class="input-group">
@@ -44,7 +44,7 @@ use App\Atlas\config\App;
                             </div>
                         </div>
 
-                        <div class="col-sm-6 mb-3">
+                        <div class="col-sm-6 mb-1">
                             <div class="form-group">
                                 <label for="primerApellido">Primer Apellido</label>
                                 <div class="input-group">
@@ -54,7 +54,7 @@ use App\Atlas\config\App;
                             </div>
                         </div>
 
-                        <div class="col-sm-6 mb-3">
+                        <div class="col-sm-6 mb-1">
                             <div class="form-group">
                                 <label for="segundoApellido">Segundo Apellido</label>
                                 <div class="input-group">
@@ -74,7 +74,7 @@ use App\Atlas\config\App;
                             </div>
                         </div>
 
-                        <div class="col-sm-6 mb-3">
+                        <div class="col-sm-6 mb-1">
                             <div class="form-group">
                                 <label for="civil">Estado civil</label>
                                 <div class="input-group">
@@ -88,7 +88,7 @@ use App\Atlas\config\App;
                             </div>
                         </div>
 
-                        <div class="col-sm-12 mb-3 ">
+                        <div class="col-sm-12 mb-1">
                             <div class="form-group">
                                 <label for="correo">Correo</label>
                                 <div class="input-group">
@@ -98,7 +98,7 @@ use App\Atlas\config\App;
                             </div>
                         </div>
 
-                        <div class="col-sm-4 mb-3">
+                        <div class="col-sm-4 mb-1">
                             <div class="form-group">
                                 <label class="required-field" for="message">Día</label>
                                 <div class="input-group">
@@ -108,7 +108,7 @@ use App\Atlas\config\App;
                             </div>
                         </div>
 
-                        <div class="col-sm-4 mb-3">
+                        <div class="col-sm-4 mb-1">
                             <div class="form-group">
                                 <label class="required-field" for="message">Mes</label>
                                 <div class="input-group">
@@ -118,7 +118,7 @@ use App\Atlas\config\App;
                             </div>
                         </div>
 
-                        <div class="col-sm-4 mb-3">
+                        <div class="col-sm-4 mb-1">
                             <div class="form-group">
                                 <label class="required-field" for="message">Año</label>
                                 <div class="input-group">
@@ -134,12 +134,9 @@ use App\Atlas\config\App;
 
                     </div>
                     <div class="row row2 m-0">
-                    <div class="col-md-6">
-      Contenido de la primera columna de la segunda fila
-    </div>
-    <div class="col-md-6">
-      Contenido de la segunda columna de la segunda fila
-    </div>
+                        <div class="col-md-6">
+                            Contenido de la primera columna de la segunda fila
+                        </div>
                     </div>
                 </form>
             </div>
