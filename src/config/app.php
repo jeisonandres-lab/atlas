@@ -12,6 +12,7 @@ class App
     public const URL_CSS = "./src/assets/css/";
     public const URL_IMG = "./src/assets/img/images/";
     public const URL_ICONS = "./src/assets/img/icons/";
+    public const URL_FOTOS = "./src/assets/photos/";
     public const APP_NAME = "ATLAS";
 
     public static function zonaHoraria()

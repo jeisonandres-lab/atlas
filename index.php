@@ -39,4 +39,4 @@ switch ($vista) {
         break;
 }
 
-require_once App::URL_INC . "/scrips.php";
+

@@ -13,6 +13,7 @@
 
 :root {
   --white-color: #fff;
+  --white-color-content: #fff;
   --blue-color: #4070f4;
   --grey-color: #707070;
   --grey-color-light: #aaa;
@@ -30,6 +31,7 @@ body.dark {
 
 body.dark {
   --white-color: #333;
+  --white-color-content: rgb(58, 56, 56);
   --blue-color: #fff;
   --grey-color: #f2f2f2;
   --grey-color-light: #aaa;
@@ -44,8 +46,14 @@ body.dark {
 body.dark,
 main.dark,
 footer.dark {
-  background-color: var(--white-color);
+  background-color: var(--white-color) !important;
 }
+
+body main .content {
+  background-color: var(--white-color-content) !important;
+  border: 1px solid white;
+}
+
 /* navbar */
 .navbar {
   position: fixed;
