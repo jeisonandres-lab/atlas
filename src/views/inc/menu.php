@@ -84,7 +84,7 @@
             <li class="item">
                 <a href="datosPersonal" class="nav_link">
                     <span class="navlink_icon">
-                        <i class='bx bx-hotel'></i>
+                    <i class='bx bx-id-card' ></i>
                     </span>
                     <span class="navlink">Datos Personal</span>
                 </a>

@@ -80,7 +80,7 @@ use App\Atlas\config\App;
                                 <div class="input-group">
                                     <span class="input-group-text span_etdc"><i class="fa-regular fa-clipboard"></i></span>
                                     <select class="form-select form-select-md estado-civil" id="civil" name="civil" aria-label="Small select example" aria-placeholder="dasdas">
-                                        <option value="estadocivil">Estado civil</option>
+                                        <option value="">Estado civil</option>
                                         <option value="soltero">Soltero</option>
                                         <option value="casado">Casado</option>
                                     </select>
@@ -100,10 +100,10 @@ use App\Atlas\config\App;
 
                         <div class="col-sm-4 mb-1">
                             <div class="form-group">
-                                <label class="required-field" for="message">Día</label>
+                                <label class="required-field" for="message">Año</label>
                                 <div class="input-group">
-                                    <span class="input-group-text span_dia"><i class="fa-regular fa-calendar"></i></i></span>
-                                    <input type="number" class="form-control" id="dia" name="dia">
+                                    <span class="input-group-text span_ano"><i class="fa-regular fa-calendar"></i></i></span>
+                                    <select class="form-select form-select-md" name="ano" id="ano"></select>
                                 </div>
                             </div>
                         </div>
@@ -113,21 +113,22 @@ use App\Atlas\config\App;
                                 <label class="required-field" for="message">Mes</label>
                                 <div class="input-group">
                                     <span class="input-group-text span_mes"><i class="fa-regular fa-calendar"></i></i></span>
-                                    <input type="number" min="1" max="31" class="form-control" id="mes" name="mes">
+                                    <select class="form-select" id="meses" name="meses" aria-label="Default select example"></select>
                                 </div>
                             </div>
                         </div>
 
                         <div class="col-sm-4 mb-1">
                             <div class="form-group">
-                                <label class="required-field" for="message">Año</label>
+                                <label class="required-field" for="message">Día</label>
                                 <div class="input-group">
-                                    <span class="input-group-text span_mes"><i class="fa-regular fa-calendar"></i></i></span>
-                                    <input type="number" class="form-control" id="ano" name="ano" min="1700" max="2024" step="1">
+                                    <span class="input-group-text span_dia"><i class="fa-regular fa-calendar"></i></i></span>
+                                    <select class="form-select" id="dia" name="dia" aria-label="Default select example"></select>
                                 </div>
                             </div>
                         </div>
 
+                        
                         <div class="col-sm-12 mb-3">
                             <button type="button" name="submit" class="btn btn-primary">
                             <i class="fa-solid fa-plus me-2"></i>Aceptar</button>
@@ -136,8 +137,7 @@ use App\Atlas\config\App;
 
                     </div>
                     <div class="row2 m-0 w-50 ms-4 bg-white content d-flex justify-content-center align-items-center ">
-                        <div class=" bg-danger d-flex h-75 w-50">
-                            <img src="<?php echo App::URL_FOTOS . "1018683.png"; ?>" class="w-100 h-100" alt="">
+                        <div class=" bg-danger d-flex h-75 w-75" id="img-contener">
                         </div>
                     </div>
                 </form>
