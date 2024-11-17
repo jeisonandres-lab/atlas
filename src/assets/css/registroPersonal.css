@@ -15,7 +15,7 @@ body::-webkit-scrollbar {
 /* verificación cumplida */
 .cumplido {
   border: 2px solid rgb(8, 180, 8) !important;
-  transition: all 2s ease;
+  
   color:rgb(8, 180, 8) !important ;
 }
 .cumplido_span {
@@ -23,10 +23,9 @@ body::-webkit-scrollbar {
   border-right: none !important;
   border-bottom: 2px solid rgb(8, 180, 8) !important;
   border-left: 2px solid rgb(8, 180, 8) !important;
-  transition: all 1.5s ease;
+  
 }
 .cumplido_span i {
-  transition: all 2s ease;
   color: rgb(8, 180, 8) !important;
 }
 
@@ -37,3 +36,23 @@ body::-webkit-scrollbar {
 }
 
 /* verificacion negativa */
+.error_input{
+  border: 2px solid rgb(180, 8, 8) !important;
+  
+  color:rgb(180, 8, 8) !important ;
+}
+.error_input:focus {
+  outline: 0;
+  border-color: rgb(180, 8, 8) !important;
+  box-shadow: none !important;
+}
+.error_span{
+  border-top: 2px solid rgb(180, 8, 8) !important;
+  border-right: none !important;
+  border-bottom: 2px solid rgb(180, 8, 8) !important;
+  border-left: 2px solid rgb(180, 8, 8) !important;
+}
+
+.error_span i {
+  color: rgb(180, 8, 8) !important;
+}
