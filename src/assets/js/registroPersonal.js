@@ -52,18 +52,19 @@ $(function () {
     }
   });
   $("#meses").trigger("change");
-
   validarSelectores("#dia", ".span_dia", "1");
 
   $("#formulario_registro").on("submit", function (event) {
     event.preventDefault();
-
     const data = new FormData(this);
     const url = "src/ajax/registroPersonal.php?modulo_personal=registrar";
-    // Disable the submit button and show a loading indicator
-    $(this).find('button[type="submit"]').prop('disabled', true);
-    function callbackExito(){
-      $(this).find('button[type="submit"]').prop('disabled', false);
+    $("#aceptar").prop("disabled", true);
+    function callbackExito(parsedData) {
+      $("#aceptar").prop("disabled", false);
+      const myModal = new bootstrap.Modal(document.getElementById('modal'));
+      myModal.show();
+
+
     }
     enviarFormulario(url, data, callbackExito);
   });

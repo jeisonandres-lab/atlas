@@ -16,6 +16,38 @@ use App\Atlas\config\App;
 <body class="layout-fixed sidebar-expand-lg bg-body-tertiary">
     <div class="app-wrapper conten-main">
         <?php require_once App::URL_INC . "/menu.php"; ?>
+        <div class="modal" tabindex="-1" id="modal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Datos De Trabajador</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-sm-6 mb-1" style="display: none;">
+                                <label class="form-label mb-0" for="primerNombre">id</label>
+                                <div class="input-group">
+                                    <span class="input-group-text "><i class="fa-regular fa-user"></i></span>
+                                    <input type="text" class="form-control" id="id" name="primerNombre" placeholder="Primer Nombre">
+                                </div>
+                            </div>
+                            <div class="col-sm-6 mb-1">
+                                <label class="form-label mb-0" for="primerNombre">Primer Nombre</label>
+                                <div class="input-group">
+                                    <span class="input-group-text "><i class="fa-regular fa-user"></i></span>
+                                    <input type="text" class="form-control" id="nombreTrabajador" name="primerNombre" placeholder="Primer Nombre">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
         <main class="app-main p-0">
             <div class="imagen-pages" style="height: 17%;">
                 <div class="d-flex align-items-center" style="position: absolute; height: 16%;">
@@ -138,7 +170,7 @@ use App\Atlas\config\App;
 
                     </div>
                     <div class="row2 m-0 w-50 ms-4 bg-white content d-flex justify-content-center align-items-center ">
-                        <div class=" bg-danger d-flex h-75 w-75" id="img-contener">
+                        <div class="border border-dark d-flex h-75 w-75" id="img-contener">
                         </div>
                     </div>
                 </form>

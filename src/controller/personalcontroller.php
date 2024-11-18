@@ -16,9 +16,12 @@ class personalController extends personalModel
         $civil = $this->limpiarCadena($civil);
         $correo = $this->limpiarCadena($correo);
         $ano = $this->limpiarCadena($ano);
-        $mes = $this->limpiarCadena($mes);
-        $dia = $this->limpiarCadena($dia);
 
+        $dia = $this->limpiarCadena($dia);
+        $data_json = [
+            'exito' => false, // Inicializamos a false por defecto
+            'mensaje' => ''
+        ];
         $personal_datos_reg=[
             [
                 "campo_nombre"=>"primerNombre",
@@ -81,13 +84,15 @@ class personalController extends personalModel
                 "campo_valor"=>date("H:i:s")
             ]
         ];
-
-        $registrarPersonal = $this->getRegistrar("datosPersonales", $personal_datos_reg);
-        if($registrarPersonal->rowCount()==1){
-            echo "datos si se registraron";
+        $validarPersonal = $this->getPersonal($cedula);
+        if ($validarPersonal == true) {
+            $data_json['exito'] = true;
+        }else{
+            $registrarPersonal = $this->getRegistrar("datosPersonales", $personal_datos_reg);
         }
+        
 
         header('Content-Type: application/json');
-        echo json_encode($registrarPersonal);
+        echo json_encode($data_json);
     }
 }

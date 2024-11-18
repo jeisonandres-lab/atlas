@@ -14,24 +14,24 @@ body::-webkit-scrollbar {
 
 /* verificación cumplida */
 .cumplido {
-  border: 2px solid rgb(8, 180, 8) !important;
+  border: 2px solid rgb(13, 109, 13) !important;
   
-  color:rgb(8, 180, 8) !important ;
+  color:rgb(13, 109, 13) !important ;
 }
 .cumplido_span {
-  border-top: 2px solid rgb(8, 180, 8) !important;
+  border-top: 2px solid rgb(13, 109, 13) !important;
   border-right: none !important;
-  border-bottom: 2px solid rgb(8, 180, 8) !important;
-  border-left: 2px solid rgb(8, 180, 8) !important;
+  border-bottom: 2px solid rgb(13, 109, 13) !important;
+  border-left: 2px solid rgb(13, 109, 13) !important;
   
 }
 .cumplido_span i {
-  color: rgb(8, 180, 8) !important;
+  color: rgb(13, 109, 13) !important;
 }
 
 .cumplido:focus {
   outline: 0;
-  border-color: rgb(8, 180, 8) !important;
+  border-color: rgb(13, 109, 13) !important;
   box-shadow: none !important;
 }
 
@@ -55,4 +55,22 @@ body::-webkit-scrollbar {
 
 .error_span i {
   color: rgb(180, 8, 8) !important;
+}
+
+select option{
+  color: black;
+}
+input::-webkit-input-placeholder { /* Chrome, Safari, Opera */
+  color: black !important;
+}
+input::-moz-placeholder { /* Firefox 19+ */
+  color: #999;
+}
+
+input:-ms-input-placeholder { /* Internet Explorer 10+ */
+  color: #999;
+}
+
+input::-ms-input-placeholder { /* Microsoft Edge */
+  color: #999;
 }
