@@ -18,12 +18,12 @@ $(function () {
   validarNombre("#segundoApellido", ".span_apellido2");
   validarNumeros("#cedula", ".span_cedula");
   validarBusquedaCedula("#cedula", "#img-contener");
-
   validarSelectores("#civil", ".span_civil");
   validarSelectores("#ano", ".span_ano", "1");
   valdiarCorreos("#correo", ".span_correo");
   colocarYear("#ano", "1900");
   colocarMeses("#meses");
+
   $("#meses").on("change", function () {
     const year = 2024; // Cambia el año si lo deseas
     const month = $("#meses").val();
@@ -51,7 +51,9 @@ $(function () {
       $(".span_mes").addClass("cumplido_span");
     }
   });
+
   $("#meses").trigger("change");
+  
   validarSelectores("#dia", ".span_dia", "1");
 
   $("#formulario_registro").on("submit", function (event) {
@@ -59,14 +61,15 @@ $(function () {
     const data = new FormData(this);
     const url = "src/ajax/registroPersonal.php?modulo_personal=registrar";
     $("#aceptar").prop("disabled", true);
+
     function callbackExito(parsedData) {
       $("#aceptar").prop("disabled", false);
+      let url = "src/ajax/registroPersonal.php?modulo_personal=obtenerDependencias";
+      console.log(parsedData.exito)
       const myModal = new bootstrap.Modal(document.getElementById('modal'));
       myModal.show();
-
-
     }
-    enviarFormulario(url, data, callbackExito);
+    enviarFormulario(url, data, callbackExito, true);
   });
 
   $("#limpiar").on("click", function () {

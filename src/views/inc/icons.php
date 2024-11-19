@@ -13,4 +13,5 @@
 <link rel="stylesheet" href="<?php echo App::URL_NODE."@fortawesome/fontawesome-free/css/v4-shims.min.css";?>"/>
 <link rel="stylesheet" href="<?php echo App::URL_NODE."boxicons/css/boxicons.min.css";?>"/>
 <link rel="stylesheet" href="<?php echo App::URL_CSS."menu.css"?>" />
+<link rel="stylesheet" href="<?php echo App::URL_NODE."sweetalert2/dist/sweetalert2.min.css";?>"/>
 <link rel="stylesheet" href="./src/libs/adminLTE/css/adminlte.css">

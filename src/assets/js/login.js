@@ -56,7 +56,7 @@ formulariosAJAX.addEventListener('submit', (e) => {
       let url = "./src/ajax/userAjax.php?modulo_usuario=login";
       const data = new FormData(formulariosAJAX);
       data.append('modulo_usuario', 'login');
-      enviarFormulario(url,data,callbackExito);
+      enviarFormulario(url,data,callbackExito, true);
       contrasenaInput.value = passwordSinEncrip;
     }
 });

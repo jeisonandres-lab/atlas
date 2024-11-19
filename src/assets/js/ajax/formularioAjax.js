@@ -1,4 +1,4 @@
-export async function enviarFormulario(url, datos, callbackExito, metodo = 'POST' ) {
+export async function enviarFormulario(url, datos, callbackExito, ejecutarCallback = false, metodo = 'POST' ) {
     return new Promise((resolve, reject) => {
         $.ajax({
             url: url,
@@ -11,8 +11,11 @@ export async function enviarFormulario(url, datos, callbackExito, metodo = 'POST
                 try {
                     // Intenta parsear los datos como JSON
                     const parsedData = data;
-                    console.table(parsedData)
-                 callbackExito(parsedData);
+                    // console.table(parsedData)
+
+                    if (ejecutarCallback) {
+                        callbackExito(parsedData);
+                    }
                     cargando.style.display = 'none';                
                 } catch (error) {
                     console.error('Error al parsear los datos JSON:', error);

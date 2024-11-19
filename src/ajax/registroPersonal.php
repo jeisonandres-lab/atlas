@@ -4,9 +4,14 @@ namespace App\Atlas\ajax;
 require_once '../../vendor/autoload.php';
 use App\Atlas\config\Conexion;
 use App\Atlas\controller\personalController;
+use App\Atlas\models\dependenciasModel;
+use App\Atlas\models\estatusModel;
 
-$personal = new personalController();
 $conexion = new conexion();
+$dependencias = new dependenciasModel();
+$estatus = new estatusModel();
+$personal = new personalController();
+
 
 $primerNombre = isset($_POST['primerNombre'])? $conexion->limpiarCadena($_POST['primerNombre']):"";
 $segundoNombre = isset($_POST['segundoNombre'])? $conexion->limpiarCadena($_POST['segundoNombre']):"";
@@ -20,7 +25,7 @@ $mes = $_POST['meses'];
 $dia = isset($_POST['dia'])? $conexion->limpiarCadena($_POST['dia']):"";
 switch ($_GET['modulo_personal']) {
     case 'registrar':
-        
+
         $personal->registro($primerNombre, $segundoNombre, $primerApellido, $segundoApellido, $cedula, $civil, $correo, $ano, $mes, $dia);
 
     break;
