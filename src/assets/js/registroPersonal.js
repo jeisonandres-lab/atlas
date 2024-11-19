@@ -69,6 +69,7 @@ $(function () {
       const myModal = new bootstrap.Modal(document.getElementById('modal'));
       myModal.show();
     }
+
     enviarFormulario(url, data, callbackExito, true);
   });
 

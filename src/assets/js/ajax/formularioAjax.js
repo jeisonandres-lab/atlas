@@ -54,6 +54,23 @@ export async function enviarDatos(url, datos, metodo = 'POST' ) {
         });
     });
 }
+
+export async function obtenerDatos(url, metodo = 'POST') {
+  return new Promise((resolve, reject) => {
+    $.ajax({
+      url,
+      type: metodo,
+      success: (data) => {
+        console.log("Datos obtenidos:", data);
+        resolve(data); // Resuelve la promesa con los datos
+      },
+      error: (jqXHR, textStatus, errorThrown) => {
+        console.error('Error al obtener los datos:', errorThrown);
+        reject(errorThrown);
+      }
+    });
+  });
+}
 // Función para generar un hash seguro con sal
 export function generarHashContrasena(contrasena) {
     // Generar una sal aleatoria de 16 bytes (32 caracteres hexadecimales)
