@@ -61,8 +61,11 @@ export async function obtenerDatos(url, metodo = 'POST') {
       url,
       type: metodo,
       success: (data) => {
-        console.log("Datos obtenidos:", data);
-        resolve(data); // Resuelve la promesa con los datos
+        // console.log("Datos obtenidos:", data);
+        resolve({
+            exito: data.exito,
+            response: data
+        }); // Resuelve la promesa con los datos
       },
       error: (jqXHR, textStatus, errorThrown) => {
         console.error('Error al obtener los datos:', errorThrown);

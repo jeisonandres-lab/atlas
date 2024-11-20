@@ -3,7 +3,7 @@
     absolute;
     z-index: 10000;
     top: 0;
-    background: white;
+    background-color: rgba(255, 255, 255, 0.856);
     height: 100%;
     width: 100%;
     display: none

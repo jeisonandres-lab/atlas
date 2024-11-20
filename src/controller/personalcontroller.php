@@ -19,6 +19,7 @@ class personalController extends personalModel
 
     public function registro($primerNombre, $segundoNombre, $primerApellido, $segundoApellido, $cedula, $civil, $correo, $ano, $mes, $dia)
     {
+        // sleep(5);
         $primerNombre = $this->limpiarCadena($primerNombre);
         $segundoNombre = $this->limpiarCadena($segundoNombre);
         $primerApellido = $this->limpiarCadena($primerApellido);
@@ -31,7 +32,7 @@ class personalController extends personalModel
         $dia = $this->limpiarCadena($dia);
         $data_json = [
             'exito' => false, // Inicializamos a false por defecto
-            'mensaje' => ''
+            'mensaje' => '',
         ];
 
         $personal_datos_reg = [
@@ -98,10 +99,11 @@ class personalController extends personalModel
         ];
         $parametro = [$cedula];
         $check_personal = $this->getExistePersonal($parametro);
-        if ($check_personal == true) {
+        if ($check_personal) {
             $data_json['exito'] = false;
             $data_json['personalEncontrado'] = true;
             $data_json['mensaje'] = 'personal encontrado';
+            $data_json['cedula'] = $cedula;
         } else {
             $registrarPersonal = $this->getRegistrar("datosPersonales", $personal_datos_reg);
             if ($registrarPersonal == true) {
@@ -139,6 +141,66 @@ class personalController extends personalModel
         $telOficina = $this->limpiarCadena($telOficina);
     }
 
+    public function obtenerDependencias()
+    {
+        $dependencias = $this->getDependenciasPersonales();
+        foreach ($dependencias as $row) {
+            $data_json['exito'] = true;
+            $data_json['data'][] = [
+                'iddependencia' => $row['id_dependencia'],
+                'dependencia' => $row['dependencia']
+            ];
+            $data_json['mensaje'] = "todas las dependencias exitoso";
+        }
+        header('Content-Type: application/json');
+        echo json_encode($data_json);
+    }
+
+    public function obtenerEstatus()
+    {
+        $estatus = $this->getEstatusPersonales();
+        foreach ($estatus as $row) {
+            $data_json['exito'] = true;
+            $data_json['data'][] = [
+                'idestatus' => $row['id_estatus'],
+                'estatus' => $row['estatus']
+            ];
+            $data_json['mensaje'] = "todas las estatus exitoso";
+        }
+        header('Content-Type: application/json');
+        echo json_encode($data_json);
+    }
+
+    public function obtenerCargo()
+    {
+        $cargo = $this->getCargoPersonales();
+        foreach ($cargo as $row) {
+            $data_json['exito'] = true;
+            $data_json['data'][] = [
+                'idcargo' => $row['id_cargo'],
+                'cargo' => $row['cargo']
+            ];
+            $data_json['mensaje'] = "todas las cargo exitoso";
+        }
+        header('Content-Type: application/json');
+        echo json_encode($data_json);
+    }
+
+    public function obtenerDepartamento()
+    {
+        $departamento = $this->getDepartamentosPersonales();
+        foreach ($departamento as $row) {
+            $data_json['exito'] = true;
+            $data_json['data'][] = [
+                'iddepartamento' => $row['id_departamento'],
+                'departamento' => $row['departamento']
+            ];
+            $data_json['mensaje'] = "todas las departamento exitoso";
+        }
+        header('Content-Type: application/json');
+        echo json_encode($data_json);
+    }
+
     // public function objetoDependencia()
     // {
     //     return $this->dependencia->getDatosDependencia();
@@ -159,15 +221,18 @@ class personalController extends personalModel
         return $estatusPersonal->getDatosEstatus();
     }
 
-    protected function getCargoPersonales() {
+    protected function getCargoPersonales()
+    {
         $cargoPersonal = $this->objetoEstatus();
         return $cargoPersonal->getDatosCargo();
     }
-    protected function getDependenciasPersonales() {
+    protected function getDependenciasPersonales()
+    {
         $dependenciaPersonal = $this->objetoDependencia();
         return $dependenciaPersonal->getDatosDependencia();
     }
-    protected function getDepartamentosPersonales(){
+    protected function getDepartamentosPersonales()
+    {
         $departamentoPersonal = $this->objetoDependencia();
         return $departamentoPersonal->getDatosDepartamentos();
     }
