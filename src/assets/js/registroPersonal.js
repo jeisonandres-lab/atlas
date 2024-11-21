@@ -9,7 +9,15 @@ import {
   validarSelectores,
 } from "./ajax/inputs.js";
 
-import { enviarFormulario, obtenerDatos } from "./ajax/formularioAjax.js";
+import { 
+  enviarFormulario, 
+  obtenerDatos 
+} from "./ajax/formularioAjax.js";
+
+import {
+  AlertDirection,
+  AlertSW2
+} from "./ajax/alerts.js";
 
 setTimeout(() => {
 }, 1000);
@@ -256,6 +264,11 @@ $(function () {
     event.preventDefault();
     const data = new FormData(this);
     function callbackExito(parsedData) {
+      console.log(parsedData);
+      let redireccionar = function (){
+        window.location.href = "personal";
+      }
+      AlertDirection("success", parsedData.mensaje, "top", 3000, redireccionar);
       // const myModal = new bootstrap.Modal(document.getElementById('modal'));
       // myModal.show();
     }

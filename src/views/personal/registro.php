@@ -39,13 +39,13 @@ use App\Atlas\config\App;
                 </div>
             </div>
             <main class=" app-main p-0 mb-2">
-                <div class="imagen-pages" style="height: 17%;">
-                    <div class="d-flex align-items-center" style="position: absolute; height: 16%;">
+                <div class="imagen-pages" style="height: 12%;">
+                    <div class="d-flex align-items-center" style="position: absolute; height: 12%;">
                         <span class="ms-4 fw-bold fs-4 text-white">Registro del Personal</span>
                     </div>
                     <img src="<?php echo App::URL_IMG . "top-header.png"; ?>" alt="" class="w-100 h-100" style="object-fit: cover; object-position:center;">
                 </div>
-                <div class="contenForm m-2 h-100 p-2 d-flex justify-content-center">
+                <div class="contenForm p-2 d-flex justify-content-center">
                     <!-- FORMULARIO DE ENVIOS DE DATOS DEL PERSONAL -->
                     <form action="#" class="animate__animated animate__slideInUp contact-form form-validate h-100 d-flex " novalidate="novalidate" id="formulario_registro">
                         <div class=" w-75 h-100 row2 bg-white content w-65 ">

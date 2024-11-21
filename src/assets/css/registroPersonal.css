@@ -125,3 +125,15 @@ border-radius: 50%
       translateY(-50px) scaleX(1);
   }
 }
+
+@media (min-width: 768px) {
+  .contenForm{
+    height: 100% !important;
+  }
+}
+
+@media (min-width > 1200px) {
+  .contenForm{
+    height: 50% !important;
+  }
+}

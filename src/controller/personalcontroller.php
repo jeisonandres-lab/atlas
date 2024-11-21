@@ -146,33 +146,33 @@ class personalController extends personalModel
 
         $empleados_datos_reg = [
             [
-                "campo_nombre" => "primerNombre",
-                "campo_marcador" => ":primerNombre",
+                "campo_nombre" => "idPersonal",
+                "campo_marcador" => ":idPersonal",
                 "campo_valor" =>  $idPersonal
             ],
             [
-                "campo_nombre" => "segundoNombre",
-                "campo_marcador" => ":segundoNombre",
+                "campo_nombre" => "idEstatus",
+                "campo_marcador" => ":idEstatus",
                 "campo_valor" => $idEstatus
             ],
             [
-                "campo_nombre" => "primerApellido",
-                "campo_marcador" => ":primerApellido",
+                "campo_nombre" => "idCargo",
+                "campo_marcador" => ":idCargo",
                 "campo_valor" => $idCargo
             ],
             [
-                "campo_nombre" => "segundoApellido",
-                "campo_marcador" => ":segundoApellido",
+                "campo_nombre" => "idDependencia",
+                "campo_marcador" => ":idDependencia",
                 "campo_valor" => $idDependencia
             ],
             [
-                "campo_nombre" => "cedula",
-                "campo_marcador" => ":cedula",
+                "campo_nombre" => "idDepartamento",
+                "campo_marcador" => ":idDepartamento",
                 "campo_valor" => $idDepartamento
             ],
             [
-                "campo_nombre" => "estadoCivil",
-                "campo_marcador" => ":estadoCivil",
+                "campo_nombre" => "telefono",
+                "campo_marcador" => ":telefono",
                 "campo_valor" => $telefono
             ],
             [
@@ -186,15 +186,23 @@ class personalController extends personalModel
                 "campo_valor" => date("H:i:s")
             ]
         ];
-
-        $check_empleado = $this->getRegistrarEmpleado("datosempleados", $empleados_datos_reg);
-        if($check_empleado == true){
+        $parametro =[$idPersonal];
+        $check_empleado_exis = $this->getExisteEmpleado($parametro);
+        if ($check_empleado_exis) {
             $data_json['exito'] = true;
-            $data_json['mensaje'] = "Empleado guardado con  exito ";
+            $data_json['mensaje'] = "Este trabajador ya esta registrado"; 
         }else{
-            $data_json['exito'] = true;
-            $data_json['mensaje'] = "No se logro realizar la consulta";
+            $check_empleado = $this->getRegistrarEmpleado("datosempleados", $empleados_datos_reg);
+            if($check_empleado == true){
+                $data_json['exito'] = true;
+                $data_json['mensaje'] = "Empleado guardado con exito";
+            }else{
+                $data_json['exito'] = true;
+                $data_json['mensaje'] = "No se logro realizar la consulta";
+            }   
         }
+        header('Content-Type: application/json');
+        echo json_encode($data_json);
     }
 
     public function obtenerDependencias()

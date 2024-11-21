@@ -19,6 +19,11 @@ class personalModel extends Conexion{
         return $sql;
     }
 
+    private function validarEmpleados($parametro){
+        $sql = $this->ejecutarConsulta("SELECT idPersonal FROM datosempleados WHERE idPersonal = ?", $parametro);
+        return $sql;
+    }
+
     private function DatosPerosnal($parametro){
         $sql = $this->ejecutarConsulta("SELECT * FROM datosPersonales WHERE cedula = ?", $parametro);
         return $sql;
@@ -41,12 +46,12 @@ class personalModel extends Conexion{
         return $this->validarPersonal( $parametro);
     }
 
-    public function getDatosPersonal($parametro){
-        return $this->DatosPerosnal($parametro);
+    public function getExisteEmpleado( $parametro){
+        return $this->validarEmpleado( $parametro);
     }
 
-    public function getExisteEmpleado($parametro){
-        return $this->validarEmpleado($parametro);
+    public function getDatosPersonal($parametro){
+        return $this->DatosPerosnal($parametro);
     }
 
 
