@@ -18,8 +18,10 @@
 </head>
 
 <body>
-    <?php require("./src/views/inc/load.php");?>
-    <?php use App\Atlas\config\App; ?>
+    <?php require("./src/views/inc/load.php"); ?>
+    <?php
+
+    use App\Atlas\config\App; ?>
     <main class="principal container-fluid ">
         <div class="h-100 d-flex justify-content-center align-items-center">
             <div class="col-md-4 col-sm-8 user_card">
@@ -31,7 +33,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="d-flex justify-content-center mt-5">
+                    <div class="d-flex justify-content-center align-items-center flex-column mt-5">
                         <form class="formularioEnviar" method="POST" action="./src/ajax/userAjax.php">
                             <div class="inicioSesion container-fluid d-flex justify-content-center mt-2 ">
                                 <h4 class=" text-muted">INICIO DE SESION</h4>
@@ -49,7 +51,10 @@
                             <div class="d-flex justify-content-center mt-3 mb-2 login_container">
                                 <button type="submit" name="button" class="btn btn-primary login_btn">Iniciar </button>
                             </div>
+
                         </form>
+                        <!-- ALERTAS CON BOOTSTRAP -->
+                        <div class="" id="alert"></div>
                     </div>
                     <div class="mt-4">
                         <div class="d-flex justify-content-center links">

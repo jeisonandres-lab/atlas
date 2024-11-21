@@ -27,7 +27,7 @@ class  userController extends userModel
             } else {
                 $check_user = $this->getExisteUsuario($user);
                 if ($check_user == true) {
-                    
+
                     session_start();
                     foreach ($check_user as $row) {
                         if ($row['nameUser'] === $user) {
@@ -45,6 +45,8 @@ class  userController extends userModel
                         }
                     }
 
+                }else{
+                    $data_json["mensaje"] = "El usuario no existe";
                 }
             }
         }
