@@ -1,5 +1,7 @@
 export function validarNombre(input, cumplidospan) {
   $(input).on("input", function () {
+    // Convertir todo a minúsculas y capitalizar la primera letra
+    this.value = this.value.toLowerCase().replace(/\b\w/g, (char) => char.toUpperCase());
     this.value = this.value.replace(/[^a-zA-Z]/g, "");
     if (this.value.length < 3) {
       $(this).removeClass("cumplido");
@@ -26,7 +28,7 @@ export function validarNumeros(input, cumplidospan) {
       $(cumplidospan).removeClass("cumplido_span");
       $(cumplidospan).addClass("error_span");
     } else if (this.value.length >= 6 || this.value.length <= 9) {
-      this.value = this.value.slice(0, 12);
+      this.value = this.value.slice(0, 9);
       $(this).removeClass("error_input");
       $(this).addClass("cumplido");
       $(cumplidospan).removeClass("error_span");
@@ -131,7 +133,7 @@ export function colocarYear(input, desde) {
 
 export function limpiarFormulario(idFormulario, excluir) {
     $(idFormulario).find('*').not(excluir).each(function() {
-        $(this).removeClass('cumplido error_span cumplido_span');
+        $(this).removeClass('cumplido error_span error_input cumplido_span');
         if ($(this).is('input[type="text"], input[type="email"], input[type="password"], textarea, select')) {
             $(this).val('');
         }

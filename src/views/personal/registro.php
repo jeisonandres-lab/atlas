@@ -153,8 +153,9 @@ use App\Atlas\config\App;
                                 </div>
 
                                 <div class="col-sm-12 ">
-                                    <button type="submit" id="aceptar" name="submit" class="btn btn-primary">
-                                        <i class="fa-solid fa-plus me-2"></i>Aceptar</button>
+                                    <button type="submit" id="aceptar" name="submit" class="btn btn-primary" disabled>
+                                        <i class="fa-solid fa-plus me-2"></i>Aceptar
+                                    </button>
                                     <button type="button" id="limpiar" name="submit" class="btn btn-warning" style="color: white;">
                                         <i class="fa-solid fa-rotate-right me-2"></i>Limpiar
                                     </button>
@@ -263,7 +264,7 @@ use App\Atlas\config\App;
                             </div>
 
                             <div class="col-sm-12 ">
-                                <button type="submit" id="aceptar" name="submit" class="btn btn-primary">
+                                <button type="submit" id="aceptar_emepleado" name="submit" class="btn btn-primary">
                                     <i class="fa-solid fa-plus me-2"></i>Aceptar</button>
                                 <button type="button" id="limpiar" name="submit" class="btn btn-warning" style="color: white;">
                                     <i class="fa-solid fa-rotate-right me-2"></i>Limpiar

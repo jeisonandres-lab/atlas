@@ -128,17 +128,73 @@ class personalController extends personalModel
         echo json_encode($data_json);
     }
 
-    public function registroEmpleador($idPersonal, $idEstatus, $idCargo, $idDependencia, $idDepartamento, $idGrp, $especialidad, $telefono, $telOficina)
+    public function registroEmpleado($idPersonal, $idEstatus, $idCargo, $idDependencia, $idDepartamento, $telefono)
     {
         $idPersonal = $this->limpiarCadena($idPersonal);
         $idEstatus = $this->limpiarCadena($idEstatus);
         $idCargo = $this->limpiarCadena($idCargo);
         $idDependencia = $this->limpiarCadena($idDependencia);
         $idDepartamento = $this->limpiarCadena($idDepartamento);
-        $idGrp = $this->limpiarCadena($idGrp);
-        $especialidad = $this->limpiarCadena($especialidad);
         $telefono = $this->limpiarCadena($telefono);
-        $telOficina = $this->limpiarCadena($telOficina);
+        // $idGrp = $this->limpiarCadena($idGrp);
+        // $especialidad = $this->limpiarCadena($especialidad);
+        // $telOficina = $this->limpiarCadena($telOficina);
+        $data_json = [
+            'exito' => false, // Inicializamos a false por defecto
+            'mensaje' => '',
+        ];
+
+        $empleados_datos_reg = [
+            [
+                "campo_nombre" => "primerNombre",
+                "campo_marcador" => ":primerNombre",
+                "campo_valor" =>  $idPersonal
+            ],
+            [
+                "campo_nombre" => "segundoNombre",
+                "campo_marcador" => ":segundoNombre",
+                "campo_valor" => $idEstatus
+            ],
+            [
+                "campo_nombre" => "primerApellido",
+                "campo_marcador" => ":primerApellido",
+                "campo_valor" => $idCargo
+            ],
+            [
+                "campo_nombre" => "segundoApellido",
+                "campo_marcador" => ":segundoApellido",
+                "campo_valor" => $idDependencia
+            ],
+            [
+                "campo_nombre" => "cedula",
+                "campo_marcador" => ":cedula",
+                "campo_valor" => $idDepartamento
+            ],
+            [
+                "campo_nombre" => "estadoCivil",
+                "campo_marcador" => ":estadoCivil",
+                "campo_valor" => $telefono
+            ],
+            [
+                "campo_nombre" => "fecha",
+                "campo_marcador" => ":fecha",
+                "campo_valor" => date("Y-m-d")
+            ],
+            [
+                "campo_nombre" => "hora",
+                "campo_marcador" => ":hora",
+                "campo_valor" => date("H:i:s")
+            ]
+        ];
+
+        $check_empleado = $this->getRegistrarEmpleado("datosempleados", $empleados_datos_reg);
+        if($check_empleado == true){
+            $data_json['exito'] = true;
+            $data_json['mensaje'] = "Empleado guardado con  exito ";
+        }else{
+            $data_json['exito'] = true;
+            $data_json['mensaje'] = "No se logro realizar la consulta";
+        }
     }
 
     public function obtenerDependencias()

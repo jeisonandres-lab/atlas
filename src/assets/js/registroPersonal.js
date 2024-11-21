@@ -12,13 +12,19 @@ import {
 import { enviarFormulario, obtenerDatos } from "./ajax/formularioAjax.js";
 
 setTimeout(() => {
-
-
-
-
-
 }, 1000);
+
+let inputPrimerNombre;
+let inputSegundoNombre;
+let inputPrimerApellido;
+let inputSegundoApellido;
+let cedula;
+let estadoCivil;
+let correo;
+
 $(function () {
+
+
   $(".formulario_empleado").hide();
 
   // $("#dependencia").select2();
@@ -38,6 +44,65 @@ $(function () {
   valdiarCorreos("#correo", ".span_correo");
   colocarYear("#ano", "1900");
   colocarMeses("#meses");
+// formulario de registro
+  let formulario = $("#formulario_registro");
+  let todosLosInputs = formulario.find("input, select");
+
+  todosLosInputs.on("input", function (event) {
+    // Evita el envío del formulario por defecto
+
+    let todosCompletos = true;
+    let todosCumplidos = true;
+
+    todosLosInputs.each(function () {
+      if ($(this).val().trim() === '') {
+        todosCompletos = false;
+      } else {
+      }
+      // Nueva validación: verifica si tiene la clase "cumplido"
+      if (!$(this).hasClass("cumplido")) {
+        todosCumplidos = false;
+      }
+    });
+
+    if (todosCompletos && todosCumplidos) {
+      $("#aceptar").prop("disabled", false);
+      console.log("Todos los campos están llenos y cumplen con los requisitos.");
+    } else {
+      $("#aceptar").prop("disabled", true);
+      console.log("Por favor, complete todos los campos y asegúrese de que cumplan con los requisitos.");
+    }
+  });
+
+  // formulario de empleado
+  let formulario2 = $("#formulario_empleado");
+  let todosLosInput = formulario2.find("input, select");
+
+  todosLosInputs.on("input", function (event) {
+    // Evita el envío del formulario por defecto
+
+    let todosCompletos = true;
+    let todosCumplidos = true;
+
+    todosLosInput.each(function () {
+      if ($(this).val().trim() === '') {
+        todosCompletos = false;
+      } else {
+      }
+      // Nueva validación: verifica si tiene la clase "cumplido"
+      if (!$(this).hasClass("cumplido")) {
+        todosCumplidos = false;
+      }
+    });
+
+    if (todosCompletos && todosCumplidos) {
+      $("#aceptar_emepleado").prop("disabled", false);
+      console.log("Todos los campos están llenos y cumplen con los requisitos.");
+    } else {
+      $("#aceptar_emepleado").prop("disabled", true);
+      console.log("Por favor, complete todos los campos y asegúrese de que cumplan con los requisitos.");
+    }
+  });
 
   $("#meses").on("change", function () {
     const year = 2024; // Cambia el año si lo deseas
@@ -182,11 +247,12 @@ $(function () {
   $("#limpiar").on("click", function () {
     limpiarFormulario(
       "#formulario_registro",
-      "#dia, #meses, #ano, .span_ano, .span_dia, .span_mes"
+      "#dia, #meses, #ano, .span_ano, .span_dia, .span_mes", "error_span", "cumplido", "cumplido_span", "error_input"
     );
   });
 
   $("#formulario_empleado").on("submit", function (event) {
+
     event.preventDefault();
     const data = new FormData(this);
     function callbackExito(parsedData) {
