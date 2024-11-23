@@ -7,11 +7,12 @@ import {
   validarNombre,
   validarNumeros,
   validarSelectores,
+  validarTelefono,
 } from "./ajax/inputs.js";
 
-import { 
-  enviarFormulario, 
-  obtenerDatos 
+import {
+  enviarFormulario,
+  obtenerDatos
 } from "./ajax/formularioAjax.js";
 
 import {
@@ -19,40 +20,28 @@ import {
   AlertSW2
 } from "./ajax/alerts.js";
 
-setTimeout(() => {
-}, 1000);
 
-let inputPrimerNombre;
-let inputSegundoNombre;
-let inputPrimerApellido;
-let inputSegundoApellido;
-let cedula;
-let estadoCivil;
-let correo;
-
+// jQuery
 $(function () {
-
-
   $(".formulario_empleado").hide();
 
-  // $("#dependencia").select2();
-  // $("#estatus").select2();
-  // $("#cargo").select2();
-  // $("#departamento").select2();
 
+  // formulario de registro
   validarNombre("#primerNombre", ".span_nombre");
   validarNombre("#segundoNombre", ".span_nombre2");
   validarNombre("#primerApellido", ".span_apellido");
   validarNombre("#segundoApellido", ".span_apellido2");
   validarNumeros("#cedula", ".span_cedula");
   validarBusquedaCedula("#cedula", "#img-contener");
-  validarBusquedaCedula("#cedula_trabajador", "#img-contener");
   validarSelectores("#civil", ".span_civil");
   validarSelectores("#ano", ".span_ano", "1");
   valdiarCorreos("#correo", ".span_correo");
   colocarYear("#ano", "1900");
   colocarMeses("#meses");
-// formulario de registro
+
+  // formulario de empleados
+
+  // formulario de registro
   let formulario = $("#formulario_registro");
   let todosLosInputs = formulario.find("input, select");
 
@@ -84,15 +73,12 @@ $(function () {
 
   // formulario de empleado
   let formulario2 = $("#formulario_empleado");
-  let todosLosInput = formulario2.find("input, select");
-
-  todosLosInputs.on("input", function (event) {
+  let todosLosInput2 = formulario2.find("input, select");
+  todosLosInput2.on("input", function (event) {
     // Evita el envío del formulario por defecto
-
     let todosCompletos = true;
     let todosCumplidos = true;
-
-    todosLosInput.each(function () {
+    todosLosInput2.each(function () {
       if ($(this).val().trim() === '') {
         todosCompletos = false;
       } else {
@@ -102,7 +88,6 @@ $(function () {
         todosCumplidos = false;
       }
     });
-
     if (todosCompletos && todosCumplidos) {
       $("#aceptar_emepleado").prop("disabled", false);
       console.log("Todos los campos están llenos y cumplen con los requisitos.");
@@ -141,7 +126,6 @@ $(function () {
   });
 
   $("#meses").trigger("change");
-
   validarSelectores("#dia", ".span_dia", "1");
 
   $("#formulario_registro").on("submit", function (event) {
@@ -240,16 +224,22 @@ $(function () {
             $("#formulario_registro").remove();
             $(".formulario_empleado").show();
             $(".formulario_empleado").addClass('d-flex');
+
+            validarNombre("#cedula_trabajador", ".span_cedula_empleado", "1");
+            validarNombre("#nombreTrabajador", ".span_nombre_empleado", "1");
+            validarNombre("#apellidoTrabajador", ".span_apellido_empleado", "1");
+            validarTelefono("#telefono", ".span_telefono");
+            validarSelectores("#estatus", ".span_estatus");
+            validarSelectores("#cargo", ".span_cargo");
+            validarSelectores("#departamento", ".span_departamento");
+            validarSelectores("#dependencia", ".span_dependencia");
           }
         });
       }
-
-
       // const myModal = new bootstrap.Modal(document.getElementById('modal'));
       // myModal.show();
     }
     enviarFormulario(url, data, callbackExito, true);
-
   });
 
   $("#limpiar").on("click", function () {
@@ -260,12 +250,11 @@ $(function () {
   });
 
   $("#formulario_empleado").on("submit", function (event) {
-
     event.preventDefault();
     const data = new FormData(this);
     function callbackExito(parsedData) {
       console.log(parsedData);
-      let redireccionar = function (){
+      let redireccionar = function () {
         window.location.href = "personal";
       }
       AlertDirection("success", parsedData.mensaje, "top", 3000, redireccionar);

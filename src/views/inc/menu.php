@@ -25,7 +25,16 @@
         <i class='bx bx-bell'></i>
         <!-- foto de perfil -->
 
-        <img src="./src/assets/img/icons/avtar_1.png" alt="" class="profile" />
+        <img src="./src/assets/img/icons/avtar_1.png" alt="" class="profile  dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"/>
+        <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">Action</a></li>
+            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
+            <li>
+                <hr class="dropdown-divider">
+            </li>
+            <li><a class="dropdown-item" href="#">Separated link</a></li>
+        </ul>
         <span class="d-none d-md-inline"><?php echo $datosUser ?></span>
     </div>
 </nav>
@@ -45,34 +54,20 @@
             <div class="menu_title menu_inicio"></div>
             <!-- start -->
             <li class="item">
-                <div href="#" class="nav_link submenu_item">
+                <a href="inicio" class="nav_link inicio">
                     <span class="navlink_icon">
                         <i class="bx bx-home-alt"></i>
                     </span>
                     <span class="navlink">Inicio</span>
-                </div>
+                </a>
             </li>
-            <!-- end -->
-
-            <!-- start -->
-            <!-- <li class="item">
-                    <div href="#" class="nav_link submenu_item">
-                        <span class="navlink_icon">
-                            <i class='bx bx-chat'></i>
-                        </span>
-                        <span class="navlink">Mensajes</span>
-
-                    </div>
-                </li> -->
-
-            <!-- end -->
         </ul>
         <!-- PERSONAL -->
         <ul class="menu_items">
             <div class="menu_title menu_personal"></div>
             <!-- Start -->
             <li class="item">
-                <a href="personal" class="nav_link">
+                <a href="personal" class="nav_link personal">
                     <span class="navlink_icon">
                         <i class='bx bx-notepad'></i>
                     </span>
@@ -82,9 +77,9 @@
             <!-- End -->
 
             <li class="item">
-                <a href="datosPersonal" class="nav_link">
+                <a href="registrosPersonal" class="nav_link registrosPersonal">
                     <span class="navlink_icon">
-                    <i class='bx bx-id-card' ></i>
+                        <i class='bx bx-id-card'></i>
                     </span>
                     <span class="navlink">Datos Personal</span>
                 </a>

@@ -12,20 +12,27 @@ body::-webkit-scrollbar {
   display: none;
 }
 
-
-
+.row {
+  margin: 0px !important;
+}
+.nav-link{
+  color: #707070;
+}
+.active{
+  background-color: #4070f4 !important;
+  color: white !important;
+}
 /* verificación cumplida */
 .cumplido {
   border: 2px solid rgb(13, 109, 13) !important;
-  
-  color:rgb(13, 109, 13) !important ;
+
+  color: rgb(13, 109, 13) !important ;
 }
 .cumplido_span {
   border-top: 2px solid rgb(13, 109, 13) !important;
   border-right: none !important;
   border-bottom: 2px solid rgb(13, 109, 13) !important;
   border-left: 2px solid rgb(13, 109, 13) !important;
-  
 }
 .cumplido_span i {
   color: rgb(13, 109, 13) !important;
@@ -38,17 +45,17 @@ body::-webkit-scrollbar {
 }
 
 /* verificacion negativa */
-.error_input{
+.error_input {
   border: 2px solid rgb(180, 8, 8) !important;
-  
-  color:rgb(180, 8, 8) !important ;
+
+  color: rgb(180, 8, 8) !important ;
 }
 .error_input:focus {
   outline: 0;
   border-color: rgb(180, 8, 8) !important;
   box-shadow: none !important;
 }
-.error_span{
+.error_span {
   border-top: 2px solid rgb(180, 8, 8) !important;
   border-right: none !important;
   border-bottom: 2px solid rgb(180, 8, 8) !important;
@@ -59,46 +66,65 @@ body::-webkit-scrollbar {
   color: rgb(180, 8, 8) !important;
 }
 
-select option{
+select option {
   color: black;
 }
-input::-webkit-input-placeholder { /* Chrome, Safari, Opera */
+input::-webkit-input-placeholder {
+  /* Chrome, Safari, Opera */
   color: black !important;
 }
-input::-moz-placeholder { /* Firefox 19+ */
+input::-moz-placeholder {
+  /* Firefox 19+ */
   color: #999;
 }
 
-input:-ms-input-placeholder { /* Internet Explorer 10+ */
+input:-ms-input-placeholder {
+  /* Internet Explorer 10+ */
   color: #999;
 }
 
-input::-ms-input-placeholder { /* Microsoft Edge */
+input::-ms-input-placeholder {
+  /* Microsoft Edge */
   color: #999;
 }
-.barra_naranja{
+.barra_naranja {
   border-radius: 0px 0px 5px 5px;
   height: 10px;
 }
 
-.cargando1{
+.conten {
+  border-radius: 10px 10px 0px 0px;
+  border-bottom: 0px !important;
+  border-top: 1.3px solid !important;
+  border-left: 1.3px solid !important;
+  border-right: 1.3px solid !important;
+  border-color: #707070 !important;
+}
+
+.contentSubMenu{
+  border: 1.3px solid;
+  border-radius: 10px 10px 0px 0px;
+  border-color: #707070 !important;
+
+}
+.cargando1 {
   width: 120px;
   height: 30px;
   display: flex;
   flex-wrap: wrap;
   align-items: flex-end;
   justify-content: space-between;
-margin: 0 auto; 
-background-color: rgba(255, 255, 255, 0.856);
+  margin: 0 auto;
+  background-color: rgba(255, 255, 255, 0.856);
 }
-.texto-cargando{
-  font-family: 'Montserrat', sans-serif;
+.texto-cargando {
+  font-family: "Montserrat", sans-serif;
   font-weight: 800;
-  color: #00b8de; 
-padding-top:20px
+  color: #00b8de;
+  padding-top: 20px;
 }
 
-.cargando span{
+.cargando span {
   font-size: 20px;
   text-transform: uppercase;
 }
@@ -106,34 +132,48 @@ padding-top:20px
   width: 30px;
   height: 30px;
   background-color: #00b8de;
-  animation: salto .5s alternate
-  infinite;
-border-radius: 50%  
+  animation: salto 0.5s alternate infinite;
+  border-radius: 50%;
 }
 .pelotas:nth-child(2) {
-  animation-delay: .18s;
+  animation-delay: 0.18s;
 }
 .pelotas:nth-child(3) {
-  animation-delay: .37s;
+  animation-delay: 0.37s;
+}
+
+.contenedor{
+  border-radius: 10px 10px 0px 0px;
+  border-bottom: 0px !important;
+  border-top: 1.3px solid !important;
+  border-left: 1.3px solid !important;
+  border-left: 1.3px solid !important;
+  border-color: #707070 !important;
+}
+
+#mostrar{
+  display: none;
 }
 @keyframes salto {
   from {
-      transform: scaleX(1.25);
+    transform: scaleX(1.25);
   }
-  to{
-      transform: 
-      translateY(-50px) scaleX(1);
-  }
-}
-
-@media (min-width: 768px) {
-  .contenForm{
-    height: 100% !important;
+  to {
+    transform: translateY(-50px) scaleX(1);
   }
 }
 
-@media (min-width > 1200px) {
-  .contenForm{
-    height: 50% !important;
+@media (width <= 768px) {
+  .containerImg {
+    display: none !important;
+  }
+
+  #mostrar{
+    display: inline-block;
+    margin-top: 4px;
+  }
+
+  body .app-main{
+    margin-bottom: 15px;
   }
 }

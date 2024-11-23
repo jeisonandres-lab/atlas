@@ -19,5 +19,6 @@ use App\Atlas\config\App;
         </main>
         <?php require_once App::URL_INC . "/footer.php"; ?>
     </div>
+    <?php require_once App::URL_INC . "/scrips.php"; ?>
 </body>
 </html>

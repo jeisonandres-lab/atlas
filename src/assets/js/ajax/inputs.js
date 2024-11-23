@@ -37,6 +37,32 @@ export function validarNumeros(input, cumplidospan) {
   });
 }
 
+export function validarTelefono(input, cumplidospan) {
+  $(input).on("input", function () {
+      // Eliminar cualquier cosa que no sea un número
+      this.value = this.value.replace(/[^0-9]/g, "");
+console.log(this.value )
+      // Limitar a 12 dígitos
+      if (this.value.length > 12) {
+          this.value = this.value.slice(0, 12);
+      }
+
+      // Aplicar clases según la longitud
+      if (this.value.length == 12) {
+          $(this).removeClass("error_input");
+          $(this).addClass("cumplido");
+          $(cumplidospan).removeClass("error_span");
+          $(cumplidospan).addClass("cumplido_span");
+      } else {
+          $(this).removeClass("cumplido");
+          $(this).addClass("error_input");
+          $(cumplidospan).removeClass("cumplido_span");
+          $(cumplidospan).addClass("error_span");
+      }
+  });
+
+}
+
 export function validarSelectores(input, cumplidospan, tigger) {
   $(input).on("change", function () {
     const opcionSeleccionada = $(this).val();
@@ -83,12 +109,15 @@ export function validarBusquedaCedula(input, divConten) {
     // Creamos una nueva imagen y la agregamos al DOM
     const img = new Image();
     img.src = imageUrl;
+    img.classList.add("img-fluid");
+    img.classList.add("imgFoto");
     img.classList.add("w-100");
     img.classList.add("h-100");
     // Escuchamos el evento 'load' para verificar si la imagen se cargó correctamente
-    img.onload = function () {
+    img.onload = () => {
       $(divConten).html(img);
     };
+
     // Escuchamos el evento 'error' para manejar el caso en que la imagen no se encuentre
     img.onerror = function () {
       $(divConten).html("Imagen no encontrada");
