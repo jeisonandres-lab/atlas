@@ -147,8 +147,12 @@ input::-ms-input-placeholder {
   border-bottom: 0px !important;
   border-top: 1.3px solid !important;
   border-left: 1.3px solid !important;
-  border-left: 1.3px solid !important;
+  border-right: 1.3px solid !important;
   border-color: #707070 !important;
+}
+
+.containerImg img{
+  border-radius: 10px 10px 0px 0px;
 }
 
 #mostrar{

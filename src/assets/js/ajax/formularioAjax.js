@@ -11,7 +11,7 @@ export async function enviarFormulario(url, datos, callbackExito, ejecutarCallba
                 try {
                     // Intenta parsear los datos como JSON
                     const parsedData = data;
-                    // console.table(parsedData)
+                     console.table(parsedData)
 
                     if (ejecutarCallback) {
                         callbackExito(parsedData);

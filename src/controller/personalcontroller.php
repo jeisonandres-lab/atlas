@@ -190,7 +190,7 @@ class personalController extends personalModel
         $check_empleado_exis = $this->getExisteEmpleado($parametro);
         if ($check_empleado_exis) {
             $data_json['exito'] = true;
-            $data_json['mensaje'] = "Este trabajador ya esta registrado"; 
+            $data_json['mensaje'] = "Este trabajador ya esta registrado";
         }else{
             $check_empleado = $this->getRegistrarEmpleado("datosempleados", $empleados_datos_reg);
             if($check_empleado == true){
@@ -199,12 +199,35 @@ class personalController extends personalModel
             }else{
                 $data_json['exito'] = true;
                 $data_json['mensaje'] = "No se logro realizar la consulta";
-            }   
+            }
         }
         header('Content-Type: application/json');
         echo json_encode($data_json);
     }
 
+    public function obtenerDatosPersonal($cedula){
+        $cedula = $this->limpiarCadena($cedula);
+        $data_json = [
+            'exito' => false, // Inicializamos a false por defecto
+            'mensaje' => 'data del principio',
+        ];
+
+            $parametro = [$cedula];
+            $check_personal = $this->getDatosPersonal($parametro);
+
+
+                foreach($check_personal as $row){
+                    $data_json['exito'] = true;
+                    $data_json['idPersonal'] = $row['id_personal'];
+                    $data_json['cedula'] = $row['cedula'];
+                    $data_json['nombre'] = $row['primerNombre'];
+                    $data_json['apellido'] = $row['primerApellido'];
+                    $data_json['mensaje'] = "Personal obtenido previamente registrado";
+                }
+
+        header('Content-Type: application/json');
+        echo json_encode($data_json);
+    }
     public function obtenerDependencias()
     {
         $dependencias = $this->getDependenciasPersonales();

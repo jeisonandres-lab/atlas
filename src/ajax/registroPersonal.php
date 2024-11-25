@@ -54,6 +54,10 @@ switch ($_GET['modulo_personal']) {
     case 'obtenerDepartamento':
         $personal->obtenerDepartamento();
         break;
+    case 'obtenerDatosPersonal':
+        echo $cedula;
+        $personal->obtenerDatosPersonal($cedula);
+        break;
     default:
         # code...
         break;

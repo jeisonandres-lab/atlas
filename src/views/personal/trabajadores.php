@@ -47,47 +47,47 @@ use App\Atlas\config\App;
             </div>
             <!-- FORMULARIO DE ENVIOS DE DATOS DE EMPLEADO -->
             <form action="#" class="formulario_empleado row animate__animated animate__slideInUp contact-form form-validate justify-content-center" novalidate="novalidate" id="formulario_empleado">
-                <div class=" col-sm-12 col-md-7 col-lg-7 col-xl-7 col-xxl-5">
-                    <div class="row col-sm-12 col-md-7 h-100 bg-white w-100 p-3 conten">
+                <div class=" col-sm-12 col-md-7 col-lg-7 col-xl-8 col-xxl-5">
+                    <div class="row col-sm-12 col-md-7 h-100 bg-white w-100 p-3 m-0 contenTrabajadores">
                         <p class="mb-0 mt-2">Registro de datos para empleado</p>
                         <hr class="mb-3">
-                        <div class="col-sm-5 mb-1" style="display: none;">
-                            <label class="form-label mb-0" for="id">id</label>
-                            <div class="input-group">
-                                <span class="input-group-text cumplido_span "><i class="fa-regular fa-user"></i></span>
-                                <input type="text" class="form-control cumplido" id="id" name="id" placeholder="id" readonly>
-                            </div>
-                        </div>
-
                         <div class="col-sm-4 mb-2">
                             <label class="form-label mb-0" for="cedula_trabajador">Cédula</label>
                             <div class="input-group">
-                                <span class="input-group-text span_cedula_empleado cumplido_span"><i class="fa-regular fa-user"></i></span>
-                                <input type="text" class="form-control cumplido" id="cedula_trabajador" name="cedulatrabajador" placeholder="Cédula" readonly>
+                                <span class="input-group-text span_cedula_empleado "><i class="fa-regular fa-user"></i></span>
+                                <input type="text" class="form-control " id="cedula_trabajador" name="cedula" placeholder="Cédula">
                             </div>
                         </div>
 
                         <div class="col-sm-4 mb-2">
                             <label class="form-label mb-0" for="primerNombre">Nombre</label>
                             <div class="input-group">
-                                <span class="input-group-text span_nombre_empleado cumplido_span"><i class="fa-regular fa-user"></i></span>
-                                <input type="text" class="form-control cumplido" id="nombreTrabajador" name="primerNombre" placeholder="Nombre" readonly>
+                                <span class="input-group-text span_nombre_empleado "><i class="fa-regular fa-user"></i></span>
+                                <input type="text" class="form-control " id="nombreTrabajador" name="primerNombre" placeholder="Nombre" disabled>
                             </div>
                         </div>
 
                         <div class="col-sm-4 mb-2">
                             <label class="form-label mb-0" for="apellido">Apellido</label>
                             <div class="input-group">
-                                <span class="input-group-text span_apellido_empleado cumplido_span"><i class="fa-regular fa-user"></i></span>
-                                <input type="text" class="form-control cumplido" id="apellidoTrabajador" name="apellido" placeholder="Apellido" readonly>
+                                <span class="input-group-text span_apellido_empleado "><i class="fa-regular fa-user"></i></span>
+                                <input type="text" class="form-control" id="apellidoTrabajador" name="apellido" placeholder="Apellido" disabled>
                             </div>
                         </div>
+                        <div id="alert">
+                            <div class="callout callout-danger">
+                                <h5>I am a danger callout!</h5>
 
+                                <p>There is a problem that we need to fix. A wonderful serenity has taken possession of my entire
+                                    soul,
+                                    like these sweet mornings of spring which I enjoy with my whole heart.</p>
+                            </div>
+                        </div>
                         <div class="col-sm-5 mb-2">
                             <label class="form-label mb-0" for="telefono">N.Telefono</label>
                             <div class="input-group">
                                 <span class="input-group-text span_telefono"><i class="fa-regular fa-user"></i></span>
-                                <input type="text" class="form-control" id="telefono" name="telefono" placeholder="Telefono" required>
+                                <input type="text" class="form-control" id="telefono" name="telefono" placeholder="Telefono" required disabled>
                             </div>
                         </div>
 
@@ -96,7 +96,7 @@ use App\Atlas\config\App;
                                 <label for="estatus">Estatus</label>
                                 <div class="input-group">
                                     <span class="input-group-text span_estatus"><i class="fa-regular fa-clipboard"></i></span>
-                                    <select class="form-select form-select-md estado-estatus" id="estatus" name="estatus" aria-label="Small select example" aria-placeholder="dasdas" required>
+                                    <select class="form-select form-select-md estado-estatus" id="estatus" name="estatus" aria-label="Small select example" aria-placeholder="dasdas" required disabled>
                                         <option value="">Selecione un estatus</option>
                                     </select>
                                 </div>
@@ -108,7 +108,7 @@ use App\Atlas\config\App;
                                 <label for="cargo">Cargo</label>
                                 <div class="input-group">
                                     <span class="input-group-text span_cargo"><i class="fa-regular fa-clipboard"></i></span>
-                                    <select class="form-select form-select-md estado-cargo" id="cargo" name="cargo" aria-label="Small select example" aria-placeholder="dasdas" required>
+                                    <select class="form-select form-select-md estado-cargo" id="cargo" name="cargo" aria-label="Small select example" aria-placeholder="dasdas" required disabled>
                                         <option value="">Selecione un cargo</option>
                                     </select>
                                 </div>
@@ -120,8 +120,8 @@ use App\Atlas\config\App;
                                 <label for="departamento">Departamento</label>
                                 <div class="input-group">
                                     <span class="input-group-text span_departamento"><i class="fa-regular fa-clipboard"></i></span>
-                                    <select class="form-select form-select-md estado-departamento" id="departamento" name="departamento" aria-label="Small select example" aria-placeholder="dasdas" required>
-                                        <option value="">Selecione un departamento</option>d
+                                    <select class="form-select form-select-md estado-departamento" id="departamento" name="departamento" aria-label="Small select example" aria-placeholder="dasdas" required disabled>
+                                        <option value="">Selecione un departamento</option>
                                     </select>
                                 </div>
                             </div>
@@ -132,7 +132,7 @@ use App\Atlas\config\App;
                                 <label for="dependencia">Estado dependencia</label>
                                 <div class="input-group">
                                     <span class="input-group-text span_dependencia"><i class="fa-regular fa-clipboard"></i></span>
-                                    <select class="form-select form-select-md estado-dependencia" id="dependencia" name="dependencia" aria-label="Small select example" aria-placeholder="dasdas" required>
+                                    <select class="form-select form-select-md estado-dependencia" id="dependencia" name="dependencia" aria-label="Small select example" aria-placeholder="dasdas" required disabled>
                                         <option value="">Selecione la dependencia</option>
                                     </select>
                                 </div>
@@ -140,8 +140,12 @@ use App\Atlas\config\App;
                         </div>
 
                         <div class="col-sm-12 ">
-                            <button type="submit" id="aceptar_emepleado" name="submit" class="btn btn-primary" disabled>
-                                <i class="fa-solid fa-plus me-2"></i>Aceptar</button>
+                            <button type="submit" id="aceptar_emepleado" name="submit" class="btn btn-primary" disabled style="display: none;">
+                                <i class="fa-solid fa-plus me-2"></i>Aceptar
+                            </button>
+                            <button type="submit" id="buscador" name="buscar" class="btn btn-success">
+                                <i class="fa-solid fa-magnifying-glass me-2"></i>Buscar
+                            </button>
                             <button type="button" id="limpiar" name="submit" class="btn btn-warning" style="color: white;">
                                 <i class="fa-solid fa-rotate-right me-2"></i>Limpiar
                             </button>
