@@ -17,7 +17,7 @@ class personalController extends personalModel
     //     $this->estatus = $estatus;
     // }
 
-    public function registro($primerNombre, $segundoNombre, $primerApellido, $segundoApellido, $cedula, $civil, $correo, $ano, $mes, $dia)
+    public function registro($primerNombre, $segundoNombre, $primerApellido, $segundoApellido, $cedula, $civil, $correo, $ano, $mes, $dia, $idEstatus, $idCargo, $idDependencia, $idDepartamento, $telefono)
     {
         // sleep(5);
         $primerNombre = $this->limpiarCadena($primerNombre);
@@ -30,6 +30,14 @@ class personalController extends personalModel
         $ano = $this->limpiarCadena($ano);
         $mes = $this->limpiarCadena($mes);
         $dia = $this->limpiarCadena($dia);
+
+        // DATOS DE EMPLEAODS
+        $idEstatus = $this->limpiarCadena($idEstatus);
+        $idCargo = $this->limpiarCadena($idCargo);
+        $idDependencia = $this->limpiarCadena($idDependencia);
+        $idDepartamento = $this->limpiarCadena($idDepartamento);
+        $telefono = $this->limpiarCadena($telefono);
+
         $data_json = [
             'exito' => false, // Inicializamos a false por defecto
             'mensaje' => '',
@@ -110,9 +118,67 @@ class personalController extends personalModel
                 $check_personal_exis = $this->getDatosPersonal($parametro);
                 if ($check_personal_exis == true) {
                      foreach ($check_personal_exis as $row) {
-                        $identificador = $row['id_personal'];
-                        if ($identificador) {
-                            
+                        $idPersonal = $row['id_personal'];
+                        if ($idPersonal) {
+                            $empleados_datos_reg = [
+                                [
+                                    "campo_nombre" => "idPersonal",
+                                    "campo_marcador" => ":idPersonal",
+                                    "campo_valor" =>  $idPersonal
+                                ],
+                                [
+                                    "campo_nombre" => "idEstatus",
+                                    "campo_marcador" => ":idEstatus",
+                                    "campo_valor" => $idEstatus
+                                ],
+                                [
+                                    "campo_nombre" => "idCargo",
+                                    "campo_marcador" => ":idCargo",
+                                    "campo_valor" => $idCargo
+                                ],
+                                [
+                                    "campo_nombre" => "idDependencia",
+                                    "campo_marcador" => ":idDependencia",
+                                    "campo_valor" => $idDependencia
+                                ],
+                                [
+                                    "campo_nombre" => "idDepartamento",
+                                    "campo_marcador" => ":idDepartamento",
+                                    "campo_valor" => $idDepartamento
+                                ],
+                                [
+                                    "campo_nombre" => "telefono",
+                                    "campo_marcador" => ":telefono",
+                                    "campo_valor" => $telefono
+                                ],
+                                [
+                                    "campo_nombre" => "fecha",
+                                    "campo_marcador" => ":fecha",
+                                    "campo_valor" => date("Y-m-d")
+                                ],
+                                [
+                                    "campo_nombre" => "hora",
+                                    "campo_marcador" => ":hora",
+                                    "campo_valor" => date("H:i:s")
+                                ]
+                            ];
+                            $parametro =[$idPersonal];
+                            $check_empleado_exis = $this->getExisteEmpleado($parametro);
+                            if ($check_empleado_exis) {
+                                $data_json['exito'] = true;
+                                $data_json['mensaje'] = "Este trabajador ya esta registrado";
+                            }else{
+                                $check_empleado = $this->getRegistrarEmpleado("datosempleados", $empleados_datos_reg);
+                                if($check_empleado == true){
+                                    $data_json['exito'] = true;
+                                    $data_json['mensaje'] = "Empleado guardado con exito";
+                                }else{
+                                    $data_json['exito'] = true;
+                                    $data_json['mensaje'] = "No se logro realizar la consulta";
+                                }
+                            }
+                        }else{
+                            $data_json['mensaje'] = "No se pudo recorrer el identificador";
                         }
                     }
                 } else {
@@ -120,83 +186,6 @@ class personalController extends personalModel
                 }
             } else {
                 $data_json['mensaje'] = "La consulta no se logro realizar correctamente";
-            }
-        }
-        header('Content-Type: application/json');
-        echo json_encode($data_json);
-    }
-
-    public function registroEmpleado($idPersonal, $idEstatus, $idCargo, $idDependencia, $idDepartamento, $telefono)
-    {
-        $idPersonal = $this->limpiarCadena($idPersonal);
-        $idEstatus = $this->limpiarCadena($idEstatus);
-        $idCargo = $this->limpiarCadena($idCargo);
-        $idDependencia = $this->limpiarCadena($idDependencia);
-        $idDepartamento = $this->limpiarCadena($idDepartamento);
-        $telefono = $this->limpiarCadena($telefono);
-        // $idGrp = $this->limpiarCadena($idGrp);
-        // $especialidad = $this->limpiarCadena($especialidad);
-        // $telOficina = $this->limpiarCadena($telOficina);
-        $data_json = [
-            'exito' => false, // Inicializamos a false por defecto
-            'mensaje' => '',
-        ];
-
-        $empleados_datos_reg = [
-            [
-                "campo_nombre" => "idPersonal",
-                "campo_marcador" => ":idPersonal",
-                "campo_valor" =>  $idPersonal
-            ],
-            [
-                "campo_nombre" => "idEstatus",
-                "campo_marcador" => ":idEstatus",
-                "campo_valor" => $idEstatus
-            ],
-            [
-                "campo_nombre" => "idCargo",
-                "campo_marcador" => ":idCargo",
-                "campo_valor" => $idCargo
-            ],
-            [
-                "campo_nombre" => "idDependencia",
-                "campo_marcador" => ":idDependencia",
-                "campo_valor" => $idDependencia
-            ],
-            [
-                "campo_nombre" => "idDepartamento",
-                "campo_marcador" => ":idDepartamento",
-                "campo_valor" => $idDepartamento
-            ],
-            [
-                "campo_nombre" => "telefono",
-                "campo_marcador" => ":telefono",
-                "campo_valor" => $telefono
-            ],
-            [
-                "campo_nombre" => "fecha",
-                "campo_marcador" => ":fecha",
-                "campo_valor" => date("Y-m-d")
-            ],
-            [
-                "campo_nombre" => "hora",
-                "campo_marcador" => ":hora",
-                "campo_valor" => date("H:i:s")
-            ]
-        ];
-        $parametro =[$idPersonal];
-        $check_empleado_exis = $this->getExisteEmpleado($parametro);
-        if ($check_empleado_exis) {
-            $data_json['exito'] = true;
-            $data_json['mensaje'] = "Este trabajador ya esta registrado";
-        }else{
-            $check_empleado = $this->getRegistrarEmpleado("datosempleados", $empleados_datos_reg);
-            if($check_empleado == true){
-                $data_json['exito'] = true;
-                $data_json['mensaje'] = "Empleado guardado con exito";
-            }else{
-                $data_json['exito'] = true;
-                $data_json['mensaje'] = "No se logro realizar la consulta";
             }
         }
         header('Content-Type: application/json');

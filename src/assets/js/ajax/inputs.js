@@ -39,32 +39,51 @@ export function validarNumeros(input, cumplidospan) {
 
 export function validarTelefono(input, cumplidospan) {
   $(input).on("input", function () {
-      // Eliminar cualquier cosa que no sea un número
-      this.value = this.value.replace(/[^0-9]/g, "");
-console.log(this.value )
-      // Limitar a 12 dígitos
-      if (this.value.length > 12) {
-          this.value = this.value.slice(0, 12);
-      }
+    // Eliminar cualquier cosa que no sea un número
+    this.value = this.value.replace(/[^0-9]/g, "");
+    console.log(this.value)
+    // Limitar a 12 dígitos
+    if (this.value.length > 11) {
+      this.value = this.value.slice(0, 11);
+    }
 
-      // Aplicar clases según la longitud
-      if (this.value.length == 12) {
-          $(this).removeClass("error_input");
-          $(this).addClass("cumplido");
-          $(cumplidospan).removeClass("error_span");
-          $(cumplidospan).addClass("cumplido_span");
-      } else {
-          $(this).removeClass("cumplido");
-          $(this).addClass("error_input");
-          $(cumplidospan).removeClass("cumplido_span");
-          $(cumplidospan).addClass("error_span");
-      }
+    // Aplicar clases según la longitud
+    if (this.value.length == 11) {
+      $(this).removeClass("error_input");
+      $(this).addClass("cumplido");
+      $(cumplidospan).removeClass("error_span");
+      $(cumplidospan).addClass("cumplido_span");
+    } else {
+      $(this).removeClass("cumplido");
+      $(this).addClass("error_input");
+      $(cumplidospan).removeClass("cumplido_span");
+      $(cumplidospan).addClass("error_span");
+    }
   });
 
 }
 
+export function validarNumeroNumber(input,cumplidospan,) {
+  $(input).on("input", function () {
+    // Si el valor es menor a 0, lo reemplazamos por 0
+    if (this.value <= 0) {
+      this.value = 0;
+      $(this).removeClass("cumplido");
+      $(this).addClass("error_input");
+      $(cumplidospan).removeClass("cumplido_span");
+      $(cumplidospan).addClass("error_span");
+    }else{
+      $(this).removeClass("error_input");
+      $(this).addClass("cumplido");
+      $(cumplidospan).removeClass("error_span");
+      $(cumplidospan).addClass("cumplido_span");
+    }
+  })
+
+}
+
 export function validarSelectores(input, cumplidospan, tigger) {
-  $(input).on("change", function () {
+  $(input).on("input", function () {
     const opcionSeleccionada = $(this).val();
     if (opcionSeleccionada === "") {
       $(this).removeClass("cumplido");
@@ -78,9 +97,9 @@ export function validarSelectores(input, cumplidospan, tigger) {
       $(cumplidospan).addClass("cumplido_span");
     }
   });
-  if(tigger == "1"){
+  if (tigger == "1") {
     $(input).trigger("change");
-  }else{}
+  } else { }
 }
 
 export function valdiarCorreos(input, cumplidospan) {
@@ -154,17 +173,16 @@ export function colocarMeses(input) {
 export function colocarYear(input, desde) {
   var anioInicio = desde;
   var anioFin = new Date().getFullYear(); // Obtiene el año actual
-  console.log(anioFin);
   for (var i = anioFin; i >= anioInicio; i--) {
     $(input).append('<option value="' + i + '">' + i + "</option>");
   }
 }
 
 export function limpiarFormulario(idFormulario, excluir) {
-    $(idFormulario).find('*').not(excluir).each(function() {
-        $(this).removeClass('cumplido error_span error_input cumplido_span');
-        if ($(this).is('input[type="text"], input[type="email"], input[type="password"], textarea, select')) {
-            $(this).val('');
-        }
-    });
+  $(idFormulario).find('*').not(excluir).each(function () {
+    $(this).removeClass('cumplido error_span error_input cumplido_span');
+    if ($(this).is('input[type="text"], input[type="email"], input[type="password"], textarea, select')) {
+      $(this).val('');
+    }
+  });
 }

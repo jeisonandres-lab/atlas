@@ -37,9 +37,6 @@ use App\Atlas\config\App;
                                 <a class="nav-link" aria-current="true" id="personal" href="./personal">Personal</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" aria-current="true" id="trabajadores" href="./trabajadores">Trabajadores</a>
-                            </li>
-                            <li class="nav-item">
                                 <a class="nav-link " aria-current="true" id="registrosPersonal"href="./registrosPersonal">Registros</a>
                             </li>
                         </ul>

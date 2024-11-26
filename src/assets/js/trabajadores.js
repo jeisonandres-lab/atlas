@@ -1,5 +1,6 @@
 import {
     validarNombre,
+    validarNumeroNumber,
     validarNumeros,
     validarSelectores,
     validarTelefono,
@@ -10,13 +11,14 @@ import { enviarDatos, enviarFormulario, obtenerDatos } from "./ajax/formularioAj
 
 $(function () {
     validarNumeros("#cedula_trabajador", ".span_cedula_empleado", "1");
-    // validarNombre("#nombreTrabajador", ".span_nombre_empleado", "1");
-    // validarNombre("#apellidoTrabajador", ".span_apellido_empleado", "1");
-    // validarTelefono("#telefono", ".span_telefono");
-    // validarSelectores("#estatus", ".span_estatus");
-    // validarSelectores("#cargo", ".span_cargo");
-    // validarSelectores("#departamento", ".span_departamento");
-    // validarSelectores("#dependencia", ".span_dependencia");
+    validarNombre("#nombreTrabajador", ".span_nombre_empleado", "1");
+    validarNombre("#apellidoTrabajador", ".span_apellido_empleado", "1");
+    validarTelefono("#telefono", ".span_telefono");
+    validarSelectores("#estatus", ".span_estatus");
+    validarSelectores("#cargo", ".span_cargo");
+    validarSelectores("#departamento", ".span_departamento");
+    validarSelectores("#dependencia", ".span_dependencia");
+    validarNumeroNumber("#edad", ".span_edad")
     $('#formulario_empleado').on("submit", function (event) {
         event.preventDefault();
         let cedula = $("#cedula_trabajador");

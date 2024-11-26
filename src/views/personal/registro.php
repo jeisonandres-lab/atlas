@@ -66,7 +66,7 @@ use App\Atlas\config\App;
                 </div>
                 <!-- FORMULARIO DE ENVIOS DE DATOS DEL PERSONAL -->
                 <form action="#" class="row animate__animated animate__slideInUp contact-form form-validate d-flex justify-content-center" novalidate="novalidate" id="formulario_registro">
-                    <div class="col-sm-12 col-md-7 col-lg-7 col-xl-8 col-xxl-7">
+                    <div class="col-sm-12 col-md-7 col-lg-7 col-xl-7 col-xxl-8">
                         <div class="row col-sm-12 col-md-7  h-100  bg-white content w-100 p-3 contenedor">
                             <p class="mb-0 mt-2">Datos del Personal</p>
                             <hr class="mb-2">

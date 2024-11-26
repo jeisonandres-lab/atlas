@@ -82,7 +82,5 @@ let urlActual2 = window.location.pathname;
 let partesUrl2 = urlActual2.split('/');
 let ultimaParte2 = partesUrl2[partesUrl2.length - 1];
 
-console.log(partesUrl2);
-console.log("hola");
 // Llamamos a la función para agregar la clase active
 agregarClaseActive2(ultimaParte2);

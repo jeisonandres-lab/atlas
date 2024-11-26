@@ -47,7 +47,7 @@ use App\Atlas\config\App;
             </div>
             <!-- FORMULARIO DE ENVIOS DE DATOS DE EMPLEADO -->
             <form action="#" class="formulario_empleado row animate__animated animate__slideInUp contact-form form-validate justify-content-center" novalidate="novalidate" id="formulario_empleado">
-                <div class=" col-sm-12 col-md-7 col-lg-8 col-xl-8 col-xxl-8">
+                <div class=" col-sm-12 col-md-7 col-lg-7 col-xl-7 col-xxl-7">
                     <div class="row col-sm-12 col-md-7 h-100 bg-white w-100 p-3 m-0 contenTrabajadores">
                         <p class="mb-0 mt-2">Registro de datos para empleado</p>
                         <hr class="mb-3">
@@ -74,65 +74,64 @@ use App\Atlas\config\App;
                                 <input type="text" class="form-control" id="apellidoTrabajador" name="apellido" placeholder="Apellido" disabled>
                             </div>
                         </div>
-                        <div id="alert">
-                            <div class="callout callout-danger">
-                                <h5>Personal no encontrado!</h5>
 
-                                <p>Esta persona no esta registrada en nuestra base de datos, por favor dirijase al apartado de registro para registrar al personal</p>
-                            </div>
-                        </div>
-                        <div class="col-sm-5 mb-2">
-                            <label class="form-label mb-0" for="telefono">N.Telefono</label>
-                            <div class="input-group">
-                                <span class="input-group-text span_telefono"><i class="fa-regular fa-user"></i></span>
-                                <input type="text" class="form-control" id="telefono" name="telefono" placeholder="Telefono" required disabled>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-7 mb-2">
+                        <div class="col-sm-6 mb-2">
                             <div class="form-group">
-                                <label for="estatus">Estatus</label>
+                                <label for="primerNombre">Primer Nombre</label>
                                 <div class="input-group">
-                                    <span class="input-group-text span_estatus"><i class="fa-regular fa-clipboard"></i></span>
-                                    <select class="form-select form-select-md estado-estatus" id="estatus" name="estatus" aria-label="Small select example" aria-placeholder="dasdas" required disabled>
-                                        <option value="">Selecione un estatus</option>
-                                    </select>
+                                    <span class="input-group-text span_nombre"><i class="fa-regular fa-user"></i></span>
+                                    <input type="text" class="form-control" id="primerNombre" name="primerNombre" placeholder="Primer Nombre" required>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="col-sm-5 mb-2">
+                        <div class="col-sm-6 mb-2">
                             <div class="form-group">
-                                <label for="cargo">Cargo</label>
-                                <div class="input-group">
-                                    <span class="input-group-text span_cargo"><i class="fa-regular fa-clipboard"></i></span>
-                                    <select class="form-select form-select-md estado-cargo" id="cargo" name="cargo" aria-label="Small select example" aria-placeholder="dasdas" required disabled>
-                                        <option value="">Selecione un cargo</option>
-                                    </select>
+                                <label for="segundoNombre">Segundo Nombre</label>
+                                <div class="input-group ">
+                                    <span class="input-group-text span_nombre2"><i class="fa-regular fa-user"></i></span>
+                                    <input type="text" class="form-control" id="segundoNombre" name="segundoNombre" placeholder="Segundo Nombre" required>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="col-sm-7 mb-2">
+                        <div class="col-sm-6 mb-2">
                             <div class="form-group">
-                                <label for="departamento">Departamento</label>
+                                <label for="primerApellido">Primer Apellido</label>
                                 <div class="input-group">
-                                    <span class="input-group-text span_departamento"><i class="fa-regular fa-clipboard"></i></span>
-                                    <select class="form-select form-select-md estado-departamento" id="departamento" name="departamento" aria-label="Small select example" aria-placeholder="dasdas" required disabled>
-                                        <option value="">Selecione un departamento</option>
-                                    </select>
+                                    <span class="input-group-text span_apellido"><i class="fa-regular fa-user"></i></span>
+                                    <input type="text" class="form-control" id="primerApellido" name="primerApellido" placeholder="Primer Apellido" required>
+                                </div>
+                            </div>
+                            <p></p>
+                        </div>
+
+                        <div class="col-sm-6 mb-2">
+                            <div class="form-group">
+                                <label for="segundoApellido">Segundo Apellido</label>
+                                <div class="input-group">
+                                    <span class="input-group-text span_apellido2"><i class="fa-regular fa-user"></i></span>
+                                    <input type="text" class="form-control" id="segundoApellido" name="segundoApellido" placeholder="segundo Apellido" required>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="col-sm-12 mb-2">
+                        <div class="col-sm-6 mb-2">
                             <div class="form-group">
-                                <label for="dependencia">Estado dependencia</label>
+                                <label for="cedula">Cédula</label>
                                 <div class="input-group">
-                                    <span class="input-group-text span_dependencia"><i class="fa-regular fa-clipboard"></i></span>
-                                    <select class="form-select form-select-md estado-dependencia" id="dependencia" name="dependencia" aria-label="Small select example" aria-placeholder="dasdas" required disabled>
-                                        <option value="">Selecione la dependencia</option>
-                                    </select>
+                                    <span class="input-group-text span_cedula"><i class="fa-regular fa-address-card"></i></span>
+                                    <input type="text" class="form-control" id="cedula" name="cedula" placeholder="Cédula de Identidad" required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6 mb-2">
+                            <div class="form-group">
+                                <label for="cedula">Edad</label>
+                                <div class="input-group">
+                                    <span class="input-group-text span_edad"><i class="fa-regular fa-address-card"></i></span>
+                                    <input type="number" class="form-control" id="edad" name="edad" placeholder="Cédula de Identidad" required>
                                 </div>
                             </div>
                         </div>

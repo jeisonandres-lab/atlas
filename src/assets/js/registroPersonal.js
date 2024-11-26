@@ -186,7 +186,7 @@ $(function () {
     }
   });
 
-  $("#meses").trigger("change");
+  $("#meses").trigger("input");
   validarSelectores("#dia", ".span_dia", "1");
 
   $("#formulario_registro").on("submit", function (event) {
