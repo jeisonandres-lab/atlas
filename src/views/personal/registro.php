@@ -114,7 +114,7 @@ use App\Atlas\config\App;
                                 <div class="form-group">
                                     <label for="cedula">Cédula</label>
                                     <div class="input-group">
-                                        <span class="input-group-text span_cedula">
+                                        <span class="input-group-text span_cedula"><i class="fa-regular fa-address-card"></i></span>
                                         <input type="text" class="form-control" id="cedula" name="cedula" placeholder="Cédula de Identidad" required>
                                     </div>
                                 </div>

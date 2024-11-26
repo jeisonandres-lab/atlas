@@ -192,14 +192,14 @@ class personalController extends personalModel
         echo json_encode($data_json);
     }
 
-    public function obtenerDatosPersonal($cedula){
-        $cedula = $this->limpiarCadena($cedula);
+    public function obtenerDatosPersonal($cedula_familiar){
+        $cedula_familiar = $this->limpiarCadena($cedula_familiar);
         $data_json = [
             'exito' => false, // Inicializamos a false por defecto
             'mensaje' => 'data del principio',
         ];
 
-            $parametro = [$cedula];
+            $parametro = [$cedula_familiar];
             $check_personal = $this->getDatosPersonal($parametro);
                 foreach($check_personal as $row){
                     $data_json['exito'] = true;

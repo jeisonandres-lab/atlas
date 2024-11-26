@@ -60,19 +60,19 @@ use App\Atlas\config\App;
                         </div>
                         <div class="col-sm-6 col-md-4 mb-2">
                             <div class="form-group">
-                                <label for="primerNombre">Primer Nombre</label>
+                                <label for="nombre">Nombre</label>
                                 <div class="input-group">
                                     <span class="input-group-text span_nombre"><i class="fa-regular fa-user"></i></span>
-                                    <input type="text" class="form-control" id="primerNombre" name="primerNombre" placeholder="Primer Nombre" required disabled>
+                                    <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Primer Nombre" required disabled>
                                 </div>
                             </div>
                         </div>
                         <div class="col-sm-6 col-md-4 mb-2">
                             <div class="form-group">
-                                <label for="primerNombre">Primer Nombre</label>
+                                <label for="apellido">apellido</label>
                                 <div class="input-group">
                                     <span class="input-group-text span_nombre"><i class="fa-regular fa-user"></i></span>
-                                    <input type="text" class="form-control" id="primerNombre" name="primerNombre" placeholder="Primer Nombre" required disabled>
+                                    <input type="text" class="form-control" id="apellido" name="apellido" placeholder="Primer Nombre" required disabled>
                                 </div>
                             </div>
                         </div>
@@ -124,7 +124,7 @@ use App\Atlas\config\App;
                                 <label for="cedula">Cédula</label>
                                 <div class="input-group">
                                     <span class="input-group-text span_cedula"><i class="fa-regular fa-address-card"></i></span>
-                                    <input type="text" class="form-control" id="cedula" name="cedula" placeholder="Cédula de Identidad" required>
+                                    <input type="text" class="form-control" id="cedula" name="cedula" placeholder="Cédula de Identidad" required disabled>
                                 </div>
                             </div>
                             <p class="text-body-secondary">Este campo es opcional</p>
@@ -135,7 +135,7 @@ use App\Atlas\config\App;
                                 <label for="cedula">Edad</label>
                                 <div class="input-group">
                                     <span class="input-group-text span_edad"><i class="fa-regular fa-user"></i></span>
-                                    <input type="number" class="form-control" id="edad" name="edad" placeholder="Cédula de Identidad" required>
+                                    <input type="number" class="form-control" id="edad" name="edad" placeholder="Cédula de Identidad" required disabled>
                                 </div>
                             </div>
                         </div>
@@ -143,32 +143,32 @@ use App\Atlas\config\App;
                         <p class="mb-0">Fecha de nacimiento</p>
                         <hr class="mb-2">
 
-                        <div class="col-sm-4 mb-2 ">
+                        <div class="col-sm-4  ">
                             <div class="form-group">
                                 <label class="required-field" for="message">Año</label>
                                 <div class="input-group">
                                     <span class="input-group-text span_ano"><i class="fa-regular fa-calendar"></i></i></span>
-                                    <select class="form-select form-select-md" name="ano" id="ano" required></select>
+                                    <select class="form-select form-select-md" name="ano" id="ano" required disabled></select>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="col-sm-4  mb-2">
+                        <div class="col-sm-4  ">
                             <div class="form-group">
                                 <label class="required-field" for="message">Mes</label>
                                 <div class="input-group">
                                     <span class="input-group-text span_mes"><i class="fa-regular fa-calendar"></i></i></span>
-                                    <select class="form-select" id="meses" name="meses" aria-label="Default select example" required></select>
+                                    <select class="form-select" id="meses" name="meses" aria-label="Default select example" required disabled></select>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="col-sm-4  mb-2">
+                        <div class="col-sm-4  mb-3">
                             <div class="form-group ">
                                 <label class="required-field" for="message">Día</label>
                                 <div class="input-group">
                                     <span class="input-group-text span_dia"><i class="fa-regular fa-calendar"></i></i></span>
-                                    <select class="form-select w-5" id="dia" name="dia" aria-label="Default select example" required></select>
+                                    <select class="form-select w-5" id="dia" name="dia" aria-label="Default select example" required disabled></select>
                                 </div>
                             </div>
                         </div>
