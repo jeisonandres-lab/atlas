@@ -109,13 +109,11 @@ class personalController extends personalModel
             if ($registrarPersonal == true) {
                 $check_personal_exis = $this->getDatosPersonal($parametro);
                 if ($check_personal_exis == true) {
-                    foreach ($check_personal_exis as $row) {
-                        $data_json['exito'] = true;
-                        $data_json['idPersonal'] = $row['id_personal'];
-                        $data_json['cedula'] = $row['cedula'];
-                        $data_json['nombre'] = $row['primerNombre'];
-                        $data_json['apellido'] = $row['primerApellido'];
-                        $data_json['mensaje'] = "Personal obtenido previamente registrado";
+                     foreach ($check_personal_exis as $row) {
+                        $identificador = $row['id_personal'];
+                        if ($identificador) {
+                            
+                        }
                     }
                 } else {
                     $data_json['mensaje'] = "Error al consultar los datos del personal previamente registrado";

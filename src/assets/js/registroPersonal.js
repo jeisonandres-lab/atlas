@@ -38,7 +38,11 @@ $(function () {
   valdiarCorreos("#correo", ".span_correo");
   colocarYear("#ano", "1900");
   colocarMeses("#meses");
-
+  validarTelefono("#telefono", ".span_telefono");
+  validarSelectores("#estatus", ".span_estatus");
+  validarSelectores("#cargo", ".span_cargo");
+  validarSelectores("#departamento", ".span_departamento");
+  validarSelectores("#dependencia", ".span_dependencia");
   // formulario de empleados
 
   // formulario de registro
@@ -70,7 +74,64 @@ $(function () {
       console.log("Por favor, complete todos los campos y asegúrese de que cumplan con los requisitos.");
     }
   });
+  let url_dependencias = "src/ajax/registroPersonal.php?modulo_personal=obtenerDependencias";
+  let url_estatus = "src/ajax/registroPersonal.php?modulo_personal=obtenerEstatus";
+  let url_cargo = "src/ajax/registroPersonal.php?modulo_personal=obtenerCargo";
+  let url_departamento = "src/ajax/registroPersonal.php?modulo_personal=obtenerDepartamento";
+  obtenerDatos(url_dependencias)
+    .then(response => {
+      if (response.exito) {
+        const arrayDependencias = Object.values(response);
+        console.log(arrayDependencias);
 
+        arrayDependencias[1].data.forEach(dependencia => {
+          $("#dependencia").append(
+            '<option value="' + dependencia.iddependencia + '">' + dependencia.dependencia + "</option>"
+          );
+          // Hacer algo con cada dependencia, como mostrarla en una lista
+        });
+      }
+    });
+  obtenerDatos(url_estatus)
+    .then(response => {
+      if (response.exito) {
+        const arrayEstatus = Object.values(response);
+        console.log(arrayEstatus);
+
+        arrayEstatus[1].data.forEach(estatus => {
+          $("#estatus").append(
+            '<option value="' + estatus.idestatus + '">' + estatus.estatus + "</option>"
+          );
+          // Hacer algo con cada dependencia, como mostrarla en una lista
+        });
+      }
+    });
+  obtenerDatos(url_cargo)
+    .then(response => {
+      if (response.exito) {
+        const arrayCargo = Object.values(response);
+        console.log(arrayCargo);
+        arrayCargo[1].data.forEach(cargo => {
+          $("#cargo").append(
+            '<option value="' + cargo.idcargo + '">' + cargo.cargo + "</option>"
+          );
+          // Hacer algo con cada dependencia, como mostrarla en una lista
+        });
+      }
+    });
+  obtenerDatos(url_departamento)
+    .then(response => {
+      if (response.exito) {
+        const arrayDepartamento = Object.values(response);
+        console.log(arrayDepartamento);
+        arrayDepartamento[1].data.forEach(departamento => {
+          $("#departamento").append(
+            '<option value="' + departamento.iddepartamento + '">' + departamento.departamento + "</option>"
+          );
+          // Hacer algo con cada dependencia, como mostrarla en una lista
+        });
+      }
+    });
   // formulario de empleado
   let formulario2 = $("#formulario_empleado");
   let todosLosInput2 = formulario2.find("input, select");
@@ -140,101 +201,7 @@ $(function () {
       if (parsedData.personalEncontrado) {
         $("#alerta").slideDown('slow', 'swing').delay(10000).slideUp();
       } else {
-        const Toast = Swal.mixin({
-          toast: true,
-          position: "top-end",
-          showConfirmButton: false,
-          timer: 3000,
-          timerProgressBar: true,
-          didOpen: (toast) => {
-            toast.onmouseenter = Swal.stopTimer;
-            toast.onmouseleave = Swal.resumeTimer;
-
-          }
-        });
-        Toast.fire({
-          icon: "success",
-          title: "Registro de personal exitoso, procesando datos"
-        }).then((result) => {
-          /* Read more about handling dismissals below */
-          if (result.dismiss === Swal.DismissReason.timer) {
-            let url_dependencias = "src/ajax/registroPersonal.php?modulo_personal=obtenerDependencias";
-            let url_estatus = "src/ajax/registroPersonal.php?modulo_personal=obtenerEstatus";
-            let url_cargo = "src/ajax/registroPersonal.php?modulo_personal=obtenerCargo";
-            let url_departamento = "src/ajax/registroPersonal.php?modulo_personal=obtenerDepartamento";
-            console.log(parsedData.exito)
-            obtenerDatos(url_dependencias)
-              .then(response => {
-                if (response.exito) {
-                  const arrayDependencias = Object.values(response);
-                  console.log(arrayDependencias);
-
-                  arrayDependencias[1].data.forEach(dependencia => {
-                    $("#dependencia").append(
-                      '<option value="' + dependencia.iddependencia + '">' + dependencia.dependencia + "</option>"
-                    );
-                    // Hacer algo con cada dependencia, como mostrarla en una lista
-                  });
-                }
-              });
-            obtenerDatos(url_estatus)
-              .then(response => {
-                if (response.exito) {
-                  const arrayEstatus = Object.values(response);
-                  console.log(arrayEstatus);
-
-                  arrayEstatus[1].data.forEach(estatus => {
-                    $("#estatus").append(
-                      '<option value="' + estatus.idestatus + '">' + estatus.estatus + "</option>"
-                    );
-                    // Hacer algo con cada dependencia, como mostrarla en una lista
-                  });
-                }
-              });
-            obtenerDatos(url_cargo)
-              .then(response => {
-                if (response.exito) {
-                  const arrayCargo = Object.values(response);
-                  console.log(arrayCargo);
-                  arrayCargo[1].data.forEach(cargo => {
-                    $("#cargo").append(
-                      '<option value="' + cargo.idcargo + '">' + cargo.cargo + "</option>"
-                    );
-                    // Hacer algo con cada dependencia, como mostrarla en una lista
-                  });
-                }
-              });
-            obtenerDatos(url_departamento)
-              .then(response => {
-                if (response.exito) {
-                  const arrayDepartamento = Object.values(response);
-                  console.log(arrayDepartamento);
-                  arrayDepartamento[1].data.forEach(departamento => {
-                    $("#departamento").append(
-                      '<option value="' + departamento.iddepartamento + '">' + departamento.departamento + "</option>"
-                    );
-                    // Hacer algo con cada dependencia, como mostrarla en una lista
-                  });
-                }
-              });
-            $("#id").val(parsedData.idPersonal);
-            $("#cedula_trabajador").val(parsedData.cedula);
-            $("#nombreTrabajador").val(parsedData.nombre);
-            $("#apellidoTrabajador").val(parsedData.apellido);
-            $("#formulario_registro").remove();
-            $(".formulario_empleado").show();
-            $(".formulario_empleado").addClass('d-flex');
-
-            validarNombre("#cedula_trabajador", ".span_cedula_empleado", "1");
-            validarNombre("#nombreTrabajador", ".span_nombre_empleado", "1");
-            validarNombre("#apellidoTrabajador", ".span_apellido_empleado", "1");
-            validarTelefono("#telefono", ".span_telefono");
-            validarSelectores("#estatus", ".span_estatus");
-            validarSelectores("#cargo", ".span_cargo");
-            validarSelectores("#departamento", ".span_departamento");
-            validarSelectores("#dependencia", ".span_dependencia");
-          }
-        });
+        
       }
       // const myModal = new bootstrap.Modal(document.getElementById('modal'));
       // myModal.show();
@@ -249,19 +216,4 @@ $(function () {
     );
   });
 
-  $("#formulario_empleado").on("submit", function (event) {
-    event.preventDefault();
-    const data = new FormData(this);
-    function callbackExito(parsedData) {
-      console.log(parsedData);
-      let redireccionar = function () {
-        window.location.href = "personal";
-      }
-      AlertDirection("success", parsedData.mensaje, "top", 3000, redireccionar);
-      // const myModal = new bootstrap.Modal(document.getElementById('modal'));
-      // myModal.show();
-    }
-    let url = "src/ajax/registroPersonal.php?modulo_personal=registrarEmpleado";
-    enviarFormulario(url, data, callbackExito, true);
-  });
 });

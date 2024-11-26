@@ -37,6 +37,7 @@ $idDependencia = isset($_POST['dependencia']) ? $conexion->limpiarCadena($_POST[
 switch ($_GET['modulo_personal']) {
     case 'registrar':
         $personal->registro($primerNombre, $segundoNombre, $primerApellido, $segundoApellido, $cedula, $civil, $correo, $ano, $mes, $dia);
+       
         break;
     case 'registrarEmpleado':
         $personal->registroEmpleado($idPersonal, $idEstatus, $idCargo, $idDependencia, $idDepartamento, $telefono);
@@ -55,7 +56,7 @@ switch ($_GET['modulo_personal']) {
         $personal->obtenerDepartamento();
         break;
     case 'obtenerDatosPersonal':
-        echo $cedula;
+       
         $personal->obtenerDatosPersonal($cedula);
         break;
     default:

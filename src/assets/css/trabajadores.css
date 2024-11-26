@@ -12,10 +12,21 @@ body::-webkit-scrollbar {
   display: none;
 }
 
-.nav-link {
+/* sub menu */
+.nav-link{
   color: #707070;
 }
-.active {
+.card{
+  box-shadow: 0px 0px 0px !important;
+}
+.card-header {
+  padding-bottom: 8.5px !important;
+  border: 0px !important;
+}
+.card-header a {
+  border: 0px !important;
+}
+.active{
   background-color: #4070f4 !important;
   color: white !important;
 }
@@ -107,7 +118,7 @@ body::-webkit-scrollbar {
   border-top: 1.3px solid !important;
   border-left: 1.3px solid !important;
   border-right: 1.3px solid !important;
-  border-color: #707070 !important;
+  border-color: rgba(0, 0, 0, 0.175) !important;
 }
 @keyframes salto {
   from {

@@ -49,8 +49,8 @@ use App\Atlas\config\App;
                     <img src="<?php echo App::URL_IMG . "top-header.png"; ?>" alt="" class="w-100 h-100" style="object-fit: cover; object-position:center;">
                 </div>
                 <!-- SUB MENU DEL MODULO -->
-                <div class="card text-center me-3 ms-3 mb-3 contentSubMenu">
-                    <div class="card-header">
+                <div class="card text-center me-3 ms-3 mb-3 contentSubMenu " style="box-shadow: none;">
+                    <div class="card-header ">
                         <ul class="nav nav-tabs card-header-tabs" id="list_sub_menu">
                             <li class="nav-item">
                                 <a class="nav-link" aria-current="true" id="personal" href="./personal">Personal</a>
@@ -66,7 +66,7 @@ use App\Atlas\config\App;
                 </div>
                 <!-- FORMULARIO DE ENVIOS DE DATOS DEL PERSONAL -->
                 <form action="#" class="row animate__animated animate__slideInUp contact-form form-validate d-flex justify-content-center" novalidate="novalidate" id="formulario_registro">
-                    <div class="col-sm-12 col-md-7 col-lg-7 col-xl-7 col-xxl-5">
+                    <div class="col-sm-12 col-md-7 col-lg-7 col-xl-8 col-xxl-7">
                         <div class="row col-sm-12 col-md-7  h-100  bg-white content w-100 p-3 contenedor">
                             <p class="mb-0 mt-2">Datos del Personal</p>
                             <hr class="mb-2">
@@ -148,7 +148,7 @@ use App\Atlas\config\App;
                             <p class="mb-0 mt-2">Fecha de nacimiento</p>
                             <hr class="mb-2">
 
-                            <div class="col-sm-4 ">
+                            <div class="col-sm-4 mb-2 ">
                                 <div class="form-group">
                                     <label class="required-field" for="message">Año</label>
                                     <div class="input-group">
@@ -158,7 +158,7 @@ use App\Atlas\config\App;
                                 </div>
                             </div>
 
-                            <div class="col-sm-4 ">
+                            <div class="col-sm-4  mb-2">
                                 <div class="form-group">
                                     <label class="required-field" for="message">Mes</label>
                                     <div class="input-group">
@@ -168,79 +168,13 @@ use App\Atlas\config\App;
                                 </div>
                             </div>
 
-                            <div class="col-sm-4 ">
+                            <div class="col-sm-4  mb-2">
                                 <div class="form-group ">
                                     <label class="required-field" for="message">Día</label>
                                     <div class="input-group">
                                         <span class="input-group-text span_dia"><i class="fa-regular fa-calendar"></i></i></span>
                                         <select class="form-select w-5" id="dia" name="dia" aria-label="Default select example" required></select>
                                     </div>
-                                </div>
-                            </div>
-
-                            <div class="col-sm-12 mt-3 ">
-                                <button type="submit" id="aceptar" name="submit" class="btn btn-primary" disabled>
-                                    <i class="fa-solid fa-plus me-2"></i>Aceptar
-                                </button>
-                                <button type="button" id="limpiar" name="submit" class="btn btn-warning" style="color: white;">
-                                    <i class="fa-solid fa-rotate-right me-2"></i>Limpiar
-                                </button>
-                                <button type="button" id="mostrar" name="mostrar" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalimg">
-                                    <i class="fa-solid fa-magnifying-glass me-2"></i></i>Mostrar
-                                </button>
-                            </div>
-
-                            <div class="alert alert-danger" role="alert" id="alerta" style="display: none;">
-                                Esta persona ya fue registrada
-                            </div>
-
-                        </div>
-                        <div style="background-color:#FE9001;" class="barra_naranja w-100"></div>
-                    </div>
-                    <div class="containerImg col-sm-12 col-md-5 col-lg-5 col-xl-5 col-xxl-4">
-                        <div class="h-100">
-                            <div class=" conten bg-white d-flex justify-content-center align-items-center h-100 w-100 col-sm-12 col-md-5  col-lg-4 col-xl-8 col-xxl-8 " id="img-contener">
-
-                            </div>
-                        </div>
-                        <div style="background-color:#FE9001;" class="barra_naranja w-100"></div>
-                    </div>
-                </form>
-                <!-- FORMULARIO DE ENVIOS DE DATOS DE EMPLEADO -->
-                <form action="#" class="formulario_empleado row animate__animated animate__slideInUp contact-form form-validate justify-content-center" novalidate="novalidate" id="formulario_empleado">
-                    <div class=" col-sm-12 col-md-7 col-lg-7 col-xl-7 col-xxl-5">
-                        <div class="row col-sm-12 col-md-7 h-100 bg-white w-100 p-3 conten">
-                        <p class="mb-0 mt-2">Registro de datos para empleado</p>
-                        <hr class="mb-3">
-                            <div class="col-sm-5 mb-1" style="display: none;">
-                                <label class="form-label mb-0" for="id">id</label>
-                                <div class="input-group">
-                                    <span class="input-group-text cumplido_span "><i class="fa-regular fa-user"></i></span>
-                                    <input type="text" class="form-control cumplido" id="id" name="id" placeholder="id" readonly>
-                                </div>
-                            </div>
-
-                            <div class="col-sm-4 mb-2">
-                                <label class="form-label mb-0" for="cedula_trabajador">Cédula</label>
-                                <div class="input-group">
-                                    <span class="input-group-text span_cedula_empleado cumplido_span"><i class="fa-regular fa-user"></i></span>
-                                    <input type="text" class="form-control cumplido" id="cedula_trabajador" name="cedulatrabajador" placeholder="Cédula" readonly>
-                                </div>
-                            </div>
-
-                            <div class="col-sm-4 mb-2">
-                                <label class="form-label mb-0" for="primerNombre">Nombre</label>
-                                <div class="input-group">
-                                    <span class="input-group-text span_nombre_empleado cumplido_span"><i class="fa-regular fa-user"></i></span>
-                                    <input type="text" class="form-control cumplido" id="nombreTrabajador" name="primerNombre" placeholder="Nombre" readonly>
-                                </div>
-                            </div>
-
-                            <div class="col-sm-4 mb-2">
-                                <label class="form-label mb-0" for="apellido">Apellido</label>
-                                <div class="input-group">
-                                    <span class="input-group-text span_apellido_empleado cumplido_span"><i class="fa-regular fa-user"></i></span>
-                                    <input type="text" class="form-control cumplido" id="apellidoTrabajador" name="apellido" placeholder="Apellido" readonly>
                                 </div>
                             </div>
 
@@ -300,15 +234,32 @@ use App\Atlas\config\App;
                                 </div>
                             </div>
 
-                            <div class="col-sm-12 ">
-                                <button type="submit" id="aceptar_emepleado" name="submit" class="btn btn-primary" disabled>
-                                    <i class="fa-solid fa-plus me-2"></i>Aceptar</button>
+                            <div class="col-sm-12 mt-3 ">
+                                <button type="submit" id="aceptar" name="submit" class="btn btn-primary" disabled>
+                                    <i class="fa-solid fa-plus me-2"></i>Aceptar
+                                </button>
                                 <button type="button" id="limpiar" name="submit" class="btn btn-warning" style="color: white;">
                                     <i class="fa-solid fa-rotate-right me-2"></i>Limpiar
                                 </button>
+                                <button type="button" id="mostrar" name="mostrar" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalimg">
+                                    <i class="fa-solid fa-magnifying-glass me-2"></i></i>Mostrar
+                                </button>
+                            </div>
+
+                            <div class="alert alert-danger" role="alert" id="alerta" style="display: none;">
+                                Esta persona ya fue registrada
+                            </div>
+
+                        </div>
+                        <div style="background-color:#FE9001;" class="barra_naranja w-100"></div>
+                    </div>
+                    <div class="containerImg col-sm-12 col-md-5 col-lg-5 col-xl-5 col-xxl-4">
+                        <div class="h-50">
+                            <div class=" conten bg-white d-flex justify-content-center align-items-center h-100 w-100 col-sm-12 col-md-5  col-lg-4 col-xl-8 col-xxl-8 " id="img-contener">
+
                             </div>
                         </div>
-                        <div style="background-color:#FE9001;" class="barra_naranja"></div>
+                        <div style="background-color:#FE9001;" class="barra_naranja w-100"></div>
                     </div>
                 </form>
             </main>

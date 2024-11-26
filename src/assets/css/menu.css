@@ -67,8 +67,6 @@ body main .content {
   padding: 15px 30px;
   z-index: 1000;
   box-shadow: 0 0 2px var(--grey-color-light);
-  border-bottom: 1.3px solid !important;
-  border-color: #707070 !important;
 }
 
 .atlas {
@@ -161,8 +159,6 @@ body main .content {
   overflow-y: scroll;
   box-shadow: 0 0 1px var(--grey-color-light);
   transition: all 0.5s ease;
-  border-right: 1.3px solid;
-  border-color: #707070;
 }
 
 .sidebar::-webkit-scrollbar {
@@ -317,10 +313,7 @@ body main .content {
   display: none;
 }
 
-footer{
-  border-top: 1.3px solid !important;
-  border-color: #707070 !important;
-}
+
 @media (width <= 768px) {
   .search_bar{
    display: none !important;

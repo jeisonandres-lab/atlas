@@ -30,7 +30,7 @@ use App\Atlas\config\App;
                 <img src="<?php echo App::URL_IMG . "top-header.png"; ?>" alt="" class="w-100 h-100" style="object-fit: cover; object-position:center;">
             </div>
             <!-- SUB MENU DEL MODULO -->
-            <div class="card text-center me-3 ms-3 mb-3 contentSubMenu">
+            <div class="card text-center me-3 ms-3 mb-3 contentSubMenu ">
                 <div class="card-header">
                     <ul class="nav nav-tabs card-header-tabs" id="list_sub_menu">
                         <li class="nav-item">
@@ -47,7 +47,7 @@ use App\Atlas\config\App;
             </div>
             <!-- FORMULARIO DE ENVIOS DE DATOS DE EMPLEADO -->
             <form action="#" class="formulario_empleado row animate__animated animate__slideInUp contact-form form-validate justify-content-center" novalidate="novalidate" id="formulario_empleado">
-                <div class=" col-sm-12 col-md-7 col-lg-7 col-xl-8 col-xxl-5">
+                <div class=" col-sm-12 col-md-7 col-lg-8 col-xl-8 col-xxl-8">
                     <div class="row col-sm-12 col-md-7 h-100 bg-white w-100 p-3 m-0 contenTrabajadores">
                         <p class="mb-0 mt-2">Registro de datos para empleado</p>
                         <hr class="mb-3">
@@ -76,11 +76,9 @@ use App\Atlas\config\App;
                         </div>
                         <div id="alert">
                             <div class="callout callout-danger">
-                                <h5>I am a danger callout!</h5>
+                                <h5>Personal no encontrado!</h5>
 
-                                <p>There is a problem that we need to fix. A wonderful serenity has taken possession of my entire
-                                    soul,
-                                    like these sweet mornings of spring which I enjoy with my whole heart.</p>
+                                <p>Esta persona no esta registrada en nuestra base de datos, por favor dirijase al apartado de registro para registrar al personal</p>
                             </div>
                         </div>
                         <div class="col-sm-5 mb-2">
