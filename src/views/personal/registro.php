@@ -56,7 +56,7 @@ use App\Atlas\config\App;
                                 <a class="nav-link" aria-current="true" id="personal" href="./personal">Personal</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" aria-current="true" id="trabajadores" href="./trabajadores">Trabajadores</a>
+                                <a class="nav-link" aria-current="true" id="familiares" href="./familiares">Familiares</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link " aria-current="true" id="registrosPersonal"href="./registrosPersonal">Registros</a>
@@ -114,7 +114,7 @@ use App\Atlas\config\App;
                                 <div class="form-group">
                                     <label for="cedula">Cédula</label>
                                     <div class="input-group">
-                                        <span class="input-group-text span_cedula"><i class="fa-regular fa-address-card"></i></span>
+                                        <span class="input-group-text span_cedula">
                                         <input type="text" class="form-control" id="cedula" name="cedula" placeholder="Cédula de Identidad" required>
                                     </div>
                                 </div>

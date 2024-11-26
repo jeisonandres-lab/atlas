@@ -67,12 +67,12 @@ export function validarNumeroNumber(input,cumplidospan,) {
   $(input).on("input", function () {
     // Si el valor es menor a 0, lo reemplazamos por 0
     if (this.value <= 0) {
-      this.value = 0;
       $(this).removeClass("cumplido");
       $(this).addClass("error_input");
       $(cumplidospan).removeClass("cumplido_span");
       $(cumplidospan).addClass("error_span");
     }else{
+     
       $(this).removeClass("error_input");
       $(this).addClass("cumplido");
       $(cumplidospan).removeClass("error_span");

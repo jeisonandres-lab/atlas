@@ -201,8 +201,6 @@ class personalController extends personalModel
 
             $parametro = [$cedula];
             $check_personal = $this->getDatosPersonal($parametro);
-
-
                 foreach($check_personal as $row){
                     $data_json['exito'] = true;
                     $data_json['idPersonal'] = $row['id_personal'];

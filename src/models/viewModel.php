@@ -18,7 +18,7 @@ class viewModel extends error
             'inicio' => 'src/views/home/home.php',
             'personal' => "src/views/personal/registro.php",
             'registrosPersonal' => "src/views/personal/registrosPersonal.php",
-            'trabajadores' => "src/views/personal/trabajadores.php",
+            'familiares' => "src/views/personal/familiares.php",
             'error' => "src/error/error.html",
         ];
         // Obtener la ruta completa de la vista
