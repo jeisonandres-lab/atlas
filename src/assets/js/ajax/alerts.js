@@ -42,3 +42,17 @@ export function AlertDirection(icons, messenger, position, time, callback) {
         console.error("Error occurred:", error);
     });
 }
+
+export function alertaNormalmix(messenger, time, icons, position){
+    const Toast = Swal.mixin({
+        toast: true,
+        position: position,
+        showConfirmButton: false,
+        timer: time,
+        timerProgressBar: false,
+    });
+    Toast.fire({
+        icon: icons,
+        title: messenger
+    });
+}

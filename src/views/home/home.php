@@ -15,7 +15,7 @@ use App\Atlas\config\App;
     <div class="app-wrapper conten-main">
         <?php require_once App::URL_INC . "/menu.php"; ?>
         <main class="app-main m-3">
-           hola
+           
         </main>
         <?php require_once App::URL_INC . "/footer.php"; ?>
     </div>

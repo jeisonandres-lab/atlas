@@ -22,12 +22,12 @@ export function validarNombre(input, cumplidospan) {
 export function validarNumeros(input, cumplidospan) {
   $(input).on("input", function (evenet) {
     this.value = this.value.replace(/[^0-9]/g, "");
-    if (this.value.length < 6) {
+    if (this.value.length < 7) {
       $(this).removeClass("cumplido");
       $(this).addClass("error_input");
       $(cumplidospan).removeClass("cumplido_span");
       $(cumplidospan).addClass("error_span");
-    } else if (this.value.length >= 6 || this.value.length <= 9) {
+    } else if (this.value.length >= 7 || this.value.length <= 9) {
       this.value = this.value.slice(0, 9);
       $(this).removeClass("error_input");
       $(this).addClass("cumplido");
@@ -121,25 +121,26 @@ export function valdiarCorreos(input, cumplidospan) {
   });
 }
 
-export function validarBusquedaCedula(input, divConten) {
+export function validarBusquedaCedula(input, divContens) {
   $(input).on("input", function () {
     const cedula = $(this).val();
     const imageUrl = `src/assets/photos/${cedula}.png`;
-    // Creamos una nueva imagen y la agregamos al DOM
+
+    // Creamos una nueva imagen y la agregamos a cada div
     const img = new Image();
     img.src = imageUrl;
-    img.classList.add("img-fluid");
-    img.classList.add("imgFoto");
-    img.classList.add("w-100");
-    img.classList.add("h-100");
-    // Escuchamos el evento 'load' para verificar si la imagen se cargó correctamente
+    img.classList.add("img-fluid", "imgFoto", "w-100", "h-100");
+
     img.onload = () => {
-      $(divConten).html(img);
+      divContens.forEach(div => {
+        $(div).html(img.cloneNode(true));
+      });
     };
 
-    // Escuchamos el evento 'error' para manejar el caso en que la imagen no se encuentre
     img.onerror = function () {
-      $(divConten).html("Imagen no encontrada");
+      divContens.forEach(div => {
+        $(div).html("Imagen no encontrada");
+      });
     };
   });
 }
@@ -147,35 +148,40 @@ export function validarBusquedaCedula(input, divConten) {
 export function colocarMeses(input) {
   // Generar las opciones de los meses
   const meses = [
-    "Enero",
-    "Febrero",
-    "Marzo",
-    "Abril",
-    "Mayo",
-    "Junio",
-    "Julio",
-    "Agosto",
-    "Septiembre",
-    "Octubre",
-    "Noviembre",
-    "Diciembre",
+    { valor: '', nombre: "Meses" },
+    { valor: '01', nombre: "Enero" },
+    { valor: '02', nombre: "Febrero" },
+    { valor: '03', nombre: "Marzo" },
+    { valor: '04', nombre: "Abril" },
+    { valor: '05', nombre: "Mayo" },
+    { valor: '06', nombre: "Junio" },
+    { valor: '07', nombre: "Julio" },
+    { valor: '08', nombre: "Agosto" },
+    { valor: '09', nombre: "Septiembre" },
+    { valor: '10', nombre: "Octubre" },
+    { valor: '11', nombre: "Noviembre" },
+    { valor: '12', nombre: "Diciembre" },
+   
   ];
-  for (let i = 0; i < meses.length; i++) {
-    // Sumamos 1 al índice para que los valores comiencen en 1
-    const valorMes = i + 1;
-    const valorMesFormateado = valorMes.toString().padStart(2, "0");
-    $(input).append(
-      '<option value="' + valorMesFormateado + '">' + meses[i] + "</option>"
-    );
-  }
+   // Crear las opciones del select
+   meses.forEach(mes => {
+    $(input).append(`<option value="${mes.valor}">${mes.nombre}</option>`);
+  });
 }
 
 export function colocarYear(input, desde) {
-  var anioInicio = desde;
-  var anioFin = new Date().getFullYear(); // Obtiene el año actual
-  for (var i = anioFin; i >= anioInicio; i--) {
-    $(input).append('<option value="' + i + '">' + i + "</option>");
+  // Crear un array de objetos para representar los años
+  const años = [];
+  // Agregar la opción "Selecciona un año" al inicio
+  años.push({ valor: "", nombre: "Selecciona un año" });
+  for (let año = new Date().getFullYear(); año >= desde; año--) {
+    años.push({ valor: año, nombre: año });
   }
+
+  // Crear las opciones del select
+  años.forEach(año => {
+    $(input).append(`<option value="${año.valor}">${año.nombre}</option>`);
+  });
 }
 
 export function limpiarFormulario(idFormulario, excluir) {

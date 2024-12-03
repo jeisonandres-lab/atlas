@@ -16,6 +16,7 @@ import {
 } from "./ajax/formularioAjax.js";
 
 import {
+  alertaNormalmix,
   AlertDirection,
   AlertSW2
 } from "./ajax/alerts.js";
@@ -25,6 +26,7 @@ import {
 $(function () {
   $(".formulario_empleado").hide();
 
+  const cargando = document.getElementById('cargando');
 
   // formulario de registro
   validarNombre("#primerNombre", ".span_nombre");
@@ -32,9 +34,10 @@ $(function () {
   validarNombre("#primerApellido", ".span_apellido");
   validarNombre("#segundoApellido", ".span_apellido2");
   validarNumeros("#cedula", ".span_cedula");
-  validarBusquedaCedula("#cedula", "#img-contener");
+  validarBusquedaCedula("#cedula", ["#img-modals", "#img-contener"]);
   validarSelectores("#civil", ".span_civil");
   validarSelectores("#ano", ".span_ano", "1");
+  validarSelectores("#dia", ".span_dia", "1");
   valdiarCorreos("#correo", ".span_correo");
   colocarYear("#ano", "1900");
   colocarMeses("#meses");
@@ -45,35 +48,6 @@ $(function () {
   validarSelectores("#dependencia", ".span_dependencia");
   // formulario de empleados
 
-  // formulario de registro
-  let formulario = $("#formulario_registro");
-  let todosLosInputs = formulario.find("input, select");
-
-  todosLosInputs.on("input", function (event) {
-    // Evita el envío del formulario por defecto
-
-    let todosCompletos = true;
-    let todosCumplidos = true;
-
-    todosLosInputs.each(function () {
-      if ($(this).val().trim() === '') {
-        todosCompletos = false;
-      } else {
-      }
-      // Nueva validación: verifica si tiene la clase "cumplido"
-      if (!$(this).hasClass("cumplido")) {
-        todosCumplidos = false;
-      }
-    });
-
-    if (todosCompletos && todosCumplidos) {
-      $("#aceptar").prop("disabled", false);
-      console.log("Todos los campos están llenos y cumplen con los requisitos.");
-    } else {
-      $("#aceptar").prop("disabled", true);
-      console.log("Por favor, complete todos los campos y asegúrese de que cumplan con los requisitos.");
-    }
-  });
   let url_dependencias = "src/ajax/registroPersonal.php?modulo_personal=obtenerDependencias";
   let url_estatus = "src/ajax/registroPersonal.php?modulo_personal=obtenerEstatus";
   let url_cargo = "src/ajax/registroPersonal.php?modulo_personal=obtenerCargo";
@@ -133,30 +107,7 @@ $(function () {
       }
     });
   // formulario de empleado
-  let formulario2 = $("#formulario_empleado");
-  let todosLosInput2 = formulario2.find("input, select");
-  todosLosInput2.on("input", function (event) {
-    // Evita el envío del formulario por defecto
-    let todosCompletos = true;
-    let todosCumplidos = true;
-    todosLosInput2.each(function () {
-      if ($(this).val().trim() === '') {
-        todosCompletos = false;
-      } else {
-      }
-      // Nueva validación: verifica si tiene la clase "cumplido"
-      if (!$(this).hasClass("cumplido")) {
-        todosCumplidos = false;
-      }
-    });
-    if (todosCompletos && todosCumplidos) {
-      $("#aceptar_emepleado").prop("disabled", false);
-      console.log("Todos los campos están llenos y cumplen con los requisitos.");
-    } else {
-      $("#aceptar_emepleado").prop("disabled", true);
-      console.log("Por favor, complete todos los campos y asegúrese de que cumplan con los requisitos.");
-    }
-  });
+
 
   $("#meses").on("change", function () {
     const year = 2024; // Cambia el año si lo deseas
@@ -189,8 +140,8 @@ $(function () {
   $("#meses").trigger("input");
   validarSelectores("#dia", ".span_dia", "1");
 
-  $("#formulario_registro").on("submit", function (event) {
-    event.preventDefault();
+  $("#formulario_registro").on("submit", function (e) {
+    e.preventDefault();
     const data = new FormData(this);
     const url = "src/ajax/registroPersonal.php?modulo_personal=registrar";
     $("#aceptar").prop("disabled", true);
@@ -201,12 +152,36 @@ $(function () {
       if (parsedData.personalEncontrado) {
         $("#alerta").slideDown('slow', 'swing').delay(10000).slideUp();
       } else {
-        
+        alertaNormalmix(parsedData.mensaje, 4000, "success", "top-end")
       }
       // const myModal = new bootstrap.Modal(document.getElementById('modal'));
       // myModal.show();
     }
     enviarFormulario(url, data, callbackExito, true);
+  });
+
+
+
+  // Selector para todos los inputs y selects dentro del formulario
+  var inputs = $('form input, form select');
+  var boton = $('#aceptar'); // Reemplaza con el ID de tu botón
+
+  // Función para verificar si todos los elementos tienen la clase "cumplido"
+  function todosCumplidos() {
+    return inputs.filter('.cumplido').length === inputs.length;
+  }
+
+  // Función para habilitar o deshabilitar el botón
+  function habilitarBoton() {
+    boton.prop('disabled', !todosCumplidos());
+  }
+
+  // Inicialmente verificamos el estado
+  habilitarBoton();
+
+  // Evento para detectar cambios en los inputs
+  inputs.on('change', function () {
+    habilitarBoton();
   });
 
   $("#limpiar").on("click", function () {

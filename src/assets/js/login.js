@@ -48,13 +48,13 @@ formulariosAJAX.addEventListener('submit', (e) => {
         let hashAlmacenado = parsedData.password;
         const esValida = verificarContrasena(passwordSinEncrip, hashAlmacenado);
         if (esValida === true) {
-          let redirecion = function(){
-              let formData = new FormData();
-              formData.append('url', `inicio`);
-              const url = "./src/ajax/userAjax.php?modulo_usuario=redireccionar";
-              enviarDatos(url, formData);
+          let redirecion = function () {
+            const url = "./src/ajax/userAjax.php?modulo_usuario=redireccionar";
+            let formData = new FormData();
+            formData.append('url', `inicio`);
+            enviarDatos(url, formData);
           };
-          AlertDirection("success","Inicio de session con exito, Redireccionando", "top-end", 4000, redirecion);
+          AlertDirection("success", "Inicio de session con exito, Redireccionando", "top-end", 4000, redirecion);
         } else {
           AlertSW2("error", "La contraseña es incorrecta", "top", 4000);
         }

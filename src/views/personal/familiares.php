@@ -30,8 +30,8 @@ use App\Atlas\config\App;
                 <img src="<?php echo App::URL_IMG . "top-header.png"; ?>" alt="" class="w-100 h-100" style="object-fit: cover; object-position:center;">
             </div>
             <!-- SUB MENU DEL MODULO -->
-            <div class="card text-center me-3 ms-3 mb-3 contentSubMenu ">
-                <div class="card-header">
+            <div class="card text-center me-3 ms-3 mb-3 contentSubMenu " style="box-shadow: none;">
+                <div class="card-header ">
                     <ul class="nav nav-tabs card-header-tabs" id="list_sub_menu">
                         <li class="nav-item">
                             <a class="nav-link" aria-current="true" id="personal" href="./personal">Personal</a>
@@ -46,9 +46,9 @@ use App\Atlas\config\App;
                 </div>
             </div>
             <!-- FORMULARIO DE ENVIOS DE DATOS DE EMPLEADO -->
-            <form action="#" class="formulario_empleado row animate__animated animate__slideInUp contact-form form-validate justify-content-center" novalidate="novalidate" id="formulario_empleado">
-                <div class=" col-sm-12 col-md-7 col-lg-7 col-xl-7 col-xxl-7">
-                    <div class="row col-sm-12 col-md-7 h-100 bg-white w-100 p-3 m-0 contenTrabajadores">
+            <form action="#" class="pe-3 ps-3 formulario_empleado row animate__animated animate__slideInUp contact-form form-validate justify-content-center" novalidate="novalidate" id="formulario_empleado">
+                <div class=" col-sm-12 col-md-12 col-lg-12 col-xl-8 col-xxl-9 ">
+                    <div class="row col-sm-12 col-md-9 h-100 bg-white w-100 p-3 m-0 content">
                         <p class="mb-0 mt-2">Datos del Empleado</p>
                         <hr class="mb-3">
                         <div class="col-sm-4 mb-2">
@@ -71,7 +71,7 @@ use App\Atlas\config\App;
                             <div class="form-group">
                                 <label for="apellido">apellido</label>
                                 <div class="input-group">
-                                    <span class="input-group-text span_nombre"><i class="fa-regular fa-user"></i></span>
+                                    <span class="input-group-text span_apellido"><i class="fa-regular fa-user"></i></span>
                                     <input type="text" class="form-control" id="apellido" name="apellido" placeholder="Primer Nombre" required disabled>
                                 </div>
                             </div>
@@ -83,7 +83,7 @@ use App\Atlas\config\App;
                             <div class="form-group">
                                 <label for="primerNombre">Primer Nombre</label>
                                 <div class="input-group">
-                                    <span class="input-group-text span_nombre"><i class="fa-regular fa-user"></i></span>
+                                    <span class="input-group-text span_nombre1"><i class="fa-regular fa-user"></i></span>
                                     <input type="text" class="form-control" id="primerNombre" name="primerNombre" placeholder="Primer Nombre" required disabled>
                                 </div>
                             </div>
@@ -103,7 +103,7 @@ use App\Atlas\config\App;
                             <div class="form-group">
                                 <label for="primerApellido">Primer Apellido</label>
                                 <div class="input-group">
-                                    <span class="input-group-text span_apellido"><i class="fa-regular fa-user"></i></span>
+                                    <span class="input-group-text span_apellido1"><i class="fa-regular fa-user"></i></span>
                                     <input type="text" class="form-control" id="primerApellido" name="primerApellido" placeholder="Primer Apellido" required disabled>
                                 </div>
                             </div>

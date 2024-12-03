@@ -1,0 +1,53 @@
+/* sub menu */
+.nav-link{
+    color: #707070 !important;
+  }
+
+  .card-header {
+    padding-bottom: 8.5px !important;
+    border: 0px !important;
+  }
+  .card-header a {
+    border: 0px !important;
+  }
+  .active{
+    background-color: #4070f4 !important;
+    color: white !important;
+  }
+
+
+  .olas>div {
+    background-color: #4070f4;
+    height: 100%;
+    width: 6px;
+    display: inline-block;
+    animation: wave 1.2s infinite ease-in-out;
+}
+
+.olas>div:nth-child(2) {
+    animation-delay: -0.2s;
+}
+
+.olas>div:nth-child(3) {
+    animation-delay: -0.4s;
+}
+
+.olas>div:nth-child(4) {
+    animation-delay: -0.6s;
+}
+
+.olas>div:nth-child(5) {
+    animation-delay: -0.8s;
+}
+
+@keyframes wave {
+
+    0%,
+    100% {
+        transform: scaleY(0.4);
+    }
+
+    50% {
+        transform: scaleY(1.2);
+    }
+}

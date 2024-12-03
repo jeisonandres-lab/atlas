@@ -11,73 +11,11 @@ main::-webkit-scrollbar {
 body::-webkit-scrollbar {
   display: none;
 }
-
-/* sub menu */
-.nav-link{
-  color: #707070;
+.content{
+  border-width: 1px !important;
+  border-color: #dee2e6 rgba(0, 0, 0, 0.175) !important;
+  border-radius: 0.375rem 0.375rem 0px 0px;
 }
-.card{
-  box-shadow: 0px 0px 0px !important;
-}
-.card-header {
-  padding-bottom: 8.5px !important;
-  border: 0px !important;
-}
-.card-header a {
-  border: 0px !important;
-}
-.active{
-  background-color: #4070f4 !important;
-  color: white !important;
-}
-/* verificación cumplida */
-.cumplido {
-  border: 2px solid rgb(13, 109, 13) !important;
-
-  color: rgb(13, 109, 13) !important ;
-}
-.cumplido_span {
-  border-top: 2px solid rgb(13, 109, 13) !important;
-  border-right: none !important;
-  border-bottom: 2px solid rgb(13, 109, 13) !important;
-  border-left: 2px solid rgb(13, 109, 13) !important;
-}
-.cumplido_span i {
-  color: rgb(13, 109, 13) !important;
-}
-
-.cumplido:focus {
-  outline: 0;
-  border-color: rgb(13, 109, 13) !important;
-  box-shadow: none !important;
-}
-
-/* verificacion negativa */
-.error_input {
-  border: 2px solid rgb(180, 8, 8) !important;
-
-  color: rgb(180, 8, 8) !important ;
-}
-.error_input:focus {
-  outline: 0;
-  border-color: rgb(180, 8, 8) !important;
-  box-shadow: none !important;
-}
-.error_span {
-  border-top: 2px solid rgb(180, 8, 8) !important;
-  border-right: none !important;
-  border-bottom: 2px solid rgb(180, 8, 8) !important;
-  border-left: 2px solid rgb(180, 8, 8) !important;
-}
-
-.error_span i {
-  color: rgb(180, 8, 8) !important;
-}
-.barra_naranja {
-  border-radius: 0px 0px 5px 5px;
-  height: 10px;
-}
-
 .cargando1 {
   width: 120px;
   height: 30px;
@@ -112,14 +50,7 @@ body::-webkit-scrollbar {
 .pelotas:nth-child(3) {
   animation-delay: 0.37s;
 }
-.contenTrabajadores{
-  border-radius: 10px 10px 0px 0px;
-  border-bottom: 0px !important;
-  border-top: 1.3px solid !important;
-  border-left: 1.3px solid !important;
-  border-right: 1.3px solid !important;
-  border-color: rgba(0, 0, 0, 0.175) !important;
-}
+
 @keyframes salto {
   from {
     transform: scaleX(1.25);

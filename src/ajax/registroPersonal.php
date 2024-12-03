@@ -48,12 +48,10 @@ switch ($_GET['modulo_personal']) {
     case 'obtenerCargo':
         $personal->obtenerCargo();
         break;
-
     case 'obtenerDepartamento':
         $personal->obtenerDepartamento();
         break;
     case 'obtenerDatosPersonal':
-        
         $personal->obtenerDatosPersonal($cedula_familiar);
         break;
     default:

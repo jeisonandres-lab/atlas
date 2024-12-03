@@ -7,6 +7,9 @@ export async function enviarFormulario(url, datos, callbackExito, ejecutarCallba
             processData: false,
             contentType: false,
             cache: false,
+            beforeSend: function (){
+                cargando.style.display = 'flex';     
+            },
             success: function(data, status, response) {
                 try {
                     // Intenta parsear los datos como JSON
@@ -55,6 +58,26 @@ export async function enviarDatos(url, datos, metodo = 'POST' ) {
     });
 }
 
+export function enviarDatosPersonalizados(url, datos, metodo = 'POST') {
+    $.ajax({
+        url: url,
+        type: metodo,
+        data: datos,
+        processData: false,
+        contentType: false,
+        cache: false,
+        dataType: 'json',
+        success: function (data, status, response) {
+            const parsedData2 = data;
+            console.log("Enviado");
+            console.table(parsedData2)
+            cargando.style.display = 'none';
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.log(jqXHR, textStatus, errorThrown);
+        }
+    });
+}
 export async function obtenerDatos(url, metodo = 'POST') {
   return new Promise((resolve, reject) => {
     $.ajax({

@@ -19,7 +19,7 @@ class personalController extends personalModel
 
     public function registro($primerNombre, $segundoNombre, $primerApellido, $segundoApellido, $cedula, $civil, $correo, $ano, $mes, $dia, $idEstatus, $idCargo, $idDependencia, $idDepartamento, $telefono)
     {
-        // sleep(5);
+        sleep(5);
         $primerNombre = $this->limpiarCadena($primerNombre);
         $segundoNombre = $this->limpiarCadena($segundoNombre);
         $primerApellido = $this->limpiarCadena($primerApellido);
@@ -117,7 +117,7 @@ class personalController extends personalModel
             if ($registrarPersonal == true) {
                 $check_personal_exis = $this->getDatosPersonal($parametro);
                 if ($check_personal_exis == true) {
-                     foreach ($check_personal_exis as $row) {
+                    foreach ($check_personal_exis as $row) {
                         $idPersonal = $row['id_personal'];
                         if ($idPersonal) {
                             $empleados_datos_reg = [
@@ -162,22 +162,22 @@ class personalController extends personalModel
                                     "campo_valor" => date("H:i:s")
                                 ]
                             ];
-                            $parametro =[$idPersonal];
+                            $parametro = [$idPersonal];
                             $check_empleado_exis = $this->getExisteEmpleado($parametro);
                             if ($check_empleado_exis) {
                                 $data_json['exito'] = true;
                                 $data_json['mensaje'] = "Este trabajador ya esta registrado";
-                            }else{
+                            } else {
                                 $check_empleado = $this->getRegistrarEmpleado("datosempleados", $empleados_datos_reg);
-                                if($check_empleado == true){
+                                if ($check_empleado == true) {
                                     $data_json['exito'] = true;
                                     $data_json['mensaje'] = "Empleado guardado con exito";
-                                }else{
+                                } else {
                                     $data_json['exito'] = true;
                                     $data_json['mensaje'] = "No se logro realizar la consulta";
                                 }
                             }
-                        }else{
+                        } else {
                             $data_json['mensaje'] = "No se pudo recorrer el identificador";
                         }
                     }
@@ -192,27 +192,40 @@ class personalController extends personalModel
         echo json_encode($data_json);
     }
 
-    public function obtenerDatosPersonal($cedula_familiar){
+    public function obtenerDatosPersonal(string $cedula_familiar)
+    {
         $cedula_familiar = $this->limpiarCadena($cedula_familiar);
         $data_json = [
             'exito' => false, // Inicializamos a false por defecto
             'mensaje' => 'data del principio',
         ];
-
+        if ($cedula_familiar == "") {
+            $data_json['exito'] = true;
+            $data_json['mensaje'] = "Debes de llenar el campo de la Cédula para hacer la busqueda del empleado";
+            $data_json['logrado'] = false;
+        } else {
             $parametro = [$cedula_familiar];
             $check_personal = $this->getDatosPersonal($parametro);
-                foreach($check_personal as $row){
+            if ($check_personal == true) {
+                foreach ($check_personal as $row) {
                     $data_json['exito'] = true;
                     $data_json['idPersonal'] = $row['id_personal'];
                     $data_json['cedula'] = $row['cedula'];
                     $data_json['nombre'] = $row['primerNombre'];
                     $data_json['apellido'] = $row['primerApellido'];
-                    $data_json['mensaje'] = "Personal obtenido previamente registrado";
+                    $data_json['mensaje'] = "Trabajador Encontrado";
+                    $data_json['logrado'] = true;
                 }
-
+            } else {
+                $data_json['exito'] = true;
+                $data_json['mensaje'] = "Este trabajador no se encuentra en nuestra base de datos";
+                $data_json['logrado'] = false;
+            }
+        }
         header('Content-Type: application/json');
         echo json_encode($data_json);
     }
+
     public function obtenerDependencias()
     {
         $dependencias = $this->getDependenciasPersonales();
