@@ -24,7 +24,6 @@
   /* verificacion negativa */
   .error_input {
     border: 2px solid rgb(180, 8, 8) !important;
-  
     color: rgb(180, 8, 8) !important ;
   }
   .error_input:focus {

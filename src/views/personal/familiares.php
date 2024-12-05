@@ -25,7 +25,7 @@ use App\Atlas\config\App;
             <!-- NOMBRE DEL MODULO -->
             <div class="imagen-pages mb-3" style="height: 75px;">
                 <div class="d-flex aling-items-center " style="position: absolute; ">
-                    <span class="ms-4 fw-bold fs-4 mt-3 text-white">Registro trabajadores</span>
+                    <span class="ms-4 fw-bold fs-4 mt-3 text-white">Registro De Familiares</span>
                 </div>
                 <img src="<?php echo App::URL_IMG . "top-header.png"; ?>" alt="" class="w-100 h-100" style="object-fit: cover; object-position:center;">
             </div>
@@ -47,7 +47,7 @@ use App\Atlas\config\App;
             </div>
             <!-- FORMULARIO DE ENVIOS DE DATOS DE EMPLEADO -->
             <form action="#" class="pe-3 ps-3 formulario_empleado row animate__animated animate__slideInUp contact-form form-validate justify-content-center" novalidate="novalidate" id="formulario_empleado">
-                <div class=" col-sm-12 col-md-12 col-lg-12 col-xl-8 col-xxl-9 ">
+                <div class=" col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-9 ">
                     <div class="row col-sm-12 col-md-9 h-100 bg-white w-100 p-3 m-0 content">
                         <p class="mb-0 mt-2">Datos del Empleado</p>
                         <hr class="mb-3">
@@ -63,7 +63,7 @@ use App\Atlas\config\App;
                                 <label for="nombre">Nombre</label>
                                 <div class="input-group">
                                     <span class="input-group-text span_nombre"><i class="fa-regular fa-user"></i></span>
-                                    <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Primer Nombre" required disabled>
+                                    <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Primer Nombre" required readonly>
                                 </div>
                             </div>
                         </div>
@@ -72,7 +72,7 @@ use App\Atlas\config\App;
                                 <label for="apellido">apellido</label>
                                 <div class="input-group">
                                     <span class="input-group-text span_apellido"><i class="fa-regular fa-user"></i></span>
-                                    <input type="text" class="form-control" id="apellido" name="apellido" placeholder="Primer Nombre" required disabled>
+                                    <input type="text" class="form-control" id="apellido" name="apellido" placeholder="Primer Nombre" required readonly>
                                 </div>
                             </div>
                         </div>
@@ -174,7 +174,7 @@ use App\Atlas\config\App;
                         </div>
 
                         <div class="col-sm-12 ">
-                            <button type="submit" id="aceptar_emepleado" name="submit" class="btn btn-primary" disabled style="display: none;">
+                            <button type="submit" id="aceptar_emepleado" name="aceptar" class="btn btn-primary" disabled style="display: none;">
                                 <i class="fa-solid fa-plus me-2"></i>Aceptar
                             </button>
                             <button type="submit" id="buscador" name="buscar" class="btn btn-success">

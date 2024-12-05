@@ -218,7 +218,7 @@ class personalController extends personalModel
                 }
             } else {
                 $data_json['exito'] = true;
-                $data_json['mensaje'] = "Este trabajador no se encuentra en nuestra base de datos";
+                $data_json['mensaje'] = "Este trabajador no se encuentra registrado en nuestro sistema.";
                 $data_json['logrado'] = false;
             }
         }

@@ -11,6 +11,7 @@ main::-webkit-scrollbar {
 body::-webkit-scrollbar {
   display: none;
 }
+
 .content{
   border-width: 1px !important;
   border-color: #dee2e6 rgba(0, 0, 0, 0.175) !important;

@@ -46,7 +46,6 @@ export function validarTelefono(input, cumplidospan) {
     if (this.value.length > 11) {
       this.value = this.value.slice(0, 11);
     }
-
     // Aplicar clases según la longitud
     if (this.value.length == 11) {
       $(this).removeClass("error_input");
@@ -63,16 +62,16 @@ export function validarTelefono(input, cumplidospan) {
 
 }
 
-export function validarNumeroNumber(input,cumplidospan,) {
+export function validarNumeroNumber(input, cumplidospan,) {
   $(input).on("input", function () {
     // Si el valor es menor a 0, lo reemplazamos por 0
     if (this.value <= 0) {
+      $(this).val("0");
       $(this).removeClass("cumplido");
       $(this).addClass("error_input");
       $(cumplidospan).removeClass("cumplido_span");
       $(cumplidospan).addClass("error_span");
-    }else{
-     
+    } else {
       $(this).removeClass("error_input");
       $(this).addClass("cumplido");
       $(cumplidospan).removeClass("error_span");
@@ -161,10 +160,10 @@ export function colocarMeses(input) {
     { valor: '10', nombre: "Octubre" },
     { valor: '11', nombre: "Noviembre" },
     { valor: '12', nombre: "Diciembre" },
-   
+
   ];
-   // Crear las opciones del select
-   meses.forEach(mes => {
+  // Crear las opciones del select
+  meses.forEach(mes => {
     $(input).append(`<option value="${mes.valor}">${mes.nombre}</option>`);
   });
 }
@@ -184,6 +183,24 @@ export function colocarYear(input, desde) {
   });
 }
 
+export function liberarInputs(input, cumplidospan, valor) {
+  // inputs
+  if (valor == 1) {
+    $(input).addClass("cumplido");
+    $(input).removeClass("error_input");
+    // spans
+    $(cumplidospan).addClass("cumplido_span");
+    $(cumplidospan).removeClass("error_span");
+  } else {
+    $(input).val("");
+    $(input).removeClass("cumplido");
+    $(input).addClass("error_input");
+    // spans
+    $(cumplidospan).removeClass("cumplido_span");
+    $(cumplidospan).addClass("error_span");
+  }
+}
+
 export function limpiarFormulario(idFormulario, excluir) {
   $(idFormulario).find('*').not(excluir).each(function () {
     $(this).removeClass('cumplido error_span error_input cumplido_span');
@@ -192,3 +209,4 @@ export function limpiarFormulario(idFormulario, excluir) {
     }
   });
 }
+
