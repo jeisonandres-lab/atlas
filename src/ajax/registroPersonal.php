@@ -26,6 +26,7 @@ $correo = isset($_POST['correo']) ? $conexion->limpiarCadena($_POST['correo']) :
 $ano = isset($_POST['ano']) ? $conexion->limpiarCadena($_POST['ano']) : "";
 $mes = isset($_POST['meses']) ? $_POST['meses'] : "";
 $dia = isset($_POST['dia']) ? $conexion->limpiarCadena($_POST['dia']) : "";
+$edad = isset($_POST['edad']) ? $conexion->limpiarCadena($_POST['edad']) : "";
 
 // DATOS PARA REGISTRAR EMPELADO
 $idPersonal = isset($_POST['id']) ? $conexion->limpiarCadena($_POST['id']) : "";
@@ -54,7 +55,11 @@ switch ($_GET['modulo_personal']) {
     case 'obtenerDatosPersonal':
         $personal->obtenerDatosPersonal($cedula_familiar);
         break;
+        case 'registrarFamilia':
+            $personal->registrarFamilia($cedula_familiar, $primerNombre, $segundoNombre, $primerApellido, $segundoApellido, $cedula, $edad, $ano, $mes, $dia);
+            break;
     default:
+    
         # code...
         break;
 }

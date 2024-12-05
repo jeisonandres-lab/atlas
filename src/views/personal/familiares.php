@@ -173,6 +173,26 @@ use App\Atlas\config\App;
                             </div>
                         </div>
 
+                        <div class="col-sm-6 col-md-6 ">
+                            <div class="form-group">
+                                <label for="cedula">Edad</label>
+                                <div class="input-group">
+                                    <span class="input-group-text span_edad"><i class="fa-regular fa-user"></i></span>
+                                    <input type="number" class="form-control" id="edad" name="edad" placeholder="Cédula de Identidad" required disabled>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-sm-12  mb-3">
+                            <div class="form-group ">
+                                <label class="required-field" for="archivo">Partida De Nacimiento</label>
+                                <div class="input-group">
+                                    <span class="input-group-text span_archivo"><i class="fa-regular fa-calendar"></i></i></span>
+                                    <input type="file" class="form-control" id="archivo" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="col-sm-12 ">
                             <button type="submit" id="aceptar_emepleado" name="aceptar" class="btn btn-primary" disabled style="display: none;">
                                 <i class="fa-solid fa-plus me-2"></i>Aceptar

@@ -183,6 +183,25 @@ export function colocarYear(input, desde) {
   });
 }
 
+export function file(input, cumplidospan){
+  $("#archivo").on("change", function(){
+    if (this.files && this.files[0]) {
+      // Se ha seleccionado un archivo
+      $(this).addClass('cumplido');
+      $(this).removeClass('error_input');
+      
+      $(cumplidospan).removeClass("error_span");
+      $(cumplidospan).addClass("cumplido_span");
+    } else {
+      // No se ha seleccionado ningún archivo
+      $(this).removeClass('cumplido');
+      $(this).addClass('error_input');
+
+      $(cumplidospan).removeClass("cumplido_span");
+      $(cumplidospan).addClass("error_span");
+    }
+  })
+}
 export function liberarInputs(input, cumplidospan, valor) {
   // inputs
   if (valor == 1) {

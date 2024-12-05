@@ -226,6 +226,30 @@ class personalController extends personalModel
         echo json_encode($data_json);
     }
 
+    public function registrarFamilia($cedula_familiar, $primerNombre, $segundoNombre, $primerApellido, $segundoApellido, $cedula, $edad, $ano, $mes, $dia){
+        sleep(5);
+        $cedula_familiar = $this->limpiarCadena($cedula_familiar);
+        $primerNombre = $this->limpiarCadena($primerNombre);
+        $segundoNombre = $this->limpiarCadena($segundoNombre);
+        $primerApellido = $this->limpiarCadena($primerApellido);
+        $segundoApellido = $this->limpiarCadena($segundoApellido);
+        $cedula = $this->limpiarCadena($cedula);
+        $edad = $this->limpiarCadena($edad);
+        $ano = $this->limpiarCadena($ano);
+        $mes = $this->limpiarCadena($mes);
+        $dia = $this->limpiarCadena($dia);
+
+        $data_json = [
+            'exito' => true, // Inicializamos a false por defecto
+            'mensaje' => 'si lelgo hasta aqui',
+        ];
+
+        $check_familiar
+
+        header('Content-Type: application/json');
+        echo json_encode($data_json);
+    }
+    
     public function obtenerDependencias()
     {
         $dependencias = $this->getDependenciasPersonales();

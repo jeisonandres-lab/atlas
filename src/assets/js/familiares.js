@@ -7,6 +7,7 @@ import {
   validarSelectores,
   limpiarFormulario,
   liberarInputs,
+  file,
 } from "./ajax/inputs.js";
 
 import { alertaNormalmix, AlertSW2 } from "./ajax/alerts.js";
@@ -28,6 +29,7 @@ $(function () {
   colocarYear("#ano", "1900");
   colocarMeses("#meses");
   validarNumeroNumber("#edad", ".span_edad");
+  file("#archvio", ".span_archivo");
 
   $("#dia").append('<option value="">Selecciona un día</option>');
   $("#meses").on("change", function () {
@@ -54,53 +56,80 @@ $(function () {
     const formData = new FormData(this);
     const accion = $(this).find('button[type="submit"]:focus').attr('name');
     console.log(accion)
-
     if(accion == "buscar"){
-      var destino = "src/ajax/registroPersonal.php?modulo_personal=obtenerDatosPersonal";
-    }else if(accion == "aceptar"){
-      var destino = "src/ajax/registroPersonal.php?modulo_personal=obtenerDatosPersonal";
-      console.log("se le dio al boton aceptar")
-    }else{
-      console.log("los destinos deben de tener un  error")
-    }
-
-    function callbackExito(parsedData) {
-      console.log(parsedData);
-      if (parsedData.logrado == true) {
-        let nombre = parsedData.nombre;
-        let apellido = parsedData.apellido;
-        // si tiene marcado error
-        $("#nombre").removeClass("error_input");
-        $("#apellido").removeClass("error_input");
-        $(".span_nombre").removeClass("error_span");
-        $(".span_apellido").removeClass("error_span");
-
-        // se marcar cumplido logrado
-        $("#cedula_trabajador").addClass("cedulaBusqueda");
-        $("#nombre").addClass("cumplido");
-        $("#apellido").addClass("cumplido");
-        $(".span_nombre").addClass("cumplido_span");
-        $(".span_apellido").addClass("cumplido_span");
-        $("#nombre").val(nombre);
-        $("#apellido").val(apellido);
-
-        $("#primerNombre").prop("disabled", false);
-        $("#segundoNombre").prop("disabled", false);
-        $("#primerApellido").prop("disabled", false);
-        $("#segundoApellido").prop("disabled", false);
-        $("#cedula").prop("disabled", false);
-        $("#edad").prop("disabled", false);
-        $("#ano").prop("disabled", false);
-        $("#meses").prop("disabled", false);
-        $("#dia").prop("disabled", false);
-        $("#aceptar_emepleado").show();
-        alertaNormalmix(parsedData.mensaje, 4000, "success", "top-end");
-      } else {
-        alertaNormalmix(parsedData.mensaje, 4000, "error", "top-end");
+      function callbackExito(parsedData) {
+        if (parsedData.logrado == true) {
+          let nombre = parsedData.nombre;
+          let apellido = parsedData.apellido;
+          // si tiene marcado error
+          $("#nombre").removeClass("error_input");
+          $("#apellido").removeClass("error_input");
+          $(".span_nombre").removeClass("error_span");
+          $(".span_apellido").removeClass("error_span");
+  
+          // se marcar cumplido logrado
+          $("#cedula_trabajador").addClass("cedulaBusqueda");
+          $("#nombre").addClass("cumplido");
+          $("#apellido").addClass("cumplido");
+          $(".span_nombre").addClass("cumplido_span");
+          $(".span_apellido").addClass("cumplido_span");
+          $("#nombre").val(nombre);
+          $("#apellido").val(apellido);
+  
+          $("#primerNombre").prop("disabled", false);
+          $("#segundoNombre").prop("disabled", false);
+          $("#primerApellido").prop("disabled", false);
+          $("#segundoApellido").prop("disabled", false);
+          $("#cedula").prop("disabled", false);
+          $("#edad").prop("disabled", false);
+          $("#ano").prop("disabled", false);
+          $("#meses").prop("disabled", false);
+          $("#dia").prop("disabled", false);
+          $("#aceptar_emepleado").show();
+          alertaNormalmix(parsedData.mensaje, 4000, "success", "top-end");
+        } else {
+          alertaNormalmix(parsedData.mensaje, 4000, "error", "top-end");
+        }
       }
-    }
-    let url = destino;
-    enviarFormulario(url, formData, callbackExito, true);
+      let destino = "src/ajax/registroPersonal.php?modulo_personal=obtenerDatosPersonal";
+      let url = destino;
+      enviarFormulario(url, formData, callbackExito, true);
+
+    }else if(accion == "aceptar"){
+      function callbackExito(parsedData) {
+        if (parsedData.logrado == true) {
+          let nombre = parsedData.nombre;
+  
+          // se marcar cumplido logrado
+          $("#cedula_trabajador").addClass("cedulaBusqueda");
+          $("#nombre").addClass("cumplido");
+          $("#apellido").addClass("cumplido");
+          $(".span_nombre").addClass("cumplido_span");
+          $(".span_apellido").addClass("cumplido_span");
+          $("#nombre").val(nombre);
+          $("#apellido").val(apellido);
+  
+          $("#primerNombre").prop("disabled", false);
+          $("#segundoNombre").prop("disabled", false);
+          $("#primerApellido").prop("disabled", false);
+          $("#segundoApellido").prop("disabled", false);
+          $("#cedula").prop("disabled", false);
+          $("#edad").prop("disabled", false);
+          $("#ano").prop("disabled", false);
+          $("#meses").prop("disabled", false);
+          $("#dia").prop("disabled", false);
+          $("#aceptar_emepleado").show();
+          alertaNormalmix(parsedData.mensaje, 4000, "success", "top-end");
+        } else {
+          alertaNormalmix(parsedData.mensaje, 4000, "error", "top-end");
+        }
+      }
+      let destino = "src/ajax/registroPersonal.php?modulo_personal=";
+      let url = destino;
+      enviarFormulario(url, formData, callbackExito, true);
+    }else{
+      console.log("los destinos deben de tener un  error");
+    }  
   });
 
   function cedulaEjecutar(valor) {
