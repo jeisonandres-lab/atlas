@@ -8,6 +8,7 @@ import {
   validarNumeros,
   validarSelectores,
   validarTelefono,
+  file,
 } from "./ajax/inputs.js";
 
 import {
@@ -46,6 +47,8 @@ $(function () {
   validarSelectores("#cargo", ".span_cargo");
   validarSelectores("#departamento", ".span_departamento");
   validarSelectores("#dependencia", ".span_dependencia");
+  file("#contrato", ".span_contrato");
+  file("#notificacion", ".span_notificacion");
   // formulario de empleados
 
   let url_dependencias = "src/ajax/registroPersonal.php?modulo_personal=obtenerDependencias";

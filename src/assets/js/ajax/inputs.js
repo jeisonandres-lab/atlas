@@ -184,7 +184,7 @@ export function colocarYear(input, desde) {
 }
 
 export function file(input, cumplidospan){
-  $("#archivo").on("change", function(){
+  $(input).on("change", function(){
     if (this.files && this.files[0]) {
       // Se ha seleccionado un archivo
       $(this).addClass('cumplido');

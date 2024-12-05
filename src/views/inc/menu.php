@@ -71,7 +71,7 @@
                     <span class="navlink_icon">
                         <i class='bx bx-notepad'></i>
                     </span>
-                    <span class="navlink">Registrar</span>
+                    <span class="navlink">Egresos</span>
                 </a>
             </li>
             <!-- End -->

@@ -145,6 +145,7 @@ use App\Atlas\config\App;
                                 </div>
                             </div>
                         </div>
+
                         <p class="mb-0 mt-2">Fecha de nacimiento</p>
                         <hr class="mb-2">
 
@@ -174,6 +175,29 @@ use App\Atlas\config\App;
                                 <div class="input-group">
                                     <span class="input-group-text span_dia"><i class="fa-regular fa-calendar"></i></i></span>
                                     <select class="form-select w-5" id="dia" name="dia" aria-label="Default select example" required></select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <p class="mb-0 mt-2">Datos Del Trabajador</p>
+                        <hr class="mb-2">
+
+                        <div class="col-sm-12 mb-2">
+                            <div class="form-group">
+                                <label for="correo">Contrato</label>
+                                <div class="input-group">
+                                    <span class="input-group-text span_contrato"><i class="fa-regular fa-file-zipper"></i></span>
+                                    <input type="file" class="form-control" id="contrato" aria-describedby="inputGroupFileAddon04" aria-label="Upload" required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12 mb-2">
+                            <div class="form-group">
+                                <label for="correo">Notificación</label>
+                                <div class="input-group">
+                                    <span class="input-group-text span_notificacion"><i class="fa-regular fa-file-zipper"></i></span>
+                                    <input type="file" class="form-control" id="notificacion" aria-describedby="inputGroupFileAddon04" aria-label="Upload" required>
                                 </div>
                             </div>
                         </div>
