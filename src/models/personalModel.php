@@ -14,13 +14,13 @@ class personalModel extends Conexion{
         return $sql;
     }
 
-    private function validarPersonal($parametro){
-        $sql = $this->ejecutarConsulta("SELECT cedula FROM datosPersonales WHERE cedula = ?", $parametro);
+    private function registraDOCS($tabla, $datos){
+        $sql = $this->guardarDatos($tabla, $datos);
         return $sql;
     }
 
-    private function validarEmpleados($parametro){
-        $sql = $this->ejecutarConsulta("SELECT idPersonal FROM datosempleados WHERE idPersonal = ?", $parametro);
+    private function validarPersonal($parametro){
+        $sql = $this->ejecutarConsulta("SELECT cedula FROM datosPersonales WHERE cedula = ?", $parametro);
         return $sql;
     }
 
@@ -30,7 +30,7 @@ class personalModel extends Conexion{
     }
 
     private function validarEmpleado($parametro){
-        $sql = $this->ejecutarConsulta("SELECT idPersonal FROM datosempleados WHERE idpersonal = ? ", $parametro);
+        $sql = $this->ejecutarConsulta("SELECT * FROM datosempleados WHERE idpersonal = ? ", $parametro);
         return $sql;
     }
 
@@ -40,6 +40,10 @@ class personalModel extends Conexion{
 
     public function getRegistrarEmpleado($tabla, $datos){
         return $this->registrarEmpleado($tabla, $datos);
+    }
+
+    public function getRegistrarDOCS($tabla, $datos){
+        return $this->registraDOCS($tabla, $datos);
     }
 
     public function getExistePersonal( $parametro){

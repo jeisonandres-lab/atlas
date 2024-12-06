@@ -150,11 +150,15 @@ $(function () {
     $("#aceptar").prop("disabled", true);
 
     function callbackExito(parsedData) {
+      let dataerror = parsedData.error;
       $("#aceptar").prop("disabled", false);
       console.log(parsedData);
       if (parsedData.personalEncontrado) {
         $("#alerta").slideDown('slow', 'swing').delay(10000).slideUp();
-      } else {
+      } 
+      else if (dataerror) {
+        alertaNormalmix(parsedData.mensaje, 4000, "error", "top-end")
+      }else{
         alertaNormalmix(parsedData.mensaje, 4000, "success", "top-end")
       }
       // const myModal = new bootstrap.Modal(document.getElementById('modal'));

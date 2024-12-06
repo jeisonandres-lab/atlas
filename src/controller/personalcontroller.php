@@ -5,21 +5,38 @@ namespace App\Atlas\controller;
 use App\Atlas\models\personalModel;
 use App\Atlas\models\dependenciasModel;
 use App\Atlas\models\estatusModel;
+use App\Atlas\controller\archivo;
 
 class personalController extends personalModel
 {
 
     private $dependencia;
     private $estatus;
+    private $archivo;
 
     // public function __construct(dependenciasModel $dependencia, estatusModel $estatus) {
     //     $this->dependencia = $dependencia;
     //     $this->estatus = $estatus;
     // }
 
-    public function registro($primerNombre, $segundoNombre, $primerApellido, $segundoApellido, $cedula, $civil, $correo, $ano, $mes, $dia, $idEstatus, $idCargo, $idDependencia, $idDepartamento, $telefono)
-    {
-        sleep(5);
+    public function registro(
+        $primerNombre,
+        $segundoNombre,
+        $primerApellido,
+        $segundoApellido,
+        $cedula,
+        $civil,
+        $correo,
+        $ano,
+        $mes,
+        $dia,
+        $idEstatus,
+        $idCargo,
+        $idDependencia,
+        $idDepartamento,
+        $telefono
+    ) {
+        // sleep(5);
         $primerNombre = $this->limpiarCadena($primerNombre);
         $segundoNombre = $this->limpiarCadena($segundoNombre);
         $primerApellido = $this->limpiarCadena($primerApellido);
@@ -42,6 +59,27 @@ class personalController extends personalModel
             'exito' => false, // Inicializamos a false por defecto
             'mensaje' => '',
         ];
+
+        $extensionesPermitidas = ['pdf'];
+        $archivoContrato = $_FILES['contratoArchivo'];
+        $archivoNotacion = $_FILES['notacionAchivo'];
+        $extensionContrato = strtolower(pathinfo($archivoContrato['name'], PATHINFO_EXTENSION));
+        $extensionNotacion = strtolower(pathinfo($archivoNotacion['name'], PATHINFO_EXTENSION));
+        if (!in_array($extensionContrato, $extensionesPermitidas)) {
+            $data_json['error'] = true;
+            $data_json['mensaje'] = "El archivo de contrato no es PDF";
+            header('Content-Type: application/json');
+        echo json_encode($data_json);
+            exit;
+        }
+
+        if (!in_array($extensionNotacion, $extensionesPermitidas)) {
+            $data_json['error'] = true;
+            $data_json['mensaje'] = "El archivo de notación no es PDF";
+            header('Content-Type: application/json');
+        echo json_encode($data_json);
+            exit;
+        }
 
         $personal_datos_reg = [
             [
@@ -75,11 +113,6 @@ class personalController extends personalModel
                 "campo_valor" => $civil
             ],
             [
-                "campo_nombre" => "correo",
-                "campo_marcador" => ":correo",
-                "campo_valor" => $correo
-            ],
-            [
                 "campo_nombre" => "anoNacimiento",
                 "campo_marcador" => ":anoNacimiento",
                 "campo_valor" => $ano
@@ -105,6 +138,7 @@ class personalController extends personalModel
                 "campo_valor" => date("H:i:s")
             ]
         ];
+
         $parametro = [$cedula];
         $check_personal = $this->getExistePersonal($parametro);
         if ($check_personal) {
@@ -170,8 +204,51 @@ class personalController extends personalModel
                             } else {
                                 $check_empleado = $this->getRegistrarEmpleado("datosempleados", $empleados_datos_reg);
                                 if ($check_empleado == true) {
-                                    $data_json['exito'] = true;
-                                    $data_json['mensaje'] = "Empleado guardado con exito";
+                                    $check_idEmpleado = $this->getExisteEmpleado($parametro);
+                                    foreach ($check_idEmpleado as $row) {
+                                        $idEmpleado = $row['id_empleados'];
+                                        if ($idEmpleado) {
+                                            // Iteramos sobre todos los elementos de $_FILES
+                                            foreach ($_FILES as $input => $fileInfo) {
+                                                $extension = pathinfo($fileInfo['name'], PATHINFO_EXTENSION);
+                                                $datosArchivos = [
+                                                    [
+                                                        "campo_nombre" => "idPersonal",
+                                                        "campo_marcador" => ":idPersonal",
+                                                        "campo_valor" => $idEmpleado
+                                                    ],
+                                                    [
+                                                        "campo_nombre" => "doc",
+                                                        "campo_marcador" => ":doc",
+                                                        "campo_valor" => $fileInfo['name']
+                                                    ],
+                                                    [
+                                                        "campo_nombre" => "tipoDoc",
+                                                        "campo_marcador" => ":tipoDoc",
+                                                        "campo_valor" => $extension
+                                                    ],
+                                                    // [
+                                                    //     "campo_nombre" => "codigoArc",
+                                                    //     "campo_marcador" => ":codigoArc",
+                                                    //     "campo_valor" => microtime(true)+1
+                                                    // ]
+                                                ];
+
+                                                // Agregar el nuevo elemento al array principal
+                                                $registroTotol = $this->getRegistrarDOCS("documentacion", $datosArchivos);
+                                                if (!$registroTotol) {
+                                                    $data_json['mensaje'] = "no se logro registras los docuemntos del trabjador";
+                                                } else {
+                                                    move_uploaded_file($archivoContrato['tmp_name'], '../global/archives/contratos/' . $archivoContrato['name']);
+                                                    move_uploaded_file($archivoNotacion['tmp_name'], '../global/archives/notacion/' . $archivoNotacion['name']);
+                                                    $data_json['exito'] = true;
+                                                    $data_json['mensaje'] = "Empleado Registrado Exitosamente.";
+                                                }
+                                            }
+                                        } else {
+                                            $data_json['mensaje'] = "no se encontro el trabajador";
+                                        }
+                                    }
                                 } else {
                                     $data_json['exito'] = true;
                                     $data_json['mensaje'] = "No se logro realizar la consulta";
@@ -226,7 +303,8 @@ class personalController extends personalModel
         echo json_encode($data_json);
     }
 
-    public function registrarFamilia($cedula_familiar, $primerNombre, $segundoNombre, $primerApellido, $segundoApellido, $cedula, $edad, $ano, $mes, $dia){
+    public function registrarFamilia($cedula_familiar, $primerNombre, $segundoNombre, $primerApellido, $segundoApellido, $cedula, $edad, $ano, $mes, $dia)
+    {
         sleep(5);
         $cedula_familiar = $this->limpiarCadena($cedula_familiar);
         $primerNombre = $this->limpiarCadena($primerNombre);
@@ -244,12 +322,12 @@ class personalController extends personalModel
             'mensaje' => 'si lelgo hasta aqui',
         ];
 
-        $check_familiar
+        // $check_familiar
 
         header('Content-Type: application/json');
         echo json_encode($data_json);
     }
-    
+
     public function obtenerDependencias()
     {
         $dependencias = $this->getDependenciasPersonales();
@@ -310,10 +388,6 @@ class personalController extends personalModel
         echo json_encode($data_json);
     }
 
-    // public function objetoDependencia()
-    // {
-    //     return $this->dependencia->getDatosDependencia();
-    // }
     public function objetoDependencia()
     {
         return $this->dependencia = new dependenciasModel();
@@ -323,6 +397,17 @@ class personalController extends personalModel
     {
         return $this->estatus = new estatusModel();
     }
+
+    // public function objetoArchivo()
+    // {
+    //     return $this->archivo = new archivo();
+    // }
+
+    // public function getArchivoDatos()
+    // {
+    //     $datosArch = $this->objetoArchivo();
+    //     return $datosArch->datosArchivos();
+    // }
 
     protected function getEstatusPersonales()
     {
