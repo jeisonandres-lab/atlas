@@ -142,7 +142,7 @@ $(function () {
 
   $("#meses").trigger("input");
   validarSelectores("#dia", ".span_dia", "1");
-
+  
   $("#formulario_registro").on("submit", function (e) {
     e.preventDefault();
     const data = new FormData(this);

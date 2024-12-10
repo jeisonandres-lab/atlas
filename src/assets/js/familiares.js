@@ -13,10 +13,157 @@ import {
 import { alertaNormalmix, AlertSW2 } from "./ajax/alerts.js";
 import { enviarDatos, enviarFormulario, obtenerDatos } from "./ajax/formularioAjax.js";
 
+
+const familiaresCedulados =`
+                        <p class="mb-0 mt-2">Datos del Empleado</p>
+                        <hr class="mb-3">
+                        <div class="col-sm-4 mb-2">
+                            <label class="form-label mb-0" for="cedula_trabajador">Cédula</label>
+                            <div class="input-group">
+                                <span class="input-group-text span_cedula_empleado "><i class="fa-regular fa-address-card"></i></span>
+                                <input type="text" class="form-control " id="cedula_trabajador" name="cedula_familiar" placeholder="Cédula">
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-4 mb-2">
+                            <div class="form-group">
+                                <label for="nombre">Nombre</label>
+                                <div class="input-group">
+                                    <span class="input-group-text span_nombre"><i class="fa-regular fa-user"></i></span>
+                                    <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Primer Nombre" required readonly>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-4 mb-2">
+                            <div class="form-group">
+                                <label for="apellido">apellido</label>
+                                <div class="input-group">
+                                    <span class="input-group-text span_apellido"><i class="fa-regular fa-user"></i></span>
+                                    <input type="text" class="form-control" id="apellido" name="apellido" placeholder="Primer Nombre" required readonly>
+                                </div>
+                            </div>
+                        </div>
+
+                        <p class="mb-0 mt-2">Datos Del Familiar</p>
+                        <hr class="mb-3">
+                        <div class="col-sm-6 col-md-6 mb-3">
+                            <div class="form-group">
+                                <label for="primerNombre">Primer Nombre</label>
+                                <div class="input-group">
+                                    <span class="input-group-text span_nombre1"><i class="fa-regular fa-user"></i></span>
+                                    <input type="text" class="form-control" id="primerNombre" name="primerNombre" placeholder="Primer Nombre" required disabled>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6 col-md-6 mb-3">
+                            <div class="form-group">
+                                <label for="segundoNombre">Segundo Nombre</label>
+                                <div class="input-group ">
+                                    <span class="input-group-text span_nombre2"><i class="fa-regular fa-user"></i></span>
+                                    <input type="text" class="form-control" id="segundoNombre" name="segundoNombre" placeholder="Segundo Nombre" required disabled>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6 col-md-6 mb-3">
+                            <div class="form-group">
+                                <label for="primerApellido">Primer Apellido</label>
+                                <div class="input-group">
+                                    <span class="input-group-text span_apellido1"><i class="fa-regular fa-user"></i></span>
+                                    <input type="text" class="form-control" id="primerApellido" name="primerApellido" placeholder="Primer Apellido" required disabled>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6 col-md-6 mb-3">
+                            <div class="form-group">
+                                <label for="segundoApellido">Segundo Apellido</label>
+                                <div class="input-group">
+                                    <span class="input-group-text span_apellido2"><i class="fa-regular fa-user"></i></span>
+                                    <input type="text" class="form-control" id="segundoApellido" name="segundoApellido" placeholder="segundo Apellido" required disabled>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6 col-md-6">
+                            <div class="form-group">
+                                <label for="cedula">Cédula</label>
+                                <div class="input-group">
+                                    <span class="input-group-text span_cedula"><i class="fa-regular fa-address-card"></i></span>
+                                    <input type="text" class="form-control" id="cedula" name="cedula" placeholder="Cédula de Identidad" required disabled>
+                                </div>
+                            </div>
+                            <p class="text-body-secondary">Este campo es opcional</p>
+                        </div>
+
+                        <div class="col-sm-6 col-md-6 ">
+                            <div class="form-group">
+                                <label for="cedula">Edad</label>
+                                <div class="input-group">
+                                    <span class="input-group-text span_edad"><i class="fa-regular fa-user"></i></span>
+                                    <input type="number" class="form-control" id="edad" name="edad" placeholder="Cédula de Identidad" required disabled>
+                                </div>
+                            </div>
+                        </div>
+
+                        <p class="mb-0">Fecha de nacimiento</p>
+                        <hr class="mb-2">
+
+                        <div class="col-sm-4  ">
+                            <div class="form-group">
+                                <label class="required-field" for="message">Año</label>
+                                <div class="input-group">
+                                    <span class="input-group-text span_ano"><i class="fa-regular fa-calendar"></i></i></span>
+                                    <select class="form-select form-select-md" name="ano" id="ano" required disabled></select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4  ">
+                            <div class="form-group">
+                                <label class="required-field" for="message">Mes</label>
+                                <div class="input-group">
+                                    <span class="input-group-text span_mes"><i class="fa-regular fa-calendar"></i></i></span>
+                                    <select class="form-select" id="meses" name="meses" aria-label="Default select example" required disabled></select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4  mb-3">
+                            <div class="form-group ">
+                                <label class="required-field" for="message">Día</label>
+                                <div class="input-group">
+                                    <span class="input-group-text span_dia"><i class="fa-regular fa-calendar"></i></i></span>
+                                    <select class="form-select w-5" id="dia" name="dia" aria-label="Default select example" required disabled></select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12 ">
+                            <button type="submit" id="aceptar_emepleado" name="aceptar" class="btn btn-primary" disabled style="display: none;">
+                                <i class="fa-solid fa-plus me-2"></i>Aceptar
+                            </button>
+                            <button type="submit" id="buscador" name="buscar" class="btn btn-success">
+                                <i class="fa-solid fa-magnifying-glass me-2"></i>Buscar
+                            </button>
+                            <button type="button" id="limpiar" name="submit" class="btn btn-warning" style="color: white;">
+                                <i class="fa-solid fa-rotate-right me-2"></i>Limpiar
+                            </button>
+                        </div>
+`
+let cedulado = document.getElementById("conCedula");
+let contenText = document.getElementById("formFamiliar");
+
+cedulado.addEventListener("click", function() {
+  contenText.innerHTML =familiaresCedulados; 
+});
+
+
 $(function () {
+
   const cargando = document.getElementById('cargando');
 
-  validarNumeros("#cedula_trabajador", ".span_cedula_empleado");
+  
   validarNombre("#nombre", ".span_nombre");
   validarNombre("#apellido", ".span_apellido");
   validarNombre("#primerNombre", ".span_nombre1");
@@ -56,7 +203,7 @@ $(function () {
     const formData = new FormData(this);
     const accion = $(this).find('button[type="submit"]:focus').attr('name');
     console.log(accion)
-    if(accion == "buscar"){
+    if (accion == "buscar") {
       function callbackExito(parsedData) {
         if (parsedData.logrado == true) {
           let nombre = parsedData.nombre;
@@ -66,7 +213,7 @@ $(function () {
           $("#apellido").removeClass("error_input");
           $(".span_nombre").removeClass("error_span");
           $(".span_apellido").removeClass("error_span");
-  
+
           // se marcar cumplido logrado
           $("#cedula_trabajador").addClass("cedulaBusqueda");
           $("#nombre").addClass("cumplido");
@@ -75,7 +222,7 @@ $(function () {
           $(".span_apellido").addClass("cumplido_span");
           $("#nombre").val(nombre);
           $("#apellido").val(apellido);
-  
+
           $("#primerNombre").prop("disabled", false);
           $("#segundoNombre").prop("disabled", false);
           $("#primerApellido").prop("disabled", false);
@@ -95,11 +242,11 @@ $(function () {
       let url = destino;
       enviarFormulario(url, formData, callbackExito, true);
 
-    }else if(accion == "aceptar"){
+    } else if (accion == "aceptar") {
       function callbackExito(parsedData) {
         if (parsedData.logrado == true) {
           let nombre = parsedData.nombre;
-  
+
           // se marcar cumplido logrado
           $("#cedula_trabajador").addClass("cedulaBusqueda");
           $("#nombre").addClass("cumplido");
@@ -108,7 +255,7 @@ $(function () {
           $(".span_apellido").addClass("cumplido_span");
           $("#nombre").val(nombre);
           $("#apellido").val(apellido);
-  
+
           $("#primerNombre").prop("disabled", false);
           $("#segundoNombre").prop("disabled", false);
           $("#primerApellido").prop("disabled", false);
@@ -127,9 +274,9 @@ $(function () {
       let destino = "src/ajax/registroPersonal.php?modulo_personal=";
       let url = destino;
       enviarFormulario(url, formData, callbackExito, true);
-    }else{
+    } else {
       console.log("los destinos deben de tener un  error");
-    }  
+    }
   });
 
   function cedulaEjecutar(valor) {
@@ -183,6 +330,8 @@ $(function () {
 
   }
 
+ 
+
   $(document).on("input", ".cedulaBusqueda", function () {
     if ($(this).val().length < 7) {
       $("#aceptar_emepleado").hide();
@@ -194,7 +343,7 @@ $(function () {
   });
 
 
-  
+
 
   // Selector para todos los inputs y selects dentro del formulario
   var inputs = $('form input, form select');
