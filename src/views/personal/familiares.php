@@ -55,7 +55,7 @@ use App\Atlas\config\App;
             <!-- FORMULARIO DE ENVIOS DE DATOS DE EMPLEADO -->
             <form action="#" class="pe-3 ps-3 formulario_empleado row animate__animated animate__slideInUp contact-form form-validate justify-content-center" novalidate="novalidate" id="formulario_empleado">
                 <div class=" col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-9 ">
-                    <div class="row col-sm-12 col-md-9 h-100 bg-white w-100 p-3 m-0 content formFamiliar" id="formFamiliar">
+                    <div class="row col-sm-12 col-md-9 h-100 bg-white w-100 p-3 m-0 content " id="formFamiliar">
                         
                     </div>
                     <div style="background-color:#FE9001;" class="barra_naranja"></div>
