@@ -170,8 +170,6 @@ export function colocarMeses(input) {
 
 export function colocarYear(input, desde) {
   // Crear un array de objetos para representar los años
-  const input2 = $(input);
-  input2.empty();
   const años = [];
   // Agregar la opción "Selecciona un año" al inicio
   años.push({ valor: "", nombre: "Selecciona un año" });
@@ -231,33 +229,3 @@ export function limpiarFormulario(idFormulario, excluir) {
   });
 }
 
-export function mesesDias(input, cumplidospan, mes){
-  const input2 = $(input);
-  input2.empty();
-  const year = 2024;
-  const month = $(mes).val();
-  if (month === "") {
-    $(this).removeClass("cumplido").addClass("error_input");
-    $(cumplidospan).removeClass("cumplido_span").addClass("error_span");
-  } else {
-    const monthWithoutLeadingZero = month.replace(/^0+/, "");
-    const daysInMonth = new Date(year, monthWithoutLeadingZero, 0).getDate();
-    let dias2 = [];
-    dias2.push({ valor: "", nombre: "Selecciona un día" });
-
-    // Recorremos los días y los agregamos al array
-    for (let i = 1; i <= daysInMonth; i++) {
-        const diaFormateado = i.toString().padStart(2, "0");
-        dias2.push({ valor: diaFormateado, nombre: diaFormateado });
-    }
-
-    // Limpiamos el select y agregamos las nuevas opciones
-    $(input).empty();
-    $.each(dias2, function(index, dia) {
-        $(input).append(`<option value="${dia.valor}">${dia.nombre}</option>`);
-    });
-    
-    $(this).removeClass("error_input").addClass("cumplido");
-    $(cumplidospan).removeClass("error_span").addClass("cumplido_span");
-  }
-}

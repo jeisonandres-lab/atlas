@@ -155,7 +155,7 @@ body main .content {
 .sidebar {
   background-color: var(--white-color);
   width: 260px;
-  padding: 9px 10px 0px 10px;
+  padding: 9px 20px 0px 20px;
   overflow-y: scroll;
   box-shadow: 0 0 1px var(--grey-color-light);
   transition: all 0.5s ease;
@@ -234,7 +234,7 @@ body main .content {
 
 .navlink_icon {
   position: relative;
-  font-size: 21px;
+  font-size: 22px;
   min-width: 50px;
   line-height: 40px;
   display: inline-block;
@@ -258,7 +258,7 @@ body main .content {
   display: flex;
   align-items: center;
   width: 100%;
-  padding: 3px 0px;
+  padding: 4px 15px;
   border-radius: 8px;
   text-decoration: none;
   color: var(--grey-color);

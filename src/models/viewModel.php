@@ -17,7 +17,7 @@ class viewModel extends error
             'Identificarse' => 'src/views/start/login.php',
             'inicio' => 'src/views/home/home.php',
             'personal' => "src/views/personal/registro.php",
-            'registrosPersonal' => "src/views/personal/registrosPersonal.php",
+            'registrosFamiliares' => "src/views/personal/registrosFamiliares.php",
             'familiares' => "src/views/personal/familiares.php",
             'error' => "src/error/error.html",
         ];

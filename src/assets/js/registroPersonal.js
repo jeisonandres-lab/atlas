@@ -1,3 +1,4 @@
+
 import {
   colocarMeses,
   colocarYear,
@@ -142,7 +143,7 @@ $(function () {
 
   $("#meses").trigger("input");
   validarSelectores("#dia", ".span_dia", "1");
-  
+
   $("#formulario_registro").on("submit", function (e) {
     e.preventDefault();
     const data = new FormData(this);
@@ -197,5 +198,7 @@ $(function () {
       "#dia, #meses, #ano, .span_ano, .span_dia, .span_mes", "error_span", "cumplido", "cumplido_span", "error_input"
     );
   });
+
+
 
 });

@@ -59,7 +59,7 @@ use App\Atlas\config\App;
                             <a class="nav-link" aria-current="true" id="familiares" href="./familiares">Familiares</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link " aria-current="true" id="registrosPersonal" href="./registrosPersonal">Registros</a>
+                        <a class="nav-link " aria-current="true" id="registrosFamiliares" href="./registrosFamiliares">Registros</a>
                         </li>
                     </ul>
                 </div>

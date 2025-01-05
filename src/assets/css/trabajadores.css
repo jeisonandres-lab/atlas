@@ -52,45 +52,6 @@ body::-webkit-scrollbar {
   animation-delay: 0.37s;
 }
 
-.botonSelect{
- padding: 0;
-
-}
-
-.botonSelect .boton{
-  display: inline-flex;
-}
-
-.botonSelect .boton .button{
-  border: 0px;
-  padding: 10px;
-  background-color: #3f6ad8;
-  color: #fff;
-  font-size: 0.9rem;
-  font-weight: 700;
-}
-
-.botonSelect .boton .button .activa{
-  background-color: #2651be;
-}
-
-.botonSelect .boton .button:nth-child(1){
-  border-radius: 5px 0px 0px 5px;
-}
-
-.botonSelect .boton .button:nth-child(2){
-  border-radius: 0px 0px 0px 0px;
-}
-
-.botonSelect .boton .button:nth-child(3){
-  border-radius: 0px 5px 5px 0px;
-}
-
-.botonSelect .boton .button:hover{
-  background-color: #2651be;
-}
-
-
 @keyframes salto {
   from {
     transform: scaleX(1.25);
