@@ -35,6 +35,9 @@ $idEstatus = isset($_POST['estatus']) ? $conexion->limpiarCadena($_POST['estatus
 $idCargo = isset($_POST['cargo']) ? $conexion->limpiarCadena($_POST['cargo']) : "";
 $idDepartamento = isset($_POST['departamento']) ? $conexion->limpiarCadena($_POST['departamento']) : "";
 $idDependencia = isset($_POST['dependencia']) ? $conexion->limpiarCadena($_POST['dependencia']) : "";
+$numeroCarnet = isset($_POST['carnet']) ? $conexion->limpiarCadena($_POST['carnet']) : "";
+$tomo = isset($_POST['tomo']) ? $conexion->limpiarCadena($_POST['tomo']) : "";
+$folio = isset($_POST['folio']) ? $conexion->limpiarCadena($_POST['folio']) : "";
 
 switch ($_GET['modulo_personal']) {
     case 'registrar':
@@ -72,8 +75,26 @@ switch ($_GET['modulo_personal']) {
         $personal->obtenerDatosPersonal($cedula_familiar);
         break;
     case 'registrarFamilia':
-        $personal->registrarFamilia($cedula_familiar, $primerNombre, $segundoNombre, $primerApellido, $segundoApellido, $cedula, $edad, $ano, $mes, $dia);
+        $personal->registrarFamilia(
+            $cedula_familiar,
+            $primerNombre,
+            $segundoNombre,
+            $primerApellido,
+            $segundoApellido,
+            $cedula,
+            $edad,
+            $ano,
+            $mes,
+            $dia,
+            $numeroCarnet,
+            $tomo,
+            $folio
+        );
         break;
+    case 'obtenerPersonal':
+        $personal->obtenerTodoPersonal();
+        break;
+
     default:
 
         # code...

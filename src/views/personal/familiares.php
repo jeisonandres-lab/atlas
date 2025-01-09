@@ -9,10 +9,8 @@ use App\Atlas\config\App;
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trabajadores | ATLAS</title>
-    <?php require_once App::URL_INC . "icons.php"; ?>
+    <?php require_once App::URL_INC . "total_css.php"; ?>
     <link rel="stylesheet" href="<?php echo App::URL_CSS . "trabajadores.css"; ?>">
-    <link rel="stylesheet" href="./src/libs/select2/select2.min.css">
-    <link rel="stylesheet" href="./src/libs/animate/animate.min.css">
 </head>
 
 <body class="layout-fixed sidebar-expand-lg bg-body-tertiary">
@@ -30,25 +28,12 @@ use App\Atlas\config\App;
                 <img src="<?php echo App::URL_IMG . "top-header.png"; ?>" alt="" class="w-100 h-100" style="object-fit: cover; object-position:center;">
             </div>
             <!-- SUB MENU DEL MODULO -->
-            <div class="card text-center me-3 ms-3 mb-3 contentSubMenu " style="box-shadow: none;">
-                <div class="card-header ">
-                    <ul class="nav nav-tabs card-header-tabs" id="list_sub_menu">
-                        <li class="nav-item">
-                            <a class="nav-link" aria-current="true" id="personal" href="./personal">Personal</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" aria-current="true" id="familiares" href="./familiares">Familiares</a>
-                        </li>
-                        <li class="nav-item">
-                        <a class="nav-link " aria-current="true" id="registrosFamiliares" href="./registrosFamiliares">Registros</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+            <?php require_once App::URL_INC . "menu_registro.php" ?>
             <!-- FORMULARIO DE ENVIOS DE DATOS DE EMPLEADO -->
-            <form action="#" class="pe-3 ps-3 formulario_empleado row animate__animated animate__slideInUp contact-form form-validate justify-content-center" novalidate="novalidate" id="formulario_empleado">
+
+            <form action="#" class="container-fluid pe-3 ps-3 formulario_empleado animate__animated animate__slideInUp contact-form form-validate justify-content-center" novalidate="novalidate" id="formulario_empleado">
                 <div class=" col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-9 ">
-                    <div class="row col-sm-12 col-md-9 h-100 bg-white w-100 p-3 m-0 content">
+                    <div class="row col-sm-12 col-md-9 h-100 bg-white w-100 p-2 m-0 content">
                         <p class="mb-0 mt-2">Datos del Empleado</p>
                         <hr class="mb-3">
                         <div class="col-sm-4 mb-2">
@@ -79,6 +64,31 @@ use App\Atlas\config\App;
 
                         <p class="mb-0 mt-2">Datos Del Familiar</p>
                         <hr class="mb-3">
+                        <!-- <div class="contenCedula d-flex mb-3">
+                            <div class="cedu ceduact" id="cedulado">Cédulado</div>
+                            <div class="cedu " id="noCedulado">No Cédulado</div>
+                        </div> -->
+                        <div class=" d-flex justify-content-center">
+                            <!-- CHECK NO CEDULADO -->
+                            <div class="checkbox-wrapper-12 d-flex me-3">
+                                <div class="cbx ">
+                                    <input id="noCedula" class="cumplidoNormal" type="checkbox" disabled/>
+                                    <label for="noCedula"></label>
+                                    <i class="fa-sharp fa-solid fa-check fa-xs"></i>
+                                </div>
+                                <p>No Cédulado</p>
+                            </div>
+
+                            <!-- CHECK DE DISCAPACIDAD -->
+                            <div class="checkbox-wrapper-12 d-flex">
+                                <div class="cbx ">
+                                    <input id="disca" class="cumplidoNormal" type="checkbox" disabled />
+                                    <label for="disca"></label>
+                                    <i class="fa-sharp fa-solid fa-check fa-xs"></i>
+                                </div>
+                                <p>Discapacidad</p>
+                            </div>
+                        </div>
                         <div class="col-sm-6 col-md-6 mb-3">
                             <div class="form-group">
                                 <label for="primerNombre">Primer Nombre</label>
@@ -109,7 +119,7 @@ use App\Atlas\config\App;
                             </div>
                         </div>
 
-                        <div class="col-sm-6 col-md-6 mb-3">
+                        <div class="col-sm-6 col-md-6 mb-3" id="contenApellidoDos">
                             <div class="form-group">
                                 <label for="segundoApellido">Segundo Apellido</label>
                                 <div class="input-group">
@@ -119,23 +129,32 @@ use App\Atlas\config\App;
                             </div>
                         </div>
 
-                        <div class="col-sm-6 col-md-6">
+                        <div class="col-sm-6 col-md-6" id="contenCedula">
                             <div class="form-group">
                                 <label for="cedula">Cédula</label>
                                 <div class="input-group">
-                                    <span class="input-group-text span_cedula"><i class="fa-regular fa-address-card"></i></span>
-                                    <input type="text" class="form-control" id="cedula" name="cedula" placeholder="Cédula de Identidad" required disabled>
+                                    <span class="input-group-text span_cedula "><i class="fa-regular fa-address-card"></i></span>
+                                    <input type="text" class="form-control " id="cedula" name="cedula" placeholder="Cédula de Identidad" required disabled>
                                 </div>
                             </div>
-                            <p class="text-body-secondary">Este campo es opcional</p>
                         </div>
 
-                        <div class="col-sm-6 col-md-6 ">
+                        <div class="col-sm-6 col-md-6 mb-3" id="contenEdad">
                             <div class="form-group">
                                 <label for="cedula">Edad</label>
                                 <div class="input-group">
                                     <span class="input-group-text span_edad"><i class="fa-regular fa-user"></i></span>
-                                    <input type="number" class="form-control" id="edad" name="edad" placeholder="Cédula de Identidad" required disabled>
+                                    <input type="number"  class="form-control" id="edad" name="edad" placeholder="Edad Del Familiar" required disabled>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12 mb-2" id="contenDoc">
+                            <div class="form-group">
+                                <label for="correo">Partida De Nacimiento</label>
+                                <div class="input-group">
+                                    <span class="input-group-text span_docArchivo"><i class="fa-regular fa-file-zipper"></i></span>
+                                    <input type="file" class="form-control" name="docArchivo" id="achivo" aria-describedby="inputGroupFileAddon04" aria-label="Upload" required disabled>
                                 </div>
                             </div>
                         </div>
@@ -147,7 +166,7 @@ use App\Atlas\config\App;
                             <div class="form-group">
                                 <label class="required-field" for="message">Año</label>
                                 <div class="input-group">
-                                    <span class="input-group-text span_ano"><i class="fa-regular fa-calendar"></i></i></span>
+                                    <span class="input-group-text span_ano "><i class="fa-regular fa-calendar"></i></i></span>
                                     <select class="form-select form-select-md" name="ano" id="ano" required disabled></select>
                                 </div>
                             </div>

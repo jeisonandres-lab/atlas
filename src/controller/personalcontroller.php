@@ -5,7 +5,8 @@ namespace App\Atlas\controller;
 use App\Atlas\models\personalModel;
 use App\Atlas\models\dependenciasModel;
 use App\Atlas\models\estatusModel;
-use App\Atlas\controller\archivo;
+use App\Atlas\controller\fileUploaderController;
+use App\Atlas\models\tablasModel;
 
 class personalController extends personalModel
 {
@@ -14,11 +15,15 @@ class personalController extends personalModel
     private $estatus;
     private $archivo;
 
-    // public function __construct(dependenciasModel $dependencia, estatusModel $estatus) {
-    //     $this->dependencia = $dependencia;
-    //     $this->estatus = $estatus;
-    // }
+    private $fileUploader;
+    private $tablas;
 
+    public function __construct()
+    {
+        parent::__construct();
+        $this->fileUploader = new fileUploaderController(['pdf', 'jpg', 'png'], '../controller/');
+        $this->tablas = new tablasModel();
+    }
     public function registro(
         $primerNombre,
         $segundoNombre,
@@ -69,7 +74,7 @@ class personalController extends personalModel
             $data_json['error'] = true;
             $data_json['mensaje'] = "El archivo de contrato no es PDF";
             header('Content-Type: application/json');
-        echo json_encode($data_json);
+            echo json_encode($data_json);
             exit;
         }
 
@@ -77,7 +82,7 @@ class personalController extends personalModel
             $data_json['error'] = true;
             $data_json['mensaje'] = "El archivo de notación no es PDF";
             header('Content-Type: application/json');
-        echo json_encode($data_json);
+            echo json_encode($data_json);
             exit;
         }
 
@@ -213,8 +218,8 @@ class personalController extends personalModel
                                                 $extension = pathinfo($fileInfo['name'], PATHINFO_EXTENSION);
                                                 $datosArchivos = [
                                                     [
-                                                        "campo_nombre" => "idPersonal",
-                                                        "campo_marcador" => ":idPersonal",
+                                                        "campo_nombre" => "idEmpleados",
+                                                        "campo_marcador" => ":idEmpleados",
                                                         "campo_valor" => $idEmpleado
                                                     ],
                                                     [
@@ -303,9 +308,22 @@ class personalController extends personalModel
         echo json_encode($data_json);
     }
 
-    public function registrarFamilia($cedula_familiar, $primerNombre, $segundoNombre, $primerApellido, $segundoApellido, $cedula, $edad, $ano, $mes, $dia)
-    {
-        sleep(5);
+    public function registrarFamilia(
+        $cedula_familiar,
+        $primerNombre,
+        $segundoNombre,
+        $primerApellido,
+        $segundoApellido,
+        $cedula,
+        $edad,
+        $ano,
+        $mes,
+        $dia,
+        $numeroCarnet,
+        $tomo,
+        $folio
+    ) {
+        sleep(1);
         $cedula_familiar = $this->limpiarCadena($cedula_familiar);
         $primerNombre = $this->limpiarCadena($primerNombre);
         $segundoNombre = $this->limpiarCadena($segundoNombre);
@@ -316,13 +334,238 @@ class personalController extends personalModel
         $ano = $this->limpiarCadena($ano);
         $mes = $this->limpiarCadena($mes);
         $dia = $this->limpiarCadena($dia);
+        $numeroCarnet = $this->limpiarCadena($numeroCarnet);
+        $tomo = $this->limpiarCadena($tomo);
+        $folio = $this->limpiarCadena($folio);
+
+        $nombre43 = null;
+        $fileInputName = 'docArchivo';
+        $fileInputName2 = 'docArchivoDis';
+        $uploadDir1 = '../controller/';
+        $uploadDir2 = '../controller/';
+
+
+        $resultado = null;
+        $resultado2 = null;
 
         $data_json = [
             'exito' => true, // Inicializamos a false por defecto
-            'mensaje' => 'si lelgo hasta aqui',
+            'mensaje' => 'si llego hasta aqui',
+            'resultado' => 0,
+            'archivo1' => 'no hay primer archivo',
+            'archivo2' => 'no hay segundo archivo',
         ];
 
-        // $check_familiar
+        if ($cedula == "") {
+            $cedula == "No Cédulado";
+        }
+
+        $parametro = [$cedula_familiar];
+        $check_empleado = $this->getExisteEmpleado_datos($parametro);
+        if ($check_empleado) {
+            foreach ($check_empleado as $row) {
+                $id_empleado = $row['id_empleados'];
+                $parametrofamili = [$cedula, $numeroCarnet];
+                $parametrosFamilia = [
+                    [
+                        "campo_nombre" => "cedula",
+                        "campo_marcador" => ":cedula",
+                        "campo_valor" => $cedula
+                    ],
+                    [
+                        "campo_nombre" => "primerNombre",
+                        "campo_marcador" => ":primerNombre",
+                        "campo_valor" => $primerNombre
+                    ],
+                    [
+                        "campo_nombre" => "segundoNombre",
+                        "campo_marcador" => ":segundoNombre",
+                        "campo_valor" => $segundoNombre
+                    ],
+                    [
+                        "campo_nombre" => "primerApellido",
+                        "campo_marcador" => ":primerApellido",
+                        "campo_valor" => $primerApellido
+                    ],
+                    [
+                        "campo_nombre" => "segundoApellido",
+                        "campo_marcador" => ":segundoApellido",
+                        "campo_valor" => $segundoApellido
+                    ],
+                    [
+                        "campo_nombre" => "edad",
+                        "campo_marcador" => ":edad",
+                        "campo_valor" => $edad
+                    ],
+                    [
+                        "campo_nombre" => "fechaNacimiento",
+                        "campo_marcador" => ":fechaNacimiento",
+                        "campo_valor" => $ano . "/" . $mes . "/" . $dia
+                    ],
+                    [
+                        "campo_nombre" => "codigoCarnet",
+                        "campo_marcador" => ":codigoCarnet",
+                        "campo_valor" => $numeroCarnet
+                    ],
+                    [
+                        "campo_nombre" => "idEmpleado",
+                        "campo_marcador" => ":idEmpleado",
+                        "campo_valor" => $id_empleado
+                    ],
+                    [
+                        "campo_nombre" => "tomo",
+                        "campo_marcador" => ":tomo",
+                        "campo_valor" => $tomo
+                    ],
+                    [
+                        "campo_nombre" => "folio",
+                        "campo_marcador" => ":folio",
+                        "campo_valor" => $folio
+                    ],
+                    [
+                        "campo_nombre" => "fecha",
+                        "campo_marcador" => ":fecha",
+                        "campo_valor" => date("Y-m-d")
+                    ],
+                    [
+                        "campo_nombre" => "hora",
+                        "campo_marcador" => ":hora",
+                        "campo_valor" => date("H:i:s")
+                    ]
+                ];
+                $tabla = 'datosFamilia';
+                $parametro_registrar = $parametrosFamilia;
+                $check_familiar_exis = $this->getExisteFamiliar($parametrofamili);
+                if ($check_familiar_exis) {
+                    $data_json['exito'] = true;
+                    $data_json['mensaje'] = "Este familiar ya esta registrado";
+                    $data_json['resultado'] = 1;
+                } else {
+                    // Verificar si los archivos tienen nombres diferentes
+                    $nombreArchivo1 = isset($_FILES[$fileInputName]) ? $_FILES[$fileInputName]['name'] : null;
+                    $nombreArchivo2 = isset($_FILES[$fileInputName2]) ? $_FILES[$fileInputName2]['name'] : null;
+
+                    if ($nombreArchivo1 && $nombreArchivo2 && $nombreArchivo1 === $nombreArchivo2) {
+                        $data_json['exito'] = false;
+                        $data_json['mensaje'] = 'Los dos archivos no pueden tener el mismo nombre.';
+                    } else {
+                        // Crear un array con los archivos que se están subiendo
+                        $archivosASubir = [];
+                        if ($nombreArchivo1) {
+                            $archivosASubir[] = ['input' => $fileInputName, 'dir' => $uploadDir1];
+                        }
+                        if ($nombreArchivo2) {
+                            $archivosASubir[] = ['input' => $fileInputName2, 'dir' => $uploadDir2]; // Asegúrate de definir $uploadDir2
+                        }
+                        // Ejecutar el código de subida si hay archivos para subir
+                        if (!empty($archivosASubir)) {
+                            $resultados = [];
+                            foreach ($archivosASubir as $archivo) {
+                                $inputName = $archivo['input'];
+                                $resultados[$inputName] = $this->fileUploader->upload($_FILES[$inputName], $archivo['dir'], $cedula);
+                            }
+                            // Manejar los resultados
+                            $error = false;
+                            $mensajeError = 'Error al subir los archivos.';
+                            if ($nombreArchivo1 && isset($resultados[$fileInputName]['error']) && $resultados[$fileInputName]['error']) {
+                                $error = true;
+                                $mensajeError .= ' ' . $resultados[$fileInputName]['mensaje'];
+                            }
+                            if ($nombreArchivo2 && isset($resultados[$fileInputName2]['error']) && $resultados[$fileInputName2]['error']) {
+                                $error = true;
+                                $mensajeError .= ' ' . $resultados[$fileInputName2]['mensaje'];
+                            }
+
+                            if ($error) {
+                                $data_json['exito'] = false;
+                                $data_json['mensaje'] = $mensajeError;
+                            } else {
+                                if ($nombreArchivo1) {
+                                    $data_json['archivo1'] = $resultados[$fileInputName];
+                                }
+                                if ($nombreArchivo2) {
+                                    $data_json['archivo2'] = $resultados[$fileInputName2];
+                                }
+
+                                $check_familiar = $this->getRegistrarEmpleado($tabla, $parametro_registrar);
+                                if ($check_familiar) {
+                                    $parametros_doc = [];
+                                    if ($nombreArchivo1) {
+                                        $parametros_doc[] = [
+                                            [
+                                                "campo_nombre" => "idEmpleados",
+                                                "campo_marcador" => ":idEmpleados",
+                                                "campo_valor" => $id_empleado
+                                            ],
+                                            [
+                                                "campo_nombre" => "size",
+                                                "campo_marcador" => ":size",
+                                                "campo_valor" => $resultados[$fileInputName]['tamano']
+                                            ],
+                                            [
+                                                "campo_nombre" => "doc",
+                                                "campo_marcador" => ":doc",
+                                                "campo_valor" => $resultados[$fileInputName]['nombre']
+                                            ],
+                                            [
+                                                "campo_nombre" => "tipoDoc",
+                                                "campo_marcador" => ":tipoDoc",
+                                                "campo_valor" => $resultados[$fileInputName]['extension']
+                                            ]
+                                        ];
+                                    }
+
+                                    if ($nombreArchivo2) {
+                                        $parametros_doc[] = [
+                                            [
+                                                "campo_nombre" => "idEmpleados",
+                                                "campo_marcador" => ":idEmpleados",
+                                                "campo_valor" => $id_empleado
+                                            ],
+                                            [
+                                                "campo_nombre" => "size",
+                                                "campo_marcador" => ":size",
+                                                "campo_valor" => $resultados[$fileInputName2]['tamano']
+                                            ],
+                                            [
+                                                "campo_nombre" => "doc",
+                                                "campo_marcador" => ":doc",
+                                                "campo_valor" => $resultados[$fileInputName2]['nombre']
+                                            ],
+                                            [
+                                                "campo_nombre" => "tipoDoc",
+                                                "campo_marcador" => ":tipoDoc",
+                                                "campo_valor" => $resultados[$fileInputName2]['extension']
+                                            ]
+                                        ];
+                                    }
+                                    $tabla = 'documentacion';
+                                    // Guardar los datos en la base de datos
+                                    foreach ($parametros_doc as $datos) {
+                                        $jo = $this->getRegistrarDOCS($tabla, $datos);
+                                    }
+                                    $data_json['exito'] = true;
+                                    $data_json['mensaje'] = "Familiar Registrado Exitosamente.";
+                                    $data_json['resultado'] = 2;
+                                } else {
+                                    $data_json['exito'] = false;
+                                    $data_json['mensaje'] = "No se logro registrar el familiar";
+                                    $data_json['resultado'] = 3;
+                                }
+                            }
+                        } else {
+                            $data_json['exito'] = true;
+                            $data_json['mensaje'] = "Debe subir al menos un archivo";
+                            $data_json['resultado'] = 3;
+                        }
+                    }
+                }
+            }
+        } else {
+            // $data_json['exito'] = true;
+            // $data_json['mensaje'] = $parametro;
+        }
+
 
         header('Content-Type: application/json');
         echo json_encode($data_json);
@@ -430,4 +673,77 @@ class personalController extends personalModel
         $departamentoPersonal = $this->objetoDependencia();
         return $departamentoPersonal->getDatosDepartamentos();
     }
+
+    public function obtenerTodoPersonal()
+{
+    $data_json = []; // Array de datos para enviar
+    $tabla = 'datosempleados e
+              INNER JOIN datospersonales d ON e.idPersonal = d.id_personal
+              INNER JOIN estatus es ON e.idEstatus = es.id_estatus
+              INNER JOIN cargo ca ON e.idCargo = ca.id_cargo
+              INNER JOIN dependencia depe ON e.idDependencia = depe.id_dependencia
+              INNER JOIN departamento depa ON e.idDepartamento = depa.id_departamento'; // Tabla a consultar
+    $selectoresCantidad = 'COUNT(e.idPersonal) as cantidad'; // Selector para contar la cantidad de registros de la tabla
+    $datosBuscar = [
+        'e.idPersonal',
+        'd.primerNombre',
+        'd.segundoNombre',
+        'd.primerApellido',
+        'd.segundoApellido',
+        'd.cedula',
+        'es.estatus',
+        'ca.cargo',
+        'depe.dependencia',
+        'depa.departamento'
+    ]; // Array de selectores para buscar en la tabla
+    $campoOrden = 'e.idPersonal'; // Campo por el cual se ordenará la tabla
+    $selectores = 'e.idPersonal, d.primerNombre, d.segundoNombre, d.primerApellido, d.segundoApellido, d.cedula, es.estatus, ca.cargo, depe.dependencia, depa.departamento'; // Selectores para obtener los datos de la tabla
+
+    $draw = $_REQUEST['draw'];
+    $start = $_REQUEST['start'];
+    $length = $_REQUEST['length'];
+    $searchValue = $_REQUEST['search']['value'];
+
+    // Obtener la cantidad de los datos de la tabla
+    $cantidadRegistro = $this->tablas->getCantidadRegistros($tabla, $selectoresCantidad);
+    // Obtener los datos de la tabla
+    $personal = $this->tablas->getTodoDatosPersonal($selectores, $tabla, $start, $length, $searchValue, $datosBuscar, $campoOrden);
+    // Recorrer datos de la tabla
+    foreach ($personal as $row) {
+        $data_json['exito'] = true;
+        $parametro = [$row['idPersonal']];
+        $validarFamiliar = $this->getExisteEmpleadoFamiliar($parametro);
+        $botones = "
+            <div class='btn-group' role='group' aria-label='Basic example'>
+                <button class='btn btn-primary btn-sm' data-bs-toggle='modal' data-bs-target='#exampleModal' onclick='editarPersonal(" . $row['idPersonal'] . ")'>Editar</button>
+                <button class='btn btn-danger btn-sm' onclick='eliminarPersonal(" . $row['idPersonal'] . ")'>Eliminar</button>
+        ";
+
+        if ($validarFamiliar) {
+            $botones .= "<button class='btn btn-warning btn-sm' onclick='personalFamiliar(" . $row['idPersonal'] . ")'>Familiar</button>";
+        }
+
+        $botones .= "</div>";
+        $data_json['data'][] = [
+            '0' => $row['primerNombre'] . " " . $row['primerApellido'],
+            '1' => $row['estatus'],
+            '2' => $row['cargo'],
+            '3' => $row['dependencia'],
+            '4' => $row['departamento'],
+            '5' => $row['cedula'],
+            '6' => $botones,
+        ];
+        $data_json['mensaje'] = "todas las personas exitoso";
+    }
+
+    // Devolver la respuesta a DataTables
+    $response = array(
+        "draw" => intval($draw),
+        "recordsTotal" => $cantidadRegistro[0]['cantidad'],
+        "recordsFiltered" => $cantidadRegistro[0]['cantidad'],
+        "data" => $data_json['data']
+    );
+    header('Content-Type: application/json');
+    echo json_encode($response);
+}
 }

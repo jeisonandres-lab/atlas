@@ -1,0 +1,103 @@
+.mitable{
+    padding: 0px 0px 10px 0px !important;
+}
+.contenTable{
+ border-radius: 0rem !important;
+ border-radius: 0px 0px 5px 5px !important;
+}
+main::-webkit-scrollbar {
+    display: none;
+  }
+  
+  body::-webkit-scrollbar {
+    display: none;
+  }
+/* parte superior de la tabla */
+table thead tr th{
+    
+    background-color:  #337ab7 !important;
+    color: white !important;
+}
+
+table.dataTable thead>tr>th.dt-orderable-desc span.dt-column-order:after, table.dataTable thead>tr>th.dt-ordering-desc span.dt-column-order:after, table.dataTable thead>tr>td.dt-orderable-desc span.dt-column-order:after, table.dataTable thead>tr>td.dt-ordering-desc span.dt-column-order:after{
+    content: "↓" !important;
+    right: 80px !important;
+    top: 16px !important;
+    margin-left: 4px !important;
+    transform: rotate(180deg) !important;
+}
+table.dataTable thead>tr>th.dt-orderable-asc span.dt-column-order:before, table.dataTable thead>tr>th.dt-ordering-asc span.dt-column-order:before, table.dataTable thead>tr>td.dt-orderable-asc span.dt-column-order:before, table.dataTable thead>tr>td.dt-ordering-asc span.dt-column-order:before {
+    content: "↓" !important;
+    top: 13px !important;
+    margin-left: 4px !important;
+}
+
+/* parte inferior de la tabla */
+
+table tfoot tr th{
+    
+    color: rgb(225, 225, 225) !important;
+}
+
+/* Boton switch */
+.togglewrapper {
+    overflow: hidden;
+  }
+  
+  .togglewrapper input{
+    position:absolute;
+    left: -99em;
+  }
+  
+  .toggle {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    width: 176px;
+    height: 35px;
+    background-color: #337ab7;
+    border-radius: 5px;
+    transition: all 200ms cubic-bezier(0.445, 0.05, 0.55, 0.95);
+  }
+  .toggle:before, .toggle:after {
+    position: absolute;
+    line-height: 37px;
+    font-size: 14px;
+    z-index: 2;
+    transition: all 200ms cubic-bezier(0.445, 0.05, 0.55, 0.95);
+  }
+  .toggle:before {
+    content: "Personal";
+    color: #337ab7;
+    left: 20px;
+  }
+  .toggle:after {
+    content: "Familiar";
+    color: #fff;
+    right: 20px;
+  }
+  .toggle_handler {
+    display: inline-block;
+    z-index: 1;
+    position: relative;
+    top: 3px;
+    left: 3px;
+    width: 89px;
+    height: 29px;
+    background-color: #fff;
+    border-radius: 3px;
+    transition: all 200ms cubic-bezier(0.445, 0.05, 0.55, 0.95);
+    transform: translate(0px);
+  }
+
+  input:checked + .toggle:before {
+    color: #fff;
+  }
+  input:checked + .toggle:after {
+    color: #337ab7;
+  }
+  input:checked + .toggle .toggle_handler {
+    width: 84px;
+    transform: translateX(84px);
+    border-color: #fff;
+  }

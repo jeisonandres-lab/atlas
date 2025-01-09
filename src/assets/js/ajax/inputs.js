@@ -220,12 +220,17 @@ export function liberarInputs(input, cumplidospan, valor) {
   }
 }
 
-export function limpiarFormulario(idFormulario, excluir) {
-  $(idFormulario).find('*').not(excluir).each(function () {
-    $(this).removeClass('cumplido error_span error_input cumplido_span');
-    if ($(this).is('input[type="text"], input[type="email"], input[type="password"], textarea, select')) {
-      $(this).val('');
-    }
-  });
+export function limpiarFormulario(idinput, span) {
+  if ($(idinput).attr('type') === 'checkbox') {
+    return;
+  }
+  
+  $(idinput).val("");
+  $(idinput).removeClass("cumplido");
+  $(idinput).addClass("error_input");
+  
+  if (span) {
+    $(span).removeClass("cumplido_span");
+    $(span).addClass("error_span");    
+  }
 }
-

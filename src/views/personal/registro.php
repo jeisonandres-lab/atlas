@@ -9,10 +9,8 @@ use App\Atlas\config\App;
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro | ATLAS</title>
-    <?php require_once App::URL_INC . "icons.php"; ?>
+    <?php require_once App::URL_INC . "total_css.php"; ?>
     <link rel="stylesheet" href="<?php echo App::URL_CSS . "registroPersonal.css"; ?>">
-    <link rel="stylesheet" href="./src/libs/select2/select2.min.css">
-    <link rel="stylesheet" href="./src/libs/animate/animate.min.css">
 </head>
 
 <body class="layout-fixed sidebar-expand-lg bg-body-tertiary">
@@ -49,25 +47,11 @@ use App\Atlas\config\App;
                 <img src="<?php echo App::URL_IMG . "top-header.png"; ?>" alt="" class="w-100 h-100" style="object-fit: cover; object-position:center;">
             </div>
             <!-- SUB MENU DEL MODULO -->
-            <div class="card text-center me-3 ms-3 mb-3 contentSubMenu " style="box-shadow: none;">
-                <div class="card-header ">
-                    <ul class="nav nav-tabs card-header-tabs" id="list_sub_menu">
-                        <li class="nav-item">
-                            <a class="nav-link" aria-current="true" id="personal" href="./personal">Personal</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" aria-current="true" id="familiares" href="./familiares">Familiares</a>
-                        </li>
-                        <li class="nav-item">
-                        <a class="nav-link " aria-current="true" id="registrosFamiliares" href="./registrosFamiliares">Registros</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+            <?php require_once App::URL_INC. "menu_registro.php"?>
             <!-- FORMULARIO DE ENVIOS DE DATOS DEL PERSONAL -->
             <form action="#" class="row animate__animated animate__slideInUp contact-form form-validate d-flex justify-content-center" novalidate="novalidate" id="formulario_registro">
                 <div class="col-sm-12 col-md-7 col-lg-7 col-xl-7 col-xxl-8">
-                    <div class="row col-sm-12 col-md-7  h-100  bg-white content w-100 p-3">
+                    <div class="row col-sm-12 col-md-7  h-100  bg-white content w-100 p-2">
                         <p class="mb-0 mt-2">Datos del Personal</p>
                         <hr class="mb-2">
                         <div class="col-sm-6 col-md-6 mb-2">
