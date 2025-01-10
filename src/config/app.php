@@ -4,6 +4,7 @@ namespace App\Atlas\config;
 
 class App
 {
+    // Rutas De Archivos
     public const APP_URL = "http://localhost/atlas/";
     public const URL_NODE = "./node_modules/";
     public const URL_INC = "./src/views/inc/";
@@ -14,6 +15,14 @@ class App
     public const URL_ICONS = "./src/assets/img/icons/";
     public const URL_FOTOS = "./src/assets/photos/";
     public const APP_NAME = "ATLAS";
+
+    // Rutas De Carpetas Y Archivos De Personal
+    public const URL_PARTIDANACIMIENTO = "../global/archives/personal/familiares/partidasNacimiento/";
+    public const URL_PARTIDADEISCAPACIDAD = "../global/archives/personal/familiares/partidasDiscapacidad/";
+    public const URL_CURRICULUMS = "../global/archives/curriculums/";
+    public const URL_FOTOS_PERSONAL = "../global/archives/photos/";
+    public const URL_CONTRATOS = "../global/archives/contratos/";
+    public const URL_NOTACION = "../global/archives/notacion/";
 
     public static function zonaHoraria()
     {

@@ -73,6 +73,28 @@ class fileUploaderController
         }
     }
 
+    public function archivoExiste($file, $uploadDir = null, $cedula) {
+        if (!isset($file)) {
+            return ['error' => true, 'mensaje' => 'No se ha subido ningún archivo'];
+        }
+
+        $extension = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
+
+        if (!in_array($extension, $this->allowedExtensions)) {
+            return ['error' => true, 'mensaje' => "El archivo no es de un tipo permitido"];
+        }
+
+        // Usar la ruta de destino proporcionada o la ruta por defecto
+        $uploadDir = $uploadDir ?? $this->defaultUploadDir;
+        $fileName = preg_replace('/\s+/', '_', pathinfo($file['name'], PATHINFO_FILENAME)) . '-' . $cedula . '.' . $extension;
+        $destination = $uploadDir . $fileName;
+        if (file_exists($destination)) {
+            return ['error' => true, 'mensaje' => 'El archivo ya existe o tiene el mismo nombre que otro archivo'];
+        } else {
+            return ['error' => false, 'mensaje' => 'El archivo no existe y puede ser subido'];
+        }
+    }
+
     private function formatSizeUnits($bytes)
     {
         if ($bytes >= 1073741824) {
@@ -124,4 +146,117 @@ class fileUploaderController
         }
         return $codigo;
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /**
+     * Obtiene el nombre del archivo y su extensión.
+     *
+     * @param array $file Información del archivo subido.
+     * @param string $cedula Identificador único para el archivo.
+     * @return array Nombre del archivo y su extensión.
+     */
+    public function obtenerNombreArchivo($file, $cedula) {
+        $extension = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
+        $fileName = preg_replace('/\s+/', '_', pathinfo($file['name'], PATHINFO_FILENAME)) . '-' . $cedula . '.' . $extension;
+        return ['nombre' => $fileName, 'extension' => $extension];
+    }
+
+    /**
+     * Verifica si un archivo ya existe en el directorio.
+     *
+     * @param string $destination Ruta completa del archivo a verificar.
+     * @return array Resultado de la verificación.
+     */
+    public function archivoExiste2($destination) {
+        if (file_exists($destination)) {
+            return ['error' => true, 'mensaje' => 'El archivo ya existe o tiene el mismo nombre que otro archivo'];
+        } else {
+            return ['error' => false, 'mensaje' => 'El archivo no existe y puede ser subido'];
+        }
+    }
+
+    /**
+     * Mueve el archivo subido al directorio de destino.
+     *
+     * @param array $file Información del archivo subido.
+     * @param string $destination Ruta completa del archivo de destino.
+     * @param string $extension Extensión del archivo.
+     * @return array Resultado de la operación de subida.
+     */
+    public function moverArchivo($file, $destination, $extension) {
+        if (move_uploaded_file($file['tmp_name'], $destination)) {
+            return [
+                'error' => false,
+                'mensaje' => 'Archivo subido con éxito',
+                'ruta' => $destination,
+                'nombre' => $file['name'],
+                'extension' => $extension,
+                'tamano' => $this->formatSizeUnits($file['size']), // Añadir el tamaño del archivo con formato legible
+                'codigo' => $this->generarCodigoAleatorio(6)
+            ];
+        } else {
+            return ['error' => true, 'mensaje' => 'Error al mover el archivo'];
+        }
+    }
+
+    /**
+     * Función principal para manejar la subida de archivos.
+     *
+     * @param array $file Información del archivo subido.
+     * @param string $cedula Identificador único para el archivo.
+     * @param string|null $uploadDir Directorio de subida (opcional).
+     * @return array Resultado de la operación de subida.
+     */
+    public function subirArchivo($file, $cedula, $uploadDir = null) {
+        if (!isset($file)) {
+            return ['error' => true, 'mensaje' => 'No se ha subido ningún archivo'];
+        }
+
+        $extension = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
+
+        if (!in_array($extension, $this->allowedExtensions)) {
+            return ['error' => true, 'mensaje' => "El archivo no es de un tipo permitido"];
+        }
+
+        // Usar la ruta de destino proporcionada o la ruta por defecto
+        $uploadDir = $uploadDir ?? $this->defaultUploadDir;
+
+        // Crear el directorio si no existe
+        if (!is_dir($uploadDir)) {
+            mkdir($uploadDir, 0777, true);
+        }
+
+        // Obtener el nombre del archivo
+        $fileInfo = $this->obtenerNombreArchivo($file, $cedula);
+        $fileName = $fileInfo['nombre'];
+        $extension = $fileInfo['extension'];
+        $destination = $uploadDir . $fileName;
+
+        // Validar si el archivo ya existe
+        $verificacion = $this->archivoExiste2($destination);
+        if ($verificacion['error']) {
+            return $verificacion;
+        }
+
+        // Mover el archivo y regresar el resultado
+        return $this->moverArchivo($file, $destination, $extension);
+    }
+
+    // Otras funciones como formatSizeUnits y generarCodigoAleatorio
+
+
 }

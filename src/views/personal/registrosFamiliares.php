@@ -66,6 +66,42 @@ use App\Atlas\config\App;
         </main>
         <?php require_once App::URL_INC . "/footer.php"; ?>
     </div>
+
+
+
+    <!-- Modal Familiar-->
+    <div class="modal  fade modal-xl" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <table id="myTable2" class="mitable table table-striped table-bordered table-hover nowrap display">
+                        <thead>
+                            <tr>
+                                <th scope="col">Cédula</th>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Estatus</th>
+                                <th scope="col">Dependencia</th>
+                                <th scope="col">Cargo</th>
+                                <th scope="col">Departamento</th>
+                                <th scope="col">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <?php require_once App::URL_INC . "/scrips.php"; ?>
     <?php require_once App::URL_INC . "/tablets.php"; ?>
 

@@ -123,7 +123,7 @@ export function valdiarCorreos(input, cumplidospan) {
 export function validarBusquedaCedula(input, divContens) {
   $(input).on("input", function () {
     const cedula = $(this).val();
-    const imageUrl = `src/assets/photos/${cedula}.png`;
+    const imageUrl = `./src/global/archives/photos/${cedula}.png`;
 
     // Creamos una nueva imagen y la agregamos a cada div
     const img = new Image();
