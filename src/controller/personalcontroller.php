@@ -9,6 +9,8 @@ use App\Atlas\controller\fileUploaderController;
 use App\Atlas\models\tablasModel;
 use App\Atlas\config\App;
 
+date_default_timezone_set("America/Caracas");
+
 class personalController extends personalModel
 {
 
@@ -416,15 +418,23 @@ class personalController extends personalModel
         ];
 
         if ($cedula == "") {
-            $cedula == "No Cédulado";
+            $cedula = "No Cédulado";
         }
 
+        if ($fileInputName == "") {
+            $fileInputNameficha = null;
+        }
+
+        if ($fileInputName2 == "") {
+            $fileInputName2_ficha = null;
+        }
         $parametro = [$cedula_familiar];
         $check_empleado = $this->getExisteEmpleado_datos($parametro);
         if ($check_empleado) {
             foreach ($check_empleado as $row) {
                 $id_empleado = $row['id_empleados'];
-                $parametrofamili = [$cedula, $numeroCarnet];
+                $id_nino = $check_empleado;
+                $parametrofamili = [$cedula, $numeroCarnet, $tomo, $folio];
                 $parametrosFamilia = [
                     [
                         "campo_nombre" => "cedula",
@@ -519,26 +529,37 @@ class personalController extends personalModel
                         // Ejecutar el código de subida si hay archivos para subir
                         if (!empty($archivosASubir)) {
                             $resultados = [];
+                            $existeArchivo = false;
+                            // Verificar si alguno de los archivos ya existe
                             foreach ($archivosASubir as $archivo) {
                                 $inputName = $archivo['input'];
-                                $resultados[$inputName] = $this->fileUploader->upload($_FILES[$inputName], $archivo['dir'], $cedula);
-                            }
-                            // Manejar los resultados
-                            $error = false;
-                            $mensajeError = 'Error al subir los archivos.';
-                            if ($nombreArchivo1 && isset($resultados[$fileInputName]['error']) && $resultados[$fileInputName]['error']) {
-                                $error = true;
-                                $mensajeError .= ' ' . $resultados[$fileInputName]['mensaje'];
-                            }
-                            if ($nombreArchivo2 && isset($resultados[$fileInputName2]['error']) && $resultados[$fileInputName2]['error']) {
-                                $error = true;
-                                $mensajeError .= ' ' . $resultados[$fileInputName2]['mensaje'];
+                                $nombreArchivos[$inputName] = $this->fileUploader->obtenerNombreArchivo($_FILES[$inputName], $cedula);
+                                $direccion = $archivo['dir'] . $nombreArchivos[$inputName]['nombre'];
+                                $existeArchivoCheck = $this->fileUploader->archivoExiste2($direccion);
+                                if ($existeArchivoCheck['error']) {
+                                    $existeArchivo = true;
+                                    $data_json['mensaje'] = $existeArchivoCheck['mensaje'];
+                                    break;
+                                }
                             }
 
-                            if ($error) {
+                            // Si alguno de los archivos ya existe, no subir ninguno
+                            if ($existeArchivo) {
                                 $data_json['exito'] = false;
-                                $data_json['mensaje'] = $mensajeError;
+                                $data_json['resultado'] = 3;
                             } else {
+                                // Si ninguno de los archivos existe, proceder con la subida
+                                foreach ($archivosASubir as $archivo) {
+                                    $inputName = $archivo['input'];
+                                    $direccion = $archivo['dir'] . $nombreArchivos[$inputName]['nombre'];
+                                    $resultados[$inputName] = $this->fileUploader->subirArchivo($_FILES[$inputName], $cedula, $archivo['dir'], $id_empleado);
+                                    if ($resultados[$inputName]['error']) {
+                                        $data_json['mensaje'] = $resultados[$inputName]['mensaje'];
+                                        $data_json['resultado'] = 3;
+                                        break;
+                                    }
+                                }
+
                                 if ($nombreArchivo1) {
                                     $data_json['archivo1'] = $resultados[$fileInputName];
                                 }
@@ -548,101 +569,28 @@ class personalController extends personalModel
 
                                 $check_familiar = $this->getRegistrarEmpleado($tabla, $parametro_registrar);
                                 if ($check_familiar) {
-                                    $parametros_doc = [];
-                                    if ($nombreArchivo1) {
-                                        $parametros_doc[] = [
-                                            [
-                                                "campo_nombre" => "idEmpleados",
-                                                "campo_marcador" => ":idEmpleados",
-                                                "campo_valor" => $id_empleado
-                                            ],
-                                            [
-                                                "campo_nombre" => "size",
-                                                "campo_marcador" => ":size",
-                                                "campo_valor" => $resultados[$fileInputName]['tamano']
-                                            ],
-                                            [
-                                                "campo_nombre" => "doc",
-                                                "campo_marcador" => ":doc",
-                                                "campo_valor" => $resultados[$fileInputName]['nombre']
-                                            ],
-                                            [
-                                                "campo_nombre" => "tipoDoc",
-                                                "campo_marcador" => ":tipoDoc",
-                                                "campo_valor" => $resultados[$fileInputName]['extension']
-                                            ],
-                                            [
-                                                "campo_nombre" => "fecha",
-                                                "campo_marcador" => ":fecha",
-                                                "campo_valor" => date("Y-m-d")
-                                            ],
-                                            [
-                                                "campo_nombre" => "hora",
-                                                "campo_marcador" => ":hora",
-                                                "campo_valor" => date("H:i:s")
-                                            ]
-                                        ];
-                                    }
-
-                                    if ($nombreArchivo2) {
-                                        $parametros_doc[] = [
-                                            [
-                                                "campo_nombre" => "idEmpleados",
-                                                "campo_marcador" => ":idEmpleados",
-                                                "campo_valor" => $id_empleado
-                                            ],
-                                            [
-                                                "campo_nombre" => "size",
-                                                "campo_marcador" => ":size",
-                                                "campo_valor" => $resultados[$fileInputName2]['tamano']
-                                            ],
-                                            [
-                                                "campo_nombre" => "doc",
-                                                "campo_marcador" => ":doc",
-                                                "campo_valor" => $resultados[$fileInputName2]['nombre']
-                                            ],
-                                            [
-                                                "campo_nombre" => "tipoDoc",
-                                                "campo_marcador" => ":tipoDoc",
-                                                "campo_valor" => $resultados[$fileInputName2]['extension']
-                                            ],
-                                            [
-                                                "campo_nombre" => "fecha",
-                                                "campo_marcador" => ":fecha",
-                                                "campo_valor" => date("Y-m-d")
-                                            ],
-                                            [
-                                                "campo_nombre" => "hora",
-                                                "campo_marcador" => ":hora",
-                                                "campo_valor" => date("H:i:s")
-                                            ]
-                                        ];
-                                    }
-                                    $tabla = 'documentacion';
-                                    // Guardar los datos en la base de datos
-                                    foreach ($parametros_doc as $datos) {
-                                        $jo = $this->getRegistrarDOCS($tabla, $datos);
-                                    }
                                     $data_json['exito'] = true;
                                     $data_json['mensaje'] = "Familiar Registrado Exitosamente.";
+                                    $data_json['datosN'] = $id_nino;
+                                    $data_json['prueba'] = $parametrofamili;
                                     $data_json['resultado'] = 2;
                                 } else {
                                     $data_json['exito'] = false;
-                                    $data_json['mensaje'] = "No se logro registrar el familiar";
-                                    $data_json['resultado'] = 3;
+                                    $data_json['mensaje'] = "Los documentos fueron cargados exitosamente, pero no el familiar.";
+                                    $data_json['resultado'] = 1;
                                 }
                             }
                         } else {
                             $data_json['exito'] = true;
-                            $data_json['mensaje'] = "Debe subir al menos un archivo";
+                            $data_json['mensaje'] = "Debe subir al menos un archivo.";
                             $data_json['resultado'] = 3;
                         }
                     }
                 }
             }
         } else {
-            // $data_json['exito'] = true;
-            // $data_json['mensaje'] = $parametro;
+            $data_json['exito'] = true;
+            $data_json['mensaje'] = 'No existe el empleado al que intentas asignar el familiar.';
         }
 
 
@@ -698,14 +646,23 @@ class personalController extends personalModel
     public function obtenerDepartamento()
     {
         $departamento = $this->getDepartamentosPersonales();
-        foreach ($departamento as $row) {
+        $data_json = [
+            'exito' => false,
+            'data' => [],
+            'mensaje' => 'No se encontraron departamentos'
+        ];
+
+        if (!empty($departamento)) {
             $data_json['exito'] = true;
-            $data_json['data'][] = [
-                'iddepartamento' => $row['id_departamento'],
-                'departamento' => $row['departamento']
-            ];
-            $data_json['mensaje'] = "todas las departamento exitoso";
+            $data_json['mensaje'] = 'Todos los departamentos obtenidos exitosamente';
+            foreach ($departamento as $row) {
+                $data_json['data'][]= [
+                    'iddepartamento' => $row['id_departamento'],
+                    'departamento' => $row['departamento']
+                ];
+            }
         }
+
         header('Content-Type: application/json');
         echo json_encode($data_json);
     }
@@ -713,23 +670,13 @@ class personalController extends personalModel
     public function objetoDependencia()
     {
         return $this->dependencia = new dependenciasModel();
+
     }
 
     public function objetoEstatus()
     {
         return $this->estatus = new estatusModel();
     }
-
-    // public function objetoArchivo()
-    // {
-    //     return $this->archivo = new archivo();
-    // }
-
-    // public function getArchivoDatos()
-    // {
-    //     $datosArch = $this->objetoArchivo();
-    //     return $datosArch->datosArchivos();
-    // }
 
     protected function getEstatusPersonales()
     {
@@ -755,7 +702,7 @@ class personalController extends personalModel
 
     public function obtenerTodoPersonal()
     {
-        $data_json = []; // Array de datos para enviar
+        $data_json['data']=[]; // Array de datos para enviar
         $tabla = 'datosempleados e
               INNER JOIN datospersonales d ON e.idPersonal = d.id_personal
               INNER JOIN estatus es ON e.idEstatus = es.id_estatus
@@ -763,20 +710,11 @@ class personalController extends personalModel
               INNER JOIN dependencia depe ON e.idDependencia = depe.id_dependencia
               INNER JOIN departamento depa ON e.idDepartamento = depa.id_departamento'; // Tabla a consultar
         $selectoresCantidad = 'COUNT(e.idPersonal) as cantidad'; // Selector para contar la cantidad de registros de la tabla
-        $datosBuscar = [
-            'e.idPersonal',
-            'd.primerNombre',
-            'd.segundoNombre',
-            'd.primerApellido',
-            'd.segundoApellido',
-            'd.cedula',
-            'es.estatus',
-            'ca.cargo',
-            'depe.dependencia',
-            'depa.departamento'
-        ]; // Array de selectores para buscar en la tabla
+        $datosBuscar = ['depe.dependencia', 'd.primerNombre', 'd.cedula']; // Array de selectores para buscar en la tabla
         $campoOrden = 'e.idPersonal'; // Campo por el cual se ordenará la tabla
         $selectores = 'e.id_empleados, e.idPersonal, d.primerNombre, d.segundoNombre, d.primerApellido, d.segundoApellido, d.cedula, es.estatus, ca.cargo, depe.dependencia, depa.departamento'; // Selectores para obtener los datos de la tabla
+        $conditions = ['activo = ?'];
+        $conditionParams = ['1'];
 
         $draw = $_REQUEST['draw'];
         $start = $_REQUEST['start'];
@@ -784,26 +722,26 @@ class personalController extends personalModel
         $searchValue = $_REQUEST['search']['value'];
 
         // Obtener la cantidad de los datos de la tabla
-        $cantidadRegistro = $this->tablas->getCantidadRegistros($tabla, $selectoresCantidad);
+        $cantidadRegistro = $this->tablas->getCantidadRegistros($tabla, $selectoresCantidad, $conditions, $conditionParams);
         // Obtener los datos de la tabla
-        $personal = $this->tablas->getTodoDatosPersonal($selectores, $tabla, $start, $length, $searchValue, $datosBuscar, $campoOrden);
+        $personal = $this->tablas->getTodoDatosPersonal($selectores, $tabla, $start, $length, $searchValue, $datosBuscar, $campoOrden, $conditions, $conditionParams);
         // Recorrer datos de la tabla
         foreach ($personal as $row) {
             $data_json['exito'] = true;
             $parametro = [$row['id_empleados']];
             $validarFamiliar = $this->getExisteEmpleadoFamiliar($parametro);
             $botones = "
-            <div class='btn-group' role='group' aria-label='Basic example'>
-                <button class='btn btn-primary btn-sm' data-bs-toggle='modal' data-bs-target='#exampleModal' onclick='editarPersonal(" . $row['id_empleados'] . ")'>Editar</button>
-                <button class='btn btn-danger btn-sm' onclick='eliminarPersonal(" . $row['id_empleados'] . ")'>Eliminar</button>
+
+                <button class='btn btn-primary btn-sm btn-hover-azul btnEditar' data-bs-toggle='modal' data-bs-target='#editarDatos' data-id=" . $row['id_empleados'] . "><i class='fa-solid fa-pencil fa-sm me-2'></i>Editar</button>
+                <button class='btn btn-danger btn-sm btn-hover-rojo btnEliminar' data-swal-toast-template='#my-template' data-id=" . $row['id_empleados'] . "><i class='fa-solid fa-trash fa-sm me-2'></i>Eliminar</button>
         ";
 
             if ($validarFamiliar) {
-                $botones .= "<button class='btn btn-warning btn-sm btn-familiar' data-id=" . $row['id_empleados'] . ">Familiar</button>";
+                $botones .= "<button class='btn btn-warning btn-sm btn-familiar btn-hover-amarillo' data-swal-toast-template='#my-template' data-id=" . $row['id_empleados'] . "><i class='fa-duotone fa-solid fa-people-group fa-sm me-2'></i>Familiar</button>";
             }
 
 
-            $botones .= "</div>";
+
             $data_json['data'][] = [
                 '0' => $row['primerNombre'] . " " . $row['primerApellido'],
                 '1' => $row['estatus'],
@@ -825,5 +763,123 @@ class personalController extends personalModel
         );
         header('Content-Type: application/json');
         echo json_encode($response);
+    }
+
+    public function obtenerFamiliar($idEmpleado)
+    {
+        $data_json['data']=[];// Array de datos para enviar
+        $tabla = 'datosfamilia '; // Tabla a consultar
+        $selectoresCantidad = 'COUNT(id_ninos) as cantidad'; // Selector para contar la cantidad de registros de la tabla
+        $datosBuscar = []; // Array de selectores para buscar en la tabla
+        $campoOrden = 'id_ninos'; // Campo por el cual se ordenará la tabla
+        $selectores = '*'; // Selectores para obtener los datos de la tabla
+        $conditions = ["idEmpleado = ?"];
+        $conditionParams = [$idEmpleado];
+
+        $draw = $_REQUEST['draw'];
+        $start = $_REQUEST['start'];
+        $length = $_REQUEST['length'];
+        $searchValue = $_REQUEST['search']['value'];
+
+        // Obtener la cantidad de los datos de la tabla
+        $cantidadRegistro = $this->tablas->getCantidadRegistros($tabla, $selectoresCantidad, $conditions, $conditionParams);
+        // Obtener los datos de la tabla
+        $personal = $this->tablas->getTodoDatosPersonal($selectores, $tabla, $start, $length, $searchValue, $datosBuscar, $campoOrden, $conditions, $conditionParams);
+        // Recorrer datos de la tabla
+        foreach ($personal as $row) {
+            $data_json['exito'] = true;
+            $parametro = [$row['id_ninos']];
+            $parametro2 = $row['idEmpleado'];
+            $parametro3 = $row['id_ninos'];
+            $tabla2 = 'documentacion'; // Tabla a consultar
+            $campoOrden2 = 'idNinos'; // Campo por el cual se ordenará la tabla
+            $selectores2 = '*'; // Selectores para obtener los datos de la tabla
+            $conditions2 = ["idEmpleados = ?", "idNinos = ?"];
+            $conditionParams2 = [$parametro2, $parametro3];
+
+            $validarDocumentos = $this->tablas->tablas($selectores2, $tabla2, $campoOrden2, $conditions2, $conditionParams2);
+            $validarFamiliar = $this->getExisteEmpleadoFamiliar($parametro);
+            $botones = "
+                <button class='btn btn-primary btn-sm btn-hover-azul' data-bs-toggle='modal' data-bs-target='#exampleModal' onclick='editarPersonal(" . $row['id_ninos'] . ")'>Editar</button>
+                <button class='btn btn-danger btn-sm btn-hover-rojo' onclick='eliminarPersonal(" . $row['id_ninos'] . ")'>Eliminar</button>
+            ";
+
+            $botonDoc = "<div class='btn-group' role='group' aria-label='Basic example'>";
+            $documentosEncontrados = false; // Variable para verificar si se encontraron documentos
+
+            // Generar un botón por cada archivo encontrado
+            foreach ($validarDocumentos as $documento) {
+                $documentosEncontrados = true; // Se encontró al menos un documento
+                $tipodoc = $documento['tipoDoc'];
+                if ($tipodoc == 'pdf') {
+                    $botonDoc .= "<button class='btn btn-danger btn-sm botondocumet btn-hover' data-doc='" . $documento['doc'] . "'><i class='fa-solid fa-file-pdf fa-sm'></i> " . $documento['tipoDoc'] . "</button>";
+                } elseif ($tipodoc == 'png') {
+                    $botonDoc .= "<button class='btn btn-success btn-sm botondocumet btn-hover' data-doc='" . $documento['doc'] . "'><i class='fa-solid fa-file-image fa-sm me-1'></i>" . $documento['tipoDoc'] . "</button>";
+                }
+            }
+
+            // Si no se encontraron documentos, agregar el mensaje "Sin documentos"
+            if (!$documentosEncontrados) {
+                $botonDoc .= "<span>Sin documentos</span>";
+            }
+
+            $botonDoc .= "</div>";
+            $data_json['data'][] = [
+                '0' => $row['primerNombre'] . " " . $row['primerApellido'],
+                '1' => $row['cedula'],
+                '2' => $row['codigoCarnet'],
+                '3' => $row['edad'],
+                '4' => $row['tomo'],
+                '5' => $row['folio'],
+                '6' => $botones,
+                '7' => $botonDoc,
+            ];
+            $data_json['mensaje'] = "todas las personas exitoso";
+        }
+
+        // Devolver la respuesta a DataTables
+        $response = array(
+            "draw" => intval($draw),
+            "recordsTotal" => $cantidadRegistro[0]['cantidad'],
+            "recordsFiltered" => $cantidadRegistro[0]['cantidad'],
+            "data" => $data_json['data']
+        );
+        header('Content-Type: application/json');
+        echo json_encode($response);
+    }
+
+    public function eliminarPersonal($idPersonal)
+    {
+        $idPersonal = $this->limpiarCadena($idPersonal);
+        $parametro = [
+            [
+                "campo_nombre" => "activo",
+                "campo_marcador" => ":activo",
+                "campo_valor" => '0'
+            ]
+        ];
+
+        // Asegúrate de que el marcador de parámetro coincida con el nombre del campo en la consulta SQL
+        $condicion = [
+            "condicion_campo" => "id_empleados",
+            "condicion_marcador" => ":id_empleados",
+            "condicion_valor" => $idPersonal
+        ];
+        $data_json = [
+            'exito' => false, // Inicializamos a false por defecto
+            'mensaje' => '',
+        ];
+        // Llama al método de actualización en el modelo
+        $resultado = $this->getActualizar('datosempleados',$parametro,  $condicion);
+
+        if ($resultado) {
+            $data_json['exito'] = true;
+            $data_json['mensaje'] = 'eliminado correctamente.';
+        } else {
+            // Manejo de error
+        }
+
+        header('Content-Type: application/json');
+        echo json_encode($data_json);
     }
 }

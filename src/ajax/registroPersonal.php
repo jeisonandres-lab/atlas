@@ -94,6 +94,12 @@ switch ($_GET['modulo_personal']) {
     case 'obtenerPersonal':
         $personal->obtenerTodoPersonal();
         break;
+    case 'obtenerFamiliar':
+        $personal->obtenerFamiliar($idPersonal);
+        break;
+    case 'eliminarPersonal':
+        $personal->eliminarPersonal($idPersonal);
+        break;
 
     default:
 

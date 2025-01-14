@@ -11,13 +11,13 @@
     border: 0px !important;
   }
   .active{
-    background-color: #4070f4 !important;
+    background-color: #1929bb !important;
     color: white !important;
   }
 
 
   .olas>div {
-    background-color: #4070f4;
+    background-color: #1929bb !important;
     height: 100%;
     width: 6px;
     display: inline-block;
@@ -39,7 +39,10 @@
 .olas>div:nth-child(5) {
     animation-delay: -0.8s;
 }
-
+.card-header{
+    background-color: transparent !important;
+    color: white !important;
+}
 @keyframes wave {
 
     0%,

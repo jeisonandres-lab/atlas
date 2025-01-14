@@ -1,16 +1,19 @@
 <?php
 
 namespace App\Atlas\controller;
-
-class fileUploaderController
+use App\Atlas\models\personalModel;
+use App\Atlas\config\Conexion;
+class fileUploaderController extends Conexion
 {
     private $allowedExtensions;
     private $defaultUploadDir;
+    private $subirDoc;
 
     public function __construct($allowedExtensions = ['pdf', 'png', 'jpeg', 'jpg'], $defaultUploadDir = '../config/')
     {
         $this->allowedExtensions = $allowedExtensions;
         $this->defaultUploadDir = $defaultUploadDir;
+        $this->subirDoc = new personalModel();
     }
 
     public function uploadMultiple($fileInputNames, $uploadDirs, $cedula)
@@ -70,28 +73,6 @@ class fileUploaderController
 
         } else {
             return ['error' => true, 'mensaje' => 'Error al subir el archivo'];
-        }
-    }
-
-    public function archivoExiste($file, $uploadDir = null, $cedula) {
-        if (!isset($file)) {
-            return ['error' => true, 'mensaje' => 'No se ha subido ningún archivo'];
-        }
-
-        $extension = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
-
-        if (!in_array($extension, $this->allowedExtensions)) {
-            return ['error' => true, 'mensaje' => "El archivo no es de un tipo permitido"];
-        }
-
-        // Usar la ruta de destino proporcionada o la ruta por defecto
-        $uploadDir = $uploadDir ?? $this->defaultUploadDir;
-        $fileName = preg_replace('/\s+/', '_', pathinfo($file['name'], PATHINFO_FILENAME)) . '-' . $cedula . '.' . $extension;
-        $destination = $uploadDir . $fileName;
-        if (file_exists($destination)) {
-            return ['error' => true, 'mensaje' => 'El archivo ya existe o tiene el mismo nombre que otro archivo'];
-        } else {
-            return ['error' => false, 'mensaje' => 'El archivo no existe y puede ser subido'];
         }
     }
 
@@ -197,19 +178,62 @@ class fileUploaderController
      * @param string $extension Extensión del archivo.
      * @return array Resultado de la operación de subida.
      */
-    public function moverArchivo($file, $destination, $extension) {
-        if (move_uploaded_file($file['tmp_name'], $destination)) {
+    public function moverArchivo($file, $destination, $extension, $id_empleado, $fileInfo) {
+        $tamano = 2; // Añadir el tamaño del archivo con formato legible
+        $codigo = $this->generarCodigoAleatorio(6);
+        $parametros_doc= [
+            [
+                "campo_nombre" => "idEmpleados",
+                "campo_marcador" => ":idEmpleados",
+                "campo_valor" => $id_empleado
+            ],
+            [
+                "campo_nombre" => "size",
+                "campo_marcador" => ":size",
+                "campo_valor" => $tamano
+            ],
+            [
+                "campo_nombre" => "doc",
+                "campo_marcador" => ":doc",
+                "campo_valor" => $fileInfo['nombre']
+            ],
+            [
+                "campo_nombre" => "tipoDoc",
+                "campo_marcador" => ":tipoDoc",
+                "campo_valor" => $extension
+            ],
+            [
+                "campo_nombre" => "fecha",
+                "campo_marcador" => ":fecha",
+                "campo_valor" => date("Y-m-d")
+            ],
+            [
+                "campo_nombre" => "hora",
+                "campo_marcador" => ":hora",
+                "campo_valor" => date("H:i:s")
+            ]
+        ];
+        $tabla = 'documentacion';
+        $cargarDOC = $this->subirDoc->getRegistrarDOCS($tabla, $parametros_doc);
+        if ($cargarDOC) {
+            if (move_uploaded_file($file['tmp_name'], $destination)) {
+                return [
+                    'error' => false,
+                    'mensaje' => 'Archivo subido con éxito',
+                    'ruta' => $destination,
+                    'nombre' => $fileInfo['nombre'],
+                    'extension' => $extension,
+                    'tamano' => $tamano, // Añadir el tamaño del archivo con formato legible
+                    'codigo' => $codigo
+                ];
+            } else {
+                return ['error' => true, 'mensaje' => 'Error al mover el archivo'];
+            }
+        }else{
             return [
-                'error' => false,
-                'mensaje' => 'Archivo subido con éxito',
-                'ruta' => $destination,
-                'nombre' => $file['name'],
-                'extension' => $extension,
-                'tamano' => $this->formatSizeUnits($file['size']), // Añadir el tamaño del archivo con formato legible
-                'codigo' => $this->generarCodigoAleatorio(6)
+                'error' => true,
+                'mensaje' => 'error al cargar los datos del archivo en la bse de datos',
             ];
-        } else {
-            return ['error' => true, 'mensaje' => 'Error al mover el archivo'];
         }
     }
 
@@ -221,7 +245,7 @@ class fileUploaderController
      * @param string|null $uploadDir Directorio de subida (opcional).
      * @return array Resultado de la operación de subida.
      */
-    public function subirArchivo($file, $cedula, $uploadDir = null) {
+    public function subirArchivo($file, $cedula, $uploadDir = null, $id_empleado) {
         if (!isset($file)) {
             return ['error' => true, 'mensaje' => 'No se ha subido ningún archivo'];
         }
@@ -244,16 +268,16 @@ class fileUploaderController
         $fileInfo = $this->obtenerNombreArchivo($file, $cedula);
         $fileName = $fileInfo['nombre'];
         $extension = $fileInfo['extension'];
-        $destination = $uploadDir . $fileName;
+        $destination = $uploadDir .$fileName;
 
         // Validar si el archivo ya existe
-        $verificacion = $this->archivoExiste2($destination);
-        if ($verificacion['error']) {
-            return $verificacion;
-        }
+        // $verificacion = $this->archivoExiste2($destination);
+        // if ($verificacion['error']) {
+        //     return $verificacion;
+        // }
 
         // Mover el archivo y regresar el resultado
-        return $this->moverArchivo($file, $destination, $extension);
+        return $this->moverArchivo($file, $destination, $extension, $id_empleado, $fileInfo);
     }
 
     // Otras funciones como formatSizeUnits y generarCodigoAleatorio

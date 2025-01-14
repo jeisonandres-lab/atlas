@@ -7,7 +7,8 @@
     <meta name="description" content="Inicia sesión en tu cuenta para acceder a todas las funcionalidades de ATLAS, nuestro sistema de gestión de recursos humanos">
     <title>Inicio de Sesión | ATLAS</title>
     <link rel="icon" href="./src/assets/img/icons/dasdad-transformed-removebg.png" type="image/x-icon">
-    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css"> -->
+     <link rel="stylesheet" href="./style.css">
     <link rel="stylesheet" href="./node_modules/@fortawesome/fontawesome-free/css/fontawesome.min.css">
     <link rel="stylesheet" href="./node_modules/@fortawesome/fontawesome-free/css/regular.min.css">
     <link rel="stylesheet" href="./node_modules/@fortawesome/fontawesome-free/css/solid.min.css">
@@ -34,7 +35,7 @@
                         </div>
                     </div>
                     <div class="d-flex justify-content-center align-items-center flex-column mt-5">
-                        <form class="formularioEnviar" method="POST" action="./src/ajax/userAjax.php">
+                        <form class="formularioEnviar" method="POST" action="./src/ajax/userAjax.php" autocapitalize="on">
                             <div class="inicioSesion container-fluid d-flex justify-content-center mt-2 ">
                                 <h4 class=" text-muted">INICIO DE SESION</h4>
                             </div>

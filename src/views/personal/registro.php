@@ -10,6 +10,7 @@ use App\Atlas\config\App;
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro | ATLAS</title>
     <?php require_once App::URL_INC . "total_css.php"; ?>
+
     <link rel="stylesheet" href="<?php echo App::URL_CSS . "registroPersonal.css"; ?>">
 </head>
 
@@ -47,9 +48,9 @@ use App\Atlas\config\App;
                 <img src="<?php echo App::URL_IMG . "top-header.png"; ?>" alt="" class="w-100 h-100" style="object-fit: cover; object-position:center;">
             </div>
             <!-- SUB MENU DEL MODULO -->
-            <?php require_once App::URL_INC. "menu_registro.php"?>
+            <?php require_once App::URL_INC . "menu_registro.php" ?>
             <!-- FORMULARIO DE ENVIOS DE DATOS DEL PERSONAL -->
-            <form action="#" class="row animate__animated animate__slideInUp contact-form form-validate d-flex justify-content-center" novalidate="novalidate" id="formulario_registro">
+            <form action="#" class="row animate__animated animate__slideInUp contact-form form-validate d-flex " novalidate="novalidate" id="formulario_registro">
                 <div class="col-sm-12 col-md-7 col-lg-7 col-xl-7 col-xxl-8">
                     <div class="row col-sm-12 col-md-7  h-100  bg-white content w-100 p-2">
                         <p class="mb-0 mt-2">Datos del Personal</p>
@@ -135,7 +136,7 @@ use App\Atlas\config\App;
 
                         <div class="col-sm-4 mb-2 ">
                             <div class="form-group">
-                                <label class="required-field" for="message">Año</label>
+                                <label class="required-field" for="ano">Año</label>
                                 <div class="input-group">
                                     <span class="input-group-text span_ano"><i class="fa-regular fa-calendar"></i></i></span>
                                     <select class="form-select form-select-md" name="ano" id="ano" required></select>
@@ -145,7 +146,7 @@ use App\Atlas\config\App;
 
                         <div class="col-sm-4  mb-2">
                             <div class="form-group">
-                                <label class="required-field" for="message">Mes</label>
+                                <label class="required-field" for="meses">Mes</label>
                                 <div class="input-group">
                                     <span class="input-group-text span_mes"><i class="fa-regular fa-calendar"></i></i></span>
                                     <select class="form-select" id="meses" name="meses" aria-label="Default select example" required></select>
@@ -155,7 +156,7 @@ use App\Atlas\config\App;
 
                         <div class="col-sm-4  mb-2">
                             <div class="form-group ">
-                                <label class="required-field" for="message">Día</label>
+                                <label class="required-field" for="dia">Día</label>
                                 <div class="input-group">
                                     <span class="input-group-text span_dia"><i class="fa-regular fa-calendar"></i></i></span>
                                     <select class="form-select w-5" id="dia" name="dia" aria-label="Default select example" required></select>
@@ -168,7 +169,7 @@ use App\Atlas\config\App;
 
                         <div class="col-sm-12 mb-2">
                             <div class="form-group">
-                                <label for="correo">Contrato</label>
+                                <label for="contrato">Contrato</label>
                                 <div class="input-group">
                                     <span class="input-group-text span_contrato"><i class="fa-regular fa-file-zipper"></i></span>
                                     <input type="file" class="form-control" name="contratoArchivo" id="contrato" aria-describedby="inputGroupFileAddon04" aria-label="Upload" required>
@@ -178,7 +179,7 @@ use App\Atlas\config\App;
 
                         <div class="col-sm-12 mb-2">
                             <div class="form-group">
-                                <label for="correo">Notificación</label>
+                                <label for="notificacion">Notificación</label>
                                 <div class="input-group">
                                     <span class="input-group-text span_notificacion"><i class="fa-regular fa-file-zipper"></i></span>
                                     <input type="file" name="notacionAchivo" class="form-control" id="notificacion" aria-describedby="inputGroupFileAddon04" aria-label="Upload" required>
@@ -242,8 +243,28 @@ use App\Atlas\config\App;
                             </div>
                         </div>
 
+                        <div class="col-sm-12 mb-2">
+                            <div class="form-group">
+                                <label for="academico">Nivel Academico</label>
+                                <div class="input-group">
+                                    <span class="input-group-text span_academico"><i class="fa-regular fa-user-graduate"></i></span>
+                                    <select class="form-select form-select-md" id="academico" name="nivel_academico">
+                                        <option value="">Nivel Academico</option>
+                                        <option value="bachiller">Bachiller</option>
+                                        <option value="tecnico">Técnico</option>
+                                        <option value="tecnologo">Tecnólogo</option>
+                                        <option value="pregrado">Pregrado</option>
+                                        <option value="ingeniero">Ingeniero</option>
+                                        <option value="especialista">Especialista</option>
+                                        <option value="maestria">Maestría</option>
+                                        <option value="doctorado">Doctorado</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="col-sm-12 mt-3 ">
-                            <button type="submit" id="aceptar" name="submit" class="btn btn-primary" disabled>
+                            <button type="button" id="aceptar" name="submit" data-bs-toggle="modal" data-bs-target="#estadosInfor" class="btn btn-primary" disabled>
                                 <i class="fa-solid fa-plus me-2"></i>
                                 Aceptar
                             </button>
@@ -262,14 +283,43 @@ use App\Atlas\config\App;
                     </div>
                     <div style="background-color:#FE9001;" class="barra_naranja w-100"></div>
                 </div>
-                <div class="containerImg col-sm-12 col-md-5 col-lg-5 col-xl-5 col-xxl-4">
-                    <div class="h-50">
-                        <div class="content bg-white d-flex justify-content-center align-items-center h-100 w-100 col-sm-12 col-md-5  col-lg-4 col-xl-8 col-xxl-8 " id="img-contener">
+                <div class="container col-sm-12 col-md-5 col-lg-5 col-xl-5 col-xxl-4">
+                    <div class="w-100 h-50 bg-white containerImg col-12 mb-3">
+                        <div class="content d-flex justify-content-center align-items-center h-100 w-100" id="img-contener">
+                            <!-- Contenido aquí -->
+                        </div>
+                        <div style="background-color:#FE9001;" class="barra_naranja w-100" id="barra"></div>
+                    </div>
+                </div>
 
+                <!-- para activar el modal colocar al boton esto: data-bs-toggle="modal" data-bs-target="#estadosInfor" -->
+                <!-- Modal para editar-->
+                <div class="modal  fade modal-lg" id="estadosInfor" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header d-flex justify-content-between bg-primary" style=" color: #fff;">
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">Editar Datos</h1>
+                                <i type="button" data-bs-dismiss="modal" aria-label="Close" class="close fa-solid fa-xmark"></i>
+                            </div>
+                            <div class="modal-body">
+                                <div class="container-fluid px-4">
+                                    <div class="container-fluid card p-2" style="background-color: #f5f5f5; box-shadow: none;">
+                                        <section class="card p-2" style="background-color: white; box-shadow: none;">
+
+                                        </section>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">
+                                    <i class="fa-solid fa-arrow-right me-2"></i>Cerrar
+                                </button>
+                            </div>
+                            <div style="background-color:#FE9001;" class="barra_naranja"></div>
                         </div>
                     </div>
-                    <div style="background-color:#FE9001;" class="barra_naranja w-100"></div>
                 </div>
+
             </form>
         </main>
         <?php require_once App::URL_INC . "/footer.php"; ?>
@@ -280,3 +330,5 @@ use App\Atlas\config\App;
 </body>
 
 </html>
+
+

@@ -10,6 +10,7 @@ import {
   validarSelectores,
   validarTelefono,
   file,
+  limpiarInput,
 } from "./ajax/inputs.js";
 
 import {
@@ -48,6 +49,7 @@ $(function () {
   validarSelectores("#cargo", ".span_cargo");
   validarSelectores("#departamento", ".span_departamento");
   validarSelectores("#dependencia", ".span_dependencia");
+  validarSelectores("#academico", ".span_academico");
   file("#contrato", ".span_contrato");
   file("#notificacion", ".span_notificacion");
   // formulario de empleados
@@ -156,10 +158,10 @@ $(function () {
       console.log(parsedData);
       if (parsedData.personalEncontrado) {
         $("#alerta").slideDown('slow', 'swing').delay(10000).slideUp();
-      } 
+      }
       else if (dataerror) {
         alertaNormalmix(parsedData.mensaje, 4000, "error", "top-end")
-      }else{
+      } else {
         alertaNormalmix(parsedData.mensaje, 4000, "success", "top-end")
       }
       // const myModal = new bootstrap.Modal(document.getElementById('modal'));
@@ -169,14 +171,24 @@ $(function () {
   });
 
 
+  $("#noCedula").on("change", function () {
+    if ($(this).is(":checked")) {
+      $("#disca").prop("checked", false);
+    }
+  });
 
-  // Selector para todos los inputs y selects dentro del formulario
-  var inputs = $('form input, form select');
+  $("#disca").on("change", function () {
+    if ($(this).is(":checked")) {
+      $("#noCedula").prop("checked", false);
+    }
+  });
+  
   var boton = $('#aceptar'); // Reemplaza con el ID de tu botón
-
-  // Función para verificar si todos los elementos tienen la clase "cumplido"
+  // metodos para escuchar cambios en el dom y habilitar el boton de enviar formulario 
+  // Función para verificar si todos los campos están cumplidos
   function todosCumplidos() {
-    return inputs.filter('.cumplido').length === inputs.length;
+    const elementosCumplidos = $('form input, form select').filter('.cumplido, .cumplidoNormal');
+    return elementosCumplidos.length === $('form input, form select').length;
   }
 
   // Función para habilitar o deshabilitar el botón
@@ -184,19 +196,51 @@ $(function () {
     boton.prop('disabled', !todosCumplidos());
   }
 
-  // Inicialmente verificamos el estado
-  habilitarBoton();
+  // Función de debounce para limitar la frecuencia de ejecución
+  function debounce(func, wait) {
+    let timeout;
+    return function (...args) {
+      clearTimeout(timeout);
+      timeout = setTimeout(() => func.apply(this, args), wait);
+    };
+  }
 
-  // Evento para detectar cambios en los inputs
-  inputs.on('change', function () {
-    habilitarBoton();
-  });
+  // Crear una instancia de MutationObserver y observar cambios
+  const observer = new MutationObserver(debounce((mutationsList, observer) => {
+    for (const mutation of mutationsList) {
+      if (mutation.type === 'childList' || mutation.type === 'attributes') {
+        habilitarBoton();
+      }
+    }
+  }, 300)); // Ajusta el tiempo de espera según sea necesario
+
+  // Configurar el observer para observar cambios en los hijos y atributos del formulario
+  const config = { childList: true, attributes: true, subtree: true };
+
+  // Seleccionar el formulario y comenzar a observar
+  const form = document.querySelector('form');
+  observer.observe(form, config);
+
 
   $("#limpiar").on("click", function () {
-    limpiarFormulario(
-      "#formulario_registro",
-      "#dia, #meses, #ano, .span_ano, .span_dia, .span_mes", "error_span", "cumplido", "cumplido_span", "error_input"
-    );
+    limpiarInput("#primerNombre", ".span_nombre");
+    limpiarInput("#segundoNombre", ".span_nombre2");
+    limpiarInput("#primerApellido", ".span_apellido");
+    limpiarInput("#segundoApellido", ".span_apellido2");
+    limpiarInput("#cedula", ".span_cedula");
+    limpiarInput("#civil", ".span_civil");
+    limpiarInput("#ano", ".span_ano");
+    limpiarInput("#meses", ".span_mes");
+    limpiarInput("#dia", ".span_dia");
+    limpiarInput("#contrato", ".span_contrato");
+    limpiarInput("#notificacion", ".span_notificacion");
+    limpiarInput("#telefono", ".span_telefono");
+    limpiarInput("#estatus", ".span_estatus");
+    limpiarInput("#cargo", ".span_cargo");
+    limpiarInput("#departamento", ".span_departamento");
+    limpiarInput("#dependencia", ".span_dependencia");
+    limpiarInput("#academico", ".span_academico");
+    $(".imgFoto").remove();
   });
 
 

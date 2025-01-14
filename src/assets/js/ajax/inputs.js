@@ -37,6 +37,26 @@ export function validarNumeros(input, cumplidospan) {
   });
 }
 
+export function validarNumerosMenores(input, cumplidospan) {
+  $(input).on("input", function (evenet) {
+    this.value = this.value.replace(/[^0-9]/g, "");
+    if (this.value.length < 1 || this.value == 0) {
+      $(this).removeClass("cumplido");
+      $(this).addClass("error_input");
+      $(cumplidospan).removeClass("cumplido_span");
+      $(cumplidospan).addClass("error_span");
+    } else if (this.value.length >= 1 || this.value.length <= 9) {
+      this.value = this.value.slice(0, 9);
+      $(this).removeClass("error_input");
+      $(this).addClass("cumplido");
+      $(cumplidospan).removeClass("error_span");
+      $(cumplidospan).addClass("cumplido_span");
+    }
+  });
+}
+
+
+
 export function validarTelefono(input, cumplidospan) {
   $(input).on("input", function () {
     // Eliminar cualquier cosa que no sea un número
@@ -232,5 +252,16 @@ export function limpiarFormulario(idinput, span) {
   if (span) {
     $(span).removeClass("cumplido_span");
     $(span).addClass("error_span");    
+  }
+}
+
+export function limpiarInput(idinput, span) {
+  if ($(idinput).attr('type') === 'checkbox') {
+    return;
+  }
+  $(idinput).val("");
+  $(idinput).removeClass("cumplido");
+  if (span) {
+    $(span).removeClass("cumplido_span"); 
   }
 }

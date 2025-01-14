@@ -45,12 +45,7 @@ class personalModel extends Conexion
 
     private function validarEmpleado_datos($parametro)
     {
-        $sql_personal = $this->ejecutarConsulta("SELECT * FROM datosPersonales WHERE cedula = ?", $parametro);
-        foreach ($sql_personal as $row) {
-            $idpersonal = $row['id_personal'];
-            $prametro2 = [$idpersonal];
-            $sql = $this->ejecutarConsulta("SELECT idPersonal, id_empleados FROM datosempleados WHERE idPersonal = ? ", $prametro2);
-        }
+        $sql = $this->ejecutarConsulta("SELECT *  FROM datosempleados de INNER JOIN datospersonales dp ON de.idPersonal =  dp.id_personal WHERE dp.cedula  = ?", $parametro);
         return $sql;
     }
 
@@ -58,18 +53,26 @@ class personalModel extends Conexion
     {
         $cedula = $parametro[0];
         $carnet = $parametro[1];
-        $sql = $this->ejecutarConsulta("SELECT * FROM datosfamilia WHERE cedula = ? ",  [$cedula]);
+        $tomo = $parametro[2];
+        $folio = $parametro[3];
+        $sql = $this->ejecutarConsulta("SELECT * FROM datosfamilia WHERE tomo = ? AND folio = ?", [$tomo, $folio]);
         if ($sql == "") {
-            $sql = $this->ejecutarConsulta("SELECT * FROM datosfamilia WHERE codigoCarnet = ? ",  [$carnet]);
-            return $sql;
-        } else {
-            return $sql;
+            $sql = $this->ejecutarConsulta("SELECT * FROM datosfamilia WHERE cedula = ? ",  [$cedula]);
+            if (empty($sql)) {
+                $sql = $this->ejecutarConsulta("SELECT * FROM datosfamilia WHERE codigoCarnet = ? ",  [$carnet]);
+            }
         }
-        return 'no se logro realizar ninguna de las consultas';
+        return $sql;
     }
     private function existeEmpleadofamiliar($parametro)
     {
         $sql = $this->ejecutarConsulta("SELECT * FROM datosfamilia WHERE idEmpleado = ? ",  $parametro);
+        return $sql;
+    }
+
+    private function actualuzarDatos($tabla, $datos, $condicion)
+    {
+        $sql = $this->actualizarDatos($tabla, $datos, $condicion);
         return $sql;
     }
 
@@ -116,5 +119,9 @@ class personalModel extends Conexion
     public function getExisteEmpleadoFamiliar($parametro)
     {
         return $this->existeEmpleadofamiliar($parametro);
+    }
+    public function getActualizar($tabla, $datos, $condicion)
+    {
+        return $this->actualuzarDatos($tabla, $datos, $condicion);
     }
 }

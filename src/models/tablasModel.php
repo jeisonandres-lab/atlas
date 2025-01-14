@@ -10,23 +10,41 @@ class tablasModel extends conexion
     private function obtenertodosDatos(
         string $selectores,
         string $tabla,
-        $start, $length,
+        $start,
+        $length,
         $searchValue,
         array $datosBuscar,
-        string $campoOrden)
-    {
+        string $campoOrden,
+        array $conditions = null,
+        array $conditionParams = []
+    ) {
         $sql = "SELECT $selectores FROM $tabla";
 
         // Construir la cláusula WHERE para la búsqueda
         $parametros = [];
+        $whereClauses = [];
+
+        // Añadir la cláusula de búsqueda si $searchValue no está vacío
         if (!empty($searchValue)) {
-            $sql .= " WHERE ";
-            $conditions = [];
+            $searchClauses = [];
             foreach ($datosBuscar as $campo) {
-                $conditions[] = "$campo LIKE ?";
+                $searchClauses[] = "$campo LIKE ?";
                 $parametros[] = '%' . $searchValue . '%';
             }
-            $sql .= implode(" OR ", $conditions);
+            $whereClauses[] = "(" . implode(" OR ", $searchClauses) . ")";
+        }
+
+        // Añadir condiciones adicionales si existen
+        if (!empty($conditions)) {
+            foreach ($conditions as $condition) {
+                $whereClauses[] = $condition;
+            }
+            $parametros = array_merge($parametros, $conditionParams);
+        }
+
+        // Construir la cláusula WHERE final
+        if (!empty($whereClauses)) {
+            $sql .= " WHERE " . implode(" AND ", $whereClauses);
         }
 
         // Añadir la cláusula ORDER BY y LIMIT para la paginación
@@ -38,20 +56,59 @@ class tablasModel extends conexion
         return $this->ejecutarConsulta($sql, $parametros);
     }
 
+    public function tablas(
+        string $selectores,
+        string $tabla,
+        string $campoOrden,
+        array $conditions = null,
+        array $conditionParams = []
+    ) {
+        $sql = "SELECT $selectores FROM $tabla";
 
-    private function cantidadRegistros($tabla, $parametros)
-    {
-        $sql = $this->ejecutarConsulta("SELECT $parametros FROM $tabla");
-        return $sql;
+        // Construir la cláusula WHERE para la búsqueda
+        $parametros = [];
+        $whereClauses = [];
+
+        // Añadir condiciones adicionales si existen
+        if (!empty($conditions)) {
+            foreach ($conditions as $condition) {
+                $whereClauses[] = $condition;
+            }
+            $parametros = array_merge($parametros, $conditionParams);
+        }
+
+        // Construir la cláusula WHERE final
+        if (!empty($whereClauses)) {
+            $sql .= " WHERE " . implode(" AND ", $whereClauses);
+        }
+
+        // Añadir la cláusula ORDER BY
+        $sql .= " ORDER BY $campoOrden ASC";
+
+        // Ejecutar la consulta utilizando la función ejecutarConsulta
+        return $this->ejecutarConsulta($sql, $parametros);
     }
 
-    public function getTodoDatosPersonal($selectores, $tabla, $start, $length, $searchValue, $datosBuscar, $campoOrden)
+    private function cantidadRegistros($tabla, $parametros, $conditions = null, $conditionParams = [])
     {
-        return $this->obtenertodosDatos($selectores, $tabla, $start, $length, $searchValue, $datosBuscar, $campoOrden);
+        $sql = "SELECT $parametros FROM $tabla";
+
+        // Construir la cláusula WHERE si hay condiciones
+        if (!empty($conditions)) {
+            $sql .= " WHERE " . implode(" AND ", $conditions);
+        }
+
+        // Ejecutar la consulta utilizando la función ejecutarConsulta
+        return $this->ejecutarConsulta($sql, $conditionParams);
     }
 
-    public function getCantidadRegistros($tabla, $parametros)
+    public function getTodoDatosPersonal($selectores, $tabla, $start, $length, $searchValue, $datosBuscar, $campoOrden, $conditions, $conditionParams)
     {
-        return $this->cantidadRegistros($tabla, $parametros);
+        return $this->obtenertodosDatos($selectores, $tabla, $start, $length, $searchValue, $datosBuscar, $campoOrden, $conditions, $conditionParams);
+    }
+
+    public function getCantidadRegistros($tabla, $parametros, $conditions, $conditionParams)
+    {
+        return $this->cantidadRegistros($tabla, $parametros, $conditions, $conditionParams);
     }
 }

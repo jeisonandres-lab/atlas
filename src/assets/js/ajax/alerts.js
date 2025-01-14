@@ -56,3 +56,29 @@ export function alertaNormalmix(messenger, time, icons, position){
         title: messenger
     });
 }
+
+export function aletaCheck(messenger, icons, position, callback){
+    const Toast = Swal.mixin({
+        toast: true,
+        timer: 10000,
+      });
+      Toast.fire({
+        icon: icons,
+        position:position,
+        html:messenger,
+        showCancelButton: true,
+        showConfirmButton: true,
+        confirmButtonText: '<i class="fa fa-check me-2"></i> Aceptar', // Icono en el botón de confirmación
+        cancelButtonText: '<i class="fa-solid fa-arrow-right me-2"></i> Cancelar',
+        customClass: {
+            icon: 'my-custom-icon' // Aplica la clase personalizada al icono
+        }
+      }).then((result) => {
+        /* Read more about isConfirmed, isDenied below */
+        if (result.isConfirmed) {
+            callback();
+        } else if (result.isDenied) {
+          Swal.fire("Changes are not saved", "", "info");
+        }
+      });
+}

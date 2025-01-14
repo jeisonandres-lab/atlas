@@ -14,10 +14,24 @@
 :root {
   --white-color: #fff;
   --white-color-content: #fff;
-  --blue-color: #4070f4;
+  --blue-color: #1929bb;
   --grey-color: #707070;
   --grey-color-light: #aaa;
   --backgroud: #f2f7fc;
+}
+/* cambio de bootstrap */
+.btn-sm{
+  color: white !important; 
+}
+
+.btn-success{
+
+  color: white !important; /* Color del texto del botón de confirmación */
+}
+
+div:where(.swal2-icon).swal2-warning {
+  border-color: #c71313 !important; 
+  color: #c71313 !important;
 }
 
 body {
