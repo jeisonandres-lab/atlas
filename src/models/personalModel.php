@@ -33,7 +33,15 @@ class personalModel extends Conexion
 
     private function DatosPerosnal($parametro)
     {
-        $sql = $this->ejecutarConsulta("SELECT * FROM datosPersonales WHERE cedula = ?", $parametro);
+        $sql = $this->ejecutarConsulta(
+            "SELECT *
+            FROM datosPersonales dp
+            INNER JOIN datosEmpleados de ON dp.id_personal = de.id_empleados
+            INNER JOIN estatus e ON de.idEstatus = e.id_estatus
+            INNER JOIN cargo c ON de.idCargo = c.id_cargo
+            INNER JOIN dependencia depe ON de.idDependencia = depe.id_dependencia
+            INNER JOIN departamento d ON de.idDepartamento = d.id_departamento
+            WHERE dp.cedula = ? AND de.activo = 1", $parametro);
         return $sql;
     }
 

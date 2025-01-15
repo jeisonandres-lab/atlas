@@ -356,11 +356,24 @@ class personalController extends personalModel
             $check_personal = $this->getDatosPersonal($parametro);
             if ($check_personal == true) {
                 foreach ($check_personal as $row) {
+                    $activo = $row['activo'] == 1 ? 'Activo' : 'Inactivo';
                     $data_json['exito'] = true;
                     $data_json['idPersonal'] = $row['id_personal'];
                     $data_json['cedula'] = $row['cedula'];
                     $data_json['nombre'] = $row['primerNombre'];
+                    $data_json['segundoNombre'] = $row['segundoNombre'];
                     $data_json['apellido'] = $row['primerApellido'];
+                    $data_json['segundoApellido'] = $row['segundoApellido'];
+                    $data_json['estadoCivil'] = $row['estadoCivil'];
+                    $data_json['diaNacimiento'] = $row['diaNacimiento'];
+                    $data_json['mesNacimiento'] = $row['mesNacimiento'];
+                    $data_json['anoNacimiento'] = $row['anoNacimiento'];
+                    $data_json['estatus'] = $row['estatus'];
+                    $data_json['cargo'] = $row['cargo'];
+                    $data_json['dependencia'] = $row['dependencia'];
+                    $data_json['departamento'] = $row['departamento'];
+                    $data_json['telefono'] = $row['telefono'];
+                    $data_json['activo'] = $activo;
                     $data_json['mensaje'] = "Trabajador Encontrado";
                     $data_json['logrado'] = true;
                 }
@@ -604,8 +617,8 @@ class personalController extends personalModel
         foreach ($dependencias as $row) {
             $data_json['exito'] = true;
             $data_json['data'][] = [
-                'iddependencia' => $row['id_dependencia'],
-                'dependencia' => $row['dependencia']
+                'id' => $row['id_dependencia'],
+                'value' => $row['dependencia'],
             ];
             $data_json['mensaje'] = "todas las dependencias exitoso";
         }
@@ -619,8 +632,8 @@ class personalController extends personalModel
         foreach ($estatus as $row) {
             $data_json['exito'] = true;
             $data_json['data'][] = [
-                'idestatus' => $row['id_estatus'],
-                'estatus' => $row['estatus']
+                'id' => $row['id_estatus'],
+                'value' => $row['estatus']
             ];
             $data_json['mensaje'] = "todas las estatus exitoso";
         }
@@ -634,8 +647,8 @@ class personalController extends personalModel
         foreach ($cargo as $row) {
             $data_json['exito'] = true;
             $data_json['data'][] = [
-                'idcargo' => $row['id_cargo'],
-                'cargo' => $row['cargo']
+                'id' => $row['id_cargo'],
+                'value' => $row['cargo']
             ];
             $data_json['mensaje'] = "todas las cargo exitoso";
         }
@@ -657,8 +670,8 @@ class personalController extends personalModel
             $data_json['mensaje'] = 'Todos los departamentos obtenidos exitosamente';
             foreach ($departamento as $row) {
                 $data_json['data'][]= [
-                    'iddepartamento' => $row['id_departamento'],
-                    'departamento' => $row['departamento']
+                    'id' => $row['id_departamento'],
+                    'value' => $row['departamento']
                 ];
             }
         }
@@ -689,6 +702,7 @@ class personalController extends personalModel
         $cargoPersonal = $this->objetoEstatus();
         return $cargoPersonal->getDatosCargo();
     }
+
     protected function getDependenciasPersonales()
     {
         $dependenciaPersonal = $this->objetoDependencia();
@@ -732,7 +746,7 @@ class personalController extends personalModel
             $validarFamiliar = $this->getExisteEmpleadoFamiliar($parametro);
             $botones = "
 
-                <button class='btn btn-primary btn-sm btn-hover-azul btnEditar' data-bs-toggle='modal' data-bs-target='#editarDatos' data-id=" . $row['id_empleados'] . "><i class='fa-solid fa-pencil fa-sm me-2'></i>Editar</button>
+                <button class='btn btn-primary btn-sm btn-hover-azul btnEditar' data-bs-toggle='modal' data-bs-target='#editarDatos' data-cedula=" . $row['cedula'] . "><i class='fa-solid fa-pencil fa-sm me-2'></i>Editar</button>
                 <button class='btn btn-danger btn-sm btn-hover-rojo btnEliminar' data-swal-toast-template='#my-template' data-id=" . $row['id_empleados'] . "><i class='fa-solid fa-trash fa-sm me-2'></i>Eliminar</button>
         ";
 

@@ -259,9 +259,13 @@ export function limpiarInput(idinput, span) {
   if ($(idinput).attr('type') === 'checkbox') {
     return;
   }
+
+  $(idinput).find('option').not(':first').remove();
   $(idinput).val("");
+
+
   $(idinput).removeClass("cumplido");
   if (span) {
-    $(span).removeClass("cumplido_span"); 
+    $(span).removeClass("cumplido_span");
   }
 }

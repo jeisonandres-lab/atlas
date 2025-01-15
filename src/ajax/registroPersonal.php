@@ -20,7 +20,7 @@ $segundoNombre = isset($_POST['segundoNombre']) ? $conexion->limpiarCadena($_POS
 $primerApellido = isset($_POST['primerApellido']) ? $conexion->limpiarCadena($_POST['primerApellido']) : "";
 $segundoApellido = isset($_POST['segundoApellido']) ? $conexion->limpiarCadena($_POST['segundoApellido']) : "";
 $cedula = isset($_POST['cedula']) ? $conexion->limpiarCadena($_POST['cedula']) : "";
-$cedula_familiar = isset($_POST['cedula_familiar']) ? $conexion->limpiarCadena($_POST['cedula_familiar']) : "";
+$cedulaEmpleado = isset($_POST['cedulaEmpleado']) ? $conexion->limpiarCadena($_POST['cedulaEmpleado']) : "";
 $civil = isset($_POST['civil']) ? $conexion->limpiarCadena($_POST['civil']) : "";
 $correo = isset($_POST['correo']) ? $conexion->limpiarCadena($_POST['correo']) : "";
 $ano = isset($_POST['ano']) ? $conexion->limpiarCadena($_POST['ano']) : "";
@@ -72,7 +72,7 @@ switch ($_GET['modulo_personal']) {
         $personal->obtenerDepartamento();
         break;
     case 'obtenerDatosPersonal':
-        $personal->obtenerDatosPersonal($cedula_familiar);
+        $personal->obtenerDatosPersonal($cedulaEmpleado);
         break;
     case 'registrarFamilia':
         $personal->registrarFamilia(

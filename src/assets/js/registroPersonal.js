@@ -15,7 +15,8 @@ import {
 
 import {
   enviarFormulario,
-  obtenerDatos
+  obtenerDatos,
+  obtenerDatosJQuery
 } from "./ajax/formularioAjax.js";
 
 import {
@@ -54,66 +55,61 @@ $(function () {
   file("#notificacion", ".span_notificacion");
   // formulario de empleados
 
-  let url_dependencias = "src/ajax/registroPersonal.php?modulo_personal=obtenerDependencias";
-  let url_estatus = "src/ajax/registroPersonal.php?modulo_personal=obtenerEstatus";
-  let url_cargo = "src/ajax/registroPersonal.php?modulo_personal=obtenerCargo";
-  let url_departamento = "src/ajax/registroPersonal.php?modulo_personal=obtenerDepartamento";
-  obtenerDatos(url_dependencias)
-    .then(response => {
-      if (response.exito) {
-        const arrayDependencias = Object.values(response);
-        console.log(arrayDependencias);
+  let urls = [
+    "src/ajax/registroPersonal.php?modulo_personal=obtenerDependencias",
+    "src/ajax/registroPersonal.php?modulo_personal=obtenerEstatus",
+    "src/ajax/registroPersonal.php?modulo_personal=obtenerCargo",
+    "src/ajax/registroPersonal.php?modulo_personal=obtenerDepartamento"
+  ];
 
-        arrayDependencias[1].data.forEach(dependencia => {
-          $("#dependencia").append(
-            '<option value="' + dependencia.iddependencia + '">' + dependencia.dependencia + "</option>"
-          );
-          // Hacer algo con cada dependencia, como mostrarla en una lista
-        });
-      }
-    });
-  obtenerDatos(url_estatus)
-    .then(response => {
-      if (response.exito) {
-        const arrayEstatus = Object.values(response);
-        console.log(arrayEstatus);
+  let requests = urls.map(url => obtenerDatosJQuery(url));
 
-        arrayEstatus[1].data.forEach(estatus => {
-          $("#estatus").append(
-            '<option value="' + estatus.idestatus + '">' + estatus.estatus + "</option>"
-          );
-          // Hacer algo con cada dependencia, como mostrarla en una lista
-        });
-      }
-    });
-  obtenerDatos(url_cargo)
-    .then(response => {
-      if (response.exito) {
-        const arrayCargo = Object.values(response);
-        console.log(arrayCargo);
-        arrayCargo[1].data.forEach(cargo => {
-          $("#cargo").append(
-            '<option value="' + cargo.idcargo + '">' + cargo.cargo + "</option>"
-          );
-          // Hacer algo con cada dependencia, como mostrarla en una lista
-        });
-      }
-    });
-  obtenerDatos(url_departamento)
-    .then(response => {
-      if (response.exito) {
-        const arrayDepartamento = Object.values(response);
-        console.log(arrayDepartamento);
-        arrayDepartamento[1].data.forEach(departamento => {
-          $("#departamento").append(
-            '<option value="' + departamento.iddepartamento + '">' + departamento.departamento + "</option>"
-          );
-          // Hacer algo con cada dependencia, como mostrarla en una lista
-        });
-      }
-    });
-  // formulario de empleado
+  $.when(...requests).done((dependencias, estatus, cargo, departamento) => {
+    if (dependencias[0].exito && dependencias[0].data) {
+      llenarSelectDependencias(dependencias[0].data, 'dependencia');
+    } else {
+      console.error('Error al obtener dependencias o la estructura de la respuesta es incorrecta');
+    }
 
+    if (estatus[0].exito && estatus[0].data) {
+      llenarSelectDependencias(estatus[0].data, 'estatus');
+    } else {
+      console.error('Error al obtener los estatus o la estructura de la respuesta es incorrecta');
+    }
+
+    if (cargo[0].exito && cargo[0].data) {
+      llenarSelectDependencias(cargo[0].data, 'cargo');
+    } else {
+      console.error('Error al obtener los cargos o la estructura de la respuesta es incorrecta');
+    }
+
+    if (departamento[0].exito && departamento[0].data) {
+      llenarSelectDependencias(departamento[0].data, 'departamento');
+    } else {
+      console.error('Error al obtener departamento o la estructura de la respuesta es incorrecta');
+    }
+  }).fail((jqXHR, textStatus, errorThrown) => {
+    console.error('Error al obtener los datos:', textStatus, errorThrown);
+  });
+
+
+  async function llenarSelectDependencias(data, selectId) {
+
+    const select = document.getElementById(selectId);
+    console.log(data);
+    // Asegúrate de que el ID del select sea correcto
+    if (!select) {
+      console.error(`El elemento select con el ID "${selectId}" no se encontró en el DOM.`);
+      return;
+    }
+
+    data.forEach(item => {
+      const option = document.createElement('option');
+      option.value = item.id;
+      option.text = item.value;
+      select.appendChild(option);
+    });
+  }
 
   $("#meses").on("change", function () {
     const year = 2024; // Cambia el año si lo deseas
@@ -182,7 +178,7 @@ $(function () {
       $("#noCedula").prop("checked", false);
     }
   });
-  
+
   var boton = $('#aceptar'); // Reemplaza con el ID de tu botón
   // metodos para escuchar cambios en el dom y habilitar el boton de enviar formulario 
   // Función para verificar si todos los campos están cumplidos

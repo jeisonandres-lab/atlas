@@ -128,7 +128,7 @@ use App\Atlas\config\App;
                     <div class="container-fluid px-4">
                         <div class="container-fluid card p-2" style="background-color: #f5f5f5; box-shadow: none;">
                             <section class="card p-2" style="background-color: white; box-shadow: none;">
-                                <form action="#" class="row animate__animated animate__slideInUp contact-form form-validate d-flex justify-content-center" novalidate="novalidate" id="formulario_registro">
+                                <form action="#" class="row contact-form form-validate d-flex justify-content-center" novalidate="novalidate" id="formulario_registro">
                                     <div class="col-sm-12 col-md-7 col-lg-7 col-xl-12 col-xxl-8">
                                         <div class="row col-sm-12 col-md-7  h-100  w-100 p-2">
                                             <p class="mb-0 mt-2">Datos del Personal</p>
@@ -175,10 +175,10 @@ use App\Atlas\config\App;
 
                                             <div class="col-sm-6 col-md-4 mb-2">
                                                 <div class="form-group">
-                                                    <label for="cedula">Cédula</label>
+                                                    <label for="cedulaEdi">Cédula</label>
                                                     <div class="input-group">
                                                         <span class="input-group-text span_cedula"><i class="fa-regular fa-address-card"></i></span>
-                                                        <input type="text" class="form-control" id="cedula" name="cedula" placeholder="Cédula de Identidad" required>
+                                                        <input type="text" class="form-control" id="cedulaEdi" name="cedula" placeholder="Cédula de Identidad" required>
                                                     </div>
                                                 </div>
                                             </div>

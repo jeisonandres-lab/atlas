@@ -78,6 +78,7 @@ export function enviarDatosPersonalizados(url, datos, metodo = 'POST') {
         }
     });
 }
+
 export async function obtenerDatos(url, metodo = 'POST') {
   return new Promise((resolve, reject) => {
     $.ajax({
@@ -97,6 +98,16 @@ export async function obtenerDatos(url, metodo = 'POST') {
     });
   });
 }
+
+ function obtenerDatosJQuery(url, options = {}) {
+    return $.ajax({
+      url: url,
+      type: 'POST',
+      contentType: 'application/json',
+      data: JSON.stringify(options),
+      dataType: 'json'
+    });
+  }
 // Función para generar un hash seguro con sal
 export function generarHashContrasena(contrasena) {
     // Generar una sal aleatoria de 16 bytes (32 caracteres hexadecimales)

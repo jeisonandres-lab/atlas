@@ -41,7 +41,7 @@ use App\Atlas\config\App;
                                     <label class="form-label mb-0" for="cedula_trabajador">Cédula</label>
                                     <div class="input-group">
                                         <span class="input-group-text span_cedula_empleado "><i class="fa-regular fa-address-card"></i></span>
-                                        <input type="text" class="form-control " id="cedula_trabajador" name="cedula_familiar" placeholder="Cédula">
+                                        <input type="text" class="form-control " id="cedula_trabajador" name="cedulaEmpleado" placeholder="Cédula">
                                     </div>
                                 </div>
                                 <div class="col-sm-6 col-md-4 mb-2">

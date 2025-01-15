@@ -3,9 +3,7 @@ import { enviarFormulario, obtenerDatos } from "./ajax/formularioAjax.js";
 import {
   colocarMeses,
   colocarYear,
-  limpiarFormulario,
   valdiarCorreos,
-  validarBusquedaCedula,
   validarNombre,
   validarNumeros,
   validarSelectores,
@@ -15,6 +13,49 @@ import {
 } from "./ajax/inputs.js";
 
 $(function () {
+  validarNombre("#primerNombre", ".span_nombre");
+  validarNombre("#segundoNombre", ".span_nombre2");
+  validarNombre("#primerApellido", ".span_apellido");
+  validarNombre("#segundoApellido", ".span_apellido2");
+  validarNumeros("#cedulaEdi", ".span_cedula");
+  validarSelectores("#civil", ".span_civil");
+  validarSelectores("#ano", ".span_ano", "1");
+  validarSelectores("#dia", ".span_dia", "1");
+  valdiarCorreos("#correo", ".span_correo");
+  validarTelefono("#telefono", ".span_telefono");
+  validarSelectores("#estatus", ".span_estatus");
+  validarSelectores("#cargo", ".span_cargo");
+  validarSelectores("#departamento", ".span_departamento");
+  validarSelectores("#dependencia", ".span_dependencia");
+  validarSelectores("#academico", ".span_academico");
+  file("#contrato", ".span_contrato");
+  file("#notificacion", ".span_notificacion");
+  colocarYear("#ano", "1900");
+  colocarMeses("#meses");
+
+  const cargando = document.getElementById('cargando');
+  var boton = $('#aceptar');
+
+  function limpiarDatos() {
+    limpiarInput("#primerNombre", ".span_nombre");
+    limpiarInput("#segundoNombre", ".span_nombre2");
+    limpiarInput("#primerApellido", ".span_apellido");
+    limpiarInput("#segundoApellido", ".span_apellido2");
+    limpiarInput("#cedulaEdi", ".span_cedula");
+    limpiarInput("#civil", ".span_civil");
+    limpiarInput("#ano", ".span_ano");
+    limpiarInput("#meses", ".span_mes");
+    limpiarInput("#dia", ".span_dia");
+    limpiarInput("#contrato", ".span_contrato");
+    limpiarInput("#notificacion", ".span_notificacion");
+    limpiarInput("#telefono", ".span_telefono");
+    limpiarInput("#estatus", ".span_estatus");
+    limpiarInput("#cargo", ".span_cargo");
+    limpiarInput("#departamento", ".span_departamento");
+    limpiarInput("#dependencia", ".span_dependencia");
+    limpiarInput("#academico", ".span_academico");
+  }
+
   let table = new DataTable('#myTable', {
     responsive: true,
     ajax: {
@@ -60,18 +101,10 @@ $(function () {
   });
 
 
-
-
   // Función para cambiar la URL del AJAX y recargar la tabla
   function recargarTablaConNuevaURL(nuevaURL) {
     table.ajax.url(nuevaURL).load();
   }
-
-  // Ejemplo de uso: cambiar la URL y recargar la tabla
-  $('#botonCambiarURL').on('click', function () {
-    let nuevaURL = "php/php_datatable/data-nuevaURL.php";
-    recargarTablaConNuevaURL(nuevaURL);
-  });
 
   // Evento click para los botones de familiar
   function personalFamiliar(idPersonal) {
@@ -212,51 +245,102 @@ $(function () {
     // });
   }
 
-  async function obtenerDatosAsync(url) {
-    try {
-      const response = await fetch(url);
-      if (!response.ok) {
-        throw new Error(`Error en la solicitud: ${response.status} ${response.statusText}`);
-      }
-      const data = await response.json();
-      return data;
-    } catch (error) {
-      console.error('Error al obtener los datos:', error);
-      throw error; // Re-lanzar el error para que pueda ser manejado por el llamador
+  function obtenerDatosJQuery(url, options = {}) {
+    let formData = new FormData();
+    for (let key in options) {
+      formData.append(key, options[key]);
     }
+  
+    return $.ajax({
+      url: url,
+      type: 'POST',
+      data: formData,
+      processData: false,
+      contentType: false,
+      dataType: 'json'
+    });
   }
-
-  async function editar(idPersonal) {
+  function editar(idPersonal) {
     console.log(idPersonal);
+    limpiarDatos();
+    let urls = [
+      "src/ajax/registroPersonal.php?modulo_personal=obtenerDependencias",
+      "src/ajax/registroPersonal.php?modulo_personal=obtenerEstatus",
+      "src/ajax/registroPersonal.php?modulo_personal=obtenerCargo",
+      "src/ajax/registroPersonal.php?modulo_personal=obtenerDepartamento",
+      "src/ajax/registroPersonal.php?modulo_personal=obtenerDatosPersonal"
+    ];
 
-    let url_dependencias = "src/ajax/registroPersonal.php?modulo_personal=obtenerDependencias";
-    // try {
-    //     const data = await obtenerDatosAsync(url_dependencias);
-    //     if (data.exito && data.data) {
-    //         llenarSelectDependencias(data.data);
-    //     } else {
-    //         console.error('Error al obtener dependencias o la estructura de la respuesta es incorrecta');
-    //     }
-    // } catch (error) {
-    //     console.error('Error al obtener los datos:', error);
-    // }
+    let options = { cedulaEmpleado: idPersonal };
+    let requests = urls.map((url, index) => {
+      if (index === 4) { // Suponiendo que quieres pasar `options` solo a la primera solicitud
+        return obtenerDatosJQuery(url, options);
+      } else {
+        return obtenerDatosJQuery(url);
+      }
+    });
+    $.when(...requests).done((dependencias, estatus, cargo, departamento, datosPersonal) => {
+
+
+      if (dependencias[0].exito && dependencias[0].data) {
+        llenarSelectDependencias(dependencias[0].data, 'dependencia');
+      } else {
+        console.error('Error al obtener dependencias o la estructura de la respuesta es incorrecta');
+      }
+
+      if (estatus[0].exito && estatus[0].data) {
+        llenarSelectDependencias(estatus[0].data, 'estatus');
+      } else {
+        console.error('Error al obtener los estatus o la estructura de la respuesta es incorrecta');
+      }
+
+      if (cargo[0].exito && cargo[0].data) {
+        llenarSelectDependencias(cargo[0].data, 'cargo');
+      } else {
+        console.error('Error al obtener los cargos o la estructura de la respuesta es incorrecta');
+      }
+
+      if (departamento[0].exito && departamento[0].data) {
+        llenarSelectDependencias(departamento[0].data, 'departamento');
+      } else {
+        console.error('Error al obtener departamento o la estructura de la respuesta es incorrecta');
+      }
+
+      if (datosPersonal[0].exito) {
+        $("#primerNombre").val(datosPersonal[0].nombre);
+        $("#segundoNombre").val(datosPersonal[0].segundoNombre);
+        $("#primerApellido").val(datosPersonal[0].apellido);
+        $("#segundoApellido").val(datosPersonal[0].segundoApellido);
+        $("#cedulaEdi").val(datosPersonal[0].cedula);
+        $("#ano").val(datosPersonal[0].anoNacimiento);
+        $("#meses").val(datosPersonal[0].mesNacimiento);
+        $("#dia").val(datosPersonal[0].diaNacimiento);
+        $("#telefono").val(datosPersonal[0].telefono);
+      } else {
+        console.error('Error al obtener datos personales o la estructura de la respuesta es incorrecta');
+      }
+    }).fail((jqXHR, textStatus, errorThrown) => {
+      console.error('Error al obtener los datos:', textStatus, errorThrown);
+    });
   }
 
-  // async function llenarSelectDependencias(dependencias) {
-  //     const select = document.getElementById('dependencia'); // Asegúrate de que el ID del select sea correcto
-  //     if (!select) {
-  //         console.error('El elemento select con el ID "dependencia" no se encontró en el DOM.');
-  //         return;
-  //     }
-  //     select.innerHTML = ''; // Limpia el select antes de llenarlo
-  //     dependencias.forEach(dependencia => {
-  //         const option = document.createElement('option');
-  //         option.value = dependencia.iddepartamento;
-  //         option.text = dependencia.departamento;
-  //         select.appendChild(option);
-  //     });
-  // }
+  async function llenarSelectDependencias(data, selectId) {
 
+    const select = document.getElementById(selectId);
+    console.log(data);
+    // Asegúrate de que el ID del select sea correcto
+    if (!select) {
+      console.error(`El elemento select con el ID "${selectId}" no se encontró en el DOM.`);
+      return;
+    }
+
+    data.forEach(item => {
+      const option = document.createElement('option');
+      option.value = item.id;
+      option.text = item.value;
+      select.appendChild(option);
+    });
+  }
 
   function eliminar(idPersonal) {
     console.log(idPersonal);
@@ -282,6 +366,42 @@ $(function () {
     aletaCheck(messenger, icons, position, enviar);
   }
 
+  function todosCumplidos() {
+    const elementosCumplidos = $('form input, form select').filter('.cumplido, .cumplidoNormal');
+    return elementosCumplidos.length === $('form input, form select').length;
+  }
+
+  // Función para habilitar o deshabilitar el botón
+  function habilitarBoton() {
+    boton.prop('disabled', !todosCumplidos());
+  }
+
+  // Función de debounce para limitar la frecuencia de ejecución
+  function debounce(func, wait) {
+    let timeout;
+    return function (...args) {
+      clearTimeout(timeout);
+      timeout = setTimeout(() => func.apply(this, args), wait);
+    };
+  }
+
+  // Crear una instancia de MutationObserver y observar cambios
+  const observer = new MutationObserver(debounce((mutationsList, observer) => {
+    for (const mutation of mutationsList) {
+      if (mutation.type === 'childList' || mutation.type === 'attributes') {
+        // formulario de registro
+        habilitarBoton();
+      }
+    }
+  }, 300)); // Ajusta el tiempo de espera según sea necesario
+
+
+  // Configurar el observer para observar cambios en los hijos y atributos del formulario
+  const config = { childList: true, attributes: true, subtree: true };
+
+  // Seleccionar el formulario y comenzar a observar
+  const form = document.querySelector('form');
+  observer.observe(form, config);
 
   $('#myTable').on('click', '.btn-familiar', function () {
     let idPersonal = $(this).data('id');
@@ -289,7 +409,7 @@ $(function () {
   });
 
   $('#myTable').on('click', '.btnEditar', function () {
-    let idPersonal = $(this).data('id');
+    let idPersonal = $(this).data('cedula');
     editar(idPersonal);
   });
 
@@ -297,7 +417,6 @@ $(function () {
     let idPersonal = $(this).data('id');
     eliminar(idPersonal);
   });
-
 
   $('#myTable2').on('click', '.botondocumet', function () {
     let doc = $(this).data('doc');
@@ -307,16 +426,6 @@ $(function () {
   $(window).resize(function () {
     table.ajax.reload(null, false); // Recarga la tabla sin reiniciar la paginación
   });
-
-
-  const cargando = document.getElementById('cargando');
-
-
-  // formulario de empleados
-
-
-  // formulario de empleado
-
 
   $("#meses").on("change", function () {
     const year = 2024; // Cambia el año si lo deseas
@@ -386,86 +495,8 @@ $(function () {
     }
   });
 
-  var boton = $('#aceptar'); // Reemplaza con el ID de tu botón
-  // metodos para escuchar cambios en el dom y habilitar el boton de enviar formulario 
-  // Función para verificar si todos los campos están cumplidos
-  function todosCumplidos() {
-    const elementosCumplidos = $('form input, form select').filter('.cumplido, .cumplidoNormal');
-    return elementosCumplidos.length === $('form input, form select').length;
-  }
-
-  // Función para habilitar o deshabilitar el botón
-  function habilitarBoton() {
-    boton.prop('disabled', !todosCumplidos());
-  }
-
-  // Función de debounce para limitar la frecuencia de ejecución
-  function debounce(func, wait) {
-    let timeout;
-    return function (...args) {
-      clearTimeout(timeout);
-      timeout = setTimeout(() => func.apply(this, args), wait);
-    };
-  }
-
-  // Crear una instancia de MutationObserver y observar cambios
-  const observer = new MutationObserver(debounce((mutationsList, observer) => {
-    for (const mutation of mutationsList) {
-      if (mutation.type === 'childList' || mutation.type === 'attributes') {
-        // formulario de registro
-        validarNombre("#primerNombre", ".span_nombre");
-        validarNombre("#segundoNombre", ".span_nombre2");
-        validarNombre("#primerApellido", ".span_apellido");
-        validarNombre("#segundoApellido", ".span_apellido2");
-        validarNumeros("#cedula", ".span_cedula");
-        validarBusquedaCedula("#cedula", ["#img-modals", "#img-contener"]);
-        validarSelectores("#civil", ".span_civil");
-        validarSelectores("#ano", ".span_ano", "1");
-        validarSelectores("#dia", ".span_dia", "1");
-        valdiarCorreos("#correo", ".span_correo");
-        colocarYear("#ano", "1900");
-        colocarMeses("#meses");
-        validarTelefono("#telefono", ".span_telefono");
-        validarSelectores("#estatus", ".span_estatus");
-        validarSelectores("#cargo", ".span_cargo");
-        validarSelectores("#departamento", ".span_departamento");
-        validarSelectores("#dependencia", ".span_dependencia");
-        validarSelectores("#academico", ".span_academico");
-        file("#contrato", ".span_contrato");
-        file("#notificacion", ".span_notificacion");
-        habilitarBoton();
-      }
-    }
-  }, 300)); // Ajusta el tiempo de espera según sea necesario
-
-
-  // Configurar el observer para observar cambios en los hijos y atributos del formulario
-  const config = { childList: true, attributes: true, subtree: true };
-
-  // Seleccionar el formulario y comenzar a observar
-  const form = document.querySelector('form');
-  observer.observe(form, config);
-
-
   $("#limpiar").on("click", function () {
-    limpiarInput("#primerNombre", ".span_nombre");
-    limpiarInput("#segundoNombre", ".span_nombre2");
-    limpiarInput("#primerApellido", ".span_apellido");
-    limpiarInput("#segundoApellido", ".span_apellido2");
-    limpiarInput("#cedula", ".span_cedula");
-    limpiarInput("#civil", ".span_civil");
-    limpiarInput("#ano", ".span_ano");
-    limpiarInput("#meses", ".span_mes");
-    limpiarInput("#dia", ".span_dia");
-    limpiarInput("#contrato", ".span_contrato");
-    limpiarInput("#notificacion", ".span_notificacion");
-    limpiarInput("#telefono", ".span_telefono");
-    limpiarInput("#estatus", ".span_estatus");
-    limpiarInput("#cargo", ".span_cargo");
-    limpiarInput("#departamento", ".span_departamento");
-    limpiarInput("#dependencia", ".span_dependencia");
-    limpiarInput("#academico", ".span_academico");
-    $(".imgFoto").remove();
+    limpiarDatos();
   });
 
 });
