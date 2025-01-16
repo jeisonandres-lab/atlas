@@ -10,7 +10,13 @@ class  userController extends userModel
 
     private $app2;
 
+    private $app;
 
+    public function __construct()
+    {
+        parent::__construct();
+        $this->app = new App();
+    }
     public function logearse(string $user, string $password)
     {
         $data_json = [
@@ -44,8 +50,7 @@ class  userController extends userModel
                             $data_json['mensaje'] = 'Usuario no coincide';
                         }
                     }
-
-                }else{
+                } else {
                     $data_json["mensaje"] = "El usuario no existe";
                 }
             }
@@ -66,18 +71,32 @@ class  userController extends userModel
         }
     }
 
-    public function getApp() {
+    public function cerrarSession_total($url){
+        $this->app->cerrarSession();
+        if ($url) {
+            $datos = [
+                'url' => $url
+            ];
+            header('Content-Type: application/json');
+            echo json_encode($datos);
+        } else {
+        }
+    }
+
+    public function getApp()
+    {
         return $this->app2 = new App();
     }
 
-    public function getIniciarSession(){
+    public function getIniciarSession()
+    {
         $appuser = $this->getApp();
         return $appuser->iniciarSession();
     }
 
-    public function getIniciarName(){
+    public function getIniciarName()
+    {
         $appuser = $this->getApp();
         return $appuser->iniciarName();
     }
-
 }

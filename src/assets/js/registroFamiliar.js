@@ -1,4 +1,4 @@
-import { aletaCheck } from "./ajax/alerts.js";
+import { alertaNormalmix, AlertSW2, aletaCheck } from "./ajax/alerts.js";
 import { enviarFormulario, obtenerDatos } from "./ajax/formularioAjax.js";
 import {
   colocarMeses,
@@ -10,6 +10,7 @@ import {
   validarTelefono,
   file,
   limpiarInput,
+  colocarNivelesEducativos,
 } from "./ajax/inputs.js";
 
 $(function () {
@@ -19,8 +20,8 @@ $(function () {
   validarNombre("#segundoApellido", ".span_apellido2");
   validarNumeros("#cedulaEdi", ".span_cedula");
   validarSelectores("#civil", ".span_civil");
-  validarSelectores("#ano", ".span_ano", "1");
-  validarSelectores("#dia", ".span_dia", "1");
+  validarSelectores("#ano2", ".span_ano", "1");
+  validarSelectores("#dia2", ".span_dia", "1");
   valdiarCorreos("#correo", ".span_correo");
   validarTelefono("#telefono", ".span_telefono");
   validarSelectores("#estatus", ".span_estatus");
@@ -30,8 +31,10 @@ $(function () {
   validarSelectores("#academico", ".span_academico");
   file("#contrato", ".span_contrato");
   file("#notificacion", ".span_notificacion");
-  colocarYear("#ano", "1900");
-  colocarMeses("#meses");
+  colocarYear("#ano2", "1900");
+  colocarMeses("#meses2");
+  colocarNivelesEducativos("#academico");
+ 
 
   const cargando = document.getElementById('cargando');
   var boton = $('#aceptar');
@@ -43,9 +46,6 @@ $(function () {
     limpiarInput("#segundoApellido", ".span_apellido2");
     limpiarInput("#cedulaEdi", ".span_cedula");
     limpiarInput("#civil", ".span_civil");
-    limpiarInput("#ano", ".span_ano");
-    limpiarInput("#meses", ".span_mes");
-    limpiarInput("#dia", ".span_dia");
     limpiarInput("#contrato", ".span_contrato");
     limpiarInput("#notificacion", ".span_notificacion");
     limpiarInput("#telefono", ".span_telefono");
@@ -53,7 +53,10 @@ $(function () {
     limpiarInput("#cargo", ".span_cargo");
     limpiarInput("#departamento", ".span_departamento");
     limpiarInput("#dependencia", ".span_dependencia");
-    limpiarInput("#academico", ".span_academico");
+    // limpiarInput("#ano2", ".span_ano");
+    // limpiarInput("#meses2", ".span_mes");
+    // limpiarInput("#dia2", ".span_dia");
+    // limpiarInput("#academico", ".span_academico");
   }
 
   let table = new DataTable('#myTable', {
@@ -216,33 +219,33 @@ $(function () {
       let cedula = $(this).data('cedula');
     })
 
-    // subDirs.forEach(subDir => {
-    //   const filePath = `${baseDir}${subDir}/${doc}`;
-    //   $.ajax({
-    //     url: filePath,
-    //     type: 'HEAD', // Usamos HEAD para verificar si el archivo existe sin descargarlo
-    //     success: function () {
-    //       if (!found) {
-    //         found = true;
-    //         console.log("Archivo encontrado en:", filePath);
-    //         // Crear un enlace temporal para descargar el archivo
-    //         const link = document.createElement('a');
-    //         link.target = "_blank";
-    //         link.href = filePath;
-    //         document.body.appendChild(link);
-    //         link.click();
-    //         document.body.removeChild(link);
-    //       }
-    //     },
-    //     error: function () {
-    //       pendingRequests--;
-    //       if (pendingRequests === 0 && !found) {
-    //         alert("No se consiguió el archivo: " + doc);
-    //       }
-    //       // No imprimir el error en la consola
-    //     }
-    //   });
-    // });
+    subDirs.forEach(subDir => {
+      const filePath = `${baseDir}${subDir}/${doc}`;
+      $.ajax({
+        url: filePath,
+        type: 'HEAD', // Usamos HEAD para verificar si el archivo existe sin descargarlo
+        success: function () {
+          if (!found) {
+            found = true;
+            console.log("Archivo encontrado en:", filePath);
+            // Crear un enlace temporal para descargar el archivo
+            const link = document.createElement('a');
+            link.target = "_blank";
+            link.href = filePath;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+          }
+        },
+        error: function () {
+          pendingRequests--;
+          if (pendingRequests === 0 && !found) {
+            alert("No se consiguió el archivo: " + doc);
+          }
+          // No imprimir el error en la consola
+        }
+      });
+    });
   }
 
   function obtenerDatosJQuery(url, options = {}) {
@@ -262,7 +265,6 @@ $(function () {
   }
   function editar(idPersonal) {
     console.log(idPersonal);
-    limpiarDatos();
     let urls = [
       "src/ajax/registroPersonal.php?modulo_personal=obtenerDependencias",
       "src/ajax/registroPersonal.php?modulo_personal=obtenerEstatus",
@@ -312,10 +314,25 @@ $(function () {
         $("#primerApellido").val(datosPersonal[0].apellido);
         $("#segundoApellido").val(datosPersonal[0].segundoApellido);
         $("#cedulaEdi").val(datosPersonal[0].cedula);
-        $("#ano").val(datosPersonal[0].anoNacimiento);
-        $("#meses").val(datosPersonal[0].mesNacimiento);
-        $("#dia").val(datosPersonal[0].diaNacimiento);
         $("#telefono").val(datosPersonal[0].telefono);
+        $("#civil").val(datosPersonal[0].estadoCivil);
+
+        // se marcar cumplido logrado
+        $("#cedula_trabajador").addClass("cedulaBusqueda");
+        $("#primerNombre").addClass("cumplido");
+        $("#segundoNombre").addClass("cumplido");
+        $("#primerApellido").addClass("cumplido");
+        $("#segundoApellido").addClass("cumplido");
+        $("#cedulaEdi").addClass("cumplido");
+        $("#telefono").addClass("cumplido");
+
+        $(".span_nombre").addClass("cumplido_span");
+        $(".span_nombre2").addClass("cumplido_span");
+        $(".span_apellido").addClass("cumplido_span");
+        $(".span_apellido2").addClass("cumplido_span");
+        $(".span_cedula").addClass("cumplido_span");
+        $(".span_telefono").addClass("cumplido_span");
+
       } else {
         console.error('Error al obtener datos personales o la estructura de la respuesta es incorrecta');
       }
@@ -349,12 +366,38 @@ $(function () {
 
     function callbackExito(parsedData) {
       // Manejar la respuesta exitosa aquí
-      console.log(parsedData);
       $('#myTable').DataTable().ajax.reload(null, false);
+      AlertSW2("success", "Empleado Eliminado Con exito", "top", 3000);
+      
     }
 
     function enviar() {
       let destino = "src/ajax/registroPersonal.php?modulo_personal=eliminarPersonal";
+      let url = destino;
+      enviarFormulario(url, formData, callbackExito, true);
+    }
+    // parametros para la alerta
+    let messenger = 'Estás a punto de <b class="text-danger"><i class="fa-solid fa-xmark"></i> <u>eliminar</u></b> este registro. ¿Deseas continuar?';
+    let icons = 'warning';
+    let position = 'center';
+
+    aletaCheck(messenger, icons, position, enviar);
+  }
+
+  function eliminarFamiliar(idPersonal) {
+    console.log(idPersonal);
+    let formData = new FormData();
+    formData.append('id', idPersonal); // Añadir idPersonal al FormData
+
+    function callbackExito(parsedData) {
+      // Manejar la respuesta exitosa aquí
+      $('#myTable').DataTable().ajax.reload(null, false);
+      AlertSW2("success", "Empleado Eliminado Con exito", "top", 3000);
+      
+    }
+
+    function enviar() {
+      let destino = "src/ajax/registroPersonal.php?modulo_personal=eliminarFamiliar";
       let url = destino;
       enviarFormulario(url, formData, callbackExito, true);
     }
@@ -418,18 +461,37 @@ $(function () {
     eliminar(idPersonal);
   });
 
+  $('#myTable2').on('click', '.btnEliminar', function () {
+    let idPersonal = $(this).data('id');
+    eliminarFamiliar(idPersonal);
+  });
+
   $('#myTable2').on('click', '.botondocumet', function () {
     let doc = $(this).data('doc');
     DescargarDocumento(doc);
   });
 
+  // $('#formularioActualizar').on("submit", function (event) {
+  //   event.preventDefault();
+  //   const formData = new FormData(this);
+  //   const accion = $(this).find('button[type="submit"]:focus').attr('name');
+  //   console.log(accion)
+     
+  //     function callbackExito(parsedData) {
+  //     }
+  //     let destino = "src/ajax/registroPersonal.php?modulo_personal=actualizarPersonal";
+  //     let url = destino;
+  //     enviarFormulario(url, formData, callbackExito, true);
+
+  // });
+
   $(window).resize(function () {
     table.ajax.reload(null, false); // Recarga la tabla sin reiniciar la paginación
   });
 
-  $("#meses").on("change", function () {
+  $("#meses2").on("change", function () {
     const year = 2024; // Cambia el año si lo deseas
-    const month = $("#meses").val();
+    const month = $("#meses2").val();
     if (month == "") {
       $(this).removeClass("cumplido");
       $(this).addClass("error_input");
@@ -441,10 +503,10 @@ $(function () {
       // Obtener el número de días en el mes seleccionado
       const daysInMonth = new Date(year, monthWithoutLeadingZero, 0).getDate(); // Restamos 1 al mes porque JavaScript cuenta los meses desde 0
       // Generar las opciones de los días
-      $("#dia").empty(); // Limpiar las opciones anteriores
+      $("#dia2").empty(); // Limpiar las opciones anteriores
       for (let i = 1; i <= daysInMonth; i++) {
         const diaFormateado = i.toString().padStart(2, "0");
-        $("#dia").append(
+        $("#dia2").append(
           '<option value="' + diaFormateado + '">' + diaFormateado + "</option>"
         );
       }
@@ -455,27 +517,29 @@ $(function () {
     }
   });
 
-  $("#meses").trigger("input");
-  validarSelectores("#dia", ".span_dia", "1");
+  $("#meses2").trigger("input");
+  validarSelectores("#dia2", ".span_dia", "1");
 
-  $("#formulario_registro").on("submit", function (e) {
+  $("#formularioActualizar").on("submit", function (e) {
     e.preventDefault();
     const data = new FormData(this);
-    const url = "src/ajax/registroPersonal.php?modulo_personal=registrar";
+    const url = "src/ajax/registroPersonal.php?modulo_personal=actualizarPersonal";
     $("#aceptar").prop("disabled", true);
 
     function callbackExito(parsedData) {
       let dataerror = parsedData.error;
       $("#aceptar").prop("disabled", false);
       console.log(parsedData);
-      if (parsedData.personalEncontrado) {
-        $("#alerta").slideDown('slow', 'swing').delay(10000).slideUp();
-      }
-      else if (dataerror) {
+      if (parsedData.exito) {
+        AlertSW2("success", "Empleado Actualizado Con Exito", "top-end", 3000);
+      }else{
         alertaNormalmix(parsedData.mensaje, 4000, "error", "top-end")
-      } else {
-        alertaNormalmix(parsedData.mensaje, 4000, "success", "top-end")
       }
+      // else if (dataerror) {
+      //   alertaNormalmix(parsedData.mensaje, 4000, "error", "top-end")
+      // } else {
+      //   alertaNormalmix(parsedData.mensaje, 4000, "success", "top-end")
+      // }
       // const myModal = new bootstrap.Modal(document.getElementById('modal'));
       // myModal.show();
     }
@@ -495,6 +559,9 @@ $(function () {
     }
   });
 
+  $(".cerrarEditar").on("click", function () {
+    limpiarDatos();
+  });
   $("#limpiar").on("click", function () {
     limpiarDatos();
   });

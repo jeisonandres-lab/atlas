@@ -20,6 +20,7 @@ class viewModel extends error
             'registrosFamiliares' => "src/views/personal/registrosFamiliares.php",
             'editarRegistro' => "src/views/personal/editarRegistro.php",
             'familiares' => "src/views/personal/familiares.php",
+            'ausencia' => "src/views/ausencia/ausencia.php",
             'error' => "src/error/error.html",
         ];
         // Obtener la ruta completa de la vista

@@ -59,7 +59,7 @@ use App\Atlas\config\App;
                             <div class="form-group">
                                 <label for="primerNombre">Primer Nombre</label>
                                 <div class="input-group">
-                                    <span class="input-group-text span_nombre"><i class="fa-regular fa-user"></i></span>
+                                    <span class="input-group-text span_nombre"><i class="icons fa-regular fa-user"></i></span>
                                     <input type="text" class="form-control" id="primerNombre" name="primerNombre" placeholder="Primer Nombre" required>
                                 </div>
                             </div>
@@ -69,7 +69,7 @@ use App\Atlas\config\App;
                             <div class="form-group">
                                 <label for="segundoNombre">Segundo Nombre</label>
                                 <div class="input-group ">
-                                    <span class="input-group-text span_nombre2"><i class="fa-regular fa-user"></i></span>
+                                    <span class="input-group-text span_nombre2"><i class="icons fa-regular fa-user"></i></span>
                                     <input type="text" class="form-control" id="segundoNombre" name="segundoNombre" placeholder="Segundo Nombre" required>
                                 </div>
                             </div>
@@ -79,7 +79,7 @@ use App\Atlas\config\App;
                             <div class="form-group">
                                 <label for="primerApellido">Primer Apellido</label>
                                 <div class="input-group">
-                                    <span class="input-group-text span_apellido"><i class="fa-regular fa-user"></i></span>
+                                    <span class="input-group-text span_apellido"><i class="icons fa-regular fa-user"></i></span>
                                     <input type="text" class="form-control" id="primerApellido" name="primerApellido" placeholder="Primer Apellido" required>
                                 </div>
                             </div>
@@ -89,7 +89,7 @@ use App\Atlas\config\App;
                             <div class="form-group">
                                 <label for="segundoApellido">Segundo Apellido</label>
                                 <div class="input-group">
-                                    <span class="input-group-text span_apellido2"><i class="fa-regular fa-user"></i></span>
+                                    <span class="input-group-text span_apellido2"><i class="icons fa-regular fa-user"></i></span>
                                     <input type="text" class="form-control" id="segundoApellido" name="segundoApellido" placeholder="segundo Apellido" required>
                                 </div>
                             </div>
@@ -99,7 +99,7 @@ use App\Atlas\config\App;
                             <div class="form-group">
                                 <label for="cedula">Cédula</label>
                                 <div class="input-group">
-                                    <span class="input-group-text span_cedula"><i class="fa-regular fa-address-card"></i></span>
+                                    <span class="input-group-text span_cedula"><i class="icons fa-regular fa-address-card"></i></span>
                                     <input type="text" class="form-control" id="cedula" name="cedula" placeholder="Cédula de Identidad" required>
                                 </div>
                             </div>
@@ -109,7 +109,7 @@ use App\Atlas\config\App;
                             <div class="form-group">
                                 <label for="civil">Estado civil</label>
                                 <div class="input-group">
-                                    <span class="input-group-text span_civil"><i class="fa-regular fa-clipboard"></i></span>
+                                    <span class="input-group-text span_civil"><i class="icons fa-regular fa-clipboard"></i></span>
                                     <select class="form-select form-select-md estado-civil" id="civil" name="civil" aria-label="Small select example" aria-placeholder="dasdas" required>
                                         <option value="">Estado civil</option>
                                         <option value="soltero">Soltero</option>
@@ -125,7 +125,7 @@ use App\Atlas\config\App;
                             <div class="form-group">
                                 <label for="correo">Correo</label>
                                 <div class="input-group">
-                                    <span class="input-group-text span_correo"><i class="fa-regular fa-envelope"></i></span>
+                                    <span class="input-group-text span_correo"><i class="icons fa-regular fa-envelope"></i></span>
                                     <input type="email" class="form-control" id="correo" name="correo" placeholder="Correo Electronico" required>
                                 </div>
                             </div>
@@ -138,7 +138,7 @@ use App\Atlas\config\App;
                             <div class="form-group">
                                 <label class="required-field" for="ano">Año</label>
                                 <div class="input-group">
-                                    <span class="input-group-text span_ano"><i class="fa-regular fa-calendar"></i></i></span>
+                                    <span class="input-group-text span_ano"><i class="icons fa-regular fa-calendar"></i></i></span>
                                     <select class="form-select form-select-md" name="ano" id="ano" required></select>
                                 </div>
                             </div>
@@ -148,7 +148,7 @@ use App\Atlas\config\App;
                             <div class="form-group">
                                 <label class="required-field" for="meses">Mes</label>
                                 <div class="input-group">
-                                    <span class="input-group-text span_mes"><i class="fa-regular fa-calendar"></i></i></span>
+                                    <span class="input-group-text span_mes"><i class="icons fa-regular fa-calendar"></i></i></span>
                                     <select class="form-select" id="meses" name="meses" aria-label="Default select example" required></select>
                                 </div>
                             </div>
@@ -158,7 +158,7 @@ use App\Atlas\config\App;
                             <div class="form-group ">
                                 <label class="required-field" for="dia">Día</label>
                                 <div class="input-group">
-                                    <span class="input-group-text span_dia"><i class="fa-regular fa-calendar"></i></i></span>
+                                    <span class="input-group-text span_dia"><i class="icons fa-regular fa-calendar"></i></i></span>
                                     <select class="form-select w-5" id="dia" name="dia" aria-label="Default select example" required></select>
                                 </div>
                             </div>
@@ -171,7 +171,7 @@ use App\Atlas\config\App;
                             <div class="form-group">
                                 <label for="contrato">Contrato</label>
                                 <div class="input-group">
-                                    <span class="input-group-text span_contrato"><i class="fa-regular fa-file-zipper"></i></span>
+                                    <span class="input-group-text span_contrato"><i class="icons fa-regular fa-file-zipper"></i></span>
                                     <input type="file" class="form-control" name="contratoArchivo" id="contrato" aria-describedby="inputGroupFileAddon04" aria-label="Upload" required>
                                 </div>
                             </div>
@@ -181,7 +181,7 @@ use App\Atlas\config\App;
                             <div class="form-group">
                                 <label for="notificacion">Notificación</label>
                                 <div class="input-group">
-                                    <span class="input-group-text span_notificacion"><i class="fa-regular fa-file-zipper"></i></span>
+                                    <span class="input-group-text span_notificacion"><i class="icons fa-regular fa-file-zipper"></i></span>
                                     <input type="file" name="notacionAchivo" class="form-control" id="notificacion" aria-describedby="inputGroupFileAddon04" aria-label="Upload" required>
                                 </div>
                             </div>
@@ -190,7 +190,7 @@ use App\Atlas\config\App;
                         <div class="col-sm-5 mb-2">
                             <label class="form-label mb-0" for="telefono">N.Telefono</label>
                             <div class="input-group">
-                                <span class="input-group-text span_telefono"><i class="fa-regular fa-user"></i></span>
+                                <span class="input-group-text span_telefono"><i class="icons fa-regular fa-mobile-notch"></i></span>
                                 <input type="text" class="form-control" id="telefono" name="telefono" placeholder="Telefono" required>
                             </div>
                         </div>
@@ -199,7 +199,7 @@ use App\Atlas\config\App;
                             <div class="form-group">
                                 <label for="estatus">Estatus</label>
                                 <div class="input-group">
-                                    <span class="input-group-text span_estatus"><i class="fa-regular fa-clipboard"></i></span>
+                                    <span class="input-group-text span_estatus"><i class="icons fa-regular fa-clipboard"></i></span>
                                     <select class="form-select form-select-md estado-estatus" id="estatus" name="estatus" aria-label="Small select example" aria-placeholder="dasdas" required>
                                         <option value="">Selecione un estatus</option>
                                     </select>
@@ -211,7 +211,7 @@ use App\Atlas\config\App;
                             <div class="form-group">
                                 <label for="cargo">Cargo</label>
                                 <div class="input-group">
-                                    <span class="input-group-text span_cargo"><i class="fa-regular fa-clipboard"></i></span>
+                                    <span class="input-group-text span_cargo"><i class="icons fa-duotone fa-regular fa-arrows-down-to-people"></i></span>
                                     <select class="form-select form-select-md estado-cargo" id="cargo" name="cargo" aria-label="Small select example" aria-placeholder="dasdas" required>
                                         <option value="">Selecione un cargo</option>
                                     </select>
@@ -223,7 +223,7 @@ use App\Atlas\config\App;
                             <div class="form-group">
                                 <label for="departamento">Departamento</label>
                                 <div class="input-group">
-                                    <span class="input-group-text span_departamento"><i class="fa-regular fa-clipboard"></i></span>
+                                    <span class="input-group-text span_departamento"><i class="icons fa-regular fa-building-user"></i></span>
                                     <select class="form-select form-select-md estado-departamento" id="departamento" name="departamento" aria-label="Small select example" aria-placeholder="dasdas" required>
                                         <option value="">Selecione un departamento</option>d
                                     </select>
@@ -233,9 +233,9 @@ use App\Atlas\config\App;
 
                         <div class="col-sm-12 mb-2">
                             <div class="form-group">
-                                <label for="dependencia">Estado dependencia</label>
+                                <label for="dependencia">Dependencia</label>
                                 <div class="input-group">
-                                    <span class="input-group-text span_dependencia"><i class="fa-regular fa-clipboard"></i></span>
+                                    <span class="input-group-text span_dependencia"><i class="icons fa-regular fa-building-memo"></i></span>
                                     <select class="form-select form-select-md estado-dependencia" id="dependencia" name="dependencia" aria-label="Small select example" aria-placeholder="dasdas" required>
                                         <option value="">Selecione la dependencia</option>
                                     </select>
@@ -247,8 +247,8 @@ use App\Atlas\config\App;
                             <div class="form-group">
                                 <label for="academico">Nivel Academico</label>
                                 <div class="input-group">
-                                    <span class="input-group-text span_academico"><i class="fa-regular fa-user-graduate"></i></span>
-                                    <select class="form-select form-select-md" id="academico" name="nivel_academico">
+                                    <span class="input-group-text span_academico"><i class="icons fa-regular fa-user-graduate"></i></span>
+                                    <select class="form-select form-select-md" id="academico" name="nivelAcademico">
                                         <option value="">Nivel Academico</option>
                                         <option value="bachiller">Bachiller</option>
                                         <option value="tecnico">Técnico</option>
@@ -264,7 +264,7 @@ use App\Atlas\config\App;
                         </div>
 
                         <div class="col-sm-12 mt-3 ">
-                            <button type="button" id="aceptar" name="submit" data-bs-toggle="modal" data-bs-target="#estadosInfor" class="btn btn-primary" disabled>
+                            <button type="submit" id="aceptar" name="submit"  class="btn btn-primary" disabled>
                                 <i class="fa-solid fa-plus me-2"></i>
                                 Aceptar
                             </button>

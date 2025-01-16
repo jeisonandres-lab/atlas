@@ -12,6 +12,9 @@ body::-webkit-scrollbar {
   display: none;
 }
 
+.icons{
+  color: #707070;
+}
 .row {
   margin: 0px !important;
 }

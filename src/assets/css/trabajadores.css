@@ -12,6 +12,10 @@ body::-webkit-scrollbar {
   display: none;
 }
 
+.icons{
+  color: #707070;
+}
+
 .content{
   border-width: 1px !important;
   border-color: #dee2e6 rgba(0, 0, 0, 0.175) !important;

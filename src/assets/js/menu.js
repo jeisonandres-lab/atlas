@@ -1,10 +1,12 @@
+import { enviarDatos } from "./ajax/formularioAjax.js";
+
 const body = document.querySelector("body");
 const main = document.querySelector("main");
 const footer = document.querySelector("footer");
 const darkLight = document.querySelector("#darkLight");
 const sidebar = document.querySelector(".sidebar");
 const submenuItems = document.querySelectorAll(".submenu_item");
-
+const cerrarSession = document.querySelector("#cerrarSession");
 sidebar.addEventListener("mouseenter", () => {
   if (sidebar.classList.contains("hoverable")) {
     sidebar.classList.remove("close");
@@ -54,6 +56,12 @@ function agregarClaseActive(ultimoSegmentoUrl) {
   }
 }
 
+cerrarSession.addEventListener("click", () => {
+  const url = "./src/ajax/userAjax.php?modulo_usuario=cerrarSession";
+  let formData = new FormData();
+  formData.append('url', `Identificarse`);
+  enviarDatos(url, formData);
+});
 // Obtenemos el último segmento de la URL (como en tu código anterior)
 let urlActual = window.location.pathname;
 let partesUrl = urlActual.split('/');

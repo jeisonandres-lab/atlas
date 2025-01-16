@@ -27,6 +27,7 @@ $ano = isset($_POST['ano']) ? $conexion->limpiarCadena($_POST['ano']) : "";
 $mes = isset($_POST['meses']) ? $_POST['meses'] : "";
 $dia = isset($_POST['dia']) ? $conexion->limpiarCadena($_POST['dia']) : "";
 $edad = isset($_POST['edad']) ? $conexion->limpiarCadena($_POST['edad']) : "";
+$nivelAcademico = isset($_POST['nivelAcademico']) ? $conexion->limpiarCadena($_POST['nivelAcademico']) : "";
 
 // DATOS PARA REGISTRAR EMPELADO
 $idPersonal = isset($_POST['id']) ? $conexion->limpiarCadena($_POST['id']) : "";
@@ -56,7 +57,8 @@ switch ($_GET['modulo_personal']) {
             $idCargo,
             $idDependencia,
             $idDepartamento,
-            $telefono
+            $telefono,
+            $nivelAcademico
         );
         break;
     case 'obtenerDependencias':
@@ -76,7 +78,7 @@ switch ($_GET['modulo_personal']) {
         break;
     case 'registrarFamilia':
         $personal->registrarFamilia(
-            $cedula_familiar,
+            $cedulaEmpleado,
             $primerNombre,
             $segundoNombre,
             $primerApellido,
@@ -100,7 +102,29 @@ switch ($_GET['modulo_personal']) {
     case 'eliminarPersonal':
         $personal->eliminarPersonal($idPersonal);
         break;
-
+        case 'eliminarFamiliar':
+            $personal->eliminarFamiliar($idPersonal);
+            break;
+    case 'actualizarPersonal':
+        $personal->actualizarPersonal(
+            $primerNombre,
+            $segundoNombre,
+            $primerApellido,
+            $segundoApellido,
+            $cedula,
+            $civil,
+            $correo,
+            $ano,
+            $mes,
+            $dia,
+            $idEstatus,
+            $idCargo,
+            $idDependencia,
+            $idDepartamento,
+            $telefono,
+            $nivelAcademico
+        );
+        break;
     default:
 
         # code...

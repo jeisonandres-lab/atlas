@@ -99,12 +99,18 @@ export async function obtenerDatos(url, metodo = 'POST') {
   });
 }
 
- function obtenerDatosJQuery(url, options = {}) {
+export async function obtenerDatosJQuery(url, options = {}) {
+    let formData = new FormData();
+    for (let key in options) {
+      formData.append(key, options[key]);
+    }
+  
     return $.ajax({
       url: url,
       type: 'POST',
-      contentType: 'application/json',
-      data: JSON.stringify(options),
+      data: formData,
+      processData: false,
+      contentType: false,
       dataType: 'json'
     });
   }

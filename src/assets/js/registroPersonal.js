@@ -65,26 +65,26 @@ $(function () {
   let requests = urls.map(url => obtenerDatosJQuery(url));
 
   $.when(...requests).done((dependencias, estatus, cargo, departamento) => {
-    if (dependencias[0].exito && dependencias[0].data) {
-      llenarSelectDependencias(dependencias[0].data, 'dependencia');
+    if (dependencias.exito && dependencias.data) {
+      llenarSelectDependencias(dependencias.data, 'dependencia');
     } else {
       console.error('Error al obtener dependencias o la estructura de la respuesta es incorrecta');
     }
 
-    if (estatus[0].exito && estatus[0].data) {
-      llenarSelectDependencias(estatus[0].data, 'estatus');
+    if (estatus.exito && estatus.data) {
+      llenarSelectDependencias(estatus.data, 'estatus');
     } else {
       console.error('Error al obtener los estatus o la estructura de la respuesta es incorrecta');
     }
 
-    if (cargo[0].exito && cargo[0].data) {
-      llenarSelectDependencias(cargo[0].data, 'cargo');
+    if (cargo.exito && cargo.data) {
+      llenarSelectDependencias(cargo.data, 'cargo');
     } else {
       console.error('Error al obtener los cargos o la estructura de la respuesta es incorrecta');
     }
 
-    if (departamento[0].exito && departamento[0].data) {
-      llenarSelectDependencias(departamento[0].data, 'departamento');
+    if (departamento.exito && departamento.data) {
+      llenarSelectDependencias(departamento.data, 'departamento');
     } else {
       console.error('Error al obtener departamento o la estructura de la respuesta es incorrecta');
     }
@@ -111,8 +111,10 @@ $(function () {
     });
   }
 
-  $("#meses").on("change", function () {
-    const year = 2024; // Cambia el año si lo deseas
+
+  $("#meses").on("change", function (yearnull) {
+    const year = $("#ano").val();
+    console.log("holis:"+year) // Cambia el año si lo deseas
     const month = $("#meses").val();
     if (month == "") {
       $(this).removeClass("cumplido");

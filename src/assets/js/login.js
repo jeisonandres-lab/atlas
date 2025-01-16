@@ -54,7 +54,7 @@ formulariosAJAX.addEventListener('submit', (e) => {
             formData.append('url', `inicio`);
             enviarDatos(url, formData);
           };
-          AlertDirection("success", "Inicio de session con exito, Redireccionando", "top-end", 4000, redirecion);
+          AlertDirection("success", "Inicio de session con exito, Redireccionando", "top-end", 3000, redirecion);
         } else {
           AlertSW2("error", "La contraseña es incorrecta", "top", 4000);
         }

@@ -164,31 +164,41 @@ export function validarBusquedaCedula(input, divContens) {
   });
 }
 
-export function colocarMeses(input) {
-  // Generar las opciones de los meses
-  const meses = [
-    { valor: '', nombre: "Meses" },
-    { valor: '01', nombre: "Enero" },
-    { valor: '02', nombre: "Febrero" },
-    { valor: '03', nombre: "Marzo" },
-    { valor: '04', nombre: "Abril" },
-    { valor: '05', nombre: "Mayo" },
-    { valor: '06', nombre: "Junio" },
-    { valor: '07', nombre: "Julio" },
-    { valor: '08', nombre: "Agosto" },
-    { valor: '09', nombre: "Septiembre" },
-    { valor: '10', nombre: "Octubre" },
-    { valor: '11', nombre: "Noviembre" },
-    { valor: '12', nombre: "Diciembre" },
+export async function colocarMeses(input) {
+  // Simular una operación asincrónica con Promise y setTimeout
+  const obtenerMeses = () => {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        const meses = [
+          { valor: '', nombre: "Meses" },
+          { valor: '01', nombre: "Enero" },
+          { valor: '02', nombre: "Febrero" },
+          { valor: '03', nombre: "Marzo" },
+          { valor: '04', nombre: "Abril" },
+          { valor: '05', nombre: "Mayo" },
+          { valor: '06', nombre: "Junio" },
+          { valor: '07', nombre: "Julio" },
+          { valor: '08', nombre: "Agosto" },
+          { valor: '09', nombre: "Septiembre" },
+          { valor: '10', nombre: "Octubre" },
+          { valor: '11', nombre: "Noviembre" },
+          { valor: '12', nombre: "Diciembre" },
+        ];
+        resolve(meses);
+      }, 1000); // Simular un retraso de 1 segundo
+    });
+  };
 
-  ];
+  // Obtener los meses de forma asincrónica
+  const meses = await obtenerMeses();
+
   // Crear las opciones del select
   meses.forEach(mes => {
     $(input).append(`<option value="${mes.valor}">${mes.nombre}</option>`);
   });
 }
 
-export function colocarYear(input, desde) {
+export async function colocarYear(input, desde) {
   // Crear un array de objetos para representar los años
   const años = [];
   // Agregar la opción "Selecciona un año" al inicio
@@ -268,4 +278,33 @@ export function limpiarInput(idinput, span) {
   if (span) {
     $(span).removeClass("cumplido_span");
   }
+}
+
+export async function colocarNivelesEducativos(input) {
+  // Simular una operación asincrónica con Promise y setTimeout
+  const obtenerNivelesEducativos = () => {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        const niveles = [
+          { valor: 'bachiller', nombre: "Bachiller" },
+          { valor: 'tecnico', nombre: "Técnico" },
+          { valor: 'tecnologo', nombre: "Tecnólogo" },
+          { valor: 'pregrado', nombre: "Pregrado" },
+          { valor: 'ingeniero', nombre: "Ingeniero" },
+          { valor: 'especialista', nombre: "Especialista" },
+          { valor: 'maestria', nombre: "Maestría" },
+          { valor: 'doctorado', nombre: "Doctorado" },
+        ];
+        resolve(niveles);
+      }, 1000); // Simular un retraso de 1 segundo
+    });
+  };
+
+  // Obtener los niveles educativos de forma asincrónica
+  const niveles = await obtenerNivelesEducativos();
+
+  // Crear las opciones del select
+  niveles.forEach(nivel => {
+    $(input).append(`<option value="${nivel.valor}">${nivel.nombre}</option>`);
+  });
 }

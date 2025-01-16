@@ -41,6 +41,7 @@ $(function () {
     const year = 2024;
     const month = $("#meses").val();
     if (month === "") {
+      $("#dia").val("");
       $("#dia").append('<option value="">Selecciona un día</option>');
       $(this).removeClass("cumplido").addClass("error_input");
       $(".span_mes").removeClass("cumplido_span").addClass("error_span");

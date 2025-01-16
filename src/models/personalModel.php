@@ -28,20 +28,27 @@ class personalModel extends Conexion
     private function validarPersonal($parametro)
     {
         $sql = $this->ejecutarConsulta("SELECT cedula FROM datosPersonales WHERE cedula = ?", $parametro);
+        if ($sql) {
+            $sql = false;
+        }else{
+            $sql = true;
+        }
         return $sql;
     }
 
     private function DatosPerosnal($parametro)
     {
+        $sql = $this->ejecutarConsulta("SELECT id_personal, cedula FROM datosPersonales WHERE cedula = ?", $parametro);
+        return $sql;
+    }
+
+    private function totalDatospersonal($parametro)
+    {
         $sql = $this->ejecutarConsulta(
-            "SELECT *
-            FROM datosPersonales dp
-            INNER JOIN datosEmpleados de ON dp.id_personal = de.id_empleados
-            INNER JOIN estatus e ON de.idEstatus = e.id_estatus
+            "SELECT * FROM datosEmpleados de INNER JOIN datosPersonales dp ON de.idPersonal = dp.id_personal INNER JOIN estatus e ON de.idEstatus = e.id_estatus
             INNER JOIN cargo c ON de.idCargo = c.id_cargo
             INNER JOIN dependencia depe ON de.idDependencia = depe.id_dependencia
-            INNER JOIN departamento d ON de.idDepartamento = d.id_departamento
-            WHERE dp.cedula = ? AND de.activo = 1", $parametro);
+            INNER JOIN departamento d ON de.idDepartamento = d.id_departamento WHERE dp.cedula = ?", $parametro);
         return $sql;
     }
 
@@ -64,7 +71,7 @@ class personalModel extends Conexion
         $tomo = $parametro[2];
         $folio = $parametro[3];
         $sql = $this->ejecutarConsulta("SELECT * FROM datosfamilia WHERE tomo = ? AND folio = ?", [$tomo, $folio]);
-        if ($sql == "") {
+        if (empty($sql)) {
             $sql = $this->ejecutarConsulta("SELECT * FROM datosfamilia WHERE cedula = ? ",  [$cedula]);
             if (empty($sql)) {
                 $sql = $this->ejecutarConsulta("SELECT * FROM datosfamilia WHERE codigoCarnet = ? ",  [$carnet]);
@@ -72,6 +79,7 @@ class personalModel extends Conexion
         }
         return $sql;
     }
+
     private function existeEmpleadofamiliar($parametro)
     {
         $sql = $this->ejecutarConsulta("SELECT * FROM datosfamilia WHERE idEmpleado = ? ",  $parametro);
@@ -81,6 +89,58 @@ class personalModel extends Conexion
     private function actualuzarDatos($tabla, $datos, $condicion)
     {
         $sql = $this->actualizarDatos($tabla, $datos, $condicion);
+        return $sql;
+    }
+
+    public function actualizarPersonalMode($primerNombre,
+    $segundoNombre,
+    $primerApellido,
+    $segundoApellido,
+    $cedula,
+    $civil,
+    $ano,
+    $mes,
+    $dia,
+    $fecha,
+    $hora){
+        $sql = $this->ejecutarConsulta("UPDATE
+        datospersonales SET primerNombre='$primerNombre',
+        segundoNombre='$segundoNombre',primerApellido='$primerApellido',
+        segundoApellido='$segundoApellido',cedula='$cedula',
+        estadoCivil='$civil',diaNacimiento='$dia',mesNacimiento='$mes',
+        anoNacimiento='$ano',fecha='$fecha',
+        hora=' $hora' WHERE cedula = '$cedula' ");
+
+        if(!empty($sql)){
+            $sql = false;
+        }else{
+            $sql = true;
+        }
+        return $sql;
+    }
+
+    public function actualizarEmpleadoMode($idEstatus,
+    $idCargo,
+    $idDependencia,
+    $telefono,
+    $idDepartamento,
+    $fecha,
+    $hora, $idPersonal, $nivelAcademico ){
+        $sql = $this->ejecutarConsulta("UPDATE
+        datosempleados
+        SET
+        idEstatus='$idEstatus',
+        idCargo='$idCargo',
+        idDependencia='$idDependencia',
+        idDepartamento=' $idDepartamento',
+        nivelAcademico='$nivelAcademico',
+        telefono=' $telefono',activo='1',fecha='$fecha',hora='$hora' WHERE idPersonal = '$idPersonal'");
+
+        if(!empty($sql)){
+            $sql = false;
+        }else{
+            $sql = true;
+        }
         return $sql;
     }
 
@@ -112,6 +172,11 @@ class personalModel extends Conexion
     public function getDatosPersonal($parametro)
     {
         return $this->DatosPerosnal($parametro);
+    }
+
+    public function getTotalDatosPersonal($parametro)
+    {
+        return $this->totalDatospersonal($parametro);
     }
 
     public function getExisteEmpleado_datos($parametro)

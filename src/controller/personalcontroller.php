@@ -44,7 +44,8 @@ class personalController extends personalModel
         $idCargo,
         $idDependencia,
         $idDepartamento,
-        $telefono
+        $telefono,
+        $nivelAcademico
     ) {
         // sleep(5);
         $primerNombre = $this->limpiarCadena($primerNombre);
@@ -57,6 +58,7 @@ class personalController extends personalModel
         $ano = $this->limpiarCadena($ano);
         $mes = $this->limpiarCadena($mes);
         $dia = $this->limpiarCadena($dia);
+        $nivelAcademico = $this->limpiarCadena($nivelAcademico);
 
         // DATOS DE EMPLEAODS
         $idEstatus = $this->limpiarCadena($idEstatus);
@@ -68,12 +70,21 @@ class personalController extends personalModel
         $fileInputName = 'contratoArchivo';
         $fileInputName2 = 'notacionAchivo';
 
+        if ($fileInputName == "") {
+            $fileInputNameficha = null;
+        }
+
+        if ($fileInputName2 == "") {
+            $fileInputName2_ficha = null;
+        }
+
         $uploadDir1 = App::URL_CONTRATOS;
         $uploadDir2 = App::URL_NOTACION;
 
         $data_json = [
             'exito' => false, // Inicializamos a false por defecto
             'mensaje' => '',
+            'resultado' => 0,
         ];
 
         $personal_datos_reg = [
@@ -135,207 +146,155 @@ class personalController extends personalModel
         ];
 
         $parametro = [$cedula];
-        // Verificar si los archivos tienen nombres diferentes
-        $nombreArchivo1 = isset($_FILES[$fileInputName]) ? $_FILES[$fileInputName]['name'] : null;
-        $nombreArchivo2 = isset($_FILES[$fileInputName2]) ? $_FILES[$fileInputName2]['name'] : null;
+        $check_exisPersonal = $this->getExistePersonal($parametro);
+        if ($check_exisPersonal) {
+            // Verificar si los archivos tienen nombres diferentes
+            $nombreArchivo1 = isset($_FILES[$fileInputName]) ? $_FILES[$fileInputName]['name'] : null;
+            $nombreArchivo2 = isset($_FILES[$fileInputName2]) ? $_FILES[$fileInputName2]['name'] : null;
 
-        if ($nombreArchivo1 && $nombreArchivo2 && $nombreArchivo1 === $nombreArchivo2) {
-            $data_json['exito'] = false;
-            $data_json['mensaje'] = 'Los dos archivos no pueden tener el mismo nombre.';
-        } else {
-            // Crear un array con los archivos que se están subiendo
-            $archivosASubir = [];
-            $nombreArchivo1 = $_FILES[$fileInputName]['name'];
-            $nombreArchivo2 = $_FILES[$fileInputName2]['name'];
+            if ($nombreArchivo1 && $nombreArchivo2 && $nombreArchivo1 === $nombreArchivo2) {
+                $data_json['exito'] = false;
+                $data_json['mensaje'] = 'Los dos archivos no pueden tener el mismo nombre.';
+            } else {
+                // Crear un array con los archivos que se están subiendo
+                $archivosASubir = [];
+                if ($nombreArchivo1) {
+                    $archivosASubir[] = ['input' => $fileInputName, 'dir' => $uploadDir1];
+                }
+                if ($nombreArchivo2) {
+                    $archivosASubir[] = ['input' => $fileInputName2, 'dir' => $uploadDir2]; // Asegúrate de definir $uploadDir2
+                }
 
-            if ($nombreArchivo1 && $nombreArchivo2) {
-                $archivosASubir[] = ['input' => $fileInputName, 'dir' => $uploadDir1];
-                $archivosASubir[] = ['input' => $fileInputName2, 'dir' => $uploadDir2];
                 // Ejecutar el código de subida si hay archivos para subir
                 if (!empty($archivosASubir)) {
-                    $check_personal = $this->getExistePersonal($parametro);
-                    if ($check_personal) {
+                    $resultados = [];
+                    $existeArchivo = false;
+                    // Verificar si alguno de los archivos ya existe
+                    foreach ($archivosASubir as $archivo) {
+                        $inputName = $archivo['input'];
+                        $nombreArchivos[$inputName] = $this->fileUploader->obtenerNombreArchivo($_FILES[$inputName], $cedula);
+                        $direccion = $archivo['dir'] . $nombreArchivos[$inputName]['nombre'];
+                        $existeArchivoCheck = $this->fileUploader->archivoExiste2($direccion);
+                        if ($existeArchivoCheck['error']) {
+                            $existeArchivo = true;
+                            $data_json['mensaje'] = $existeArchivoCheck['mensaje'];
+                            break;
+                        }
+                    }
+                    // Si alguno de los archivos ya existe, no subir ninguno
+                    if ($existeArchivo) {
                         $data_json['exito'] = false;
-                        $data_json['personalEncontrado'] = true;
-                        $data_json['mensaje'] = 'personal encontrado';
-                        $data_json['cedula'] = $cedula;
+                        $data_json['resultado'] = 3;
                     } else {
-                        $registrarPersonal = $this->getRegistrar("datosPersonales", $personal_datos_reg);
-                        if ($registrarPersonal == true) {
-                            $check_personal_exis = $this->getDatosPersonal($parametro);
-                            if ($check_personal_exis == true) {
-                                foreach ($check_personal_exis as $row) {
-                                    $idPersonal = $row['id_personal'];
-                                    if ($idPersonal) {
-                                        $empleados_datos_reg = [
-                                            [
-                                                "campo_nombre" => "idPersonal",
-                                                "campo_marcador" => ":idPersonal",
-                                                "campo_valor" =>  $idPersonal
-                                            ],
-                                            [
-                                                "campo_nombre" => "idEstatus",
-                                                "campo_marcador" => ":idEstatus",
-                                                "campo_valor" => $idEstatus
-                                            ],
-                                            [
-                                                "campo_nombre" => "idCargo",
-                                                "campo_marcador" => ":idCargo",
-                                                "campo_valor" => $idCargo
-                                            ],
-                                            [
-                                                "campo_nombre" => "idDependencia",
-                                                "campo_marcador" => ":idDependencia",
-                                                "campo_valor" => $idDependencia
-                                            ],
-                                            [
-                                                "campo_nombre" => "idDepartamento",
-                                                "campo_marcador" => ":idDepartamento",
-                                                "campo_valor" => $idDepartamento
-                                            ],
-                                            [
-                                                "campo_nombre" => "telefono",
-                                                "campo_marcador" => ":telefono",
-                                                "campo_valor" => $telefono
-                                            ],
-                                            [
-                                                "campo_nombre" => "fecha",
-                                                "campo_marcador" => ":fecha",
-                                                "campo_valor" => date("Y-m-d")
-                                            ],
-                                            [
-                                                "campo_nombre" => "hora",
-                                                "campo_marcador" => ":hora",
-                                                "campo_valor" => date("H:i:s")
-                                            ]
-                                        ];
-                                        $parametro = [$idPersonal];
-                                        $check_empleado_exis = $this->getExisteEmpleado($parametro);
-                                        if ($check_empleado_exis) {
-                                            $data_json['exito'] = true;
-                                            $data_json['mensaje'] = "Este trabajador ya esta registrado";
-                                        } else {
-                                            $check_empleado = $this->getRegistrarEmpleado("datosempleados", $empleados_datos_reg);
-                                            if ($check_empleado == true) {
-                                                $check_idEmpleado = $this->getExisteEmpleado($parametro);
-                                                foreach ($check_idEmpleado as $row) {
-                                                    $idEmpleado = $row['id_empleados'];
-                                                    if ($idEmpleado) {
-                                                        $resultados = [];
-                                                        foreach ($archivosASubir as $archivo) {
-                                                            $inputName = $archivo['input'];
-                                                            $resultados[$inputName] = $this->fileUploader->upload($_FILES[$inputName], $archivo['dir'], $cedula);
-                                                        }
-                                                        // Manejar los resultados
-                                                        $error = false;
-                                                        $mensajeError = 'Error al subir los archivos.';
-                                                        if ($nombreArchivo1 && isset($resultados[$fileInputName]['error']) && $resultados[$fileInputName]['error']) {
-                                                            $error = true;
-                                                            $mensajeError .= ' ' . $resultados[$fileInputName]['mensaje'];
-                                                        }
-                                                        if ($nombreArchivo2 && isset($resultados[$fileInputName2]['error']) && $resultados[$fileInputName2]['error']) {
-                                                            $error = true;
-                                                            $mensajeError .= ' ' . $resultados[$fileInputName2]['mensaje'];
-                                                        }
-
-                                                        if ($error) {
-                                                            $data_json['exito'] = false;
-                                                            $data_json['mensaje'] = $mensajeError;
-                                                            $data_json['personal'] = 'los datos del nuevo personal y empleado si fueron registrados';
-                                                        } else {
-                                                            if ($nombreArchivo1) {
-                                                                $data_json['archivo1'] = $resultados[$fileInputName];
-                                                            }
-                                                            if ($nombreArchivo2) {
-                                                                $data_json['archivo2'] = $resultados[$fileInputName2];
-                                                            }
-                                                            $parametros_doc = [];
-                                                            if ($nombreArchivo1) {
-                                                                $parametros_doc[] = [
-                                                                    [
-                                                                        "campo_nombre" => "idEmpleados",
-                                                                        "campo_marcador" => ":idEmpleados",
-                                                                        "campo_valor" => $idEmpleado
-                                                                    ],
-                                                                    [
-                                                                        "campo_nombre" => "size",
-                                                                        "campo_marcador" => ":size",
-                                                                        "campo_valor" => $resultados[$fileInputName]['tamano']
-                                                                    ],
-                                                                    [
-                                                                        "campo_nombre" => "doc",
-                                                                        "campo_marcador" => ":doc",
-                                                                        "campo_valor" => $resultados[$fileInputName]['nombre']
-                                                                    ],
-                                                                    [
-                                                                        "campo_nombre" => "tipoDoc",
-                                                                        "campo_marcador" => ":tipoDoc",
-                                                                        "campo_valor" => $resultados[$fileInputName]['extension']
-                                                                    ]
-                                                                ];
-                                                            }
-
-                                                            if ($nombreArchivo2) {
-                                                                $parametros_doc[] = [
-                                                                    [
-                                                                        "campo_nombre" => "idEmpleados",
-                                                                        "campo_marcador" => ":idEmpleados",
-                                                                        "campo_valor" => $idEmpleado
-                                                                    ],
-                                                                    [
-                                                                        "campo_nombre" => "size",
-                                                                        "campo_marcador" => ":size",
-                                                                        "campo_valor" => $resultados[$fileInputName2]['tamano']
-                                                                    ],
-                                                                    [
-                                                                        "campo_nombre" => "doc",
-                                                                        "campo_marcador" => ":doc",
-                                                                        "campo_valor" => $resultados[$fileInputName2]['nombre']
-                                                                    ],
-                                                                    [
-                                                                        "campo_nombre" => "tipoDoc",
-                                                                        "campo_marcador" => ":tipoDoc",
-                                                                        "campo_valor" => $resultados[$fileInputName2]['extension']
-                                                                    ]
-                                                                ];
-                                                            }
-                                                            $tabla = 'documentacion';
-                                                            // Guardar los datos en la base de datos
-                                                            foreach ($parametros_doc as $datos) {
-                                                                $jo = $this->getRegistrarDOCS($tabla, $datos);
-                                                            }
-                                                            $data_json['exito'] = true;
-                                                            $data_json['mensaje'] = "Familiar Registrado Exitosamente.";
-                                                            $data_json['resultado'] = 2;
-                                                        }
-                                                    } else {
-                                                        $data_json['mensaje'] = "no se encontro el trabajador";
-                                                    }
-                                                }
-                                            } else {
-                                                $data_json['exito'] = true;
-                                                $data_json['mensaje'] = "No se logro realizar la consulta";
+                        $check_regisPersonal = $this->getRegistrar('datospersonales', $personal_datos_reg);
+                        if ($check_regisPersonal) {
+                            $check_busPersonal = $this->getDatosPersonal($parametro);
+                            foreach ($check_busPersonal as $row) {
+                                $idPersonal = $row['id_personal'];
+                                $empleados_datos_reg = [
+                                    [
+                                        "campo_nombre" => "idPersonal",
+                                        "campo_marcador" => ":idPersonal",
+                                        "campo_valor" =>  $idPersonal
+                                    ],
+                                    [
+                                        "campo_nombre" => "idEstatus",
+                                        "campo_marcador" => ":idEstatus",
+                                        "campo_valor" => $idEstatus
+                                    ],
+                                    [
+                                        "campo_nombre" => "idCargo",
+                                        "campo_marcador" => ":idCargo",
+                                        "campo_valor" => $idCargo
+                                    ],
+                                    [
+                                        "campo_nombre" => "idDependencia",
+                                        "campo_marcador" => ":idDependencia",
+                                        "campo_valor" => $idDependencia
+                                    ],
+                                    [
+                                        "campo_nombre" => "idDepartamento",
+                                        "campo_marcador" => ":idDepartamento",
+                                        "campo_valor" => $idDepartamento
+                                    ],
+                                    [
+                                        "campo_nombre" => "telefono",
+                                        "campo_marcador" => ":telefono",
+                                        "campo_valor" => $telefono
+                                    ],
+                                    [
+                                        "campo_nombre" => "nivelAcademico",
+                                        "campo_marcador" => ":nivelAcademico",
+                                        "campo_valor" => $nivelAcademico
+                                    ],
+                                    [
+                                        "campo_nombre" => "activo",
+                                        "campo_marcador" => ":activo",
+                                        "campo_valor" => 1
+                                    ],
+                                    [
+                                        "campo_nombre" => "fecha",
+                                        "campo_marcador" => ":fecha",
+                                        "campo_valor" => date("Y-m-d")
+                                    ],
+                                    [
+                                        "campo_nombre" => "hora",
+                                        "campo_marcador" => ":hora",
+                                        "campo_valor" => date("H:i:s")
+                                    ]
+                                ];
+                                $parametro_empleado = [$idPersonal];
+                                $check_regisEmpleados = $this->getRegistrar('datosempleados', $empleados_datos_reg);
+                                if ($check_regisEmpleados) {
+                                    $check_busEmpleado = $this->getExisteEmpleado($parametro_empleado);
+                                    foreach ($check_busEmpleado as $row) {
+                                        $id_empleado = $row['id_empleados'];
+                                        // Si ninguno de los archivos existe, proceder con la subida
+                                        foreach ($archivosASubir as $archivo) {
+                                            $inputName = $archivo['input'];
+                                            $direccion = $archivo['dir'] . $nombreArchivos[$inputName]['nombre'];
+                                            $resultados[$inputName] = $this->fileUploader->subirArchivo($_FILES[$inputName], $cedula, $archivo['dir'], $id_empleado, null);
+                                            if ($resultados[$inputName]['error']) {
+                                                $data_json['mensaje'] = $resultados[$inputName]['mensaje'];
+                                                $data_json['resultado'] = 3;
+                                                break;
                                             }
                                         }
-                                    } else {
-                                        $data_json['mensaje'] = "No se pudo recorrer el identificador";
+
+                                        if ($nombreArchivo1) {
+                                            $data_json['archivo1'] = $resultados[$fileInputName];
+                                        }
+                                        if ($nombreArchivo2) {
+                                            $data_json['archivo2'] = $resultados[$fileInputName2];
+                                        }
+
+                                        $data_json['exito'] = true;
+                                        $data_json['mensaje'] = "Empleado Registrado Exitosamente.";
+                                        $data_json['resultado'] = 2;
                                     }
+                                } else {
+                                    $data_json['exito'] = false;
+                                    $data_json['mensaje'] = "Los datos Del Personal fueron registrados exitosamente, pero el de los datos empleados";
+                                    $data_json['resultado'] = 1;
                                 }
-                            } else {
-                                $data_json['mensaje'] = "Error al consultar los datos del personal previamente registrado";
                             }
-                        } else {
-                            $data_json['mensaje'] = "La consulta no se logro realizar correctamente";
                         }
                     }
                 } else {
-                    // Establecer un mensaje de error si uno o ambos archivos no están presentes
                     $data_json['exito'] = false;
-                    $data_json['mensaje'] = "Debe subir ambos archivos";
+                    $data_json['mensaje'] = "Debe subir al menos un archivo.";
                     $data_json['resultado'] = 3;
                 }
             }
+        } else {
+            $data_json = [
+                'exito' => true, // Inicializamos a false por defecto
+                'mensaje' => 'Este Empleado Ya Esta Registrado',
+                'resultado' => 1,
+                'resultado2' => $check_exisPersonal,
+            ];
         }
+
         header('Content-Type: application/json');
         echo json_encode($data_json);
     }
@@ -353,7 +312,7 @@ class personalController extends personalModel
             $data_json['logrado'] = false;
         } else {
             $parametro = [$cedula_familiar];
-            $check_personal = $this->getDatosPersonal($parametro);
+            $check_personal = $this->getTotalDatosPersonal($parametro);
             if ($check_personal == true) {
                 foreach ($check_personal as $row) {
                     $activo = $row['activo'] == 1 ? 'Activo' : 'Inactivo';
@@ -388,7 +347,7 @@ class personalController extends personalModel
     }
 
     public function registrarFamilia(
-        $cedula_familiar,
+        $cedulaEmpleado,
         $primerNombre,
         $segundoNombre,
         $primerApellido,
@@ -403,7 +362,7 @@ class personalController extends personalModel
         $folio
     ) {
         sleep(1);
-        $cedula_familiar = $this->limpiarCadena($cedula_familiar);
+        $cedulaEmpleado = $this->limpiarCadena($cedulaEmpleado);
         $primerNombre = $this->limpiarCadena($primerNombre);
         $segundoNombre = $this->limpiarCadena($segundoNombre);
         $primerApellido = $this->limpiarCadena($primerApellido);
@@ -417,6 +376,18 @@ class personalController extends personalModel
         $tomo = $this->limpiarCadena($tomo);
         $folio = $this->limpiarCadena($folio);
 
+        if ($cedula == "") {
+            $cedula = null;
+        }
+        if ($tomo == "") {
+            $tomo = null;
+        }
+        if ($folio == "") {
+            $folio = null;
+        }
+        if ($numeroCarnet == "") {
+            $numeroCarnet = null;
+        }
         $fileInputName = 'docArchivo';
         $fileInputName2 = 'docArchivoDis';
         $uploadDir1 = App::URL_PARTIDANACIMIENTO;
@@ -441,7 +412,7 @@ class personalController extends personalModel
         if ($fileInputName2 == "") {
             $fileInputName2_ficha = null;
         }
-        $parametro = [$cedula_familiar];
+        $parametro = [$cedulaEmpleado];
         $check_empleado = $this->getExisteEmpleado_datos($parametro);
         if ($check_empleado) {
             foreach ($check_empleado as $row) {
@@ -505,6 +476,11 @@ class personalController extends personalModel
                         "campo_valor" => $folio
                     ],
                     [
+                        "campo_nombre" => "activo",
+                        "campo_marcador" => ":activo",
+                        "campo_valor" => 1
+                    ],
+                    [
                         "campo_nombre" => "fecha",
                         "campo_marcador" => ":fecha",
                         "campo_valor" => date("Y-m-d")
@@ -521,7 +497,6 @@ class personalController extends personalModel
                 if ($check_familiar_exis) {
                     $data_json['exito'] = true;
                     $data_json['mensaje'] = "Este familiar ya esta registrado";
-                    $data_json['resultado'] = 1;
                 } else {
                     // Verificar si los archivos tienen nombres diferentes
                     $nombreArchivo1 = isset($_FILES[$fileInputName]) ? $_FILES[$fileInputName]['name'] : null;
@@ -561,31 +536,32 @@ class personalController extends personalModel
                                 $data_json['exito'] = false;
                                 $data_json['resultado'] = 3;
                             } else {
-                                // Si ninguno de los archivos existe, proceder con la subida
-                                foreach ($archivosASubir as $archivo) {
-                                    $inputName = $archivo['input'];
-                                    $direccion = $archivo['dir'] . $nombreArchivos[$inputName]['nombre'];
-                                    $resultados[$inputName] = $this->fileUploader->subirArchivo($_FILES[$inputName], $cedula, $archivo['dir'], $id_empleado);
-                                    if ($resultados[$inputName]['error']) {
-                                        $data_json['mensaje'] = $resultados[$inputName]['mensaje'];
-                                        $data_json['resultado'] = 3;
-                                        break;
-                                    }
-                                }
-
-                                if ($nombreArchivo1) {
-                                    $data_json['archivo1'] = $resultados[$fileInputName];
-                                }
-                                if ($nombreArchivo2) {
-                                    $data_json['archivo2'] = $resultados[$fileInputName2];
-                                }
-
                                 $check_familiar = $this->getRegistrarEmpleado($tabla, $parametro_registrar);
                                 if ($check_familiar) {
+                                    $check_exisfamiliar = $this->getExisteFamiliar($parametrofamili);
+                                    foreach ($check_exisfamiliar as $row) {
+                                        $id_nino = $row['id_ninos'];
+                                        // Si ninguno de los archivos existe, proceder con la subida
+                                        foreach ($archivosASubir as $archivo) {
+                                            $inputName = $archivo['input'];
+                                            $direccion = $archivo['dir'] . $nombreArchivos[$inputName]['nombre'];
+                                            $resultados[$inputName] = $this->fileUploader->subirArchivo($_FILES[$inputName], $cedula, $archivo['dir'], $id_empleado, $id_nino);
+                                            if ($resultados[$inputName]['error']) {
+                                                $data_json['mensaje'] = $resultados[$inputName]['mensaje'];
+                                                $data_json['resultado'] = 3;
+                                                break;
+                                            }
+                                        }
+
+                                        if ($nombreArchivo1) {
+                                            $data_json['archivo1'] = $resultados[$fileInputName];
+                                        }
+                                        if ($nombreArchivo2) {
+                                            $data_json['archivo2'] = $resultados[$fileInputName2];
+                                        }
+                                    }
                                     $data_json['exito'] = true;
                                     $data_json['mensaje'] = "Familiar Registrado Exitosamente.";
-                                    $data_json['datosN'] = $id_nino;
-                                    $data_json['prueba'] = $parametrofamili;
                                     $data_json['resultado'] = 2;
                                 } else {
                                     $data_json['exito'] = false;
@@ -603,7 +579,8 @@ class personalController extends personalModel
             }
         } else {
             $data_json['exito'] = true;
-            $data_json['mensaje'] = 'No existe el empleado al que intentas asignar el familiar.';
+            $data_json['mensaje'] = 'No existe el empleado al que intentas asignar el familiar.' . $parametro;
+            $data_json['resultado'] = var_dump($parametro);
         }
 
 
@@ -669,7 +646,7 @@ class personalController extends personalModel
             $data_json['exito'] = true;
             $data_json['mensaje'] = 'Todos los departamentos obtenidos exitosamente';
             foreach ($departamento as $row) {
-                $data_json['data'][]= [
+                $data_json['data'][] = [
                     'id' => $row['id_departamento'],
                     'value' => $row['departamento']
                 ];
@@ -683,7 +660,6 @@ class personalController extends personalModel
     public function objetoDependencia()
     {
         return $this->dependencia = new dependenciasModel();
-
     }
 
     public function objetoEstatus()
@@ -716,7 +692,7 @@ class personalController extends personalModel
 
     public function obtenerTodoPersonal()
     {
-        $data_json['data']=[]; // Array de datos para enviar
+        $data_json['data'] = []; // Array de datos para enviar
         $tabla = 'datosempleados e
               INNER JOIN datospersonales d ON e.idPersonal = d.id_personal
               INNER JOIN estatus es ON e.idEstatus = es.id_estatus
@@ -781,7 +757,7 @@ class personalController extends personalModel
 
     public function obtenerFamiliar($idEmpleado)
     {
-        $data_json['data']=[];// Array de datos para enviar
+        $data_json['data'] = []; // Array de datos para enviar
         $tabla = 'datosfamilia '; // Tabla a consultar
         $selectoresCantidad = 'COUNT(id_ninos) as cantidad'; // Selector para contar la cantidad de registros de la tabla
         $datosBuscar = []; // Array de selectores para buscar en la tabla
@@ -814,8 +790,8 @@ class personalController extends personalModel
             $validarDocumentos = $this->tablas->tablas($selectores2, $tabla2, $campoOrden2, $conditions2, $conditionParams2);
             $validarFamiliar = $this->getExisteEmpleadoFamiliar($parametro);
             $botones = "
-                <button class='btn btn-primary btn-sm btn-hover-azul' data-bs-toggle='modal' data-bs-target='#exampleModal' onclick='editarPersonal(" . $row['id_ninos'] . ")'>Editar</button>
-                <button class='btn btn-danger btn-sm btn-hover-rojo' onclick='eliminarPersonal(" . $row['id_ninos'] . ")'>Eliminar</button>
+                
+                <button class='btn btn-danger btn-sm btn-hover-rojo btnEliminar'  data-swal-toast-template='#my-template' data-id=" . $row['id_ninos'] .  "><i class='fa-solid fa-trash fa-sm me-2'></i>Eliminar</button>
             ";
 
             $botonDoc = "<div class='btn-group' role='group' aria-label='Basic example'>";
@@ -884,7 +860,7 @@ class personalController extends personalModel
             'mensaje' => '',
         ];
         // Llama al método de actualización en el modelo
-        $resultado = $this->getActualizar('datosempleados',$parametro,  $condicion);
+        $resultado = $this->getActualizar('datosempleados', $parametro,  $condicion);
 
         if ($resultado) {
             $data_json['exito'] = true;
@@ -893,6 +869,323 @@ class personalController extends personalModel
             // Manejo de error
         }
 
+        header('Content-Type: application/json');
+        echo json_encode($data_json);
+    }
+
+    public function eliminarFamiliar($idPersonal)
+    {
+        $idPersonal = $this->limpiarCadena($idPersonal);
+        $parametro = [
+            [
+                "campo_nombre" => "activo",
+                "campo_marcador" => ":activo",
+                "campo_valor" => '0'
+            ]
+        ];
+
+        // Asegúrate de que el marcador de parámetro coincida con el nombre del campo en la consulta SQL
+        $condicion = [
+            "condicion_campo" => "id_ninos",
+            "condicion_marcador" => ":id_ninos",
+            "condicion_valor" => $idPersonal
+        ];
+        $data_json = [
+            'exito' => false, // Inicializamos a false por defecto
+            'mensaje' => '',
+        ];
+        // Llama al método de actualización en el modelo
+        $resultado = $this->getActualizar('datosfamilia', $parametro,  $condicion);
+
+        if ($resultado) {
+            $data_json['exito'] = true;
+            $data_json['mensaje'] = 'eliminado correctamente.';
+        } else {
+            // Manejo de error
+        }
+
+        header('Content-Type: application/json');
+        echo json_encode($data_json);
+    }
+
+    public function actualizarPersonal(
+        $primerNombre,
+        $segundoNombre,
+        $primerApellido,
+        $segundoApellido,
+        $cedula,
+        $civil,
+        $correo,
+        $ano,
+        $mes,
+        $dia,
+        $idEstatus,
+        $idCargo,
+        $idDependencia,
+        $idDepartamento,
+        $telefono,
+        $nivelAcademico
+    ) {
+        $primerNombre = $this->limpiarCadena($primerNombre);
+        $segundoNombre = $this->limpiarCadena($segundoNombre);
+        $primerApellido = $this->limpiarCadena($primerApellido);
+        $segundoApellido = $this->limpiarCadena($segundoApellido);
+        $cedula = $this->limpiarCadena($cedula);
+        $civil = $this->limpiarCadena($civil);
+        $correo = $this->limpiarCadena($correo);
+        $ano = $this->limpiarCadena($ano);
+        $mes = $this->limpiarCadena($mes);
+        $dia = $this->limpiarCadena($dia);
+        $fecha = date("Y-m-d");
+        $hora = date("H:i:s");
+        $nivelAcademico = $this->limpiarCadena($nivelAcademico);
+
+        // DATOS DE EMPLEAODS
+        $idEstatus = $this->limpiarCadena($idEstatus);
+        $idCargo = $this->limpiarCadena($idCargo);
+        $idDependencia = $this->limpiarCadena($idDependencia);
+        $idDepartamento = $this->limpiarCadena($idDepartamento);
+        $telefono = $this->limpiarCadena($telefono);
+
+        $fileInputName = 'contratoArchivo';
+        $fileInputName2 = 'notacionAchivo';
+
+        if ($fileInputName == "") {
+            $fileInputNameficha = null;
+        }
+
+        if ($fileInputName2 == "") {
+            $fileInputName2_ficha = null;
+        }
+
+        $uploadDir1 = App::URL_CONTRATOS;
+        $uploadDir2 = App::URL_NOTACION;
+
+        $data_json = [
+            'exito' => false, // Inicializamos a false por defecto
+            'mensaje' => '',
+            'resultado' => 0,
+        ];
+
+        // Asegúrate de que el marcador de parámetro coincida con el nombre del campo en la consulta SQL
+        $condicion = [
+            "condicion_campo" => "cedula",
+            "condicion_marcador" => ":cedula",
+            "condicion_valor" => $cedula
+        ];
+        $personal_datos_reg = [
+            [
+                "campo_nombre" => "primerNombre",
+                "campo_marcador" => ":primerNombre",
+                "campo_valor" => $primerNombre
+            ],
+            [
+                "campo_nombre" => "segundoNombre",
+                "campo_marcador" => ":segundoNombre",
+                "campo_valor" => $segundoNombre
+            ],
+            [
+                "campo_nombre" => "primerApellido",
+                "campo_marcador" => ":primerApellido",
+                "campo_valor" => $primerApellido
+            ],
+            [
+                "campo_nombre" => "segundoApellido",
+                "campo_marcador" => ":segundoApellido",
+                "campo_valor" => $segundoApellido
+            ],
+            [
+                "campo_nombre" => "cedula",
+                "campo_marcador" => ":cedula",
+                "campo_valor" => $cedula
+            ],
+            [
+                "campo_nombre" => "estadoCivil",
+                "campo_marcador" => ":estadoCivil",
+                "campo_valor" => $civil
+            ],
+            [
+                "campo_nombre" => "anoNacimiento",
+                "campo_marcador" => ":anoNacimiento",
+                "campo_valor" => $ano
+            ],
+            [
+                "campo_nombre" => "mesNacimiento",
+                "campo_marcador" => ":mesNacimiento",
+                "campo_valor" => $mes
+            ],
+            [
+                "campo_nombre" => "diaNacimiento",
+                "campo_marcador" => ":diaNacimiento",
+                "campo_valor" => $dia
+            ],
+            [
+                "campo_nombre" => "fecha",
+                "campo_marcador" => ":fecha",
+                "campo_valor" => date("Y-m-d")
+            ],
+            [
+                "campo_nombre" => "hora",
+                "campo_marcador" => ":hora",
+                "campo_valor" => date("H:i:s")
+            ]
+        ];
+        $parametro = [$cedula];
+        // Verificar si los archivos tienen nombres diferentes
+        $nombreArchivo1 = isset($_FILES[$fileInputName]) ? $_FILES[$fileInputName]['name'] : null;
+        $nombreArchivo2 = isset($_FILES[$fileInputName2]) ? $_FILES[$fileInputName2]['name'] : null;
+
+        if ($nombreArchivo1 && $nombreArchivo2 && $nombreArchivo1 === $nombreArchivo2) {
+            $data_json['exito'] = false;
+            $data_json['mensaje'] = 'Los dos archivos no pueden tener el mismo nombre.';
+        } else {
+            // Crear un array con los archivos que se están subiendo
+            $archivosASubir = [];
+            if ($nombreArchivo1) {
+                $archivosASubir[] = ['input' => $fileInputName, 'dir' => $uploadDir1];
+            }
+            if ($nombreArchivo2) {
+                $archivosASubir[] = ['input' => $fileInputName2, 'dir' => $uploadDir2]; // Asegúrate de definir $uploadDir2
+            }
+
+            // Ejecutar el código de subida si hay archivos para subir
+            if (!empty($archivosASubir)) {
+                $resultados = [];
+                $existeArchivo = false;
+                // Verificar si alguno de los archivos ya existe
+                foreach ($archivosASubir as $archivo) {
+                    $inputName = $archivo['input'];
+                    $nombreArchivos[$inputName] = $this->fileUploader->obtenerNombreArchivo($_FILES[$inputName], $cedula);
+                    $direccion = $archivo['dir'] . $nombreArchivos[$inputName]['nombre'];
+                    $existeArchivoCheck = $this->fileUploader->archivoExiste2($direccion);
+                    if ($existeArchivoCheck['error']) {
+                        $existeArchivo = true;
+                        $data_json['mensaje'] = $existeArchivoCheck['mensaje'];
+                        break;
+                    }
+                }
+                // Si alguno de los archivos ya existe, no subir ninguno
+                if ($existeArchivo) {
+                    $data_json['exito'] = false;
+                    $data_json['resultado'] = 3;
+                } else {
+                    $check_regisPersonal = $this->actualizarPersonalMode($primerNombre,
+                    $segundoNombre,
+                    $primerApellido,
+                    $segundoApellido,
+                    $cedula,
+                    $civil,
+                    $ano,
+                    $mes,
+                    $dia,
+                    $fecha,
+                    $hora);
+                    if ($check_regisPersonal) {
+                        $check_busPersonal = $this->getDatosPersonal($parametro);
+                        foreach ($check_busPersonal as $row) {
+                            $idPersonal = $row['id_personal'];
+                            $condicion_empleado = [
+                                "condicion_campo" => "idPersonal",
+                                "condicion_marcador" => ":idPersonal",
+                                "condicion_valor" => $idPersonal
+                            ];
+                            $empleados_datos_reg = [
+                                [
+                                    "campo_nombre" => "idPersonal",
+                                    "campo_marcador" => ":idPersonal",
+                                    "campo_valor" =>  $idPersonal
+                                ],
+                                [
+                                    "campo_nombre" => "idEstatus",
+                                    "campo_marcador" => ":idEstatus",
+                                    "campo_valor" => $idEstatus
+                                ],
+                                [
+                                    "campo_nombre" => "idCargo",
+                                    "campo_marcador" => ":idCargo",
+                                    "campo_valor" => $idCargo
+                                ],
+                                [
+                                    "campo_nombre" => "idDependencia",
+                                    "campo_marcador" => ":idDependencia",
+                                    "campo_valor" => $idDependencia
+                                ],
+                                [
+                                    "campo_nombre" => "idDepartamento",
+                                    "campo_marcador" => ":idDepartamento",
+                                    "campo_valor" => $idDepartamento
+                                ],
+                                [
+                                    "campo_nombre" => "telefono",
+                                    "campo_marcador" => ":telefono",
+                                    "campo_valor" => $telefono
+                                ],
+                                [
+                                    "campo_nombre" => "nivelAcademico",
+                                    "campo_marcador" => ":nivelAcademico",
+                                    "campo_valor" => $nivelAcademico
+                                ],
+                                [
+                                    "campo_nombre" => "activo",
+                                    "campo_marcador" => ":activo",
+                                    "campo_valor" => 1
+                                ],
+                                [
+                                    "campo_nombre" => "fecha",
+                                    "campo_marcador" => ":fecha",
+                                    "campo_valor" => date("Y-m-d")
+                                ],
+                                [
+                                    "campo_nombre" => "hora",
+                                    "campo_marcador" => ":hora",
+                                    "campo_valor" => date("H:i:s")
+                                ]
+                            ];
+                            $parametro_empleado = [$idPersonal];
+                            $check_regisEmpleados = $this->actualizarEmpleadoMode($idEstatus,
+                            $idCargo,
+                            $idDependencia,
+                            $telefono,
+                            $idDepartamento,
+                            $fecha,
+                            $hora, $idPersonal, $nivelAcademico );
+                            if ($check_regisEmpleados) {
+                                $check_busEmpleado = $this->getExisteEmpleado($parametro_empleado);
+                                foreach ($check_busEmpleado as $row) {
+                                    $id_empleado = $row['id_empleados'];
+                                    // Si ninguno de los archivos existe, proceder con la subida
+                                    foreach ($archivosASubir as $archivo) {
+                                        $inputName = $archivo['input'];
+                                        $direccion = $archivo['dir'] . $nombreArchivos[$inputName]['nombre'];
+                                        $resultados[$inputName] = $this->fileUploader->subirArchivo($_FILES[$inputName], $cedula, $archivo['dir'], $id_empleado, null);
+                                        if ($resultados[$inputName]['error']) {
+                                            $data_json['mensaje'] = $resultados[$inputName]['mensaje'];
+                                            $data_json['resultado'] = 3;
+                                            break;
+                                        }
+                                    }
+                                    if ($nombreArchivo1) {
+                                        $data_json['archivo1'] = $resultados[$fileInputName];
+                                    }
+                                    if ($nombreArchivo2) {
+                                        $data_json['archivo2'] = $resultados[$fileInputName2];
+                                    }
+
+                                    $data_json['exito'] = true;
+                                    $data_json['mensaje'] = "Empleado Registrado Exitosamente.";
+                                    $data_json['resultado'] = 2;
+                                }
+
+                            } else {
+                                $data_json['exito'] = false;
+                                $data_json['mensaje'] = "Los datos Del Personal fueron registrados exitosamente, pero el de los datos empleados";
+                                $data_json['resultado'] = 1;
+                            }
+                        }
+                    }
+                }
+            }
+        }
         header('Content-Type: application/json');
         echo json_encode($data_json);
     }

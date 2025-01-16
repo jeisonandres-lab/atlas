@@ -53,6 +53,7 @@ class App
 
     public function cerrarSession()
     {
+        session_start();
         return session_destroy();
     }
 }

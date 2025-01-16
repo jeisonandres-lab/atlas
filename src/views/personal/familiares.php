@@ -40,7 +40,7 @@ use App\Atlas\config\App;
                                 <div class="col-sm-4 mb-2">
                                     <label class="form-label mb-0" for="cedula_trabajador">Cédula</label>
                                     <div class="input-group">
-                                        <span class="input-group-text span_cedula_empleado "><i class="fa-regular fa-address-card"></i></span>
+                                        <span class="input-group-text span_cedula_empleado "><i class="icons fa-regular fa-address-card"></i></span>
                                         <input type="text" class="form-control " id="cedula_trabajador" name="cedulaEmpleado" placeholder="Cédula">
                                     </div>
                                 </div>
@@ -48,7 +48,7 @@ use App\Atlas\config\App;
                                     <div class="form-group">
                                         <label for="nombre">Nombre</label>
                                         <div class="input-group">
-                                            <span class="input-group-text span_nombre"><i class="fa-regular fa-user"></i></span>
+                                            <span class="input-group-text span_nombre"><i class="icons fa-regular fa-user"></i></span>
                                             <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Primer Nombre" required readonly>
                                         </div>
                                     </div>
@@ -57,7 +57,7 @@ use App\Atlas\config\App;
                                     <div class="form-group">
                                         <label for="apellido">apellido</label>
                                         <div class="input-group">
-                                            <span class="input-group-text span_apellido"><i class="fa-regular fa-user"></i></span>
+                                            <span class="input-group-text span_apellido"><i class="icons fa-regular fa-user"></i></span>
                                             <input type="text" class="form-control" id="apellido" name="apellido" placeholder="Primer Nombre" required readonly>
                                         </div>
                                     </div>
@@ -75,7 +75,7 @@ use App\Atlas\config\App;
                                         <div class="cbx ">
                                             <input id="noCedula" class="cumplidoNormal" type="checkbox" disabled />
                                             <label for="noCedula"></label>
-                                            <i class="fa-solid fa-check fa-xs"></i>
+                                            <i class="icons fa-solid fa-check fa-xs"></i>
                                         </div>
                                         <p>No Cédulado</p>
                                     </div>
@@ -85,7 +85,7 @@ use App\Atlas\config\App;
                                         <div class="cbx ">
                                             <input id="disca" class="cumplidoNormal" type="checkbox" disabled />
                                             <label for="disca"></label>
-                                            <i class="fa-solid fa-check fa-xs"></i>
+                                            <i class="icons fa-solid fa-check fa-xs"></i>
                                         </div>
                                         <p>Discapacidad</p>
                                     </div>
@@ -94,7 +94,7 @@ use App\Atlas\config\App;
                                     <div class="form-group">
                                         <label for="primerNombre">Primer Nombre</label>
                                         <div class="input-group">
-                                            <span class="input-group-text span_nombre1"><i class="fa-regular fa-user"></i></span>
+                                            <span class="input-group-text span_nombre1"><i class="icons fa-regular fa-user"></i></span>
                                             <input type="text" class="form-control" id="primerNombre" name="primerNombre" placeholder="Primer Nombre" required disabled>
                                         </div>
                                     </div>
@@ -104,7 +104,7 @@ use App\Atlas\config\App;
                                     <div class="form-group">
                                         <label for="segundoNombre">Segundo Nombre</label>
                                         <div class="input-group ">
-                                            <span class="input-group-text span_nombre2"><i class="fa-regular fa-user"></i></span>
+                                            <span class="input-group-text span_nombre2"><i class="icons fa-regular fa-user"></i></span>
                                             <input type="text" class="form-control" id="segundoNombre" name="segundoNombre" placeholder="Segundo Nombre" required disabled>
                                         </div>
                                     </div>
@@ -114,7 +114,7 @@ use App\Atlas\config\App;
                                     <div class="form-group">
                                         <label for="primerApellido">Primer Apellido</label>
                                         <div class="input-group">
-                                            <span class="input-group-text span_apellido1"><i class="fa-regular fa-user"></i></span>
+                                            <span class="input-group-text span_apellido1"><i class="icons fa-regular fa-user"></i></span>
                                             <input type="text" class="form-control" id="primerApellido" name="primerApellido" placeholder="Primer Apellido" required disabled>
                                         </div>
                                     </div>
@@ -124,7 +124,7 @@ use App\Atlas\config\App;
                                     <div class="form-group">
                                         <label for="segundoApellido">Segundo Apellido</label>
                                         <div class="input-group">
-                                            <span class="input-group-text span_apellido2"><i class="fa-regular fa-user"></i></span>
+                                            <span class="input-group-text span_apellido2"><i class="icons fa-regular fa-user"></i></span>
                                             <input type="text" class="form-control" id="segundoApellido" name="segundoApellido" placeholder="segundo Apellido" required disabled>
                                         </div>
                                     </div>
@@ -134,7 +134,7 @@ use App\Atlas\config\App;
                                     <div class="form-group">
                                         <label for="cedula">Cédula</label>
                                         <div class="input-group">
-                                            <span class="input-group-text span_cedula "><i class="fa-regular fa-address-card"></i></span>
+                                            <span class="input-group-text span_cedula "><i class="icons fa-regular fa-address-card"></i></span>
                                             <input type="text" class="form-control " id="cedula" name="cedula" placeholder="Cédula de Identidad" required disabled>
                                         </div>
                                     </div>
@@ -144,7 +144,7 @@ use App\Atlas\config\App;
                                     <div class="form-group">
                                         <label for="cedula">Edad</label>
                                         <div class="input-group">
-                                            <span class="input-group-text span_edad"><i class="fa-regular fa-user-clock"></i></span>
+                                            <span class="input-group-text span_edad"><i class="icons fa-regular fa-user-clock"></i></span>
                                             <input type="number" class="form-control" id="edad" name="edad" placeholder="Edad Del Familiar" required disabled>
                                         </div>
                                     </div>
@@ -154,7 +154,7 @@ use App\Atlas\config\App;
                                     <div class="form-group">
                                         <label for="correo">Partida De Nacimiento</label>
                                         <div class="input-group">
-                                            <span class="input-group-text span_docArchivo"><i class="fa-regular fa-file-zipper"></i></span>
+                                            <span class="input-group-text span_docArchivo"><i class="icons fa-regular fa-file-zipper"></i></span>
                                             <input type="file" class="form-control" name="docArchivo" id="achivo" aria-describedby="inputGroupFileAddon04" aria-label="Upload" required disabled>
                                         </div>
                                     </div>
@@ -167,7 +167,7 @@ use App\Atlas\config\App;
                                     <div class="form-group">
                                         <label class="required-field" for="message">Año</label>
                                         <div class="input-group">
-                                            <span class="input-group-text span_ano "><i class="fa-regular fa-calendar"></i></i></span>
+                                            <span class="input-group-text span_ano "><i class="icons fa-regular fa-calendar"></i></i></span>
                                             <select class="form-select form-select-md" name="ano" id="ano" required disabled></select>
                                         </div>
                                     </div>
@@ -177,7 +177,7 @@ use App\Atlas\config\App;
                                     <div class="form-group">
                                         <label class="required-field" for="message">Mes</label>
                                         <div class="input-group">
-                                            <span class="input-group-text span_mes"><i class="fa-regular fa-calendar"></i></i></span>
+                                            <span class="input-group-text span_mes"><i class="icons fa-regular fa-calendar"></i></i></span>
                                             <select class="form-select" id="meses" name="meses" aria-label="Default select example" required disabled></select>
                                         </div>
                                     </div>
@@ -187,7 +187,7 @@ use App\Atlas\config\App;
                                     <div class="form-group ">
                                         <label class="required-field" for="message">Día</label>
                                         <div class="input-group">
-                                            <span class="input-group-text span_dia"><i class="fa-regular fa-calendar"></i></i></span>
+                                            <span class="input-group-text span_dia"><i class="icons fa-regular fa-calendar"></i></i></span>
                                             <select class="form-select w-5" id="dia" name="dia" aria-label="Default select example" required disabled></select>
                                         </div>
                                     </div>

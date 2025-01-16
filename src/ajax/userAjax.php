@@ -23,6 +23,11 @@ switch ($_GET['modulo_usuario']) {
        echo $userLogin->redireccionarUsuario($url);
     break;
 
+    case 'cerrarSession':
+        $url = $_POST['url'];
+       echo $userLogin->cerrarSession_total($url);
+    break;
+
     default:
         # code...
         break;

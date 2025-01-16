@@ -14,3 +14,4 @@
 <link rel="stylesheet" href="<?php echo App::URL_LIBRARY."animate/animate.min.css"?>" />
 <link rel="stylesheet" href="<?php echo App::URL_CSS."subMenu.css"?>" />
 <link rel="stylesheet" href="<?php echo App::URL_CSS."inputs.css"?>" />
+

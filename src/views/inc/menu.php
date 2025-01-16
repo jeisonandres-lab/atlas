@@ -24,18 +24,17 @@
         <i class='bx bx-sun' id="darkLight"></i>
         <i class='bx bx-bell'></i>
         <!-- foto de perfil -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <img src="./src/assets/img/icons/avtar_1.png" alt="" class="profile nav-item dropdown dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" />
+          <span class="ms-2 d-none d-md-inline"><?php echo $datosUser ?></span>
+        </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#" id="cerrarSession">Cerrar Sesion</a></li>
+          </ul>
+        </li>
 
-        <img src="./src/assets/img/icons/avtar_1.png" alt="" class="profile  dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"/>
-        <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
-            <li>
-                <hr class="dropdown-divider">
-            </li>
-            <li><a class="dropdown-item" href="#">Separated link</a></li>
-        </ul>
-        <span class="d-none d-md-inline"><?php echo $datosUser ?></span>
+
     </div>
 </nav>
 
@@ -67,7 +66,7 @@
             <div class="menu_title menu_personal"></div>
             <!-- Start -->
             <li class="item">
-                <a href="personal" class="nav_link personal">
+                <a href="personal" class="nav_link personal familiares">
                     <span class="navlink_icon">
                         <i class='bx bx-notepad'></i>
                     </span>
@@ -77,7 +76,7 @@
             <!-- End -->
 
             <li class="item">
-                <a href="registrosPersonal" class="nav_link registrosPersonal">
+                <a href="registrosFamiliares" class="nav_link registrosFamiliares">
                     <span class="navlink_icon">
                         <i class='bx bx-id-card'></i>
                     </span>
@@ -90,7 +89,7 @@
             <div class="menu_title menu_vacaciones"></div>
             <!-- Start -->
             <li class="item">
-                <a href="#" class="nav_link">
+                <a href="ausencia" class="nav_link ausencia">
                     <span class="navlink_icon">
                         <i class='bx bx-notepad'></i>
                     </span>
