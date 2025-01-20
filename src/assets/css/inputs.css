@@ -1,8 +1,7 @@
 
 /* verificación cumplida */
-.cumplido {
+body .conten-main .app-main form .cumplido {
     border: 2px solid rgb(13, 109, 13) !important;
-  
     color: rgb(13, 109, 13) !important ;
   }
   .cumplido_span {

@@ -288,9 +288,10 @@ class personalController extends personalModel
             }
         } else {
             $data_json = [
-                'exito' => true, // Inicializamos a false por defecto
+                'exito' => false, // Inicializamos a false por defecto
                 'mensaje' => 'Este Empleado Ya Esta Registrado',
-                'resultado' => 1,
+                'resultado' => 0,
+                'error' => true,
                 'resultado2' => $check_exisPersonal,
             ];
         }
@@ -328,9 +329,13 @@ class personalController extends personalModel
                     $data_json['mesNacimiento'] = $row['mesNacimiento'];
                     $data_json['anoNacimiento'] = $row['anoNacimiento'];
                     $data_json['estatus'] = $row['estatus'];
+                    $data_json['idestatus'] = $row['id_estatus'];
                     $data_json['cargo'] = $row['cargo'];
+                    $data_json['idcargo'] = $row['id_cargo'];
                     $data_json['dependencia'] = $row['dependencia'];
+                    $data_json['iddependencia'] = $row['id_dependencia'];
                     $data_json['departamento'] = $row['departamento'];
+                    $data_json['iddepartamento'] = $row['id_departamento'];
                     $data_json['telefono'] = $row['telefono'];
                     $data_json['activo'] = $activo;
                     $data_json['mensaje'] = "Trabajador Encontrado";
@@ -790,7 +795,7 @@ class personalController extends personalModel
             $validarDocumentos = $this->tablas->tablas($selectores2, $tabla2, $campoOrden2, $conditions2, $conditionParams2);
             $validarFamiliar = $this->getExisteEmpleadoFamiliar($parametro);
             $botones = "
-                
+
                 <button class='btn btn-danger btn-sm btn-hover-rojo btnEliminar'  data-swal-toast-template='#my-template' data-id=" . $row['id_ninos'] .  "><i class='fa-solid fa-trash fa-sm me-2'></i>Eliminar</button>
             ";
 

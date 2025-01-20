@@ -301,11 +301,11 @@ use App\Atlas\config\App;
 
                                             <div class="col-sm-6 mb-2">
                                                 <div class="form-group">
-                                                    <label for="dependencia">Estado dependencia</label>
+                                                    <label for="dependencia" class="form-label">Estado dependencia</label>
                                                     <div class="input-group">
                                                         <span class="input-group-text span_dependencia"><i class="icons fa-regular fa-clipboard"></i></span>
-                                                        <select class="form-select form-select-md estado-dependencia" id="dependencia" name="dependencia" aria-label="Small select example" aria-placeholder="dasdas" required>
-                                                            <option value="">Selecione la dependencia</option>
+                                                        <select class="form-select form-select-md estado-dependencia" id="dependencia" name="dependencia" aria-describedby="dependencia" required>
+
                                                         </select>
                                                     </div>
                                                 </div>

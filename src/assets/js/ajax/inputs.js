@@ -1,4 +1,5 @@
-export function validarNombre(input, cumplidospan) {
+// Funcion para vlaidar campos tipo text que tambien coloquen la primera letra en mayuscula
+export async function validarNombre(input, cumplidospan) {
   $(input).on("input", function () {
     // Convertir todo a minúsculas y capitalizar la primera letra
     this.value = this.value.toLowerCase().replace(/\b\w/g, (char) => char.toUpperCase());
@@ -19,7 +20,8 @@ export function validarNombre(input, cumplidospan) {
   });
 }
 
-export function validarNumeros(input, cumplidospan) {
+// Funcion para validar que se ocloquen solo numeros mayor a 7 menor a 9 (Cédula)
+export async function validarNumeros(input, cumplidospan) {
   $(input).on("input", function (evenet) {
     this.value = this.value.replace(/[^0-9]/g, "");
     if (this.value.length < 7) {
@@ -37,7 +39,8 @@ export function validarNumeros(input, cumplidospan) {
   });
 }
 
-export function validarNumerosMenores(input, cumplidospan) {
+// Funcion para validar que se coloque un número mayor a 1
+export async function validarNumerosMenores(input, cumplidospan) {
   $(input).on("input", function (evenet) {
     this.value = this.value.replace(/[^0-9]/g, "");
     if (this.value.length < 1 || this.value == 0) {
@@ -55,9 +58,8 @@ export function validarNumerosMenores(input, cumplidospan) {
   });
 }
 
-
-
-export function validarTelefono(input, cumplidospan) {
+// Funcion para validar los numeros de telefonos 
+export async function validarTelefono(input, cumplidospan) {
   $(input).on("input", function () {
     // Eliminar cualquier cosa que no sea un número
     this.value = this.value.replace(/[^0-9]/g, "");
@@ -82,7 +84,8 @@ export function validarTelefono(input, cumplidospan) {
 
 }
 
-export function validarNumeroNumber(input, cumplidospan,) {
+// Funcion para validar los inputs de tipo number
+export async function validarNumeroNumber(input, cumplidospan,) {
   $(input).on("input", function () {
     // Si el valor es menor a 0, lo reemplazamos por 0
     if (this.value <= 0) {
@@ -101,8 +104,10 @@ export function validarNumeroNumber(input, cumplidospan,) {
 
 }
 
-export function validarSelectores(input, cumplidospan, tigger) {
+// Funcion para validar los selectores de tipo select 
+export async function validarSelectores(input, cumplidospan, tigger) {
   $(input).on("input", function () {
+    console.log("hola");
     const opcionSeleccionada = $(this).val();
     if (opcionSeleccionada === "") {
       $(this).removeClass("cumplido");
@@ -121,7 +126,37 @@ export function validarSelectores(input, cumplidospan, tigger) {
   } else { }
 }
 
-export function valdiarCorreos(input, cumplidospan) {
+export async function validarSelectoresSelec2(input, cumplidospan) {
+  // Maneja el evento select2:select y change
+    $("#dependencia").on('select2:select change', function (e) {
+      const select2Container = $(this).next('.select2-container');
+      const selectedValue = $(this).val();
+      const select = $("#dependencia");
+      const span = $(".span_dependencia");
+      if (select.val() == "") {
+        select2Container.removeClass('cumplido');
+        select2Container.addClass('error_input');
+        select.removeClass('cumplido');
+        span.removeClass('cumplido_span');
+      } else {
+        if (selectedValue && selectedValue !== "") {
+          select2Container.addClass('cumplido');
+          select.addClass('cumplido');
+          span.addClass('cumplido_span'); 
+          select2Container.removeClass('error_input');
+        } else {
+          select.removeClass('cumplido');
+          span.removeClass('cumplido_span');
+
+          select2Container.removeClass('cumplido');
+          select2Container.addClass('error_input');
+        }
+      }
+  
+    });
+}
+// Funcion para validar los inputs de tipo correo
+export async function valdiarCorreos(input, cumplidospan) {
   $(input).on("input", function (evenet) {
     var correo = this.value;
     var regexHotmail = /@hotmail\.com$/i;
@@ -140,7 +175,8 @@ export function valdiarCorreos(input, cumplidospan) {
   });
 }
 
-export function validarBusquedaCedula(input, divContens) {
+// Funcion para buscar las fotos de los empleados mediante la cédula de identidad
+export async function validarBusquedaCedula(input, divContens) {
   $(input).on("input", function () {
     const cedula = $(this).val();
     const imageUrl = `./src/global/archives/photos/${cedula}.png`;
@@ -164,6 +200,7 @@ export function validarBusquedaCedula(input, divContens) {
   });
 }
 
+// Objeto para colocar los meses
 export async function colocarMeses(input) {
   // Simular una operación asincrónica con Promise y setTimeout
   const obtenerMeses = () => {
@@ -198,6 +235,7 @@ export async function colocarMeses(input) {
   });
 }
 
+// Objeto para colocar los años
 export async function colocarYear(input, desde) {
   // Crear un array de objetos para representar los años
   const años = [];
@@ -213,73 +251,7 @@ export async function colocarYear(input, desde) {
   });
 }
 
-export function file(input, cumplidospan){
-  $(input).on("change", function(){
-    if (this.files && this.files[0]) {
-      // Se ha seleccionado un archivo
-      $(this).addClass('cumplido');
-      $(this).removeClass('error_input');
-      
-      $(cumplidospan).removeClass("error_span");
-      $(cumplidospan).addClass("cumplido_span");
-    } else {
-      // No se ha seleccionado ningún archivo
-      $(this).removeClass('cumplido');
-      $(this).addClass('error_input');
-
-      $(cumplidospan).removeClass("cumplido_span");
-      $(cumplidospan).addClass("error_span");
-    }
-  })
-}
-export function liberarInputs(input, cumplidospan, valor) {
-  // inputs
-  if (valor == 1) {
-    $(input).addClass("cumplido");
-    $(input).removeClass("error_input");
-    // spans
-    $(cumplidospan).addClass("cumplido_span");
-    $(cumplidospan).removeClass("error_span");
-  } else {
-    $(input).val("");
-    $(input).removeClass("cumplido");
-    $(input).addClass("error_input");
-    // spans
-    $(cumplidospan).removeClass("cumplido_span");
-    $(cumplidospan).addClass("error_span");
-  }
-}
-
-export function limpiarFormulario(idinput, span) {
-  if ($(idinput).attr('type') === 'checkbox') {
-    return;
-  }
-  
-  $(idinput).val("");
-  $(idinput).removeClass("cumplido");
-  $(idinput).addClass("error_input");
-  
-  if (span) {
-    $(span).removeClass("cumplido_span");
-    $(span).addClass("error_span");    
-  }
-}
-
-export function limpiarInput(idinput, span) {
-  if ($(idinput).attr('type') === 'checkbox') {
-    return;
-  }
-
-  $(idinput).find('option').not(':first').remove();
-  $(idinput).val("");
-
-
-  $(idinput).removeClass("cumplido");
-  if (span) {
-    $(span).removeClass("cumplido_span");
-  }
-}
-
+// Objeto para colocar niveles de estudio de los empleados
 export async function colocarNivelesEducativos(input) {
   // Simular una operación asincrónica con Promise y setTimeout
   const obtenerNivelesEducativos = () => {
@@ -307,4 +279,89 @@ export async function colocarNivelesEducativos(input) {
   niveles.forEach(nivel => {
     $(input).append(`<option value="${nivel.valor}">${nivel.nombre}</option>`);
   });
+}
+
+// Validar documentos subidos
+export async function file(input, cumplidospan){
+  $(input).on("change", function(){
+    if (this.files && this.files[0]) {
+      // Se ha seleccionado un archivo
+      $(this).addClass('cumplido');
+      $(this).removeClass('error_input');
+      
+      $(cumplidospan).removeClass("error_span");
+      $(cumplidospan).addClass("cumplido_span");
+    } else {
+      // No se ha seleccionado ningún archivo
+      $(this).removeClass('cumplido');
+      $(this).addClass('error_input');
+
+      $(cumplidospan).removeClass("cumplido_span");
+      $(cumplidospan).addClass("error_span");
+    }
+  })
+}
+
+export async function liberarInputs(input, cumplidospan, valor) {
+  // inputs
+  if (valor == 1) {
+    $(input).addClass("cumplido");
+    $(input).removeClass("error_input");
+    // spans
+    $(cumplidospan).addClass("cumplido_span");
+    $(cumplidospan).removeClass("error_span");
+  } else {
+    $(input).val("");
+    $(input).removeClass("cumplido");
+    $(input).addClass("error_input");
+    // spans
+    $(cumplidospan).removeClass("cumplido_span");
+    $(cumplidospan).addClass("error_span");
+  }
+}
+
+export async function limpiarFormulario(idinput, span) {
+  if ($(idinput).attr('type') === 'checkbox') {
+    return;
+  }
+  
+  $(idinput).val("");
+  $(idinput).removeClass("cumplido");
+  $(idinput).addClass("error_input");
+  
+  if (span) {
+    $(span).removeClass("cumplido_span");
+    $(span).addClass("error_span");    
+  }
+}
+
+export async function limpiarInput(idinput, span) {
+  if ($(idinput).attr('type') === 'checkbox') {
+    return;
+  }
+
+  $(idinput).find('option').not(':first').remove();
+  $(idinput).val("");
+
+
+  $(idinput).removeClass("cumplido");
+  if (span) {
+    $(span).removeClass("cumplido_span");
+  }
+}
+
+// Funcion para colocar las clases cumplido en los input y span 
+export async function clasesInputs(input, span) {
+  $(input).addClass("cumplido");
+  $(input).removeClass("error_input");
+  $(span).addClass("cumplido_span");
+  $(span).removeClass("error_span");
+}
+
+// Funcion para colocar las clases error en los input y span
+export async function clasesInputsError(input, span) {
+  $(input).removeClass("cumplido");
+  $(input).addClass("error_input");
+  $(span).removeClass("cumplido_span");
+  $(span).addClass("error_span");
 }

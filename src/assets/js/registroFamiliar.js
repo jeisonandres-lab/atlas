@@ -11,6 +11,7 @@ import {
   file,
   limpiarInput,
   colocarNivelesEducativos,
+  clasesInputs,
 } from "./ajax/inputs.js";
 
 $(function () {
@@ -34,7 +35,7 @@ $(function () {
   colocarYear("#ano2", "1900");
   colocarMeses("#meses2");
   colocarNivelesEducativos("#academico");
- 
+
 
   const cargando = document.getElementById('cargando');
   var boton = $('#aceptar');
@@ -253,7 +254,7 @@ $(function () {
     for (let key in options) {
       formData.append(key, options[key]);
     }
-  
+
     return $.ajax({
       url: url,
       type: 'POST',
@@ -264,6 +265,7 @@ $(function () {
     });
   }
   function editar(idPersonal) {
+    
     console.log(idPersonal);
     let urls = [
       "src/ajax/registroPersonal.php?modulo_personal=obtenerDependencias",
@@ -286,6 +288,7 @@ $(function () {
 
       if (dependencias[0].exito && dependencias[0].data) {
         llenarSelectDependencias(dependencias[0].data, 'dependencia');
+        
       } else {
         console.error('Error al obtener dependencias o la estructura de la respuesta es incorrecta');
       }
@@ -316,23 +319,20 @@ $(function () {
         $("#cedulaEdi").val(datosPersonal[0].cedula);
         $("#telefono").val(datosPersonal[0].telefono);
         $("#civil").val(datosPersonal[0].estadoCivil);
+        $("#dependencia").val(datosPersonal[0].dependencia);
 
-        // se marcar cumplido logrado
-        $("#cedula_trabajador").addClass("cedulaBusqueda");
-        $("#primerNombre").addClass("cumplido");
-        $("#segundoNombre").addClass("cumplido");
-        $("#primerApellido").addClass("cumplido");
-        $("#segundoApellido").addClass("cumplido");
-        $("#cedulaEdi").addClass("cumplido");
-        $("#telefono").addClass("cumplido");
+        // llevarOptionIndividual(datosPersonal[0].dependencia, 'dependencia', datosPersonal[0].iddependencia);
+        // se marcar cumplido logrado y se marcar span cumplido logrado 
+        // $("cedula_trabajador").addClass("cedulaBusqueda"); 
+        clasesInputs("#primerNombre", ".span_nombre");
+        clasesInputs("#segundoNombre", ".span_nombre2");
+        clasesInputs("#primerApellido", ".span_apellido");
+        clasesInputs("#segundoApellido", ".span_apellido2");
+        clasesInputs("#cedulaEdi", ".span_cedula");
+        clasesInputs("#telefono", ".span_telefono");
+        clasesInputs("#civil", ".span_civil");
 
-        $(".span_nombre").addClass("cumplido_span");
-        $(".span_nombre2").addClass("cumplido_span");
-        $(".span_apellido").addClass("cumplido_span");
-        $(".span_apellido2").addClass("cumplido_span");
-        $(".span_cedula").addClass("cumplido_span");
-        $(".span_telefono").addClass("cumplido_span");
-
+        
       } else {
         console.error('Error al obtener datos personales o la estructura de la respuesta es incorrecta');
       }
@@ -342,7 +342,6 @@ $(function () {
   }
 
   async function llenarSelectDependencias(data, selectId) {
-
     const select = document.getElementById(selectId);
     console.log(data);
     // Asegúrate de que el ID del select sea correcto
@@ -358,6 +357,21 @@ $(function () {
       select.appendChild(option);
     });
   }
+  // select.remove(i);
+  async function llevarOptionIndividual(data, selectId, idnumber) {
+    const select = document.getElementById(selectId);
+    const options = select.options;
+  
+    // Crear la nueva opción
+    const option = document.createElement('option');
+    option.value = idnumber;
+    option.text = data;
+    option.classList.add('new-option'); // Añadir clase para fondo rojo
+  
+    // Insertar la opción al principio
+    select.insertBefore(option, select.firstChild);
+
+  }
 
   function eliminar(idPersonal) {
     console.log(idPersonal);
@@ -368,7 +382,7 @@ $(function () {
       // Manejar la respuesta exitosa aquí
       $('#myTable').DataTable().ajax.reload(null, false);
       AlertSW2("success", "Empleado Eliminado Con exito", "top", 3000);
-      
+
     }
 
     function enviar() {
@@ -393,7 +407,7 @@ $(function () {
       // Manejar la respuesta exitosa aquí
       $('#myTable').DataTable().ajax.reload(null, false);
       AlertSW2("success", "Empleado Eliminado Con exito", "top", 3000);
-      
+
     }
 
     function enviar() {
@@ -476,7 +490,7 @@ $(function () {
   //   const formData = new FormData(this);
   //   const accion = $(this).find('button[type="submit"]:focus').attr('name');
   //   console.log(accion)
-     
+
   //     function callbackExito(parsedData) {
   //     }
   //     let destino = "src/ajax/registroPersonal.php?modulo_personal=actualizarPersonal";
@@ -532,7 +546,7 @@ $(function () {
       console.log(parsedData);
       if (parsedData.exito) {
         AlertSW2("success", "Empleado Actualizado Con Exito", "top-end", 3000);
-      }else{
+      } else {
         alertaNormalmix(parsedData.mensaje, 4000, "error", "top-end")
       }
       // else if (dataerror) {

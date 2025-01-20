@@ -11,6 +11,11 @@
 <link rel="stylesheet" href="<?php echo App::URL_CSS."menu.css"?>" />
 <link rel="stylesheet" href="<?php echo App::URL_NODE."sweetalert2/dist/sweetalert2.min.css";?>"/>
 <link rel="stylesheet" href="<?php echo App::URL_LIBRARY."select2/select2.min.css"?>" />
+
+<link rel="stylesheet" href="<?php echo App::URL_LIBRARY."select2bts/select2-bootstrap-5-theme.min.css"?>" />
+<link rel="stylesheet" href="<?php echo App::URL_LIBRARY."select2bts/select2-bootstrap-5-theme.rtl.min.css"?>" />
+
+
 <link rel="stylesheet" href="<?php echo App::URL_LIBRARY."animate/animate.min.css"?>" />
 <link rel="stylesheet" href="<?php echo App::URL_CSS."subMenu.css"?>" />
 <link rel="stylesheet" href="<?php echo App::URL_CSS."inputs.css"?>" />

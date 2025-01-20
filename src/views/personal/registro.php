@@ -39,7 +39,7 @@ use App\Atlas\config\App;
             </div>
         </div>
         <!-- CUERPO DEL SISTEMA -->
-        <main class=" app-main p-0 pb-4">
+        <main class="app-main p-0 pb-4">
             <!-- NOMBRE DEL MODULO -->
             <div class="imagen-pages mb-3" style="height: 75px;">
                 <div class="d-flex aling-items-center " style="position: absolute; ">
@@ -236,7 +236,7 @@ use App\Atlas\config\App;
                                 <label for="dependencia">Dependencia</label>
                                 <div class="input-group">
                                     <span class="input-group-text span_dependencia"><i class="icons fa-regular fa-building-memo"></i></span>
-                                    <select class="form-select form-select-md estado-dependencia" id="dependencia" name="dependencia" aria-label="Small select example" aria-placeholder="dasdas" required>
+                                    <select class="form-select form-select-md estado-dependencia " id="dependencia" name="dependencia" aria-label="Small select example" aria-placeholder="dasdas" required>
                                         <option value="">Selecione la dependencia</option>
                                     </select>
                                 </div>

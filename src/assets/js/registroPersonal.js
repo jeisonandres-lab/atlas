@@ -11,6 +11,7 @@ import {
   validarTelefono,
   file,
   limpiarInput,
+  validarSelectoresSelec2,
 } from "./ajax/inputs.js";
 
 import {
@@ -49,12 +50,19 @@ $(function () {
   validarSelectores("#estatus", ".span_estatus");
   validarSelectores("#cargo", ".span_cargo");
   validarSelectores("#departamento", ".span_departamento");
-  validarSelectores("#dependencia", ".span_dependencia");
+
   validarSelectores("#academico", ".span_academico");
   file("#contrato", ".span_contrato");
   file("#notificacion", ".span_notificacion");
   // formulario de empleados
+  // formulario de empleados
+  $('#dependencia').select2({
+    theme: "bootstrap-5",
+    width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
+    placeholder: $(this).data('placeholder'),
+  });
 
+  validarSelectoresSelec2("#dependencia", ".span_dependencia");
   let urls = [
     "src/ajax/registroPersonal.php?modulo_personal=obtenerDependencias",
     "src/ajax/registroPersonal.php?modulo_personal=obtenerEstatus",
@@ -67,6 +75,7 @@ $(function () {
   $.when(...requests).done((dependencias, estatus, cargo, departamento) => {
     if (dependencias.exito && dependencias.data) {
       llenarSelectDependencias(dependencias.data, 'dependencia');
+
     } else {
       console.error('Error al obtener dependencias o la estructura de la respuesta es incorrecta');
     }
@@ -114,7 +123,7 @@ $(function () {
 
   $("#meses").on("change", function (yearnull) {
     const year = $("#ano").val();
-    console.log("holis:"+year) // Cambia el año si lo deseas
+    console.log("holis:" + year) // Cambia el año si lo deseas
     const month = $("#meses").val();
     if (month == "") {
       $(this).removeClass("cumplido");
