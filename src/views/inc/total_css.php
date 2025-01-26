@@ -1,4 +1,5 @@
 <?php use App\Atlas\config\App;?>
+<link rel="stylesheet" href="<?php echo App::URL_LIBRARY."adminLTE/css/adminlte.min.css"?>" />
 
 <link rel="icon"       href="<?php echo App::URL_ICONS."dasdad-transformed-removebg.png";?>" type="image/x-icon"/>
 <!-- <link rel="stylesheet" href="<?php echo App::URL_NODE."bootstrap/dist/css/bootstrap.min.css";?>"/> -->
@@ -18,5 +19,6 @@
 
 <link rel="stylesheet" href="<?php echo App::URL_LIBRARY."animate/animate.min.css"?>" />
 <link rel="stylesheet" href="<?php echo App::URL_CSS."subMenu.css"?>" />
-<link rel="stylesheet" href="<?php echo App::URL_CSS."inputs.css"?>" />
+<link rel="stylesheet" href="<?php echo App::URL_CSS."cssUtils/inputs.css"?>" />
+
 

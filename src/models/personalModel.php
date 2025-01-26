@@ -30,7 +30,7 @@ class personalModel extends Conexion
         $sql = $this->ejecutarConsulta("SELECT cedula FROM datosPersonales WHERE cedula = ?", $parametro);
         if ($sql) {
             $sql = false;
-        }else{
+        } else {
             $sql = true;
         }
         return $sql;
@@ -48,7 +48,9 @@ class personalModel extends Conexion
             "SELECT * FROM datosEmpleados de INNER JOIN datosPersonales dp ON de.idPersonal = dp.id_personal INNER JOIN estatus e ON de.idEstatus = e.id_estatus
             INNER JOIN cargo c ON de.idCargo = c.id_cargo
             INNER JOIN dependencia depe ON de.idDependencia = depe.id_dependencia
-            INNER JOIN departamento d ON de.idDepartamento = d.id_departamento WHERE dp.cedula = ?", $parametro);
+            INNER JOIN departamento d ON de.idDepartamento = d.id_departamento WHERE dp.cedula = ?",
+            $parametro
+        );
         return $sql;
     }
 
@@ -80,9 +82,28 @@ class personalModel extends Conexion
         return $sql;
     }
 
+    private function existeFamiliarID($parametro)
+    {
+        $sql = $this->ejecutarConsulta("SELECT * FROM datosfamilia WHERE id_ninos = ? ",  $parametro);
+        return $sql;
+    }
+
     private function existeEmpleadofamiliar($parametro)
     {
         $sql = $this->ejecutarConsulta("SELECT * FROM datosfamilia WHERE idEmpleado = ? ",  $parametro);
+        return $sql;
+    }
+
+    private function datosFamiliar($parametro)
+    {
+        $sql = $this->ejecutarConsulta("SELECT df . *, dp . cedula AS cedulaEmpleado,
+        dp.primerNombre AS primerNombreEmpleado,
+        dp.primerApellido AS primerApellidoEmpleado
+        FROM datosfamilia df
+        INNER JOIN datosempleados de
+        ON de.id_empleados = df.idEmpleado
+        INNER JOIN datospersonales dp ON dp.id_personal = de.idPersonal
+        WHERE df.id_ninos = ? ",  $parametro);
         return $sql;
     }
 
@@ -92,17 +113,24 @@ class personalModel extends Conexion
         return $sql;
     }
 
-    public function actualizarPersonalMode($primerNombre,
-    $segundoNombre,
-    $primerApellido,
-    $segundoApellido,
-    $cedula,
-    $civil,
-    $ano,
-    $mes,
-    $dia,
-    $fecha,
-    $hora){
+    public function actualizarDatosFamiliar()
+    {
+        $sql = $this->ejecutarConsulta("");
+        return $sql;
+    }
+    public function actualizarPersonalMode(
+        $primerNombre,
+        $segundoNombre,
+        $primerApellido,
+        $segundoApellido,
+        $cedula,
+        $civil,
+        $ano,
+        $mes,
+        $dia,
+        $fecha,
+        $hora
+    ) {
         $sql = $this->ejecutarConsulta("UPDATE
         datospersonales SET primerNombre='$primerNombre',
         segundoNombre='$segundoNombre',primerApellido='$primerApellido',
@@ -111,21 +139,25 @@ class personalModel extends Conexion
         anoNacimiento='$ano',fecha='$fecha',
         hora=' $hora' WHERE cedula = '$cedula' ");
 
-        if(!empty($sql)){
+        if (!empty($sql)) {
             $sql = false;
-        }else{
+        } else {
             $sql = true;
         }
         return $sql;
     }
 
-    public function actualizarEmpleadoMode($idEstatus,
-    $idCargo,
-    $idDependencia,
-    $telefono,
-    $idDepartamento,
-    $fecha,
-    $hora, $idPersonal, $nivelAcademico ){
+    public function actualizarEmpleadoMode(
+        $idEstatus,
+        $idCargo,
+        $idDependencia,
+        $telefono,
+        $idDepartamento,
+        $fecha,
+        $hora,
+        $idPersonal,
+        $nivelAcademico
+    ) {
         $sql = $this->ejecutarConsulta("UPDATE
         datosempleados
         SET
@@ -136,9 +168,9 @@ class personalModel extends Conexion
         nivelAcademico='$nivelAcademico',
         telefono=' $telefono',activo='1',fecha='$fecha',hora='$hora' WHERE idPersonal = '$idPersonal'");
 
-        if(!empty($sql)){
+        if (!empty($sql)) {
             $sql = false;
-        }else{
+        } else {
             $sql = true;
         }
         return $sql;
@@ -189,10 +221,21 @@ class personalModel extends Conexion
         return $this->existeFamilar($parametro);
     }
 
+    public function getDatosFamiliar($parametro)
+    {
+        return $this->datosFamiliar($parametro);
+    }
+
     public function getExisteEmpleadoFamiliar($parametro)
     {
         return $this->existeEmpleadofamiliar($parametro);
     }
+
+    public function getExisteFamiliarID($parametro)
+    {
+        return $this->existeFamiliarID($parametro);
+    }
+    
     public function getActualizar($tabla, $datos, $condicion)
     {
         return $this->actualuzarDatos($tabla, $datos, $condicion);

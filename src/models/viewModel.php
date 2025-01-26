@@ -18,10 +18,11 @@ class viewModel extends error
             'inicio' => 'src/views/home/home.php',
             'personal' => "src/views/personal/registro.php",
             'registrosFamiliares' => "src/views/personal/registrosFamiliares.php",
-            'editarRegistro' => "src/views/personal/editarRegistro.php",
+            'datosInces' => "src/views/personal/DatosInces.php",
             'familiares' => "src/views/personal/familiares.php",
             'ausencia' => "src/views/ausencia/ausencia.php",
             'error' => "src/error/error.html",
+            'prueba' => "chart.html",
         ];
         // Obtener la ruta completa de la vista
         $rutaVista = $vistas[$vista] ?? null;

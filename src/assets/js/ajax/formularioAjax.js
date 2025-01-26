@@ -117,18 +117,19 @@ export async function obtenerDatosJQuery(url, options = {}) {
 // Función para generar un hash seguro con sal
 export function generarHashContrasena(contrasena) {
     // Generar una sal aleatoria de 16 bytes (32 caracteres hexadecimales)
-    const salt = CryptoJS.lib.WordArray.random(16);
-    const hash = CryptoJS.SHA256(contrasena + salt);
-    return hash.toString() + salt.toString();
-  }
-  
+    const salt = CryptoJS.lib.WordArray.random(16).toString();
+    const hash = CryptoJS.SHA256(contrasena + salt).toString();
+    // Combinar el hash y la sal en un solo string
+    return hash + salt;
+}
+
 // Función para verificar una contraseña
 export function verificarContrasena(contrasena, hashAlmacenado) {
     // Separar el hash y la sal del string almacenado
     const hashParte = hashAlmacenado.substring(0, 64); // Hash SHA-256 tiene 64 caracteres hexadecimales
     const saltParte = hashAlmacenado.substring(64);
     // Reconstruir el hash original con la sal
-    const hashCalculado = CryptoJS.SHA256(contrasena + saltParte);
+    const hashCalculado = CryptoJS.SHA256(contrasena + saltParte).toString();
     // Comparar los hashes
-    return hashCalculado.toString() === hashParte;
+    return hashCalculado === hashParte;
 }

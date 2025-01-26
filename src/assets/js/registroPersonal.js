@@ -12,6 +12,7 @@ import {
   file,
   limpiarInput,
   validarSelectoresSelec2,
+  incluirSelec2,
 } from "./ajax/inputs.js";
 
 import {
@@ -40,29 +41,29 @@ $(function () {
   validarNombre("#segundoApellido", ".span_apellido2");
   validarNumeros("#cedula", ".span_cedula");
   validarBusquedaCedula("#cedula", ["#img-modals", "#img-contener"]);
-  validarSelectores("#civil", ".span_civil");
-  validarSelectores("#ano", ".span_ano", "1");
-  validarSelectores("#dia", ".span_dia", "1");
   valdiarCorreos("#correo", ".span_correo");
   colocarYear("#ano", "1900");
   colocarMeses("#meses");
-  validarTelefono("#telefono", ".span_telefono");
-  validarSelectores("#estatus", ".span_estatus");
-  validarSelectores("#cargo", ".span_cargo");
-  validarSelectores("#departamento", ".span_departamento");
-
-  validarSelectores("#academico", ".span_academico");
+  validarTelefono("#telefono", ".span_telefono", "#linea");
+  validarSelectores("#civil", ".span_civil");
+  validarSelectores("#ano", ".span_ano", "1");
+  validarSelectores("#dia", ".span_dia", "1");
   file("#contrato", ".span_contrato");
   file("#notificacion", ".span_notificacion");
-  // formulario de empleados
-  // formulario de empleados
-  $('#dependencia').select2({
-    theme: "bootstrap-5",
-    width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
-    placeholder: $(this).data('placeholder'),
-  });
 
+  // formulario de empleados por select 2
+  incluirSelec2("#estatus");
+  incluirSelec2("#cargo");
+  incluirSelec2("#departamento");
+  incluirSelec2("#dependencia");
+  incluirSelec2("#academico");
   validarSelectoresSelec2("#dependencia", ".span_dependencia");
+  validarSelectoresSelec2("#estatus", ".span_estatus");
+  validarSelectoresSelec2("#cargo", ".span_cargo");
+  validarSelectoresSelec2("#departamento", ".span_departamento");
+  validarSelectoresSelec2("#dependencia", ".span_dependencia");
+  validarSelectoresSelec2("#academico", ".span_academico");
+
   let urls = [
     "src/ajax/registroPersonal.php?modulo_personal=obtenerDependencias",
     "src/ajax/registroPersonal.php?modulo_personal=obtenerEstatus",
@@ -194,7 +195,7 @@ $(function () {
   // metodos para escuchar cambios en el dom y habilitar el boton de enviar formulario 
   // Función para verificar si todos los campos están cumplidos
   function todosCumplidos() {
-    const elementosCumplidos = $('form input, form select').filter('.cumplido, .cumplidoNormal');
+    const elementosCumplidos = $('form input, form select').filter('.cumplido, .cumplidoNormal, .cumplido_segundario');
     return elementosCumplidos.length === $('form input, form select').length;
   }
 

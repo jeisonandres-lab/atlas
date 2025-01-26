@@ -59,26 +59,33 @@ export async function validarNumerosMenores(input, cumplidospan) {
 }
 
 // Funcion para validar los numeros de telefonos 
-export async function validarTelefono(input, cumplidospan) {
+export async function validarTelefono(input, cumplidospan, cumplido_span2) {
   $(input).on("input", function () {
     // Eliminar cualquier cosa que no sea un número
     this.value = this.value.replace(/[^0-9]/g, "");
     console.log(this.value)
     // Limitar a 12 dígitos
-    if (this.value.length > 11) {
-      this.value = this.value.slice(0, 11);
+    if (this.value.length > 7) {
+      this.value = this.value.slice(0, 7);
     }
     // Aplicar clases según la longitud
-    if (this.value.length == 11) {
+    if (this.value.length == 7) {
       $(this).removeClass("error_input");
       $(this).addClass("cumplido");
       $(cumplidospan).removeClass("error_span");
       $(cumplidospan).addClass("cumplido_span");
+
+      $(cumplido_span2).removeClass("error_span");
+      $(cumplido_span2).addClass("cumplido_segundario");
+
     } else {
       $(this).removeClass("cumplido");
       $(this).addClass("error_input");
       $(cumplidospan).removeClass("cumplido_span");
       $(cumplidospan).addClass("error_span");
+
+      $(cumplido_span2).removeClass("cumplido_segundario");
+      $(cumplido_span2).addClass("error_span");
     }
   });
 
@@ -126,13 +133,21 @@ export async function validarSelectores(input, cumplidospan, tigger) {
   } else { }
 }
 
+export async function incluirSelec2(input){
+  $(input).select2({
+    theme: "bootstrap-5",
+    width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
+    placeholder: $(this).data('placeholder'),
+  });
+}
+
 export async function validarSelectoresSelec2(input, cumplidospan) {
   // Maneja el evento select2:select y change
-    $("#dependencia").on('select2:select change', function (e) {
+    $(input).on('select2:select change', function (e) {
       const select2Container = $(this).next('.select2-container');
       const selectedValue = $(this).val();
-      const select = $("#dependencia");
-      const span = $(".span_dependencia");
+      const select = $(input);
+      const span = $(cumplidospan);
       if (select.val() == "") {
         select2Container.removeClass('cumplido');
         select2Container.addClass('error_input');
@@ -258,14 +273,14 @@ export async function colocarNivelesEducativos(input) {
     return new Promise((resolve) => {
       setTimeout(() => {
         const niveles = [
-          { valor: 'bachiller', nombre: "Bachiller" },
-          { valor: 'tecnico', nombre: "Técnico" },
-          { valor: 'tecnologo', nombre: "Tecnólogo" },
-          { valor: 'pregrado', nombre: "Pregrado" },
-          { valor: 'ingeniero', nombre: "Ingeniero" },
-          { valor: 'especialista', nombre: "Especialista" },
-          { valor: 'maestria', nombre: "Maestría" },
-          { valor: 'doctorado', nombre: "Doctorado" },
+          { valor: 'Bachiller', nombre: "Bachiller" },
+          { valor: 'Tecnico', nombre: "Técnico" },
+          { valor: 'Tecnologo', nombre: "Tecnólogo" },
+          { valor: 'Pregrado', nombre: "Pregrado" },
+          { valor: 'Ingeniero', nombre: "Ingeniero" },
+          { valor: 'Especialista', nombre: "Especialista" },
+          { valor: 'Maestria', nombre: "Maestría" },
+          { valor: 'Doctorado', nombre: "Doctorado" },
         ];
         resolve(niveles);
       }, 1000); // Simular un retraso de 1 segundo

@@ -13,7 +13,7 @@ import {
 } from "./ajax/inputs.js";
 
 import { alertaNormalmix, AlertSW2 } from "./ajax/alerts.js";
-import { enviarDatos, enviarFormulario, obtenerDatos } from "./ajax/formularioAjax.js";
+import { enviarDatos, enviarDatosPersonalizados, enviarFormulario, obtenerDatos } from "./ajax/formularioAjax.js";
 
 $(function () {
   const cargando = document.getElementById('cargando');
@@ -29,14 +29,142 @@ $(function () {
   validarNumeros("#cedula", ".span_cedula");
   validarSelectores("#ano", ".span_ano");
   validarSelectores("#dia", ".span_dia");
+  validarSelectores("#parentesco", ".span_parentesco");
   validarSelectores("#familiarTipo", ".span_familiarTipo");
   colocarYear("#ano", "1900");
   colocarMeses("#meses");
-  validarNumeroNumber("#edad", ".span_edad");
   file("#achivo", ".span_docArchivo");
   file("#achivo", ".span_achivo");
-
   $("#dia").append('<option value="">Selecciona un día</option>');
+
+  $("#cedula_trabajador").on("input", function () {
+    function callbackExito(parsedData) {
+      if (parsedData.logrado == true) {
+        let nombre = parsedData.nombre;
+        let apellido = parsedData.apellido;
+        // si tiene marcado error
+        $("#nombre").removeClass("error_input");
+        $("#apellido").removeClass("error_input");
+        $(".span_nombre").removeClass("error_span");
+        $(".span_apellido").removeClass("error_span");
+
+        // se marcar cumplido logrado
+        $("#cedula_trabajador").addClass("cedulaBusqueda");
+        $("#nombre").addClass("cumplido");
+        $("#apellido").addClass("cumplido");
+        $(".span_nombre").addClass("cumplido_span");
+        $(".span_apellido").addClass("cumplido_span");
+        $("#nombre").val(nombre);
+        $("#apellido").val(apellido);
+
+        $("#primerNombre").prop("disabled", false);
+        $("#segundoNombre").prop("disabled", false);
+        $("#primerApellido").prop("disabled", false);
+        $("#segundoApellido").prop("disabled", false);
+        $("#parentesco").prop("disabled", false);
+        $("#cedula").prop("disabled", false);
+        $("#noCedula").prop("disabled", false);
+        $("#disca").prop("disabled", false);
+        $("#achivo").prop("disabled", false);
+        $("#familiarTipo").prop("disabled", false);
+        $("#ano").prop("disabled", false);
+        $("#meses").prop("disabled", false);
+        $("#dia").prop("disabled", false);
+        $("#aceptar_emepleado").show();
+        alertaNormalmix(parsedData.mensaje, 4000, "success", "top-end");
+      } else {
+        $("#nombre").val("");
+        $("#apellido").val("");
+        $("#nombre").removeClass("cumplido");
+        $("#apellido").removeClass("cumplido");
+        $(".span_nombre").removeClass("cumplido_span");
+        $(".span_apellido").removeClass("cumplido_span");
+
+        $("#primerNombre").prop("disabled", true);
+        $("#segundoNombre").prop("disabled", true);
+        $("#primerApellido").prop("disabled", true);
+        $("#segundoApellido").prop("disabled", true);
+        $("#parentesco").prop("disabled", true);
+        $("#cedula").prop("disabled", true);
+        $("#noCedula").prop("disabled", true);
+        $("#disca").prop("disabled", true);
+        $("#achivo").prop("disabled", true);
+        $("#familiarTipo").prop("disabled", true);
+        $("#ano").prop("disabled", true);
+        $("#meses").prop("disabled", true);
+        $("#dia").prop("disabled", true);
+        $("#aceptar_emepleado").hide();
+        alertaNormalmix(parsedData.mensaje, 4000, "error", "top-end");
+      }
+    }
+
+    if ($(this).val().length >= 7) {
+      const datoCedula = $(this).val();
+      const formData = new FormData(); // Crea un nuevo objeto FormData
+      formData.append('cedulaEmpleado', datoCedula);
+      enviarFormulario("src/ajax/registroPersonal.php?modulo_personal=obtenerDatosPersonal", formData, callbackExito, true);
+    }
+  });
+
+  $("#dia, #meses, #ano").on("input", function () {
+    const dia = $("#dia").val();
+    const mes = $("#meses").val();
+    const ano = $("#ano").val();
+
+    if (dia && mes && ano) {
+      const fechaNacimiento = new Date(ano, mes - 1, dia);
+      const edad = calcularEdad(fechaNacimiento);
+      $("#edad").val(edad);
+      $("#edad").addClass("cumplido");
+      $(".span_edad").addClass("cumplido_span");
+      if (!isNaN(edad)) {
+        let check = $("#noCedula");
+        if (check.is(":checked")) {
+          if (edad >= 18) {
+            let contenCedula = document.querySelector("#contenDoc");
+            let contenedor = $("#contenApellidoDos");
+            let contenTomo = document.querySelector("#contenTomo");
+            let contenFolio = document.querySelector("#contenFolio");
+            contenTomo.remove();
+            contenFolio.remove();
+            contenCedula.remove();
+            // Insertamos el nuevo contenido después del contenedor
+            $(cedulaContenido).insertAfter(contenedor);
+          } else {
+            var contenedor = $("#cedula");
+            let contenDoc = document.getElementById("contenDoc");
+            if (!contenDoc) {
+              $(partidaNacimiento).insertAfter(contenedor);
+            }
+          }
+        } else {
+          if (edad >= 18) {
+            let contenCedula = document.querySelector("#contenDoc");
+            contenCedula.remove();
+          } else {
+            var contenedor = $("#contenEdad");
+            let contenDoc = document.getElementById("contenDoc");
+            if (!contenDoc) {
+              $(partidaNacimiento).insertAfter(contenedor);
+            }
+          }
+        }
+
+      }
+      console.log(edad)
+    }
+  });
+
+  function calcularEdad(fechaNacimiento) {
+    const hoy = new Date();
+    let edad = hoy.getFullYear() - fechaNacimiento.getFullYear();
+    const mes = hoy.getMonth() - fechaNacimiento.getMonth();
+    if (mes < 0 || (mes === 0 && hoy.getDate() < fechaNacimiento.getDate())) {
+      edad--;
+    }
+    return edad;
+  }
+
   $("#meses").on("change", function () {
     const year = 2024;
     const month = $("#meses").val();
@@ -62,50 +190,7 @@ $(function () {
     const formData = new FormData(this);
     const accion = $(this).find('button[type="submit"]:focus').attr('name');
     console.log(accion)
-    if (accion == "buscar") {
-      function callbackExito(parsedData) {
-        if (parsedData.logrado == true) {
-          let nombre = parsedData.nombre;
-          let apellido = parsedData.apellido;
-          // si tiene marcado error
-          $("#nombre").removeClass("error_input");
-          $("#apellido").removeClass("error_input");
-          $(".span_nombre").removeClass("error_span");
-          $(".span_apellido").removeClass("error_span");
-
-          // se marcar cumplido logrado
-          $("#cedula_trabajador").addClass("cedulaBusqueda");
-          $("#nombre").addClass("cumplido");
-          $("#apellido").addClass("cumplido");
-          $(".span_nombre").addClass("cumplido_span");
-          $(".span_apellido").addClass("cumplido_span");
-          $("#nombre").val(nombre);
-          $("#apellido").val(apellido);
-
-          $("#primerNombre").prop("disabled", false);
-          $("#segundoNombre").prop("disabled", false);
-          $("#primerApellido").prop("disabled", false);
-          $("#segundoApellido").prop("disabled", false);
-          $("#cedula").prop("disabled", false);
-          $("#noCedula").prop("disabled", false);
-          $("#disca").prop("disabled", false);
-          $("#achivo").prop("disabled", false);
-          $("#edad").prop("disabled", false);
-          $("#familiarTipo").prop("disabled", false);
-          $("#ano").prop("disabled", false);
-          $("#meses").prop("disabled", false);
-          $("#dia").prop("disabled", false);
-          $("#aceptar_emepleado").show();
-          alertaNormalmix(parsedData.mensaje, 4000, "success", "top-end");
-        } else {
-          alertaNormalmix(parsedData.mensaje, 4000, "error", "top-end");
-        }
-      }
-      let destino = "src/ajax/registroPersonal.php?modulo_personal=obtenerDatosPersonal";
-      let url = destino;
-      enviarFormulario(url, formData, callbackExito, true);
-
-    } else if (accion == "aceptar") {
+    if (accion == "aceptar") {
       function callbackExito(parsedData) {
         if (parsedData.resultado == 2) {
 
@@ -182,39 +267,8 @@ $(function () {
     }
   });
 
-  $("#edad").on("input", function () {
-    const edad = parseInt($(this).val());
-    if (!isNaN(edad)) {
-      let check = $("#noCedula");
-      if (check.is(":checked")) {
-        if (edad >= 18) {
-          let contenCedula = document.querySelector("#contenDoc");
-          contenCedula.remove();
-        } else {
-          var contenedor = $("#cedula");
-          let contenDoc = document.getElementById("contenDoc");
-          if (!contenDoc) {
-            $(partidaNacimiento).insertAfter(contenedor);
-          }
-        }
-      } else {
-        if (edad >= 18) {
-          let contenCedula = document.querySelector("#contenDoc");
-          contenCedula.remove();
-        } else {
-          var contenedor = $("#contenEdad");
-          let contenDoc = document.getElementById("contenDoc");
-          if (!contenDoc) {
-            $(partidaNacimiento).insertAfter(contenedor);
-          }
-        }
-      }
-
-    }
-  });
-
   $("#noCedula").on("change", function () {
-    var contenedor = $("#contenApellidoDos");
+    let contenedor = $("#contenApellidoDos");
     if ($(this).is(":checked")) {
       let contenCedula = document.querySelector("#contenCedula");
       contenCedula.remove();
@@ -310,7 +364,7 @@ $(function () {
       if ($(this).is(":checked")) {
         contenPartida.remove();
         contencedual.remove();
-      } 
+      }
     });
 
     $(".imgFoto").remove();
@@ -351,7 +405,9 @@ $(function () {
     $("#achivoDis").prop("disabled", true);
     $("#carnet").prop("disabled", true);
   });
+
 });
+
 // plantillas HTML
 let cedulaContenido =
   `
@@ -386,7 +442,8 @@ let noCedulado =
         <input type="text" class="form-control" id="folio" name="folio" placeholder="Número de folio" required >
       </div>
   </div>
-</div>`;
+</div>
+`;
 
 let numeroCernet = `
 <div class="col-sm-6 col-md-6 mb-3" id="contenCarnet">

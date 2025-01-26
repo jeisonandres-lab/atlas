@@ -17,7 +17,7 @@ use App\Atlas\config\App;
 <body class="layout-fixed sidebar-expand-lg bg-body-tertiary">
     <?php require("./src/views/inc/load.php"); ?>
     <div class="app-wrapper conten-main" id="conten-main">
-        <?php require_once App::URL_INC . "/menu.php"; ?>
+        <?php require_once App::URL_INC . "utils/menu.php"; ?>
         <!-- MODAL RESPONSIVEk -->
         <div class=" modal" tabindex="-1" id="modalimg">
             <div class="modal-dialog modal-lg">
@@ -48,7 +48,7 @@ use App\Atlas\config\App;
                 <img src="<?php echo App::URL_IMG . "top-header.png"; ?>" alt="" class="w-100 h-100" style="object-fit: cover; object-position:center;">
             </div>
             <!-- SUB MENU DEL MODULO -->
-            <?php require_once App::URL_INC . "menu_registro.php" ?>
+            <?php require_once App::URL_INC . "utils/menu_registro.php" ?>
             <!-- FORMULARIO DE ENVIOS DE DATOS DEL PERSONAL -->
             <form action="#" class="row animate__animated animate__slideInUp contact-form form-validate d-flex " novalidate="novalidate" id="formulario_registro">
                 <div class="col-sm-12 col-md-7 col-lg-7 col-xl-7 col-xxl-8">
@@ -187,20 +187,29 @@ use App\Atlas\config\App;
                             </div>
                         </div>
 
-                        <div class="col-sm-5 mb-2">
+                        <div class="col-sm-6 mb-2">
                             <label class="form-label mb-0" for="telefono">N.Telefono</label>
                             <div class="input-group">
                                 <span class="input-group-text span_telefono"><i class="icons fa-regular fa-mobile-notch"></i></span>
+                                <div class="col-sm-4">
+                                    <select class="form-select" name="linea" id="linea" style="border-radius: 0px;">
+                                        <option value="0412">0412</option>
+                                        <option value="0416">0416</option>
+                                        <option value="0424">0424</option>
+                                        <option value="0426">0426</option>
+                                    </select>
+                                </div>
+
                                 <input type="text" class="form-control" id="telefono" name="telefono" placeholder="Telefono" required>
                             </div>
                         </div>
 
-                        <div class="col-sm-7 mb-2">
+                        <div class="col-sm-6 mb-2">
                             <div class="form-group">
                                 <label for="estatus">Estatus</label>
                                 <div class="input-group">
                                     <span class="input-group-text span_estatus"><i class="icons fa-regular fa-clipboard"></i></span>
-                                    <select class="form-select form-select-md estado-estatus" id="estatus" name="estatus" aria-label="Small select example" aria-placeholder="dasdas" required>
+                                    <select class="form-select form-select-md estado-estatus" id="estatus" name="estatus" aria-label="Small select example" aria-placeholder="dasdas" style="border-radius: 5px" required>
                                         <option value="">Selecione un estatus</option>
                                     </select>
                                 </div>
@@ -264,7 +273,7 @@ use App\Atlas\config\App;
                         </div>
 
                         <div class="col-sm-12 mt-3 ">
-                            <button type="submit" id="aceptar" name="submit"  class="btn btn-primary" disabled>
+                            <button type="submit" id="aceptar" name="submit" class="btn btn-primary" disabled>
                                 <i class="fa-solid fa-plus me-2"></i>
                                 Aceptar
                             </button>
@@ -330,5 +339,3 @@ use App\Atlas\config\App;
 </body>
 
 </html>
-
-

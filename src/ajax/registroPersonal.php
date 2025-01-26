@@ -19,6 +19,7 @@ $primerNombre = isset($_POST['primerNombre']) ? $conexion->limpiarCadena($_POST[
 $segundoNombre = isset($_POST['segundoNombre']) ? $conexion->limpiarCadena($_POST['segundoNombre']) : "";
 $primerApellido = isset($_POST['primerApellido']) ? $conexion->limpiarCadena($_POST['primerApellido']) : "";
 $segundoApellido = isset($_POST['segundoApellido']) ? $conexion->limpiarCadena($_POST['segundoApellido']) : "";
+$parentesco = isset($_POST['parentesco']) ? $conexion->limpiarCadena($_POST['parentesco']) : "";
 $cedula = isset($_POST['cedula']) ? $conexion->limpiarCadena($_POST['cedula']) : "";
 $cedulaEmpleado = isset($_POST['cedulaEmpleado']) ? $conexion->limpiarCadena($_POST['cedulaEmpleado']) : "";
 $civil = isset($_POST['civil']) ? $conexion->limpiarCadena($_POST['civil']) : "";
@@ -31,7 +32,9 @@ $nivelAcademico = isset($_POST['nivelAcademico']) ? $conexion->limpiarCadena($_P
 
 // DATOS PARA REGISTRAR EMPELADO
 $idPersonal = isset($_POST['id']) ? $conexion->limpiarCadena($_POST['id']) : "";
+$idfamiliar = isset($_POST['idfamiliar']) ? $conexion->limpiarCadena($_POST['idfamiliar']) : "";
 $telefono = isset($_POST['telefono']) ? $conexion->limpiarCadena($_POST['telefono']) : "";
+$linea = isset($_POST['linea']) ? $conexion->limpiarCadena($_POST['linea']) : "";
 $idEstatus = isset($_POST['estatus']) ? $conexion->limpiarCadena($_POST['estatus']) : "";
 $idCargo = isset($_POST['cargo']) ? $conexion->limpiarCadena($_POST['cargo']) : "";
 $idDepartamento = isset($_POST['departamento']) ? $conexion->limpiarCadena($_POST['departamento']) : "";
@@ -42,6 +45,7 @@ $folio = isset($_POST['folio']) ? $conexion->limpiarCadena($_POST['folio']) : ""
 
 switch ($_GET['modulo_personal']) {
     case 'registrar':
+        $telefono = $linea . "-" . $telefono;
         $personal->registro(
             $primerNombre,
             $segundoNombre,
@@ -76,8 +80,13 @@ switch ($_GET['modulo_personal']) {
     case 'obtenerDatosPersonal':
         $personal->obtenerDatosPersonal($cedulaEmpleado);
         break;
+
+        case 'obtenerDatosFamiliar':
+        $personal->obtenerDatosFamiliar($idPersonal);
+            break;
     case 'registrarFamilia':
         $personal->registrarFamilia(
+            $parentesco,
             $cedulaEmpleado,
             $primerNombre,
             $segundoNombre,
@@ -102,9 +111,9 @@ switch ($_GET['modulo_personal']) {
     case 'eliminarPersonal':
         $personal->eliminarPersonal($idPersonal);
         break;
-        case 'eliminarFamiliar':
-            $personal->eliminarFamiliar($idPersonal);
-            break;
+    case 'eliminarFamiliar':
+        $personal->eliminarFamiliar($idPersonal);
+        break;
     case 'actualizarPersonal':
         $personal->actualizarPersonal(
             $primerNombre,
@@ -123,6 +132,25 @@ switch ($_GET['modulo_personal']) {
             $idDepartamento,
             $telefono,
             $nivelAcademico
+        );
+        break;
+    case 'actualizarFamiliar':
+        $personal->actualizarFamiliar(
+            $idfamiliar,
+            $parentesco,
+            $cedulaEmpleado,
+            $primerNombre,
+            $segundoNombre,
+            $primerApellido,
+            $segundoApellido,
+            $cedula,
+            $edad,
+            $ano,
+            $mes,
+            $dia,
+            $numeroCarnet,
+            $tomo,
+            $folio
         );
         break;
     default:

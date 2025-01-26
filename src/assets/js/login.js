@@ -28,6 +28,7 @@ formulariosAJAX.addEventListener('submit', (e) => {
   let usuarioInput = document.getElementById('usuario');
   let contrasenaInput = document.getElementById('password');
   let passwordSinEncrip = contrasenaInput.value;
+  console.log('sin encriptar:'+passwordSinEncrip);
   // Validar los campos
 
   if (usuarioInput.value.trim() === '' && contrasenaInput.value.trim() === '') {
@@ -39,13 +40,17 @@ formulariosAJAX.addEventListener('submit', (e) => {
   } else {
     let contrseñatring = contrasenaInput.toString();
     let contraseñaEncrip = generarHashContrasena(contrseñatring);
+    // console.log(contraseñaEncrip);//Contraseña encriptada
     contrasenaInput.value = contraseñaEncrip;
+    //console.log(contrasenaInput.value);
     const cargando = document.getElementById('cargando');
     cargando.style.display = 'flex';
 
     function callbackExito(parsedData) {
       if (parsedData.exito) {
         let hashAlmacenado = parsedData.password;
+        console.log('hash almacenado:'+hashAlmacenado);
+        console.log('sin en criptar:'+passwordSinEncrip);
         const esValida = verificarContrasena(passwordSinEncrip, hashAlmacenado);
         if (esValida === true) {
           let redirecion = function () {
@@ -54,7 +59,7 @@ formulariosAJAX.addEventListener('submit', (e) => {
             formData.append('url', `inicio`);
             enviarDatos(url, formData);
           };
-          AlertDirection("success", "Inicio de session con exito, Redireccionando", "top-end", 3000, redirecion);
+          AlertDirection("success", "Inicio de session con exito, Redireccionando", "top", 3000, redirecion);
         } else {
           AlertSW2("error", "La contraseña es incorrecta", "top", 4000);
         }
@@ -65,6 +70,9 @@ formulariosAJAX.addEventListener('submit', (e) => {
     let url = "./src/ajax/userAjax.php?modulo_usuario=login";
     const data = new FormData(formulariosAJAX);
     data.append('modulo_usuario', 'login');
+    data.forEach((value, key) => {
+      console.log(key + ': ' + value);
+    });
     enviarFormulario(url, data, callbackExito, true);
     contrasenaInput.value = passwordSinEncrip;
   }

@@ -12,9 +12,18 @@ import {
   limpiarInput,
   colocarNivelesEducativos,
   clasesInputs,
+  incluirSelec2,
+  validarSelectoresSelec2,
+  validarNumerosMenores,
 } from "./ajax/inputs.js";
 
 $(function () {
+  $("#contenTomo").hide();
+  $("#contenFolio").hide();
+  $("#contenCarnet").hide();
+  $("#contenDoc").hide();
+  $("#contentPartida").hide();
+
   validarNombre("#primerNombre", ".span_nombre");
   validarNombre("#segundoNombre", ".span_nombre2");
   validarNombre("#primerApellido", ".span_apellido");
@@ -25,40 +34,44 @@ $(function () {
   validarSelectores("#dia2", ".span_dia", "1");
   valdiarCorreos("#correo", ".span_correo");
   validarTelefono("#telefono", ".span_telefono");
-  validarSelectores("#estatus", ".span_estatus");
-  validarSelectores("#cargo", ".span_cargo");
-  validarSelectores("#departamento", ".span_departamento");
-  validarSelectores("#dependencia", ".span_dependencia");
-  validarSelectores("#academico", ".span_academico");
+  incluirSelec2("#estatus");
+  incluirSelec2("#cargo");
+  incluirSelec2("#departamento");
+  incluirSelec2("#dependencia");
+  incluirSelec2("#academico");
+  validarSelectoresSelec2("#dependencia", ".span_dependencia");
+  validarSelectoresSelec2("#estatus", ".span_estatus");
+  validarSelectoresSelec2("#cargo", ".span_cargo");
+  validarSelectoresSelec2("#departamento", ".span_departamento");
+  validarSelectoresSelec2("#dependencia", ".span_dependencia");
+  validarSelectoresSelec2("#academico", ".span_academico");
+
   file("#contrato", ".span_contrato");
   file("#notificacion", ".span_notificacion");
   colocarYear("#ano2", "1900");
   colocarMeses("#meses2");
   colocarNivelesEducativos("#academico");
 
+  // Validar los campos del formulario de registro de familiares
+  validarNombre("#primerNombreFamiliar", ".span_nombre1");
+  validarNombre("#segundoNombreFamiliar", ".span_nombre2");
+  validarNombre("#primerApellidoFamiliar", ".span_apellido1");
+  validarNombre("#segundoApellidoFamiliar", ".span_apellido2");
+  validarSelectores("#parentesco", ".span_parentesco");
+  validarSelectores("#anoFamiliar", ".span_ano_familiar", "1");
+  validarSelectores("#diaFamiliar", ".span_dia_familiar", "1");
+  validarNumeros("#cedula_familiar", ".span_cedula_familiar");
+  colocarMeses("#mesesFamiliar");
+  colocarYear("#anoFamiliar", "1900");
+  validarNumeros("#carnet", ".span_carnet");
+  validarNumerosMenores("#tomo", ".span_tomo");
+  validarNumerosMenores("#folio", ".span_folio");
+  validarNumeros("#cedula_trabajador_familiar", ".span_cedula_empleado");
+  file("#achivoparti", ".span_docArchivo");
+  file("#achivoDis", ".span_docArchivoDis");
 
   const cargando = document.getElementById('cargando');
-  var boton = $('#aceptar');
-
-  function limpiarDatos() {
-    limpiarInput("#primerNombre", ".span_nombre");
-    limpiarInput("#segundoNombre", ".span_nombre2");
-    limpiarInput("#primerApellido", ".span_apellido");
-    limpiarInput("#segundoApellido", ".span_apellido2");
-    limpiarInput("#cedulaEdi", ".span_cedula");
-    limpiarInput("#civil", ".span_civil");
-    limpiarInput("#contrato", ".span_contrato");
-    limpiarInput("#notificacion", ".span_notificacion");
-    limpiarInput("#telefono", ".span_telefono");
-    limpiarInput("#estatus", ".span_estatus");
-    limpiarInput("#cargo", ".span_cargo");
-    limpiarInput("#departamento", ".span_departamento");
-    limpiarInput("#dependencia", ".span_dependencia");
-    // limpiarInput("#ano2", ".span_ano");
-    // limpiarInput("#meses2", ".span_mes");
-    // limpiarInput("#dia2", ".span_dia");
-    // limpiarInput("#academico", ".span_academico");
-  }
+  var boton = $('#aceptarFamilia');
 
   let table = new DataTable('#myTable', {
     responsive: true,
@@ -85,11 +98,60 @@ $(function () {
     columnDefs: [
       {
         targets: 0,
-        width: "7%"
-        // render: function (data, type, userRow){
-        // }
-      }
+        width: "7%",
+        // render: function(data, type, row) {
+        //             // Aquí puedes personalizar el contenido de la celda
+        //             return '<div style="width: 20px; height: 20px; background-color: ' + getColor(row) + ';"></div>';
+        //         }
+      },
+      {
+        targets: 2,
+        render: function (data, type, row) {
+          let dataEstatus = data;
+          const dataEstatusMap = {
+            1: 'Contradado',
+            2: 'Cooperativa',
+            3: 'Coral',
+            4: 'Empleado',
+            5: 'Estudiante',
+            6: 'Jubilado',
+            7: 'Maestro',
+            8: 'Obrero',
+            9: 'Pasante',
+            10: 'Tributo',
+            11: 'Vigilancia'
+          };
+          if (dataEstatusMap[dataEstatus]) {
+            dataEstatus = `<small class='d-inline-flex px-2 py-1 fw-semibold text-warning-emphasis bg-warning-subtle border border-warning-subtle rounded-2'>${dataEstatusMap[dataEstatus]}</small>`;
+          }
+          return dataEstatus
+        }
+      },
+      {
+        targets: 4,
+        render: function (data, type, row) {
+          let dataTexto = data;
+          const dataTextoMap = {
+            1: "Auxiliar I",
+            2: "Auxiliar II",
+            3: "Auxiliar III",
+            4: "Analista I",
+            5: "Analista II",
+            6: "Analista III",
+            7: "Especialista I",
+            8: "Especialista II",
+            9: "Especialista III"
+          };
+
+          if (dataTextoMap[dataTexto]) {
+            dataTexto = `<small class='d-inline-flex px-2 py-1 fw-semibold text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-2'>${dataTextoMap[dataTexto]}</small>`;
+          }
+          return dataTexto
+
+        }
+      },
     ],
+
     language: {
       url: "./IdiomaEspañol.json"
     },
@@ -104,7 +166,31 @@ $(function () {
     ]
   });
 
+  function limpiarDatos() {
+    limpiarInput("#primerNombre", ".span_nombre");
+    limpiarInput("#segundoNombre", ".span_nombre2");
+    limpiarInput("#primerApellido", ".span_apellido");
+    limpiarInput("#segundoApellido", ".span_apellido2");
+    limpiarInput("#cedulaEdi", ".span_cedula");
+    limpiarInput("#civil", ".span_civil");
+    limpiarInput("#contrato", ".span_contrato");
+    limpiarInput("#notificacion", ".span_notificacion");
+    limpiarInput("#telefono", ".span_telefono");
+    limpiarInput("#estatus", ".span_estatus");
+    limpiarInput("#cargo", ".span_cargo");
+    limpiarInput("#departamento", ".span_departamento");
+    limpiarInput("#dependencia", ".span_dependencia");
+  }
 
+  function calcularEdad(fechaNacimiento) {
+    const hoy = new Date();
+    let edad = hoy.getFullYear() - fechaNacimiento.getFullYear();
+    const mes = hoy.getMonth() - fechaNacimiento.getMonth();
+    if (mes < 0 || (mes === 0 && hoy.getDate() < fechaNacimiento.getDate())) {
+      edad--;
+    }
+    return edad;
+  }
   // Función para cambiar la URL del AJAX y recargar la tabla
   function recargarTablaConNuevaURL(nuevaURL) {
     table.ajax.url(nuevaURL).load();
@@ -201,6 +287,7 @@ $(function () {
     });
   }
 
+  // Funcion para descargar documentos 
   function DescargarDocumento(doc) {
     console.log("Documento a descargar:", doc);
     const baseDir = './src/global/archives/personal/familiares/';
@@ -249,6 +336,7 @@ $(function () {
     });
   }
 
+  // Funcion para obtener datos por medio de multiples url
   function obtenerDatosJQuery(url, options = {}) {
     let formData = new FormData();
     for (let key in options) {
@@ -264,8 +352,10 @@ $(function () {
       dataType: 'json'
     });
   }
+
+  // Editar empledos
   function editar(idPersonal) {
-    
+
     console.log(idPersonal);
     let urls = [
       "src/ajax/registroPersonal.php?modulo_personal=obtenerDependencias",
@@ -284,11 +374,9 @@ $(function () {
       }
     });
     $.when(...requests).done((dependencias, estatus, cargo, departamento, datosPersonal) => {
-
-
       if (dependencias[0].exito && dependencias[0].data) {
         llenarSelectDependencias(dependencias[0].data, 'dependencia');
-        
+
       } else {
         console.error('Error al obtener dependencias o la estructura de la respuesta es incorrecta');
       }
@@ -319,11 +407,20 @@ $(function () {
         $("#cedulaEdi").val(datosPersonal[0].cedula);
         $("#telefono").val(datosPersonal[0].telefono);
         $("#civil").val(datosPersonal[0].estadoCivil);
-        $("#dependencia").val(datosPersonal[0].dependencia);
+        $('#dependencia').val(datosPersonal[0].iddependencia).trigger('change');
+        $('#departamento').val(datosPersonal[0].iddepartamento).trigger('change');
+        $('#estatus').val(datosPersonal[0].idestatus).trigger('change');
+        $('#dependencia').val(datosPersonal[0].iddependencia).trigger('change');
+        $('#cargo').val(datosPersonal[0].idcargo).trigger('change');
+        $('#academico').val(datosPersonal[0].nivelAcademico).trigger('change');
+        $('#ano2').val(datosPersonal[0].anoNacimiento).trigger('change');
+        $('#dia2').val(datosPersonal[0].diaNacimineto).trigger('change');
+        $('#meses2').val(datosPersonal[0].mesNacimiento).trigger('change');
+
 
         // llevarOptionIndividual(datosPersonal[0].dependencia, 'dependencia', datosPersonal[0].iddependencia);
         // se marcar cumplido logrado y se marcar span cumplido logrado 
-        // $("cedula_trabajador").addClass("cedulaBusqueda"); 
+        $("cedula_trabajador").addClass("cedulaBusqueda");
         clasesInputs("#primerNombre", ".span_nombre");
         clasesInputs("#segundoNombre", ".span_nombre2");
         clasesInputs("#primerApellido", ".span_apellido");
@@ -331,8 +428,115 @@ $(function () {
         clasesInputs("#cedulaEdi", ".span_cedula");
         clasesInputs("#telefono", ".span_telefono");
         clasesInputs("#civil", ".span_civil");
+        clasesInputs("#ano2", ".span_ano");
+        clasesInputs("#dia2", ".span_dia");
 
-        
+      } else {
+        console.error('Error al obtener datos personales o la estructura de la respuesta es incorrecta');
+      }
+    }).fail((jqXHR, textStatus, errorThrown) => {
+      console.error('Error al obtener los datos:', textStatus, errorThrown);
+    });
+  }
+
+  function editarFamiliar(idPersonal) {
+    console.log(idPersonal);
+    let urls = [
+      "src/ajax/registroPersonal.php?modulo_personal=obtenerDatosFamiliar",
+    ];
+
+    let options = { id: idPersonal };
+    let requests = urls.map((url, index) => {
+      if (index === 0) { // Suponiendo que quieres pasar `options` solo a la primera solicitud
+        return obtenerDatosJQuery(url, options);
+      } else {
+        return obtenerDatosJQuery(url);
+      }
+    });
+
+    $.when(...requests).done((datosPersonal) => {
+      if (datosPersonal.exito) {
+        $("#cedula_trabajador_familiar").val(datosPersonal.cedulaEmpleado);
+        $("#nombreEmpleado").val(datosPersonal.nombreEmpleado);
+        $("#apellidoEmpleado").val(datosPersonal.apellidoEmpleado);
+
+        $("#primerNombreFamiliar").val(datosPersonal.nombre);
+        $("#segundoNombreFamiliar").val(datosPersonal.segundoNombre);
+        $("#primerApellidoFamiliar").val(datosPersonal.apellido);
+        $("#segundoApellidoFamiliar").val(datosPersonal.segundoApellido);
+        $("#edad").val(datosPersonal.edad);
+        $("#identificador").val(datosPersonal.idfamiliar);
+        $('#parentesco').val(datosPersonal.parentesco).trigger('change');
+        $('#anoFamiliar').val(datosPersonal.anoNacimiento).trigger('change');
+        $('#diaFamiliar').val(datosPersonal.diaNacimineto).trigger('change');
+        $('#mesesFamiliar').val(datosPersonal.mesNacimiento).trigger('change');
+
+        $("#tomo").val(datosPersonal.tomo);
+        $("#folio").val(datosPersonal.folio);
+
+        $("#cedula_trabajador_familiar").addClass("cedulaBusqueda");
+        clasesInputs("#nombreEmpleado", ".span_nombre");
+        clasesInputs("#apellidoEmpleado", ".span_apellido");
+        clasesInputs("#cedula_trabajador_familiar", ".span_cedula_empleado");
+        clasesInputs("#primerNombreFamiliar", ".span_nombre1");
+        clasesInputs("#segundoNombreFamiliar", ".span_nombre2");
+        clasesInputs("#primerApellidoFamiliar", ".span_apellido1");
+        clasesInputs("#segundoApellidoFamiliar", ".span_apellido2");
+        clasesInputs("#parentesco", ".span_parentesco");
+        clasesInputs("#edad", ".span_edad");
+        clasesInputs("#anoFamiliar", ".span_ano_familiar");
+        clasesInputs("#diaFamiliar", ".span_dia_familiar");
+        clasesInputs("#tomo", ".span_tomo");
+        clasesInputs("#folio", ".span_folio");
+        clasesInputs("#carnet", ".span_carnet");
+        $("#cedula_familiar").val(datosPersonal.cedula);
+        clasesInputs("#cedula_familiar", ".span_cedula_familiar");
+        $("#carnet").val(datosPersonal.codigoCarnet);
+
+        if (datosPersonal.cedula == null) {
+          $("#noCedula").prop("checked", true);
+          $("#contenTomo").show();
+          $("#contenFolio").show();
+          $("#tomo").removeClass("ignore-validation");
+          $("#folio").removeClass("ignore-validation");
+          $("#contenCedula").hide();
+          $("#cedula_familiar").addClass("ignore-validation");
+          $("#cedula_familiar").removeClass("cumplido");
+          $(".span_cedula").removeClass("cumplido_span");
+        } else {
+          $("#noCedula").prop("checked", false);
+
+          $("#contenTomo").hide();
+          $("#contenFolio").hide();
+          $("#tomo").addClass("ignore-validation");
+          $("#tomo").removeClass("cumplido");
+          $(".span_tomo").removeClass("cumplido_span");
+
+          $("#folio").addClass("ignore-validation");
+          $("#folio").removeClass("cumplido");
+          $(".span_folio").removeClass("cumplido_span");
+
+          $("#contenCedula").show();
+          $("#cedula_familiar").removeClass("ignore-validation");
+          $("#cedula_familiar").addClass("cumplido");
+          $(".span_cedula").addClass("cumplido_span");
+        }
+
+        if (datosPersonal.codigoCarnet == null) {
+          $("#disca").prop("checked", false);
+          $("#contenCarnet").hide();
+          $("#carnet").removeClass("cumplido");
+          $(".span_carnet").removeClass("cumplido_span");
+
+          $("#carnet").addClass("ignore-validation");
+        } else {
+          $("#contenCarnet").show();
+          $("#carnet").addClass("cumplido");
+          $(".span_carnet").addClass("cumplido_span");
+          $("#carnet").removeClass("ignore-validation");
+          $("#disca").prop("checked", true);
+        }
+      
       } else {
         console.error('Error al obtener datos personales o la estructura de la respuesta es incorrecta');
       }
@@ -357,17 +561,18 @@ $(function () {
       select.appendChild(option);
     });
   }
+
   // select.remove(i);
   async function llevarOptionIndividual(data, selectId, idnumber) {
     const select = document.getElementById(selectId);
     const options = select.options;
-  
+
     // Crear la nueva opción
     const option = document.createElement('option');
     option.value = idnumber;
     option.text = data;
     option.classList.add('new-option'); // Añadir clase para fondo rojo
-  
+
     // Insertar la opción al principio
     select.insertBefore(option, select.firstChild);
 
@@ -392,8 +597,8 @@ $(function () {
     }
     // parametros para la alerta
     let messenger = 'Estás a punto de <b class="text-danger"><i class="fa-solid fa-xmark"></i> <u>eliminar</u></b> este registro. ¿Deseas continuar?';
-    let icons = 'warning';
-    let position = 'center';
+    let icons = 'primary';
+    let position = 'top-end';
 
     aletaCheck(messenger, icons, position, enviar);
   }
@@ -417,48 +622,53 @@ $(function () {
     }
     // parametros para la alerta
     let messenger = 'Estás a punto de <b class="text-danger"><i class="fa-solid fa-xmark"></i> <u>eliminar</u></b> este registro. ¿Deseas continuar?';
-    let icons = 'warning';
-    let position = 'center';
+    let icons = 'primary';
+    let position = 'top-end';
 
     aletaCheck(messenger, icons, position, enviar);
   }
 
-  function todosCumplidos() {
-    const elementosCumplidos = $('form input, form select').filter('.cumplido, .cumplidoNormal');
-    return elementosCumplidos.length === $('form input, form select').length;
-  }
+  // $("#cedula_trabajador_familiar").on("input", function () {
+  //   function callbackExito(parsedData) {
+  //     if (parsedData.logrado == true) {
+  //       let nombre = parsedData.nombre;
+  //       let apellido = parsedData.apellido;
+  //       // si tiene marcado error
+  //       $("#nombreEmpleado").removeClass("error_input");
+  //       $("#apellidoEmpleado").removeClass("error_input");
+  //       $(".span_nombre").removeClass("error_span");
+  //       $(".span_apellido").removeClass("error_span");
+  //       // se marcar cumplido logrado
+  //       $("#cedula_trabajador_familiar").addClass("cedulaBusqueda");
+  //       $("#nombreEmpleado").addClass("cumplido");
+  //       $("#apellidoEmpleado").addClass("cumplido");
+  //       $(".span_nombre").addClass("cumplido_span");
+  //       $(".span_apellido").addClass("cumplido_span");
+  //       $("#nombreEmpleado").val(nombre);
+  //       $("#apellidoEmpleado").val(apellido);
+  //       alertaNormalmix(parsedData.mensaje, 4000, "success", "top-end");
+  //     } else {
+  //       $("#nombreEmpleado").val("");
+  //       $("#apellidoEmpleado").val("");
+  //       $("#nombreEmpleado").removeClass("cumplido");
+  //       $("#apellidoEmpleado").removeClass("cumplido");
+  //       $(".span_nombre").removeClass("cumplido_span");
+  //       $(".span_apellido").removeClass("cumplido_span");
+  //       alertaNormalmix(parsedData.mensaje, 4000, "error", "top-end");
+  //     }
+  //   }
+  //   if ($(this).val().length >= 7) {
+  //     const datoCedula = $(this).val();
+  //     const formData = new FormData(); // Crea un nuevo objeto FormData
+  //     formData.append('cedulaEmpleado', datoCedula);
+  //     enviarFormulario("src/ajax/registroPersonal.php?modulo_personal=obtenerDatosPersonal", formData, callbackExito, true);
+  //   }
+  // });
 
-  // Función para habilitar o deshabilitar el botón
-  function habilitarBoton() {
-    boton.prop('disabled', !todosCumplidos());
-  }
-
-  // Función de debounce para limitar la frecuencia de ejecución
-  function debounce(func, wait) {
-    let timeout;
-    return function (...args) {
-      clearTimeout(timeout);
-      timeout = setTimeout(() => func.apply(this, args), wait);
-    };
-  }
-
-  // Crear una instancia de MutationObserver y observar cambios
-  const observer = new MutationObserver(debounce((mutationsList, observer) => {
-    for (const mutation of mutationsList) {
-      if (mutation.type === 'childList' || mutation.type === 'attributes') {
-        // formulario de registro
-        habilitarBoton();
-      }
-    }
-  }, 300)); // Ajusta el tiempo de espera según sea necesario
-
-
-  // Configurar el observer para observar cambios en los hijos y atributos del formulario
-  const config = { childList: true, attributes: true, subtree: true };
-
-  // Seleccionar el formulario y comenzar a observar
-  const form = document.querySelector('form');
-  observer.observe(form, config);
+  // Evento click para los botones de familiar
+  $(window).resize(function () {
+    table.ajax.reload(null, false); // Recarga la tabla sin reiniciar la paginación
+  });
 
   $('#myTable').on('click', '.btn-familiar', function () {
     let idPersonal = $(this).data('id');
@@ -480,59 +690,29 @@ $(function () {
     eliminarFamiliar(idPersonal);
   });
 
+  $('#myTable2').on('click', '.btnEditarFamiliar', function () {
+    let idempleado = $(this).data('cedula');
+    editarFamiliar(idempleado);
+  });
+
   $('#myTable2').on('click', '.botondocumet', function () {
     let doc = $(this).data('doc');
     DescargarDocumento(doc);
   });
 
-  // $('#formularioActualizar').on("submit", function (event) {
-  //   event.preventDefault();
-  //   const formData = new FormData(this);
-  //   const accion = $(this).find('button[type="submit"]:focus').attr('name');
-  //   console.log(accion)
+  $(document).on("click", ".btnEditarFamiliar", function () {
+    $('#exampleModal').modal('show');
+    $('#editarDatosFamiliar').modal('show');
 
-  //     function callbackExito(parsedData) {
-  //     }
-  //     let destino = "src/ajax/registroPersonal.php?modulo_personal=actualizarPersonal";
-  //     let url = destino;
-  //     enviarFormulario(url, formData, callbackExito, true);
-
-  // });
-
-  $(window).resize(function () {
-    table.ajax.reload(null, false); // Recarga la tabla sin reiniciar la paginación
+  })
+  // Evitar que el primer modal se cierre cuando se abre el segundo modal
+  $('#exampleModal').on('show.bs.modal', function () {
+    var zIndex = 1040 + (10 * $('.modal:visible').length);
+    $(this).css('z-index', zIndex);
+    setTimeout(function () {
+      $('.modal-backdrop').not('.modal-stack').css('z-index', zIndex - 1).addClass('modal-stack');
+    }, 0);
   });
-
-  $("#meses2").on("change", function () {
-    const year = 2024; // Cambia el año si lo deseas
-    const month = $("#meses2").val();
-    if (month == "") {
-      $(this).removeClass("cumplido");
-      $(this).addClass("error_input");
-      $(".span_mes").removeClass("cumplido_span");
-      $(".span_mes").addClass("error_span");
-    } else {
-      // Eliminar el cero inicial si existe
-      const monthWithoutLeadingZero = month.replace(/^0+/, "");
-      // Obtener el número de días en el mes seleccionado
-      const daysInMonth = new Date(year, monthWithoutLeadingZero, 0).getDate(); // Restamos 1 al mes porque JavaScript cuenta los meses desde 0
-      // Generar las opciones de los días
-      $("#dia2").empty(); // Limpiar las opciones anteriores
-      for (let i = 1; i <= daysInMonth; i++) {
-        const diaFormateado = i.toString().padStart(2, "0");
-        $("#dia2").append(
-          '<option value="' + diaFormateado + '">' + diaFormateado + "</option>"
-        );
-      }
-      $(this).removeClass("error_input");
-      $(this).addClass("cumplido");
-      $(".span_mes").removeClass("error_span");
-      $(".span_mes").addClass("cumplido_span");
-    }
-  });
-
-  $("#meses2").trigger("input");
-  validarSelectores("#dia2", ".span_dia", "1");
 
   $("#formularioActualizar").on("submit", function (e) {
     e.preventDefault();
@@ -560,24 +740,653 @@ $(function () {
     enviarFormulario(url, data, callbackExito, true);
   });
 
+  $("#forActualizarFamiliar").on("submit", function (e) {
+    const form = document.getElementById('forActualizarFamiliar');
+    e.preventDefault();
+    const data = new FormData(form);
+    const url = "src/ajax/registroPersonal.php?modulo_personal=actualizarFamiliar";
+    $("#aceptar_familia").prop("disabled", true);
 
-  $("#noCedula").on("change", function () {
+    function callbackExito(parsedData) {
+      let dataerror = parsedData.error;
+      $("#aceptar_familia").prop("disabled", false);
+      console.log(parsedData);
+      if (parsedData.exito) {
+        AlertSW2("success", "Empleado Actualizado Con Exito", "top-end", 3000);
+      } else {
+        alertaNormalmix(parsedData.mensaje, 4000, "error", "top-end")
+      }
+    }
+    enviarFormulario(url, data, callbackExito, true);
+  });
+
+  // MESES DE EMPELADO
+  $("#meses2").on("change", function () {
+    const year = 2024; // Cambia el año si lo deseas
+    const month = $("#meses2").val();
+    if (month == "") {
+      $(this).removeClass("cumplido");
+      $(this).addClass("error_input");
+      $(".span_mes").removeClass("cumplido_span");
+      $(".span_mes").addClass("error_span");
+
+      $("#dia2").removeClass("cumplido");
+      $("#dia2").addClass("error_input");
+      $(".span_dia").removeClass("cumplido_span");
+      $(".span_dia").addClass("error_span");
+      $("#dia2").empty();
+    } else {
+      // Verificar si month no es null o undefined
+      if (month) {
+        // Eliminar el cero inicial si existe
+        const monthWithoutLeadingZero = month.replace(/^0+/, "");
+        // Obtener el número de días en el mes seleccionado
+        const daysInMonth = new Date(year, monthWithoutLeadingZero, 0).getDate(); // Restamos 1 al mes porque JavaScript cuenta los meses desde 0
+        // Generar las opciones de los días
+        $("#dia2").empty(); // Limpiar las opciones anterior
+        $("#dia2").removeClass("error_input");
+        $("#dia2").addClass("cumplido");
+        $(".span_dia").removeClass("error_span");
+        $(".span_dia").addClass("cumplido_span");
+        for (let i = 1; i <= daysInMonth; i++) {
+          const diaFormateado = i.toString().padStart(2, "0");
+          $("#dia2").append(
+            '<option value="' + diaFormateado + '">' + diaFormateado + "</option>"
+          );
+        }
+        $(this).removeClass("error_input");
+        $(this).addClass("cumplido");
+        $(".span_mes").removeClass("error_span");
+        $(".span_mes").addClass("cumplido_span");
+      } else {
+        console.error("El valor de month es null o undefined");
+      }
+    }
+  });
+
+  // MESES DE FAMILIAR
+  $("#mesesFamiliar").on("change", function () {
+    const year = 2024; // Cambia el año si lo deseas
+    const month = $("#mesesFamiliar").val();
+    if (month == "") {
+      $(this).removeClass("cumplido");
+      $(this).addClass("error_input");
+      $(".span_mes_familiar").removeClass("cumplido_span");
+      $(".span_mes_familiar").addClass("error_span");
+
+      $("#diaFamiliar").removeClass("cumplido");
+      $("#diaFamiliar").addClass("error_input");
+      $(".span_dia_familiar").removeClass("cumplido_span");
+      $(".span_dia_familiar").addClass("error_span");
+      $("#diaFamiliar").empty();
+    } else {
+      // Verificar si month no es null o undefined
+      if (month) {
+        // Eliminar el cero inicial si existe
+        const monthWithoutLeadingZero = month.replace(/^0+/, "");
+        // Obtener el número de días en el mes seleccionado
+        const daysInMonth = new Date(year, monthWithoutLeadingZero, 0).getDate(); // Restamos 1 al mes porque JavaScript cuenta los meses desde 0
+        // Generar las opciones de los días
+        $("#diaFamiliar").empty();
+        $("#diaFamiliar").removeClass("error_input");
+        $("#diaFamiliar").addClass("cumplido");
+        $(".span_dia_familiar").removeClass("error_span");
+        $(".span_dia_familiar").addClass("cumplido_span");
+        // Limpiar las opciones anteriores
+        for (let i = 1; i <= daysInMonth; i++) {
+          const diaFormateado = i.toString().padStart(2, "0");
+          $("#diaFamiliar").append(
+            '<option value="' + diaFormateado + '">' + diaFormateado + "</option>"
+          );
+        }
+        $(this).removeClass("error_input");
+        $(this).addClass("cumplido");
+        $(".span_mes_familiar").removeClass("error_span");
+        $(".span_mes_familiar").addClass("cumplido_span");
+      } else {
+        console.error("El valor de month es null o undefined");
+      }
+    }
+  });
+
+  $("#ano2").on("input", function () {
+    const opcionSeleccionada = $(this).val();
+    if (opcionSeleccionada === "") {
+      $("#meses2").removeClass("cumplido");
+      $("#meses2").addClass("error_input");
+      $(".span_mes").removeClass("cumplido_span");
+      $(".span_mes").addClass("error_span");
+
+      $("#dia2").removeClass("cumplido");
+      $("#dia2").addClass("error_input");
+      $(".span_dia").removeClass("cumplido_span");
+      $(".span_dia").addClass("error_span");
+      $("#meses2").empty();
+      $("#dia2").empty();
+    } else {
+      colocarMeses("#meses2");
+
+    }
+  });
+
+  $("#anoFamiliar").on("input", function () {
+    const opcionSeleccionada = $(this).val();
+    if (opcionSeleccionada === "") {
+      $("#mesesFamiliar").removeClass("cumplido");
+      $("#mesesFamiliar").addClass("error_input");
+      $(".span_mes_familiar").removeClass("cumplido_span");
+      $(".span_mes_familiar").addClass("error_span");
+
+      $("#diaFamiliar").removeClass("cumplido");
+      $("#diaFamiliar").addClass("error_input");
+      $(".span_dia_familiar").removeClass("cumplido_span");
+      $(".span_dia_familiar").addClass("error_span");
+      $("#mesesFamiliar").empty();
+      $("#diaFamiliar").empty();
+    } else {
+      colocarMeses("#mesesFamiliar");
+
+    }
+  });
+
+  $("#noCedula").on("input", function () {
     if ($(this).is(":checked")) {
-      $("#disca").prop("checked", false);
+      $("#contenTomo").show();
+      $("#contenFolio").show();
+      $("#contenCedula").hide();
+      $("#tomo").removeClass("ignore-validation");
+      $("#folio").removeClass("ignore-validation");
+      $("#cedula_familiar").addClass("ignore-validation");
+    } else {
+      $("#contenTomo").hide();
+      $("#contenFolio").hide();
+      $("#tomo").addClass("ignore-validation");
+      $("#folio").addClass("ignore-validation");
+      $("#contenCedula").show();
+      $("#cedula_familiar").removeClass("ignore-validation");
     }
   });
 
   $("#disca").on("change", function () {
     if ($(this).is(":checked")) {
-      $("#noCedula").prop("checked", false);
+      $("#contenCarnet").show();
+      $("#carnet").removeClass("ignore-validation");
+    } else {
+      $("#contenCarnet").hide();
+      $("#carnet").addClass("ignore-validation");
     }
   });
 
   $(".cerrarEditar").on("click", function () {
     limpiarDatos();
   });
+
   $("#limpiar").on("click", function () {
     limpiarDatos();
   });
 
+  // Carga de Partida de Nacimiento familiar
+  $(document).on("click", "#cargaPartiNacimiento", function () {
+    const $this = $(this);
+    // Deshabilitar temporalmente el botón para evitar múltiples clics
+    $this.prop("disabled", true);
+    // Aplicar efecto de desvanecimiento al cambiar el contenido HTML
+    $this.slideUp(300, function () {
+      $this.html('<i class="fa-solid fa-xmark me-2"></i>Eliminar Partida').fadeIn(300);
+    });
+    $this.addClass("eliminar");
+    $("#achivoparti").removeClass("ignore-validation");
+    $("#achivoparti").empty();
+    const $contentPartida = $("#contenDoc");
+    // Verificar si el contenedor ya está visible
+    if ($contentPartida.is(":visible")) {
+      // Ocultar el contenedor si ya está visible
+      $contentPartida.slideDown(500, function () {
+        // Rehabilitar el botón después de la animación
+        $this.prop("disabled", false);
+      });
+    } else {
+      // Mostrar el contenedor si no está visible
+      $contentPartida.slideDown(500, function () {
+        // Rehabilitar el botón después de la animación
+        $this.prop("disabled", false);
+      });
+    }
+    // Cambiar el ID del contenedor
+    $this.attr("id", "cargaPartiEliminar");
+  });
+
+  $("#diaFamiliar, #mesesFamiliar, #anoFamiliar").on("input", function () {
+    const dia = $("#diaFamiliar").val();
+    const mes = $("#mesesFamiliar").val();
+    const ano = $("#anoFamiliar").val();
+
+    if (dia && mes && ano) {
+      const fechaNacimiento = new Date(ano, mes - 1, dia);
+      const edad = calcularEdad(fechaNacimiento);
+      $("#edad").val(edad);
+      $("#edad").addClass("cumplido");
+      $(".span_edad").addClass("cumplido_span");
+      if (!isNaN(edad)) {
+        let check = $("#noCedula");
+        if (check.is(":checked")) {
+          if (edad >= 18) {
+            $("#contenCedula").show();
+            $("#contenTomo").hide();
+            $("#contenFolio").hide();
+          } else {
+            $("#contenTomo").show();
+            $("#contenFolio").show();
+            $("#contenCedula").hide();
+            let contenDoc = document.getElementById("contenDoc");
+            if (!contenDoc) {
+              $("#contenDoc").show();
+            }
+          }
+        } else {
+          if (edad >= 18) {
+            $("#contenDoc").hide();
+            $("#contenTomo").hide();
+            $("#contenFolio").hide();
+          } else {
+            $("#contenDoc").show();
+            $("#contenTomo").show();
+            $("#contenFolio").show();
+            let contenDoc = document.getElementById("#contenDoc");
+            if (!contenDoc) {
+              $("#contenDoc").show();
+            }
+          }
+        }
+
+      }
+      console.log(edad)
+    }
+  });
+
+  function partidaNacimeinto() {
+  }
+  // Eliminar Partida de Nacimiento familiar
+  $(document).on("click", "#cargaPartiEliminar", function () {
+    const $this = $(this);
+    // Deshabilitar temporalmente el botón para evitar múltiples clics
+    $this.prop("disabled", true);
+    // Aplicar efecto de desvanecimiento al cambiar el contenido HTML
+    $this.slideUp(300, function () {
+      $this.html('<i class="fa-solid fa-plus me-2"></i>Cargar Partida').fadeIn(300);
+    });
+    $this.removeClass("eliminar");
+    $("#achivoparti").addClass("ignore-validation");
+    const $contentPartida = $("#contenDoc");
+    // Verificar si el contenedor ya está visible
+    if ($contentPartida.is(":visible")) {
+      // Ocultar el contenedor si ya está visible
+      $contentPartida.slideUp(500, function () {
+        // Rehabilitar el botón después de la animación
+        $this.prop("disabled", false);
+      });
+    } else {
+      // Mostrar el contenedor si no está visible
+      $contentPartida.slideDown(500, function () {
+        // Rehabilitar el botón después de la animación
+        $this.prop("disabled", false);
+      });
+    }
+    // Cambiar el ID del contenedor
+    $this.attr("id", "cargaPartiNacimiento");
+  });
+
+  // Carga de Partida de Nacimiento familiar
+  $(document).on("click", "#cargaDiscapacidad", function () {
+    const $this = $(this);
+    // Deshabilitar temporalmente el botón para evitar múltiples clics
+    $this.prop("disabled", true);
+    // Aplicar efecto de desvanecimiento al cambiar el contenido HTML
+    $this.slideUp(300, function () {
+      $this.html('<i class="fa-solid fa-xmark me-2"></i>Eliminar Partida').fadeIn(300);
+    });
+    $this.addClass("eliminar");
+    $("#achivoDis").removeClass("ignore-validation");
+    const $contentPartida = $("#contentPartida");
+    // Verificar si el contenedor ya está visible
+    if ($contentPartida.is(":visible")) {
+      // Ocultar el contenedor si ya está visible
+      $contentPartida.slideDown(500, function () {
+        // Rehabilitar el botón después de la animación
+        $this.prop("disabled", false);
+      });
+    } else {
+      // Mostrar el contenedor si no está visible
+      $contentPartida.slideDown(500, function () {
+        // Rehabilitar el botón después de la animación
+        $this.prop("disabled", false);
+      });
+    }
+    // Cambiar el ID del contenedor
+    $this.attr("id", "cargaDiscaEliminar");
+  });
+
+  // Eliminar Partida de Nacimiento familiar
+  $(document).on("click", "#cargaDiscaEliminar", function () {
+    const $this = $(this);
+    // Deshabilitar temporalmente el botón para evitar múltiples clics
+    $this.prop("disabled", true);
+    // Aplicar efecto de desvanecimiento al cambiar el contenido HTML
+    $this.slideUp(300, function () {
+      $this.html('<i class="fa-solid fa-plus me-2"></i>Cargar Partida').fadeIn(300);
+    });
+    $this.removeClass("eliminar");
+    $("#achivoDis").addClass("ignore-validation");
+    const $contentPartida = $("#contentPartida");
+    // Verificar si el contenedor ya está visible
+    if ($contentPartida.is(":visible")) {
+      // Ocultar el contenedor si ya está visible
+      $contentPartida.slideUp(500, function () {
+        // Rehabilitar el botón después de la animación
+        $this.prop("disabled", false);
+      });
+    } else {
+      // Mostrar el contenedor si no está visible
+      $contentPartida.slideDown(500, function () {
+        // Rehabilitar el botón después de la animación
+        $this.prop("disabled", false);
+      });
+    }
+    // Cambiar el ID del contenedor
+    $this.attr("id", "cargaPartiNacimiento");
+  });
+
+  // Cambiar id y colocar contenedor de notificacion
+  $(document).on("click", "#cargaNoti", function () {
+    const $this = $(this);
+    // Deshabilitar temporalmente el botón para evitar múltiples clics
+    $this.prop("disabled", true);
+    // Aplicar efecto de desvanecimiento al cambiar el contenido HTML
+    $this.slideUp(300, function () {
+      $this.html('<i class="fa-solid fa-xmark me-2"></i>Eliminar Notificación').fadeIn(300);
+    });
+    $this.addClass("eliminar");
+    const contentelefono = $("#contentTelefono");
+    // Verificar si el contenedor ya existe
+    if ($("#contentNoti").length === 0) {
+      // Crear el contenedor htmlNotificacion y ocultarlo inicialmente
+      const $htmlNotificacion = $(htmlNotificacion).hide();
+      // Insertar el contenedor antes del campo de teléfono y mostrarlo con un efecto de desvanecimiento
+      $(contentelefono).before($htmlNotificacion);
+      $htmlNotificacion.slideDown(500, function () {
+        // Rehabilitar el botón después de la animación
+        $this.prop("disabled", false);
+      }); // Mostrar con efecto show slow
+    } else {
+      // Rehabilitar el botón si el contenedor ya existe
+      $this.prop("disabled", false);
+    }
+    // Cambiar el ID del contenedor
+    $this.attr("id", "cargaNotiEliminar");
+  });
+
+  // Delegación de eventos para el botón con ID cargaNotiEliminar y 
+  // eliminar el contenedor de notificacion 
+  $(document).on("click", "#cargaNotiEliminar", function () {
+    const $this = $(this);
+    // Deshabilitar temporalmente el botón para evitar múltiples clics
+    $this.prop("disabled", true);
+    $("#contentNoti").slideUp(500, function () {
+      $(this).remove();
+      // Rehabilitar el botón después de la animación
+      $this.prop("disabled", false);
+    });
+    // Aplicar efecto de desvanecimiento al cambiar el contenido HTML
+    $this.slideUp(300, function () {
+      $this.html('<i class="fa-solid fa-plus me-2"></i>Cargar Notificación').fadeIn(300);
+    });
+    $this.attr("id", "cargaNoti");
+  });
+
+  // Cambiar id y colocar contenedor de contrato
+  $(document).on("click", "#cargaContrato", function () {
+    const $this = $(this);
+    // Deshabilitar temporalmente el botón para evitar múltiples clics
+    $this.prop("disabled", true);
+    // Aplicar efecto de desvanecimiento al cambiar el contenido HTML
+    $this.slideUp(300, function () {
+      $this.html('<i class="fa-solid fa-xmark me-2"></i>Eliminar Contrato').fadeIn(300);
+    });
+    $this.addClass("eliminar");
+    const contentelefono = $("#contentTelefono");
+    // Verificar si el contenedor ya existe
+    if ($("#contentContrato").length === 0) {
+      // Crear el contenedor htmlContrato y ocultarlo inicialmente
+      const $htmlContrato = $(htmlContrato).hide();
+      // Insertar el contenedor antes del campo de teléfono y mostrarlo con un efecto de desvanecimiento
+      $(contentelefono).before($htmlContrato);
+      $htmlContrato.slideDown(500, function () {
+        // Rehabilitar el botón después de la animación
+        $this.prop("disabled", false);
+      }); // Mostrar con efecto show slow
+    } else {
+      // Rehabilitar el botón si el contenedor ya existe
+      $this.prop("disabled", false);
+    }
+    // Cambiar el ID del contenedor
+    $this.attr("id", "cargaContratoEliminar");
+  });
+
+  // Delegación de eventos para el botón con ID cargaContratoEliminar y 
+  // eliminar el contenedor de contrato 
+  $(document).on("click", "#cargaContratoEliminar", function () {
+    const $this = $(this);
+    // Deshabilitar temporalmente el botón para evitar múltiples clics
+    $this.prop("disabled", true);
+    $("#contentContrato").slideUp(500, function () {
+      $(this).remove();
+      // Rehabilitar el botón después de la animación
+      $this.prop("disabled", false);
+    });
+    // Aplicar efecto de desvanecimiento al cambiar el contenido HTML
+    $this.slideUp(300, function () {
+      $this.html('<i class="fa-solid fa-plus me-2"></i>Cargar Contrato').fadeIn(300);
+    });
+    $this.attr("id", "cargaContrato");
+  });
+
+  // Función para buscar datos
+  function buscarDatos() {
+    const valor = $("#cedula_trabajador_familiar").val();
+    if (valor.length >= 7) {
+      function callbackExito(parsedData) {
+        if (parsedData.logrado == true) {
+          let nombre = parsedData.nombre;
+          let apellido = parsedData.apellido;
+          // si tiene marcado error
+          $("#nombreEmpleado").removeClass("error_input");
+          $("#apellidoEmpleado").removeClass("error_input");
+          $(".span_nombre").removeClass("error_span");
+          $(".span_apellido").removeClass("error_span");
+          // se marcar cumplido logrado
+          $("#cedula_trabajador_familiar").addClass("cedulaBusqueda");
+          $("#nombreEmpleado").addClass("cumplido");
+          $("#apellidoEmpleado").addClass("cumplido");
+          $(".span_nombre").addClass("cumplido_span");
+          $(".span_apellido").addClass("cumplido_span");
+          $("#nombreEmpleado").val(nombre);
+          $("#apellidoEmpleado").val(apellido);
+          alertaNormalmix(parsedData.mensaje, 4000, "success", "top-end");
+        } else {
+          $("#nombreEmpleado").val("");
+          $("#apellidoEmpleado").val("");
+          $("#nombreEmpleado").removeClass("cumplido");
+          $("#apellidoEmpleado").removeClass("cumplido");
+          $(".span_nombre").removeClass("cumplido_span");
+          $(".span_apellido").removeClass("cumplido_span");
+          alertaNormalmix(parsedData.mensaje, 4000, "error", "top-end");
+        }
+      }
+      if ($(this).val().length >= 7) {
+        const datoCedula = $(this).val();
+        const formData = new FormData(); // Crea un nuevo objeto FormData
+        formData.append('cedulaEmpleado', datoCedula);
+        enviarFormulario("src/ajax/registroPersonal.php?modulo_personal=obtenerDatosPersonal", formData, callbackExito, true);
+      }
+    }
+  }
+
+  // Aplicar debounce a la función de búsqueda
+  const buscarDatosDebounced = debounce(buscarDatos, 600);
+
+  // Evento de input para el campo de búsqueda
+  $("#cedula_trabajador_familiar").on("input", buscarDatosDebounced);
+
+  function todosCumplidos(formulario) {
+    const elementosCumplidos = $(formulario).find('input, select').filter('.cumplido, .cumplidoNormal').not('.ignore-validation');
+    const totalElementos = $(formulario).find('input, select').not('.ignore-validation').length;
+    return elementosCumplidos.length === totalElementos;
+  }
+
+  // Función para habilitar o deshabilitar el botón
+  function habilitarBoton(formulario, boton) {
+    boton.prop('disabled', !todosCumplidos(formulario));
+  }
+
+  // Función de debounce para limitar la frecuencia de ejecución
+  function debounce(func, wait) {
+    let timeout;
+    return function (...args) {
+      clearTimeout(timeout);
+      timeout = setTimeout(() => func.apply(this, args), wait);
+    };
+  }
+
+  // Crear una instancia de MutationObserver y observar cambios en un formulario específico
+  function observarFormulario(formulario, boton) {
+    const observer = new MutationObserver(debounce((mutationsList, observer) => {
+      for (const mutation of mutationsList) {
+        if (mutation.type === 'childList' || mutation.type === 'attributes') {
+          habilitarBoton(formulario, boton);
+          file("#notificacion", ".span_notificacion");
+          file("#contrato", ".span_contrato");
+        }
+      }
+    }, 300)); // Ajusta el tiempo de espera según sea necesario
+
+    // Configurar el observer para observar cambios en los hijos y atributos del formulario
+    const config = { childList: true, attributes: true, subtree: true };
+
+    // Comenzar a observar el formulario
+    observer.observe(formulario, config);
+  }
+
+  // Seleccionar los formularios y los botones correspondientes
+  const formularioActualizar = document.querySelector('#formularioActualizar');
+  const botonActualizar = $('#aceptar_empleado');
+
+  const forActualizarFamiliar = document.querySelector('.formulario-familia');
+  const aceptar_familia = $('#aceptar_familia');
+
+  // Observar cambios en cada formulario por separado
+  observarFormulario(formularioActualizar, botonActualizar);
+  observarFormulario(forActualizarFamiliar, aceptar_familia);
+
+
+  // Inicializar el estado de los botones al cargar la página
+  habilitarBoton(formularioActualizar, botonActualizar);
+  // Inicializar el estado de los botones al cargar la página
+  habilitarBoton(forActualizarFamiliar, aceptar_familia);
+
 });
+
+// CONTENIDO HTML
+let htmlContrato = `
+<div class="col-sm-12 col-md-12 mb-2" id="contentContrato">
+  <div class="form-group">
+        <label for="correo">Contrato</label>
+        <div class="input-group">
+            <span class="input-group-text span_contrato"><i class="icons fa-regular fa-file-zipper"></i></span>
+            <input type="file" class="form-control" name="contratoArchivo" id="contrato" aria-describedby="inputGroupFileAddon04" aria-label="Upload" required>
+        </div>
+    </div>
+</div>
+`;
+
+let htmlNotificacion = `
+  <div class="col-sm-12 col-md-12 mb-2" id="contentNoti">
+      <div class="form-group">
+          <label for="correo">Notificación</label>
+          <div class="input-group">
+              <span class="input-group-text span_notificacion"><i class="icons fa-regular fa-file-zipper"></i></span>
+              <input type="file" name="notacionAchivo" class="form-control" id="notificacion" aria-describedby="inputGroupFileAddon04" aria-label="Upload" required>
+          </div>
+      </div>
+  </div>
+`;
+
+// plantillas HTML
+let cedulaContenido = `
+<div class="col-sm-6 col-md-6" id="contenCedula">
+    <div class="form-group" >
+      <label for="cedula">Cédula</label>
+      <div class="input-group">
+        <span class="input-group-text span_cedula_familiar"><i class="fa-regular fa-address-card"></i></span>
+        <input type="text" class="form-control " id="cedula_familiar" name="cedula" placeholder="Cédula de Identidad" required >
+      </div>
+  </div>
+</div>
+`;
+
+let noCedulado = `
+<div class="col-sm-6 col-md-6 mb-3" id="contenTomo">
+    <div class="form-group" >
+      <label for="tomo">Tomo</label>
+      <div class="input-group">
+        <span class="input-group-text span_tomo"><i class="fa-regular fa-address-card"></i></span>
+        <input type="text" class="form-control" id="tomo" name="tomo" placeholder="Tomo De partida De Nacimiento" required >
+      </div>
+  </div>
+</div>
+
+<div class="col-sm-6 col-md-6 mb-3" id="contenFolio">
+    <div class="form-group" >
+      <label for="folio">Folio</label>
+      <div class="input-group">
+        <span class="input-group-text span_folio"><i class="fa-regular fa-address-card"></i></span>
+        <input type="text" class="form-control" id="folio" name="folio" placeholder="Número de folio" required >
+      </div>
+  </div>
+</div>
+`;
+
+let numeroCernet = `
+<div class="col-sm-6 col-md-6 mb-3" id="contenCarnet">
+  <div class="form-group" >
+      <label for="cedula">Número de Carnet de Discapacidad</label>
+        <div class="input-group">
+        <span class="input-group-text span_carnet"><i class="fa-regular fa-address-card"></i></span>
+        <input type="text" class="form-control " id="carnet" name="carnet" placeholder="Cédula de Identidad" required>
+    </div>
+  </div>
+</div>
+`;
+
+let partidaNacimiento = `
+<div class="col-sm-12 mb-2 mt-3" id="contenDoc">
+  <div class="form-group">
+    <label for="correo">Partida De Nacimiento</label>
+    <div class="input-group">
+      <span class="input-group-text span_docArchivo"><i class="fa-regular fa-file-zipper"></i></span>
+      <input type="file" class="form-control" name="docArchivo" id="achivo" aria-describedby="inputGroupFileAddon04" aria-label="Upload" required >
+    </div>
+  </div>
+</div>
+`;
+
+let partidaDiscapacidad = `
+<div class="col-sm-12 mb-2" id="contentPartida">
+  <div class="form-group">
+      <label for="correo">Partida De Discapacidad</label>
+      <div class="input-group">
+          <span class="input-group-text span_docArchivoDis"><i class="fa-regular fa-file-zipper"></i></span>
+          <input type="file" class="form-control" name="docArchivoDis" id="achivoDis" aria-describedby="inputGroupFileAddon04" aria-label="Upload" required>
+      </div>
+  </div>
+</div>
+`;
