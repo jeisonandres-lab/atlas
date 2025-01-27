@@ -39,10 +39,10 @@ use App\Atlas\config\App;
                                 <section class="card contenTable" style="background-color: white; box-shadow: none;">
                                     <div class="contenTablet mitable table-responsive">
                                         <!-- Boton Switch -->
-                                        <div class="radio-inputs m-2">
-                                            <label class="radio">
+                                        <div class="card radio-inputs m-2" style="flex-direction: row; box-shadow: none;">
+                                            <label class="radio " >
                                                 <input name="radio" id="switchDepe" type="radio" />
-                                                <span class="name">Dependencia</span>
+                                                <span class="name card">Dependencia</span>
                                             </label>
                                             <label class="radio">
                                                 <input name="radio" id="switchCargo" type="radio" />
@@ -57,7 +57,7 @@ use App\Atlas\config\App;
                                                 <span class="name">Departamentos</span>
                                             </label>
                                         </div>
-                                        <table id="myTable" class="mitable table table-striped table-bordered table-hover nowrap display">
+                                        <table id="tableInic" class="mitable table table-striped table-bordered table-hover nowrap display">
                                             <thead>
                                                 <tr>
                                                     <th scope="col" id="cedula" class="bg-primary">Cédula</th>
@@ -83,7 +83,7 @@ use App\Atlas\config\App;
     <?php require_once App::URL_INC . "/scrips.php"; ?>
     <?php require_once App::URL_INC . "/tablets.php"; ?>
     <script src="./src/libs/select2/select2.min.js"></script>
-    <!-- <script src="<?php echo App::URL_SCRIPS . "registroFamiliar.js" ?>" type="module"></script> -->
+    <script src="<?php echo App::URL_SCRIPS . "datosDecd.js" ?>" type="module"></script>
 
 </body>
 
