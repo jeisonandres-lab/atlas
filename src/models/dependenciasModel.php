@@ -7,9 +7,9 @@ use App\Atlas\config\Conexion;
 class dependenciasModel extends Conexion
 {
     // Metodos de la Clase Privada
-    private function datosDependencia($tabla)
+    private function datosDependencia()
     {
-        $sql = $this->ejecutarConsulta("SELECT * FROM $tabla");
+        $sql = $this->ejecutarConsulta("SELECT * FROM dependencia");
         return $sql;
     }
 
@@ -20,9 +20,9 @@ class dependenciasModel extends Conexion
     }
 
     // Getters Para Accder a los Metodos de la Clase
-    public function getDatosDependencia($tabla)
+    public function getDatosDependencia()
     {
-        return $this->datosDependencia($tabla);
+        return $this->datosDependencia();
     }
 
     public function getActulizarDependencia($tabla, $datos, $condicion)

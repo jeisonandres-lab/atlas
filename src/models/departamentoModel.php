@@ -7,9 +7,9 @@ use App\Atlas\config\Conexion;
 class departamentoModel extends Conexion
 {
     // Metodos de la Clase Privada
-    private function datosDepartamento($tabla)
+    private function datosDepartamento()
     {
-        $sql = $this->ejecutarConsulta("SELECT * FROM $tabla");
+        $sql = $this->ejecutarConsulta("SELECT * FROM departamento");
         return $sql;
     }
 
@@ -20,9 +20,9 @@ class departamentoModel extends Conexion
     }
 
     // Getters Para Accder a los Metodos de la Clase
-    public function getDatosDepartamento($tabla)
+    public function getDatosDepartamento()
     {
-        return $this->datosDepartamento($tabla);
+        return $this->datosDepartamento();
     }
 
     public function getActulizarDepartamento($tabla, $datos, $condicion)

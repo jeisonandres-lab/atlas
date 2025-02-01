@@ -5,9 +5,9 @@ use App\Atlas\config\Conexion;
 class estatusModel extends Conexion{
 
     // Metodos de la Clase Privada
-    private function datosEstatus($tabla)
+    private function datosEstatus()
     {
-        $sql = $this->ejecutarConsulta("SELECT * FROM $tabla");
+        $sql = $this->ejecutarConsulta("SELECT * FROM estatus");
         return $sql;
     }
 
@@ -18,9 +18,9 @@ class estatusModel extends Conexion{
     }
 
     // Getters Para Accder a los Metodos de la Clase
-    public function getDatosEstatus($tabla)
+    public function getDatosEstatus()
     {
-        return $this->datosEstatus($tabla);
+        return $this->datosEstatus();
     }
 
     public function getActulizarEstatus($tabla, $datos, $condicion)

@@ -5,6 +5,8 @@ namespace App\Atlas\controller;
 use App\Atlas\models\personalModel;
 use App\Atlas\models\dependenciasModel;
 use App\Atlas\models\estatusModel;
+use App\Atlas\models\cargoModel;
+use App\Atlas\models\departamentoModel;
 use App\Atlas\controller\fileUploaderController;
 use App\Atlas\models\tablasModel;
 use App\Atlas\config\App;
@@ -753,6 +755,18 @@ class personalController extends personalModel
         return $this->dependencia = new dependenciasModel();
     }
 
+    //Inyectar cargo
+    public function objetoCargo()
+    {
+        return $this->dependencia = new cargoModel();
+    }
+
+    //Inyectar departamento
+    public function objetoDepartamento()
+    {
+        return $this->dependencia = new departamentoModel();
+    }
+
     //Inyectar estatus
     public function objetoEstatus()
     {
@@ -773,7 +787,7 @@ class personalController extends personalModel
         $datosBuscar = ['depe.dependencia', 'd.primerNombre', 'd.cedula', 'ca.cargo']; // Array de selectores para buscar en la tabla
         $campoOrden = 'e.idPersonal'; // Campo por el cual se ordenará la tabla
         $selectores = 'e.id_empleados, e.idPersonal, d.primerNombre, d.segundoNombre, d.primerApellido, d.segundoApellido, d.cedula, e.idEstatus, ca.cargo, e.idCargo, depe.dependencia, depa.departamento'; // Selectores para obtener los datos de la tabla
-        $conditions = ['activo = ?'];
+        $conditions = ['e.activo = ?'];
         $conditionParams = ['1'];
 
         $draw = $_REQUEST['draw'];
@@ -919,7 +933,7 @@ class personalController extends personalModel
     //Encapsulamineto de cargo
     protected function getCargoPersonales()
     {
-        $cargoPersonal = $this->objetoEstatus();
+        $cargoPersonal = $this->objetoCargo();
         return $cargoPersonal->getDatosCargo();
     }
 
@@ -933,8 +947,8 @@ class personalController extends personalModel
     //Encapsulamiento de departamentos
     protected function getDepartamentosPersonales()
     {
-        $departamentoPersonal = $this->objetoDependencia();
-        return $departamentoPersonal->getDatosDepartamentos();
+        $departamentoPersonal = $this->objetoDepartamento();
+        return $departamentoPersonal->getDatosDepartamento();
     }
 
     //Eliminar personal empleado

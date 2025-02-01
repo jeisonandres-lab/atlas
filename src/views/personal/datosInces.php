@@ -57,15 +57,19 @@ use App\Atlas\config\App;
                                                 <span class="name">Departamentos</span>
                                             </label>
                                         </div>
+                                        <div class="container">
+                                            <button class="mt-2 btn btn-primary btn-sm btn-hover-azul" data-bs-toggle="modal" data-bs-target="#agregarDatosDependencia" id="btnAgregarDependencia"><i class="fa-solid fa-plus fa-sm me-2"></i>Agregar</button>
+                                            <button class="mt-2 btn btn-primary btn-sm btn-hover-azul" data-bs-toggle="modal" data-bs-target="#agregarDatosDependencia" id="btnAgregarCargo"><i class="fa-solid fa-plus fa-sm me-2"></i>Agregar</button>
+                                            <button class="mt-2 btn btn-primary btn-sm btn-hover-azul" data-bs-toggle="modal" data-bs-target="#agregarDatosDependencia" id="btnAgregarEstatus"><i class="fa-solid fa-plus fa-sm me-2"></i>Agregar</button>
+                                            <button class="mt-2 btn btn-primary btn-sm btn-hover-azul" data-bs-toggle="modal" data-bs-target="#agregarDatosDependencia" id="btnAgregarDepartamento"><i class="fa-solid fa-plus fa-sm me-2"></i>Agregar</button>
+                                        </div>
                                         <table id="tableInic" class="mitable table table-striped table-bordered table-hover nowrap display">
                                             <thead>
-                                                <tr>
-                                                    <th scope="col" id="cedula" class="bg-primary">Cédula</th>
-                                                    <th scope="col" class="bg-primary">Nombre</th>
-                                                    <th scope="col" class="bg-primary">Estatus</th>
+                                                <tr id="tr-identity" class="tr-identity">
+
                                                 </tr>
                                             </thead>
-                                            <tbody>
+                                            <tbody class="contenidoTable">
                                             </tbody>
                                         </table>
                                     </div>

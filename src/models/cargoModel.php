@@ -7,9 +7,9 @@ use App\Atlas\config\Conexion;
 class cargoModel extends Conexion
 {
     // Metodos de la Clase Privada
-    private function datosCargo($tabla)
+    private function datosCargo()
     {
-        $sql = $this->ejecutarConsulta("SELECT * FROM $tabla");
+        $sql = $this->ejecutarConsulta("SELECT * FROM cargo");
         return $sql;
     }
 
@@ -20,9 +20,9 @@ class cargoModel extends Conexion
     }
 
     // Getters Para Accder a los Metodos de la Clase
-    public function getDatosCargo($tabla)
+    public function getDatosCargo()
     {
-        return $this->datosCargo($tabla);
+        return $this->datosCargo();
     }
 
     public function getActulizarCargo($tabla, $datos, $condicion)
