@@ -16,17 +16,20 @@ switch ($_GET['modulo_usuario']) {
         $user = $userLogin->limpiarCadena($_POST['usuario']);
         $password = $userLogin->limpiarCadena($_POST['password']);
         $userLogin->logearse($user, $password);
-    break;
+        break;
 
     case 'redireccionar':
         $url = $_POST['url'];
-       echo $userLogin->redireccionarUsuario($url);
-    break;
+        echo $userLogin->redireccionarUsuario($url);
+        break;
 
     case 'cerrarSession':
         $url = $_POST['url'];
-       echo $userLogin->cerrarSession_total($url);
-    break;
+        echo $userLogin->cerrarSession_total($url);
+        break;
+    case 'DatosUsuariosBasicos':
+        $usercontroller->DatosUsuariosBasicos();
+        break;
 
     default:
         # code...

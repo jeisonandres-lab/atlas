@@ -4,6 +4,7 @@ namespace App\Atlas\controller;
 
 use App\Atlas\models\userModel;
 use App\Atlas\config\App;
+use App\Atlas\models\tablasModel;
 
 class  userController extends userModel
 {
@@ -11,11 +12,12 @@ class  userController extends userModel
     private $app2;
 
     private $app;
-
+    private $tablas;
     public function __construct()
     {
         parent::__construct();
         $this->app = new App();
+        $this->tablas = new tablasModel();
     }
     public function logearse(string $user, string $password)
     {
@@ -83,6 +85,47 @@ class  userController extends userModel
         }
     }
 
+    public function DatosUsuariosBasicos()
+    {
+        $data_json['data'] = []; // Array de datos para enviar
+        $tabla = 'users INNER JOIN rol ON users.idRol = rol.id_rol'; // Tabla a consultar
+        $selectoresCantidad = 'COUNT(id_user) as cantidad'; // Selector para contar la cantidad de registros de la tabla
+        $datosBuscar = []; // Array de selectores para buscar en la tabla
+        $campoOrden = 'id_user'; // Campo por el cual se ordenará la tabla
+        $selectores = '*'; // Selectores para obtener los datos de la tabla
+        $conditions = []; // Condiciones para obtener los datos de la tabla
+        $conditionParams = []; // Parámetros de las condiciones
+
+        $draw = $_REQUEST['draw'];
+        $start = $_REQUEST['start'];
+        $length = $_REQUEST['length'];
+        $searchValue = $_REQUEST['search']['value'];
+
+        // Obtener la cantidad de los datos de la tabla
+        $cantidadRegistro = $this->tablas->getCantidadRegistros($tabla, $selectoresCantidad, $conditions, $conditionParams);
+        // Obtener los datos de la tabla
+        $personal = $this->tablas->getTodoDatosPersonal($selectores, $tabla, $start, $length, $searchValue, $datosBuscar, $campoOrden, $conditions, $conditionParams);
+        // Recorrer datos de la tabla
+
+        foreach ($personal as $row) {
+            $data_json['data'][] = [
+                '0' => $row['nameUser'],
+                '1' => $row['rol'],
+                '2' => $row['activo'],
+            ];
+            $data_json['mensaje'] = "todas las dependencias de manera exitosa";
+        }
+
+        // Devolver la respuesta a DataTables
+        $response = array(
+            "draw" => intval($draw),
+            "recordsTotal" => $cantidadRegistro[0]['cantidad'],
+            "recordsFiltered" => $cantidadRegistro[0]['cantidad'],
+            "data" => $data_json['data']
+        );
+        header('Content-Type: application/json');
+        echo json_encode($response);
+    }
     public function getApp()
     {
         return $this->app2 = new App();

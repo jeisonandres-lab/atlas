@@ -43,7 +43,7 @@ use App\Atlas\config\App;
             <!-- NOMBRE DEL MODULO -->
             <div class="imagen-pages mb-3" style="height: 75px;">
                 <div class="d-flex aling-items-center " style="position: absolute; ">
-                    <span class="ms-4 fw-bold fs-4 mt-3 text-white">Registro del Personal</span>
+                    <span class="ms-4 fw-bold fs-4 mt-3 text-white">Registro Del Personal</span>
                 </div>
                 <img src="<?php echo App::URL_IMG . "top-header.png"; ?>" alt="" class="w-100 h-100" style="object-fit: cover; object-position:center;">
             </div>

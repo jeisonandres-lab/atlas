@@ -70,7 +70,6 @@ body main .content {
 
 /* navbar */
 .navbar {
-  position: fixed;
   top: 0;
   width: 100%;
   left: 0;
@@ -192,7 +191,7 @@ body main .content {
   display: none;
 }
 .sidebar::-webkit-scrollbar-thumb {
-  background-color: rgb(231, 229, 229);
+  background-color: var(--blue-color);
   border-radius: 6px;
 }
 
@@ -231,6 +230,10 @@ body main .content {
 }
 .menu_personal::before {
   content: "Personal";
+}
+
+.menu_administrador::before {
+  content: "Administrador";
 }
 .sidebar.close .menu_title::before {
   content: "";

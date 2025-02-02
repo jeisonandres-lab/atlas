@@ -25,13 +25,13 @@
         <i class='bx bx-bell'></i>
         <!-- foto de perfil -->
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-          <img src="./src/assets/img/icons/avtar_1.png" alt="" class="profile nav-item dropdown dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" />
-          <span class="ms-2 d-none d-md-inline"><?php echo $datosUser ?></span>
-        </a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#" id="cerrarSession">Cerrar Sesion</a></li>
-          </ul>
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <img src="./src/assets/img/icons/avtar_1.png" alt="" class="profile nav-item dropdown dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" />
+                <span class="ms-2 d-none d-md-inline"><?php echo $datosUser ?></span>
+            </a>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#" id="cerrarSession">Cerrar Sesion</a></li>
+            </ul>
         </li>
     </div>
 </nav>
@@ -178,6 +178,36 @@
                         <i class='bx bx-file'></i>
                     </span>
                     <span class="navlink">Informe Medico</span>
+                </a>
+            </li>
+        </ul>
+
+        <!-- Administracion -->
+        <ul class="menu_items">
+            <div class="menu_title menu_administrador"></div>
+
+            <li class="item">
+                <a href="users" class="nav_link usuarios">
+                    <span class="navlink_icon">
+                        <i class="fa-regular fa-user-tie"></i>
+                    </span>
+                    <span class="navlink">Usuarios</span>
+                </a>
+            </li>
+            <li class="item">
+                <a href="#" class="nav_link">
+                    <span class="navlink_icon">
+                        <i class='bx bx-cabinet'></i>
+                    </span>
+                    <span class="navlink">Historial</span>
+                </a>
+            </li>
+            <li class="item">
+                <a href="#" class="nav_link">
+                    <span class="navlink_icon">
+                        <i class='bx bx-file'></i>
+                    </span>
+                    <span class="navlink">Informe</span>
                 </a>
             </li>
         </ul>

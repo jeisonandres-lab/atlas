@@ -21,6 +21,7 @@ class viewModel extends error
             'datosInces' => "src/views/personal/DatosInces.php",
             'familiares' => "src/views/personal/familiares.php",
             'ausencia' => "src/views/ausencia/ausencia.php",
+            'users' => "src/views/admin/usuarios.php",
             'error' => "src/error/error.html",
             'prueba' => "chart.html",
         ];
