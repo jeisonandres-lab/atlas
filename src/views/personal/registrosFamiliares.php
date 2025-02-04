@@ -479,7 +479,7 @@ use App\Atlas\config\App;
                                                 </div>
                                             </div>
 
-                                            <div class="col-sm-6 col-md-6 mb-3" id="contenTomo" >
+                                            <div class="col-sm-6 col-md-6 mb-3" id="contenTomo">
                                                 <div class="form-group">
                                                     <label for="tomo">Tomo</label>
                                                     <div class="input-group">
@@ -489,7 +489,7 @@ use App\Atlas\config\App;
                                                 </div>
                                             </div>
 
-                                            <div class="col-sm-6 col-md-6 mb-3" id="contenFolio"  >
+                                            <div class="col-sm-6 col-md-6 mb-3" id="contenFolio">
                                                 <div class="form-group">
                                                     <label for="folio">Folio</label>
                                                     <div class="input-group">
@@ -499,7 +499,7 @@ use App\Atlas\config\App;
                                                 </div>
                                             </div>
 
-                                            <div class="col-sm-6 col-md-6 mb-3" id="contenCarnet"  >
+                                            <div class="col-sm-6 col-md-6 mb-3" id="contenCarnet">
                                                 <div class="form-group">
                                                     <label for="cedula">Número de Carnet de Discapacidad</label>
                                                     <div class="input-group">
@@ -509,7 +509,7 @@ use App\Atlas\config\App;
                                                 </div>
                                             </div>
 
-                                            <div class="col-sm-6 mb-3" id="contenDoc"  >
+                                            <div class="col-sm-6 mb-3" id="contenDoc">
                                                 <div class="form-group">
                                                     <label for="correo">Partida De Nacimiento</label>
                                                     <div class="input-group">
@@ -519,7 +519,7 @@ use App\Atlas\config\App;
                                                 </div>
                                             </div>
 
-                                            <div class="col-sm-6 mb-3" id="contentPartida"   >
+                                            <div class="col-sm-6 mb-3" id="contentPartida">
                                                 <div class="form-group">
                                                     <label for="correo">Partida De Discapacidad</label>
                                                     <div class="input-group">
@@ -574,7 +574,7 @@ use App\Atlas\config\App;
                                             </div>
 
                                             <div class="col-sm-12 ">
-                                                <button type="submit" id="aceptar_familia" name="aceptar2" class="btn btn-primary" disabled >
+                                                <button type="submit" id="aceptar_familia" name="aceptar2" class="btn btn-primary" disabled>
                                                     <i class="fa-solid fa-plus me-2"></i>Aceptar
                                                 </button>
                                             </div>
@@ -597,6 +597,7 @@ use App\Atlas\config\App;
 
     <?php require_once App::URL_INC . "/scrips.php"; ?>
     <?php require_once App::URL_INC . "/tablets.php"; ?>
+
     <script src="./src/libs/select2/select2.min.js"></script>
     <script src="<?php echo App::URL_SCRIPS . "registroFamiliar.js" ?>" type="module"></script>
 

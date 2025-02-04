@@ -32536,3 +32536,9 @@ Archivo: C:\xampp\htdocs\atlas\src\views\personal\registrosFamiliares.php
 Línea: 13
 Fecha y hora: 2025-01-26 17:25:19
 ======================================================
+======================================================
+Error: require_once(./src/views/inc//menu.php): Failed to open stream: No such file or directory
+Archivo: C:\xampp\htdocs\atlas\src\views\ausencia\ausencia.php
+Línea: 19
+Fecha y hora: 2025-02-03 08:20:17
+======================================================

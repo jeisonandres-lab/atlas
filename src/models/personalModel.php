@@ -112,12 +112,13 @@ class personalModel extends Conexion
         $sql = $this->actualizarDatos($tabla, $datos, $condicion);
         return $sql;
     }
-
+    
     public function actualizarDatosFamiliar()
     {
         $sql = $this->ejecutarConsulta("");
         return $sql;
     }
+
     public function actualizarPersonalMode(
         $primerNombre,
         $segundoNombre,
@@ -235,7 +236,7 @@ class personalModel extends Conexion
     {
         return $this->existeFamiliarID($parametro);
     }
-    
+
     public function getActualizar($tabla, $datos, $condicion)
     {
         return $this->actualuzarDatos($tabla, $datos, $condicion);

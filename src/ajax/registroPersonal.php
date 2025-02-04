@@ -81,7 +81,7 @@ switch ($_GET['modulo_personal']) {
         $personal->obtenerDatosPersonal($cedulaEmpleado);
         break;
 
-        case 'obtenerDatosFamiliar':
+    case 'obtenerDatosFamiliar':
         $personal->obtenerDatosFamiliar($idPersonal);
             break;
     case 'registrarFamilia':

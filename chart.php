@@ -16,7 +16,7 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$sql = "SELECT count(id_personal) as personal, count(firma) as firma FROM datosPersonales"; // Replace 'your_table_name' with your actual table name
+$sql = "SELECT count(id_doc) as personal FROM documentacion"; // Replace 'your_table_name' with your actual table name
 $result = $conn->query($sql);
 
 $data = array();

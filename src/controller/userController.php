@@ -109,9 +109,10 @@ class  userController extends userModel
 
         foreach ($personal as $row) {
             $data_json['data'][] = [
-                '0' => $row['nameUser'],
-                '1' => $row['rol'],
-                '2' => $row['activo'],
+                '0' => $row['enUso'],
+                '1' => $row['nameUser'],
+                '2' => $row['rol'],
+                '3' => $row['activo'],
             ];
             $data_json['mensaje'] = "todas las dependencias de manera exitosa";
         }

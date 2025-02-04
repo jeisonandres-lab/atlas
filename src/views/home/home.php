@@ -21,7 +21,7 @@ use App\Atlas\config\App;
         <!-- MODAL RESPONSIVEk -->
         <!-- CUERPO DEL SISTEMA -->
         <main class=" app-main p-0 pb-2">
-            <div class="container text-center  p-5 pb-4">
+            <div class="container-fluid text-center  p-5 pb-4">
                 <div class="row">
                     <div class="col d-flex justify-content-start flex-column">
                         <div class="panelHome mb-3">
@@ -56,7 +56,7 @@ use App\Atlas\config\App;
             </div>
 
             <!-- subMenu de la vista -->
-            <div class="container">
+            <div class="container-fluid">
                 <div class="row">
                     <div class="col">
                         <div class="row">
@@ -69,15 +69,13 @@ use App\Atlas\config\App;
                                                 <span class="text-muted fs-13 d-block mb-1">
                                                     Total de personal
                                                 </span>
-                                                <h4 class="fw-medium mb-0">
-
+                                                <h4 class="fw-medium mb-0" id="totalPersonal">
                                                     854
                                                 </h4>
                                             </div>
                                             <div class="lh-1">
                                                 <span class="avatar avatar-md avatar-rounded color-primary">
-                                                    <i class="fa-regular fa-user fs-5 icon-menu"></i>
-
+                                                    <i class="fa-regular fa-user-tie fs-5 icon-menu"></i>
                                                 </span>
                                             </div>
                                         </div>
@@ -100,8 +98,7 @@ use App\Atlas\config\App;
                                                 <span class="text-muted fs-13 d-block mb-1">
                                                     Total de achivos
                                                 </span>
-                                                <h4 class="fw-medium mb-0">
-
+                                                <h4 class="fw-medium mb-0" id="totalArchivos">
                                                     860
                                                 </h4>
                                             </div>
@@ -114,7 +111,7 @@ use App\Atlas\config\App;
                                         <div class="text-muted fs-13">
                                             Aumentó un
                                             <span class="text-success">
-                                                2,56% <i class="fa-regular fa-arrow-up"></i>
+                                                <span id="porcentajeArchivos">2,56% </span><i class="fa-regular fa-arrow-up ms-1"></i>
                                             </span>
                                         </div>
                                     </div>
@@ -130,8 +127,7 @@ use App\Atlas\config\App;
                                                 <span class="text-muted fs-13 d-block mb-1">
                                                     Atención médica
                                                 </span>
-                                                <h4 class="fw-medium mb-0">
-
+                                                <h4 class="fw-medium mb-0" id="atencionMedica">
                                                     870
                                                 </h4>
                                             </div>
@@ -144,7 +140,7 @@ use App\Atlas\config\App;
                                         <div class="text-muted fs-13">
                                             Aumentó un
                                             <span class="text-success">
-                                                2,56% <i class="fa-regular fa-arrow-up"></i>
+                                                <span id="porcentajeAtencionMedica">2,56% </span> <i class="fa-regular fa-arrow-up"></i>
                                             </span>
                                         </div>
                                     </div>
@@ -160,8 +156,7 @@ use App\Atlas\config\App;
                                                 <span class="text-muted fs-13 d-block mb-1">
                                                     Total de medicamentos
                                                 </span>
-                                                <h4 class="fw-medium mb-0">
-
+                                                <h4 class="fw-medium mb-0" id="totalMedicamentos">
                                                     8980
                                                 </h4>
                                             </div>
@@ -190,14 +185,13 @@ use App\Atlas\config\App;
                                                 <span class="text-muted fs-13 d-block mb-1">
                                                     Personal de vacaciones
                                                 </span>
-                                                <h4 class="fw-medium mb-0">
+                                                <h4 class="fw-medium mb-0" id="personalVacaciones">
                                                     12
                                                 </h4>
                                             </div>
                                             <div class="lh-1">
                                                 <span class="avatar avatar-md avatar-rounded color-primary">
-                                                    <i class="fa-regular fa-user fs-5 icon-menu"></i>
-
+                                                    <i class="fa-light fa-island-tropical fs-5 icon-menu"></i>
                                                 </span>
                                             </div>
                                         </div>
@@ -220,14 +214,13 @@ use App\Atlas\config\App;
                                                 <span class="text-muted fs-13 d-block mb-1">
                                                     Personal en ausencia
                                                 </span>
-                                                <h4 class="fw-medium mb-0">
+                                                <h4 class="fw-medium mb-0" id="personalAusencia">
                                                     82
                                                 </h4>
                                             </div>
                                             <div class="lh-1">
                                                 <span class="avatar avatar-md avatar-rounded color-primary">
-                                                    <i class="fa-regular fa-user fs-5 icon-menu"></i>
-
+                                                    <i class="fa-regular fa-users-gear fs-5 icon-menu"></i>
                                                 </span>
                                             </div>
                                         </div>
@@ -246,32 +239,38 @@ use App\Atlas\config\App;
             </div>
 
             <!-- USUARIOS Y ESTADISTICAS DEL DATOS -->
-            <div class="container mb-2">
+            <div class="container-fluid mb-2">
                 <div class="row">
-                    <div class="col bg-white p-2">
-                        <table id="tableUsers" class="table table-hover table-bordered">
-                            <thead>
-                                <tr>
-                                    <th scope="col" class="text-center bg-primary">Usuario</th>
-                                    <th scope="col" class="text-center bg-primary">Rol</th>
-                                    <th scope="col" class="text-center bg-primary">Activo</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            </tbody>
-                        </table>
+                    <div class="col">
+                        <div class="bg-white p-3">
+                            <table id="tableUsers" class="table table-hover table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th scope="col" class="text-center bg-primary">#</th>
+                                        <th scope="col" class="text-center bg-primary">Usuario</th>
+                                        <th scope="col" class="text-center bg-primary">Rol</th>
+                                        <th scope="col" class="text-center bg-primary">Activo</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-                    <div class=" col bg-danger">
-                        s
+                    <div class="col">
+                        <div class="bg-white p-3">
+                            <canvas id="scoreChart2"  width="400" height="400">
+                            </canvas>
+                        </div>
                     </div>
                 </div>
             </div>
             <!-- ARCHIVOS SUBIDOS -->
-            <div class="container ">
+            <div class="container-fluid ">
                 <!-- ESTADISTICAS -->
                 <div class="bg-white">
                     <di class="char">
-                        <canvas id="scoreChart" width="500px" height="200px">
+                        <canvas id="scoreChart">
                         </canvas>
                     </di>
                 </div>

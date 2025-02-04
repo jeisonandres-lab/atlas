@@ -90,6 +90,13 @@ $(function () {
     },
     processing: true,
     serverSide: true,
+    dom: 'Bfrtip',
+    buttons: [
+        'colvis',
+        'excelHtml5',
+        'print',
+        'pdf',
+    ],
     info: false,
     order: [[0, 'desc']],
     paging: true,
@@ -536,7 +543,7 @@ $(function () {
           $("#carnet").removeClass("ignore-validation");
           $("#disca").prop("checked", true);
         }
-      
+
       } else {
         console.error('Error al obtener datos personales o la estructura de la respuesta es incorrecta');
       }
