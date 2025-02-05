@@ -1,3 +1,5 @@
+@import url(cssUtils/colorTableButtons.css);
+
 .btn-hover:hover {
     transform: translateY(-3px); /* Mueve el botón 3px hacia arriba */
     transition: transform 0.2s; /* Añade una transición suave */

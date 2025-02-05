@@ -157,19 +157,20 @@ $(function () {
           {
             extend: 'copy',
             text: '<i class="fas fa-copy"></i> Copiar',
-            className: 'btn btn-secondary'
+            className: 'btn btn-secondary',
+            
           },
           {
             extend: 'excelHtml5',
             text: '<i class="fas fa-file-excel"></i> Excel',
-            className: 'btn btn-success'
+            className: 'btn  buttonVerde'
           },
           {
             extend: 'pdfHtml5',
             text: '<i class="fas fa-file-pdf"></i> PDF',
             className: 'btn btn-danger'
           }
-        ]
+        ],
       },
     },
     language: {

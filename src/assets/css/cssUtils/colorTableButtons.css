@@ -1,0 +1,10 @@
+:root{
+    --buttonVerde:#01BDA4;
+    --buttonRojo:#FF0000;
+}
+
+
+.buttonVerde{
+    background-color: var(--buttonVerde) !important;
+    border: 0px;
+}
