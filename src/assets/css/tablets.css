@@ -106,3 +106,9 @@ table tfoot tr th{
     transform: translateX(84px);
     border-color: #fff;
   }
+
+
+  .dataTables_wrapper .dataTables_paginate {
+    display: flex !important;
+    justify-content: flex-end !important;
+}

@@ -94,6 +94,7 @@ $(function () {
     order: [[0, 'desc']],
     paging: true,
     lengthMenu: [2, 10, 25],
+    pageLength: 10,
     columnDefs: [
       {
         targets: 0,
@@ -150,28 +151,7 @@ $(function () {
         }
       },
     ],
-    layout: {
-      topStart: {
-        pageLength: 10,
-        buttons: [
-          {
-            extend: 'copy',
-            text: '<i class="fas fa-copy"></i> Copiar',
-            className: 'btn btn-secondary'
-          },
-          {
-            extend: 'excelHtml5',
-            text: '<i class="fas fa-file-excel"></i> Excel',
-            className: 'btn btn-success'
-          },
-          {
-            extend: 'pdfHtml5',
-            text: '<i class="fas fa-file-pdf"></i> PDF',
-            className: 'btn btn-danger'
-          }
-        ]
-      },
-    },
+
     language: {
       url: "./IdiomaEspañol.json"
     },
@@ -556,7 +536,7 @@ $(function () {
           $("#carnet").removeClass("ignore-validation");
           $("#disca").prop("checked", true);
         }
-
+      
       } else {
         console.error('Error al obtener datos personales o la estructura de la respuesta es incorrecta');
       }
