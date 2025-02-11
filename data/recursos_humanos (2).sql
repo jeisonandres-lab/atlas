@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 02-02-2025 a las 20:21:00
+-- Tiempo de generación: 12-02-2025 a las 00:13:20
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -662,6 +662,8 @@ CREATE TABLE `datosempleados` (
   `idGrp` int(11) DEFAULT NULL,
   `telefono` varchar(12) NOT NULL,
   `telOficina` varchar(12) DEFAULT NULL,
+  `fechaING` varchar(15) DEFAULT NULL,
+  `estadoEmpleado` varchar(100) DEFAULT NULL,
   `activo` int(1) NOT NULL,
   `fecha` varchar(10) NOT NULL,
   `hora` varchar(20) NOT NULL
@@ -671,11 +673,11 @@ CREATE TABLE `datosempleados` (
 -- Volcado de datos para la tabla `datosempleados`
 --
 
-INSERT INTO `datosempleados` (`id_empleados`, `idPersonal`, `idEstatus`, `idCargo`, `idDependencia`, `idDepartamento`, `nivelAcademico`, `idGrp`, `telefono`, `telOficina`, `activo`, `fecha`, `hora`) VALUES
-(1, 1, 2, 8, 11, 1, 'Maestria', 1, ' 04128977094', '0243', 1, '2025-01-23', '08:57:18'),
-(57, 111, 10, 4, 12, 1, 'Ingeniero', NULL, '21321233121', NULL, 0, '2024-12-06', '06:39:15'),
-(73, 149, 1, 1, 40, 1, 'Bachiller', NULL, '04243406780', NULL, 1, '2025-01-16', '00:58:02'),
-(77, 153, 3, 2, 5, 1, 'Pregrado', NULL, '0412-8977095', NULL, 1, '2025-01-20', '12:07:56');
+INSERT INTO `datosempleados` (`id_empleados`, `idPersonal`, `idEstatus`, `idCargo`, `idDependencia`, `idDepartamento`, `nivelAcademico`, `idGrp`, `telefono`, `telOficina`, `fechaING`, `estadoEmpleado`, `activo`, `fecha`, `hora`) VALUES
+(1, 1, 2, 8, 11, 1, 'Maestria', 1, ' 04128977094', '0243', '2025-01-20', 'Jubilado', 1, '2025-01-23', '08:57:18'),
+(57, 111, 10, 4, 12, 1, 'Ingeniero', NULL, '21321233121', NULL, NULL, NULL, 0, '2024-12-06', '06:39:15'),
+(73, 149, 1, 1, 40, 1, 'Bachiller', NULL, '04243406780', NULL, NULL, NULL, 1, '2025-01-16', '00:58:02'),
+(77, 153, 3, 2, 5, 1, 'Pregrado', NULL, '0412-8977095', NULL, NULL, NULL, 1, '2025-01-20', '12:07:56');
 
 -- --------------------------------------------------------
 
@@ -713,8 +715,8 @@ CREATE TABLE `datosfamilia` (
 INSERT INTO `datosfamilia` (`id_ninos`, `idEmpleado`, `primerNombre`, `segundoNombre`, `primerApellido`, `segundoApellido`, `parentesco`, `cedula`, `codigoCarnet`, `tomo`, `folio`, `edad`, `anoNacimiento`, `mesNacimiento`, `diaNacimiento`, `tallaFranela`, `tallaPantalon`, `activo`, `fecha`, `hora`) VALUES
 (157, 1, 'Pedro', 'Juan', 'Gonzalez', 'Torres', 'Hijo', '7456888', NULL, NULL, NULL, 10, '2018', '04', '01', NULL, NULL, 1, '2025-01-25', '23:25:24'),
 (158, 73, 'Daniel', 'Jose', 'Ramirez', 'Santana', 'Hijo', '12567890', NULL, NULL, NULL, 17, '2010', '02', '12', NULL, NULL, 1, '2025-01-16', '13:13:44'),
-(159, 57, 'Elio', 'Samuel', 'Rodri', 'Torres', 'Hijo', '14234567', NULL, NULL, NULL, 7, '2003', '12', '21', NULL, NULL, 1, '2025-01-16', '14:14:08'),
-(166, 1, 'Eiker', 'Rodrigues', 'Pedro', 'Juan', 'Hija', NULL, '123123', '12', '768', 14, '2010', '07', '16', NULL, NULL, 1, '2025-01-25', '10:23:02');
+(159, 1, 'Elio', 'Samuel', 'Rodri', 'Torres', 'Hijo', '14234567', NULL, NULL, NULL, 7, '2003', '12', '21', NULL, NULL, 1, '2025-01-16', '14:14:08'),
+(166, 57, 'Eiker', 'Rodrigues', 'Pedro', 'Juan', 'Hija', NULL, '123123', '12', '768', 14, '2010', '07', '16', NULL, NULL, 1, '2025-01-25', '10:23:02');
 
 -- --------------------------------------------------------
 
@@ -809,7 +811,32 @@ INSERT INTO `departamento` (`id_departamento`, `departamento`, `codigoDepa`, `ac
 (23, 'Turismo', NULL, 1),
 (24, 'Móviles', NULL, 1),
 (25, 'Ferroviario', NULL, 1),
-(26, 'Penitenciario Luisa Cáceres de Arismendi', NULL, 1);
+(26, 'Penitenciario Luisa Cáceres de Arismendi', NULL, 1),
+(27, 'Planificación', NULL, 1),
+(28, 'Cultura', NULL, 1),
+(29, 'Deporte', NULL, 1),
+(30, 'Prensa', NULL, 1),
+(31, 'Gerencia Regional', NULL, 1),
+(32, 'Asesoría Legal', NULL, 1),
+(33, 'Encadenamiento Productivo', NULL, 1),
+(34, 'División de Informática', NULL, 1),
+(35, 'Servicio y mantenimiento', NULL, 1),
+(36, 'Administración', NULL, 1),
+(37, 'Compras', NULL, 1),
+(38, 'Bienes Nacionales', NULL, 1),
+(39, 'Almacén', NULL, 1),
+(40, 'Talento humano', NULL, 1),
+(41, 'Servicio Médico', NULL, 1),
+(42, 'Formación Profesional', NULL, 1),
+(43, 'Currículo y didáctico', NULL, 1),
+(44, 'Formación Delegada', NULL, 1),
+(45, 'Adiestramiento', NULL, 1),
+(46, 'ANP', NULL, 1),
+(47, 'Liceo INCES Aragua', NULL, 1),
+(48, 'Turismo', NULL, 1),
+(49, 'Móviles', NULL, 1),
+(50, 'Ferroviario', NULL, 1),
+(51, 'Penitenciario Luisa Cáceres de Arismendi', NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -903,46 +930,46 @@ CREATE TABLE `documentacion` (
 --
 
 INSERT INTO `documentacion` (`id_doc`, `idEmpleados`, `idNinos`, `tipoDoc`, `size`, `doc`, `codigoArc`, `fecha`, `hora`, `activo`) VALUES
-(62, 1, 57, 'pdf', '2', 'Bootstrap_4_tutorial-30012937.pdf', 'edae', '2025-01-10', '15:05:01', 1),
-(148, 1, 57, 'png', '2', 'Logo_SICONTS1-3897645.png', 'EdaaT', '2025-01-10', '21:47:44', 0),
-(149, 1, 57, 'png', '2', 'Logo_SICONTS1-.png', 'aeqw45', '2025-01-10', '21:49:42', 0),
-(150, 1, NULL, 'png', '2', 'Logo_SICONTS1-.png', NULL, '2025-01-10', '21:50:10', 0),
-(151, 1, NULL, 'png', '2', 'Logo_SICONTS1-3897645.png', NULL, '2025-01-10', '21:54:40', 0),
-(152, 1, NULL, 'png', '2', 'Captura-3897645.png', NULL, '2025-01-10', '21:54:40', 0),
-(153, 1, NULL, 'png', '2', 'Logo_SICONTS1-3897645.png', NULL, '2025-01-10', '21:57:48', 0),
-(154, 1, NULL, 'png', '2', 'Captura-3897645.png', NULL, '2025-01-10', '21:57:48', 0),
-(155, 1, NULL, 'png', '2', 'Logo_SICONTS1-3897645.png', NULL, '2025-01-10', '22:03:55', 0),
-(156, 1, NULL, 'png', '2', 'Captura-3897645.png', NULL, '2025-01-10', '22:03:55', 0),
-(163, 73, NULL, 'pdf', '342.43 KB', 'CLEMENTE_MENDOZA_COT.44-30197049.pdf', NULL, '2025-01-16', '00:58:02', 0),
-(164, 73, NULL, 'pdf', '141.17 KB', 'clemente_050-30197049.pdf', NULL, '2025-01-16', '00:58:02', 0),
-(165, 73, NULL, 'pdf', '108.95 KB', 'JOSE_COPAS_046-433243212.pdf', NULL, '2025-01-16', '02:00:25', 0),
-(166, 73, NULL, 'pdf', '108.95 KB', 'JOSE_COPAS_046-321313213.pdf', NULL, '2025-01-16', '02:13:44', 0),
-(167, 73, NULL, 'pdf', '108.95 KB', 'JOSE_COPAS_046-321313213.pdf', NULL, '2025-01-16', '02:17:44', 0),
-(168, 73, 144, 'pdf', '141.17 KB', 'clemente_050-12345678.pdf', NULL, '2025-01-16', '02:20:15', 0),
-(171, 1, 156, 'pdf', '108.95 KB', 'JOSE_COPAS_046-3213891.pdf', NULL, '2025-01-16', '03:20:54', 0),
-(172, 1, 157, 'pdf', '141.17 KB', 'clemente_050-7456789.pdf', NULL, '2025-01-16', '11:00:22', 0),
-(173, 1, NULL, 'jpg', '1.96 MB', 'IMG_20240923_120039-30012937.jpg', NULL, '2025-01-16', '11:32:20', 0),
-(174, 1, NULL, 'jpg', '25.96 KB', 'FB_IMG_1725990635603-30012937.jpg', NULL, '2025-01-16', '11:42:47', 0),
-(175, 1, NULL, 'jpg', '35.80 KB', 'Screenshot_20240509_074246_edit_9728005732039-30012937.jpg', NULL, '2025-01-16', '11:42:47', 0),
-(176, 1, NULL, 'jpg', '56.71 KB', 'FB_IMG_1715723057779_(2)-30012937.jpg', NULL, '2025-01-16', '11:48:06', 0),
-(177, 1, NULL, 'jpg', '55.09 KB', 'FB_IMG_1715723057779-30012937.jpg', NULL, '2025-01-16', '11:50:23', 0),
-(178, 1, NULL, 'jpg', '46.80 KB', 'Screenshot_20240509_074334_edit_9752830653349-30012937.jpg', NULL, '2025-01-16', '11:50:23', 0),
-(179, 1, NULL, 'pdf', '41.40 KB', 'rif_jeison-30012937.pdf', NULL, '2025-01-16', '12:00:55', 0),
-(180, 1, NULL, 'pdf', '642.05 KB', 'factura_de_shein_leydi-30012937.pdf', NULL, '2025-01-16', '12:00:55', 0),
-(185, 73, 158, 'pdf', '41.40 KB', 'rif_jeison-12567890.pdf', NULL, '2025-01-16', '13:13:44', 0),
-(186, 57, 159, 'pdf', '67.90 KB', 'BingoElio-14234567.pdf', NULL, '2025-01-16', '14:14:08', 0),
-(189, 77, NULL, 'png', '28.54 KB', 'Captura-30012935.png', NULL, '2025-01-20', '12:07:56', 0),
-(190, 77, NULL, 'png', '2.83 MB', 'Logo_SICONTS1-30012935.png', NULL, '2025-01-20', '12:07:56', 0),
-(191, 1, 160, 'png', '2.83 MB', 'Logo_SICONTS1-21312312.png', NULL, '2025-01-21', '13:15:45', 0),
-(192, 1, 161, 'png', '2.83 MB', 'Logo_SICONTS1-21312312.png', NULL, '2025-01-21', '13:17:55', 0),
-(193, 1, 162, 'png', '411.95 KB', 'folders-123213123.png', NULL, '2025-01-21', '13:19:47', 0),
-(194, 1, NULL, 'jpg', '25.25 KB', '760ae84439a000216ffdf6e64177ad3d_1722410697792_1.webp-30012937.jpg', NULL, '2025-02-23', '01:54:07', 0),
-(195, 1, NULL, 'pdf', '455.24 KB', 'diploma-php-30012937.pdf', NULL, '2025-02-23', '08:57:05', 0),
-(196, 1, NULL, 'pdf', '1.17 MB', 'Documento_escaneado-30012937.pdf', NULL, '2025-02-23', '08:57:18', 1),
-(197, 1, 166, 'png', '26.90 KB', 'Captura-No Cédulado.png', NULL, '2025-02-25', '10:23:02', 1),
-(198, 1, 157, 'jpg', '76.49 KB', 'Captura_de_pantalla_2025-01-23_210055.PNG-7456789.jpg', NULL, '2025-02-25', '20:51:52', 1),
-(199, 1, 157, 'png', '160.25 KB', '2537273db8991e0ee69e742d5c09ca96-7456789.png', NULL, '2025-02-25', '22:02:43', 0),
-(200, 1, 157, 'png', '670.26 KB', 'a1a146615845d22efa1e42e6689edc0f-7456999.png', NULL, '2025-02-25', '22:03:17', 0);
+(62, 1, 57, 'pdf', '500,00', 'Bootstrap_4_tutorial-30012937.pdf', 'edae', '2025-01-10', '15:05:01', 1),
+(148, 1, 57, 'png', '500,00', 'Logo_SICONTS1-3897645.png', 'EdaaT', '2025-01-10', '21:47:44', 0),
+(149, 1, 57, 'png', '500,00', 'Logo_SICONTS1-.png', 'aeqw45', '2025-01-10', '21:49:42', 0),
+(150, 1, NULL, 'png', '500,00', 'Logo_SICONTS1-.png', NULL, '2025-01-10', '21:50:10', 0),
+(151, 1, NULL, 'png', '500,00', 'Logo_SICONTS1-3897645.png', NULL, '2025-01-10', '21:54:40', 0),
+(152, 1, NULL, 'png', '500,00', 'Captura-3897645.png', NULL, '2025-01-10', '21:54:40', 0),
+(153, 1, NULL, 'png', '500,00', 'Logo_SICONTS1-3897645.png', NULL, '2025-01-10', '21:57:48', 0),
+(154, 1, NULL, 'png', '500,00', 'Captura-3897645.png', NULL, '2025-01-10', '21:57:48', 0),
+(155, 1, NULL, 'png', '500,00', 'Logo_SICONTS1-3897645.png', NULL, '2025-01-10', '22:03:55', 0),
+(156, 1, NULL, 'png', '500,00', 'Captura-3897645.png', NULL, '2025-01-10', '22:03:55', 0),
+(163, 73, NULL, 'pdf', '500,00', 'CLEMENTE_MENDOZA_COT.44-30197049.pdf', NULL, '2025-01-16', '00:58:02', 0),
+(164, 73, NULL, 'pdf', '500,00', 'clemente_050-30197049.pdf', NULL, '2025-01-16', '00:58:02', 0),
+(165, 73, NULL, 'pdf', '500,00', 'JOSE_COPAS_046-433243212.pdf', NULL, '2025-01-16', '02:00:25', 0),
+(166, 73, NULL, 'pdf', '500,00', 'JOSE_COPAS_046-321313213.pdf', NULL, '2025-01-16', '02:13:44', 0),
+(167, 73, NULL, 'pdf', '500,00', 'JOSE_COPAS_046-321313213.pdf', NULL, '2025-01-16', '02:17:44', 0),
+(168, 73, 144, 'pdf', '500,00', 'clemente_050-12345678.pdf', NULL, '2025-01-16', '02:20:15', 0),
+(171, 1, 156, 'pdf', '500,00', 'JOSE_COPAS_046-3213891.pdf', NULL, '2025-01-16', '03:20:54', 0),
+(172, 1, 157, 'pdf', '500,00', 'clemente_050-7456789.pdf', NULL, '2025-01-16', '11:00:22', 0),
+(173, 1, NULL, 'jpg', '500,00', 'IMG_20240923_120039-30012937.jpg', NULL, '2025-01-16', '11:32:20', 0),
+(174, 1, NULL, 'jpg', '500,00', 'FB_IMG_1725990635603-30012937.jpg', NULL, '2025-01-16', '11:42:47', 0),
+(175, 1, NULL, 'jpg', '500,00', 'Screenshot_20240509_074246_edit_9728005732039-30012937.jpg', NULL, '2025-01-16', '11:42:47', 0),
+(176, 1, NULL, 'jpg', '500,00', 'FB_IMG_1715723057779_(2)-30012937.jpg', NULL, '2025-01-16', '11:48:06', 0),
+(177, 1, NULL, 'jpg', '500,00', 'FB_IMG_1715723057779-30012937.jpg', NULL, '2025-01-16', '11:50:23', 0),
+(178, 1, NULL, 'jpg', '500,00', 'Screenshot_20240509_074334_edit_9752830653349-30012937.jpg', NULL, '2025-01-16', '11:50:23', 0),
+(179, 1, NULL, 'pdf', '500,00', 'rif_jeison-30012937.pdf', NULL, '2025-01-16', '12:00:55', 0),
+(180, 1, NULL, 'pdf', '500,00', 'factura_de_shein_leydi-30012937.pdf', NULL, '2025-01-16', '12:00:55', 0),
+(185, 73, 158, 'pdf', '500,00', 'rif_jeison-12567890.pdf', NULL, '2025-01-16', '13:13:44', 0),
+(186, 57, 159, 'pdf', '500,00', 'BingoElio-14234567.pdf', NULL, '2025-01-16', '14:14:08', 0),
+(189, 77, NULL, 'png', '500,00', 'Captura-30012935.png', NULL, '2025-01-20', '12:07:56', 0),
+(190, 77, NULL, 'png', '500,00', 'Logo_SICONTS1-30012935.png', NULL, '2025-01-20', '12:07:56', 0),
+(191, 1, 160, 'png', '500,00', 'Logo_SICONTS1-21312312.png', NULL, '2025-01-21', '13:15:45', 0),
+(192, 1, 161, 'png', '500,00', 'Logo_SICONTS1-21312312.png', NULL, '2025-01-21', '13:17:55', 0),
+(193, 1, 162, 'png', '500,00', 'folders-123213123.png', NULL, '2025-01-21', '13:19:47', 0),
+(194, 1, NULL, 'jpg', '500,00', '760ae84439a000216ffdf6e64177ad3d_1722410697792_1.webp-30012937.jpg', NULL, '2025-02-23', '01:54:07', 0),
+(195, 1, NULL, 'pdf', '500,00', 'diploma-php-30012937.pdf', NULL, '2025-02-23', '08:57:05', 0),
+(196, 1, NULL, 'pdf', '500,00', 'Documento_escaneado-30012937.pdf', NULL, '2025-02-23', '08:57:18', 1),
+(197, 1, 166, 'png', '500,00', 'Captura-No Cédulado.png', NULL, '2025-02-25', '10:23:02', 1),
+(198, 1, 157, 'jpg', '500,00', 'Captura_de_pantalla_2025-01-23_210055.PNG-7456789.jpg', NULL, '2025-02-25', '20:51:52', 1),
+(199, 1, 157, 'png', '500,00', '2537273db8991e0ee69e742d5c09ca96-7456789.png', NULL, '2025-02-25', '22:02:43', 0),
+(200, 1, 157, 'png', '500,00', 'a1a146615845d22efa1e42e6689edc0f-7456999.png', NULL, '2025-02-25', '22:03:17', 0);
 
 -- --------------------------------------------------------
 
@@ -1123,10 +1150,10 @@ CREATE TABLE `ingresos` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `medicacmentos`
+-- Estructura de tabla para la tabla `medicamentos`
 --
 
-CREATE TABLE `medicacmentos` (
+CREATE TABLE `medicamentos` (
   `id_medicamentos` int(11) NOT NULL,
   `codigoBarra` varchar(13) NOT NULL,
   `nombre` text NOT NULL,
@@ -2836,6 +2863,7 @@ CREATE TABLE `users` (
   `prioridad` int(2) DEFAULT NULL,
   `pin` int(5) DEFAULT NULL,
   `activo` int(1) DEFAULT NULL,
+  `enUso` int(1) NOT NULL,
   `fotoPérfil` varchar(150) DEFAULT NULL,
   `fecha` varchar(10) DEFAULT NULL,
   `hora` varchar(20) DEFAULT NULL
@@ -2845,9 +2873,9 @@ CREATE TABLE `users` (
 -- Volcado de datos para la tabla `users`
 --
 
-INSERT INTO `users` (`id_user`, `idEmpleado`, `idRol`, `nameUser`, `userPassword`, `permiso`, `prioridad`, `pin`, `activo`, `fotoPérfil`, `fecha`, `hora`) VALUES
-(1, 1, 1, 'Jeison12345', 'ff2c1c5042200d8a7e6802fe3447281a6979e5b49a9c3ca3e9f24c6303486cf493ad4ffb6adac23930e60b17d5a13d19', NULL, NULL, NULL, 1, NULL, NULL, NULL),
-(11, 73, 2, 'Emili123', 'd43d21546739cf0e6ba7f20e703123cd282eaf4a41fc313d851719cee4ab7700790efe72aabc8d520e5e23861319e925', NULL, NULL, NULL, 1, NULL, NULL, NULL);
+INSERT INTO `users` (`id_user`, `idEmpleado`, `idRol`, `nameUser`, `userPassword`, `permiso`, `prioridad`, `pin`, `activo`, `enUso`, `fotoPérfil`, `fecha`, `hora`) VALUES
+(1, 1, 1, 'Jeison12345', 'ff2c1c5042200d8a7e6802fe3447281a6979e5b49a9c3ca3e9f24c6303486cf493ad4ffb6adac23930e60b17d5a13d19', NULL, NULL, NULL, 1, 1, NULL, NULL, NULL),
+(11, 73, 2, 'Emili123', 'd43d21546739cf0e6ba7f20e703123cd282eaf4a41fc313d851719cee4ab7700790efe72aabc8d520e5e23861319e925', NULL, NULL, NULL, 1, 0, NULL, NULL, NULL);
 
 --
 -- Índices para tablas volcadas
@@ -2961,9 +2989,9 @@ ALTER TABLE `historialpsicologico`
   ADD PRIMARY KEY (`id_historialP`);
 
 --
--- Indices de la tabla `medicacmentos`
+-- Indices de la tabla `medicamentos`
 --
-ALTER TABLE `medicacmentos`
+ALTER TABLE `medicamentos`
   ADD PRIMARY KEY (`id_medicamentos`);
 
 --
@@ -3075,7 +3103,7 @@ ALTER TABLE `datospersonales`
 -- AUTO_INCREMENT de la tabla `departamento`
 --
 ALTER TABLE `departamento`
-  MODIFY `id_departamento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id_departamento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
 -- AUTO_INCREMENT de la tabla `documentacion`
@@ -3108,9 +3136,9 @@ ALTER TABLE `historialpsicologico`
   MODIFY `id_historialP` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `medicacmentos`
+-- AUTO_INCREMENT de la tabla `medicamentos`
 --
-ALTER TABLE `medicacmentos`
+ALTER TABLE `medicamentos`
   MODIFY `id_medicamentos` int(11) NOT NULL AUTO_INCREMENT;
 
 --
