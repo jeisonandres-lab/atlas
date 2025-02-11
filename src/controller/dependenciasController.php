@@ -2,18 +2,25 @@
 
 namespace App\Atlas\controller;
 
+use App\Atlas\config\App;
 use App\Atlas\models\dependenciasModel;
 use App\Atlas\models\tablasModel;
 
-class dependenciasController
+date_default_timezone_set("America/Caracas");
+
+
+class dependenciasController extends dependenciasModel
 {
 
     private $dependencia;
     private $tablas;
+    private $app;
+
     public function __construct()
     {
         $this->tablas = new tablasModel();
         $this->dependencia = new dependenciasModel();
+        $this->app = new App();
     }
 
     public function datosDependencia()
@@ -62,5 +69,56 @@ class dependenciasController
         );
         header('Content-Type: application/json');
         echo json_encode($response);
+    }
+
+    public function datosEstado(){
+        $datos_json = [
+            'exito' => false,
+            'messenger' => 'No se pudo obtener los datos de los estados',
+        ];
+
+        $estados = $this->getObtenerEstados();
+        if ($estados) {
+            $datos_json['exito'] = true;
+            $datos_json['messenger'] = 'Datos de los estados obtenidos con exito';
+            $datos_json['data'] = $estados;
+        }
+
+        header('Content-Type: application/json');
+        echo json_encode($datos_json);
+    }
+
+    public function registrarDependencia(string $dependencia, string $codigodepe, string $estado){
+        $dependencia = $this->limpiarCadena($dependencia);
+        $codigodepe = $this->limpiarCadena($codigodepe);
+        $estado = $this->limpiarCadena($estado);
+
+        $datos_json = [
+            'exito' => false,
+            'messenger' => 'No se pudo obtener los datos de los estados',
+        ];
+
+        $datos = [
+            [
+                "campo_nombre" => "dependencia",
+                "campo_marcador" => ":dependencia",
+                "campo_valor" => $dependencia
+            ],
+            [
+                "campo_nombre" => "codigo",
+                "campo_marcador" => ":codigo",
+                "campo_valor" => $codigodepe
+            ],
+            [
+                "campo_nombre" => "idEstado",
+                "campo_marcador" => ":idEstado",
+                "campo_valor" => $estado
+            ]
+        ];
+        $registro = $this->getRegistrarDependencia('dependencia', $datos);
+        if ($registro) {
+            $datos_json['exito'] = true;
+            $datos_json['messenger'] = 'Dependencia registrada con exito';
+        }
     }
 }

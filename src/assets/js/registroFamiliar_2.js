@@ -1322,7 +1322,7 @@ let htmlNotificacion = `
 
 // plantillas HTML
 let cedulaContenido = `
-<div class="col-sm-6 col-md-6" id="contenCedula">
+<div class="col-sm-6 col-md-6 col-xl-4 col-xxl-4" id="contenCedula">
     <div class="form-group" >
       <label for="cedula">Cédula</label>
       <div class="input-group">
@@ -1334,7 +1334,7 @@ let cedulaContenido = `
 `;
 
 let noCedulado = `
-<div class="col-sm-6 col-md-6 mb-3" id="contenTomo">
+<div class="col-sm-6 col-md-6 col-xl-4 col-xxl-4 mb-3" id="contenTomo">
     <div class="form-group" >
       <label for="tomo">Tomo</label>
       <div class="input-group">
@@ -1356,7 +1356,7 @@ let noCedulado = `
 `;
 
 let numeroCernet = `
-<div class="col-sm-6 col-md-6 mb-3" id="contenCarnet">
+<div class="col-sm-6 col-md-6 col-xl-4 col-xxl-4 mb-3" id="contenCarnet">
   <div class="form-group" >
       <label for="cedula">Número de Carnet de Discapacidad</label>
         <div class="input-group">

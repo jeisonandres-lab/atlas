@@ -790,10 +790,10 @@ class personalController extends personalModel
         $conditions = ['e.activo = ?'];
         $conditionParams = ['1'];
 
-        $draw = $_REQUEST['draw'];
-        $start = $_REQUEST['start'];
-        $length = $_REQUEST['length'];
-        $searchValue = $_REQUEST['search']['value'];
+        $draw = $_REQUEST['draw'] ?? '';
+        $start = $_REQUEST['start'] ?? '';
+        $length = $_REQUEST['length'] ?? '';
+        $searchValue = $_REQUEST['search']['value'] ?? '';
 
         // Obtener la cantidad de los datos de la tabla
         $cantidadRegistro = $this->tablas->getCantidadRegistros($tabla, $selectoresCantidad, $conditions, $conditionParams);

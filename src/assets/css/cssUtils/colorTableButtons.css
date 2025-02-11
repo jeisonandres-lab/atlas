@@ -1,10 +1,115 @@
+@import url('colores.css');
 :root{
-    --buttonVerde:#01BDA4;
+    --buttonVerde:#01bd0a;
+    --buttonVerdeHover: #019e08;
     --buttonRojo:#FF0000;
+    --buttonRojoHover: #c71313;
+    --buttonAzul: #1929bb;
+    --buttonAzulHover: #0d1a8b;
+    --buttonAzulClaro: #2980b9 ;
+    --buttonAzulClaroHover: #1020ad;
+    --buttonAmarillo: #FE9001;
+    --buttonAmarilloHover: #f47e00;
 }
 
 
 .buttonVerde{
     background-color: var(--buttonVerde) !important;
-    border: 0px;
+    border: none;
+}
+
+.buttonVerde:hover{
+    background-color: var(--buttonVerdeHover) !important;
+}
+
+.buttonRojo{
+    background-color: var(--buttonRojo) !important;
+    border: none;
+}
+
+.buttonRojo:hover{
+    background-color: var(--buttonRojoHover) !important;
+}
+
+.buttonAzul{
+    background-color: var(--buttonAzul) !important;
+    border: none;
+}
+
+.buttonAzul:hover{
+    background-color: var(--buttonAzulHover) !important;
+}
+
+.buttonAmarillo{
+    background-color: var(--buttonAmarillo) !important;
+    border: none;
+}
+
+.buttonAmarillo:hover{
+    background-color: var(--buttonAmarilloHover) !important;
+}
+
+.buttonAzulClaro{
+    background-color: var(--buttonAzulClaro) !important;
+    border: none;
+}
+
+.buttonAzulClaro:hover{
+    background-color: var(--buttonAzulClaroHover) !important;
+}
+
+.btn-buttons{
+    border: 0px none;
+    background-color: var(--buttonAzul) !important;
+}
+
+.btn-buttons:hover{
+    background-color: var(--buttonAzulHover) !important;
+}
+
+
+.dt-button-collection {
+    /* background: #d31a1a !important; */
+    border: 10px !important;
+    border-radius: 0.25rem !important;
+    box-shadow: none !important;
+    padding: 10px !important;
+}
+.div.dt-buttons div.dropdown-menu .dt-button {
+    border: 10px !important;
+    background: #3fd31a !important;
+}
+
+.dt-button-collection .dt-button {
+    display: block !important;
+    text-align: left !important;
+    background: rgb(255, 255, 255)!important;
+    border: none !important;
+    cursor: pointer !important;
+}
+
+div.dt-button-collection .dt-button-active:after {
+    content: "✔" !important;
+    color: #3fd31a !important;
+    font-size: 1.5em !important;
+}
+
+div.dt-button-collection .dt-button-desactive:after {
+    content: "X" !important;
+    color: var(--buttonRojo) !important;
+    font-size: 1.5em !important;
+    position: absolute;
+    top: 50%;
+    margin-top: -10px;
+    right: 1em;
+    display: inline-block;
+}
+.dt-button-collection .dt-button:hover {
+    background-color: #f8f9fa !important;
+    /* color: var(--buttonRojo) !important; */
+}
+
+/* Estilo para desenfocar el fondo */
+.blur-background {
+    filter: none !important;
 }

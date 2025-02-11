@@ -336,3 +336,63 @@ body main .content {
    display: none !important;
   }
 }
+
+
+/* menus desplegable de de busqueda */
+
+
+
+
+.menu-desplegable {
+  position: absolute;
+  /* Para que se posicione debajo del buscador */
+  top: 40px;
+  /* Ajusta la distancia del menú al buscador */
+  left: 0;
+  width: 200px;
+  /* Ancho del menú */
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+  z-index: 10;
+  /* Para que el menú se muestre sobre otros elementos */
+  display: none;
+  /* Ocultar el menú inicialmente */
+}
+
+.menu-desplegable ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.menu-desplegable li {
+  padding: 8px;
+  cursor: pointer;
+}
+
+.menu-desplegable li:hover {
+  background-color: #f0f0f0;
+}
+
+.subtitulo {
+  font-size: 0.8em;
+  color: #888;
+  display: block; /* Convierte el subtítulo en un bloque */
+  margin-left: 0; /* Elimina el margen a la izquierda */
+  margin-top: 5px; /* Añade un pequeño margen en la parte superior */
+}
+
+#resultadosBusqueda {
+  position: absolute; /* Para posicionar el menú */
+  top: 100%; /* Colocar el menú debajo del contenedor */
+  left: 0; /* Alinear el menú con el borde izquierdo del contenedor */
+  width: 100%; /* Ocupar todo el ancho del contenedor */
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+  z-index: 10; /* Para que el menú se muestre sobre otros elementos */
+  display: none; /* Ocultar el menú inicialmente */
+}

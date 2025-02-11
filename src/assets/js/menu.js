@@ -7,6 +7,78 @@ const darkLight = document.querySelector("#darkLight");
 const sidebar = document.querySelector(".sidebar");
 const submenuItems = document.querySelectorAll(".submenu_item");
 const cerrarSession = document.querySelector("#cerrarSession");
+
+
+const buscador = document.getElementById('buscador');
+const resultadosBusqueda = document.getElementById('resultadosBusqueda');
+
+buscador.addEventListener('input', () => {
+  const textoBusqueda = buscador.value.toLowerCase();
+  const elementosMenuItems = document.querySelectorAll('.menu_items');
+  const resultados = [];
+
+  // Verificar si el campo de búsqueda está vacío
+  if (textoBusqueda.trim() === '') {
+    ocultarResultados(); // Ocultar si está vacío
+    return; // Salir de la función
+  }
+
+  elementosMenuItems.forEach(elementoMenuItem => {
+    const menuTitleElement = elementoMenuItem.querySelector('.menu_title');
+    if (menuTitleElement) {
+      const tituloApartado = window.getComputedStyle(menuTitleElement, '::before').content.replace(/"/g, '');
+      const elementosNavLink = elementoMenuItem.querySelectorAll('.navlink');
+
+      elementosNavLink.forEach(elementoNavLink => {
+        const textoElemento = elementoNavLink.textContent.toLowerCase();
+
+        if (textoElemento.includes(textoBusqueda)) {
+          // Buscar el href en el elemento más cercano con la clase 'item'
+          const itemElement = elementoNavLink.closest('.item');
+          let href = '';
+          if (itemElement) {
+            const linkElement = itemElement.querySelector('a');
+            if (linkElement) {
+              href = linkElement.getAttribute('href');
+            }
+          }
+
+          resultados.push({
+            texto: tituloApartado,
+            titulo: elementoNavLink.textContent,
+            href: href
+          });
+        }
+      });
+    }
+  });
+
+  if (resultados.length > 0) {
+    mostrarResultados(resultados);
+  } else {
+    ocultarResultados();
+  }
+});
+
+function mostrarResultados(resultados) {
+  const listaResultados = document.createElement('ul');
+  resultados.forEach(resultado => {
+    const itemResultado = document.createElement('li');
+    itemResultado.innerHTML = `<a href="${resultado.href}"><strong>${resultado.texto}</strong> <span class="subtitulo">${resultado.titulo}</span></a>`;
+    listaResultados.appendChild(itemResultado);
+  });
+
+  resultadosBusqueda.innerHTML = '';
+  resultadosBusqueda.appendChild(listaResultados);
+  resultadosBusqueda.style.display = 'block';
+}
+
+function ocultarResultados() {
+  resultadosBusqueda.style.display = 'none';
+}
+
+
+
 sidebar.addEventListener("mouseenter", () => {
   if (sidebar.classList.contains("hoverable")) {
     sidebar.classList.remove("close");

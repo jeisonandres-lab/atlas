@@ -11,5 +11,7 @@
             "email": "jeisonbalduz12@gmail.com"
         }
     ],
-    "require": {}
+    "require": {
+        "dompdf/dompdf": "^3.1"
+    }
 }

@@ -258,17 +258,17 @@ use App\Atlas\config\App;
                         </div>
                     </div>
                     <div class="col">
-                        <div class="bg-white p-3">
-                            <canvas id="scoreChart2"  width="400" height="400">
+                        <div class="bg-white p-3" style="height: 100%;">
+                            <canvas id="scoreChart2" >
                             </canvas>
                         </div>
                     </div>
                 </div>
             </div>
             <!-- ARCHIVOS SUBIDOS -->
-            <div class="container-fluid ">
+            <div class="container-fluid px-2">
                 <!-- ESTADISTICAS -->
-                <div class="bg-white">
+                <div class="bg-white px-2">
                     <di class="char">
                         <canvas id="scoreChart">
                         </canvas>

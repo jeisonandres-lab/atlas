@@ -30,42 +30,39 @@ use App\Atlas\config\App;
             </div>
             <!-- SUB MENU DEL MODULO -->
             <?php require_once App::URL_INC . "utils/menu_registro.php" ?>
-            <div class="container-fluid px-4">
-                <div class="container-fluid card p-2" style="background-color: #f5f5f5; box-shadow: none;">
-                    <div class="">
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <section class="card contenTable" style="background-color: white; box-shadow: none;">
-                                    <div class="contenTablet mitable table-responsive">
-                                        <!-- Boton Switch -->
+            <div class="container-fluid px-3">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <section class="card contenTable" style="background-color: white; box-shadow: 0px 6px 16px 2px rgba(0, 0, 0, 0.05) !important;">
+                            <div class="contenTablet mitable table-responsive">
+                                <!-- Boton Switch
                                         <div class="togglewrapper m-2">
                                             <input type="checkbox" name="" id="dn" class="dn">
                                             <label for="dn" class="toggle bg-primary">
                                                 <span class="toggle_handler"></span>
                                             </label>
-                                        </div>
-                                        <table id="myTable" class="mitable table table-striped table-bordered table-hover nowrap display">
-                                            <thead>
-                                                <tr>
-                                                    <th scope="col" id="cedula" class="bg-primary">Cédula</th>
-                                                    <th scope="col" class="bg-primary">Nombre</th>
-                                                    <th scope="col" class="bg-primary">Estatus</th>
-                                                    <th scope="col" class="bg-primary">Dependencia</th>
-                                                    <th scope="col" class="bg-primary">Cargo</th>
-                                                    <th scope="col" class="bg-primary">Departamento</th>
-                                                    <th scope="col" class="bg-primary">Acciones</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <div style="background-color:#FE9001;" class="barra_naranja"></div>
-                                </section>
+                                        </div> -->
+                                <table id="myTable" class="mitable table table-striped table-bordered table-hover nowrap display">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col" id="cedula" class="bg-primary">Cédula</th>
+                                            <th scope="col" class="bg-primary">Nombre</th>
+                                            <th scope="col" class="bg-primary">Estatus</th>
+                                            <th scope="col" class="bg-primary">Dependencia</th>
+                                            <th scope="col" class="bg-primary">Cargo</th>
+                                            <th scope="col" class="bg-primary">Departamento</th>
+                                            <th scope="col" class="bg-primary">Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
                             </div>
-                        </div>
+                            <div style="background-color:#FE9001;" class="barra_naranja"></div>
+                        </section>
                     </div>
                 </div>
+
             </div>
         </main>
         <?php require_once App::URL_INC . "/footer.php"; ?>

@@ -35,18 +35,18 @@
                         </div>
                     </div>
                     <div class="d-flex justify-content-center align-items-center flex-column mt-5">
-                        <form class="formularioEnviar" method="POST" action="./src/ajax/userAjax.php" autocapitalize="on">
+                        <form class="formularioEnviar" method="POST" action="./src/ajax/userAjax.php" >
                             <div class="inicioSesion container-fluid d-flex justify-content-center mt-2 ">
                                 <h4 class=" text-muted">INICIO DE SESION</h4>
                             </div>
                             <div class="mb-3 mt-3">
                                 <div class="input-group mb-3 ">
                                     <span class="input-group-text" style="height: 40px; width: 40px;"><i class="user fas fa-user"></i></span>
-                                    <input type="text" name="usuario" id="usuario" class="form-control input_user px-3" value="" placeholder="Usuario">
+                                    <input type="text" name="usuario" id="usuario" class="form-control input_user px-3" value="" placeholder="Usuario" autocomplete="username">
                                 </div>
                                 <div class="input-group">
                                     <span class="input-group-text" id="candado" style="height: 40px; width: 40px;"><i class="password fa-solid fa-lock "></i></span>
-                                    <input type="password" name="password" id="password" class="form-control input_pass px-3" value="" placeholder="Contraseña">
+                                    <input type="password" name="password" id="password" class="form-control input_pass px-3" value="" placeholder="Contraseña" autocomplete="current-password">
                                 </div>
                             </div>
                             <div class="d-flex justify-content-center mt-3 mb-2 login_container">

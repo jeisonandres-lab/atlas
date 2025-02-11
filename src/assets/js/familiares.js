@@ -411,7 +411,7 @@ $(function () {
 // plantillas HTML
 let cedulaContenido =
   `
-<div class="col-sm-6 col-md-6" id="contenCedula">
+<div class="col-sm-6 col-md-6 col-xl-4 col-xxl-4" id="contenCedula">
     <div class="form-group" >
       <label for="cedula">Cédula</label>
       <div class="input-group">
@@ -424,7 +424,7 @@ let cedulaContenido =
 
 let noCedulado =
   `
-<div class="col-sm-6 col-md-6 mb-3" id="contenTomo">
+<div class="col-sm-6 col-md-6 col-xl-4 col-xxl-4 mb-3" id="contenTomo">
     <div class="form-group" >
       <label for="tomo">Tomo</label>
       <div class="input-group">
@@ -434,7 +434,7 @@ let noCedulado =
   </div>
 </div>
 
-<div class="col-sm-6 col-md-6 mb-3" id="contenFolio">
+<div class="col-sm-6 col-md-6 col-xl-4 col-xxl-4 mb-3" id="contenFolio">
     <div class="form-group" >
       <label for="folio">Folio</label>
       <div class="input-group">
@@ -446,7 +446,7 @@ let noCedulado =
 `;
 
 let numeroCernet = `
-<div class="col-sm-6 col-md-6 mb-3" id="contenCarnet">
+<div class="col-sm-6 col-md-6 col-xl-4 col-xxl-4 mb-3" id="contenCarnet">
   <div class="form-group" >
       <label for="cedula">Número de Carnet de Discapacidad</label>
         <div class="input-group">
@@ -456,7 +456,7 @@ let numeroCernet = `
   </div>
 </div>
 
-<div class="col-sm-12 mb-2" id="contentPartida">
+<div class="col-sm-12 col-xl-12 col-xxl-12 mb-2" id="contentPartida">
   <div class="form-group">
       <label for="correo">Partida De Discapacidad</label>
       <div class="input-group">
@@ -468,7 +468,7 @@ let numeroCernet = `
 `;
 
 let partidaNacimiento = `
-<div class="col-sm-12 mb-2 mt-3" id="contenDoc">
+<div class="col-sm-12 col-xl-12 col-xxl-12 mb-2 mt-3" id="contenDoc">
   <div class="form-group">
     <label for="correo">Partida De Nacimiento</label>
     <div class="input-group">

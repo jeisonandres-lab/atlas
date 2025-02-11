@@ -1,5 +1,5 @@
 import { alertaNormalmix, AlertSW2, aletaCheck } from "./ajax/alerts.js";
-import { enviarFormulario, obtenerDatos } from "./ajax/formularioAjax.js";
+import { descargarArchivo, enviarFormulario} from "./ajax/formularioAjax.js";
 import {
   colocarMeses,
   colocarYear,
@@ -73,118 +73,198 @@ $(function () {
   const cargando = document.getElementById('cargando');
   var boton = $('#aceptarFamilia');
 
-  let table = new DataTable('#myTable', {
-    responsive: true,
-    ajax: {
-      url: "./src/ajax/registroPersonal.php?modulo_personal=obtenerPersonal",
-      type: "POST",
-      dataSrc: function (json) {
-        // Verificar la estructura de los datos devueltos
-        if (json.data) {
-          return json.data; // Acceder al array de datos dentro de 'data'
-        } else {
-          console.error('Estructura de datos incorrecta:', json);
-          return [];
-        }
-      }
-    },
-    processing: true,
-    serverSide: true,
-    info: false,
-    order: [[0, 'desc']],
-    paging: true,
-    lengthMenu: [2, 10, 25],
-    columnDefs: [
-      {
-        targets: 0,
-        width: "7%",
-        // render: function(data, type, row) {
-        //             // Aquí puedes personalizar el contenido de la celda
-        //             return '<div style="width: 20px; height: 20px; background-color: ' + getColor(row) + ';"></div>';
-        //         }
-      },
-      {
-        targets: 2,
-        render: function (data, type, row) {
-          let dataEstatus = data;
-          const dataEstatusMap = {
-            1: 'Contradado',
-            2: 'Cooperativa',
-            3: 'Coral',
-            4: 'Empleado',
-            5: 'Estudiante',
-            6: 'Jubilado',
-            7: 'Maestro',
-            8: 'Obrero',
-            9: 'Pasante',
-            10: 'Tributo',
-            11: 'Vigilancia'
-          };
-          if (dataEstatusMap[dataEstatus]) {
-            dataEstatus = `<small class='d-inline-flex px-2 py-1 fw-semibold text-warning-emphasis bg-warning-subtle border border-warning-subtle rounded-2'>${dataEstatusMap[dataEstatus]}</small>`;
+  window.addEventListener('load', function () {
+    // Initialize your data table here
+    let table = new DataTable('#myTable', {
+      responsive: true,
+      ajax: {
+        url: "./src/ajax/registroPersonal.php?modulo_personal=obtenerPersonal",
+        type: "POST",
+        dataSrc: function (json) {
+          // Verificar la estructura de los datos devueltos
+          if (json.data) {
+            return json.data; // Acceder al array de datos dentro de 'data'
+          } else {
+            console.error('Estructura de datos incorrecta:', json);
+            return [];
           }
-          return dataEstatus
         }
       },
-      {
-        targets: 4,
-        render: function (data, type, row) {
-          let dataTexto = data;
-          const dataTextoMap = {
-            1: "Auxiliar I",
-            2: "Auxiliar II",
-            3: "Auxiliar III",
-            4: "Analista I",
-            5: "Analista II",
-            6: "Analista III",
-            7: "Especialista I",
-            8: "Especialista II",
-            9: "Especialista III"
-          };
-
-          if (dataTextoMap[dataTexto]) {
-            dataTexto = `<small class='d-inline-flex px-2 py-1 fw-semibold text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-2'>${dataTextoMap[dataTexto]}</small>`;
-          }
-          return dataTexto
-
-        }
-      },
+      processing: true,
+      serverSide: true,
+      info: false,
+      order: [[0, 'desc']],
+      paging: true,
+      lengthMenu: [
+        [ 2, 15, 30, -1 ], // Valores
+        [ '2', '15', '30', 'Todos' ] // Etiquetas
     ],
-    layout: {
-      topStart: {
-        pageLength: 10,
-        buttons: [
-          {
-            extend: 'copy',
-            text: '<i class="fas fa-copy"></i> Copiar',
-            className: 'btn btn-secondary',
-            
-          },
-          {
-            extend: 'excelHtml5',
-            text: '<i class="fas fa-file-excel"></i> Excel',
-            className: 'btn  buttonVerde'
-          },
-          {
-            extend: 'pdfHtml5',
-            text: '<i class="fas fa-file-pdf"></i> PDF',
-            className: 'btn btn-danger'
+      columnDefs: [
+        {
+          targets: 0,
+          width: "7%",
+          // render: function(data, type, row) {
+          //             // Aquí puedes personalizar el contenido de la celda
+          //             return '<div style="width: 20px; height: 20px; background-color: ' + getColor(row) + ';"></div>';
+          //         }
+        },
+        {
+          targets: 2,
+          render: function (data, type, row) {
+            let dataEstatus = data;
+            const dataEstatusMap = {
+              1: 'Contradado',
+              2: 'Cooperativa',
+              3: 'Coral',
+              4: 'Empleado',
+              5: 'Estudiante',
+              6: 'Jubilado',
+              7: 'Maestro',
+              8: 'Obrero',
+              9: 'Pasante',
+              10: 'Tributo',
+              11: 'Vigilancia'
+            };
+            if (dataEstatusMap[dataEstatus]) {
+              dataEstatus = `<small class='d-inline-flex px-2 py-1 fw-semibold text-warning-emphasis bg-warning-subtle border border-warning-subtle rounded-2'>${dataEstatusMap[dataEstatus]}</small>`;
+            }
+            return dataEstatus
           }
-        ],
+        },
+        {
+          targets: 4,
+          render: function (data, type, row) {
+            let dataTexto = data;
+            const dataTextoMap = {
+              1: "Auxiliar I",
+              2: "Auxiliar II",
+              3: "Auxiliar III",
+              4: "Analista I",
+              5: "Analista II",
+              6: "Analista III",
+              7: "Especialista I",
+              8: "Especialista II",
+              9: "Especialista III"
+            };
+
+            if (dataTextoMap[dataTexto]) {
+              dataTexto = `<small class='d-inline-flex px-2 py-1 fw-semibold text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-2'>${dataTextoMap[dataTexto]}</small>`;
+            }
+            return dataTexto
+
+          }
+        },
+      ],
+      layout: {
+        topStart: {
+          pageLength: 10,
+          buttons: [
+            {
+              extend: 'copy',
+              text: '<i class="fa-solid fa-copy"></i>',
+              className: 'copiar btn buttonAmarillo p-2 pe-3 ps-3',
+              titleAttr: 'Copiar a portapapeles',
+              exportOptions: {
+                columns: ':not(:last)',
+                modifier: {
+                  page: 'all'
+                }
+              },
+
+            },
+            {
+              extend: 'excel',
+              text: '<i class="fa-regular fa-table"></i>',
+              className: 'excel btn buttonVerde p-2 pe-3 ps-3',
+              titleAttr: 'Exportar a Excel',
+              exportOptions: {
+                columns: ':not(:last)',
+                modifier: {
+                  search: 'none', // Ignorar el filtro de búsqueda
+                  order: 'applied', // Mantener el orden aplicado
+                  page: 'all' // Exportar todas las páginas
+                }
+              },
+              excelStyles: [
+                // Add an excelStyles definition
+                {
+                  template: 'cyan_medium', // Apply the 'green_medium' template
+                },
+                {
+                  cells: 'sh', // Use Smart References (s) to target the header row (h)
+                  style: {
+                    // Add a style block
+                    font: {
+                      // Style the font
+                      size: 12, // Size 14
+                      b: true, // Turn off the default bolding of the header
+                    },
+                    fill: {
+                      // Style the fill/background
+                      pattern: {
+                        // Add a pattern (default type is solid)
+                        color: '1929bb', // Define the color
+                      },
+                    },
+                    alignment: {
+                      horizontal: 'center', // Alineación centrada
+                    },
+
+                  },
+                },
+                {
+                  cells: 1, // Use Smart References (s) to target the header row (h)
+                  style: {
+
+                    fill: {
+                      // Style the fill/background
+                      pattern: {
+                        // Add a pattern (default type is solid)
+                        color: '1929bb', // Define the color
+                      },
+                    },
+                    font: {
+                      size: 14, // Tamaño de fuente
+                      b: true, // Texto en negrita
+                      color: 'FFFFFF', // Texto blanco
+                    },
+                  },
+                },
+              ]
+            },
+            {
+              extend: 'pdf', // Extensión para generar PDF
+              text: '<i class="bi bi-file-earmark-pdf-fill"></i>', // Texto del botón (con icono)
+              className: 'pdf btn buttonRojo p-2 pe-3 ps-3', // Clases CSS para el botón
+              titleAttr: 'Exportar a PDF', // Título al pasar el mouse por encima
+              action: function (e, dt, node, config) {
+                descargarArchivo('./src/ajax/tablasDescargar.php?accion=impirimirEmpleados', 'DatosEmpleado.pdf');
+              }
+            },
+            {
+              extend: 'colvis',
+              text: '<i class="fa-solid fa-eye me-2"></i>',
+              className: 'colvis btn buttonAzulClaro p-2 pe-3 ps-3',
+              titleAttr: 'Mostrar/Ocultar Columnas',
+              columns: ':not(:last)',
+            }
+          ],
+        },
       },
-    },
-    language: {
-      url: "./IdiomaEspañol.json"
-    },
-    columns: [
-      { "data": 5 }, // Cédula
-      { "data": 0 }, // Nombre Y Apellido
-      { "data": 1 }, // Estatus
-      { "data": 3 }, // Dependencia
-      { "data": 2 }, // Cargo
-      { "data": 4 }, // Departamento
-      { "data": 6 }  // Acciones O Botones
-    ]
+      language: {
+        url: "./IdiomaEspañol.json"
+      },
+      columns: [
+        { "data": 5 }, // Cédula
+        { "data": 0 }, // Nombre Y Apellido
+        { "data": 1 }, // Estatus
+        { "data": 3 }, // Dependencia
+        { "data": 2 }, // Cargo
+        { "data": 4 }, // Departamento
+        { "data": 6 }  // Acciones O Botones
+      ]
+    });
+
   });
 
   function limpiarDatos() {
@@ -1027,6 +1107,8 @@ $(function () {
 
   function partidaNacimeinto() {
   }
+
+
   // Eliminar Partida de Nacimiento familiar
   $(document).on("click", "#cargaPartiEliminar", function () {
     const $this = $(this);
@@ -1211,6 +1293,19 @@ $(function () {
     $this.attr("id", "cargaContrato");
   });
 
+  // Delegación de eventos para botones creados dinámicamente
+  $(document).on('click', '.dt-button', function(event) {
+    event.preventDefault(); // Evita el comportamiento predeterminado del enlace
+
+    if ($(this).hasClass('dt-button-active')) {
+      // Si tiene la clase dt-button-active
+      $(this).removeClass('dt-button-desactive'); // Elimina la clase dt-button-desactive
+    } else {
+      // Si no tiene la clase dt-button-active
+      $(this).addClass('dt-button-desactive'); // Añade la clase dt-button-desactive
+    }
+  });
+
   // Función para buscar datos
   function buscarDatos() {
     const valor = $("#cedula_trabajador_familiar").val();
@@ -1313,6 +1408,7 @@ $(function () {
   habilitarBoton(formularioActualizar, botonActualizar);
   // Inicializar el estado de los botones al cargar la página
   habilitarBoton(forActualizarFamiliar, aceptar_familia);
+
 
 });
 

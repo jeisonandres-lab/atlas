@@ -107,12 +107,30 @@ class personalModel extends Conexion
         return $sql;
     }
 
+    private function datosFamiliarEmpleado($parametro)
+    {
+        $sql = $this->ejecutarConsulta("SELECT df . *, dp . cedula AS cedulaEmpleado,
+        df . primerNombre AS primerNombreFamiliar, df . primerApellido AS primerApellidoFamiliar,
+        df . segundoNombre AS segundoNombreFamiliar, df . segundoApellido AS segundoApellidoFamiliar,
+        df . cedula AS cedulaFamiliar, df . diaNacimiento AS diaNacimientoFamiliar, df . mesNacimiento AS mesNacimientoFamiliar,
+        df . anoNacimiento AS anoNacimientoFamiliar,
+        dp.primerNombre AS primerNombreEmpleado,
+        dp.primerApellido AS primerApellidoEmpleado
+        FROM datosfamilia df
+        INNER JOIN datosempleados de
+        ON de.id_empleados = df.idEmpleado
+        INNER JOIN datospersonales dp ON dp.id_personal = de.idPersonal
+        WHERE df.idEmpleado = ? ",  $parametro);
+
+        return $sql;
+    }
+
     private function actualuzarDatos($tabla, $datos, $condicion)
     {
         $sql = $this->actualizarDatos($tabla, $datos, $condicion);
         return $sql;
     }
-    
+
     public function actualizarDatosFamiliar()
     {
         $sql = $this->ejecutarConsulta("");
@@ -174,6 +192,19 @@ class personalModel extends Conexion
         } else {
             $sql = true;
         }
+        return $sql;
+    }
+
+    // Total de datos de empleado
+    public function totalDatosEmpleado(){
+        $sql = $this->ejecutarConsulta("SELECT *
+        FROM datosempleados de
+        INNER JOIN estatus e ON de.idEstatus = e.id_estatus
+        INNER JOIN cargo c ON de.idCargo = c.id_cargo
+        INNER JOIN dependencia depe ON de.idDependencia = depe.id_dependencia
+        INNER JOIN departamento d ON de.idDepartamento = d.id_departamento
+        INNER JOIN datospersonales dp ON dp.id_personal = de.idPersonal");
+
         return $sql;
     }
 
@@ -240,5 +271,14 @@ class personalModel extends Conexion
     public function getActualizar($tabla, $datos, $condicion)
     {
         return $this->actualuzarDatos($tabla, $datos, $condicion);
+    }
+
+    public function getDatosFamiliarEmpleado($parametro)
+    {
+        return $this->datosFamiliarEmpleado($parametro);
+    }
+
+    public function getTotalDatosEmpleado(){
+        return $this->totalDatosEmpleado();
     }
 }

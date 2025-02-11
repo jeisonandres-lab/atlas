@@ -1,7 +1,8 @@
 
-import {obtenerDatosJQuery} from "./ajax/formularioAjax.js";
+import { obtenerDatosJQuery } from "./ajax/formularioAjax.js";
 // Dependencias: jQuery, DataTables, Chart.js
 $(function () {
+    
     let table = new DataTable('#tableUsers', {
         responsive: true,
         ajax: {
@@ -100,34 +101,33 @@ $(function () {
         ]
     });
 
-    
     let urlsCard = [
         "src/ajax/totalDate.php?modulo_Datos=totalDatos"
-      ];
+    ];
 
-      let requests = urlsCard.map((url, index) => {
+    let requests = urlsCard.map((url, index) => {
         // Suponiendo que quieres pasar `options` solo a la primera solicitud
-          return obtenerDatosJQuery(url);
-      });
+        return obtenerDatosJQuery(url);
+    });
     async function obtenerDatosCards() {
         $.when(...requests).done((totalPersonal) => {
-              if (totalPersonal.exito) {
+            if (totalPersonal.exito) {
                 console.log(totalPersonal);
                 $('#totalPersonal').text(totalPersonal.empleado[0].totalEmpleados);
-                $('#totalArchivos').text(totalPersonal.archivos[0].totalArchivos);totalMedicamentos
-                $('#atencionMedica').text(totalPersonal.atencionMedica[0].atencionMedica);personalAusencia
+                $('#totalArchivos').text(totalPersonal.archivos[0].totalArchivos); totalMedicamentos
+                $('#atencionMedica').text(totalPersonal.atencionMedica[0].atencionMedica); personalAusencia
                 $('#totalMedicamentos').text(totalPersonal.medicamentos[0].totalMedicamentos);
                 // $('#personalVacaciones').text(totalPersonal.vacaciones[0].totalVacaciones);
                 $('#personalAusencia').text(totalPersonal.ausencia[0].totalPermisos);
                 // PORCENTAJES DE DATOS
                 $('#porcentajeArchivos').text(totalPersonal.porcentajeArchivos[0].porcentaje_documentos_subidos + '%');
-              } else {
+            } else {
                 console.error('Error al obtener dependencias o la estructura de la respuesta es incorrecta');
-              }
+            }
 
-            }).fail((jqXHR, textStatus, errorThrown) => {
-              console.error('Error al obtener los datos:', textStatus, errorThrown);
-            });
+        }).fail((jqXHR, textStatus, errorThrown) => {
+            console.error('Error al obtener los datos:', textStatus, errorThrown);
+        });
     }
 
     obtenerDatosCards();
@@ -135,13 +135,13 @@ $(function () {
     function obtenerFechaYDia(parametro) {
         const diasSemana = ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'];
         const meses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
-    
+
         const hoy = new Date();
         const diaSemana = diasSemana[hoy.getDay()];
         const dia = hoy.getDate();
         const mes = hoy.getMonth() + 1; // Los meses en JavaScript son 0-indexados
         const año = hoy.getFullYear();
-    
+
         if (parametro === 'fecha') {
             return `${dia} de ${meses[mes - 1]} de ${año}`;
         } else if (parametro === 'dia') {
@@ -154,122 +154,129 @@ $(function () {
             return 'Parámetro no válido. Usa "fecha", "dia" o "fechaISO".';
         }
     }
-    
+
     var fecha = obtenerFechaYDia('fecha');
     var dia = obtenerFechaYDia('dia');
     var fechaISO = obtenerFechaYDia('fechaISO');
-    
+
     $('#fecha').text(fecha);
-    
+
 })
+document.addEventListener('DOMContentLoaded', async function () {
+    async function fetchData(url) {
+        try {
+            const response = await fetch(url);
+            return await response.json();
+        } catch (error) {
+            console.error('Error fetching data:', error);
+            return null;
+        }
+    }
 
-document.addEventListener('DOMContentLoaded', function () {
-    fetch('src/ajax/totalDate.php?modulo_Datos=totalArchivosDia')
-        .then(response => response.json())
-        .then(data => {
-            if (data.exito) {
-                console.table(data);
-                const chartData = {
-                    labels: data.values, // Asegúrate de que los labels sean correctos
-                    datasets: [{
-                        label: 'My First Dataset',
-                        data: data.labels, // Asegúrate de que los datos sean correctos
-                        backgroundColor: [
-                            'rgb(255, 99, 132)', // Rojo
-                            'rgb(54, 162, 235)', // Azul
-                            'rgb(255, 205, 86)', // Amarillo
-                            'rgb(75, 192, 192)', // Verde azulado
-                            'rgb(153, 102, 255)', // Morado
-                            'rgb(255, 159, 64)', // Naranja
-                            'rgb(255, 99, 132, 0.5)', // Rojo transparente
-                            'rgb(54, 162, 235, 0.5)', // Azul transparente
-                            'rgb(255, 205, 86, 0.5)', // Amarillo transparente
-                            'rgb(75, 192, 192, 0.5)', // Verde azulado transparente
-                            'rgb(153, 102, 255, 0.5)', // Morado transparente
-                            'rgb(255, 159, 64, 0.5)'  // Naranja transparente
-                          ],
-                        hoverOffset: 4
-                    }]
-                };
+    async function loadChartDia() {
+        const dataDia = await fetchData('src/ajax/totalDate.php?modulo_Datos=totalArchivosDia');
+        if (dataDia && dataDia.exito) {
+            console.table(dataDia);
+            const chartDataDia = {
+                labels: dataDia.values,
+                datasets: [{
+                    label: 'Datos Subidos',
+                    data: dataDia.labels,
+                    backgroundColor: ['rgb(25, 41, 187)', 'rgb(54, 162, 235)'],
+                    with: 20,
+                    hoverOffset: 4
+                }]
+            };
 
-                const config = {
-                    type: 'bar',
-                    data: chartData,
-                    options: {
-                        plugins: {
-                            tooltip: {
-                                callbacks: {
-                                    label: function(context) {
-                                        const originalLabel = data.original_labels[context.dataIndex];
-                                        return `${context.label}: ${originalLabel}`;
-                                    }
+            const configDia = {
+                type: 'bar',
+                data: chartDataDia,
+                options: {
+                    plugins: {
+                        tooltip: {
+                            callbacks: {
+                                label: function (context) {
+                                    const originalLabel = dataDia.original_labels[context.dataIndex];
+                                    return `${context.label}: ${originalLabel}`;
                                 }
                             }
                         }
+                    },
+                    layout: {
+                        padding: 20,
+
+                    },
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
                     }
-                };
 
-                const ctx = document.getElementById('scoreChart').getContext('2d');
-                const scoreChart = new Chart(ctx, config);
-            } else {
-                console.error('Error en los datos:', data.messenger);
-            }
-        })
-        .catch(error => console.error('Error fetching data:', error));
-});
+                }
+            };
 
-document.addEventListener('DOMContentLoaded', function () {
-    fetch('src/ajax/totalDate.php?modulo_Datos=totalArchivosMes')
-        .then(response => response.json())
-        .then(data => {
-            if (data.exito) {
-                console.table(data);
-                const chartData = {
-                    barPercentage: 0.5,
-                    labels: data.values, // Asegúrate de que los labels sean correctos
-                    datasets: [{
-                        label: 'My First Dataset',
-                        data: data.labels, // Asegúrate de que los datos sean correctos
-                        backgroundColor: [
-                            'rgb(255, 99, 132)', // Rojo
-                            'rgb(54, 162, 235)', // Azul
-                            'rgb(255, 205, 86)', // Amarillo
-                            'rgb(75, 192, 192)', // Verde azulado
-                            'rgb(153, 102, 255)', // Morado
-                            'rgb(255, 159, 64)', // Naranja
-                            'rgb(255, 99, 132, 0.5)', // Rojo transparente
-                            'rgb(54, 162, 235, 0.5)', // Azul transparente
-                            'rgb(255, 205, 86, 0.5)', // Amarillo transparente
-                            'rgb(75, 192, 192, 0.5)', // Verde azulado transparente
-                            'rgb(153, 102, 255, 0.5)', // Morado transparente
-                            'rgb(255, 159, 64, 0.5)'  // Naranja transparente
-                          ],
-                        hoverOffset: 4
-                    }]
-                };
+            const ctxDia = document.getElementById('scoreChart').getContext('2d');
+            new Chart(ctxDia, configDia);
+        } else {
+            console.error('Error en los datos del día:', dataDia ? dataDia.messenger : 'No data');
+        }
+    }
 
-                const config = {
-                    type: 'doughnut',
-                    data: chartData,
-                    options: {
-                        plugins: {
-                            tooltip: {
-                                callbacks: {
-                                    label: function(context) {
-                                        const originalLabel = data.original_labels[context.dataIndex];
-                                        return `${context.label}: ${originalLabel}`;
-                                    }
+    async function loadChartMes() {
+        const dataMes = await fetchData('src/ajax/totalDate.php?modulo_Datos=totalArchivosMes');
+        if (dataMes && dataMes.exito) {
+            console.table(dataMes);
+            const chartDataMes = {
+                labels: dataMes.values,
+                datasets: [{
+                    label: 'Cantidad de archivos subidos',
+                    data: dataMes.labels,
+                    backgroundColor: [
+                        'rgb(25, 41, 187)', 'rgb(54, 162, 235)', 'rgb(255, 99, 132)',
+                        'rgb(255, 205, 86)', 'rgb(75, 192, 192)', 'rgb(153, 102, 255)',
+                        'rgb(255, 159, 64)', 'rgb(255, 99, 132, 0.5)', 'rgb(54, 162, 235, 0.5)',
+                        'rgb(255, 205, 86, 0.5)', 'rgb(75, 192, 192, 0.5)', 'rgb(153, 102, 255, 0.5)',
+                        'rgb(255, 159, 64, 0.5)'
+                    ],
+                    hoverOffset: 4
+                }]
+            };
+
+            const configMes = {
+                type: 'doughnut',
+                data: chartDataMes,
+                options: {
+                    plugins: {
+                        tooltip: {
+                            callbacks: {
+                                label: function (context) {
+                                    const originalLabel = dataMes.original_labels[context.dataIndex];
+                                    return `${context.label}: ${originalLabel}`;
                                 }
                             }
                         }
+                    },
+                    scales: {
+                        y: {
+                            // ... opciones de escala ...
+                        },
+                        x: {
+                            barThickness: 120 // Ancho de barra fijo de 50 píxeles
+                        }
                     }
-                };
+                }
+            };
 
-                const ctx = document.getElementById('scoreChart2').getContext('2d');
-                const scoreChart = new Chart(ctx, config);
-            } else {
-                console.error('Error en los datos:', data.messenger);
-            }
-        })
-        .catch(error => console.error('Error fetching data:', error));
+            const ctxMes = document.getElementById('scoreChart2').getContext('2d');
+            new Chart(ctxMes, configMes);
+        } else {
+            console.error('Error en los datos del mes:', dataMes ? dataMes.messenger : 'No data');
+        }
+    }
+
+    // Cargar las gráficas de manera asíncrona
+    loadChartDia();
+    loadChartMes();
 });

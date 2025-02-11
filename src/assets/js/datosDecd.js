@@ -1,12 +1,34 @@
+import { obtenerDatosJQuery, enviarFormulario } from './ajax/formularioAjax.js';
+import { validarNombre, incluirSelec2, validarSelectoresSelec2 } from './ajax/inputs.js';
+
 $(function () {
     const btnDependencia = document.querySelector('#btnAgregarDependencia');
     const btnCargo = document.querySelector('#btnAgregarCargo');
     const btnEstatus = document.querySelector('#btnAgregarEstatus');
     const btnDepartamento = document.querySelector('#btnAgregarDepartamento');
+    // VARIBLES DE MODAL
+    const bodyModal = document.querySelector('.section-body');
+    const titleModal = document.querySelector('.modal-title');
+    const contenButton = document.querySelector('.modal-footer');
+
+    var boton = $('#aceptar');
+
+    let contentRegis;
+
     $('#btnAgregarDependencia').hide();
     $('#btnAgregarCargo').hide();
     $('#btnAgregarEstatus').hide();
     $('#btnAgregarDepartamento').hide();
+
+    validarNombre("#dependencia", ".span_dependencia");
+    incluirSelec2("#estado", ".span_estado");
+    validarSelectoresSelec2("#estado", ".span_estado");
+    validarNombre("#codigo", ".span_codigo");
+
+    validarNombre("#cargo", ".span_cargo");
+    validarNombre("#estatus", ".span_estatus");
+    validarNombre("#departamento", ".span_departamento");
+
     // Configuración base para DataTables
     const baseConfig = {
         responsive: true,
@@ -35,7 +57,7 @@ $(function () {
         // Crear y agregar las nuevas celdas a la fila
         nuevosTextos.forEach(texto => {
             const $celda = $('<th>').text(texto).addClass('bg-primary text-white');
-            console.log(`Añadiendo celda con texto: ${texto}`); // Depuración
+            // console.log(`Añadiendo celda con texto: ${texto}`); // Depuración
             $fila.append($celda);
         });
 
@@ -61,12 +83,12 @@ $(function () {
         // Creamos las nuevas celdas y las agregamos a la fila
         nuevosTextos.forEach(texto => {
             const $celda = $('<th>').text(texto).addClass('bg-primary text-white');
-            console.log(`Añadiendo celda con texto: ${texto}`); // Depuración
+            // console.log(`Añadiendo celda con texto: ${texto}`); // Depuración
             $fila.append($celda);
         });
 
-        console.log($fila.html()); // Depuración: Verificar el contenido de la fila
-        console.log($thead.html()); // Depuración: Verificar el contenido del thead
+        // console.log($fila.html());  Depuración: Verificar el contenido de la fila
+        // console.log($thead.html());  Depuración: Verificar el contenido del thead
         return true;
     }
 
@@ -95,7 +117,7 @@ $(function () {
                     dataSrc: function (json) {
                         // Verificar la estructura de los datos devueltos
                         if (json.data) {
-                            console.log(json.data);
+                            // console.log(json.data);
                             return json.data; // Acceder al array de datos dentro de 'data'
                         } else {
                             console.error('Estructura de datos incorrecta:', json);
@@ -168,7 +190,7 @@ $(function () {
                     dataSrc: function (json) {
                         // Verificar la estructura de los datos devueltos
                         if (json.data) {
-                            console.log(json.data);
+                            // console.log(json.data);
                             return json.data; // Acceder al array de datos dentro de 'data'
                         } else {
                             console.error('Estructura de datos incorrecta:', json);
@@ -232,7 +254,7 @@ $(function () {
                     dataSrc: function (json) {
                         // Verificar la estructura de los datos devueltos
                         if (json.data) {
-                            console.log(json.data);
+                            // console.log(json.data);
                             return json.data; // Acceder al array de datos dentro de 'data'
                         } else {
                             console.error('Estructura de datos incorrecta:', json);
@@ -296,7 +318,7 @@ $(function () {
                     dataSrc: function (json) {
                         // Verificar la estructura de los datos devueltos
                         if (json.data) {
-                            console.log(json.data);
+                            // console.log(json.data);
                             return json.data; // Acceder al array de datos dentro de 'data'
                         } else {
                             console.error('Estructura de datos incorrecta:', json);
@@ -338,4 +360,182 @@ $(function () {
         }
     });
 
+    // Realizar la solicitud asíncrona para obtener los datos de las dependencias
+    btnDependencia.addEventListener('click', async () => {
+        //Abrir Modal
+        $('#modalDependencia').modal('show');
+        $('#dependencia').val('');
+        $('#estado').val('0').trigger('change');
+        $('#codigo').val('');
+
+        $('#dependencia').removeClass('cumplido');
+        $('.span_dependencia').removeClass('cumplido');
+
+        $('#estado').removeClass('cumplido');
+        $('.span_estado').removeClass('cumplido');
+
+        $('#codigo').removeClass('cumplido');
+        $('.span_codigo').removeClass('cumplido_span');
+
+        $('#dependencia').removeClass('error_input');
+        $('.span_dependencia').removeClass('error_span');
+        $('.span_dependencia').removeClass('cumplido_span');
+        $('#estado').removeClass('error_input');
+        $('.span_estado').removeClass('error_span');
+        $('#codigo').removeClass('error_input');
+        $('.span_codigo').removeClass('error_span');
+        $('.select2').removeClass('error_input');
+        $('span_codigo').removeClass('cimplido_span');
+
+
+        const select = document.getElementById('estado');
+        try {
+            const response = await fetch('src/ajax/datosDecd.php?modulo_datos=obtenerEstados');
+            if (!response.ok) {
+                throw new Error('Error en la solicitud');
+            }
+            const data = await response.json();
+            data.data.forEach(item => {
+                const option = document.createElement('option');
+                option.value = item.id_estado;
+                option.text = item.estado;
+                select.appendChild(option);
+            });
+        } catch (error) {
+            console.error('Error al obtener los datos de las dependencias:', error);
+        }
+    });
+
+    btnCargo.addEventListener('click', async () => {
+        //Abrir Modal
+        $('#modalCargo').modal('show');
+        $('#cargo').val('');
+    });
+
+    btnEstatus.addEventListener('click', async () => {
+        //Abrir Modal
+        $('#modalEstatus').modal('show');
+        $('#estatus').val('');
+    });
+
+    btnDepartamento.addEventListener('click', async () => {
+        //Abrir Modal
+        $('#modalDepartamento').modal('show');
+        $('#departamento').val('');
+    });
+
+    //FORMULARIO DE DEPENDENCIA
+    $('.formularioDepen').on('submit', async function (e) {
+        e.preventDefault();
+        function collbackExito(data) {
+            if (data) {
+                if (data.exito) {
+                    console.log(data.messenger);
+                } else {
+                    console.log('si llegaorn datos pero la respuesta fue falsa')
+                }
+            } else {
+                alert('Error al registrar');
+            }
+        }
+        const form = new FormData(this);
+        const data = form;
+        enviarFormulario('./src/ajax/datosDecd.php?modulo_datos=agregarDependencia', data, collbackExito, true);
+    });
+
+    //FORMULARIO DE ESTATUS
+    $('.formularioEstatus').on('submit', function (e) {
+        e.preventDefault();
+        async function collbackExito(data) {
+            if (data.length) {
+                alert ('Se ha registrado correctamente');
+            } else {
+                alert('Error al registrar');
+            }
+        }
+        const form = new FormData(this);
+        const data = form;
+        enviarFormulario('./src/ajax/datosDecd.php?modulo_datos=agregarEstatus', data, collbackExito, true);
+    });
+
+    //FORMULARIO CARGO
+    $('.formularioCargo').on('submit', function (e) {
+        e.preventDefault();
+        async function collbackExito(data) {
+            if (data.length) {
+                alert ('Se ha registrado correctamente');
+            } else {
+                alert('Error al registrar');
+            }
+        }
+        const form = new FormData(this);
+        const data = form;
+        enviarFormulario('./src/ajax/datosDecd.php?modulo_datos=agregarCargo', data, collbackExito, true);
+    });
+
+    //FORMULARIO DEPARTAMENTO
+    $('.formularioDepa').on('submit', function (e) {
+        e.preventDefault();
+        async function collbackExito(data) {
+            if (data.length) {
+                alert ('Se ha registrado correctamente');
+            } else {
+                alert('Error al registrar');
+            }
+        }
+        const form = new FormData(this);
+        const data = form;
+        enviarFormulario('./src/ajax/datosDecd.php?modulo_datos=agregarDepartamento', data, collbackExito, true);
+    });
+    // metodos para escuchar cambios en el dom y habilitar el boton de enviar formulario 
+    // Función para verificar si todos los campos están cumplidos en un formulario específico
+    function todosCumplidos(form) {
+        const elementosCumplidos = $(form).find('input, select').filter('.cumplido, .cumplidoNormal');
+        return elementosCumplidos.length === $(form).find('input, select').length;
+    }
+
+    // Función para habilitar o deshabilitar el botón en un formulario específico
+    function habilitarBoton(form, boton) {
+        boton.prop('disabled', !todosCumplidos(form));
+    }
+
+    // Función de debounce para limitar la frecuencia de ejecución
+    function debounce(func, wait) {
+        let timeout;
+        return function (...args) {
+            clearTimeout(timeout);
+            timeout = setTimeout(() => func.apply(this, args), wait);
+        };
+    }
+
+    // Seleccionar los formularios específicos que deseas observar
+    const forms = document.querySelectorAll('.formDependencia, .formCargo, .formEstatus, .formDepartamento');
+
+    forms.forEach(form => {
+        const boton = $(form).closest('.modal').find('.aceptar');
+
+        // Inicialmente desactivar el botón
+        boton.prop('disabled', true);
+
+        // Crear una instancia de MutationObserver y observar cambios
+        const observer = new MutationObserver(debounce((mutationsList) => {
+            for (const mutation of mutationsList) {
+                if (mutation.type === 'childList' || mutation.type === 'attributes') {
+                    habilitarBoton(form, boton);
+                }
+            }
+        }, 300)); // Ajusta el tiempo de espera según sea necesario
+
+        // Configurar el observer para observar cambios en los hijos y atributos del formulario
+        const config = { childList: true, attributes: true, subtree: true };
+
+        // Comenzar a observar el formulario
+        observer.observe(form, config);
+
+        // Ejecutar la validación inicialmente
+        habilitarBoton(form, boton);
+    });
+
+
 });
+

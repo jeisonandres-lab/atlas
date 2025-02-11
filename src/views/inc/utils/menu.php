@@ -11,8 +11,10 @@
             <span><?php echo $act ?> </span>
         </li>
     </div>
-    <div class="search_bar">
-        <input type="text" placeholder="Search" />
+    <div id="contenedor-buscar" class="search_bar">
+        <input type="text" id="buscador" placeholder="Search" />
+
+        <div id="resultadosBusqueda"></div>
     </div>
     <div class="navbar_content me-3">
         <li class="nav-item">

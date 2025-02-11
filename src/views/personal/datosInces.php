@@ -31,51 +31,48 @@ use App\Atlas\config\App;
             </div>
             <!-- SUB MENU DEL MODULO -->
             <?php require_once App::URL_INC . "utils/menu_registro.php" ?>
-            <div class="container-fluid px-4">
-                <div class="container-fluid card p-2" style="background-color: #f5f5f5; box-shadow: none;">
-                    <div class="">
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <section class="card contenTable" style="background-color: white; box-shadow: none;">
-                                    <div class="contenTablet mitable table-responsive">
-                                        <!-- Boton Switch -->
-                                        <div class="card radio-inputs m-2" style="flex-direction: row; box-shadow: none;">
-                                            <label class="radio " >
-                                                <input name="radio" id="switchDepe" type="radio" />
-                                                <span class="name card">Dependencia</span>
-                                            </label>
-                                            <label class="radio">
-                                                <input name="radio" id="switchCargo" type="radio" />
-                                                <span class="name">Cargo</span>
-                                            </label>
-                                            <label class="radio">
-                                                <input name="radio" id="switchEstatus" type="radio" />
-                                                <span class="name">Estatus</span>
-                                            </label>
-                                            <label class="radio">
-                                                <input name="radio" id="switchDepa" type="radio" />
-                                                <span class="name">Departamentos</span>
-                                            </label>
-                                        </div>
-                                        <div class="container">
-                                            <button class="mt-2 btn btn-primary btn-sm btn-hover-azul" data-bs-toggle="modal" data-bs-target="#agregarDatosDependencia" id="btnAgregarDependencia"><i class="fa-solid fa-plus fa-sm me-2"></i>Agregar</button>
-                                            <button class="mt-2 btn btn-primary btn-sm btn-hover-azul" data-bs-toggle="modal" data-bs-target="#agregarDatosDependencia" id="btnAgregarCargo"><i class="fa-solid fa-plus fa-sm me-2"></i>Agregar</button>
-                                            <button class="mt-2 btn btn-primary btn-sm btn-hover-azul" data-bs-toggle="modal" data-bs-target="#agregarDatosDependencia" id="btnAgregarEstatus"><i class="fa-solid fa-plus fa-sm me-2"></i>Agregar</button>
-                                            <button class="mt-2 btn btn-primary btn-sm btn-hover-azul" data-bs-toggle="modal" data-bs-target="#agregarDatosDependencia" id="btnAgregarDepartamento"><i class="fa-solid fa-plus fa-sm me-2"></i>Agregar</button>
-                                        </div>
-                                        <table id="tableInic" class="mitable table table-striped table-bordered table-hover nowrap display">
-                                            <thead>
-                                                <tr id="tr-identity" class="tr-identity">
-
-                                                </tr>
-                                            </thead>
-                                            <tbody class="contenidoTable">
-                                            </tbody>
-                                        </table>
+            <div class="container-fluid px-3">
+                <div class="">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <section class="card contenTable" style="background-color: white; box-shadow: none;">
+                                <div class="contenTablet mitable table-responsive">
+                                    <!-- Boton Switch -->
+                                    <div class="card radio-inputs m-2" style="flex-direction: row; box-shadow: none;">
+                                        <label class="radio ">
+                                            <input name="radio" id="switchDepe" type="radio" />
+                                            <span class="name card">Dependencia</span>
+                                        </label>
+                                        <label class="radio">
+                                            <input name="radio" id="switchCargo" type="radio" />
+                                            <span class="name">Cargo</span>
+                                        </label>
+                                        <label class="radio">
+                                            <input name="radio" id="switchEstatus" type="radio" />
+                                            <span class="name">Estatus</span>
+                                        </label>
+                                        <label class="radio">
+                                            <input name="radio" id="switchDepa" type="radio" />
+                                            <span class="name">Departamentos</span>
+                                        </label>
                                     </div>
-                                    <div style="background-color:#FE9001;" class="barra_naranja"></div>
-                                </section>
-                            </div>
+                                    <div class="container">
+                                        <button class="mt-2 btn btn-primary btn-sm btn-hover-azul" id="btnAgregarDependencia"><i class="fa-solid fa-plus fa-sm me-2"></i>Agregar</button>
+                                        <button class="mt-2 btn btn-primary btn-sm btn-hover-azul" id="btnAgregarCargo"><i class="fa-solid fa-plus fa-sm me-2"></i>Agregar</button>
+                                        <button class="mt-2 btn btn-primary btn-sm btn-hover-azul" id="btnAgregarEstatus"><i class="fa-solid fa-plus fa-sm me-2"></i>Agregar</button>
+                                        <button class="mt-2 btn btn-primary btn-sm btn-hover-azul" id="btnAgregarDepartamento"><i class="fa-solid fa-plus fa-sm me-2"></i>Agregar</button>
+                                    </div>
+                                    <table id="tableInic" class="mitable table  table-bordered table-hover nowrap display">
+                                        <thead>
+                                            <tr id="tr-identity" class="tr-identity">
+                                            </tr>
+                                        </thead>
+                                        <tbody class="contenidoTable">
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div style="background-color:#FE9001;" class="barra_naranja"></div>
+                            </section>
                         </div>
                     </div>
                 </div>
@@ -84,6 +81,181 @@ use App\Atlas\config\App;
         <?php require_once App::URL_INC . "/footer.php"; ?>
     </div>
 
+    <!-- Modal Dependencia-->
+    <div class="modal fade" id="modalDependencia" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header d-flex justify-content-between bg-primary" style=" color: #fff;">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Registro Dependencias</h1>
+                    <i type="button" data-bs-dismiss="modal" aria-label="Close" class="cerrarEditar close fa-solid fa-xmark"></i>
+                </div>
+                <div class="modal-body formDependencia" id="modal-body">
+                    <div class="container-fluid p-4">
+                        <section class=" card" style="background-color: white; box-shadow: none;">
+                            <form action="" method="post" class="formularioDepen p-3">
+                                <div class="row">
+                                    <div class="section-body col-lg-12">
+                                        <div class="col-sm-12 col-md-12 col-xl-12 col-xxl-12 mb-3">
+                                            <div class="form-group">
+                                                <label for="dependencia">Nombre Dependencia</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-text span_dependencia"><i class="icons fa-regular fa-user"></i></span>
+                                                    <input type="text" class="form-control" id="dependencia" name="dependencia" placeholder="Nombre de la dependencia" required>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-12 col-md-12 col-xl-12 col-xxl-12 mb-3">
+                                            <div class="form-group">
+                                                <label for="estado">Estado</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-text span_estado"><i class="icons fa-regular fa-user"></i></span>
+                                                    <select class="form-select form-select-md estado-estado" id="estado" name="estado" aria-label="Small select example" aria-placeholder="dasdas" required>
+                                                        <option value="">Selecione de estado</option>d
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-12 col-md-12 col-xl-12 col-xxl-12 mb-3">
+                                            <div class="form-group">
+                                                <label for="codigo">Codigo de Dependencia</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-text span_codigo"><i class="icons fa-regular fa-user"></i></span>
+                                                    <input type="text" class="form-control" id="codigo" name="codigo" placeholder="Nombre de la dependencia" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="background-color:#FE9001;" class="barra_naranja"></div>
+                        </section>
+
+                    </div>
+                    <div class="modal-footer p-1">
+                        <button type="submit" class="btn btn-primary aceptar" id="aceptar">Guardar</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Cargo-->
+    <div class="modal fade" id="modalCargo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header d-flex justify-content-between bg-primary" style=" color: #fff;">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Registro Cargo</h1>
+                    <i type="button" data-bs-dismiss="modal" aria-label="Close" class="cerrarEditar close fa-solid fa-xmark"></i>
+                </div>
+                <div class="modal-body formCargo" id="modal-body">
+                    <div class="container-fluid p-4">
+                        <section class=" card" style="background-color: white; box-shadow: none;">
+                            <form action="" method="post" class="formularioCargo p-3">
+                                <div class="row">
+                                    <div class="section-body col-lg-12">
+                                        <div class="col-sm-12 col-md-12 col-xl-12 col-xxl-12 mb-3">
+                                            <div class="form-group">
+                                                <label for="cargo">Nombre Del Cargo</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-text span_cargo"><i class="icons fa-regular fa-user"></i></span>
+                                                    <input type="text" class="form-control" id="cargo" name="cargo" placeholder="Nombre de la dependencia" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="background-color:#FE9001;" class="barra_naranja"></div>
+                        </section>
+                    </div>
+                        <div class="modal-footer p-1">
+                            <button type="submit" class="btn btn-primary aceptar" id="aceptar">Guardar</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Estatus-->
+    <div class="modal fade" id="modalEstatus" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header d-flex justify-content-between bg-primary" style=" color: #fff;">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Registro Estatus</h1>
+                    <i type="button" data-bs-dismiss="modal" aria-label="Close" class="cerrarEditar close fa-solid fa-xmark"></i>
+                </div>
+                <div class="modal-body formEstatus" id="modal-body">
+                    <div class="container-fluid p-4">
+                        <section class=" card" style="background-color: white; box-shadow: none;">
+                            <form action="" method="post" class="formularioEstatus p-3">
+                                <div class="row">
+                                    <div class="section-body col-lg-12">
+                                        <div class="col-sm-12 col-md-12 col-xl-12 col-xxl-12 mb-3">
+                                            <div class="form-group">
+                                                <label for="estatus">Nombre Del Estatus</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-text span_estatus"><i class="icons fa-regular fa-user"></i></span>
+                                                    <input type="text" class="form-control" id="estatus" name="estatus" placeholder="Nombre de la dependencia" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="background-color:#FE9001;" class="barra_naranja"></div>
+                        </section>
+                    </div>
+                    <div class="modal-footer p-1">
+                        <button type="submit" class="btn btn-primary aceptar" id="aceptar">Guardar</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Departamento-->
+    <div class="modal fade" id="modalDepartamento" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header d-flex justify-content-between bg-primary" style=" color: #fff;">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Registro Departamento</h1>
+                    <i type="button" data-bs-dismiss="modal" aria-label="Close" class="cerrarEditar close fa-solid fa-xmark"></i>
+                </div>
+                <div class="modal-body formDepartamento" id="modal-body">
+                    <div class="container-fluid p-4">
+                        <section class=" card" style="background-color: white; box-shadow: none;">
+                            <form action="" method="post" class="formularioDepa p-3">
+                                <div class="row">
+                                    <div class="section-body col-lg-12">
+                                        <div class="col-sm-12 col-md-12 col-xl-12 col-xxl-12 mb-3">
+                                            <div class="form-group">
+                                                <label for="departamento">Nombre Del Departamento</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-text span_departamento"><i class="icons fa-regular fa-user"></i></span>
+                                                    <input type="text" class="form-control" id="departamento" name="departamento" placeholder="Nombre de la dependencia" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="background-color:#FE9001;" class="barra_naranja"></div>
+                        </section>
+                    </div>
+                    <div class="modal-footer p-1">
+                        <button type="submit" class="btn btn-primary aceptar" id="aceptar">Guardar</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
     <?php require_once App::URL_INC . "/scrips.php"; ?>
     <?php require_once App::URL_INC . "/tablets.php"; ?>
     <script src="./src/libs/select2/select2.min.js"></script>
