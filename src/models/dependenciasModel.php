@@ -19,6 +19,12 @@ class dependenciasModel extends Conexion
         return $sql;
     }
 
+    private function obtenerEstados()
+    {
+        $sql = $this->ejecutarConsulta("SELECT * FROM estados");
+        return $sql;
+    }
+
     // Getters Para Accder a los Metodos de la Clase
     public function getDatosDependencia()
     {
@@ -28,5 +34,10 @@ class dependenciasModel extends Conexion
     public function getActulizarDependencia($tabla, $datos, $condicion)
     {
         return $this->actulizarDependencia($tabla, $datos, $condicion);
+    }
+
+    public function getObtenerEstados()
+    {
+        return $this->obtenerEstados();
     }
 }
