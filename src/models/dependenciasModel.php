@@ -25,6 +25,12 @@ class dependenciasModel extends Conexion
         return $sql;
     }
 
+    public function registrarDependencia($tabla, $datos)
+    {
+        $sql = $this->ejecutarConsulta($tabla, $datos);
+        return $sql;
+    }
+
     // Getters Para Accder a los Metodos de la Clase
     public function getDatosDependencia()
     {
@@ -39,5 +45,10 @@ class dependenciasModel extends Conexion
     public function getObtenerEstados()
     {
         return $this->obtenerEstados();
+    }
+
+    public function getRegistrarDependencia($tabla, $datos)
+    {
+        return $this->registrarDependencia($tabla, $datos);
     }
 }

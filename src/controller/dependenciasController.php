@@ -28,7 +28,7 @@ class dependenciasController extends dependenciasModel
         $data_json['data'] = []; // Array de datos para enviar
         $tabla = 'dependencia depe INNER JOIN estados esta ON depe.idEstado = id_estado'; // Tabla a consultar
         $selectoresCantidad = 'COUNT(id_dependencia) as cantidad'; // Selector para contar la cantidad de registros de la tabla
-        $datosBuscar = ['depe.dependencia','depe.codigo', 'esta.estado']; // Array de selectores para buscar en la tabla
+        $datosBuscar = ['depe.dependencia', 'depe.codigo', 'esta.estado']; // Array de selectores para buscar en la tabla
         $campoOrden = 'id_dependencia'; // Campo por el cual se ordenará la tabla
         $selectores = '*'; // Selectores para obtener los datos de la tabla
         $conditions = []; // Condiciones para obtener los datos de la tabla
@@ -71,24 +71,31 @@ class dependenciasController extends dependenciasModel
         echo json_encode($response);
     }
 
-    public function datosEstado(){
-        $datos_json = [
-            'exito' => false,
-            'messenger' => 'No se pudo obtener los datos de los estados',
-        ];
+    public function datosEstado()
+    {
+        $tabla = 'estados';
+        $selectores = '*';
+        $conditions = [];
+        $conditionParams = [];
 
-        $estados = $this->getObtenerEstados();
-        if ($estados) {
-            $datos_json['exito'] = true;
-            $datos_json['messenger'] = 'Datos de los estados obtenidos con exito';
-            $datos_json['data'] = $estados;
+        // Obtener los datos de la tabla estados
+        $estados = $this->tablas->getTodoDatosPersonal($selectores, $tabla, 0, 100, '', [], 'id_estado', $conditions, $conditionParams);
+
+        $data_json['data'] = [];
+        foreach ($estados as $row) {
+            $data_json['data'][] = [
+                'id_estado' => $row['id_estado'],
+                'estado' => $row['estado']
+            ];
         }
 
+        // Devolver la respuesta en formato JSON
         header('Content-Type: application/json');
-        echo json_encode($datos_json);
+        echo json_encode($data_json);
     }
 
-    public function registrarDependencia(string $dependencia, string $codigodepe, string $estado){
+    public function regisDependencia(string $dependencia, string $codigodepe, string $estado)
+    {
         $dependencia = $this->limpiarCadena($dependencia);
         $codigodepe = $this->limpiarCadena($codigodepe);
         $estado = $this->limpiarCadena($estado);
