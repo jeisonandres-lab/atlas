@@ -25,11 +25,12 @@ class dependenciasModel extends Conexion
         return $sql;
     }
 
-    public function registrarDependencia($tabla, $datos)
+    private function registrarPersonal2($tabla, $datos)
     {
-        $sql = $this->ejecutarConsulta($tabla, $datos);
+        $sql = $this->guardarDatos($tabla, $datos);
         return $sql;
     }
+
 
     // Getters Para Accder a los Metodos de la Clase
     public function getDatosDependencia()
@@ -47,8 +48,8 @@ class dependenciasModel extends Conexion
         return $this->obtenerEstados();
     }
 
-    public function getRegistrarDependencia($tabla, $datos)
+    public function getRegistrar2($tabla, $datos)
     {
-        return $this->registrarDependencia($tabla, $datos);
+        return $this->registrarPersonal2($tabla, $datos);
     }
 }

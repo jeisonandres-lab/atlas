@@ -92,7 +92,7 @@ use App\Atlas\config\App;
                 <div class="modal-body formDependencia" id="modal-body">
                     <div class="container-fluid p-4">
                         <section class=" card" style="background-color: white; box-shadow: none;">
-                            <form action="" method="post" class="formularioDepen p-3">
+                            <form action="" method="post" class="formularioDepen p-3" accept-charset="UTF-8">
                                 <div class="row">
                                     <div class="section-body col-lg-12">
                                         <div class="col-sm-12 col-md-12 col-xl-12 col-xxl-12 mb-3">
@@ -122,17 +122,18 @@ use App\Atlas\config\App;
                                                 <label for="codigo">Codigo de Dependencia</label>
                                                 <div class="input-group">
                                                     <span class="input-group-text span_codigo"><i class="icons fa-regular fa-user"></i></span>
-                                                    <input type="text" class="form-control" id="codigo" name="codigo" placeholder="Nombre de la dependencia" required>
+                                                    <input type="text" class="form-control" id="codigo" name="codigo" placeholder="Codigo de la dependencia" required>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div style="background-color:#FE9001;" class="barra_naranja"></div>
                         </section>
+                        <div style="background-color:#FE9001;" class="barra_naranja"></div>
 
                     </div>
                     <div class="modal-footer p-1">
+                        <button type="button" class="btn btn-warning sinCodigo" id="sinCodigo">Sin Codigo</button>
                         <button type="submit" class="btn btn-primary aceptar" id="aceptar">Guardar</button>
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                     </div>
@@ -170,10 +171,10 @@ use App\Atlas\config\App;
                                 <div style="background-color:#FE9001;" class="barra_naranja"></div>
                         </section>
                     </div>
-                        <div class="modal-footer p-1">
-                            <button type="submit" class="btn btn-primary aceptar" id="aceptar">Guardar</button>
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                        </div>
+                    <div class="modal-footer p-1">
+                        <button type="submit" class="btn btn-primary aceptar" id="aceptar">Guardar</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    </div>
                     </form>
                 </div>
             </div>

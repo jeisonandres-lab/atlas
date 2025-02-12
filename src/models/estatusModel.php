@@ -17,6 +17,12 @@ class estatusModel extends Conexion{
         return $sql;
     }
 
+    private function registrarEstatus($tabla, $datos)
+    {
+        $sql = $this->guardarDatos($tabla, $datos);
+        return $sql;
+    }
+
     // Getters Para Accder a los Metodos de la Clase
     public function getDatosEstatus()
     {
@@ -27,5 +33,12 @@ class estatusModel extends Conexion{
     {
         return $this->actulizarEstatus($tabla, $datos, $condicion);
     }
+
+    public function getRegistrarEstatus($tabla, $datos)
+    {
+        return $this->registrarEstatus($tabla, $datos);
+    }
+
+
 
 }

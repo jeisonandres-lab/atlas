@@ -19,6 +19,12 @@ class departamentoModel extends Conexion
         return $sql;
     }
 
+    private function registrarDepartamento($tabla, $datos)
+    {
+        $sql = $this->guardarDatos($tabla, $datos);
+        return $sql;
+    }
+
     // Getters Para Accder a los Metodos de la Clase
     public function getDatosDepartamento()
     {
@@ -28,5 +34,10 @@ class departamentoModel extends Conexion
     public function getActulizarDepartamento($tabla, $datos, $condicion)
     {
         return $this->actulizarDepartamento($tabla, $datos, $condicion);
+    }
+
+    public function getRegistrarDepartamento($tabla, $datos)
+    {
+        return $this->registrarDepartamento($tabla, $datos);
     }
 }

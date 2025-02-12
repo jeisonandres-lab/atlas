@@ -4,15 +4,15 @@ namespace App\Atlas\controller;
 
 use App\Atlas\models\departamentoModel;
 use App\Atlas\models\tablasModel;
-class departamentoController
+
+class departamentoController extends departamentoModel
 {
-    private $departamento;
     private $tablas;
 
     public function __construct()
     {
+        parent::__construct();
         $this->tablas = new tablasModel();
-        $this->departamento = new departamentoModel();
     }
 
     public function datosDepartamento()
@@ -59,5 +59,39 @@ class departamentoController
         );
         header('Content-Type: application/json');
         echo json_encode($response);
+    }
+
+    public function regisDepartamento(string $nombreDepartamento)
+    {
+        $nombreDepartamento = $this->limpiarCadena($nombreDepartamento);
+
+        $datos_json = [
+            'messenger' => '',
+            'exito' => false
+        ];
+
+        $parametros = [
+            [
+                "campo_nombre" => "departamento",
+                "campo_marcador" => ":departamento",
+                "campo_valor" => $nombreDepartamento
+            ],
+            [
+                "campo_nombre" => "activo",
+                "campo_marcador" => ":activo",
+                "campo_valor" => 1
+            ],
+        ];
+
+        $registro =  $this->getRegistrarDepartamento('departamento', $parametros);
+        if ($registro) {
+            $datos_json['messenger'] = "Registro de departamento exitoso";
+            $datos_json['exito'] = true;
+        } else {
+            $datos_json['messenger'] = "Error al registrar";
+        }
+
+        header('Content-Type: application/json');
+        echo json_encode($datos_json);
     }
 }

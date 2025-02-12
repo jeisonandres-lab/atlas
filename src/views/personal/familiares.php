@@ -32,7 +32,7 @@ use App\Atlas\config\App;
             <!-- FORMULARIO DE ENVIOS DE DATOS DE EMPLEADO -->
             <div class="container-fluid px-3">
                 <form action="#" class="justify'content-center formulario_empleado animate__animated animate__slideInUp contact-form form-validate justify-content-center" novalidate="novalidate" id="formulario_empleado">
-                    <div class=" col-sm-12 col-md-12 col-lg-12 col-xl-9 col-xxl-9 ">
+                    <div class=" col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12 ">
                         <div class="row col-sm-12 col-md-9 h-100 bg-white w-100 p-2 m-0 content">
                             <p class="mb-0 mt-2">Datos del Empleado</p>
                             <hr class="mb-3">
@@ -161,7 +161,7 @@ use App\Atlas\config\App;
                                     <label for="cedula">Edad</label>
                                     <div class="input-group">
                                         <span class="input-group-text span_edad"><i class="icons fa-regular fa-user-clock"></i></span>
-                                        <input type="text" class="form-control" id="edad" name="edad" placeholder="Edad Del Familiar" required readonly>
+                                        <input type="text" class="form-control" id="edad" name="edad" placeholder="Edad Del Familiar" required disabled>
                                     </div>
                                     <p class="parrafo fs-6 fw-light mb-0">La edad del familiar se ingresa automáticamente con la fecha de nacimiento.</p>
                                 </div>

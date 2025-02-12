@@ -1,11 +1,13 @@
-import { obtenerDatosJQuery, enviarFormulario } from './ajax/formularioAjax.js';
-import { validarNombre, incluirSelec2, validarSelectoresSelec2 } from './ajax/inputs.js';
+import {  enviarFormulario } from './ajax/formularioAjax.js';
+import { validarNombre, incluirSelec2, validarSelectoresSelec2, soloNumeros, validarNombreConEspacios } from './ajax/inputs.js';
+import { alertaNormalmix } from './ajax/alerts.js';
 
 $(function () {
     const btnDependencia = document.querySelector('#btnAgregarDependencia');
     const btnCargo = document.querySelector('#btnAgregarCargo');
     const btnEstatus = document.querySelector('#btnAgregarEstatus');
     const btnDepartamento = document.querySelector('#btnAgregarDepartamento');
+    const btnSinCodigo = document.querySelector('#sinCodigo');
     // VARIBLES DE MODAL
     const bodyModal = document.querySelector('.section-body');
     const titleModal = document.querySelector('.modal-title');
@@ -13,21 +15,19 @@ $(function () {
 
     var boton = $('#aceptar');
 
-    let contentRegis;
-
     $('#btnAgregarDependencia').hide();
     $('#btnAgregarCargo').hide();
     $('#btnAgregarEstatus').hide();
     $('#btnAgregarDepartamento').hide();
 
-    validarNombre("#dependencia", ".span_dependencia");
+    validarNombreConEspacios("#dependencia", ".span_dependencia");
     incluirSelec2("#estado", ".span_estado");
     validarSelectoresSelec2("#estado", ".span_estado");
-    validarNombre("#codigo", ".span_codigo");
+    soloNumeros("#codigo", ".span_codigo");
 
-    validarNombre("#cargo", ".span_cargo");
-    validarNombre("#estatus", ".span_estatus");
-    validarNombre("#departamento", ".span_departamento");
+    validarNombreConEspacios("#cargo", ".span_cargo");
+    validarNombreConEspacios("#estatus", ".span_estatus");
+    validarNombreConEspacios("#departamento", ".span_departamento");
 
     // Configuración base para DataTables
     const baseConfig = {
@@ -92,13 +92,21 @@ $(function () {
         return true;
     }
 
-    // Ejemplo de uso de las funciones
-    $('#switchDepe').on('click', () => {
-        $('#btnAgregarDependencia').slideDown();
+    // Función para alternar la visibilidad de los botones
+    function toggleButtons(showButton, hideButtons) {
+        return new Promise((resolve) => {
+            $(showButton).slideDown(() => {
+                hideButtons.forEach(button => {
+                    $(button).slideUp();
+                });
+                resolve();
+            });
+        });
+    }
 
-        $('#btnAgregarCargo').hide();
-        $('#btnAgregarEstatus').hide();
-        $('#btnAgregarDepartamento').hide();
+    // Ejemplo de uso de las funciones
+    $('#switchDepe').on('click', async () => {
+        await toggleButtons('#btnAgregarDependencia', ['#btnAgregarCargo', '#btnAgregarEstatus', '#btnAgregarDepartamento']);
         const columnasDepe = [
             { data: 0 },
             { data: 1 },
@@ -168,12 +176,8 @@ $(function () {
         }
     });
 
-    $('#switchCargo').on('click', () => {
-        $('#btnAgregarCargo').slideDown();
-
-        $('#btnAgregarDependencia').hide();
-        $('#btnAgregarEstatus').hide();
-        $('#btnAgregarDepartamento').hide();
+    $('#switchCargo').on('click', async () => {
+        await toggleButtons('#btnAgregarCargo', ['#btnAgregarDependencia', '#btnAgregarEstatus', '#btnAgregarDepartamento']);
         const columnasCargo = [
             { data: 0 },
             { data: 1 },
@@ -232,12 +236,8 @@ $(function () {
         }
     });
 
-    $('#switchEstatus').on('click', () => {
-        $('#btnAgregarEstatus').slideDown();
-
-        $('#btnAgregarCargo').hide();
-        $('#btnAgregarDependencia').hide();
-        $('#btnAgregarDepartamento').hide();
+    $('#switchEstatus').on('click', async () => {
+        await toggleButtons('#btnAgregarEstatus', ['#btnAgregarCargo', '#btnAgregarDependencia', '#btnAgregarDepartamento']);
         const columnasEstatus = [
             { data: 0 },
             { data: 1 },
@@ -296,12 +296,8 @@ $(function () {
         }
     });
 
-    $('#switchDepa').on('click', () => {
-        $('#btnAgregarDepartamento').slideDown();
-
-        $('#btnAgregarDependencia').hide();
-        $('#btnAgregarCargo').hide();
-        $('#btnAgregarEstatus').hide();
+    $('#switchDepa').on('click', async () => {
+        await toggleButtons('#btnAgregarDepartamento', ['#btnAgregarDependencia', '#btnAgregarCargo', '#btnAgregarEstatus']);
         const columnasDepar = [
             { data: 0 },
             { data: 1 },
@@ -387,6 +383,7 @@ $(function () {
         $('.select2').removeClass('error_input');
         $('span_codigo').removeClass('cimplido_span');
 
+        $('#codigo').attr('disabled', false);
 
         const select = document.getElementById('estado');
         try {
@@ -424,13 +421,47 @@ $(function () {
         $('#departamento').val('');
     });
 
+    btnSinCodigo.addEventListener('click', async () => {
+        // Verificar si el campo está deshabilitado
+        if ($('#codigo').is(':disabled')) {
+            // Revertir los cambios
+            $('#codigo').removeClass('cumplido');
+            $('.span_codigo').removeClass('cumplido_span');
+    
+            $('#codigo').addClass('error_input');
+            $('.span_codigo').addClass('error_span');
+    
+            $('#codigo').removeClass('cumplidoNormal');
+
+            $('#codigo').val('');
+    
+            $('#codigo').attr('disabled', false);
+        } else {
+            // Aplicar los cambios
+            $('#codigo').removeClass('error_input');
+            $('.span_codigo').removeClass('error_span');
+
+            $('#codigo').removeClass('cumplido');
+            $('.span_codigo').removeClass('cumplido_span');
+
+            $('#codigo').addClass('cumplidoNormal');
+    
+            $('#codigo').addClass('cumplido');
+            $('.span_codigo').addClass("cumplido_span");
+    
+            $('#codigo').val('');
+    
+            $('#codigo').attr('disabled', true);
+        }
+    });
+
     //FORMULARIO DE DEPENDENCIA
     $('.formularioDepen').on('submit', async function (e) {
         e.preventDefault();
         function collbackExito(data) {
             if (data) {
                 if (data.exito) {
-                    console.log(data.messenger);
+                    alertaNormalmix(data.messenger, 3000, 'success', 'top-end');
                 } else {
                     console.log('si llegaorn datos pero la respuesta fue falsa')
                 }
@@ -447,10 +478,10 @@ $(function () {
     $('.formularioEstatus').on('submit', function (e) {
         e.preventDefault();
         async function collbackExito(data) {
-            if (data.length) {
-                alert ('Se ha registrado correctamente');
+            if (data.exito) {
+                alertaNormalmix(data.messenger, 3000, 'success', 'top-end');
             } else {
-                alert('Error al registrar');
+                console.log('si llegaorn datos pero la respuesta fue falsa')
             }
         }
         const form = new FormData(this);
@@ -462,10 +493,10 @@ $(function () {
     $('.formularioCargo').on('submit', function (e) {
         e.preventDefault();
         async function collbackExito(data) {
-            if (data.length) {
-                alert ('Se ha registrado correctamente');
+            if (data.exito) {
+                alertaNormalmix(data.messenger, 3000, 'success', 'top-end');
             } else {
-                alert('Error al registrar');
+                console.log('si llegaorn datos pero la respuesta fue falsa');
             }
         }
         const form = new FormData(this);
@@ -477,16 +508,18 @@ $(function () {
     $('.formularioDepa').on('submit', function (e) {
         e.preventDefault();
         async function collbackExito(data) {
-            if (data.length) {
-                alert ('Se ha registrado correctamente');
+            if (data.exito) {
+                alertaNormalmix(data.messenger, 3000, 'success', 'top-end');
             } else {
-                alert('Error al registrar');
+                console.log('si llegaorn datos pero la respuesta fue falsa')
             }
         }
         const form = new FormData(this);
         const data = form;
         enviarFormulario('./src/ajax/datosDecd.php?modulo_datos=agregarDepartamento', data, collbackExito, true);
     });
+
+
     // metodos para escuchar cambios en el dom y habilitar el boton de enviar formulario 
     // Función para verificar si todos los campos están cumplidos en un formulario específico
     function todosCumplidos(form) {

@@ -19,6 +19,12 @@ class cargoModel extends Conexion
         return $sql;
     }
 
+    private function registrarCargo($tabla, $datos)
+    {
+        $sql = $this->guardarDatos($tabla, $datos);
+        return $sql;
+    }
+
     // Getters Para Accder a los Metodos de la Clase
     public function getDatosCargo()
     {
@@ -28,5 +34,10 @@ class cargoModel extends Conexion
     public function getActulizarCargo($tabla, $datos, $condicion)
     {
         return $this->actulizarCargo($tabla, $datos, $condicion);
+    }
+
+    public function getRegistrarCargo($tabla, $datos)
+    {
+        return $this->registrarCargo($tabla, $datos);
     }
 }

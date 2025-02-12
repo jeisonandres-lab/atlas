@@ -16,6 +16,8 @@ $cargo = new cargoController();
 $estatus = new estatusController();
 $departamento = new departamentoController();
 
+$id= isset($_POST['id']) ? $conexion->limpiarCadena($_POST['id']) : "";
+
 //DATOS DE DEPENDENCIA
 $nombredepen = isset($_POST['dependencia']) ? $conexion->limpiarCadena($_POST['dependencia']) : "";
 $codigodepen = isset($_POST['codigo']) ? $conexion->limpiarCadena($_POST['codigo']) : "";
@@ -51,14 +53,34 @@ switch ($_GET['modulo_datos']) {
         $dependencias->datosEstado();
         break;
     case 'agregarDependencia':
-        $dependencias->registrarDependencia($nombredepen, $codigodepen, $estadodepen);
+        $dependencias->regisDependencia($nombredepen, $codigodepen, $estadodepen);
         break;
     case 'agregarEstatus':
+        $estatus->regisEstatus($nombreEstatus);
         break;
     case 'agregarCargo':
+        $cargo->regisCargo($nombreCargo);
         break;
     case 'agregarDepartamento':
+        $departamento->regisDepartamento($nombreDepartamento);
         break;
+    case 'editarDependencia':
+        break;
+    case 'editarCargo':
+        break;
+    case 'editarEstatus':
+        break;
+    case 'editarDepartamento':
+        break;
+    case 'eliminarDependencia':
+        break;
+    case 'eliminarCargo':
+        break;
+    case 'eliminarEstatus':
+        break;
+    case 'eliminarDepartamento':
+        break;
+
     default:
         break;
 }

@@ -12,14 +12,14 @@ date_default_timezone_set("America/Caracas");
 class dependenciasController extends dependenciasModel
 {
 
-    private $dependencia;
+
     private $tablas;
     private $app;
 
     public function __construct()
     {
+        parent::__construct();
         $this->tablas = new tablasModel();
-        $this->dependencia = new dependenciasModel();
         $this->app = new App();
     }
 
@@ -100,12 +100,17 @@ class dependenciasController extends dependenciasModel
         $codigodepe = $this->limpiarCadena($codigodepe);
         $estado = $this->limpiarCadena($estado);
 
-        $datos_json = [
+        if (empty($codigodepe) ){
+            $codigodepe = 'SIN-CDG';
+        }
+
+
+        $data_json = [
             'exito' => false,
             'messenger' => 'No se pudo obtener los datos de los estados',
         ];
 
-        $datos = [
+        $parametros = [
             [
                 "campo_nombre" => "dependencia",
                 "campo_marcador" => ":dependencia",
@@ -120,12 +125,22 @@ class dependenciasController extends dependenciasModel
                 "campo_nombre" => "idEstado",
                 "campo_marcador" => ":idEstado",
                 "campo_valor" => $estado
+            ],
+            [
+                "campo_nombre" => "activo",
+                "campo_marcador" => ":activo",
+                "campo_valor" => '1'
             ]
+
         ];
-        $registro = $this->getRegistrarDependencia('dependencia', $datos);
+        $registro = $this->getRegistrar2('dependencia', $parametros);
         if ($registro) {
-            $datos_json['exito'] = true;
-            $datos_json['messenger'] = 'Dependencia registrada con exito';
+            $data_json['exito'] = true;
+            $data_json['messenger'] = 'Dependencia registrada con exito';
         }
+
+        // Devolver la respuesta en formato JSON
+        header('Content-Type: application/json');
+        echo json_encode($data_json);
     }
 }

@@ -4,15 +4,16 @@ namespace App\Atlas\controller;
 
 use App\Atlas\models\estatusModel;
 use App\Atlas\models\tablasModel;
-class estatusController
+
+class estatusController extends estatusModel
 {
-    private $estatus;
     private $tablas;
 
     public function __construct()
     {
+        parent::__construct();
         $this->tablas = new tablasModel();
-        $this->estatus = new estatusModel();
+
     }
 
     public function datosEstatus()
@@ -59,5 +60,39 @@ class estatusController
         );
         header('Content-Type: application/json');
         echo json_encode($response);
+    }
+
+    public function regisEstatus (string $nombreEstatus)
+    {
+        $nombreEstatus =  $this->limpiarCadena($nombreEstatus);
+        $data_json = [
+            'messenger' => '',
+            'exito' => false
+        ];
+
+        $parametros = [
+            [
+                "campo_nombre" => "estatus",
+                "campo_marcador" => ":estatus",
+                "campo_valor" => $nombreEstatus
+            ],
+            [
+                "campo_nombre" => "activo",
+                "campo_marcador" => ":activo",
+                "campo_valor" => 1
+            ]
+        ];
+
+        $regisEstatus = $this->getRegistrarEstatus('estatus', $parametros);
+        if ($regisEstatus) {
+            $data_json['messenger'] = "Estatus registrado de manera exitosa";
+            $data_json['exito'] = true;
+        } else {
+            $data_json['messenger'] = "Error al registrar el estatus";
+        }
+
+         // Devolver la respuesta en formato JSON
+         header('Content-Type: application/json');
+         echo json_encode($data_json);
     }
 }

@@ -5,15 +5,14 @@ namespace App\Atlas\controller;
 use App\Atlas\models\cargoModel;
 use App\Atlas\models\tablasModel;
 
-class cargoController
+class cargoController extends cargoModel
 {
-    private $cargo;
     private $tablas;
 
     public function __construct()
     {
+        parent::__construct();
         $this->tablas = new tablasModel();
-        $this->cargo = new cargoModel();
     }
 
     public function datosCargo()
@@ -60,5 +59,36 @@ class cargoController
         );
         header('Content-Type: application/json');
         echo json_encode($response);
+    }
+
+    public function regisCargo(string $nombreCargo)
+    {
+        $nombreCargo = $this->limpiarCadena($nombreCargo);
+        $data_json = [
+            'messenger' => '',
+            'exito' => false
+        ];
+        $parametros = [
+            [
+                "campo_nombre" => "cargo",
+                "campo_marcador" => ":cargo",
+                "campo_valor" => $nombreCargo
+            ],
+            [
+                "campo_nombre" => "activo",
+                "campo_marcador" => ":activo",
+                "campo_valor" => "1"
+            ]
+        ];
+        $registro = $this->getRegistrarCargo('cargo', $parametros);
+        if ($registro) {
+            $data_json['messenger'] = "Cargo registrado con éxito";
+            $data_json['exito'] = true;
+        } else {
+            $data_json['messenger'] = "Error al registrar el cargo";
+        }
+
+        header('Content-Type: application/json');
+        echo json_encode($data_json);
     }
 }

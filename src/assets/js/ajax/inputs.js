@@ -20,6 +20,28 @@ export async function validarNombre(input, cumplidospan) {
   });
 }
 
+// Funcion para validar campos tipo text que coloquen la primera letra de cada palabra en mayuscula y permitan espacios
+export async function validarNombreConEspacios(input, cumplidospan) {
+  $(input).on("input", function () {
+    // Convertir todo a minúsculas y capitalizar la primera letra de cada palabra
+    this.value = this.value.toLowerCase().replace(/\b\w/g, (char) => char.toUpperCase());
+    this.value = this.value.replace(/[^a-zA-Z\s]/g, ""); // Permitir solo letras y espacios
+
+    if (this.value.length < 3) {
+      $(this).removeClass("cumplido");
+      $(this).addClass("error_input");
+      $(cumplidospan).removeClass("cumplido_span");
+      $(cumplidospan).addClass("error_span");
+    } else if (this.value.length >= 4 ) {
+      $(this).removeClass("error_input");
+      $(this).addClass("cumplido");
+      $(cumplidospan).removeClass("error_span");
+      $(cumplidospan).addClass("cumplido_span");
+      console.log("Okay, el valor es válido.");
+    }
+  });
+}
+
 // Funcion para validar que se ocloquen solo numeros mayor a 7 menor a 9 (Cédula)
 export async function validarNumeros(input, cumplidospan) {
   $(input).on("input", function (evenet) {
@@ -109,6 +131,27 @@ export async function validarNumeroNumber(input, cumplidospan,) {
     }
   })
 
+}
+
+//SOLO NUMEROS 
+export async function soloNumeros(input, cumplidospan) {
+  $(input).on("input", function () {
+    // Reemplazar cualquier carácter que no sea un número
+    this.value = this.value.replace(/[^0-9]/g, "");
+
+    // Verificar si el valor es válido
+    if (this.value.length > 0) {
+      $(this).removeClass("error_input");
+      $(this).addClass("cumplido");
+      $(cumplidospan).removeClass("error_span");
+      $(cumplidospan).addClass("cumplido_span");
+    } else {
+      $(this).removeClass("cumplido");
+      $(this).addClass("error_input");
+      $(cumplidospan).removeClass("cumplido_span");
+      $(cumplidospan).addClass("error_span");
+    }
+  });
 }
 
 // Funcion para validar los selectores de tipo select 

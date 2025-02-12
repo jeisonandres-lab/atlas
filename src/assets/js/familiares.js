@@ -33,6 +33,7 @@ $(function () {
   validarSelectores("#familiarTipo", ".span_familiarTipo");
   colocarYear("#ano", "1900");
   colocarMeses("#meses");
+  validarNumeros("#edad", ".span_edad");
   file("#achivo", ".span_docArchivo");
   file("#achivo", ".span_achivo");
   $("#dia").append('<option value="">Selecciona un día</option>');
@@ -70,6 +71,7 @@ $(function () {
         $("#ano").prop("disabled", false);
         $("#meses").prop("disabled", false);
         $("#dia").prop("disabled", false);
+        $("#edad").prop("disabled", false);
         $("#aceptar_emepleado").show();
         alertaNormalmix(parsedData.mensaje, 4000, "success", "top-end");
       } else {
@@ -117,6 +119,8 @@ $(function () {
       $("#edad").val(edad);
       $("#edad").addClass("cumplido");
       $(".span_edad").addClass("cumplido_span");
+      $("#edad").removeClass("error_input");
+      $(".span_edad").removeClass("error_span");
       if (!isNaN(edad)) {
         let check = $("#noCedula");
         if (check.is(":checked")) {
@@ -296,6 +300,12 @@ $(function () {
     }
   });
 
+  $('#edad').on("input", function () {
+    this.value = this.value.replace(/[^0-9]/g, ""); // Permitir solo números
+    if (this.value.length > 2) {
+      this.value = this.value.slice(0, 2); // Limitar a 2 dígitos
+    }
+  });
   // metodos para escuchar cambios en el dom y habilitar el boton de enviar formulario 
   // Función para verificar si todos los campos están cumplidos
   function todosCumplidos() {
