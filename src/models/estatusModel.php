@@ -7,7 +7,8 @@ class estatusModel extends Conexion{
     // Metodos de la Clase Privada
     private function datosEstatus()
     {
-        $sql = $this->ejecutarConsulta("SELECT * FROM estatus");
+        $parametro = ['1'];
+        $sql = $this->ejecutarConsulta("SELECT * FROM estatus WHERE activo = ? ", $parametro);
         return $sql;
     }
 

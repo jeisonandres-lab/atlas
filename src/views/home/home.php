@@ -12,7 +12,6 @@ use App\Atlas\config\App;
     <?php require_once App::URL_INC . "total_css.php"; ?>
     <?php require_once App::URL_INC . "tablets_css.php"; ?>
     <link rel="stylesheet" href="<?php echo App::URL_CSS . "home.css"; ?>">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body class="layout-fixed sidebar-expand-lg bg-body-tertiary">

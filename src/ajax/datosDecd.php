@@ -64,6 +64,15 @@ switch ($_GET['modulo_datos']) {
     case 'agregarDepartamento':
         $departamento->regisDepartamento($nombreDepartamento);
         break;
+    case 'obtenerDependencia':
+        $dependencias->dependencia($id);
+        break;
+    case 'obtenerCargo':
+        break;
+    case 'obtenerEstatus':
+        break;
+    case 'obtenerDepartamento':
+        break;
     case 'editarDependencia':
         break;
     case 'editarCargo':

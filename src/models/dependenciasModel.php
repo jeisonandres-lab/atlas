@@ -13,6 +13,10 @@ class dependenciasModel extends Conexion
         return $sql;
     }
 
+    private function obtenerdependencia(array $parametro){
+       return $sql = $this->ejecutarConsulta("SELECT * FROM dependencia depe INNER JOIN estados es ON depe.idEstado = es.id_estado WHERE depe.id_dependencia = ? ", $parametro);
+    }
+
     private function actulizarDependencia($tabla, $datos, $condicion)
     {
         $sql = $this->actualizarDatos($tabla, $datos, $condicion);
@@ -52,4 +56,10 @@ class dependenciasModel extends Conexion
     {
         return $this->registrarPersonal2($tabla, $datos);
     }
+
+    public function getobtenerDependencia(array $parametro)
+    {
+        return $this->obtenerdependencia($parametro);
+    }
+
 }

@@ -47,8 +47,8 @@ class dependenciasController extends dependenciasModel
 
         foreach ($personal as $row) {
             $buttons =  "
-            <button class='btn btn-primary btn-sm btn-hover-azul btnEditarDependencia fw-semibold' data-bs-toggle='modal' data-bs-target='#editarDatosFamiliar' data-cedula=" . $row['id_dependencia'] . "><i class='fa-solid fa-pencil fa-sm me-2'></i>Editar</button>
-            <button class='btn btn-danger btn-sm btn-hover-rojo btnEliminar'  data-swal-toast-template='#my-template' data-id=" . $row['id_dependencia'] .  "><i class='fa-solid fa-trash fa-sm me-2'></i>Eliminar</button>
+            <button class='btn btn-primary btn-sm btn-hover-azul btnEditarDependencia fw-semibold' data-bs-toggle='modal' data-bs-target='#modalDependencia' data-id='" . $row['id_dependencia'] . "'><i class='fa-solid fa-pencil fa-sm me-2'></i>Editar</button>
+            <button class='btn btn-danger btn-sm btn-hover-rojo btnEliminar fw-semibold' data-swal-toast-template='#my-template' data-idDependencia='" . $row['id_dependencia'] . "'><i class='fa-solid fa-trash fa-sm me-2'></i>Eliminar</button>
             ";
             $data_json['data'][] = [
                 '0' => $row['dependencia'],
@@ -100,7 +100,7 @@ class dependenciasController extends dependenciasModel
         $codigodepe = $this->limpiarCadena($codigodepe);
         $estado = $this->limpiarCadena($estado);
 
-        if (empty($codigodepe) ){
+        if (empty($codigodepe)) {
             $codigodepe = 'SIN-CDG';
         }
 
@@ -142,5 +142,27 @@ class dependenciasController extends dependenciasModel
         // Devolver la respuesta en formato JSON
         header('Content-Type: application/json');
         echo json_encode($data_json);
+    }
+
+    public function dependencia(string $id){
+        $id = $this->limpiarCadena($id);
+
+         $parametro = [$id];
+
+        $datos_json = [
+            'exito' => false,
+            'messenger' => 'No se pudo obtener los datos de la dependencia',
+        ];
+
+        $datos = $this->getobtenerDependencia($parametro);
+        if ($datos) {
+            $datos_json['exito'] = true;
+            $datos_json['messenger'] = 'Datos de la dependencia obtenidos con exito';
+            $datos_json['datos'] = $datos;
+        }
+
+        // Devolver la respuesta en formato JSON
+        header('Content-Type: application/json');
+        echo json_encode($datos_json); 
     }
 }

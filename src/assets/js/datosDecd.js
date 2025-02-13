@@ -1,4 +1,4 @@
-import {  enviarFormulario } from './ajax/formularioAjax.js';
+import { enviarFormulario } from './ajax/formularioAjax.js';
 import { validarNombre, incluirSelec2, validarSelectoresSelec2, soloNumeros, validarNombreConEspacios } from './ajax/inputs.js';
 import { alertaNormalmix } from './ajax/alerts.js';
 
@@ -143,7 +143,6 @@ $(function () {
                         width: "10%",
                         render: function (data, type, row) {
                             let dataTexto = data;
-                            console.log('holisss:' + dataTexto);
                             const dataTextoMap = {
                                 1: "Activo",
                                 0: "Inactivo",
@@ -427,14 +426,14 @@ $(function () {
             // Revertir los cambios
             $('#codigo').removeClass('cumplido');
             $('.span_codigo').removeClass('cumplido_span');
-    
+
             $('#codigo').addClass('error_input');
             $('.span_codigo').addClass('error_span');
-    
+
             $('#codigo').removeClass('cumplidoNormal');
 
             $('#codigo').val('');
-    
+
             $('#codigo').attr('disabled', false);
         } else {
             // Aplicar los cambios
@@ -445,12 +444,12 @@ $(function () {
             $('.span_codigo').removeClass('cumplido_span');
 
             $('#codigo').addClass('cumplidoNormal');
-    
+
             $('#codigo').addClass('cumplido');
             $('.span_codigo').addClass("cumplido_span");
-    
+
             $('#codigo').val('');
-    
+
             $('#codigo').attr('disabled', true);
         }
     });
@@ -519,7 +518,61 @@ $(function () {
         enviarFormulario('./src/ajax/datosDecd.php?modulo_datos=agregarDepartamento', data, collbackExito, true);
     });
 
+    // Delegación de eventos para el botón btnEditarDependencia
+    $('#tableInic').on('click', '.btnEditarDependencia', async function () {
+        try {
+            let id = $(this).data('id');
+            if (id !== undefined) {
+                try {
+                    // Crear un nuevo FormData y agregar el id
+                    const formData = new FormData();
+                    formData.append('id', id);
 
+                    const response = await fetch(`src/ajax/datosDecd.php?modulo_datos=obtenerDependencia`, {
+                        method: 'POST',
+                        body: formData
+                    });
+
+                    if (!response.ok) {
+                        throw new Error('Error en la solicitud');
+                    } 
+                    
+                    const data = await response.json();
+                    if (data) {
+                        const dependencia = data.datos[0]; // Acceder al primer objeto en el array
+                        console.log(dependencia.dependencia);
+                        $('#dependencia').val(dependencia.dependencia);
+                        $('#estado').val(dependencia.estado).trigger('change');
+                        $('#codigo').val(dependencia.codigo);
+                    } else {
+                        console.error('No se encontraron datos de la dependencia');
+                    }
+                } catch (error) {
+                    console.error('Error al obtener los datos de la dependencia:', error);
+                }
+
+            } else {
+                console.error('El idDependencia es undefined');
+            }
+        } catch (error) {
+            console.error('Error al manejar el evento de clic:', error);
+        }
+    });
+
+    //FUNCION PARA EDITAR DEPENDENCIA
+    async function editarDependencia($id) {
+        try {
+            const response = await fetch(`src/ajax/datosDecd.php?modulo_datos=obtenerDatosDependencia&id=${$id}`);
+            if (!response.ok) {
+                throw new Error('Error en la solicitud');
+            }
+            const data = await response.json();
+            // $('#estado').val(data.data.id_estado).trigger('change');
+
+        } catch (error) {
+            console.error('Error al obtener los datos de la dependencia:', error);
+        }
+    }
     // metodos para escuchar cambios en el dom y habilitar el boton de enviar formulario 
     // Función para verificar si todos los campos están cumplidos en un formulario específico
     function todosCumplidos(form) {
