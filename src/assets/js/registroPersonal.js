@@ -2,7 +2,6 @@
 import {
   colocarMeses,
   colocarYear,
-  limpiarFormulario,
   valdiarCorreos,
   validarBusquedaCedula,
   validarNombre,
@@ -17,14 +16,11 @@ import {
 
 import {
   enviarFormulario,
-  obtenerDatos,
   obtenerDatosJQuery
 } from "./ajax/formularioAjax.js";
 
 import {
   alertaNormalmix,
-  AlertDirection,
-  AlertSW2
 } from "./ajax/alerts.js";
 
 

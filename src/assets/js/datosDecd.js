@@ -1,4 +1,4 @@
-import { enviarFormulario } from './ajax/formularioAjax.js';
+import { enviarFormulario} from './ajax/formularioAjax.js';
 import { validarNombre, incluirSelec2, validarSelectoresSelec2, soloNumeros, validarNombreConEspacios } from './ajax/inputs.js';
 import { alertaNormalmix } from './ajax/alerts.js';
 
@@ -518,35 +518,53 @@ $(function () {
         enviarFormulario('./src/ajax/datosDecd.php?modulo_datos=agregarDepartamento', data, collbackExito, true);
     });
 
+    // Funcion para obtener datos por medio de multiples url
+  function obtenerDatosJQuery(url, options = {}) {
+    let formData = new FormData();
+    for (let key in options) {
+      formData.append(key, options[key]);
+    }
+
+    return $.ajax({
+      url: url,
+      type: 'POST',
+      data: formData,
+      processData: false,
+      contentType: false,
+      dataType: 'json'
+    });
+  }
+
     // Delegación de eventos para el botón btnEditarDependencia
     $('#tableInic').on('click', '.btnEditarDependencia', async function () {
         try {
-            let id = $(this).data('id');
-            if (id !== undefined) {
+            let id2 = $(this).data('id');
+            if (id2 !== undefined) {
                 try {
-                    // Crear un nuevo FormData y agregar el id
-                    const formData = new FormData();
-                    formData.append('id', id);
+                       let urls = [
+                         "src/ajax/datosDecd.php?modulo_datos=obtenerDependencia",
+                         "src/ajax/datosDecd.php?modulo_datos=obtenerEstados",
+                       ];
+                       
+                       let options = { id: id2 };
+                       let requests = urls.map((url, index) => {
+                         if (index === 0) { // Suponiendo que quieres pasar `options` solo a la primera solicitud
+                           return obtenerDatosJQuery(url, options);
+                         } else {
+                           return obtenerDatosJQuery(url);
+                         }
+                       });
+                       $.when(...requests).done((dependencia, estados) => {
 
-                    const response = await fetch(`src/ajax/datosDecd.php?modulo_datos=obtenerDependencia`, {
-                        method: 'POST',
-                        body: formData
-                    });
-
-                    if (!response.ok) {
-                        throw new Error('Error en la solicitud');
-                    } 
-                    
-                    const data = await response.json();
-                    if (data) {
-                        const dependencia = data.datos[0]; // Acceder al primer objeto en el array
-                        console.log(dependencia.dependencia);
-                        $('#dependencia').val(dependencia.dependencia);
-                        $('#estado').val(dependencia.estado).trigger('change');
-                        $('#codigo').val(dependencia.codigo);
-                    } else {
-                        console.error('No se encontraron datos de la dependencia');
-                    }
+                         if (dependencia[0].exito) {
+                           console.log(dependencia);
+                   
+                         } else {
+                           console.error('Error al obtener dependencias o la estructura de la respuesta es incorrecta');
+                         }
+                       }).fail((jqXHR, textStatus, errorThrown) => {
+                         console.error('Error al obtener los datos:', textStatus, errorThrown);
+                       });
                 } catch (error) {
                     console.error('Error al obtener los datos de la dependencia:', error);
                 }
@@ -572,6 +590,24 @@ $(function () {
         } catch (error) {
             console.error('Error al obtener los datos de la dependencia:', error);
         }
+    }
+
+    async function llenarSelectDependencias(data, selectId) {
+
+        const select = document.getElementById(selectId);
+        console.log(data);
+        // Asegúrate de que el ID del select sea correcto
+        if (!select) {
+            console.error(`El elemento select con el ID "${selectId}" no se encontró en el DOM.`);
+            return;
+        }
+
+        data.forEach(item => {
+            const option = document.createElement('option');
+            option.value = item.id;
+            option.text = item.value;
+            select.appendChild(option);
+        });
     }
     // metodos para escuchar cambios en el dom y habilitar el boton de enviar formulario 
     // Función para verificar si todos los campos están cumplidos en un formulario específico

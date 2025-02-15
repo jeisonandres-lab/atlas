@@ -49,9 +49,6 @@ switch ($_GET['modulo_datos']) {
     case 'obtenerEstados':
         $dependencias->datosEstado();
         break;
-    case 'obtenerEstados':
-        $dependencias->datosEstado();
-        break;
     case 'agregarDependencia':
         $dependencias->regisDependencia($nombredepen, $codigodepen, $estadodepen);
         break;
