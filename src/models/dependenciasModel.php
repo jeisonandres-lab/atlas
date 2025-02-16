@@ -35,7 +35,16 @@ class dependenciasModel extends Conexion
         return $sql;
     }
 
-
+    private function verificarCodigo($tabla, $codigo)
+    {
+        if ($codigo == "SIN-CDG") {
+            $parametro = [''];
+        } else {
+            $parametro = [$codigo];
+        }
+        $sql = $this->ejecutarConsulta("SELECT * FROM $tabla WHERE codigo = ?", $parametro);
+        return $sql;
+    }
     // Getters Para Accder a los Metodos de la Clase
     public function getDatosDependencia()
     {
@@ -62,4 +71,8 @@ class dependenciasModel extends Conexion
         return $this->obtenerdependencia($parametro);
     }
 
+    public function getVerificarCodigo($tabla, $codigo)
+    {
+        return $this->verificarCodigo($tabla, $codigo);
+    }
 }

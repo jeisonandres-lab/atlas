@@ -23,16 +23,18 @@ export async function validarNombre(input, cumplidospan) {
 // Funcion para validar campos tipo text que coloquen la primera letra de cada palabra en mayuscula y permitan espacios
 export async function validarNombreConEspacios(input, cumplidospan) {
   $(input).on("input", function () {
-    // Convertir todo a minúsculas y capitalizar la primera letra de cada palabra
-    this.value = this.value.toLowerCase().replace(/\b\w/g, (char) => char.toUpperCase());
-    this.value = this.value.replace(/[^a-zA-Z\s]/g, ""); // Permitir solo letras y espacios
+    // Convertir la primera letra de cada palabra a mayúscula y mantener el resto en su estado original
+    this.value = this.value.replace(/\b\w/g, (char) => char.toUpperCase());
+
+    // Permitir solo letras y espacios
+    this.value = this.value.replace(/[^a-zA-Z\s]/g, "");
 
     if (this.value.length < 3) {
       $(this).removeClass("cumplido");
       $(this).addClass("error_input");
       $(cumplidospan).removeClass("cumplido_span");
       $(cumplidospan).addClass("error_span");
-    } else if (this.value.length >= 4 ) {
+    } else if (this.value.length >= 4) {
       $(this).removeClass("error_input");
       $(this).addClass("cumplido");
       $(cumplidospan).removeClass("error_span");

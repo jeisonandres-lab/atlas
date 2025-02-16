@@ -24,6 +24,14 @@ class estatusModel extends Conexion{
         return $sql;
     }
 
+    private function verificarEstatus($tabla, $estatus)
+    {
+        $parametro = [$estatus];
+        $sql = $this->ejecutarConsulta("SELECT * FROM $tabla WHERE estatus = ?", $parametro);
+
+        return $sql;
+    }
+
     // Getters Para Accder a los Metodos de la Clase
     public function getDatosEstatus()
     {
@@ -40,6 +48,10 @@ class estatusModel extends Conexion{
         return $this->registrarEstatus($tabla, $datos);
     }
 
+    public function getValidarEstatus($tabla, $estatus)
+    {
+        return $this->verificarEstatus($tabla, $estatus);
+    }
 
 
 }

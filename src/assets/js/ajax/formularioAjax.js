@@ -14,7 +14,7 @@ export async function enviarFormulario(url, datos, callbackExito, ejecutarCallba
                 try {
                     // Intenta parsear los datos como JSON
                     const parsedData = data;
-                    console.table(parsedData)
+                    // console.table(parsedData)
 
                     if (ejecutarCallback) {
                         callbackExito(parsedData);
@@ -101,19 +101,43 @@ export async function obtenerDatos(url, metodo = 'POST') {
 
 export async function obtenerDatosJQuery(url, options = {}) {
     let formData = new FormData();
-    for (let key in options) {
-        formData.append(key, options[key]);
-    }
-
-    return $.ajax({
-        url: url,
-        type: 'POST',
-        data: formData,
-        processData: false,
-        contentType: false,
-        dataType: 'json'
-    });
+        for (let key in options) {
+            formData.append(key, options[key]);
+        }
+    
+        try {
+            const response = await fetch(url, {
+                method: 'POST',
+                body: formData
+            });
+    
+            if (!response.ok) {
+                throw new Error('Error en la solicitud');
+            }
+    
+            const data = await response.json();
+            return data;
+        } catch (error) {
+            console.error('Error al obtener los datos:', error);
+            throw error;
+        }
 }
+
+// export async function obtenerDatosJQuery(url, options = {}) {
+//     let formData = new FormData();
+//     for (let key in options) {
+//         formData.append(key, options[key]);
+//     }
+
+//     return $.ajax({
+//         url: url,
+//         type: 'POST',
+//         data: formData,
+//         processData: false,
+//         contentType: false,
+//         dataType: 'json'
+//     });
+// }
 // Función para generar un hash seguro con sal
 export function generarHashContrasena(contrasena) {
     // Generar una sal aleatoria de 16 bytes (32 caracteres hexadecimales)
@@ -133,7 +157,6 @@ export function verificarContrasena(contrasena, hashAlmacenado) {
     // Comparar los hashes
     return hashCalculado === hashParte;
 }
-
 
 export async function descargarArchivo(url, nombreArchivo) {
     try {

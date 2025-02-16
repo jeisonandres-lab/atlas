@@ -1,6 +1,6 @@
-import { enviarFormulario} from './ajax/formularioAjax.js';
+import { enviarFormulario, obtenerDatosJQuery } from './ajax/formularioAjax.js';
 import { validarNombre, incluirSelec2, validarSelectoresSelec2, soloNumeros, validarNombreConEspacios } from './ajax/inputs.js';
-import { alertaNormalmix } from './ajax/alerts.js';
+import { alertaNormalmix, AlertSW2, aletaCheck } from './ajax/alerts.js';
 
 $(function () {
     const btnDependencia = document.querySelector('#btnAgregarDependencia');
@@ -393,8 +393,8 @@ $(function () {
             const data = await response.json();
             data.data.forEach(item => {
                 const option = document.createElement('option');
-                option.value = item.id_estado;
-                option.text = item.estado;
+                option.value = item.id;
+                option.text = item.value;
                 select.appendChild(option);
             });
         } catch (error) {
@@ -406,6 +406,8 @@ $(function () {
         //Abrir Modal
         $('#modalCargo').modal('show');
         $('#cargo').val('');
+        $('#cargo').removeClass('cumplido');
+        $('.span_cargo').removeClass('cumplido_span');
     });
 
     btnEstatus.addEventListener('click', async () => {
@@ -418,6 +420,8 @@ $(function () {
         //Abrir Modal
         $('#modalDepartamento').modal('show');
         $('#departamento').val('');
+        $('#departamento').removeClass('cumplido');
+        $('.span_departamento').removeClass('cumplido_span');
     });
 
     btnSinCodigo.addEventListener('click', async () => {
@@ -454,121 +458,151 @@ $(function () {
         }
     });
 
-    //FORMULARIO DE DEPENDENCIA
-    $('.formularioDepen').on('submit', async function (e) {
-        e.preventDefault();
+    function registrarEditar(id, modulo, formulario) {
         function collbackExito(data) {
             if (data) {
                 if (data.exito) {
                     alertaNormalmix(data.messenger, 3000, 'success', 'top-end');
                 } else {
-                    console.log('si llegaorn datos pero la respuesta fue falsa')
+                    alertaNormalmix(data.messenger, 3000, 'error', 'top-end');
                 }
             } else {
                 alert('Error al registrar');
             }
         }
-        const form = new FormData(this);
-        const data = form;
-        enviarFormulario('./src/ajax/datosDecd.php?modulo_datos=agregarDependencia', data, collbackExito, true);
+        if (id !== undefined) {
+            const form = new FormData(formulario);
+            const data = form;
+            enviarFormulario(`./src/ajax/datosDecd.php?modulo_datos=${modulo}`, data, collbackExito, true);
+        } else {
+            const form = new FormData(formulario);
+            const data = form;
+            enviarFormulario(`./src/ajax/datosDecd.php?modulo_datos=${modulo}`, data, collbackExito, true);
+        }
+        tableInic.ajax.reload(null, false);
+    }
+
+    function eliminarActivar(id, activo, modulo, messenger, icon) {
+        let formData = new FormData();
+        formData.append('id', id); // Añadir id al FormData
+        formData.append('activo', activo); // Añadir activador al FormData
+        function callbackExito(parsedData) {
+            // Manejar la respuesta exitosa aquí
+            tableInic.ajax.reload(null, false);
+            AlertSW2("success", parsedData.messenger, "top", 3000);
+        }
+
+        function enviar() {
+            enviarFormulario(`./src/ajax/datosDecd.php?modulo_datos=${modulo}`, formData, callbackExito, true);
+        }
+        // parametros para la alerta
+        aletaCheck(messenger, icon, 'top-end', enviar);
+    }
+
+    //FORMULARIO DE DEPENDENCIA
+    $('.formularioDepen').on('submit', async function (e) {
+        e.preventDefault();
+        if ($(this).hasClass('editarDependencia')) {
+            let id = $('#identificador_depe').val();
+            registrarEditar(id, 'editarDependencia', this);
+            $(this).removeClass('editarDependencia');
+            $('#modalDependencia').modal('hide');
+        } else {
+            registrarEditar('', 'agregarDependencia', this);
+            $('#modalDependencia').modal('hide');
+        }
+        tableInic.ajax.reload(null, false);
     });
 
     //FORMULARIO DE ESTATUS
     $('.formularioEstatus').on('submit', function (e) {
         e.preventDefault();
-        async function collbackExito(data) {
-            if (data.exito) {
-                alertaNormalmix(data.messenger, 3000, 'success', 'top-end');
-            } else {
-                console.log('si llegaorn datos pero la respuesta fue falsa')
-            }
+        if ($(this).hasClass('editarEstatus')) {
+            let id = $('#identificador_Estatus').val();
+            registrarEditar(id, 'editarEstatus', this);
+            $(this).removeClass('editarEstatus');
+            $('#modalEstatus').modal('hide');
+        } else {
+            registrarEditar('', 'agregarEstatus', this);
+            $('#modalEstatus').modal('hide');
         }
-        const form = new FormData(this);
-        const data = form;
-        enviarFormulario('./src/ajax/datosDecd.php?modulo_datos=agregarEstatus', data, collbackExito, true);
+        tableInic.ajax.reload(null, false);
     });
 
     //FORMULARIO CARGO
     $('.formularioCargo').on('submit', function (e) {
         e.preventDefault();
-        async function collbackExito(data) {
-            if (data.exito) {
-                alertaNormalmix(data.messenger, 3000, 'success', 'top-end');
-            } else {
-                console.log('si llegaorn datos pero la respuesta fue falsa');
-            }
+        if ($(this).hasClass('editarCargo')) {
+            let id = $('#identificador_cargo').val();
+            registrarEditar(id, 'editarCargo', this);
+            $(this).removeClass('editarCargo');
+            $('#modalCargo').modal('hide');
+        } else {
+            registrarEditar('', 'agregarCargo', this);
+            $('#modalCargo').modal('hide');
         }
-        const form = new FormData(this);
-        const data = form;
-        enviarFormulario('./src/ajax/datosDecd.php?modulo_datos=agregarCargo', data, collbackExito, true);
+        tableInic.ajax.reload(null, false);
     });
 
     //FORMULARIO DEPARTAMENTO
     $('.formularioDepa').on('submit', function (e) {
         e.preventDefault();
-        async function collbackExito(data) {
-            if (data.exito) {
-                alertaNormalmix(data.messenger, 3000, 'success', 'top-end');
-            } else {
-                console.log('si llegaorn datos pero la respuesta fue falsa')
-            }
+        if ($(this).hasClass('editarDepa')) {
+            let id = $('#identificador_cargo').val();
+            registrarEditar(id, 'editarDepartamento', this);
+            $(this).removeClass('editarDepa');
+            $('#modalDepartamento').modal('hide');
+        } else {
+            registrarEditar('', 'agregarDepartamento', this);
+            $('#modalDepartamento').modal('hide');
+            tableInic.ajax.reload(null, false);
         }
-        const form = new FormData(this);
-        const data = form;
-        enviarFormulario('./src/ajax/datosDecd.php?modulo_datos=agregarDepartamento', data, collbackExito, true);
+        tableInic.ajax.reload(null, false);
     });
 
-    // Funcion para obtener datos por medio de multiples url
-  function obtenerDatosJQuery(url, options = {}) {
-    let formData = new FormData();
-    for (let key in options) {
-      formData.append(key, options[key]);
-    }
-
-    return $.ajax({
-      url: url,
-      type: 'POST',
-      data: formData,
-      processData: false,
-      contentType: false,
-      dataType: 'json'
-    });
-  }
-
-    // Delegación de eventos para el botón btnEditarDependencia
+    // Delegación de dependencia
     $('#tableInic').on('click', '.btnEditarDependencia', async function () {
         try {
-            let id2 = $(this).data('id');
-            if (id2 !== undefined) {
+            let id = $(this).data('id');
+            if (id !== undefined) {
                 try {
-                       let urls = [
-                         "src/ajax/datosDecd.php?modulo_datos=obtenerDependencia",
-                         "src/ajax/datosDecd.php?modulo_datos=obtenerEstados",
-                       ];
-                       
-                       let options = { id: id2 };
-                       let requests = urls.map((url, index) => {
-                         if (index === 0) { // Suponiendo que quieres pasar `options` solo a la primera solicitud
-                           return obtenerDatosJQuery(url, options);
-                         } else {
-                           return obtenerDatosJQuery(url);
-                         }
-                       });
-                       $.when(...requests).done((dependencia, estados) => {
+                    let urls = [
+                        "src/ajax/datosDecd.php?modulo_datos=obtenerDependencia",
+                        "src/ajax/datosDecd.php?modulo_datos=obtenerEstados",
+                    ];
 
-                         if (dependencia[0].exito) {
-                           console.log(dependencia);
-                   
-                         } else {
-                           console.error('Error al obtener dependencias o la estructura de la respuesta es incorrecta');
-                         }
-                       }).fail((jqXHR, textStatus, errorThrown) => {
-                         console.error('Error al obtener los datos:', textStatus, errorThrown);
-                       });
+                    let options = { id: id };
+                    let requests = urls.map((url, index) => {
+                        if (index === 0) { // Suponiendo que quieres pasar `options` solo a la primera solicitud
+                            return obtenerDatosJQuery(url, options);
+                        } else {
+                            return obtenerDatosJQuery(url);
+                        }
+                    });
+
+                    const [dependencia, estados] = await Promise.all(requests);
+
+                    if (dependencia.exito && estados) {
+                        const data = dependencia;
+                        llenarSelectDependencias(estados.data, 'estado');
+                        $('#identificador_depe').val(data.id_dependencia);
+                        $('#dependencia').val(data.dependencia);
+                        $('#dependencia').addClass('cumplido');
+                        $('.span_dependencia').addClass('cumplido_span');
+
+                        $('#estado').val(data.idestado).trigger('change');
+
+                        $('#codigo').val(data.codigo);
+                        $('#codigo').addClass('cumplido');
+                        $('.span_codigo').addClass('cumplido_span');
+
+                        $('.formularioDepen').addClass('editarDependencia');
+                    } else {
+                        console.error('Error al obtener dependencias o la estructura de la respuesta es incorrecta');
+                    }
                 } catch (error) {
                     console.error('Error al obtener los datos de la dependencia:', error);
                 }
-
             } else {
                 console.error('El idDependencia es undefined');
             }
@@ -577,20 +611,104 @@ $(function () {
         }
     });
 
-    //FUNCION PARA EDITAR DEPENDENCIA
-    async function editarDependencia($id) {
-        try {
-            const response = await fetch(`src/ajax/datosDecd.php?modulo_datos=obtenerDatosDependencia&id=${$id}`);
-            if (!response.ok) {
-                throw new Error('Error en la solicitud');
-            }
-            const data = await response.json();
-            // $('#estado').val(data.data.id_estado).trigger('change');
+    $('#tableInic').on('click', '.btnEliminarDependencia', async function () {
+        let id = $(this).data('id');
+        let messenger = 'Estás a punto de <b class="text-danger"><i class="fa-solid fa-xmark"></i> <u>eliminar</u></b> este registro. ¿Deseas continuar?';
+        eliminarActivar(id, 0, 'eliminarActivarDependencia', messenger, 'warning');
+    });
 
-        } catch (error) {
-            console.error('Error al obtener los datos de la dependencia:', error);
-        }
-    }
+    $('#tableInic').on('click', '.btnActivarDependencia', async function () {
+        let id = $(this).data('id');
+        const messenger = 'Estás a punto de <b class="text-success"><i class="fa-solid fa-check"></i> <u>activar</u></b> este registro. ¿Deseas continuar?';
+        eliminarActivar(id, 1, 'eliminarActivarDependencia', messenger, 'success');
+    })
+
+
+    // Delegación de cargo
+    $('#tableInic').on('click', '.btnEditarCargo', async function () {
+        let id = $(this).data('id');
+        // Obtener la fila correspondiente al botón clicado
+        let row = $(this).closest('tr');
+        // Obtener los datos de la fila
+        let rowData = tableInic.row(row).data();
+        // Obtener el primer campo de la fila
+        let primerCampo = rowData[0];
+        $('#identificador_cargo').val(id);
+        $('#cargo').val(primerCampo);
+        $('#cargo').addClass('cumplido');
+        $('.span_cargo').addClass('cumplido_span');
+        $('.formularioCargo').addClass('editarCargo');
+    });
+
+    $('#tableInic').on('click', '.btnEliminarCargo', async function () {
+        let id = $(this).data('id');
+        let messenger = 'Estás a punto de <b class="text-danger"><i class="fa-solid fa-xmark"></i> <u>eliminar</u></b> este registro. ¿Deseas continuar?';
+        eliminarActivar(id, 0, 'eliminarActivarCargo', messenger, 'warning');
+    });
+
+    $('#tableInic').on('click', '.btnActivarCargo', async function () {
+        let id = $(this).data('id');
+        const messenger = 'Estás a punto de <b class="text-success"><i class="fa-solid fa-check"></i> <u>activar</u></b> este registro. ¿Deseas continuar?';
+        eliminarActivar(id, 1, 'eliminarActivarCargo', messenger, 'success');
+    })
+
+
+    // Delegación de estatus
+    $('#tableInic').on('click', '.btnEditarEstatus', async function () {
+        let id = $(this).data('id');
+        // Obtener la fila correspondiente al botón clicado
+        let row = $(this).closest('tr');
+        // Obtener los datos de la fila
+        let rowData = tableInic.row(row).data();
+        // Obtener el primer campo de la fila
+        let primerCampo = rowData[0];
+        $('#identificador_estatus').val(id);
+        $('#estatus').val(primerCampo);
+        $('#estatus').addClass('cumplido');
+        $('.span_estatus').addClass('cumplido_span');
+        $('.formularioEstatus').addClass('editarEstatus');
+    });
+
+    $('#tableInic').on('click', '.btnEliminarEstatus', async function () {
+        let id = $(this).data('id');
+        let messenger = 'Estás a punto de <b class="text-danger"><i class="fa-solid fa-xmark"></i> <u>eliminar</u></b> este registro. ¿Deseas continuar?';
+        eliminarActivar(id, 0, 'eliminarActivarEstatus', messenger, 'warning');
+    });
+
+    $('#tableInic').on('click', '.btnActivarEstatus', async function () {
+        let id = $(this).data('id');
+        const messenger = 'Estás a punto de <b class="text-success"><i class="fa-solid fa-check"></i> <u>activar</u></b> este registro. ¿Deseas continuar?';
+        eliminarActivar(id, 1, 'eliminarActivarEstatus', messenger, 'success');
+    })
+
+
+    // Delegación de departamento
+    $('#tableInic').on('click', '.btnEditarDepa', async function () {
+        let id = $(this).data('id');
+        // Obtener la fila correspondiente al botón clicado
+        let row = $(this).closest('tr');
+        // Obtener los datos de la fila
+        let rowData = tableInic.row(row).data();
+        // Obtener el primer campo de la fila
+        let primerCampo = rowData[0];
+        $('#identificador_depa').val(id);
+        $('#departamento').val(primerCampo);
+        $('#departamento').addClass('cumplido');
+        $('.span_departamento').addClass('cumplido_span');
+        $('.formularioDepa').addClass('editarDepa');
+    });
+
+    $('#tableInic').on('click', '.btnEliminarDepa', async function () {
+        let id = $(this).data('id');
+        let messenger = 'Estás a punto de <b class="text-danger"><i class="fa-solid fa-xmark"></i> <u>eliminar</u></b> este registro. ¿Deseas continuar?';
+        eliminarActivar(id, 0, 'eliminarActivarDepartamento', messenger, 'warning');
+    });
+
+    $('#tableInic').on('click', '.btnActivarDepa', async function () {
+        let id = $(this).data('id');
+        const messenger = 'Estás a punto de <b class="text-success"><i class="fa-solid fa-check"></i> <u>activar</u></b> este registro. ¿Deseas continuar?';
+        eliminarActivar(id, 1, 'eliminarActivarDepartamento', messenger, 'success');
+    })
 
     async function llenarSelectDependencias(data, selectId) {
 

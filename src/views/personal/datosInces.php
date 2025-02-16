@@ -95,6 +95,7 @@ use App\Atlas\config\App;
                             <form action="" method="post" class="formularioDepen p-3" accept-charset="UTF-8">
                                 <div class="row">
                                     <div class="section-body col-lg-12">
+                                        <input type="text" value="" id="identificador_depe" class="cumplido" name="id" hidden>
                                         <div class="col-sm-12 col-md-12 col-xl-12 col-xxl-12 mb-3">
                                             <div class="form-group">
                                                 <label for="dependencia">Nombre Dependencia</label>
@@ -158,6 +159,7 @@ use App\Atlas\config\App;
                                 <div class="row">
                                     <div class="section-body col-lg-12">
                                         <div class="col-sm-12 col-md-12 col-xl-12 col-xxl-12 mb-3">
+                                            <input type="text" value="" id="identificador_cargo" class="cumplido" name="id" hidden>
                                             <div class="form-group">
                                                 <label for="cargo">Nombre Del Cargo</label>
                                                 <div class="input-group">
@@ -168,8 +170,9 @@ use App\Atlas\config\App;
                                         </div>
                                     </div>
                                 </div>
-                                <div style="background-color:#FE9001;" class="barra_naranja"></div>
                         </section>
+                        <div style="background-color:#FE9001;" class="barra_naranja"></div>
+
                     </div>
                     <div class="modal-footer p-1">
                         <button type="submit" class="btn btn-primary aceptar" id="aceptar">Guardar</button>
@@ -196,6 +199,7 @@ use App\Atlas\config\App;
                                 <div class="row">
                                     <div class="section-body col-lg-12">
                                         <div class="col-sm-12 col-md-12 col-xl-12 col-xxl-12 mb-3">
+                                            <input type="text" value="" id="identificador_estatus" class="cumplido" name="id" hidden>
                                             <div class="form-group">
                                                 <label for="estatus">Nombre Del Estatus</label>
                                                 <div class="input-group">
@@ -206,8 +210,8 @@ use App\Atlas\config\App;
                                         </div>
                                     </div>
                                 </div>
-                                <div style="background-color:#FE9001;" class="barra_naranja"></div>
                         </section>
+                        <div style="background-color:#FE9001;" class="barra_naranja"></div>
                     </div>
                     <div class="modal-footer p-1">
                         <button type="submit" class="btn btn-primary aceptar" id="aceptar">Guardar</button>
@@ -235,6 +239,7 @@ use App\Atlas\config\App;
                                 <div class="row">
                                     <div class="section-body col-lg-12">
                                         <div class="col-sm-12 col-md-12 col-xl-12 col-xxl-12 mb-3">
+                                            <input type="text" value="" id="identificador_depa" class="cumplido" name="id" hidden>
                                             <div class="form-group">
                                                 <label for="departamento">Nombre Del Departamento</label>
                                                 <div class="input-group">

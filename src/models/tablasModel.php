@@ -16,7 +16,8 @@ class tablasModel extends conexion
         array $datosBuscar,
         string $campoOrden,
         array $conditions = null,
-        array $conditionParams = []
+        array $conditionParams = [],
+        $orderTable
     ) {
         $sql = "SELECT $selectores FROM $tabla";
 
@@ -48,7 +49,7 @@ class tablasModel extends conexion
         }
 
         // Añadir la cláusula ORDER BY y LIMIT para la paginación
-        $sql .= " ORDER BY $campoOrden ASC LIMIT ?, ?";
+        $sql .= " ORDER BY $campoOrden $orderTable LIMIT ?, ?";
         $parametros[] = (int) $start;
         $parametros[] = (int) $length;
 
@@ -102,9 +103,9 @@ class tablasModel extends conexion
         return $this->ejecutarConsulta($sql, $conditionParams);
     }
 
-    public function getTodoDatosPersonal($selectores, $tabla, $start, $length, $searchValue, $datosBuscar, $campoOrden, $conditions, $conditionParams)
+    public function getTodoDatosPersonal($selectores, $tabla, $start, $length, $searchValue, $datosBuscar, $campoOrden, $conditions, $conditionParams, $orderTable)
     {
-        return $this->obtenertodosDatos($selectores, $tabla, $start, $length, $searchValue, $datosBuscar, $campoOrden, $conditions, $conditionParams);
+        return $this->obtenertodosDatos($selectores, $tabla, $start, $length, $searchValue, $datosBuscar, $campoOrden, $conditions, $conditionParams, $orderTable);
     }
 
     public function getCantidadRegistros($tabla, $parametros, $conditions, $conditionParams)

@@ -798,7 +798,7 @@ class personalController extends personalModel
         // Obtener la cantidad de los datos de la tabla
         $cantidadRegistro = $this->tablas->getCantidadRegistros($tabla, $selectoresCantidad, $conditions, $conditionParams);
         // Obtener los datos de la tabla
-        $personal = $this->tablas->getTodoDatosPersonal($selectores, $tabla, $start, $length, $searchValue, $datosBuscar, $campoOrden, $conditions, $conditionParams);
+        $personal = $this->tablas->getTodoDatosPersonal($selectores, $tabla, $start, $length, $searchValue, $datosBuscar, $campoOrden, $conditions, $conditionParams, $orderTable = 'ASC');
         // Recorrer datos de la tabla
         foreach ($personal as $row) {
             $data_json['exito'] = true;
@@ -859,7 +859,7 @@ class personalController extends personalModel
         // Obtener la cantidad de los datos de la tabla
         $cantidadRegistro = $this->tablas->getCantidadRegistros($tabla, $selectoresCantidad, $conditions, $conditionParams);
         // Obtener los datos de la tabla
-        $personal = $this->tablas->getTodoDatosPersonal($selectores, $tabla, $start, $length, $searchValue, $datosBuscar, $campoOrden, $conditions, $conditionParams);
+        $personal = $this->tablas->getTodoDatosPersonal($selectores, $tabla, $start, $length, $searchValue, $datosBuscar, $campoOrden, $conditions, $conditionParams, $orderTable = 'ASC');
         // Recorrer datos de la tabla
         foreach ($personal as $row) {
             $data_json['exito'] = true;

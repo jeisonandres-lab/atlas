@@ -25,6 +25,14 @@ class cargoModel extends Conexion
         return $sql;
     }
 
+    private function verificarCargo($tabla, $cargo)
+    {
+        $parametro = [$cargo];
+        $sql = $this->ejecutarConsulta("SELECT * FROM $tabla WHERE cargo = ?", $parametro);
+        
+        return $sql;
+    }
+
     // Getters Para Accder a los Metodos de la Clase
     public function getDatosCargo()
     {
@@ -39,5 +47,10 @@ class cargoModel extends Conexion
     public function getRegistrarCargo($tabla, $datos)
     {
         return $this->registrarCargo($tabla, $datos);
+    }
+
+    public function getVerificarCargo($tabla, $cargo)
+    {
+        return $this->verificarCargo($tabla, $cargo);
     }
 }

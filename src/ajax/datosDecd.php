@@ -17,6 +17,7 @@ $estatus = new estatusController();
 $departamento = new departamentoController();
 
 $id= isset($_POST['id']) ? $conexion->limpiarCadena($_POST['id']) : "";
+$activo = isset($_POST['activo']) ? $conexion->limpiarCadena($_POST['activo']) : "";
 
 //DATOS DE DEPENDENCIA
 $nombredepen = isset($_POST['dependencia']) ? $conexion->limpiarCadena($_POST['dependencia']) : "";
@@ -64,27 +65,29 @@ switch ($_GET['modulo_datos']) {
     case 'obtenerDependencia':
         $dependencias->dependencia($id);
         break;
-    case 'obtenerCargo':
-        break;
-    case 'obtenerEstatus':
-        break;
-    case 'obtenerDepartamento':
-        break;
     case 'editarDependencia':
+        $dependencias->editarDependencia($id, $nombredepen, $codigodepen, $estadodepen);
         break;
     case 'editarCargo':
+        $cargo->editarCargo($id, $nombreCargo);
         break;
     case 'editarEstatus':
+        $estatus->editarEstatus($id, $nombreEstatus);
         break;
     case 'editarDepartamento':
+        $departamento->editarDepartamento($id, $nombreDepartamento);
         break;
-    case 'eliminarDependencia':
+    case 'eliminarActivarDependencia':
+        $dependencias->eliminarActivarDependencia($id, $activo);
         break;
-    case 'eliminarCargo':
+    case 'eliminarActivarCargo':
+        $cargo->eliminarActivarCargo($id, $activo);
         break;
-    case 'eliminarEstatus':
+    case 'eliminarActivarEstatus':
+        $estatus->eliminarActivarEstatus($id, $activo);
         break;
-    case 'eliminarDepartamento':
+    case 'eliminarActivarDepartamento':
+        $departamento->eliminarActivarDepartamento($id, $activo);
         break;
 
     default:

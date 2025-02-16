@@ -34,14 +34,22 @@ class departamentoController extends departamentoModel
         // Obtener la cantidad de los datos de la tabla
         $cantidadRegistro = $this->tablas->getCantidadRegistros($tabla, $selectoresCantidad, $conditions, $conditionParams);
         // Obtener los datos de la tabla
-        $personal = $this->tablas->getTodoDatosPersonal($selectores, $tabla, $start, $length, $searchValue, $datosBuscar, $campoOrden, $conditions, $conditionParams);
+        $personal = $this->tablas->getTodoDatosPersonal($selectores, $tabla, $start, $length, $searchValue, $datosBuscar, $campoOrden, $conditions, $conditionParams, $ordenTabla = 'DESC');
         // Recorrer datos de la tabla
 
         foreach ($personal as $row) {
-            $buttons =  "
-            <button class='btn btn-primary btn-sm btn-hover-azul btnEditarDependencia fw-semibold' data-bs-toggle='modal' data-bs-target='#editarDatosFamiliar' data-cedula=" . $row['id_departamento'] . "><i class='fa-solid fa-pencil fa-sm me-2'></i>Editar</button>
-            <button class='btn btn-danger btn-sm btn-hover-rojo btnEliminar'  data-swal-toast-template='#my-template' data-id=" . $row['id_departamento'] .  "><i class='fa-solid fa-trash fa-sm me-2'></i>Eliminar</button>
-            ";
+            $buttons = "
+                <button class='btn btn-primary btn-sm btn-hover-azul btnEditarDepa fw-semibold' data-bs-toggle='modal' data-bs-target='#modalDepartamento' data-id='" . $row['id_departamento'] . "'><i class='fa-solid fa-pencil fa-sm me-2'></i>Editar</button>
+               ";
+            if ($row['activo'] == 0) {
+                $buttons .= "
+                <button class='btn btn-success btn-sm btn-hover-verde btnActivarDepa fw-semibold' data-id='" . $row['id_departamento'] . "'><i class='fa-solid fa-check fa-sm me-2'></i>Activar</button>
+                ";
+            } else {
+                $buttons .= "
+                <button class='btn btn-danger btn-sm btn-hover-rojo btnEliminarDepa fw-semibold' data-swal-toast-template='#my-template' data-id='" . $row['id_departamento'] . "'><i class='fa-solid fa-trash fa-sm me-2'></i>Eliminar</button>
+                ";
+            }
             $data_json['data'][] = [
                 '0' => $row['departamento'],
                 '1' => $row['activo'],
@@ -83,15 +91,99 @@ class departamentoController extends departamentoModel
             ],
         ];
 
-        $registro =  $this->getRegistrarDepartamento('departamento', $parametros);
-        if ($registro) {
-            $datos_json['messenger'] = "Registro de departamento exitoso";
-            $datos_json['exito'] = true;
+        $validar = $this->getValidarDepartamento('departamento',  $nombreDepartamento);
+        if (empty($validar)) {
+            $registro =  $this->getRegistrarDepartamento('departamento', $parametros);
+            if ($registro) {
+                $datos_json['messenger'] = "Registro de departamento exitoso";
+                $datos_json['exito'] = true;
+            } else {
+                $datos_json['messenger'] = "Error al registrar";
+            }
         } else {
-            $datos_json['messenger'] = "Error al registrar";
+            $data_json['messenger'] = "El Departamento ya se encuentra registrado";
         }
+
 
         header('Content-Type: application/json');
         echo json_encode($datos_json);
+    }
+
+    public function editarDepartamento($id, $Departamento)
+    {
+        $data_json = [
+            'messenger' => '',
+            'exito' => false
+        ];
+        $parametros = [
+            [
+                "campo_nombre" => "departamento",
+                "campo_marcador" => ":departamento",
+                "campo_valor" => $Departamento
+            ],
+
+        ];
+
+        $condicion = [
+            "condicion_campo" => "id_departamento",
+            "condicion_marcador" => ":id_departamento",
+            "condicion_valor" => $id
+        ];
+
+        $validar = $this->getValidarDepartamento('departamento',  $Departamento);
+        if (empty($validar)) {
+            $registro = $this->getActulizarDepartamento('departamento', $parametros,  $condicion);
+            if ($registro) {
+                $data_json['messenger'] = "Departamento editado con éxito";
+                $data_json['exito'] = true;
+            } else {
+                $data_json['messenger'] = "Error al editar el cargo";
+            }
+        } else {
+            $data_json['messenger'] = "El Departamento ya se encuentra registrado";
+        }
+
+
+        header('Content-Type: application/json');
+        echo json_encode($data_json);
+    }
+
+    public function eliminarActivarDepartamento(string $id, $activo)
+    {
+        $data_json = [
+            'exito' => false,
+            'messenger' => 'No se pudo obtener los datos de la dependencia',
+        ];
+
+        $id = $this->limpiarCadena($id);
+        $activador = $activo;
+
+        $parametros = [
+            [
+                "campo_nombre" => "activo",
+                "campo_marcador" => ":activo",
+                "campo_valor" =>  $activador
+            ]
+        ];
+
+        $condicion = [
+            "condicion_campo" => "id_departamento",
+            "condicion_marcador" => ":id_departamento",
+            "condicion_valor" => $id
+        ];
+
+        $actualizar = $this->getActulizarDepartamento('departamento', $parametros, $condicion);
+
+        if ($actualizar) {
+            $data_json['exito'] = true;
+            if ($activador == 1) {
+                $data_json['messenger'] = 'Departamento activado con exito';
+            } else {
+                $data_json['messenger'] = 'Departamento desactivado con exito';
+            }
+        }
+        // Devolver la respuesta en formato JSON
+        header('Content-Type: application/json');
+        echo json_encode($data_json);
     }
 }

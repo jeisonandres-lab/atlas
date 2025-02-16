@@ -42,14 +42,22 @@ class dependenciasController extends dependenciasModel
         // Obtener la cantidad de los datos de la tabla
         $cantidadRegistro = $this->tablas->getCantidadRegistros($tabla, $selectoresCantidad, $conditions, $conditionParams);
         // Obtener los datos de la tabla
-        $personal = $this->tablas->getTodoDatosPersonal($selectores, $tabla, $start, $length, $searchValue, $datosBuscar, $campoOrden, $conditions, $conditionParams);
+        $personal = $this->tablas->getTodoDatosPersonal($selectores, $tabla, $start, $length, $searchValue, $datosBuscar, $campoOrden, $conditions, $conditionParams, $orderTable = 'DESC');
         // Recorrer datos de la tabla
 
         foreach ($personal as $row) {
-            $buttons =  "
-            <button class='btn btn-primary btn-sm btn-hover-azul btnEditarDependencia fw-semibold' data-bs-toggle='modal' data-bs-target='#modalDependencia' data-id='" . $row['id_dependencia'] . "'><i class='fa-solid fa-pencil fa-sm me-2'></i>Editar</button>
-            <button class='btn btn-danger btn-sm btn-hover-rojo btnEliminar fw-semibold' data-swal-toast-template='#my-template' data-idDependencia='" . $row['id_dependencia'] . "'><i class='fa-solid fa-trash fa-sm me-2'></i>Eliminar</button>
-            ";
+            $buttons = "
+                <button class='btn btn-primary btn-sm btn-hover-azul btnEditarDependencia fw-semibold' data-bs-toggle='modal' data-bs-target='#modalDependencia' data-id='" . $row['id_dependencia'] . "'><i class='fa-solid fa-pencil fa-sm me-2'></i>Editar</button>
+               ";
+            if ($row['activo'] == 0) {
+                $buttons .= "
+                <button class='btn btn-success btn-sm btn-hover-verde btnActivarDependencia fw-semibold' data-id='" . $row['id_dependencia'] . "'><i class='fa-solid fa-check fa-sm me-2'></i>Activar</button>
+                ";
+            } else {
+                $buttons .= "
+                <button class='btn btn-danger btn-sm btn-hover-rojo btnEliminarDependencia fw-semibold' data-swal-toast-template='#my-template' data-id='" . $row['id_dependencia'] . "'><i class='fa-solid fa-trash fa-sm me-2'></i>Eliminar</button>
+                ";
+            }
             $data_json['data'][] = [
                 '0' => $row['dependencia'],
                 '1' => $row['activo'],
@@ -79,13 +87,13 @@ class dependenciasController extends dependenciasModel
         $conditionParams = [];
 
         // Obtener los datos de la tabla estados
-        $estados = $this->tablas->getTodoDatosPersonal($selectores, $tabla, 0, 100, '', [], 'id_estado', $conditions, $conditionParams);
+        $estados = $this->tablas->getTodoDatosPersonal($selectores, $tabla, 0, 100, '', [], 'id_estado', $conditions, $conditionParams, $orderTable = 'ASC');
 
         $data_json['data'] = [];
         foreach ($estados as $row) {
             $data_json['data'][] = [
-                'id_estado' => $row['id_estado'],
-                'estado' => $row['estado']
+                'id' => $row['id_estado'],
+                'value' => $row['estado']
             ];
         }
 
@@ -133,10 +141,16 @@ class dependenciasController extends dependenciasModel
             ]
 
         ];
-        $registro = $this->getRegistrar2('dependencia', $parametros);
-        if ($registro) {
-            $data_json['exito'] = true;
-            $data_json['messenger'] = 'Dependencia registrada con exito';
+        $verificarCodigo = $this->getVerificarCodigo('dependencia', $codigodepe);
+        if ($verificarCodigo) {
+            $data_json['exito'] = false;
+            $data_json['messenger'] = 'El codigo de la dependencia ya existe';
+        } else {
+            $registro = $this->getRegistrar2('dependencia', $parametros);
+            if ($registro) {
+                $data_json['exito'] = true;
+                $data_json['messenger'] = 'Dependencia registrada con exito';
+            }
         }
 
         // Devolver la respuesta en formato JSON
@@ -144,10 +158,11 @@ class dependenciasController extends dependenciasModel
         echo json_encode($data_json);
     }
 
-    public function dependencia(string $id){
+    public function dependencia(string $id)
+    {
         $id = $this->limpiarCadena($id);
 
-         $parametro = [$id];
+        $parametro = [$id];
 
         $datos_json = [
             'exito' => false,
@@ -155,14 +170,107 @@ class dependenciasController extends dependenciasModel
         ];
 
         $datos = $this->getobtenerDependencia($parametro);
-        if ($datos) {
-            $datos_json['exito'] = true;
-            $datos_json['messenger'] = 'Datos de la dependencia obtenidos con exito';
-            $datos_json['datos'] = $datos;
+        foreach ($datos as $row) {
+            if ($datos) {
+                $datos_json['exito'] = true;
+                $datos_json['messenger'] = 'Datos de la dependencia obtenidos con exito';
+                $datos_json['dependencia'] = $row['dependencia'];
+                $datos_json['codigo'] = $row['codigo'];
+                $datos_json['idestado'] = $row['idEstado'];
+                $datos_json['estado'] = $row['estado'];
+                $datos_json['id_dependencia'] = $row['id_dependencia'];
+                $datos_json['activo'] = $row['activo'];
+            }
         }
 
         // Devolver la respuesta en formato JSON
         header('Content-Type: application/json');
-        echo json_encode($datos_json); 
+        echo json_encode($datos_json);
+    }
+
+    public function editarDependencia(string $id, string $nombredepen, string $codigodepen, string $estadodepen)
+    {
+        $data_json = [
+            'exito' => false,
+            'messenger' => 'No se pudo obtener los datos de la dependencia',
+        ];
+
+        $id = $this->limpiarCadena($id);
+        $nombredepen = $this->limpiarCadena($nombredepen);
+        $codigodepen = $this->limpiarCadena($codigodepen);
+        $estadodepen = $this->limpiarCadena($estadodepen);
+
+        $parametros = [
+            [
+                "campo_nombre" => "dependencia",
+                "campo_marcador" => ":dependencia",
+                "campo_valor" => $nombredepen
+            ],
+            [
+                "campo_nombre" => "codigo",
+                "campo_marcador" => ":codigo",
+                "campo_valor" => $codigodepen
+            ],
+            [
+                "campo_nombre" => "idEstado",
+                "campo_marcador" => ":idEstado",
+                "campo_valor" => $estadodepen
+            ]
+        ];
+
+        $condicion = [
+            "condicion_campo" => "id_dependencia",
+            "condicion_marcador" => ":id_dependencia",
+            "condicion_valor" => $id
+        ];
+
+        $actualizar = $this->getActulizarDependencia('dependencia', $parametros, $condicion);
+
+        if ($actualizar) {
+            $data_json['exito'] = true;
+            $data_json['messenger'] = 'Dependencia actualizada con exito';
+        }
+        // Devolver la respuesta en formato JSON
+        header('Content-Type: application/json');
+        echo json_encode($data_json);
+    }
+
+    public function eliminarActivarDependencia(string $id, $activo)
+    {
+        $data_json = [
+            'exito' => false,
+            'messenger' => 'No se pudo obtener los datos de la dependencia',
+        ];
+
+        $id = $this->limpiarCadena($id);
+        $activador = $activo;
+
+        $parametros = [
+            [
+                "campo_nombre" => "activo",
+                "campo_marcador" => ":activo",
+                "campo_valor" =>  $activador
+            ]
+        ];
+
+        $condicion = [
+            "condicion_campo" => "id_dependencia",
+            "condicion_marcador" => ":id_dependencia",
+            "condicion_valor" => $id
+        ];
+
+        $actualizar = $this->getActulizarDependencia('dependencia', $parametros, $condicion);
+
+        if ($actualizar) {
+            $data_json['exito'] = true;
+            if ($activador == 1) {
+                $data_json['messenger'] = 'Dependencia activada con exito';
+            } else {
+                $data_json['messenger'] = 'Dependencia desactivada con exito';
+            }
+        }
+        // Devolver la respuesta en formato JSON
+        header('Content-Type: application/json');
+        echo json_encode($data_json);
     }
 }
