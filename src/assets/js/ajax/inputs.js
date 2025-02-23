@@ -159,7 +159,7 @@ export async function soloNumeros(input, cumplidospan) {
 // Funcion para validar los selectores de tipo select 
 export async function validarSelectores(input, cumplidospan, tigger) {
   $(input).on("input", function () {
-    console.log("hola");
+    // console.log("hola");
     const opcionSeleccionada = $(this).val();
     if (opcionSeleccionada === "") {
       $(this).removeClass("cumplido");

@@ -335,6 +335,7 @@ class personalController extends personalModel
                     $data_json['anoNacimiento'] = $row['anoNacimiento'];
                     $data_json['estatus'] = $row['estatus'];
                     $data_json['idestatus'] = $row['id_estatus'];
+                    $data_json['idEmpleado'] = $row['id_empleados'];
                     $data_json['cargo'] = $row['cargo'];
                     $data_json['idcargo'] = $row['id_cargo'];
                     $data_json['dependencia'] = $row['dependencia'];

@@ -4,15 +4,26 @@ namespace App\Atlas\controller;
 
 use App\Atlas\models\estatusModel;
 use App\Atlas\models\tablasModel;
+use App\Atlas\controller\auditoriaController;
+use App\Atlas\config\App;
 
 class estatusController extends estatusModel
 {
     private $tablas;
+    private $auditoriaController;
+    private $app;
 
+    private $idUsuario;
+    private $nombreUsuario;
     public function __construct()
     {
         parent::__construct();
         $this->tablas = new tablasModel();
+        $this->app = new App();
+        $this->auditoriaController = new auditoriaController();
+        $this->app->iniciarSession();
+        $this->idUsuario = $_SESSION['id'];
+        $this->nombreUsuario = $_SESSION['usuario'];
     }
 
     public function datosEstatus()
@@ -34,20 +45,20 @@ class estatusController extends estatusModel
         // Obtener la cantidad de los datos de la tabla
         $cantidadRegistro = $this->tablas->getCantidadRegistros($tabla, $selectoresCantidad, $conditions, $conditionParams);
         // Obtener los datos de la tabla
-        $personal = $this->tablas->getTodoDatosPersonal($selectores, $tabla, $start, $length, $searchValue, $datosBuscar, $campoOrden, $conditions, $conditionParams, $ordenTabla = 'ASC');
+        $personal = $this->tablas->getTodoDatosPersonal($selectores, $tabla, $start, $length, $searchValue, $datosBuscar, $campoOrden, $conditions, $conditionParams, $ordenTabla = 'DESC');
         // Recorrer datos de la tabla
 
         foreach ($personal as $row) {
             $buttons = "
-                <button class='btn btn-primary btn-sm btn-hover-azul btnEditarEstatus fw-semibold' data-bs-toggle='modal' data-bs-target='#modalEstatus' data-id='" . $row['id_estatus'] . "'><i class='fa-solid fa-pencil fa-sm me-2'></i>Editar</button>
+                <button class='btn btn-primary btn-sm btn-hover-azul btnEditarEstatus' data-bs-toggle='modal' data-bs-target='#modalEstatus' data-id='" . $row['id_estatus'] . "'><i class='fa-solid fa-pencil fa-sm me-2'></i>Editar</button>
                ";
             if ($row['activo'] == 0) {
                 $buttons .= "
-                <button class='btn btn-success btn-sm btn-hover-verde btnActivarEstatus fw-semibold' data-id='" . $row['id_estatus'] . "'><i class='fa-solid fa-check fa-sm me-2'></i>Activar</button>
+                <button class='btn btn-success btn-sm btn-hover-verde btnActivarEstatus' data-id='" . $row['id_estatus'] . "'><i class='fa-solid fa-check fa-sm me-2'></i>Activar</button>
                 ";
             } else {
                 $buttons .= "
-                <button class='btn btn-danger btn-sm btn-hover-rojo btnEliminarEstatus fw-semibold' data-swal-toast-template='#my-template' data-id='" . $row['id_estatus'] . "'><i class='fa-solid fa-trash fa-sm me-2'></i>Eliminar</button>
+                <button class='btn btn-danger btn-sm btn-hover-rojo btnEliminarEstatus' data-swal-toast-template='#my-template' data-id='" . $row['id_estatus'] . "'><i class='fa-solid fa-trash fa-sm me-2'></i>Eliminar</button>
                 ";
             }
             $data_json['data'][] = [
@@ -94,6 +105,14 @@ class estatusController extends estatusModel
         if (empty($validar)) {
             $regisEstatus = $this->getRegistrarEstatus('estatus', $parametros);
             if ($regisEstatus) {
+                $registroAuditoria = $this->auditoriaController->registrarAuditoria($this->idUsuario, 'Registrar estatus', 'El usuario ' . $this->nombreUsuario . ' ha registrado el ' . $nombreEstatus . ' en el sistema.');
+                if ($registroAuditoria) {
+                    $data_json["exitoAuditoria"] = true;
+                    $data_json['messengerAuditoria'] = "Auditoria registrada con exito.";
+                } else {
+                    $data_json["exitoAuditoria"] = false;
+                    $data_json['messengerAuditoria'] = "Error al registrar la auditoria.";
+                }
                 $data_json['messenger'] = "Estatus registrado de manera exitosa";
                 $data_json['exito'] = true;
             } else {
@@ -130,19 +149,38 @@ class estatusController extends estatusModel
             "condicion_valor" => $id
         ];
 
-        $validar = $this->getValidarEstatus('estatus',  $Estatus);
-        if (empty($validar)) {
-            $registro = $this->getActulizarEstatus('estatus', $parametros,  $condicion);
-            if ($registro) {
-                $data_json['messenger'] = "Estatus editado con éxito";
-                $data_json['exito'] = true;
-            } else {
-                $data_json['messenger'] = "Error al editar el cargo";
-            }
+        $buscarEstatus = $this->getDatosEstatusID([$id]);
+        if (empty($buscarEstatus)) {
+            $data_json['exito'] = false;
+            $data_json['messenger'] = 'No se pudo obtener los datos del estatus';
         } else {
-            $data_json['messenger'] = "El estatus ya se encuentra registrado";
-        }
+            foreach ($buscarEstatus as $row) {
+                $estatus = $row['estatus'];
+                $validar = $this->getValidarEstatus('estatus',  $Estatus);
+                if (empty($validar)) {
+                    $actualizar = $this->getActulizarEstatus('estatus', $parametros, $condicion);
+                    if ($actualizar) {
+                        $data_json['exito'] = true;
 
+                        $registroAuditoria = $this->auditoriaController->registrarAuditoria($this->idUsuario, 'Editar estatus', 'El usuario ' . $this->nombreUsuario . ' ha editado el estatus ' . $estatus . ' por ' . $Estatus . ' en el sistema.');
+                        if ($registroAuditoria) {
+                            $data_json["exitoAuditoria"] = true;
+                            $data_json['messengerAuditoria'] = "Auditoria registrada con exito.";
+                        } else {
+                            $data_json["exitoAuditoria"] = false;
+                            $data_json['messengerAuditoria'] = "Error al registrar la auditoria.";
+                        }
+
+                        $data_json['messenger'] = 'Estatus editado con exito';
+                    } else {
+                        $data_json['exito'] = false;
+                        $data_json['messenger'] = 'Error al actualizar el estatus';
+                    }
+                } else {
+                    $data_json['messenger'] = "El estatus ya se encuentra registrado";
+                }
+            }
+        }
 
         header('Content-Type: application/json');
         echo json_encode($data_json);
@@ -157,6 +195,8 @@ class estatusController extends estatusModel
 
         $id = $this->limpiarCadena($id);
         $activador = $activo;
+        $estadoEli = ($activador == 1) ? "activado" : "desactivado";
+        $estadoEli2 = ($activador == 1) ? "Activar" : "Desactivar";
 
         $parametros = [
             [
@@ -172,16 +212,38 @@ class estatusController extends estatusModel
             "condicion_valor" => $id
         ];
 
-        $actualizar = $this->getActulizarEstatus('estatus', $parametros, $condicion);
+        $buscarEstatus = $this->getDatosEstatusID([$id]);
+        if (empty($buscarEstatus)) {
+            $data_json['exito'] = false;
+            $data_json['messenger'] = 'No se pudo obtener los datos del estatus';
+        } else {
+            foreach ($buscarEstatus as $row) {
+                $estatus = $row['estatus'];
+                $actualizar = $this->getActulizarEstatus('estatus', $parametros, $condicion);
+                if ($actualizar) {
+                    $data_json['exito'] = true;
 
-        if ($actualizar) {
-            $data_json['exito'] = true;
-            if ($activador == 1) {
-                $data_json['messenger'] = 'Estatus activado con exito';
-            } else {
-                $data_json['messenger'] = 'Estatus desactivado con exito';
+                    $registroAuditoria = $this->auditoriaController->registrarAuditoria($this->idUsuario, $estadoEli2 . ' estatus', 'El usuario ' . $this->nombreUsuario . ' ha ' . $estadoEli . ' el estatus ' . $estatus . ' en el sistema.');
+                    if ($registroAuditoria) {
+                        $data_json["exitoAuditoria"] = true;
+                        $data_json['messengerAuditoria'] = "Auditoria registrada con exito.";
+                    } else {
+                        $data_json["exitoAuditoria"] = false;
+                        $data_json['messengerAuditoria'] = "Error al registrar la auditoria.";
+                    }
+
+                    if ($activador == 1) {
+                        $data_json['messenger'] = 'Estatus activado con exito';
+                    } else {
+                        $data_json['messenger'] = 'Estatus desactivado con exito';
+                    }
+                } else {
+                    $data_json['exito'] = false;
+                    $data_json['messenger'] = 'Error al actualizar el estatus';
+                }
             }
         }
+
         // Devolver la respuesta en formato JSON
         header('Content-Type: application/json');
         echo json_encode($data_json);

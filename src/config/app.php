@@ -2,6 +2,7 @@
 
 namespace App\Atlas\config;
 
+
 class App
 {
     // Rutas De Archivos
@@ -40,10 +41,10 @@ class App
         return ['vista' => $vista, 'parametros' => $parametros];
     }
 
-    public function iniciarSession()
-    {
-       return session_start();
-
+    public function iniciarSession() {
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
     }
 
     public function iniciarName()

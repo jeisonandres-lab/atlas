@@ -5,12 +5,13 @@ namespace App\Atlas\controller;
 use App\Atlas\models\userModel;
 use App\Atlas\config\App;
 use App\Atlas\models\tablasModel;
+use App\Atlas\controller\auditoriaController;
 
 class  userController extends userModel
 {
 
     private $app2;
-
+    private $auditoriaController;
     private $app;
     private $tablas;
     public function __construct()
@@ -18,6 +19,7 @@ class  userController extends userModel
         parent::__construct();
         $this->app = new App();
         $this->tablas = new tablasModel();
+        $this->auditoriaController = new auditoriaController();
     }
     public function logearse(string $user, string $password)
     {
@@ -48,6 +50,21 @@ class  userController extends userModel
                             $_SESSION['usuario'] = $user;
                             $_SESSION['id'] = $row['id_user'];
                             $_SESSION['activado'] = $row['activo'];
+                            $_SESSION['idrol'] = $row['idrol'];
+                            $_SESSION['rol'] = $row['rol'];
+                            $_SESSION['permiso'] = $row['permiso'];
+
+                            $id =  $_SESSION['id'];
+                            $usuario = $_SESSION['usuario'];
+
+                            $registroAuditoria = $this->auditoriaController->registrarAuditoria($id, 'Inicio de sesion', 'el usuario' . ' ' . $usuario . ' a iniciado sesion en el sistema');
+                            if ($registroAuditoria) {
+                                $data_json["exitoAuditoria"] = true;
+                                $data_json['messengerAuditoria'] = "Auditoria registrada con exito.";
+                            } else {
+                                $data_json["exito"] = false;
+                                $data_json['messenger'] = "Error al registrar la auditoria.";
+                            }
                         } else {
                             $data_json['mensaje'] = 'Usuario no coincide';
                         }
@@ -73,16 +90,27 @@ class  userController extends userModel
         }
     }
 
-    public function cerrarSession_total($url){
+    public function cerrarSession_total($url)
+    {
         $this->app->cerrarSession();
+        $id =  $_SESSION['id'];
+        $usuario = $_SESSION['usuario'];
+        $registroAuditoria = $this->auditoriaController->registrarAuditoria($id, 'cierre de sesion', 'el usuario' . ' ' . $usuario . ' a cerrado sesion en el sistema');
+        if ($registroAuditoria) {
+            $data_json["exitoAuditoria"] = true;
+            $data_json['messengerAuditoria'] = "Auditoria registrada con exito.";
+        } else {
+            $data_json["exito"] = false;
+            $data_json['messenger'] = "Error al registrar la auditoria.";
+        }
         if ($url) {
             $datos = [
                 'url' => $url
             ];
-            header('Content-Type: application/json');
-            echo json_encode($datos);
         } else {
         }
+        header('Content-Type: application/json');
+        echo json_encode($datos);
     }
 
     public function DatosUsuariosBasicos()
@@ -104,7 +132,7 @@ class  userController extends userModel
         // Obtener la cantidad de los datos de la tabla
         $cantidadRegistro = $this->tablas->getCantidadRegistros($tabla, $selectoresCantidad, $conditions, $conditionParams);
         // Obtener los datos de la tabla
-        $personal = $this->tablas->getTodoDatosPersonal($selectores, $tabla, $start, $length, $searchValue, $datosBuscar, $campoOrden, $conditions, $conditionParams);
+        $personal = $this->tablas->getTodoDatosPersonal($selectores, $tabla, $start, $length, $searchValue, $datosBuscar, $campoOrden, $conditions, $conditionParams, $ordenTabla = 'ASC');
         // Recorrer datos de la tabla
 
         foreach ($personal as $row) {
@@ -127,6 +155,7 @@ class  userController extends userModel
         header('Content-Type: application/json');
         echo json_encode($response);
     }
+    
     public function getApp()
     {
         return $this->app2 = new App();

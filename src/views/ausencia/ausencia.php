@@ -10,13 +10,12 @@ use App\Atlas\config\App; ?>
     <title>Ausencia | ATLAS</title>
     <?php require_once App::URL_INC . "total_css.php"; ?>
     <link rel="stylesheet" href="<?php echo App::URL_CSS . "trabajadores.css"; ?>">
-    <script src="<?php echo App::URL_NODE."bootstrap/dist/js/bootstrap.bundle.min.js";?>"></script>
 </head>
 
 <body class="layout-fixed sidebar-expand-lg bg-body-tertiary">
     <?php require("./src/views/inc/load.php"); ?>
     <div class="app-wrapper conten-main" id="conten-main">
-        <?php require_once App::URL_INC . "/menu.php"; ?>
+        <?php require_once App::URL_INC . "utils/menu.php"; ?>
 
         <main class=" app-main p-0 pb-4">
             <div class="imagen-pages mb-3" style="height: 75px;">
@@ -26,125 +25,137 @@ use App\Atlas\config\App; ?>
                 <img src="<?php echo App::URL_IMG . "top-header.png"; ?>" alt="" class="w-100 h-100" style="object-fit: cover; object-position:center;">
             </div>
             <!-- SUB MENU DEL MODULO -->
-            <?php require_once App::URL_INC . "menu_ausencia.php" ?>
+            <?php require_once App::URL_INC . "utils/menu_ausencia.php" ?>
             <!-- FORMULARIO DE ENVIOS DE DATOS DEL PERSONAL -->
-            <div class="container-fluid px-4">
-                <div class="container-fluid card p-2" style="background-color: #f5f5f5; box-shadow: none;">
-                    <section class="card" style="background-color: white; box-shadow: none;">
-                        <form action="" class="row p-2">
-                            <div class="col-sm-12 col-md-7 col-lg-7 col-xl-7 col-xxl-8">
-                                <div class="row">
-                                    <div class="col-sm-12 mb-2">
-                                        <p class="mb-0 mt-2">Datos del Personal</p>
-                                        <hr class="mb-0 mt-0">
-                                    </div>
+            <div class="container-fluid px-3">
+                <section class="card modalContent" style="background-color: white; box-shadow: none;">
+                    <form action="" class="row p-2 formAusento" id="formAusento">
+                        <div class="col-sm-12 col-md-7 col-lg-7 col-xl-7 col-xxl-8  p-3">
+                            <div class="row pe-4 ps-4">
+                                <div class="col-sm-12 mb-2">
+                                    <p class="mb-0 mt-2">Datos del Personal</p>
+                                    <hr class="mb-0 mt-0">
+                                </div>
 
-                                    <div class="col-sm-6 mb-2">
-                                        <div class="form-group">
-                                            <label for="cedula">Cédula</label>
-                                            <div class="input-group">
-                                                <span class="input-group-text span_cedula"><i class="fa-regular fa-address-card"></i></span>
-                                                <input type="text" class="form-control" id="cedula" name="cedula" placeholder="Cédula de Identidad" required>
-                                            </div>
+                                <input type="text" id="identificador" name="id" class="cumplido" readonly hidden>
+                                <div class="col-sm-6 mb-2">
+                                    <div class="form-group">
+                                        <label for="cedula">Cédula</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text span_cedula"><i class="fa-regular fa-address-card"></i></span>
+                                            <input type="text" class="form-control" id="cedula" name="cedula" placeholder="Cédula de Identidad" required>
                                         </div>
-                                    </div>
-                                    <div class="col-sm-6 mb-2">
-                                        <div class="form-group">
-                                            <label for="primerNombre">Nombre</label>
-                                            <div class="input-group">
-                                                <span class="input-group-text span_nombre"><i class="fa-regular fa-user"></i></span>
-                                                <input type="text" class="form-control" id="primerNombre" name="primerNombre" placeholder="Nombre" required>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-sm-6 mb-2">
-                                        <div class="form-group">
-                                            <label for="primerApellido">Apellido</label>
-                                            <div class="input-group">
-                                                <span class="input-group-text span_apellido"><i class="fa-regular fa-user"></i></span>
-                                                <input type="text" class="form-control" id="primerApellido" name="primerApellido" placeholder="Apellido" required>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-sm-6 mb-2">
-                                        <div class="form-group">
-                                            <label for="cargo">Cargo</label>
-                                            <div class="input-group">
-                                                <span class="input-group-text span_cargo"><i class="fa-regular fa-clipboard"></i></span>
-                                                <input type="text" class="form-control" id="cargo" name="cargo" placeholder="Cargo" required>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-sm-12 mb-3">
-                                        <p class="mb-0 mt-2">Fecha De Ausencia</p>
-                                        <hr class="mb-0 mt-0">
-                                    </div>
-
-                                    <div class="col-sm-6 mb-3">
-                                        <div class="form-group">
-                                            <label for="fecha_ini">Fecha Inicio</label>
-                                            <div class="input-group">
-                                                <span class="input-group-text span_fecha_ini"><i class="fa-regular fa-clipboard"></i></span>
-                                                <input type="text" class="form-control" id="fecha_ini" name="fecha_ini" placeholder="Fecha Inicio" required>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-sm-6 mb-3">
-                                        <div class="form-group">
-                                            <label for="fecha_fin">Fecha Fin</label>
-                                            <div class="input-group">
-                                                <span class="input-group-text span_fecha_fin"><i class="fa-regular fa-clipboard"></i></span>
-                                                <input type="text" class="form-control" id="fecha_fin" name="fecha_fin" placeholder="Fecha Fin" required>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-sm-12 mb-2">
-                                        <div class="form-group">
-                                            <label for="permiso">Persimos</label>
-                                            <div class="input-group">
-                                                <span class="input-group-text span_permiso"><i class="fa-solid fa-triangle-instrument"></i></span>
-                                                <select class="form-select form-select-md estado-permiso" id="permiso" name="permiso" aria-label="Small select example" aria-placeholder="dasdas" required>
-                                                    <option value="">Seleciona Un Permiso</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-sm-12 mt-3 ">
-                                        <button type="button" id="aceptar" name="submit" data-bs-toggle="modal" data-bs-target="#estadosInfor" class="btn btn-primary" disabled>
-                                            <i class="fa-solid fa-plus me-2"></i>
-                                            Aceptar
-                                        </button>
-                                        <button type="button" id="limpiar" name="submit" class="btn btn-warning" style="color: white;">
-                                            <i class="fa-solid fa-rotate-right me-2"></i>Limpiar
-                                        </button>
                                     </div>
                                 </div>
+
+                                <div class="col-sm-6 mb-2">
+                                    <div class="form-group">
+                                        <label for="cargo">Cargo</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text span_cargo"><i class="fa-regular fa-clipboard"></i></span>
+                                            <input type="text" class="form-control" id="cargo" name="cargo" placeholder="Cargo" required readonly>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6 mb-2">
+                                    <div class="form-group">
+                                        <label for="primerNombre">Nombre</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text span_nombre"><i class="fa-regular fa-user"></i></span>
+                                            <input type="text" class="form-control" id="primerNombre" name="primerNombre" placeholder="Nombre" required readonly>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6 mb-2">
+                                    <div class="form-group">
+                                        <label for="primerApellido">Apellido</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text span_apellido"><i class="fa-regular fa-user"></i></span>
+                                            <input type="text" class="form-control" id="primerApellido" name="primerApellido" placeholder="Apellido" required readonly>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="col-sm-12 mb-3">
+                                    <p class="mb-0 mt-2">Fecha De Ausencia</p>
+                                    <hr class="mb-0 mt-0">
+                                </div>
+
+                                <div class="col-sm-6 mb-3">
+                                    <div class="form-group">
+                                        <label for="fecha_ini">Fecha Inicio</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text span_fecha_ini"><i class="fa-regular fa-clipboard"></i></span>
+                                            <input type="date" class="form-control fecha_ini" id="fecha_ini" name="fecha_ini" placeholder="Fecha Inicio" required>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6 mb-3">
+                                    <div class="form-group">
+                                        <label for="fecha_fin">Fecha Fin</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text span_fecha_fin"><i class="fa-regular fa-clipboard"></i></span>
+                                            <input type="date" class="form-control" id="fecha_fin" name="fecha_fin" placeholder="Fecha Fin" required>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-12">
+                                    <div class="alert alert-danger mt-2" role="alert" id="alerta" style="display: none;">
+
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-12 mb-2">
+                                    <div class="form-group">
+                                        <label for="permiso">Persimos</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text span_permiso"><i class="fa-solid fa-triangle-instrument"></i></span>
+                                            <select class="form-select form-select-md estado-permiso" id="permiso" name="permiso" aria-label="Small select example" aria-placeholder="dasdas" required>
+                                                <option value="">Seleciona Un Permiso</option>
+                                                <option value="1">Administrativo</option>
+                                                <option value="1">Descanso</option>
+                                                <option value="1">Urgencia</option>
+                                                <option value="1">Vacaciones</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-12 mt-3 ">
+                                    <button type="submit" id="aceptar" name="submit" class="aceptar btn btn-primary" disabled>
+                                        <i class="fa-solid fa-plus me-2"></i>
+                                        Aceptar
+                                    </button>
+                                    <button type="button" id="limpiar" name="submit" class="btn btn-warning" style="color: white;">
+                                        <i class="fa-solid fa-rotate-right me-2"></i>Limpiar
+                                    </button>
+                                </div>
                             </div>
-                            <div class="col-sm-12 col-md-5 col-lg-5 col-xl-5 col-xxl-4" style="height: 365px;">
-                                <div class=" w-100 h-100 bg-white containerImg col-12 mb-3">
+                        </div>
+                        <div class="col-sm-12 col-md-5 col-lg-5 col-xl-5 col-xxl-4 pt-3" style="height: 365px;">
+                            <div class=" w-100 h-100 bg-white containerImg col-12 mb-3">
                                 <div class="content d-flex justify-content-center align-items-center h-100 w-100" id="img-contener">
                                     <!-- Contenido aquí -->
                                 </div>
                             </div>
-                </div>
+                        </div>
 
-                </form>
-                <div style="background-color:#FE9001;" class="barra_naranja w-100" id="barra"></div>
+                    </form>
+                    <div style="background-color:#FE9001;" class="barra_naranja w-100" id="barra"></div>
                 </section>
             </div>
-    </div>
-    </main>
-    <?php require_once App::URL_INC . "/footer.php"; ?>
+        </main>
+        <?php require_once App::URL_INC . "/footer.php"; ?>
 
     </div>
     <?php require_once App::URL_INC . "/scrips.php"; ?>
-
+    <?php require_once App::URL_INC . "/tablets.php"; ?>
+    <script src="./src/libs/select2/select2.min.js"></script>
     <script src="<?php echo App::URL_SCRIPS . "ausencia.js" ?>" type="module"></script>
 </body>
 

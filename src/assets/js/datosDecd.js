@@ -360,6 +360,7 @@ $(function () {
         //Abrir Modal
         $('#modalDependencia').modal('show');
         $('#dependencia').val('');
+        $('#identificador_depe').val('');
         $('#estado').val('0').trigger('change');
         $('#codigo').val('');
 
@@ -406,6 +407,7 @@ $(function () {
         //Abrir Modal
         $('#modalCargo').modal('show');
         $('#cargo').val('');
+        $('#identificador_cargo').val('');
         $('#cargo').removeClass('cumplido');
         $('.span_cargo').removeClass('cumplido_span');
     });
@@ -414,12 +416,16 @@ $(function () {
         //Abrir Modal
         $('#modalEstatus').modal('show');
         $('#estatus').val('');
+        $('#identificador_estatus').val('');
+        $('#estatus').removeClass('cumplido');
+        $('.span_estatus').removeClass('cumplido_span');
     });
 
     btnDepartamento.addEventListener('click', async () => {
         //Abrir Modal
         $('#modalDepartamento').modal('show');
         $('#departamento').val('');
+        $('#identificador_depa').val('');
         $('#departamento').removeClass('cumplido');
         $('.span_departamento').removeClass('cumplido_span');
     });
@@ -458,7 +464,7 @@ $(function () {
         }
     });
 
-    function registrarEditar(id, modulo, formulario) {
+    function registrarEditar(id, modulo, formulario, nombre) {
         function collbackExito(data) {
             if (data) {
                 if (data.exito) {
@@ -476,6 +482,7 @@ $(function () {
             enviarFormulario(`./src/ajax/datosDecd.php?modulo_datos=${modulo}`, data, collbackExito, true);
         } else {
             const form = new FormData(formulario);
+            
             const data = form;
             enviarFormulario(`./src/ajax/datosDecd.php?modulo_datos=${modulo}`, data, collbackExito, true);
         }

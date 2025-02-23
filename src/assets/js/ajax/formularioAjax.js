@@ -101,26 +101,26 @@ export async function obtenerDatos(url, metodo = 'POST') {
 
 export async function obtenerDatosJQuery(url, options = {}) {
     let formData = new FormData();
-        for (let key in options) {
-            formData.append(key, options[key]);
+    for (let key in options) {
+        formData.append(key, options[key]);
+    }
+
+    try {
+        const response = await fetch(url, {
+            method: 'POST',
+            body: formData
+        });
+
+        if (!response.ok) {
+            throw new Error('Error en la solicitud');
         }
-    
-        try {
-            const response = await fetch(url, {
-                method: 'POST',
-                body: formData
-            });
-    
-            if (!response.ok) {
-                throw new Error('Error en la solicitud');
-            }
-    
-            const data = await response.json();
-            return data;
-        } catch (error) {
-            console.error('Error al obtener los datos:', error);
-            throw error;
-        }
+
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Error al obtener los datos:', error);
+        throw error;
+    }
 }
 
 // export async function obtenerDatosJQuery(url, options = {}) {
@@ -158,17 +158,108 @@ export function verificarContrasena(contrasena, hashAlmacenado) {
     return hashCalculado === hashParte;
 }
 
-export async function descargarArchivo(url, nombreArchivo) {
+export async function descargarArchivo(url, nombreArchivo, formData = null) {
+    try {
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', url, true);
+        xhr.responseType = 'blob';
+
+        // Mostrar alerta de descarga iniciada
+        const Toast = Swal.mixin({
+            toast: true,
+            position: "top",
+            showConfirmButton: false,
+            allowOutsideClick: false,
+            didOpen: () => {
+                Swal.showLoading();
+            }
+        });
+        Toast.fire({
+            icon: "success",
+            title: "Descargando archivo..."
+        });
+
+        xhr.onload = function () {
+            if (xhr.status === 200) {
+                const contentType = xhr.getResponseHeader('Content-Type');
+                if (!contentType || !contentType.includes('application/pdf')) {
+                    const reader = new FileReader();
+                    reader.onload = function () {
+                        console.error('Respuesta del servidor:', reader.result);
+                    };
+                    reader.readAsText(xhr.response);
+                    throw new Error('La respuesta no es un PDF válido');
+                }
+
+                const urlBlob = window.URL.createObjectURL(xhr.response);
+                const a = document.createElement('a');
+                a.style.display = 'none';
+                a.href = urlBlob;
+                a.download = nombreArchivo;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                window.URL.revokeObjectURL(urlBlob);
+
+                // Mostrar alerta de descarga completa
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: "top",
+                    showConfirmButton: false,
+                    allowOutsideClick: false,
+                    timer: 5000,
+                });
+                Toast.fire({
+                    icon: "success",
+                    title: "Archivo Descargado"
+                });
+            } else {
+                throw new Error('Error al generar PDF');
+            }
+        };
+
+        xhr.onerror = function () {
+            console.error('Error al generar PDF:', xhr.statusText);
+            Swal.fire({
+                title: 'Error',
+                text: 'Hubo un error al descargar el archivo.',
+                icon: 'error',
+                confirmButtonText: 'Aceptar'
+            });
+        };
+
+        xhr.send(formData);
+    } catch (error) {
+        console.error('Error al generar PDF:', error);
+        Swal.fire({
+            title: 'Error',
+            text: 'Hubo un error al descargar el archivo.',
+            icon: 'error',
+            confirmButtonText: 'Aceptar'
+        });
+    } finally {
+        const botonPdf = document.querySelector('.pdf');
+        if (botonPdf) {
+            botonPdf.classList.remove('processing');
+        }
+    }
+}
+
+export async function descargarArchivo2(url, nombreArchivo, formData = null) {
     try {
         const response = await fetch(url, {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            }
+            body: formData
         });
 
         if (!response.ok) {
             throw new Error('Error al generar PDF');
+        }
+
+        // Verificar el tipo de contenido de la respuesta
+        const contentType = response.headers.get('Content-Type');
+        if (!contentType || !contentType.includes('application/pdf')) {
+            throw new Error('La respuesta no es un PDF válido');
         }
 
         const blob = await response.blob();

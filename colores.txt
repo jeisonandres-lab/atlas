@@ -1,0 +1,68 @@
+  --color negro
+
+.sidebar {
+  background-color: #0f172a;
+  min-width: 270px;
+  /* padding: 9px 20px 0px 20px; */
+  overflow-y: scroll;
+  box-shadow: 0 0 1px var(--grey-color-light);
+  transition: all 0.5s ease;
+}
+
+.sidebar .nav_link {
+  display: flex;
+  align-items: center;
+  /* width: 105%; */
+  padding:4px 15px 0px 0px; 
+  border-radius: 8px;
+  text-decoration: none;
+  color: #b1b4c0;
+  white-space: nowrap;
+  font-weight: 550;
+  font-size: 14px;
+
+}
+
+.sidebar-brand {
+  /* width: 200px; */
+  padding: 38px !important;
+}
+
+.menu_title::before {
+  color: #b1b4c0;
+  white-space: nowrap;
+}
+
+
+
+'--- blanco
+
+
+.sidebar {
+  background-color: var(--white-color);
+  min-width: 270px;
+  /* padding: 9px 20px 0px 20px; */
+  overflow-y: scroll;
+  box-shadow: 0 0 1px var(--grey-color-light);
+  transition: all 0.5s ease;
+}
+
+
+.sidebar .nav_link {
+  display: flex;
+  align-items: center;
+  /* width: 105%; */
+  padding:4px 15px 0px 0px; 
+  border-radius: 8px;
+  text-decoration: none;
+  color: var(--grey-color);
+  white-space: nowrap;
+  font-weight: 550;
+  font-size: 14px;
+}
+
+
+.menu_title::before {
+  color: var(--grey-color);
+  white-space: nowrap;
+}

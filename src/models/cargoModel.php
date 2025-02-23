@@ -19,6 +19,12 @@ class cargoModel extends Conexion
         return $sql;
     }
 
+    private function obtenerDatosCargo($parametros)
+    {
+        $sql = $this->ejecutarConsulta("SELECT * FROM cargo WHERE id_cargo = ?", $parametros);
+        return $sql;
+    }
+
     private function registrarCargo($tabla, $datos)
     {
         $sql = $this->guardarDatos($tabla, $datos);
@@ -29,7 +35,7 @@ class cargoModel extends Conexion
     {
         $parametro = [$cargo];
         $sql = $this->ejecutarConsulta("SELECT * FROM $tabla WHERE cargo = ?", $parametro);
-        
+
         return $sql;
     }
 
@@ -52,5 +58,10 @@ class cargoModel extends Conexion
     public function getVerificarCargo($tabla, $cargo)
     {
         return $this->verificarCargo($tabla, $cargo);
+    }
+
+    public function getObtenerDatosCargo($parametros)
+    {
+        return $this->obtenerDatosCargo($parametros);
     }
 }

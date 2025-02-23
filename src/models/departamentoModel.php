@@ -33,6 +33,12 @@ class departamentoModel extends Conexion
         return $sql;
     }
 
+    private function obtenerDatosDepartamento($parametro)
+    {
+        $sql = $this->ejecutarConsulta("SELECT * FROM departamento WHERE id_departamento = ?", $parametro);
+
+        return $sql;
+    }
     // Getters Para Accder a los Metodos de la Clase
     public function getDatosDepartamento()
     {
@@ -52,5 +58,10 @@ class departamentoModel extends Conexion
     public function getValidarDepartamento($tabla, $departamento)
     {
         return $this->verificarDepartamento($tabla, $departamento);
+    }
+
+    public function getObtenerDatosDepartamento($parametro)
+    {
+        return $this->obtenerDatosDepartamento($parametro);
     }
 }

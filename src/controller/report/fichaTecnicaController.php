@@ -85,7 +85,7 @@ class fichaTecnicaController extends FPDF
     {
         $this->AddPage();
         $this->SetFont('Arial', 'B', 10);
-        $parametro = ['30012937'];
+        $parametro = [$idCedula];
         $datosPersonal = $this->personalData->getTotalDatosPersonal($parametro);
         $this->SetDrawColor(0,0,0); // Negro
         foreach ($datosPersonal as $row) {

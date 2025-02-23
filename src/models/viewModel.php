@@ -22,6 +22,8 @@ class viewModel extends error
             'familiares' => "src/views/personal/familiares.php",
             'ausencia' => "src/views/ausencia/ausencia.php",
             'users' => "src/views/admin/usuarios.php",
+            'datosPersonal' => "src/views/bienestarSocial/datosPersonal.php",
+            'ficha' => "src/views/bienestarSocial/fichaTecnica.php",
             'error' => "src/error/error.html",
             'prueba' => "chart.html",
         ];

@@ -27,7 +27,7 @@ table.dataTable thead>tr>th.dt-orderable-desc span.dt-column-order:after, table.
 }
 table.dataTable thead>tr>th.dt-orderable-asc span.dt-column-order:before, table.dataTable thead>tr>th.dt-ordering-asc span.dt-column-order:before, table.dataTable thead>tr>td.dt-orderable-asc span.dt-column-order:before, table.dataTable thead>tr>td.dt-ordering-asc span.dt-column-order:before {
     content: "↓" !important;
-    top: 13px !important;
+    top: 16px !important;
     margin-left: 4px !important;
 }
 
@@ -111,4 +111,16 @@ table tfoot tr th{
   .dataTables_wrapper .dataTables_paginate {
     display: flex !important;
     justify-content: flex-end !important;
+}
+
+
+.img-table{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.dt-middle {
+  vertical-align: middle !important;
 }

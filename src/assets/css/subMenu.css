@@ -1,22 +1,25 @@
 /* sub menu */
-.nav-link{
+.nav-link {
     color: #707070 !important;
-  }
+}
 
-  .card-header {
-    padding-bottom: 8.5px !important;
+.card-header {
     border: 0px !important;
-  }
-  .card-header a {
+    background-color: transparent !important;
+    color: white !important;
+}
+
+.card-header a {
     border: 0px !important;
-  }
-  .active{
+}
+
+.active {
     background-color: #1929bb !important;
     color: white !important;
-  }
+}
 
 
-  .olas>div {
+.olas>div {
     background-color: #1929bb !important;
     height: 100%;
     width: 6px;
@@ -39,10 +42,7 @@
 .olas>div:nth-child(5) {
     animation-delay: -0.8s;
 }
-.card-header{
-    background-color: transparent !important;
-    color: white !important;
-}
+
 @keyframes wave {
 
     0%,

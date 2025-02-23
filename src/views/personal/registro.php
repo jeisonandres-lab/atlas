@@ -50,7 +50,7 @@ use App\Atlas\config\App;
             <!-- SUB MENU DEL MODULO -->
             <?php require_once App::URL_INC . "utils/menu_registro.php" ?>
             <!-- FORMULARIO DE ENVIOS DE DATOS DEL PERSONAL -->
-            <form action="#" class="row animate__animated animate__slideInUp contact-form form-validate d-flex " novalidate="novalidate" id="formulario_registro">
+            <form action="#" class="row contact-form form-validate d-flex " novalidate="novalidate" id="formulario_registro">
                 <div class="col-sm-12 col-md-7 col-lg-7 col-xl-7 col-xxl-8">
                     <div class="row col-sm-12 col-md-7  h-100  bg-white content w-100 p-2">
                         <p class="mb-0 mt-2">Datos del Personal</p>

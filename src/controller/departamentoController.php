@@ -4,15 +4,27 @@ namespace App\Atlas\controller;
 
 use App\Atlas\models\departamentoModel;
 use App\Atlas\models\tablasModel;
+use App\Atlas\controller\auditoriaController;
+use App\Atlas\config\App;
 
 class departamentoController extends departamentoModel
 {
     private $tablas;
+    private $auditoriaController;
+    private $app;
+
+    private $idUsuario;
+    private $nombreUsuario;
 
     public function __construct()
     {
         parent::__construct();
         $this->tablas = new tablasModel();
+        $this->app = new App();
+        $this->auditoriaController = new auditoriaController();
+        $this->app->iniciarSession();
+        $this->idUsuario = $_SESSION['id'];
+        $this->nombreUsuario = $_SESSION['usuario'];
     }
 
     public function datosDepartamento()
@@ -39,15 +51,15 @@ class departamentoController extends departamentoModel
 
         foreach ($personal as $row) {
             $buttons = "
-                <button class='btn btn-primary btn-sm btn-hover-azul btnEditarDepa fw-semibold' data-bs-toggle='modal' data-bs-target='#modalDepartamento' data-id='" . $row['id_departamento'] . "'><i class='fa-solid fa-pencil fa-sm me-2'></i>Editar</button>
+                <button class='btn btn-primary btn-sm btn-hover-azul btnEditarDepa' data-bs-toggle='modal' data-bs-target='#modalDepartamento' data-id='" . $row['id_departamento'] . "'><i class='fa-solid fa-pencil fa-sm me-2'></i>Editar</button>
                ";
             if ($row['activo'] == 0) {
                 $buttons .= "
-                <button class='btn btn-success btn-sm btn-hover-verde btnActivarDepa fw-semibold' data-id='" . $row['id_departamento'] . "'><i class='fa-solid fa-check fa-sm me-2'></i>Activar</button>
+                <button class='btn btn-success btn-sm btn-hover-verde btnActivarDepa' data-id='" . $row['id_departamento'] . "'><i class='fa-solid fa-check fa-sm me-2'></i>Activar</button>
                 ";
             } else {
                 $buttons .= "
-                <button class='btn btn-danger btn-sm btn-hover-rojo btnEliminarDepa fw-semibold' data-swal-toast-template='#my-template' data-id='" . $row['id_departamento'] . "'><i class='fa-solid fa-trash fa-sm me-2'></i>Eliminar</button>
+                <button class='btn btn-danger btn-sm btn-hover-rojo btnEliminarDepa' data-swal-toast-template='#my-template' data-id='" . $row['id_departamento'] . "'><i class='fa-solid fa-trash fa-sm me-2'></i>Eliminar</button>
                 ";
             }
             $data_json['data'][] = [
@@ -95,6 +107,14 @@ class departamentoController extends departamentoModel
         if (empty($validar)) {
             $registro =  $this->getRegistrarDepartamento('departamento', $parametros);
             if ($registro) {
+                $registroAuditoria = $this->auditoriaController->registrarAuditoria($this->idUsuario, 'Registrar departamento', 'El usuario ' . $this->nombreUsuario . ' ha registrado el departamento ' . $nombreDepartamento . ' en el sistema.');
+                if ($registroAuditoria) {
+                    $datos_json["exitoAuditoria"] = true;
+                    $datos_json['messengerAuditoria'] = "Auditoria registrada con exito.";
+                } else {
+                    $datos_json["exitoAuditoria"] = false;
+                    $datos_json['messengerAuditoria'] = "Error al registrar la auditoria.";
+                }
                 $datos_json['messenger'] = "Registro de departamento exitoso";
                 $datos_json['exito'] = true;
             } else {
@@ -130,18 +150,36 @@ class departamentoController extends departamentoModel
             "condicion_valor" => $id
         ];
 
-        $validar = $this->getValidarDepartamento('departamento',  $Departamento);
-        if (empty($validar)) {
-            $registro = $this->getActulizarDepartamento('departamento', $parametros,  $condicion);
-            if ($registro) {
-                $data_json['messenger'] = "Departamento editado con éxito";
-                $data_json['exito'] = true;
-            } else {
-                $data_json['messenger'] = "Error al editar el cargo";
+        $buscarDepartamento = $this->getObtenerDatosDepartamento([$id]);
+        if (empty($buscarDepartamento)) {
+            $data_json['exito'] = false;
+            $data_json['messenger'] = 'No se pudo obtener los datos del departamento';
+        }else{
+            foreach ($buscarDepartamento as $row) {
+                $departamentoViejo = $row['departamento'];
+                $validar = $this->getValidarDepartamento('departamento',  $Departamento);
+                if (empty($validar)) {
+                    $registro = $this->getActulizarDepartamento('departamento', $parametros,  $condicion);
+                    if ($registro) {
+                        $registroAuditoria = $this->auditoriaController->registrarAuditoria($this->idUsuario, 'Editar departamento', 'El usuario ' . $this->nombreUsuario . ' ha editado el departamento ' . $departamentoViejo . ' por ' . $Departamento . ' en el sistema.');
+                        if ($registroAuditoria) {
+                            $data_json["exitoAuditoria"] = true;
+                            $data_json['messengerAuditoria'] = "Auditoria registrada con exito.";
+                        } else {
+                            $data_json["exitoAuditoria"] = false;
+                            $data_json['messengerAuditoria'] = "Error al registrar la auditoria.";
+                        }
+                        $data_json['messenger'] = "Departamento editado con éxito";
+                        $data_json['exito'] = true;
+                    } else {
+                        $data_json['messenger'] = "Error al editar el cargo";
+                    }
+                } else {
+                    $data_json['messenger'] = "El Departamento ya se encuentra registrado";
+                }
             }
-        } else {
-            $data_json['messenger'] = "El Departamento ya se encuentra registrado";
         }
+
 
 
         header('Content-Type: application/json');
@@ -157,6 +195,8 @@ class departamentoController extends departamentoModel
 
         $id = $this->limpiarCadena($id);
         $activador = $activo;
+        $estadoEli = ($activador == 1) ? "activado" : "desactivado";
+        $estadoEli2 = ($activador == 1) ? "Activar" : "Desactivar";
 
         $parametros = [
             [
@@ -172,16 +212,36 @@ class departamentoController extends departamentoModel
             "condicion_valor" => $id
         ];
 
-        $actualizar = $this->getActulizarDepartamento('departamento', $parametros, $condicion);
+        $buscarDepartamento = $this->getObtenerDatosDepartamento([$id]);
+        if (empty($buscarDepartamento)) {
+            $data_json['exito'] = false;
+            $data_json['messenger'] = 'No se pudo obtener los datos del departamento';
+        } else {
+            foreach ($buscarDepartamento as $row) {
+                $departamento = $row['departamento'];
+                $actualizar = $this->getActulizarDepartamento('departamento', $parametros, $condicion);
 
-        if ($actualizar) {
-            $data_json['exito'] = true;
-            if ($activador == 1) {
-                $data_json['messenger'] = 'Departamento activado con exito';
-            } else {
-                $data_json['messenger'] = 'Departamento desactivado con exito';
+                if ($actualizar) {
+                    $data_json['exito'] = true;
+
+                    $registroAuditoria = $this->auditoriaController->registrarAuditoria($this->idUsuario, $estadoEli2 . ' departamento', 'El usuario ' . $this->nombreUsuario . ' ha ' . $estadoEli . ' el departamento ' . $departamento . ' en el sistema.');
+                    if ($registroAuditoria) {
+                        $data_json["exitoAuditoria"] = true;
+                        $data_json['messengerAuditoria'] = "Auditoria registrada con exito.";
+                    } else {
+                        $data_json["exitoAuditoria"] = false;
+                        $data_json['messengerAuditoria'] = "Error al registrar la auditoria.";
+                    }
+
+                    if ($activador == 1) {
+                        $data_json['messenger'] = 'Departamento activado con exito';
+                    } else {
+                        $data_json['messenger'] = 'Departamento desactivado con exito';
+                    }
+                }
             }
         }
+
         // Devolver la respuesta en formato JSON
         header('Content-Type: application/json');
         echo json_encode($data_json);

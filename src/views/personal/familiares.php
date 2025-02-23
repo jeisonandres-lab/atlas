@@ -31,7 +31,7 @@ use App\Atlas\config\App;
             <?php require_once App::URL_INC . "utils/menu_registro.php" ?>
             <!-- FORMULARIO DE ENVIOS DE DATOS DE EMPLEADO -->
             <div class="container-fluid px-3">
-                <form action="#" class="justify'content-center formulario_empleado animate__animated animate__slideInUp contact-form form-validate justify-content-center" novalidate="novalidate" id="formulario_empleado">
+                <form action="#" class="justify'content-center formulario_empleado contact-form form-validate justify-content-center" novalidate="novalidate" id="formulario_empleado">
                     <div class=" col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12 ">
                         <div class="row col-sm-12 col-md-9 h-100 bg-white w-100 p-2 m-0 content">
                             <p class="mb-0 mt-2">Datos del Empleado</p>

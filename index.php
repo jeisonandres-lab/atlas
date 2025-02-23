@@ -32,6 +32,7 @@ switch ($vista) {
         $datosUser = $_SESSION['usuario'];
         $classActivo = $_SESSION['activado'] == '1' ? 'activado bg-success' : 'desactivado bg-danger';
         $act = $_SESSION['activado'] == '1' ? 'Activo' : 'Desactivado';
+        $rol = $_SESSION['rol'];
         require_once $vista2;
     } else {
         header('location: Identificarse');

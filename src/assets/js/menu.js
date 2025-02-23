@@ -12,6 +12,9 @@ const cerrarSession = document.querySelector("#cerrarSession");
 const buscador = document.getElementById('buscador');
 const resultadosBusqueda = document.getElementById('resultadosBusqueda');
 
+const contenedorNofi = document.querySelector('#contenNoti');
+const subContenedorNofi = document.querySelector('#conten-notificaciones');
+
 buscador.addEventListener('input', () => {
   const textoBusqueda = buscador.value.toLowerCase();
   const elementosMenuItems = document.querySelectorAll('.menu_items');
@@ -59,6 +62,75 @@ buscador.addEventListener('input', () => {
     ocultarResultados();
   }
 });
+
+
+let interval = 5000; // Intervalo inicial (5 segundos)
+let maxInterval = 60000; // Intervalo máximo (1 minuto)
+
+async function getNotifications() {
+  try {
+    const response = await fetch('./src/ajax/notificacion.php?modulo_noti=obtenerNoti');
+    const data = await response.json();
+
+    if (data.error) {
+      console.error('Error al obtener notificaciones:', data.error);
+      return;
+    }
+
+    // Verifica si data es un array y tiene la estructura esperada
+    if (Array.isArray(data) && data.length === 2 && Array.isArray(data[0]) && Array.isArray(data[1])) {
+      const notificaciones = data[0];
+      const conteo = data[1][0].contarNotificacion;
+
+      $(subContenedorNofi).empty();
+      let contadornoti = document.querySelector('#contadorNoti');
+      let notificacionesHTML = '';
+
+      if (conteo === 0) {
+        contadornoti.textContent = '';
+        notificacionesHTML += `
+              <div class="conten-messenger-noti d-flex">
+                  <div class="horafecha-nofi">
+                      <div class="messengerNoti">No Tienes Ninguna Notificación</div>
+                  </div>
+              </div>
+          `;
+      } else {
+        contadornoti.textContent = conteo;
+        notificaciones.forEach((notificacion) => {
+          notificacionesHTML += `
+                  <div class="conten-messenger-noti d-flex">
+                      <div class="contentImgNofi me-2"><img src="./src/global/archives/photos/30012937.png" alt="" class="imgNoti"></div>
+                      <div class="horafecha-nofi">
+                          <div class="messengerNoti">${notificacion.notificacion}</div>
+                          <p class="me-2">${notificacion.fecha} ${notificacion.hora} </p> 
+                      </div>
+                  </div>
+              `;
+        });
+      }
+
+      $(subContenedorNofi).append(notificacionesHTML); // Agrega el HTML al contenedor
+    } else {
+      console.error('Error: La respuesta del servidor no es un array:', data);
+    }
+
+    // Ajustar intervalo
+    if (data.length === 0) {
+      interval = Math.min(interval * 2, maxInterval);
+    } else {
+      interval = 5000;
+    }
+  } catch (error) {
+    console.error('Error de red:', error);
+  }
+
+  setTimeout(getNotifications, interval);
+}
+
+getNotifications();
+
+
 
 function mostrarResultados(resultados) {
   const listaResultados = document.createElement('ul');
@@ -164,3 +236,11 @@ let ultimaParte2 = partesUrl2[partesUrl2.length - 1];
 
 // Llamamos a la función para agregar la clase active
 agregarClaseActive2(ultimaParte2);
+
+
+
+
+
+
+
+

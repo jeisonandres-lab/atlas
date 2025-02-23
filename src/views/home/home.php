@@ -1,6 +1,8 @@
 <?php
 
 use App\Atlas\config\App;
+
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -20,34 +22,49 @@ use App\Atlas\config\App;
         <!-- MODAL RESPONSIVEk -->
         <!-- CUERPO DEL SISTEMA -->
         <main class=" app-main p-0 pb-2">
-            <div class="container-fluid text-center  p-5 pb-4">
+            <!-- <div class="container-fluid">
                 <div class="row">
-                    <div class="col d-flex justify-content-start flex-column">
-                        <div class="panelHome mb-3">
-                            <span class="d-flex align-items-center">
-                                <a class="icon-link  align-items-center me-3" href="users">
-                                    <i class="bi bi-box2"></i>
-                                    <p class="mb-0 ">Panel De Usuarios</p>
-                                </a>
-                                <i class="fa-regular fa-arrow-right me-3 sm"></i>
-                                <p class="mb-0 fw-medium">Registros</p>
-                            </span>
-                        </div>
 
-                        <div class="text-start">
-                            <h3 class="fw-medium">Panel Principal</h3>
+                </div>
+            </div> -->
+            <div class="container-fluid text-center  pb-4">
+                <div class="row">
+                    <div class="d-flex" style="background-color: white; box-shadow: 0 0 2px #aaa;">
+                        <div class="content-img-inces">
+                            <img class="img-inces" src="./src/assets/img/images/logoince2-removebg-preview.png" alt="logo del inces">
                         </div>
-                    </div>
-                    <div class="col d-flex justify-content-end ">
-                        <div class="d-flex align-items-center">
-                            <div class="form-group me-3">
-                                <div class="input-group">
-                                    <span class="input-group-text" style="border-radius: 0px; background-color: white;"><i class="fa-light fa-calendar"></i></span>
-                                    <span type="text" class="form-control" id="fecha" style="border-radius: 0px;"> </span>
-                                </div>
+                        <!-- <div class="d-flex  align-items-center">
+                            <p class="m-0">INCES ROMANA</p>
+                        </div> -->
+
+                        <div class="col d-flex justify-content-start ">
+                            <div class="text-start d-flex align-items-center me-3 conten-panel">
+                                <p class="fw-medium m-0 ">Panel Principal</p>
                             </div>
-                            <div class="buttonHome">
-                                <button class="btn btn-primary btn-sm fw-semibold pe-3 ps-3" style="border-radius: 0px; "><i class="fa-light fa-arrows-turn-right me-3"></i>Recorte</button>
+                            <div class="panelHome d-flex aling-items-center">
+                                <span class="d-flex align-items-center">
+                                    <p class="mb-0 fw-medium me-3">Registros</p>
+                                    <i class="fa-regular fa-chevron-right me-3 sm"></i>
+                                    <a class="icon-link  align-items-center me-3" href="users">
+                                        <i class="bi bi-box2"></i>
+                                        <p class="mb-0 ">Panel De Usuarios</p>
+                                    </a>
+                                </span>
+                            </div>
+
+
+                        </div>
+                        <div class="col d-flex justify-content-end ">
+                            <div class="d-flex align-items-center">
+                                <div class="form-group me-3">
+                                    <div class="input-group">
+                                        <span class="input-group-text" style="border-radius: 0px; background-color: white;"><i class="fa-light fa-calendar"></i></span>
+                                        <span type="text" class="form-control" id="fecha" style="border-radius: 0px;"> </span>
+                                    </div>
+                                </div>
+                                <div class="buttonHome">
+                                    <button class="btn btn-primary btn-sm fw-semibold pe-3 ps-3" style="border-radius: 0px; "><i class="fa-light fa-arrows-turn-right me-3"></i>Recorte</button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -258,7 +275,7 @@ use App\Atlas\config\App;
                     </div>
                     <div class="col">
                         <div class="bg-white p-3" style="height: 100%;">
-                            <canvas id="scoreChart2" >
+                            <canvas id="scoreChart2">
                             </canvas>
                         </div>
                     </div>

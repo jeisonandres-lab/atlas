@@ -16,6 +16,7 @@ import {
 
 import {
   enviarFormulario,
+  obtenerDatos,
   obtenerDatosJQuery
 } from "./ajax/formularioAjax.js";
 
@@ -60,43 +61,51 @@ $(function () {
   validarSelectoresSelec2("#dependencia", ".span_dependencia");
   validarSelectoresSelec2("#academico", ".span_academico");
 
-  let urls = [
+
+
+  // URLs para las consultas
+  const urls = [
     "src/ajax/registroPersonal.php?modulo_personal=obtenerDependencias",
     "src/ajax/registroPersonal.php?modulo_personal=obtenerEstatus",
     "src/ajax/registroPersonal.php?modulo_personal=obtenerCargo",
     "src/ajax/registroPersonal.php?modulo_personal=obtenerDepartamento"
   ];
 
-  let requests = urls.map(url => obtenerDatosJQuery(url));
+  // Función para realizar las consultas y llenar los selectores
+  async function realizarConsultas() {
+    try {
+      const [dependencias, estatus, cargo, departamento] = await Promise.all(urls.map(url => obtenerDatosJQuery(url)));
 
-  $.when(...requests).done((dependencias, estatus, cargo, departamento) => {
-    if (dependencias.exito && dependencias.data) {
-      llenarSelectDependencias(dependencias.data, 'dependencia');
+      if (dependencias && dependencias.exito && dependencias.data) {
+        llenarSelectDependencias(dependencias.data, 'dependencia');
+      } else {
+        console.error('Error al obtener dependencias o la estructura de la respuesta es incorrecta');
+      }
 
-    } else {
-      console.error('Error al obtener dependencias o la estructura de la respuesta es incorrecta');
+      if (estatus && estatus.exito && estatus.data) {
+        llenarSelectDependencias(estatus.data, 'estatus');
+      } else {
+        console.error('Error al obtener los estatus o la estructura de la respuesta es incorrecta');
+      }
+
+      if (cargo && cargo.exito && cargo.data) {
+        llenarSelectDependencias(cargo.data, 'cargo');
+      } else {
+        console.error('Error al obtener los cargos o la estructura de la respuesta es incorrecta');
+      }
+
+      if (departamento && departamento.exito && departamento.data) {
+        llenarSelectDependencias(departamento.data, 'departamento');
+      } else {
+        console.error('Error al obtener departamento o la estructura de la respuesta es incorrecta');
+      }
+    } catch (error) {
+      console.error('Error al realizar las consultas:', error);
     }
+  }
 
-    if (estatus.exito && estatus.data) {
-      llenarSelectDependencias(estatus.data, 'estatus');
-    } else {
-      console.error('Error al obtener los estatus o la estructura de la respuesta es incorrecta');
-    }
-
-    if (cargo.exito && cargo.data) {
-      llenarSelectDependencias(cargo.data, 'cargo');
-    } else {
-      console.error('Error al obtener los cargos o la estructura de la respuesta es incorrecta');
-    }
-
-    if (departamento.exito && departamento.data) {
-      llenarSelectDependencias(departamento.data, 'departamento');
-    } else {
-      console.error('Error al obtener departamento o la estructura de la respuesta es incorrecta');
-    }
-  }).fail((jqXHR, textStatus, errorThrown) => {
-    console.error('Error al obtener los datos:', textStatus, errorThrown);
-  });
+  // Llamar a la función para realizar las consultas
+  realizarConsultas();
 
 
   async function llenarSelectDependencias(data, selectId) {

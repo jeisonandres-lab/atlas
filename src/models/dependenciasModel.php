@@ -29,6 +29,11 @@ class dependenciasModel extends Conexion
         return $sql;
     }
 
+    private function verificarDependencia($parametro)
+    {
+        $sql = $this->ejecutarConsulta("SELECT * FROM dependencia WHERE dependencia = ?", $parametro);
+        return $sql;
+    }
     private function registrarPersonal2($tabla, $datos)
     {
         $sql = $this->guardarDatos($tabla, $datos);
@@ -74,5 +79,10 @@ class dependenciasModel extends Conexion
     public function getVerificarCodigo($tabla, $codigo)
     {
         return $this->verificarCodigo($tabla, $codigo);
+    }
+
+    public function getVerificarDependencia($parametro)
+    {
+        return $this->verificarDependencia($parametro);
     }
 }
