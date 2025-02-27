@@ -501,6 +501,7 @@ $(function () {
       }
 
       if (datosPersonal[0].exito) {
+        $("#idEmpleado").val(datosPersonal[0].idPersonal);
         $("#primerNombre").val(datosPersonal[0].nombre);
         $("#segundoNombre").val(datosPersonal[0].segundoNombre);
         $("#primerApellido").val(datosPersonal[0].apellido);
@@ -853,7 +854,7 @@ $(function () {
       $("#aceptar_familia").prop("disabled", false);
       console.log(parsedData);
       if (parsedData.exito) {
-        AlertSW2("success", "Empleado Actualizado Con Exito", "top-end", 3000);
+        AlertSW2("success", "Familiar Actualizado Con Exito", "top-end", 3000);
       } else {
         alertaNormalmix(parsedData.mensaje, 4000, "error", "top-end")
       }
@@ -1108,7 +1109,6 @@ $(function () {
   function partidaNacimeinto() {
   }
 
-
   // Eliminar Partida de Nacimiento familiar
   $(document).on("click", "#cargaPartiEliminar", function () {
     const $this = $(this);
@@ -1120,6 +1120,8 @@ $(function () {
     });
     $this.removeClass("eliminar");
     $("#achivoparti").addClass("ignore-validation");
+    $("#achivoparti").removeClass("cumplido");
+    $("#achivoparti").val('');
     const $contentPartida = $("#contenDoc");
     // Verificar si el contenedor ya está visible
     if ($contentPartida.is(":visible")) {

@@ -42,7 +42,7 @@ use App\Atlas\config\App;
                                                 <span class="toggle_handler"></span>
                                             </label>
                                         </div> -->
-                                <table id="myTable" class="mitable table table-striped table-bordered table-hover nowrap display">
+                                <table id="myTable" class="mitable table table-striped  table-hover nowrap display">
                                     <thead>
                                         <tr>
                                             <th scope="col" id="cedula" class="bg-primary">Cédula</th>
@@ -86,6 +86,7 @@ use App\Atlas\config\App;
                                         <div class="row col-sm-12 col-md-7  h-100  w-100 p-2">
                                             <p class="mb-0 mt-2">Datos Personales</p>
                                             <hr class="mb-2">
+                                            <input type="text" class="form-control cumplido" id="idEmpleado" name="id" placeholder="Primer Nombre" required hidden>
                                             <div class="col-sm-6 col-md-4 mb-2">
                                                 <div class="form-group">
                                                     <label for="primerNombre">Primer Nombre</label>
@@ -263,7 +264,7 @@ use App\Atlas\config\App;
                                             </div>
 
                                             <div class="col-sm-12 mt-3 ">
-                                                <button type="submit" id="aceptar_empleado" name="submit" class="btn btn-primary" data-bs-dismiss="modal">
+                                                <button type="submit" id="aceptar_empleado" name="submit" class="btn btn-success" data-bs-dismiss="modal">
                                                     Actualizar
                                                 </button>
                                             </div>
@@ -296,7 +297,7 @@ use App\Atlas\config\App;
                     <div class="container-fluid px-4">
                         <div class="container-fluid card p-2" style="background-color: #f5f5f5; box-shadow: none;">
                             <section class="card p-2" style="background-color: white; box-shadow: none;">
-                                <table id="myTable2" class="mitable table table-striped table-bordered table-hover nowrap display">
+                                <table id="myTable2" class="mitable table table-striped table-hover nowrap display">
                                     <thead>
                                         <tr>
                                             <th scope="col" class="bg-primary">Nombre</th>
@@ -571,7 +572,7 @@ use App\Atlas\config\App;
                                             </div>
 
                                             <div class="col-sm-12 ">
-                                                <button type="submit" id="aceptar_familia" name="aceptar2" class="btn btn-primary" disabled>
+                                                <button type="submit" id="aceptar_familia" name="aceptar2" class="btn btn-success " disabled>
                                                     <i class="fa-solid fa-plus me-2"></i>Aceptar
                                                 </button>
                                             </div>

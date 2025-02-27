@@ -38,7 +38,7 @@ class personalModel extends Conexion
 
     private function DatosPerosnal($parametro)
     {
-        $sql = $this->ejecutarConsulta("SELECT id_personal, cedula FROM datosPersonales WHERE cedula = ?", $parametro);
+        $sql = $this->ejecutarConsulta("SELECT id_personal, cedula FROM datospersonales WHERE cedula = ?", $parametro);
         return $sql;
     }
 
@@ -49,6 +49,18 @@ class personalModel extends Conexion
             INNER JOIN cargo c ON de.idCargo = c.id_cargo
             INNER JOIN dependencia depe ON de.idDependencia = depe.id_dependencia
             INNER JOIN departamento d ON de.idDepartamento = d.id_departamento WHERE dp.cedula = ?",
+            $parametro
+        );
+        return $sql;
+    }
+
+    private function totalDatosID($parametro)
+    {
+        $sql = $this->ejecutarConsulta(
+            "SELECT * FROM datosEmpleados de INNER JOIN datosPersonales dp ON de.idPersonal = dp.id_personal INNER JOIN estatus e ON de.idEstatus = e.id_estatus
+            INNER JOIN cargo c ON de.idCargo = c.id_cargo
+            INNER JOIN dependencia depe ON de.idDependencia = depe.id_dependencia
+            INNER JOIN departamento d ON de.idDepartamento = d.id_departamento WHERE dp.id_personal = ?",
             $parametro
         );
         return $sql;
@@ -280,5 +292,9 @@ class personalModel extends Conexion
 
     public function getTotalDatosEmpleado(){
         return $this->totalDatosEmpleado();
+    }
+
+    public function getTotalDatosID($parametro){
+        return $this->totalDatosID($parametro);
     }
 }

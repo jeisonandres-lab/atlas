@@ -5,7 +5,9 @@ namespace App\Atlas\ajax;
 require_once '../../vendor/autoload.php';
 
 use App\Atlas\controller\totalDateController;
+use App\Atlas\controller\notificacionController;
 
+$notificacion = new notificacionController();
 $totalDatos = new totalDateController();
 
 switch ($_GET['modulo_Datos']) {

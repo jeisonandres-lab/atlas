@@ -22,12 +22,20 @@ class userModel extends Conexion {
         return $sql;
     }
 
+    private function actulizarDato($tabla, $datos, $condicion){
+        $sql = $this->actualizarDatos($tabla, $datos, $condicion);
+        return $sql;
+    }
     public function getExisteUsuario($user){
         return $this->existeUsuario($user);;
     }
 
     public function getDatosUsuario($user){
         return $this->datosUsuario($user);
+    }
+
+    public function getActualizarDato($tabla, $datos, $condicion){
+        return $this->actulizarDato($tabla, $datos, $condicion);
     }
 
 

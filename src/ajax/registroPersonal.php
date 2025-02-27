@@ -8,11 +8,13 @@ use App\Atlas\config\Conexion;
 use App\Atlas\controller\personalController;
 use App\Atlas\models\dependenciasModel;
 use App\Atlas\models\estatusModel;
+use App\Atlas\controller\notificacionController;
 
 $conexion = new conexion();
 $dependencias = new dependenciasModel();
 $estatus = new estatusModel();
 $personal = new personalController();
+$notificacion = new notificacionController();
 
 // DATOS PARA REGISTRAR DATOS PERSONAL
 $primerNombre = isset($_POST['primerNombre']) ? $conexion->limpiarCadena($_POST['primerNombre']) : "";
@@ -116,6 +118,7 @@ switch ($_GET['modulo_personal']) {
         break;
     case 'actualizarPersonal':
         $personal->actualizarPersonal(
+            $idPersonal,
             $primerNombre,
             $segundoNombre,
             $primerApellido,

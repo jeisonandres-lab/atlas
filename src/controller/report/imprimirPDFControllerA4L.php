@@ -8,6 +8,8 @@ use App\Atlas\models\estatusModel;
 use App\Atlas\models\departamentoModel;
 use App\Atlas\models\personalModel;
 use App\Atlas\controller\report\pdfController; // Importa la clase pdfController
+use App\Atlas\controller\auditoriaController;
+use App\Atlas\config\App;
 
 date_default_timezone_set("America/Caracas");
 
@@ -20,6 +22,11 @@ class imprimirPDFControllerA4L
     private $personalData;
     private $pdf;
 
+    private $app;
+    private $auditoriaController;
+    private $idUsuario;
+    private $nombreUsuario;
+
     public function __construct($orientation = 'L', $unit = 'mm', $size = 'A4')
     {
         $this->dependenciasData = new dependenciasModel();
@@ -28,6 +35,11 @@ class imprimirPDFControllerA4L
         $this->estatusData = new estatusModel();
         $this->departamentoData = new departamentoModel();
         $this->personalData = new personalModel();
+        $this->app = new App();
+        $this->auditoriaController = new auditoriaController();
+        $this->app->iniciarSession();
+        $this->idUsuario = $_SESSION['id'];
+        $this->nombreUsuario = $_SESSION['usuario'];
     }
 
 }

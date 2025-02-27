@@ -41,7 +41,31 @@ class App
         return ['vista' => $vista, 'parametros' => $parametros];
     }
 
-    public function iniciarSession() {
+    // public function analizarURL($url)
+    // {
+    //     $partes = explode('?', $url);
+    //     $segmentos = explode('/', $partes[0]);
+    //     $rol = '';
+    //     $vista = '';
+
+    //     Determinar si hay un rol y la vista
+    //     if (count($segmentos) >= 4) { // Asegurarse de que hay al menos 4 segmentos (incluyendo 'localhost', 'atlas', 'rol' y 'vista')
+    //         $rol = $segmentos[2];
+    //         $vista = $segmentos[3];
+    //     } elseif (count($segmentos) >= 3) { // Si no hay rol, pero hay una vista
+    //         $vista = $segmentos[2];
+    //     }
+
+    //     $parametros = [];
+    //     if (isset($partes[1])) {
+    //         parse_str($partes[1], $parametros);
+    //     }
+
+    //     return ['rol' => $rol, 'vista' => $vista, 'parametros' => $parametros];
+    // }
+
+    public function iniciarSession()
+    {
         if (session_status() == PHP_SESSION_NONE) {
             session_start();
         }

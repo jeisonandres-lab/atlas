@@ -52,6 +52,9 @@ switch ($_GET['accion']) {
         $notificacion->generarNotificacion($iduser, $idUserDirec, $enviarnotificacion);
         break;
 
+    case 'impirimirAusencias':
+        $imprimirPDFController->generarAusenciasPDF();
+        break;
     default:
         # code...
         break;

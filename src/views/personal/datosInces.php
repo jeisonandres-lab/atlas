@@ -62,7 +62,7 @@ use App\Atlas\config\App;
                                         <button class="mt-2 btn btn-primary btn-sm btn-hover-azul" id="btnAgregarEstatus"><i class="fa-solid fa-plus fa-sm me-2"></i>Agregar</button>
                                         <button class="mt-2 btn btn-primary btn-sm btn-hover-azul" id="btnAgregarDepartamento"><i class="fa-solid fa-plus fa-sm me-2"></i>Agregar</button>
                                     </div>
-                                    <table id="tableInic" class="mitable table  table-bordered table-hover nowrap display">
+                                    <table id="tableInic" class="mitable table table-hover nowrap display">
                                         <thead>
                                             <tr id="tr-identity" class="tr-identity">
                                             </tr>

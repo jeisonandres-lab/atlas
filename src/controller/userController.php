@@ -155,7 +155,7 @@ class  userController extends userModel
         header('Content-Type: application/json');
         echo json_encode($response);
     }
-    
+
     public function getApp()
     {
         return $this->app2 = new App();
@@ -171,5 +171,104 @@ class  userController extends userModel
     {
         $appuser = $this->getApp();
         return $appuser->iniciarName();
+    }
+
+
+    public function datosUsuarios()
+    {
+        $data_json['data'] = []; // Array de datos para enviar
+        $tabla = 'users us
+        INNER JOIN datosempleados dp ON us.idEmpleado = dp.id_empleados
+        INNER JOIN datospersonales dpe ON dp.idPersonal = dpe.id_personal INNER JOIN cargo ca ON dp.idCargo = ca.id_cargo
+        INNER JOIN rol r ON us.idRol = r.id_rol'; // Tabla a consultar
+        $selectoresCantidad = 'COUNT(id_cargo) as cantidad'; // Selector para contar la cantidad de registros de la tabla
+        $datosBuscar = ['nameUser']; // Array de selectores para buscar en la tabla
+        $campoOrden = 'id_user'; // Campo por el cual se ordenará la tabla
+        $selectores = '*, us.activo AS activoUser'; // Selectores para obtener los datos de la tabla
+        $conditions = []; // Condiciones para obtener los datos de la tabla
+        $conditionParams = []; // Parámetros de las condiciones
+
+        $draw = $_REQUEST['draw'];
+        $start = $_REQUEST['start'];
+        $length = $_REQUEST['length'];
+        $searchValue = $_REQUEST['search']['value'];
+
+        // Obtener la cantidad de los datos de la tabla
+        $cantidadRegistro = $this->tablas->getCantidadRegistros($tabla, $selectoresCantidad, $conditions, $conditionParams);
+        // Obtener los datos de la tabla
+        $personal = $this->tablas->getTodoDatosPersonal($selectores, $tabla, $start, $length, $searchValue, $datosBuscar, $campoOrden, $conditions, $conditionParams, $ordenTable = 'DESC');
+        // Recorrer datos de la tabla
+
+        foreach ($personal as $row) {
+
+            if ($row['enUso'] == 0) {
+                $row['enUso'] = 'No';
+            } else {
+                $row['enUso'] = 'Si';
+            }
+            $buttons = "
+
+               ";
+            if ($row['activo'] == 0) {
+                $buttons .= "
+                <button class='btn btn-success btn-sm btn-hover-verde btnActivarCargo ' data-id='" . $row['id_user'] . "'><i class='fa-solid fa-check fa-sm me-2'></i>Activar</button>
+                ";
+            } else {
+                $buttons .= "
+                <button class='btn btn-danger btn-sm btn-hover-rojo btnEliminarUsuario' data-swal-toast-template='#my-template' data-id=" . $row['id_user'] .  "><i class='fa-solid fa-trash fa-sm me-2'></i>Desactivar</button>
+                ";
+            }
+            $data_json['data'][] = [
+                '0' => $row['activoUser'],
+                '1' => $row['cedula'],
+                '2' => $row['nameUser'],
+                '3' => $row['rol'],
+                '4' => $row['enUso'],
+                '5' => $buttons,
+            ];
+            $data_json['mensaje'] = "todas las cargos de manera exitosa";
+        }
+
+        // Devolver la respuesta a DataTables
+        $response = array(
+            "draw" => intval($draw),
+            "recordsTotal" => $cantidadRegistro[0]['cantidad'],
+            "recordsFiltered" => $cantidadRegistro[0]['cantidad'],
+            "data" => $data_json['data']
+        );
+        header('Content-Type: application/json');
+        echo json_encode($response);
+    }
+
+    public function desactivarUsuario($id)
+    {
+        $data_json = [
+            'exito' => false, // Inicializamos a false por defecto
+            'mensaje' => ''
+        ];
+        $parametros = [
+            [
+                "campo_nombre" => "activo",
+                "campo_marcador" => ":activo",
+                "campo_valor" => 2
+            ],
+
+        ];
+
+        $condicion = [
+            "condicion_campo" => "id_user",
+            "condicion_marcador" => ":id_user",
+            "condicion_valor" => $id
+        ];
+
+        $desactivar = $this->getActualizarDato('users', $parametros, $condicion);
+        if ($desactivar) {
+            $data_json['exito'] = true;
+            $data_json['mensaje'] = 'Usuario desactivado con exito';
+        } else {
+            $data_json['mensaje'] = 'Error al desactivar el usuario';
+        }
+        header('Content-Type: application/json');
+        echo json_encode($data_json);
     }
 }

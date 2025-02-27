@@ -64,6 +64,8 @@ class pdfController extends FPDF
         $this->SetFont('Arial', 'B', 16);
         $this->SetFillColor(25, 41, 187); // Azul
         $this->SetTextColor(255, 255, 255); // Blanco
+        $this->SetY(20); // Posición desde el final
+        $this->centrarTabla();
         $this->Cell(120, 12, $this->title , 1, 0, 'C', true);
         $this->Ln(12);
         $this->centrarTabla();

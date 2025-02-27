@@ -221,7 +221,7 @@ use App\Atlas\config\App;
                             </div>
 
                             <div class="col-sm-12 ">
-                                <button type="submit" id="aceptar_emepleado" name="aceptar" class="btn btn-primary" disabled style="display: none;">
+                                <button type="submit" id="aceptar_emepleado" name="aceptar" class="btn btn-success" disabled>
                                     <i class="fa-solid fa-plus me-2"></i>Aceptar
                                 </button>
                                 <button type="button" id="limpiar" name="submit" class="btn btn-warning" style="color: white;">

@@ -116,16 +116,16 @@ async function getNotifications() {
     }
 
     // Ajustar intervalo
-    if (data.length === 0) {
-      interval = Math.min(interval * 2, maxInterval);
-    } else {
-      interval = 5000;
-    }
+    // if (data.length === 0) {
+    //   interval = Math.min(interval * 2, maxInterval);
+    // } else {
+    //   interval = 5000;
+    // }
   } catch (error) {
     console.error('Error de red:', error);
   }
 
-  setTimeout(getNotifications, interval);
+  // setTimeout(getNotifications, interval);
 }
 
 getNotifications();
@@ -242,5 +242,7 @@ agregarClaseActive2(ultimaParte2);
 
 
 
+
+let elementos = document.querySelectorAll('.first'); // Selecciona todos los elementos con la clase "tu-clase"
 
 

@@ -1,0 +1,29 @@
+@import url(../css/cssUtils/colores.css);
+
+
+.search_bar_usuario {
+  width: 100%;
+}
+
+.search_bar_usuario input {
+  /* height: 100%; */
+  width: 100%;
+  border-radius: 3px;
+  outline: none;
+  background-color: var(--white-color);
+  color: var(--grey-color);
+  border: 1px solid var(--grey-color-light);
+
+}
+
+.content-descripcion p {
+  overflow-wrap: break-word !important;
+  /* O word-wrap: break-word; */
+
+}
+
+@media (max-width: 799px) {
+  .contenedor-img {
+    display: none !important;
+  }
+}

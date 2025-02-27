@@ -47,7 +47,7 @@ class notificacionController extends notificacionModel
             [
                 "campo_nombre" => "hora",
                 "campo_marcador" => ":hora",
-                "campo_valor" =>  date("H:i:s")
+                "campo_valor" =>  date("h:i:s A")
             ],
 
         ];

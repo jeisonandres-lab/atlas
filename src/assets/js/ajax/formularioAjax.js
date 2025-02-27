@@ -139,6 +139,7 @@ export async function obtenerDatosJQuery(url, options = {}) {
 //     });
 // }
 // Función para generar un hash seguro con sal
+
 export function generarHashContrasena(contrasena) {
     // Generar una sal aleatoria de 16 bytes (32 caracteres hexadecimales)
     const salt = CryptoJS.lib.WordArray.random(16).toString();

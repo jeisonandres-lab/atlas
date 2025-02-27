@@ -8,6 +8,9 @@ use App\Atlas\models\estatusModel;
 use App\Atlas\models\departamentoModel;
 use App\Atlas\models\personalModel;
 use App\Atlas\controller\report\pdfControllerL; // Importa la clase pdfController
+use App\Atlas\controller\auditoriaController;
+use App\Atlas\config\App;
+
 use FPDF;
 date_default_timezone_set("America/Caracas");
 
@@ -20,6 +23,10 @@ class imprimirPDFControllerLatterL
     private $personalData;
     private $pdf;
 
+    private $app;
+    private $auditoriaController;
+    private $idUsuario;
+    private $nombreUsuario;
 
     public function __construct($orientation = 'L', $unit = 'mm', $size = 'Letter')
     {
@@ -29,6 +36,11 @@ class imprimirPDFControllerLatterL
         $this->estatusData = new estatusModel();
         $this->departamentoData = new departamentoModel();
         $this->personalData = new personalModel();
+        $this->app = new App();
+        $this->auditoriaController = new auditoriaController();
+        $this->app->iniciarSession();
+        $this->idUsuario = $_SESSION['id'];
+        $this->nombreUsuario = $_SESSION['usuario'];
     }
 
     public function generarEmpleadoPDF()
@@ -69,6 +81,8 @@ class imprimirPDFControllerLatterL
                     // echo '<pre>';
                     // print_r($dato);
                     // echo '</pre>';
+                    $registroAuditoria = $this->auditoriaController->registrarAuditoria($this->idUsuario, 'Descarga pdf de empleado', 'El usuario'. $this->nombreUsuario. ' a descargado un pdf de los empelados en tamaño carta formato vertical');
+
                     $i++;
                     $pdf->personalContar++;
                     $datosImprimir[] = [

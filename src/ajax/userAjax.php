@@ -4,12 +4,16 @@ namespace App\Atlas\ajax;
 
 require_once '../../vendor/autoload.php';
 
+use App\Atlas\config\Conexion;
 use App\Atlas\controller\userController;
 use App\Atlas\controller\loginController;
+use App\Atlas\controller\notificacionController;
 
+$conexion = new Conexion();
 $usercontroller = new userController();
 $userLogin = new userController();
-
+$notificacion = new notificacionController();
+$id = isset($_POST['id']) ? $conexion->limpiarCadena($_POST['id']) : "";
 
 switch ($_GET['modulo_usuario']) {
     case 'login':
@@ -29,6 +33,14 @@ switch ($_GET['modulo_usuario']) {
         break;
     case 'DatosUsuariosBasicos':
         $usercontroller->DatosUsuariosBasicos();
+        break;
+
+    case 'DatosUsuarios':
+        $usercontroller->datosUsuarios();
+        break;
+
+    case 'desactivarUsuario':
+        $usercontroller->desactivarUsuario($id);
         break;
 
     default:

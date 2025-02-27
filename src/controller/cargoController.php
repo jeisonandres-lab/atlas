@@ -194,7 +194,7 @@ class cargoController extends cargoModel
         $id = $this->limpiarCadena($id);
         $activador = $activo;
         $editado = ($activador == 1) ? "activado" : "desactivado";
-        $editado2 = ($activador == 1) ? "Activar" : "Desactivar";
+        $editado2 = ($activador == 1) ? "Activación" : "Desactivación";
         $parametros = [
             [
                 "campo_nombre" => "activo",

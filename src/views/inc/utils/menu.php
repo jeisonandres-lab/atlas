@@ -105,7 +105,6 @@
                         <i class="bx bx-chevron-right arrow-left"></i>
                     </div>
                     <ul class="menu_items submenu">
-                        <a href="datosPersonal" class="nav_link sublink">Datos Personal</a>
                         <a href="ficha" class="nav_link sublink">Ficha Técnica</a>
                         <a href="#" class="nav_link sublink">Renuncia</a>
                     </ul>
@@ -125,13 +124,13 @@
                     </div>
                     <ul class="menu_items submenu">
                         <a href="ausencia" class="nav_link sublink ausencia">Asignar ausento</a>
-                        <a href="ficha" class="nav_link sublink Reposos">Vacaciones</a>
+                        <a href="vacaciones" class="nav_link sublink vacaciones">Vacaciones</a>
                     </ul>
                 </li>
             </ul>
-            <!-- LEGALIZACIONES -->
+            <!-- LEGALIZACIONES
             <ul class="menu_items">
-                <!-- <div class="menu_title"></div> -->
+                <div class="menu_title"></div>
                 <li class="item">
                     <div href="#" class="nav_link submenu_item">
                         <span class="navlink_icon">
@@ -141,18 +140,17 @@
                         <i class="bx bx-chevron-right arrow-left"></i>
                     </div>
                     <ul class="menu_items submenu">
-                        <a href="#" class="nav_link sublink">Personal</a>
                         <a href="#" class="nav_link sublink">Jubilados</a>
                         <a href="#" class="nav_link sublink">Renuncia</a>
                         <a href="#" class="nav_link sublink">Reporte Legal</a>
                         <a href="#" class="nav_link sublink">Generar Asesoria</a>
                     </ul>
                 </li>
-            </ul>
+            </ul>-->
 
-            <!-- MEDICINA -->
+            <!-- MEDICINA
             <ul class="menu_items">
-                <!-- <div class="menu_title"></div> -->
+                 <div class="menu_title"></div>
                 <li class="item">
                     <div href="#" class="nav_link submenu_item">
                         <span class="navlink_icon">
@@ -170,7 +168,7 @@
                         <a href="#" class="nav_link sublink">Consulta Personal</a>
                     </ul>
                 </li>
-            </ul>
+            </ul> -->
 
             <!-- ADMINISTRADOR -->
             <ul class="menu_items">
@@ -184,9 +182,9 @@
                         <i class="bx bx-chevron-right arrow-left"></i>
                     </div>
                     <ul class="menu_items submenu">
-                        <a href="#" class="nav_link sublink Usuarios">Usuarios</a>
-                        <a href="#" class="nav_link sublink HistorialUsuario">Historial</a>
-                        <a href="#" class="nav_link sublink InformeUsuario">Informe</a>
+                        <a href="usuarios" class="nav_link sublink Usuarios">Usuarios</a>
+                        <a href="historial" class="nav_link sublink HistorialUsuario">Historial</a>
+                        <!-- <a href="#" class="nav_link sublink InformeUsuario">Informe</a> -->
                     </ul>
                 </li>
             </ul>

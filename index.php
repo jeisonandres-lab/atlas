@@ -14,6 +14,7 @@ if (isset($_GET['vista'])) {
     $url = $_SERVER['REQUEST_URI']; // Obtener la URL completa
     $datosURL = $app->analizarURL($url);
     $vista = $datosURL['vista'];
+    // print_r($url);
     $parametros = $datosURL['parametros'];
     if ($parametros == "") {
         $parametros = null;

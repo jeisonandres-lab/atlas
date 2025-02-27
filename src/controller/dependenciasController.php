@@ -294,7 +294,7 @@ class dependenciasController extends dependenciasModel
         $id = $this->limpiarCadena($id);
         $activador = $activo;
         $estadoEli = ($activador == 1) ? "activado" : "desactivado";
-        $estadoEli2 = ($activador == 1) ? "Activar" : "Desactivar";
+        $estadoEli2 = ($activador == 1) ? "Activación" : "Desactivación";
 
         $parametros = [
             [

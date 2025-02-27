@@ -1,4 +1,5 @@
 
+import { AlertSW2 } from "./ajax/alerts.js";
 import { obtenerDatosJQuery } from "./ajax/formularioAjax.js";
 // Dependencias: jQuery, DataTables, Chart.js
 $(function () {
@@ -78,6 +79,7 @@ $(function () {
                     const dataTextoMap = {
                         1: "Activo",
                         0: "Desactivado",
+                        2: "Inactivo",
                     };
 
                     if (dataTextoMap[dataTexto] == 'Activo') {
@@ -160,7 +162,21 @@ $(function () {
     var fechaISO = obtenerFechaYDia('fechaISO');
 
     $('#fecha').text(fecha);
-
+    $('.descargarBD').click(function() {
+        $.ajax({
+            url: './src/ajax/administrador.php?modulo_datos=descargarBD', // Reemplaza con la URL de tu script de descarga
+            method: 'POST', // O 'POST' si es necesario
+            success: function(response, data) {
+                // Si la descarga fue exitosa, muestra el mensaje
+                AlertSW2('success', 'listo!, ya se logro de descargar la base de datos', 'top', 4000)
+            },
+            error: function(xhr, status, error) {
+                // Si hubo un error, muestra un mensaje de error
+                $('#mensaje').text('Error al descargar la base de datos: ' + error);
+            }
+        });
+    });
+    
 })
 document.addEventListener('DOMContentLoaded', async function () {
     async function fetchData(url) {

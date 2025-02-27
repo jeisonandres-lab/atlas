@@ -63,7 +63,7 @@ use App\Atlas\config\App;
                                     </div>
                                 </div>
                                 <div class="buttonHome">
-                                    <button class="btn btn-primary btn-sm fw-semibold pe-3 ps-3" style="border-radius: 0px; "><i class="fa-light fa-arrows-turn-right me-3"></i>Recorte</button>
+                                    <button class="btn btn-primary btn-sm fw-semibold pe-3 ps-3 descargarBD" style="border-radius: 0px; "><i class="fa-light fa-arrows-turn-right me-3"></i>Descargar BD</button>
                                 </div>
                             </div>
                         </div>
@@ -95,12 +95,12 @@ use App\Atlas\config\App;
                                                 </span>
                                             </div>
                                         </div>
-                                        <div class="text-muted fs-13">
+                                        <!-- <div class="text-muted fs-13">
                                             Aumentó un
                                             <span class="text-success">
                                                 2,56% <i class="fa-regular fa-arrow-up"></i>
                                             </span>
-                                        </div>
+                                        </div> -->
                                     </div>
                                 </div>
                             </div>
@@ -124,18 +124,18 @@ use App\Atlas\config\App;
                                                 </span>
                                             </div>
                                         </div>
-                                        <div class="text-muted fs-13">
+                                        <!-- <div class="text-muted fs-13">
                                             Aumentó un
                                             <span class="text-success">
                                                 <span id="porcentajeArchivos">2,56% </span><i class="fa-regular fa-arrow-up ms-1"></i>
                                             </span>
-                                        </div>
+                                        </div> -->
                                     </div>
                                 </div>
                             </div>
 
                             <!-- ATENCION MEDICA -->
-                            <div class="col-lg-4 col-md-4 col-sm-12">
+                            <!-- <div class="col-lg-4 col-md-4 col-sm-12">
                                 <div class="card custom-card">
                                     <div class="card-body">
                                         <div class="d-flex align-items-start justify-content-between mb-2">
@@ -161,10 +161,10 @@ use App\Atlas\config\App;
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
 
                             <!-- MEDICAMENTOS -->
-                            <div class="col-lg-4 col-md-4 col-sm-12">
+                            <!-- <div class="col-lg-4 col-md-4 col-sm-12">
                                 <div class="card custom-card">
                                     <div class="card-body">
                                         <div class="d-flex align-items-start justify-content-between mb-2">
@@ -190,7 +190,7 @@ use App\Atlas\config\App;
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
 
                             <!-- PERSONAL DE VACACIONES -->
                             <div class="col-lg-4 col-md-4 col-sm-12">
@@ -211,12 +211,12 @@ use App\Atlas\config\App;
                                                 </span>
                                             </div>
                                         </div>
-                                        <div class="text-muted fs-13">
+                                        <!-- <div class="text-muted fs-13">
                                             Aumentó un
                                             <span class="text-success">
                                                 2,56% <i class="fa-regular fa-arrow-up"></i>
                                             </span>
-                                        </div>
+                                        </div> -->
                                     </div>
                                 </div>
                             </div>
@@ -240,12 +240,12 @@ use App\Atlas\config\App;
                                                 </span>
                                             </div>
                                         </div>
-                                        <div class="text-muted fs-13">
+                                        <!-- <div class="text-muted fs-13">
                                             Aumentó un
                                             <span class="text-success">
                                                 2,56% <i class="fa-regular fa-arrow-up"></i>
                                             </span>
-                                        </div>
+                                        </div> -->
                                     </div>
                                 </div>
                             </div>
@@ -259,7 +259,7 @@ use App\Atlas\config\App;
                 <div class="row">
                     <div class="col">
                         <div class="bg-white p-3">
-                            <table id="tableUsers" class="table table-hover table-bordered">
+                            <table id="tableUsers" class="table table-hover">
                                 <thead>
                                     <tr>
                                         <th scope="col" class="text-center bg-primary">#</th>

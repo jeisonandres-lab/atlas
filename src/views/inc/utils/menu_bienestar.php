@@ -5,9 +5,9 @@
             <li class="nav-item">
                 <a class="nav-link ausencia" aria-current="true" id="ficha" href="./ficha">Ficha Técnica</a>
             </li>
-            <li class="nav-item">
+            <!-- <li class="nav-item">
                 <a class="nav-link registrosAusencia" aria-current="true" id="registrosAusencia" href="./registrosAusencia">Registros</a>
-            </li>
+            </li> -->
         </ul>
     </div>
 </div>

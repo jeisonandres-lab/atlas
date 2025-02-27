@@ -170,7 +170,6 @@ body main .content {
 /* sidebar */
 .sidebar {
   background-color: var(--white-color);
-  min-width: 270px;
   /* padding: 9px 20px 0px 20px; */
   overflow-y: scroll;
   box-shadow: 0 0 1px var(--grey-color-light);

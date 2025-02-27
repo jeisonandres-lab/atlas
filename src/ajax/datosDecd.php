@@ -9,12 +9,14 @@ use App\Atlas\controller\dependenciasController;
 use App\Atlas\controller\cargoController;
 use App\Atlas\controller\departamentoController;
 use App\Atlas\controller\estatusController;
+use App\Atlas\controller\notificacionController;
 
 $conexion = new Conexion();
 $dependencias = new dependenciasController();
 $cargo = new cargoController();
 $estatus = new estatusController();
 $departamento = new departamentoController();
+$notificacion = new notificacionController();
 
 $id= isset($_POST['id']) ? $conexion->limpiarCadena($_POST['id']) : "";
 $activo = isset($_POST['activo']) ? $conexion->limpiarCadena($_POST['activo']) : "";

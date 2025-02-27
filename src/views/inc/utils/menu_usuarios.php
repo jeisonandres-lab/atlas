@@ -3,10 +3,10 @@
     <div class="card-header " style="padding-bottom: 0px !important;">
         <ul class="nav nav-tabs card-header-tabs" id="list_sub_menu">
             <li class="nav-item">
-                <a class="nav-link ausencia" aria-current="true" id="ausencia" href="./ausencia">Ausencia</a>
+                <a class="nav-link usuarios" aria-current="true" id="usuarios" href="./usuarios">usuarios</a>
             </li>
             <!-- <li class="nav-item">
-                <a class="nav-link registrosAusencia" aria-current="true" id="registrosAusencia" href="./registrosAusencia">Registros</a>
+                <a class="nav-link historial" aria-current="true" id="historial" href="./historial">Historial</a>
             </li> -->
         </ul>
     </div>

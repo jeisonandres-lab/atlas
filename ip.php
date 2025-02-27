@@ -71,9 +71,9 @@ function analizarUserAgent($user_agent) {
     return $datos;
 }
 
-// Ejemplo de uso:
-$user_agent = $_SERVER['HTTP_USER_AGENT']; // Obtiene la cadena User Agent del usuario
-echo $user_agent;
+// // Ejemplo de uso:
+// $user_agent = $_SERVER['HTTP_USER_AGENT']; // Obtiene la cadena User Agent del usuario
+// echo $user_agent;
 // $datos_navegador = analizarUserAgent($user_agent);
 
 // echo "IP del Usuario: " . $datos_navegador['ip'] . "<br>";
@@ -94,5 +94,19 @@ echo $user_agent;
 // $fh = fopen($archivo, 'a'); // Se abre el archivo con el nombre "data.txt"
 // fwrite($fh, $texto); // Se guarda el contenido de la variable "texto" en el archivo
 // fclose($fh); // Se cierra el archivo
+$diadisfrute = '';
+$dias = '2';
+$diasDescuento =  $dias - $diadisfrute;
+
+echo $diasDescuento;
 
 ?>
+
+
+require "src/fpdf/fpdf.pdf";
+
+$PDF = new FPDF();
+
+$PDF->AddPage();
+<!-- SUB MENU DEL MODULO -->
+

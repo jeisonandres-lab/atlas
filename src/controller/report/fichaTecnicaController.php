@@ -3,6 +3,8 @@
 namespace App\Atlas\controller\report;
 
 use App\Atlas\models\personalModel;
+use App\Atlas\controller\auditoriaController;
+use App\Atlas\config\App;
 
 use  FPDF; // Importa la clase pdfController
 
@@ -18,6 +20,7 @@ class fichaTecnicaController extends FPDF
     public $column_headerAlignments;
     public $datosImprimir;
     public $header_height;
+
     public $data_height;
     public $header_font;
     public $header_font_size;
@@ -28,12 +31,22 @@ class fichaTecnicaController extends FPDF
     public $title = 'Ficha Técnica'; // Título del reporte
     public $page_size;
 
+    private $app;
+    private $auditoriaController;
+    private $idUsuario;
+    private $nombreUsuario;
+
     public function __construct($orientation = 'P', $unit = 'mm', $size = 'Letter')
     {
         parent::__construct($orientation, $unit, $size);
         $this->personalData = new personalModel();
         $this->pdf = new pdfController($orientation, $unit, $size); // Crear una instancia de pdfController con los parámetros
         $this->AliasNbPages(); // Define el alias {nb}
+        $this->app = new App();
+        $this->auditoriaController = new auditoriaController();
+        $this->app->iniciarSession();
+        $this->idUsuario = $_SESSION['id'];
+        $this->nombreUsuario = $_SESSION['usuario'];
     }
 
     function Header()
@@ -93,6 +106,11 @@ class fichaTecnicaController extends FPDF
             // var_dump($row);
             // echo "</pre>";
             $parametroID = [$row['cedula']];
+            $parametronombre = $row['primerNombre'].' '.$row['primerApellido'];
+
+            $registroAuditoria = $this->auditoriaController->registrarAuditoria($this->idUsuario, 'Descargar ficha técnica', 'El usuario'. $this->nombreUsuario. ' a generado la ficha técnica del empleado '. $parametronombre);
+
+
             $rutaImagen = '../global/archives/photos/' . $parametroID[0] . '.png';
 
             if (file_exists($rutaImagen)) {
