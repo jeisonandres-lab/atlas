@@ -422,8 +422,8 @@ class vacacionesController extends vacacionesModel
         $datosBuscar = []; // Array de selectores para buscar en la tabla
         $campoOrden = 'id_vacaciones'; // Campo por el cual se ordenará la tabla
         $selectores = '*,  DATE_FORMAT(av.fecha, "%d-%m-%Y") AS fechaFormat'; // Selectores para obtener los datos de la tabla
-        $conditions = ['av.activo = ?']; // Condiciones para obtener los datos de la tabla
-        $conditionParams = ['1']; // Parámetros de las condiciones
+        $conditions = []; // Condiciones para obtener los datos de la tabla
+        $conditionParams = []; // Parámetros de las condiciones
 
         $draw = $_REQUEST['draw'];
         $start = $_REQUEST['start'];
@@ -500,7 +500,7 @@ class vacacionesController extends vacacionesModel
 
         if (empty($diadisfrute)) {
             $datosvacacionesViejos = $this->getExisVacaciones([$cedula, $ano]);
-            
+
 
             $datosVacaciones = $this->getDatosCedulaVacaciones([$cedula]);
                 foreach ($datosVacaciones as $row) {

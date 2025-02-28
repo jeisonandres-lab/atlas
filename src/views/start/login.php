@@ -61,9 +61,9 @@
                         <div class="d-flex justify-content-center links">
                             ¿Olvidaste Los Datos De Tu Cuenta?
                         </div>
-                        <div class="d-flex justify-content-center links">
+                        <!-- <div class="d-flex justify-content-center links">
                             <a href="#">Recuperar Datos</a>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
                 <div class="barraNaranja">s</div>

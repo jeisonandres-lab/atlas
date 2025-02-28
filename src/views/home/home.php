@@ -45,7 +45,7 @@ use App\Atlas\config\App;
                                 <span class="d-flex align-items-center">
                                     <p class="mb-0 fw-medium me-3">Registros</p>
                                     <i class="fa-regular fa-chevron-right me-3 sm"></i>
-                                    <a class="icon-link  align-items-center me-3" href="users">
+                                    <a class="icon-link  align-items-center me-3" href="usuarios">
                                         <i class="bi bi-box2"></i>
                                         <p class="mb-0 ">Panel De Usuarios</p>
                                     </a>

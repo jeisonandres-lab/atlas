@@ -88,6 +88,15 @@ class administradorController extends administradorModel
         echo "Salida del comando: " . implode("\n", $output) . "\n";
 
         if ($return_var === 0) {
+            $registroAuditoria = $this->auditoriaController->registrarAuditoria($this->idUsuario,'Descargar base de datos', 'El usuario ' . $this->nombreUsuario . ' ha descargo la base de datos');
+            if ($registroAuditoria) {
+                $data_json["exitoAuditoria"] = true;
+                $data_json['messengerAuditoria'] = "Auditoria registrada con exito.";
+            } else {
+                $data_json["exitoAuditoria"] = false;
+                $data_json['messengerAuditoria'] = "Error al registrar la auditoria.";
+            }
+            
             header('Content-Description: File Transfer');
             header('Content-Type: application/octet-stream');
             header('Content-Disposition: attachment; filename=' . basename($backupFile));
@@ -98,10 +107,10 @@ class administradorController extends administradorModel
             readfile($backupFile);
             // No eliminar el archivo después de la descarga
             // unlink($backupFile);
+
             $data_json['exito'] = true;
             $data_json['messenger'] = 'Ya se logro descargar la base de datos';
         } else {
-
         }
 
         header('Content-Type: application/json');

@@ -12,7 +12,7 @@
         </li>
     </div>
     <div id="contenedor-buscar" class="search_bar">
-        <input type="text" id="buscador" placeholder="Search" />
+        <input type="text" id="buscador" placeholder="Buscar" />
 
         <div id="resultadosBusqueda"></div>
     </div>

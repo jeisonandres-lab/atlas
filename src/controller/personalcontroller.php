@@ -886,8 +886,8 @@ class personalController extends personalModel
         $datosBuscar = []; // Array de selectores para buscar en la tabla
         $campoOrden = 'id_ninos'; // Campo por el cual se ordenará la tabla
         $selectores = '*'; // Selectores para obtener los datos de la tabla
-        $conditions = ["idEmpleado = ?"];
-        $conditionParams = [$idEmpleado];
+        $conditions = ["idEmpleado = ?", "activo = ?"];
+        $conditionParams = [$idEmpleado, '1'];
 
         $draw = $_REQUEST['draw'];
         $start = $_REQUEST['start'];
