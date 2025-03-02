@@ -209,6 +209,35 @@ class dependenciasController extends dependenciasModel
         echo json_encode($datos_json);
     }
 
+    // OBTENER TODAS LAS DEPENDECIAS CON SU ESTADO
+    public function obtenerdependeciasGeneral(){
+        $data_json = [
+            'exito' => false, // Inicializamos a false por defecto
+            'mensaje' => '',
+        ];
+
+        $dependenciaGeneral = $this->getObtenerDependenciasGeneral();
+        if (!empty($dependenciaGeneral)) {
+            $data_json['exito'] = true;
+            $data_json['mensaje'] = 'Dependecias obtenidas con exito';
+
+            foreach ($dependenciaGeneral as $row){
+                $data_json["exito"] = true;
+                $data_json['data'][] = [
+                    'id' => $row['id_dependencia'],
+                    'value' => $row['dependencia']
+                ];
+            }
+        }else{
+            $data_json['exito'] = true;
+            $data_json['mensaje'] = 'Error al tener todas las dependencias';
+        }
+
+         // Devolver la respuesta en formato JSON
+         header('Content-Type: application/json');
+         echo json_encode($data_json);
+    }
+
     public function editarDependencia(string $id, string $nombredepen, string $codigodepen, string $estadodepen)
     {
         $data_json = [

@@ -42,19 +42,25 @@ use App\Atlas\config\App;
                                                 <span class="toggle_handler"></span>
                                             </label>
                                         </div> -->
-                                <table id="myTable" class="mitable table table-striped  table-hover nowrap display">
+                                <table id="myTable" class="mitable table-bordered table table-hover nowrap display">
                                     <thead>
                                         <tr>
-                                            <th scope="col" id="cedula" class="bg-primary">Cédula</th>
-                                            <th scope="col" class="bg-primary">Nombre</th>
-                                            <th scope="col" class="bg-primary">Estatus</th>
-                                            <th scope="col" class="bg-primary">Dependencia</th>
-                                            <th scope="col" class="bg-primary">Cargo</th>
-                                            <th scope="col" class="bg-primary">Departamento</th>
-                                            <th scope="col" class="bg-primary">Acciones</th>
+                                            <th scope="col" data-dt-order="disable" id="cedula" class="bg-primary" style="font-size: 14px;">Cédula</th>
+                                            <th scope="col" data-dt-order="disable" class="bg-primary" style="font-size: 14px;">Nombres</th>
+                                            <th scope="col" data-dt-order="disable" class="bg-primary" style="font-size: 14px;">Apellidos</th>
+                                            <th scope="col" data-dt-order="disable" class="bg-primary" style="font-size: 14px;">Fecha Nacimiento</th>
+                                            <th scope="col" data-dt-order="disable" class="bg-primary" style="font-size: 14px;">Estado Civil</th>
+                                            <th scope="col" data-dt-order="disable" class="bg-primary" style="font-size: 14px;">Nivel Academico</th>
+                                            <th scope="col" data-dt-order="disable" class="bg-primary" style="font-size: 14px;">Telefono</th>
+                                            <th scope="col" data-dt-order="disable" class="bg-primary" style="font-size: 14px;">Estatus</th>
+                                            <th scope="col" data-dt-order="disable" class="bg-primary" style="font-size: 14px;">Dependencia</th>
+                                            <th scope="col" data-dt-order="disable" class="bg-primary" style="font-size: 14px;">Cargo</th>
+                                            <th scope="col" data-dt-order="disable" class="bg-primary" style="font-size: 14px;">Departamento</th>
+                                            <th scope="col" data-dt-order="disable" class="bg-primary" style="font-size: 14px;">Fecha Ingreso</th>
+                                            <th scope="col" data-dt-order="disable" class="bg-primary" style="font-size: 14px;">Acciones</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody style="font-size: 14px;">
                                     </tbody>
                                 </table>
                             </div>
@@ -297,7 +303,7 @@ use App\Atlas\config\App;
                     <div class="container-fluid px-4">
                         <div class="container-fluid card p-2" style="background-color: #f5f5f5; box-shadow: none;">
                             <section class="card p-2" style="background-color: white; box-shadow: none;">
-                                <table id="myTable2" class="mitable table table-striped table-hover nowrap display">
+                                <table id="myTable2" class="mitable table table-hover nowrap display">
                                     <thead>
                                         <tr>
                                             <th scope="col" class="bg-primary">Nombre</th>
@@ -310,7 +316,7 @@ use App\Atlas\config\App;
                                             <th scope="col" class="text-center bg-primary">Documento</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody style="font-size: 14px;">
                                     </tbody>
                                 </table>
                             </section>
@@ -345,6 +351,7 @@ use App\Atlas\config\App;
                                         <div class="row col-sm-12 col-md-9 h-100 bg-white w-100 p-2 m-0 content">
                                             <p class="mb-0 mt-2">Datos del Empleado</p>
                                             <hr class="mb-3">
+                                            <input type="text" class="form-control cumplido" id="idEmpleadoFamiliar" name="id" placeholder="Primer Nombre" required hidden>
                                             <div class="col-sm-4 mb-2">
                                                 <label class="form-label mb-0" for="cedula_trabajador">Cédula</label>
                                                 <div class="input-group">

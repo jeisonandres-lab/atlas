@@ -246,4 +246,32 @@ class departamentoController extends departamentoModel
         header('Content-Type: application/json');
         echo json_encode($data_json);
     }
+
+    public function obtenerDeparmatentoGeneral(){
+
+        $data_json = [
+            "exito" => false,
+            "mensaje" => ""
+        ];
+
+        $datosGeneralDepartamento = $this->getObtenerDepartamentoGeneral();
+        if (!empty($datosGeneralDepartamento)) {
+            foreach($datosGeneralDepartamento as $row){
+                $data_json["exito"] = true;
+                $data_json['data'][] = [
+                    'id' => $row['id_departamento'],
+                    'value' => $row['departamento']
+                ];
+            }
+        }else{
+
+            $data_json["exito"] = false;
+            $data_json["mensaje"] = "no se lograron obtener los departamento";
+        }
+
+         // Devolver la respuesta en formato JSON
+         header('Content-Type: application/json');
+         echo json_encode($data_json);
+    }
+
 }

@@ -13,6 +13,11 @@ class departamentoModel extends Conexion
         return $sql;
     }
 
+    private function obtenerDepartamentoGeneral(){
+        $sql = $this->ejecutarConsulta("SELECT * FROM departamento depa WHERE depa.activo = 1");
+        return $sql;
+    }
+    
     private function actulizarDepartamento($tabla, $datos, $condicion)
     {
         $sql = $this->actualizarDatos($tabla, $datos, $condicion);
@@ -63,5 +68,9 @@ class departamentoModel extends Conexion
     public function getObtenerDatosDepartamento($parametro)
     {
         return $this->obtenerDatosDepartamento($parametro);
+    }
+
+    public function getObtenerDepartamentoGeneral(){
+        return $this->obtenerDepartamentoGeneral();
     }
 }

@@ -13,6 +13,11 @@ class cargoModel extends Conexion
         return $sql;
     }
 
+    private function obtenerCargoGeneral(){
+        $sql = $this->ejecutarConsulta("SELECT * FROM cargo c WHERE c.activo = 1");
+        return $sql;
+    }
+
     private function actulizarCargo($tabla, $datos, $condicion)
     {
         $sql = $this->actualizarDatos($tabla, $datos, $condicion);
@@ -63,5 +68,9 @@ class cargoModel extends Conexion
     public function getObtenerDatosCargo($parametros)
     {
         return $this->obtenerDatosCargo($parametros);
+    }
+
+    public function getObtenerCargoGeneral(){
+        return $this->obtenerCargoGeneral();
     }
 }

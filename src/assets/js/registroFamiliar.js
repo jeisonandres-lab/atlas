@@ -1,5 +1,5 @@
 import { alertaNormalmix, AlertSW2, aletaCheck } from "./ajax/alerts.js";
-import { descargarArchivo, enviarFormulario} from "./ajax/formularioAjax.js";
+import { descargarArchivo, enviarFormulario, obtenerDatos, obtenerDatosPromise } from "./ajax/formularioAjax.js";
 import {
   colocarMeses,
   colocarYear,
@@ -90,77 +90,99 @@ $(function () {
           }
         }
       },
-      processing: true,
+
+      processing: false,
       serverSide: true,
+      deferRender: true,
+      scrollX: true,
+      scrollCollapse: true,
       info: false,
       order: [[0, 'desc']],
       paging: true,
-      lengthMenu: [
-        [ 2, 15, 30, -1 ], // Valores
-        [ '2', '15', '30', 'Todos' ] // Etiquetas
-    ],
       columnDefs: [
         {
           targets: 0,
-          width: "7%",
-          // render: function(data, type, row) {
-          //             // Aquí puedes personalizar el contenido de la celda
-          //             return '<div style="width: 20px; height: 20px; background-color: ' + getColor(row) + ';"></div>';
-          //         }
+          width: "100px",
         },
         {
-          targets: 2,
+          targets: 5,
           render: function (data, type, row) {
-            let dataEstatus = data;
-            const dataEstatusMap = {
-              1: 'Contradado',
-              2: 'Cooperativa',
-              3: 'Coral',
-              4: 'Empleado',
-              5: 'Estudiante',
-              6: 'Jubilado',
-              7: 'Maestro',
-              8: 'Obrero',
-              9: 'Pasante',
-              10: 'Tributo',
-              11: 'Vigilancia'
-            };
-            if (dataEstatusMap[dataEstatus]) {
-              dataEstatus = `<small class='d-inline-flex px-2 py-1 fw-semibold text-warning-emphasis bg-warning-subtle border border-warning-subtle rounded-2'>${dataEstatusMap[dataEstatus]}</small>`;
-            }
-            return dataEstatus
+            return `<small class='d-inline-flex px-2 py-1 fw-semibold text-warning-emphasis bg-warning-subtle border border-warning-subtle rounded-2'>${data}</small>`;
           }
         },
         {
           targets: 4,
           render: function (data, type, row) {
-            let dataTexto = data;
-            const dataTextoMap = {
-              1: "Auxiliar I",
-              2: "Auxiliar II",
-              3: "Auxiliar III",
-              4: "Analista I",
-              5: "Analista II",
-              6: "Analista III",
-              7: "Especialista I",
-              8: "Especialista II",
-              9: "Especialista III"
-            };
-
-            if (dataTextoMap[dataTexto]) {
-              dataTexto = `<small class='d-inline-flex px-2 py-1 fw-semibold text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-2'>${dataTextoMap[dataTexto]}</small>`;
-            }
-            return dataTexto
-
+            return `<small class='d-inline-flex px-2 py-1 fw-semibold text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-2'>${data}</small>`;
           }
         },
+        {
+          targets: 7,
+          render: function (data, type, row) {
+            return `<small class='d-inline-flex px-2 py-1 fw-semibold text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-2'>${data}</small>`;
+          }
+        },
+
+        {
+          targets: 8,
+          render: function (data, type, row) {
+            return `<small class='d-inline-flex px-2 py-1 fw-semibold text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-2'>${data}</small>`;
+          }
+        },
+
+        {
+          targets: 9,
+          render: function (data, type, row) {
+            return `<small class='d-inline-flex px-2 py-1 fw-semibold text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-2'>${data}</small>`;
+          }
+        },
+
+        {
+          targets: 10,
+          render: function (data, type, row) {
+            return `<small class='d-inline-flex px-2 py-1 fw-semibold text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-2'>${data}</small>`;
+          }
+        },
+
       ],
       layout: {
         topStart: {
-          pageLength: 10,
+          pageLength: {
+            menu: [
+              [10, 15, 30, -1], // Valores
+              ['10', '15', '30', 'Todos'] // Etiquetas
+            ],
+          },
+
           buttons: [
+            //   {
+            //     extend: 'collection',
+            //     text: 'ExportarPDF',
+            //     className: 'excel btn buttonVerde p-2 pe-3 ps-3',
+            //     split: [
+
+            //         {
+            //             text: 'copy',
+            //             split: [
+            //               {
+            //                 extend: 'pdfHtml5', // Extensión para generar PDF
+            //                 text: '<i class="bi bi-file-earmark-pdf-fill"></i>', // Texto del botón (con icono)
+            //                 className: 'pdf btn buttonRojo p-2 pe-3 ps-3', // Clases CSS para el botón
+            //                 titleAttr: 'Exportar a PDF', // Título al pasar el mouse por encima
+            //                 // orientation: 'landscape',
+            //                 // pageSize: 'LEGAL'
+            //                 action: function (e, dt, node, config) {
+            //                   descargarArchivo('./src/ajax/tablasDescargar.php?accion=impirimirEmpleados', 'DatosEmpleado.pdf');
+            //                 }
+            //               },
+            //             ]
+            //         },
+
+
+            //     ]
+            // },
             {
-              extend: 'copy',
+              extend: 'copyHtml5',
               text: '<i class="fa-solid fa-copy"></i>',
               className: 'copiar btn buttonAmarillo p-2 pe-3 ps-3',
               titleAttr: 'Copiar a portapapeles',
@@ -173,7 +195,7 @@ $(function () {
 
             },
             {
-              extend: 'excel',
+              extend: 'excelHtml5',
               text: '<i class="fa-regular fa-table"></i>',
               className: 'excel btn buttonVerde p-2 pe-3 ps-3',
               titleAttr: 'Exportar a Excel',
@@ -229,14 +251,18 @@ $(function () {
                       color: 'FFFFFF', // Texto blanco
                     },
                   },
+
+
                 },
               ]
             },
             {
-              extend: 'pdf', // Extensión para generar PDF
+              extend: 'pdfHtml5', // Extensión para generar PDF
               text: '<i class="bi bi-file-earmark-pdf-fill"></i>', // Texto del botón (con icono)
               className: 'pdf btn buttonRojo p-2 pe-3 ps-3', // Clases CSS para el botón
               titleAttr: 'Exportar a PDF', // Título al pasar el mouse por encima
+              // orientation: 'landscape',
+              // pageSize: 'LEGAL'
               action: function (e, dt, node, config) {
                 descargarArchivo('./src/ajax/tablasDescargar.php?accion=impirimirEmpleados', 'DatosEmpleado.pdf');
               }
@@ -244,10 +270,11 @@ $(function () {
             {
               extend: 'colvis',
               text: '<i class="fa-solid fa-eye me-2"></i>',
-              className: 'colvis btn buttonAzulClaro p-2 pe-3 ps-3',
+              className: ' btn buttonAzulClaro p-2 pe-3 ps-3',
               titleAttr: 'Mostrar/Ocultar Columnas',
               columns: ':not(:last)',
-            }
+
+            },
           ],
         },
       },
@@ -255,17 +282,31 @@ $(function () {
         url: "./IdiomaEspañol.json"
       },
       columns: [
-        { "data": 5 }, // Cédula
+        { "data": 3 }, // Cédula
         { "data": 0 }, // Nombre Y Apellido
-        { "data": 1 }, // Estatus
-        { "data": 3 }, // Dependencia
-        { "data": 2 }, // Cargo
-        { "data": 4 }, // Departamento
-        { "data": 6 }  // Acciones O Botones
+        { "data": 1 }, // Nombre Y Apellido 2
+        { "data": 2 }, // Dia de nacimiento
+        { "data": 4 }, // estado civil
+        { "data": 9 }, // nivel Academico
+        { "data": 10 },  // Acciones O Botones
+        { "data": 5 },  // estatus
+        { "data": 7 },  // dependencia
+        { "data": 6 },  // cargo
+        { "data": 8 },  // depeartamento
+        { "data": 11 },  // fecha ingreso
+        { "data": 12 },  // botones
+
+
       ]
     });
 
   });
+
+  // $('#myTable tbody').on('click', 'tr', function () {
+  //   var data = table.row(this).data();
+
+  //   console.log('You clicked on ' + data[0] + "'s row");
+  // });
 
   function limpiarDatos() {
     limpiarInput("#primerNombre", ".span_nombre");
@@ -437,27 +478,9 @@ $(function () {
     });
   }
 
-  // Funcion para obtener datos por medio de multiples url
-  function obtenerDatosJQuery(url, options = {}) {
-    let formData = new FormData();
-    for (let key in options) {
-      formData.append(key, options[key]);
-    }
-
-    return $.ajax({
-      url: url,
-      type: 'POST',
-      data: formData,
-      processData: false,
-      contentType: false,
-      dataType: 'json'
-    });
-  }
 
   // Editar empledos
-  function editar(idPersonal) {
-
-    console.log(idPersonal);
+  async function editar(idPersonal) {
     let urls = [
       "src/ajax/registroPersonal.php?modulo_personal=obtenerDependencias",
       "src/ajax/registroPersonal.php?modulo_personal=obtenerEstatus",
@@ -468,56 +491,64 @@ $(function () {
 
     let options = { cedulaEmpleado: idPersonal };
     let requests = urls.map((url, index) => {
-      if (index === 4) { // Suponiendo que quieres pasar `options` solo a la primera solicitud
-        return obtenerDatosJQuery(url, options);
+      if (index === 4) {
+        return obtenerDatosPromise(url, options);
       } else {
-        return obtenerDatosJQuery(url);
+        return obtenerDatosPromise(url);
       }
     });
-    $.when(...requests).done((dependencias, estatus, cargo, departamento, datosPersonal) => {
-      if (dependencias[0].exito && dependencias[0].data) {
-        llenarSelectDependencias(dependencias[0].data, 'dependencia');
 
+    try {
+      const [dependencias, estatus, cargo, departamento, datosPersonal] = await Promise.all(requests);
+
+      // Procesar dependencias
+      if (dependencias.exito && dependencias.data) {
+        llenarSelectDependencias(dependencias.data, 'dependencia');
       } else {
         console.error('Error al obtener dependencias o la estructura de la respuesta es incorrecta');
       }
 
-      if (estatus[0].exito && estatus[0].data) {
-        llenarSelectDependencias(estatus[0].data, 'estatus');
+      // Procesar estatus
+      if (estatus.exito && estatus.data) {
+        llenarSelectDependencias(estatus.data, 'estatus');
       } else {
         console.error('Error al obtener los estatus o la estructura de la respuesta es incorrecta');
       }
 
-      if (cargo[0].exito && cargo[0].data) {
-        llenarSelectDependencias(cargo[0].data, 'cargo');
+      // Procesar cargo
+      if (cargo.exito && cargo.data) {
+        llenarSelectDependencias(cargo.data, 'cargo');
       } else {
         console.error('Error al obtener los cargos o la estructura de la respuesta es incorrecta');
       }
 
-      if (departamento[0].exito && departamento[0].data) {
-        llenarSelectDependencias(departamento[0].data, 'departamento');
+      // Procesar departamento
+      if (departamento.exito && departamento.data) {
+        llenarSelectDependencias(departamento.data, 'departamento');
       } else {
         console.error('Error al obtener departamento o la estructura de la respuesta es incorrecta');
       }
 
-      if (datosPersonal[0].exito) {
-        $("#idEmpleado").val(datosPersonal[0].idPersonal);
-        $("#primerNombre").val(datosPersonal[0].nombre);
-        $("#segundoNombre").val(datosPersonal[0].segundoNombre);
-        $("#primerApellido").val(datosPersonal[0].apellido);
-        $("#segundoApellido").val(datosPersonal[0].segundoApellido);
-        $("#cedulaEdi").val(datosPersonal[0].cedula);
-        $("#telefono").val(datosPersonal[0].telefono);
-        $("#civil").val(datosPersonal[0].estadoCivil);
-        $('#dependencia').val(datosPersonal[0].iddependencia).trigger('change');
-        $('#departamento').val(datosPersonal[0].iddepartamento).trigger('change');
-        $('#estatus').val(datosPersonal[0].idestatus).trigger('change');
-        $('#dependencia').val(datosPersonal[0].iddependencia).trigger('change');
-        $('#cargo').val(datosPersonal[0].idcargo).trigger('change');
-        $('#academico').val(datosPersonal[0].nivelAcademico).trigger('change');
-        $('#ano2').val(datosPersonal[0].anoNacimiento).trigger('change');
-        $('#dia2').val(datosPersonal[0].diaNacimineto).trigger('change');
-        $('#meses2').val(datosPersonal[0].mesNacimiento).trigger('change');
+      // Procesar datos personales
+      if (datosPersonal.exito) {
+        console.log(datosPersonal)
+        $("#idEmpleado").val(datosPersonal.idPersonal);
+        $("#primerNombre").val(datosPersonal.nombre);
+        $("#segundoNombre").val(datosPersonal.segundoNombre);
+        $("#primerApellido").val(datosPersonal.apellido);
+        $("#segundoApellido").val(datosPersonal.segundoApellido);
+        $("#cedulaEdi").val(datosPersonal.cedula);
+        $("#telefono").val(datosPersonal.telefono);
+        $("#civil").val(datosPersonal.estadoCivil);
+        $('#dependencia').val(datosPersonal.iddependencia).trigger('change');
+        $('#departamento').val(datosPersonal.iddepartamento).trigger('change');
+        $('#estatus').val(datosPersonal.idestatus).trigger('change');
+        $('#dependencia').val(datosPersonal.iddependencia).trigger('change');
+        $('#cargo').val(datosPersonal.idcargo).trigger('change');
+        $('#academico').val(datosPersonal.nivelAcademico).trigger('change');
+        $('#ano2').val(datosPersonal.anoNacimiento).trigger('change');
+        $('#dia2').val(datosPersonal.diaNacimineto).trigger('change');
+        $('#meses2').val(datosPersonal.mesNacimiento).trigger('change');
 
 
         // llevarOptionIndividual(datosPersonal[0].dependencia, 'dependencia', datosPersonal[0].iddependencia);
@@ -532,32 +563,22 @@ $(function () {
         clasesInputs("#civil", ".span_civil");
         clasesInputs("#ano2", ".span_ano");
         clasesInputs("#dia2", ".span_dia");
-
       } else {
         console.error('Error al obtener datos personales o la estructura de la respuesta es incorrecta');
       }
-    }).fail((jqXHR, textStatus, errorThrown) => {
-      console.error('Error al obtener los datos:', textStatus, errorThrown);
-    });
+    } catch (error) {
+      console.error('Error al obtener los datos:', error.status, error.error);
+    }
   }
 
-  function editarFamiliar(idPersonal) {
-    console.log(idPersonal);
-    let urls = [
-      "src/ajax/registroPersonal.php?modulo_personal=obtenerDatosFamiliar",
-    ];
-
+  async function editarFamiliar(idPersonal) {
+    let url = "src/ajax/registroPersonal.php?modulo_personal=obtenerDatosFamiliar";
     let options = { id: idPersonal };
-    let requests = urls.map((url, index) => {
-      if (index === 0) { // Suponiendo que quieres pasar `options` solo a la primera solicitud
-        return obtenerDatosJQuery(url, options);
-      } else {
-        return obtenerDatosJQuery(url);
-      }
-    });
+    try {
+      const datosPersonal = await obtenerDatosPromise(url, options);
 
-    $.when(...requests).done((datosPersonal) => {
       if (datosPersonal.exito) {
+        $("#idEmpleadoFamiliar").val(datosPersonal.idEmpleado);
         $("#cedula_trabajador_familiar").val(datosPersonal.cedulaEmpleado);
         $("#nombreEmpleado").val(datosPersonal.nombreEmpleado);
         $("#apellidoEmpleado").val(datosPersonal.apellidoEmpleado);
@@ -638,13 +659,12 @@ $(function () {
           $("#carnet").removeClass("ignore-validation");
           $("#disca").prop("checked", true);
         }
-
       } else {
         console.error('Error al obtener datos personales o la estructura de la respuesta es incorrecta');
       }
-    }).fail((jqXHR, textStatus, errorThrown) => {
-      console.error('Error al obtener los datos:', textStatus, errorThrown);
-    });
+    } catch (error) {
+      console.error('Error al obtener los datos:', error.status, error.error);
+    }
   }
 
   async function llenarSelectDependencias(data, selectId) {
@@ -1296,7 +1316,7 @@ $(function () {
   });
 
   // Delegación de eventos para botones creados dinámicamente
-  $(document).on('click', '.dt-button', function(event) {
+  $(document).on('click', '.dt-button', function (event) {
     event.preventDefault(); // Evita el comportamiento predeterminado del enlace
 
     if ($(this).hasClass('dt-button-active')) {

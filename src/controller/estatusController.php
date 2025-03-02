@@ -80,6 +80,32 @@ class estatusController extends estatusModel
         echo json_encode($response);
     }
 
+    public function obtenerEstatusGeneral(){
+        $data_json = [
+            "exito" => false,
+            "mensaje" => ""
+        ];
+
+        $datosGeneralEstatus = $this->getObtenerEstatusGeneral();
+        if (!empty($datosGeneralEstatus)) {
+            foreach($datosGeneralEstatus as $row){
+                $data_json["exito"] = true;
+                $data_json['data'][] = [
+                    'id' => $row['id_estatus'],
+                    'value' => $row['estatus']
+                ];
+            }
+        }else{
+
+            $data_json["exito"] = false;
+            $data_json["mensaje"] = "no se lograron obtener los estatus";
+        }
+
+         // Devolver la respuesta en formato JSON
+         header('Content-Type: application/json');
+         echo json_encode($data_json);
+    }
+
     public function regisEstatus(string $nombreEstatus)
     {
         $nombreEstatus =  $this->limpiarCadena($nombreEstatus);

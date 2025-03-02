@@ -7,25 +7,42 @@ use App\Atlas\config\Conexion;
 class personalModel extends Conexion
 {
 
-    private function registrarPersonal($tabla, $datos)
+    // REGISTRAR DATOS
+    private function registrarDatos(string $tabla, array $datos)
     {
         $sql = $this->guardarDatos($tabla, $datos);
         return $sql;
     }
 
-    private function registrarEmpleado($tabla, $datos)
+    //REGISTRAR DOCUMENTOS
+    private function registraDOCS(string $tabla, array $datos)
     {
         $sql = $this->guardarDatos($tabla, $datos);
         return $sql;
     }
 
-    private function registraDOCS($tabla, $datos)
+    // RETORNAR ID PERSONAL POR CÉDULA
+    private function returnIDP(array $parametro)
     {
-        $sql = $this->guardarDatos($tabla, $datos);
+        $sql = $this->ejecutarConsulta("SELECT id_personal
+         FROM datospersonales dp
+         WHERE dp.cedula = ?", $parametro);
         return $sql;
     }
 
-    private function validarPersonal($parametro)
+    // RETORNAR ID EMPLEADO POR CÉDULA
+    private function returnIDPE(array $parametro)
+    {
+        $sql = $this->ejecutarConsulta("SELECT id_personal, id_empleados
+         FROM datospersonales dp
+         INNER JOIN datosempleados de
+         ON dp.id_personal = de.idPersonal
+         WHERE dp.cedula = ?", $parametro);
+        return $sql;
+    }
+
+    // EXISTE DATOS DE PERSONAL POR CÉDULA
+    private function existePersonalCD(array $parametro)
     {
         $sql = $this->ejecutarConsulta("SELECT cedula FROM datosPersonales WHERE cedula = ?", $parametro);
         if ($sql) {
@@ -36,90 +53,85 @@ class personalModel extends Conexion
         return $sql;
     }
 
-    private function DatosPerosnal($parametro)
+    // EXISTE EMPELADO POR ID
+    private function existeEmpleadoCD(array $parametro)
     {
-        $sql = $this->ejecutarConsulta("SELECT id_personal, cedula FROM datospersonales WHERE cedula = ?", $parametro);
+        $sql = $this->ejecutarConsulta("SELECT id_empleados FROM datosempelados WHERE id_empleados = ?", $parametro);
+        if ($sql) {
+            $sql = false;
+        } else {
+            $sql = true;
+        }
         return $sql;
     }
 
-    private function totalDatospersonal($parametro)
-    {
-        $sql = $this->ejecutarConsulta(
-            "SELECT * FROM datosEmpleados de INNER JOIN datosPersonales dp ON de.idPersonal = dp.id_personal INNER JOIN estatus e ON de.idEstatus = e.id_estatus
-            INNER JOIN cargo c ON de.idCargo = c.id_cargo
-            INNER JOIN dependencia depe ON de.idDependencia = depe.id_dependencia
-            INNER JOIN departamento d ON de.idDepartamento = d.id_departamento WHERE dp.cedula = ?",
-            $parametro
-        );
-        return $sql;
-    }
-
-    private function totalDatosID($parametro)
-    {
-        $sql = $this->ejecutarConsulta(
-            "SELECT * FROM datosEmpleados de INNER JOIN datosPersonales dp ON de.idPersonal = dp.id_personal INNER JOIN estatus e ON de.idEstatus = e.id_estatus
-            INNER JOIN cargo c ON de.idCargo = c.id_cargo
-            INNER JOIN dependencia depe ON de.idDependencia = depe.id_dependencia
-            INNER JOIN departamento d ON de.idDepartamento = d.id_departamento WHERE dp.id_personal = ?",
-            $parametro
-        );
-        return $sql;
-    }
-
-    private function validarEmpleado($parametro)
-    {
-        $sql = $this->ejecutarConsulta("SELECT * FROM datosempleados WHERE idpersonal = ? ", $parametro);
-        return $sql;
-    }
-
-    private function validarEmpleado_datos($parametro)
-    {
-        $sql = $this->ejecutarConsulta("SELECT *  FROM datosempleados de INNER JOIN datospersonales dp ON de.idPersonal =  dp.id_personal WHERE dp.cedula  = ?", $parametro);
-        return $sql;
-    }
-
-    private function existeFamilar($parametro)
+    // EXISTE FAMILIAR POR TOMO, FOLIO Y CÉDULA
+    private function existeFamilar(array $parametro)
     {
         $cedula = $parametro[0];
         $carnet = $parametro[1];
         $tomo = $parametro[2];
         $folio = $parametro[3];
-        $sql = $this->ejecutarConsulta("SELECT * FROM datosfamilia WHERE tomo = ? AND folio = ?", [$tomo, $folio]);
+        $sql = $this->ejecutarConsulta("SELECT df.id_ninos, df.tomo, df.folio FROM datosfamilia  df WHERE df.tomo = ? AND df.folio = ?", [$tomo, $folio]);
         if (empty($sql)) {
-            $sql = $this->ejecutarConsulta("SELECT * FROM datosfamilia WHERE cedula = ? ",  [$cedula]);
+            $sql = $this->ejecutarConsulta("SELECT df.id_ninos, df.cedula FROM datosfamilia df WHERE df.cedula = ? ",  [$cedula]);
             if (empty($sql)) {
-                $sql = $this->ejecutarConsulta("SELECT * FROM datosfamilia WHERE codigoCarnet = ? ",  [$carnet]);
+                $sql = $this->ejecutarConsulta("SELECT df.id_ninos, df.codigoCarnet FROM datosfamilia df WHERE df.codigoCarnet = ? ",  [$carnet]);
             }
         }
         return $sql;
     }
 
-    private function existeFamiliarID($parametro)
+    // TOTAL DE DATOS DE EMPLEADO Y DATOS PERSONALES
+    private function totalDatosPE(array $parametro)
     {
-        $sql = $this->ejecutarConsulta("SELECT * FROM datosfamilia WHERE id_ninos = ? ",  $parametro);
+        $sql = $this->ejecutarConsulta(
+            "SELECT de.*, dp.*
+        FROM datosEmpleados de
+        INNER JOIN datosPersonales dp ON de.idPersonal = dp.id_personal
+        INNER JOIN estatus e ON de.idEstatus = e.id_estatus
+        INNER JOIN cargo c ON de.idCargo = c.id_cargo
+        INNER JOIN dependencia depe ON de.idDependencia = depe.id_dependencia
+        INNER JOIN departamento d ON de.idDepartamento = d.id_departamento WHERE dp.cedula = ?",
+            $parametro
+        );
         return $sql;
     }
 
-    private function existeEmpleadofamiliar($parametro)
+    // TOTAL DE DATOS DE EMPLEADO Y DATOS PERSONALES POR ID PERSONAL
+    private function totalDatosPEID(array $parametro)
     {
-        $sql = $this->ejecutarConsulta("SELECT * FROM datosfamilia WHERE idEmpleado = ? ",  $parametro);
+        $sql = $this->ejecutarConsulta(
+            "SELECT de.*, dp.*
+        FROM datosEmpleados de
+        INNER JOIN datosPersonales dp ON de.idPersonal = dp.id_personal
+        INNER JOIN estatus e ON de.idEstatus = e.id_estatus
+        INNER JOIN cargo c ON de.idCargo = c.id_cargo
+        INNER JOIN dependencia depe ON de.idDependencia = depe.id_dependencia
+        INNER JOIN departamento d ON de.idDepartamento = d.id_departamento WHERE dp.id_personal = ?",
+            $parametro
+        );
         return $sql;
     }
 
-    private function datosFamiliar($parametro)
+    // TOTAL DE DATOS DE EMPLEADO Y DATOS PERSONALES POR ID EMPLEADO
+    private function totalDatosIDEmpleados(array $parametro)
     {
-        $sql = $this->ejecutarConsulta("SELECT df . *, dp . cedula AS cedulaEmpleado,
-        dp.primerNombre AS primerNombreEmpleado,
-        dp.primerApellido AS primerApellidoEmpleado
-        FROM datosfamilia df
-        INNER JOIN datosempleados de
-        ON de.id_empleados = df.idEmpleado
-        INNER JOIN datospersonales dp ON dp.id_personal = de.idPersonal
-        WHERE df.id_ninos = ? ",  $parametro);
+        $sql = $this->ejecutarConsulta(
+            "SELECT * FROM datosEmpleados de
+        INNER JOIN datosPersonales dp ON de.idPersonal = dp.id_personal
+        INNER JOIN estatus e ON de.idEstatus = e.id_estatus
+        INNER JOIN cargo c ON de.idCargo = c.id_cargo
+        INNER JOIN dependencia depe ON de.idDependencia = depe.id_dependencia
+        INNER JOIN departamento d ON de.idDepartamento = d.id_departamento
+        WHERE de.id_empleados = ?",
+            $parametro
+        );
         return $sql;
     }
 
-    private function datosFamiliarEmpleado($parametro)
+    // DATOS DE FAMILIAR POR MEDIO ID EMPLEADO
+    private function datosFamiliarEmpleadoID($parametro)
     {
         $sql = $this->ejecutarConsulta("SELECT df . *, dp . cedula AS cedulaEmpleado,
         df . primerNombre AS primerNombreFamiliar, df . primerApellido AS primerApellidoFamiliar,
@@ -137,78 +149,29 @@ class personalModel extends Conexion
         return $sql;
     }
 
-    private function actualuzarDatos($tabla, $datos, $condicion)
+    // DATOS DE FAMILIAR POR MEDIO DEL ID DE FAMILIAR
+    private function datosFamiliarID(array $parametro)
     {
-        $sql = $this->actualizarDatos($tabla, $datos, $condicion);
+        $sql = $this->ejecutarConsulta("SELECT df . *,
+        df.primerNombre AS primerNombreFamiliar,
+        df.segundoNombre AS segundoNombreFamiliar,
+        df.primerApellido AS primerApellidoFamiliar,
+        df.segundoApellido AS segundoApellidoFamiliar,
+        dp . cedula AS cedulaEmpleado,
+        dp.primerNombre AS primerNombreEmpleado,
+        dp.primerApellido AS primerApellidoEmpleado
+        FROM datosfamilia df
+        INNER JOIN datosempleados de
+        ON de.id_empleados = df.idEmpleado
+        INNER JOIN datospersonales dp ON dp.id_personal = de.idPersonal
+        WHERE df.id_ninos = ? ",  $parametro);
         return $sql;
     }
 
-    public function actualizarDatosFamiliar()
-    {
-        $sql = $this->ejecutarConsulta("");
-        return $sql;
-    }
-
-    public function actualizarPersonalMode(
-        $primerNombre,
-        $segundoNombre,
-        $primerApellido,
-        $segundoApellido,
-        $cedula,
-        $civil,
-        $ano,
-        $mes,
-        $dia,
-        $fecha,
-        $hora
-    ) {
-        $sql = $this->ejecutarConsulta("UPDATE
-        datospersonales SET primerNombre='$primerNombre',
-        segundoNombre='$segundoNombre',primerApellido='$primerApellido',
-        segundoApellido='$segundoApellido',cedula='$cedula',
-        estadoCivil='$civil',diaNacimiento='$dia',mesNacimiento='$mes',
-        anoNacimiento='$ano',fecha='$fecha',
-        hora=' $hora' WHERE cedula = '$cedula' ");
-
-        if (!empty($sql)) {
-            $sql = false;
-        } else {
-            $sql = true;
-        }
-        return $sql;
-    }
-
-    public function actualizarEmpleadoMode(
-        $idEstatus,
-        $idCargo,
-        $idDependencia,
-        $telefono,
-        $idDepartamento,
-        $fecha,
-        $hora,
-        $idPersonal,
-        $nivelAcademico
-    ) {
-        $sql = $this->ejecutarConsulta("UPDATE
-        datosempleados
-        SET
-        idEstatus='$idEstatus',
-        idCargo='$idCargo',
-        idDependencia='$idDependencia',
-        idDepartamento=' $idDepartamento',
-        nivelAcademico='$nivelAcademico',
-        telefono=' $telefono',activo='1',fecha='$fecha',hora='$hora' WHERE idPersonal = '$idPersonal'");
-
-        if (!empty($sql)) {
-            $sql = false;
-        } else {
-            $sql = true;
-        }
-        return $sql;
-    }
 
     // Total de datos de empleado
-    public function totalDatosEmpleado(){
+    public function totalDatosEmpleado()
+    {
         $sql = $this->ejecutarConsulta("SELECT *
         FROM datosempleados de
         INNER JOIN estatus e ON de.idEstatus = e.id_estatus
@@ -216,85 +179,88 @@ class personalModel extends Conexion
         INNER JOIN dependencia depe ON de.idDependencia = depe.id_dependencia
         INNER JOIN departamento d ON de.idDepartamento = d.id_departamento
         INNER JOIN datospersonales dp ON dp.id_personal = de.idPersonal");
-
         return $sql;
     }
 
+    // ACTUALIZAR DATOS DE PERSONAL, EMPLEADO Y FAMILIAR
+    private function actualuzarPEF($tabla, $datos, $condicion)
+    {
+        $sql = $this->actualizarDatos($tabla, $datos, $condicion);
+        return $sql;
+    }
+
+    /* GETTERS */
+
+    // GETTERS PARA REGISTRAR DATOS
     public function getRegistrar($tabla, $datos)
     {
-        return $this->registrarPersonal($tabla, $datos);
+        return $this->registrarDatos($tabla, $datos);
     }
 
-    public function getRegistrarEmpleado($tabla, $datos)
-    {
-        return $this->registrarEmpleado($tabla, $datos);
-    }
-
+    // REGISTRAR DOCUMENTOS
     public function getRegistrarDOCS($tabla, $datos)
     {
         return $this->registraDOCS($tabla, $datos);
     }
 
-    public function getExistePersonal($parametro)
+    // GETTER DE ACTUALIZAR DATOS
+    public function getActualizar($tabla, $datos, $condicion)
     {
-        return $this->validarPersonal($parametro);
+        return $this->actualuzarPEF($tabla, $datos, $condicion);
     }
 
-    public function getExisteEmpleado($parametro)
+    // GETTER DE RETORNAR ID PERSONAL POR CÉDULA
+    public function getreturnIDP($parametro)
     {
-        return $this->validarEmpleado($parametro);
+        return $this->returnIDP($parametro);
     }
 
-    public function getDatosPersonal($parametro)
+    // GETTER DE RETORNAR ID EMPLEADO POR CÉDULA
+    public function getreturnIDPE($parametro)
     {
-        return $this->DatosPerosnal($parametro);
+        return $this->returnIDPE($parametro);
     }
 
-    public function getTotalDatosPersonal($parametro)
+    // GETTER DE VALIDAR DATOS DE PERSONAL POR CÉDULA
+    public function getExistePersonalCD($parametro)
     {
-        return $this->totalDatospersonal($parametro);
+        return $this->existePersonalCD($parametro);
+    }
+    // TOTAL DE DATOS DE EMPELADOS MASIVOS EN GENERAL
+    public function getTotalDatosEmpleado()
+    {
+        return $this->totalDatosEmpleado();
     }
 
-    public function getExisteEmpleado_datos($parametro)
+    public function getTotalDatosIDEmpleados($parametro)
     {
-        return $this->validarEmpleado_datos($parametro);
+        return $this->totalDatosIDEmpleados($parametro);
     }
 
-    public function getExisteFamiliar($parametro)
+    // GETTER DE VALIDAR DATOS DE EMPLEADO POR CÉDULA
+    public function getTotalDatosPE($parametro)
+    {
+        return $this->totalDatosPE($parametro);
+    }
+
+    // GETTER DE VALIDAR EXISTENCIA DE FAMILIAR
+    public function getExisteFamilar($parametro)
     {
         return $this->existeFamilar($parametro);
     }
 
-    public function getDatosFamiliar($parametro)
+    // GETTER DE VALIDAR EXISTENCIA DE FAMILIAR POR ID
+    public function getTotalDatosPEID($parametro)
     {
-        return $this->datosFamiliar($parametro);
+        return $this->totalDatosPEID($parametro);
     }
 
-    public function getExisteEmpleadoFamiliar($parametro)
+    public function getDatosFamiliarEmpleadoID($parametro)
     {
-        return $this->existeEmpleadofamiliar($parametro);
+        return $this->datosFamiliarEmpleadoID($parametro);
     }
 
-    public function getExisteFamiliarID($parametro)
-    {
-        return $this->existeFamiliarID($parametro);
-    }
-
-    public function getActualizar($tabla, $datos, $condicion)
-    {
-        return $this->actualuzarDatos($tabla, $datos, $condicion);
-    }
-
-    public function getDatosFamiliarEmpleado($parametro)
-    {
-        return $this->datosFamiliarEmpleado($parametro);
-    }
-
-    public function getTotalDatosEmpleado(){
-        return $this->totalDatosEmpleado();
-    }
-
-    public function getTotalDatosID($parametro){
-        return $this->totalDatosID($parametro);
+    public function getDatosFamiliarID($parametro){
+        return $this->datosFamiliarID($parametro);
     }
 }

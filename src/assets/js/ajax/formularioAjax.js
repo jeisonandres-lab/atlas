@@ -99,6 +99,23 @@ export async function obtenerDatos(url, metodo = 'POST') {
     });
 }
 
+export async function obtenerDatosPromise(url, data = {}) {
+    return new Promise((resolve, reject) => {
+      $.ajax({
+        url: url,
+        method: 'POST', // O 'POST', según tu necesidad
+        data: data,
+        dataType: 'json', // Asegúrate de que el servidor responde con JSON
+        success: function(response) {
+          resolve(response);
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+          reject({ status: textStatus, error: errorThrown });
+        }
+      });
+    });
+}
+  
 export async function obtenerDatosJQuery(url, options = {}) {
     let formData = new FormData();
     for (let key in options) {

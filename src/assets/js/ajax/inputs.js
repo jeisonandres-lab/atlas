@@ -89,7 +89,7 @@ export async function validarTelefono(input, cumplidospan, cumplido_span2) {
     this.value = this.value.replace(/[^0-9]/g, "");
     console.log(this.value)
     // Limitar a 12 dígitos
-    if (this.value.length > 7) {
+    if (this.value.length > 7 ) {
       this.value = this.value.slice(0, 7);
     }
     // Aplicar clases según la longitud

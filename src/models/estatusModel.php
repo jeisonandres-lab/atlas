@@ -12,6 +12,11 @@ class estatusModel extends Conexion{
         return $sql;
     }
 
+    private function obtenerEstatusGeneral(){
+        $sql = $this->ejecutarConsulta("SELECT * FROM estatus WHERE activo = 1 ");
+        return $sql;
+    }
+
     private function actulizarEstatus($tabla, $datos, $condicion)
     {
         $sql = $this->actualizarDatos($tabla, $datos, $condicion);
@@ -62,6 +67,10 @@ class estatusModel extends Conexion{
     public function getDatosEstatusID($parametro)
     {
         return $this->datosEstatusID($parametro);
+    }
+
+    public function getObtenerEstatusGeneral(){
+        return $this->obtenerEstatusGeneral();
     }
 
 }

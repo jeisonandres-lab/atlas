@@ -3,10 +3,6 @@
 namespace App\Atlas\controller;
 
 use App\Atlas\models\personalModel;
-use App\Atlas\models\dependenciasModel;
-use App\Atlas\models\estatusModel;
-use App\Atlas\models\cargoModel;
-use App\Atlas\models\departamentoModel;
 use App\Atlas\controller\fileUploaderController;
 use App\Atlas\models\tablasModel;
 use App\Atlas\config\App;
@@ -16,9 +12,6 @@ date_default_timezone_set("America/Caracas");
 class personalController extends personalModel
 {
 
-    private $dependencia;
-    private $estatus;
-    private $archivo;
 
     private $fileUploader;
     private $tablas;
@@ -146,6 +139,11 @@ class personalController extends personalModel
                 "campo_valor" => $dia
             ],
             [
+                "campo_nombre" => "fechaING",
+                "campo_marcador" => ":fechaING",
+                "campo_valor" => date("Y-m-d")
+            ],
+            [
                 "campo_nombre" => "fecha",
                 "campo_marcador" => ":fecha",
                 "campo_valor" => date("Y-m-d")
@@ -157,8 +155,7 @@ class personalController extends personalModel
             ]
         ];
 
-        $parametro = [$cedula];
-        $check_exisPersonal = $this->getExistePersonal($parametro);
+        $check_exisPersonal = $this->getExistePersonalCD([$cedula]);
         if ($check_exisPersonal) {
             // Verificar si los archivos tienen nombres diferentes
             $nombreArchivo1 = isset($_FILES[$fileInputName]) ? $_FILES[$fileInputName]['name'] : 'sin archivo';
@@ -200,12 +197,18 @@ class personalController extends personalModel
                     } else {
                         $check_regisPersonal = $this->getRegistrar('datospersonales', $personal_datos_reg);
                         if ($check_regisPersonal) {
-                            $registroAuditoria = $this->auditoriaController->registrarAuditoria($this->idUsuario, 'Registrar personal', 'El usuario ' . $this->nombreUsuario . ' ha colocado un nuevo personal en el sistema.');
+                            $registroAuditoria = $this->auditoriaController->registrarAuditoria(
+                                $this->idUsuario,
+                                'Registrar personal',
+                                'El usuario ' . $this->nombreUsuario . ' ha colocado un nuevo personal en el sistema con el nombre '
+                                    . $primerNombre . ' ' . $primerApellido . ' y la cedula ' . $cedula . '.'
+                            );
                             if ($registroAuditoria) {
-                                $check_busPersonal = $this->getDatosPersonal($parametro);
+                                $check_busPersonal = $this->getreturnIDP([$cedula]);
 
                                 foreach ($check_busPersonal as $row) {
                                     $idPersonal = $row['id_personal'];
+
                                     $empleados_datos_reg = [
                                         [
                                             "campo_nombre" => "idPersonal",
@@ -259,12 +262,17 @@ class personalController extends personalModel
                                         ]
                                     ];
 
-                                    $parametro_empleado = [$idPersonal];
                                     $check_regisEmpleados = $this->getRegistrar('datosempleados', $empleados_datos_reg);
                                     if ($check_regisEmpleados) {
-                                        $registroAuditoria = $this->auditoriaController->registrarAuditoria($this->idUsuario, 'Registrar empleado', 'El usuario ' . $this->nombreUsuario . ' ha colocado un nuevo empleado en el sistema.');
+
+
+                                        $registroAuditoria = $this->auditoriaController->registrarAuditoria(
+                                            $this->idUsuario,
+                                            'Registrar empleado',
+                                            'El usuario ' . $this->nombreUsuario . ' ha colocado un nuevo empleado en el sistema' . $primerNombre . ' ' . $primerApellido . ' y la cedula ' . $cedula . '.'
+                                        );
                                         if ($registroAuditoria) {
-                                            $check_busEmpleado = $this->getExisteEmpleado($parametro_empleado);
+                                            $check_busEmpleado = $this->getreturnIDPE([$cedula]);
                                             foreach ($check_busEmpleado as $row) {
                                                 $id_empleado = $row['id_empleados'];
                                                 // Si ninguno de los archivos existe, proceder con la subida
@@ -331,107 +339,6 @@ class personalController extends personalModel
         echo json_encode($data_json);
     }
 
-    //Obtener todos los datos de personal
-    public function obtenerDatosPersonal(string $cedula_familiar)
-    {
-        $cedula_familiar = $this->limpiarCadena($cedula_familiar);
-        $data_json = [
-            'exito' => false, // Inicializamos a false por defecto
-            'mensaje' => 'data del principio',
-        ];
-        if ($cedula_familiar == "") {
-            $data_json['exito'] = true;
-            $data_json['mensaje'] = "Debes de llenar el campo de la Cédula para hacer la busqueda del empleado";
-            $data_json['logrado'] = false;
-        } else {
-            $parametro = [$cedula_familiar];
-            $check_personal = $this->getTotalDatosPersonal($parametro);
-            if ($check_personal == true) {
-                foreach ($check_personal as $row) {
-                    $activo = $row['activo'] == 1 ? 'Activo' : 'Inactivo';
-                    $data_json['exito'] = true;
-                    $data_json['idPersonal'] = $row['id_personal'];
-                    $data_json['cedula'] = $row['cedula'];
-                    $data_json['nombre'] = $row['primerNombre'];
-                    $data_json['segundoNombre'] = $row['segundoNombre'];
-                    $data_json['apellido'] = $row['primerApellido'];
-                    $data_json['segundoApellido'] = $row['segundoApellido'];
-                    $data_json['estadoCivil'] = $row['estadoCivil'];
-                    $data_json['diaNacimiento'] = $row['diaNacimiento'];
-                    $data_json['mesNacimiento'] = $row['mesNacimiento'];
-                    $data_json['anoNacimiento'] = $row['anoNacimiento'];
-                    $data_json['estatus'] = $row['estatus'];
-                    $data_json['idestatus'] = $row['id_estatus'];
-                    $data_json['idEmpleado'] = $row['id_empleados'];
-                    $data_json['cargo'] = $row['cargo'];
-                    $data_json['idcargo'] = $row['id_cargo'];
-                    $data_json['dependencia'] = $row['dependencia'];
-                    $data_json['iddependencia'] = $row['id_dependencia'];
-                    $data_json['departamento'] = $row['departamento'];
-                    $data_json['iddepartamento'] = $row['id_departamento'];
-                    $data_json['nivelAcademico'] = $row['nivelAcademico'];
-                    $data_json['telefono'] = $row['telefono'];
-                    $data_json['activo'] = $activo;
-                    $data_json['mensaje'] = "Trabajador Encontrado";
-                    $data_json['logrado'] = true;
-                }
-            } else {
-                $data_json['exito'] = false;
-                $data_json['mensaje'] = "Este trabajador no se encuentra registrado en nuestro sistema.";
-                $data_json['logrado'] = false;
-            }
-        }
-        header('Content-Type: application/json');
-        echo json_encode($data_json);
-    }
-
-    // Obtener datos del familiar
-    public function obtenerDatosFamiliar(string $idPersonal)
-    {
-        $idPersonal = $this->limpiarCadena($idPersonal);
-
-        $data_json = [
-            'exito' => false,
-            'mensaje' => 'data del principio'
-        ];
-
-        if ($idPersonal == "") {
-            $data_json['exit'] = true;
-            $data_json['mensaje'] = "Debes de llenar el campo de la Cédula para hacer la busqueda del empleado";
-        } else {
-            $parametro = [$idPersonal];
-            $check_familiar = $this->getDatosFamiliar($parametro);
-            if ($check_familiar) {
-                foreach ($check_familiar as $row) {
-                    $data_json['exito'] = true;
-                    $data_json['cedulaEmpleado'] = $row['cedulaEmpleado'];
-                    $data_json['nombreEmpleado'] = $row['primerNombreEmpleado'];
-                    $data_json['apellidoEmpleado'] = $row['primerApellidoEmpleado'];
-
-                    $data_json['idfamiliar'] = $row['id_ninos'];
-                    $data_json['cedula'] = $row['cedula'];
-                    $data_json['nombre'] = $row['primerNombre'];
-                    $data_json['segundoNombre'] = $row['segundoNombre'];
-                    $data_json['apellido'] = $row['primerApellido'];
-                    $data_json['segundoApellido'] = $row['segundoApellido'];
-                    $data_json['parentesco'] = $row['parentesco'];
-                    $data_json['edad'] = $row['edad'];
-                    $data_json['anoNacimiento'] = $row['anoNacimiento'];
-                    $data_json['mesNacimiento'] = $row['mesNacimiento'];
-                    $data_json['diaNacimiento'] = $row['diaNacimiento'];
-                    $data_json['codigoCarnet'] = $row['codigoCarnet'];
-                    $data_json['tomo'] = $row['tomo'];
-                    $data_json['folio'] = $row['folio'];
-                    $data_json['mensaje'] = "Familiar Encontrado";
-                }
-            } else {
-                $data_json['exit'] = 'epa epa';
-                $data_json['mensaje'] = "Este familiar no se encuentra registrado en nuestro sistema.";
-            }
-        }
-        header('Content-Type: application/json');
-        echo json_encode($data_json);
-    }
 
     //Registrar Familiar a un empleado
     public function registrarFamilia(
@@ -499,15 +406,18 @@ class personalController extends personalModel
         if ($fileInputName2 == "") {
             $fileInputName2 = null;
         }
-        $parametro = [$cedulaEmpleado];
-        $check_empleado = $this->getExisteEmpleado_datos($parametro);
+
+        $check_empleado = $this->getTotalDatosPE([$cedulaEmpleado]);
         if ($check_empleado) {
             foreach ($check_empleado as $row) {
+
                 $id_empleado = $row['id_empleados'];
                 $nombreEmpleado = $row['primerNombre'];
                 $apellidoEmpleado = $row['primerApellido'];
                 $id_nino = $check_empleado;
+
                 $parametrofamili = [$cedula, $numeroCarnet, $tomo, $folio];
+
                 $parametrosFamilia = [
                     [
                         "campo_nombre" => "cedula",
@@ -595,9 +505,11 @@ class personalController extends personalModel
                         "campo_valor" => date("h:i:s A")
                     ]
                 ];
-                $tabla = 'datosFamilia';
+
+
                 $parametro_registrar = $parametrosFamilia;
-                $check_familiar_exis = $this->getExisteFamiliar($parametrofamili);
+                $check_familiar_exis = $this->getExisteFamilar($parametrofamili);
+
                 if ($check_familiar_exis) {
                     $data_json['exito'] = true;
                     $data_json['mensaje'] = "Este familiar ya esta registrado";
@@ -626,6 +538,7 @@ class personalController extends personalModel
                         } else {
                             // Ejecutar el código de subida si hay archivos para subir
                             if (!empty($archivosASubir)) {
+
                                 $resultados = [];
                                 $existeArchivo = false;
                                 // Verificar si alguno de los archivos ya existe
@@ -646,9 +559,13 @@ class personalController extends personalModel
                                     $data_json['exito'] = false;
                                     $data_json['resultado'] = 3;
                                 } else {
-                                    $check_familiar = $this->getRegistrarEmpleado($tabla, $parametro_registrar);
+
+                                    $check_familiar = $this->getRegistrar('datosFamilia', $parametro_registrar);
+
                                     if ($check_familiar) {
+
                                         $registroAuditoria = $this->auditoriaController->registrarAuditoria($this->idUsuario, 'Registrar familiar', 'El usuario ' . $this->nombreUsuario . ' asigno un nuevo familiar en el sistema al empleado ' . $nombreEmpleado . ' ' . $apellidoEmpleado . ' portador de la cedula ' . $cedulaEmpleado . ' el familiar asignado fue ' . $primerNombre . ' ' . $primerApellido . '.');
+
                                         if ($registroAuditoria) {
                                             $data_json["exitoAuditoria"] = true;
                                             $data_json['messengerAuditoria'] = "Auditoria registrada con exito.";
@@ -656,7 +573,8 @@ class personalController extends personalModel
                                             $data_json["exitoAuditoria"] = false;
                                             $data_json['messengerAuditoria'] = "Error al registrar la auditoria.";
                                         }
-                                        $check_exisfamiliar = $this->getExisteFamiliar($parametrofamili);
+
+                                        $check_exisfamiliar = $this->getExisteFamilar($parametrofamili);
                                         foreach ($check_exisfamiliar as $row) {
                                             $id_nino = $row['id_ninos'];
                                             // Si ninguno de los archivos existe, proceder con la subida
@@ -689,7 +607,7 @@ class personalController extends personalModel
                                 }
                             } else {
                                 // Si no hay archivos para subir, registrar el familiar sin archivos
-                                $check_familiar = $this->getRegistrarEmpleado($tabla, $parametro_registrar);
+                                $check_familiar = $this->getRegistrar('datosFamilia', $parametro_registrar);
                                 if ($check_familiar) {
                                     $data_json['exito'] = true;
                                     $data_json['mensaje'] = "Familiar Registrado Exitosamente.";
@@ -706,80 +624,62 @@ class personalController extends personalModel
             }
         } else {
             $data_json['exito'] = true;
-            $data_json['mensaje'] = 'No existe el empleado al que intentas asignar el familiar.' . $parametro;
-            $data_json['resultado'] = var_dump($parametro);
+            $data_json['mensaje'] = 'No existe el empleado al que intentas asignar el familiar.';
         }
 
         header('Content-Type: application/json');
         echo json_encode($data_json);
     }
 
-    //Obtener todos los datos de dependencias
-    public function obtenerDependencias()
-    {
-        $dependencias = $this->getDependenciasPersonales();
-        foreach ($dependencias as $row) {
-            $data_json['exito'] = true;
-            $data_json['data'][] = [
-                'id' => $row['id_dependencia'],
-                'value' => $row['dependencia'],
-            ];
-            $data_json['mensaje'] = "todas las dependencias exitoso";
-        }
-        header('Content-Type: application/json');
-        echo json_encode($data_json);
-    }
-
-    //Obtener todos los datos de estatus
-    public function obtenerEstatus()
-    {
-        $estatus = $this->getEstatusPersonales();
-        foreach ($estatus as $row) {
-            $data_json['exito'] = true;
-            $data_json['data'][] = [
-                'id' => $row['id_estatus'],
-                'value' => $row['estatus']
-            ];
-            $data_json['mensaje'] = "todas las estatus exitoso";
-        }
-        header('Content-Type: application/json');
-        echo json_encode($data_json);
-    }
-
-    //Obtener todos los datos de cargo
-    public function obtenerCargo()
-    {
-        $cargo = $this->getCargoPersonales();
-        foreach ($cargo as $row) {
-            $data_json['exito'] = true;
-            $data_json['data'][] = [
-                'id' => $row['id_cargo'],
-                'value' => $row['cargo']
-            ];
-            $data_json['mensaje'] = "todas las cargo exitoso";
-        }
-        header('Content-Type: application/json');
-        echo json_encode($data_json);
-    }
-
-    //Obtener todos los datos de departamento
-    public function obtenerDepartamento()
-    {
-        $departamento = $this->getDepartamentosPersonales();
+    //Obtener todos los datos de personal
+    public function obtenerDatosPersonal(
+        string $idEmpleado
+    ) {
+        $idEmpleado = $this->limpiarCadena($idEmpleado);
         $data_json = [
-            'exito' => false,
-            'data' => [],
-            'mensaje' => 'No se encontraron departamentos'
+            'exito' => false, // Inicializamos a false por defecto
+            'mensaje' => 'data del principio',
         ];
-
-        if (!empty($departamento)) {
+        if ($idEmpleado == "") {
             $data_json['exito'] = true;
-            $data_json['mensaje'] = 'Todos los departamentos obtenidos exitosamente';
-            foreach ($departamento as $row) {
-                $data_json['data'][] = [
-                    'id' => $row['id_departamento'],
-                    'value' => $row['departamento']
-                ];
+            $data_json['mensaje'] = "Debes de llenar el campo de la Cédula para hacer la busqueda del empleado";
+            $data_json['logrado'] = false;
+        } else {
+
+            $check_personal = $this->getTotalDatosIDEmpleados([$idEmpleado]);
+            if ($check_personal == true) {
+                foreach ($check_personal as $row) {
+                    $activo = $row['activo'] == 1 ? 'Activo' : 'Inactivo';
+                    $data_json['exito'] = true;
+                    $data_json['idPersonal'] = $row['id_personal'];
+                    $data_json['cedula'] = $row['cedula'];
+                    $data_json['nombre'] = $row['primerNombre'];
+                    $data_json['segundoNombre'] = $row['segundoNombre'];
+                    $data_json['apellido'] = $row['primerApellido'];
+                    $data_json['segundoApellido'] = $row['segundoApellido'];
+                    $data_json['estadoCivil'] = $row['estadoCivil'];
+                    $data_json['diaNacimiento'] = $row['diaNacimiento'];
+                    $data_json['mesNacimiento'] = $row['mesNacimiento'];
+                    $data_json['anoNacimiento'] = $row['anoNacimiento'];
+                    $data_json['estatus'] = $row['estatus'];
+                    $data_json['idestatus'] = $row['id_estatus'];
+                    $data_json['idEmpleado'] = $row['id_empleados'];
+                    $data_json['cargo'] = $row['cargo'];
+                    $data_json['idcargo'] = $row['id_cargo'];
+                    $data_json['dependencia'] = $row['dependencia'];
+                    $data_json['iddependencia'] = $row['id_dependencia'];
+                    $data_json['departamento'] = $row['departamento'];
+                    $data_json['iddepartamento'] = $row['id_departamento'];
+                    $data_json['nivelAcademico'] = $row['nivelAcademico'];
+                    $data_json['telefono'] = $row['telefono'];
+                    $data_json['activo'] = $activo;
+                    $data_json['mensaje'] = "Trabajador Encontrado";
+                    $data_json['logrado'] = true;
+                }
+            } else {
+                $data_json['exito'] = false;
+                $data_json['mensaje'] = "Este trabajador no se encuentra registrado en nuestro sistema.";
+                $data_json['logrado'] = false;
             }
         }
 
@@ -787,28 +687,52 @@ class personalController extends personalModel
         echo json_encode($data_json);
     }
 
-    //Inyectar dependencias
-    public function objetoDependencia()
+    // Obtener datos del familiar
+    public function obtenerDatosFamiliar(string $idPersonal)
     {
-        return $this->dependencia = new dependenciasModel();
-    }
+        $idPersonal = $this->limpiarCadena($idPersonal);
 
-    //Inyectar cargo
-    public function objetoCargo()
-    {
-        return $this->dependencia = new cargoModel();
-    }
+        $data_json = [
+            'exito' => false,
+            'mensaje' => 'data del principio'
+        ];
 
-    //Inyectar departamento
-    public function objetoDepartamento()
-    {
-        return $this->dependencia = new departamentoModel();
-    }
+        if ($idPersonal == "") {
+            $data_json['exit'] = true;
+            $data_json['mensaje'] = "Debes de llenar el campo de la Cédula para hacer la busqueda del empleado";
+        } else {
+            $check_familiar = $this-> getDatosFamiliarID([$idPersonal]);
+            if ($check_familiar) {
+                foreach ($check_familiar as $row) {
+                    $data_json['exito'] = true;
+                    $data_json['idEmpleado'] = $row['idEmpleado'];
+                    $data_json['cedulaEmpleado'] = $row['cedulaEmpleado'];
+                    $data_json['nombreEmpleado'] = $row['primerNombreEmpleado'];
+                    $data_json['apellidoEmpleado'] = $row['primerApellidoEmpleado'];
 
-    //Inyectar estatus
-    public function objetoEstatus()
-    {
-        return $this->estatus = new estatusModel();
+                    $data_json['idfamiliar'] = $row['id_ninos'];
+                    $data_json['cedula'] = $row['cedula'];
+                    $data_json['nombre'] = $row['primerNombre'];
+                    $data_json['segundoNombre'] = $row['segundoNombre'];
+                    $data_json['apellido'] = $row['primerApellido'];
+                    $data_json['segundoApellido'] = $row['segundoApellido'];
+                    $data_json['parentesco'] = $row['parentesco'];
+                    $data_json['edad'] = $row['edad'];
+                    $data_json['anoNacimiento'] = $row['anoNacimiento'];
+                    $data_json['mesNacimiento'] = $row['mesNacimiento'];
+                    $data_json['diaNacimiento'] = $row['diaNacimiento'];
+                    $data_json['codigoCarnet'] = $row['codigoCarnet'];
+                    $data_json['tomo'] = $row['tomo'];
+                    $data_json['folio'] = $row['folio'];
+                    $data_json['mensaje'] = "Familiar Encontrado";
+                }
+            } else {
+                $data_json['exit'] = 'epa epa';
+                $data_json['mensaje'] = "Este familiar no se encuentra registrado en nuestro sistema.";
+            }
+        }
+        header('Content-Type: application/json');
+        echo json_encode($data_json);
     }
 
     //Obtener todos los datos de personal para la tabla
@@ -824,7 +748,7 @@ class personalController extends personalModel
         $selectoresCantidad = 'COUNT(e.idPersonal) as cantidad'; // Selector para contar la cantidad de registros de la tabla
         $datosBuscar = ['depe.dependencia', 'd.primerNombre', 'd.cedula', 'ca.cargo']; // Array de selectores para buscar en la tabla
         $campoOrden = 'e.idPersonal'; // Campo por el cual se ordenará la tabla
-        $selectores = 'e.id_empleados, e.idPersonal, d.primerNombre, d.segundoNombre, d.primerApellido, d.segundoApellido, d.cedula, e.idEstatus, ca.cargo, e.idCargo, depe.dependencia, depa.departamento'; // Selectores para obtener los datos de la tabla
+        $selectores = '*, DATE_FORMAT(fechaING, "%d-%m-%Y") AS fechaCreada'; // Selectores para obtener los datos de la tabla
         $conditions = ['e.activo = ?'];
         $conditionParams = ['1'];
 
@@ -841,12 +765,12 @@ class personalController extends personalModel
         foreach ($personal as $row) {
             $data_json['exito'] = true;
             $parametro = [$row['id_empleados']];
-            $validarFamiliar = $this->getExisteEmpleadoFamiliar($parametro);
+            $validarFamiliar = $this->getDatosFamiliarEmpleadoID($parametro);
             $botones = "
 
-                <button class='btn btn-primary btn-sm btn-hover-azul btnEditar ' data-bs-toggle='modal' data-bs-target='#editarDatos' data-cedula=" . $row['cedula'] . "><i class='fa-solid fa-pencil fa-sm me-2'></i>Editar</button>
+                <button class='btn btn-primary btn-sm btn-hover-azul btnEditar ' data-bs-toggle='modal' data-bs-target='#editarDatos' data-cedula=" . $row['id_empleados'] . "><i class='fa-solid fa-pencil fa-sm me-2'></i>Editar</button>
                 <button class='btn btn-danger btn-sm btn-hover-rojo btnEliminar ' data-swal-toast-template='#my-template' data-id=" . $row['id_empleados'] . "><i class='fa-solid fa-trash fa-sm me-2'></i>Eliminar</button>
-        ";
+                ";
 
             if ($validarFamiliar) {
                 $botones .= "<button class='btn btn-warning btn-sm btn-familiar btn-hover-amarillo ' data-swal-toast-template='#my-template' data-id=" . $row['id_empleados'] . "><i class='fa-duotone fa-solid fa-people-group fa-sm me-2'></i>Familiar</button>";
@@ -855,13 +779,19 @@ class personalController extends personalModel
 
 
             $data_json['data'][] = [
-                '0' => $row['primerNombre'] . " " . $row['primerApellido'],
-                '1' => $row['idEstatus'],
-                '2' => $row['idCargo'],
-                '3' => $row['dependencia'],
-                '4' => $row['departamento'],
-                '5' => $row['cedula'],
-                '6' => $botones
+                '0' => $row['primerNombre'] . " " . $row['segundoNombre'],
+                '1' => $row['primerApellido'] . " " . $row['segundoApellido'],
+                '2' => $row['diaNacimiento']."-".$row['mesNacimiento']."-".$row['anoNacimiento'],
+                '3' => $row['cedula'],
+                '4' => $row['estadoCivil'],
+                '5' => $row['estatus'],
+                '6' => $row['cargo'],
+                '7' => $row['dependencia'],
+                '8' => $row['departamento'],
+                '9' => $row['nivelAcademico'],
+                '10' => $row['telefono'],
+                '11' => $row['fechaCreada'],
+                '12' => $botones
             ];
             $data_json['mensaje'] = "todas las personas exitoso";
         }
@@ -911,7 +841,7 @@ class personalController extends personalModel
             $conditionParams2 = [$parametro2, $parametro3];
 
             $validarDocumentos = $this->tablas->tablas($selectores2, $tabla2, $campoOrden2, $conditions2, $conditionParams2);
-            $validarFamiliar = $this->getExisteEmpleadoFamiliar($parametro);
+            // $validarFamiliar = $this->getExisteEmpleadoFamiliar($parametro);
             $botones = "
                 <button class='btn btn-primary btn-sm btn-hover-azul btnEditarFamiliar ' data-bs-toggle='modal' data-bs-target='#editarDatosFamiliar' data-cedula=" . $row['id_ninos'] . "><i class='fa-solid fa-pencil fa-sm me-2'></i>Editar</button>
                 <button class='btn btn-danger btn-sm btn-hover-rojo btnEliminar'  data-swal-toast-template='#my-template' data-id=" . $row['id_ninos'] .  "><i class='fa-solid fa-trash fa-sm me-2'></i>Eliminar</button>
@@ -961,38 +891,10 @@ class personalController extends personalModel
         echo json_encode($response);
     }
 
-    //Encapsulamineto de estatus
-    protected function getEstatusPersonales()
-    {
-        $estatusPersonal = $this->objetoEstatus();
-        return $estatusPersonal->getDatosEstatus();
-    }
-
-    //Encapsulamineto de cargo
-    protected function getCargoPersonales()
-    {
-        $cargoPersonal = $this->objetoCargo();
-        return $cargoPersonal->getDatosCargo();
-    }
-
-    //Encapsulamineto de dependencias
-    protected function getDependenciasPersonales()
-    {
-        $dependenciaPersonal = $this->objetoDependencia();
-        return $dependenciaPersonal->getDatosDependencia();
-    }
-
-    //Encapsulamiento de departamentos
-    protected function getDepartamentosPersonales()
-    {
-        $departamentoPersonal = $this->objetoDepartamento();
-        return $departamentoPersonal->getDatosDepartamento();
-    }
-
     //Eliminar personal empleado
-    public function eliminarPersonal($idPersonal)
+    public function eliminarEmpleado($idEmpleado)
     {
-        $idPersonal = $this->limpiarCadena($idPersonal);
+        $idEmpleado = $this->limpiarCadena($idEmpleado);
         $parametro = [
             [
                 "campo_nombre" => "activo",
@@ -1005,7 +907,7 @@ class personalController extends personalModel
         $condicion = [
             "condicion_campo" => "id_empleados",
             "condicion_marcador" => ":id_empleados",
-            "condicion_valor" => $idPersonal
+            "condicion_valor" => $idEmpleado
         ];
         $data_json = [
             'exito' => false, // Inicializamos a false por defecto
@@ -1053,9 +955,10 @@ class personalController extends personalModel
 
         if ($resultado) {
             $data_json['exito'] = true;
-            $data_json['mensaje'] = 'eliminado correctamente.';
+            $data_json['mensaje'] = 'Eliminado correctamente.';
         } else {
-            // Manejo de error
+            $data_json['exito'] = false;
+            $data_json['mensaje'] = 'Error al eliminar al familiar.';
         }
 
         header('Content-Type: application/json');
@@ -1092,8 +995,6 @@ class personalController extends personalModel
         $ano = $this->limpiarCadena($ano);
         $mes = $this->limpiarCadena($mes);
         $dia = $this->limpiarCadena($dia);
-        $fecha = date("Y-m-d");
-        $hora = date("h:i:s A");
         $nivelAcademico = $this->limpiarCadena($nivelAcademico);
 
         // DATOS DE EMPLEADOS
@@ -1114,12 +1015,17 @@ class personalController extends personalModel
             'mensaje' => '',
             'resultado' => 0,
         ];
-
         // Asegúrate de que el marcador de parámetro coincida con el nombre del campo en la consulta SQL
-        $condicion = [
-            "condicion_campo" => "cedula",
-            "condicion_marcador" => ":cedula",
-            "condicion_valor" => $cedula
+        $condicion_personal = [
+            "condicion_campo" => "id_personal",
+            "condicion_marcador" => ":id_personal",
+            "condicion_valor" =>  $idPersonal
+        ];
+
+        $condicion_empleado = [
+            "condicion_campo" => "idPersonal",
+            "condicion_marcador" => ":idPersonal",
+            "condicion_valor" => $idPersonal
         ];
 
         $personal_datos_reg = [
@@ -1168,19 +1074,45 @@ class personalController extends personalModel
                 "campo_marcador" => ":diaNacimiento",
                 "campo_valor" => $dia
             ],
+        ];
+
+        $empleados_datos_reg = [
             [
-                "campo_nombre" => "fecha",
-                "campo_marcador" => ":fecha",
-                "campo_valor" => date("Y-m-d")
+                "campo_nombre" => "idEstatus",
+                "campo_marcador" => ":idEstatus",
+                "campo_valor" => $idEstatus
             ],
             [
-                "campo_nombre" => "hora",
-                "campo_marcador" => ":hora",
-                "campo_valor" => date("h:i:s A")
+                "campo_nombre" => "idCargo",
+                "campo_marcador" => ":idCargo",
+                "campo_valor" => $idCargo
+            ],
+            [
+                "campo_nombre" => "idDependencia",
+                "campo_marcador" => ":idDependencia",
+                "campo_valor" => $idDependencia
+            ],
+            [
+                "campo_nombre" => "idDepartamento",
+                "campo_marcador" => ":idDepartamento",
+                "campo_valor" => $idDepartamento
+            ],
+            [
+                "campo_nombre" => "telefono",
+                "campo_marcador" => ":telefono",
+                "campo_valor" => $telefono
+            ],
+            [
+                "campo_nombre" => "nivelAcademico",
+                "campo_marcador" => ":nivelAcademico",
+                "campo_valor" => $nivelAcademico
+            ],
+            [
+                "campo_nombre" => "activo",
+                "campo_marcador" => ":activo",
+                "campo_valor" => 1
             ]
         ];
-        $parametro = [$idPersonal];
-
         // Verificar si los archivos tienen nombres diferentes
         $nombreArchivo1 = isset($_FILES[$fileInputName]) ? $_FILES[$fileInputName]['name'] : null;
         $nombreArchivo2 = isset($_FILES[$fileInputName2]) ? $_FILES[$fileInputName2]['name'] : null;
@@ -1197,7 +1129,6 @@ class personalController extends personalModel
             if ($nombreArchivo2) {
                 $archivosASubir[] = ['input' => $fileInputName2, 'dir' => $uploadDir2]; // Asegúrate de definir $uploadDir2
             }
-
             // Ejecutar el código de subida si hay archivos para subir
             if (!empty($archivosASubir)) {
                 $resultados = [];
@@ -1219,100 +1150,17 @@ class personalController extends personalModel
                     $data_json['exito'] = false;
                     $data_json['resultado'] = 3;
                 } else {
-                    $viejosDatos = $this->getTotalDatosID($parametro);
+                    $viejosDatos = $this->getTotalDatosPEID([$idPersonal]);
                     foreach ($viejosDatos as $row) {
-                        $check_regisPersonal = $this->actualizarPersonalMode(
-                            $primerNombre,
-                            $segundoNombre,
-                            $primerApellido,
-                            $segundoApellido,
-                            $cedula,
-                            $civil,
-                            $ano,
-                            $mes,
-                            $dia,
-                            $fecha,
-                            $hora
-                        );
+                        $check_regisPersonal = $this->getActualizar('datospersonales', $personal_datos_reg,  $condicion_personal);
                         if ($check_regisPersonal) {
 
                             $registroAuditoria = $this->auditoriaController->registrarAuditoria($this->idUsuario, 'Actualizar personal', 'El usuario ' . $this->nombreUsuario . ' actualizo los datos del personal con cedula ' . $cedula . '.');
-
-                            $condicion_empleado = [
-                                "condicion_campo" => "idPersonal",
-                                "condicion_marcador" => ":idPersonal",
-                                "condicion_valor" => $idPersonal
-                            ];
-
-                            $empleados_datos_reg = [
-                                [
-                                    "campo_nombre" => "idPersonal",
-                                    "campo_marcador" => ":idPersonal",
-                                    "campo_valor" =>  $idPersonal
-                                ],
-                                [
-                                    "campo_nombre" => "idEstatus",
-                                    "campo_marcador" => ":idEstatus",
-                                    "campo_valor" => $idEstatus
-                                ],
-                                [
-                                    "campo_nombre" => "idCargo",
-                                    "campo_marcador" => ":idCargo",
-                                    "campo_valor" => $idCargo
-                                ],
-                                [
-                                    "campo_nombre" => "idDependencia",
-                                    "campo_marcador" => ":idDependencia",
-                                    "campo_valor" => $idDependencia
-                                ],
-                                [
-                                    "campo_nombre" => "idDepartamento",
-                                    "campo_marcador" => ":idDepartamento",
-                                    "campo_valor" => $idDepartamento
-                                ],
-                                [
-                                    "campo_nombre" => "telefono",
-                                    "campo_marcador" => ":telefono",
-                                    "campo_valor" => $telefono
-                                ],
-                                [
-                                    "campo_nombre" => "nivelAcademico",
-                                    "campo_marcador" => ":nivelAcademico",
-                                    "campo_valor" => $nivelAcademico
-                                ],
-                                [
-                                    "campo_nombre" => "activo",
-                                    "campo_marcador" => ":activo",
-                                    "campo_valor" => 1
-                                ],
-                                [
-                                    "campo_nombre" => "fecha",
-                                    "campo_marcador" => ":fecha",
-                                    "campo_valor" => date("Y-m-d")
-                                ],
-                                [
-                                    "campo_nombre" => "hora",
-                                    "campo_marcador" => ":hora",
-                                    "campo_valor" => date("h:i:s A")
-                                ]
-                            ];
-
-                            $parametro_empleado = [$idPersonal];
-                            $check_regisEmpleados = $this->actualizarEmpleadoMode(
-                                $idEstatus,
-                                $idCargo,
-                                $idDependencia,
-                                $telefono,
-                                $idDepartamento,
-                                $fecha,
-                                $hora,
-                                $idPersonal,
-                                $nivelAcademico
-                            );
+                            $check_regisEmpleados = $this->getActualizar('datosempleados', $empleados_datos_reg,  $condicion_empleado);
                             if ($check_regisEmpleados) {
                                 $registroAuditoria = $this->auditoriaController->registrarAuditoria($this->idUsuario, 'Actualizar empleado', 'El usuario ' . $this->nombreUsuario . ' actualizo los datos del empleado con cedula ' . $cedula . '.');
 
-                                $check_busEmpleado = $this->getExisteEmpleado($parametro_empleado);
+                                $check_busEmpleado = $this->getTotalDatosPEID([$idPersonal]);
                                 foreach ($check_busEmpleado as $row) {
                                     $id_empleado = $row['id_empleados'];
                                     // Si ninguno de los archivos existe, proceder con la subida
@@ -1353,130 +1201,44 @@ class personalController extends personalModel
                 }
             } else {
                 // Si no hay archivos para subir, proceder con la actualización de los datos
-                $viejosDatos = $this->getTotalDatosID($parametro);
+                $viejosDatos = $this->getTotalDatosPEID([$idPersonal]);
                 foreach ($viejosDatos as $row) {
                     $idPersonal = $row['id_personal'];
-                    $check_regisPersonal = $this->actualizarPersonalMode(
-                        $primerNombre,
-                        $segundoNombre,
-                        $primerApellido,
-                        $segundoApellido,
-                        $cedula,
-                        $civil,
-                        $ano,
-                        $mes,
-                        $dia,
-                        $fecha,
-                        $hora
-                    );
+
+                    $check_regisPersonal = $this->getActualizar('datospersonales', $personal_datos_reg,  $condicion_personal);
                     if ($check_regisPersonal) {
                         $registroAuditoria = $this->auditoriaController->registrarAuditoria($this->idUsuario, 'Actualizar personal', 'El usuario ' . $this->nombreUsuario . ' actualizo los datos del personal ' . $primerNombre . ' ' . $primerApellido . ' por tador de la cédula ' . $cedula . '.');
 
-                        $check_busPersonalNuevo = $this->getTotalDatosID($parametro);
-                        foreach ($check_busPersonalNuevo as $row) {
-
-                            $condicion_empleado = [
-                                "condicion_campo" => "idPersonal",
-                                "condicion_marcador" => ":idPersonal",
-                                "condicion_valor" => $idPersonal
-                            ];
-                            $empleados_datos_reg = [
-                                [
-                                    "campo_nombre" => "idPersonal",
-                                    "campo_marcador" => ":idPersonal",
-                                    "campo_valor" =>  $idPersonal
-                                ],
-                                [
-                                    "campo_nombre" => "idEstatus",
-                                    "campo_marcador" => ":idEstatus",
-                                    "campo_valor" => $idEstatus
-                                ],
-                                [
-                                    "campo_nombre" => "idCargo",
-                                    "campo_marcador" => ":idCargo",
-                                    "campo_valor" => $idCargo
-                                ],
-                                [
-                                    "campo_nombre" => "idDependencia",
-                                    "campo_marcador" => ":idDependencia",
-                                    "campo_valor" => $idDependencia
-                                ],
-                                [
-                                    "campo_nombre" => "idDepartamento",
-                                    "campo_marcador" => ":idDepartamento",
-                                    "campo_valor" => $idDepartamento
-                                ],
-                                [
-                                    "campo_nombre" => "telefono",
-                                    "campo_marcador" => ":telefono",
-                                    "campo_valor" => $telefono
-                                ],
-                                [
-                                    "campo_nombre" => "nivelAcademico",
-                                    "campo_marcador" => ":nivelAcademico",
-                                    "campo_valor" => $nivelAcademico
-                                ],
-                                [
-                                    "campo_nombre" => "activo",
-                                    "campo_marcador" => ":activo",
-                                    "campo_valor" => 1
-                                ],
-                                [
-                                    "campo_nombre" => "fecha",
-                                    "campo_marcador" => ":fecha",
-                                    "campo_valor" => date("Y-m-d")
-                                ],
-                                [
-                                    "campo_nombre" => "hora",
-                                    "campo_marcador" => ":hora",
-                                    "campo_valor" => date("h:i:s A")
-                                ]
-                            ];
-                            $parametro_empleado = [$idPersonal];
-                            $check_regisEmpleados = $this->actualizarEmpleadoMode(
-                                $idEstatus,
-                                $idCargo,
-                                $idDependencia,
-                                $telefono,
-                                $idDepartamento,
-                                $fecha,
-                                $hora,
-                                $idPersonal,
-                                $nivelAcademico
-                            );
-                            if ($check_regisEmpleados) {
-                                $registroAuditoria = $this->auditoriaController->registrarAuditoria($this->idUsuario, 'Actualizar empleado', 'El usuario ' . $this->nombreUsuario . ' actualizo los datos del empleado con cedula ' . $cedula . '.');
-
-                                $check_busEmpleado = $this->getExisteEmpleado($parametro_empleado);
-                                foreach ($check_busEmpleado as $row) {
-                                    $id_empleado = $row['id_empleados'];
-                                    $data_json['exito'] = true;
-                                    $data_json['mensaje'] = "Empleado Registrado Exitosamente.";
-                                    $data_json['resultado'] = 2;
-                                }
-                                if ($registroAuditoria) {
-                                    $data_json["exitoAuditoria"] = true;
-                                    $data_json['messengerAuditoria'] = "Auditoria registrada con exito.";
-                                } else {
-                                    $data_json["exitoAuditoria"] = false;
-                                    $data_json['messengerAuditoria'] = "Error al registrar la auditoria.";
-                                }
+                        $check_busEmpleado = $this->getActualizar('datosempleados', $empleados_datos_reg, $condicion_empleado);
+                        if ($check_busEmpleado) {
+                            $registroAuditoria = $this->auditoriaController->registrarAuditoria($this->idUsuario, 'Actualizar empleado', 'El usuario ' . $this->nombreUsuario . ' actualizo los datos del empleado con cedula ' . $cedula . '.');
+                            if ($registroAuditoria) {
+                                $data_json["exitoAuditoria"] = true;
+                                $data_json['messengerAuditoria'] = "Auditoria registrada con exito.";
                             } else {
-                                $data_json['exito'] = false;
-                                $data_json['mensaje'] = "Los datos Del Personal fueron registrados exitosamente, pero el de los datos empleados";
-                                $data_json['resultado'] = 1;
+                                $data_json["exitoAuditoria"] = false;
+                                $data_json['messengerAuditoria'] = "Error al registrar la auditoria.";
                             }
+                            $data_json['exito'] = true;
+                            $data_json['mensaje'] = "Empleado Registrado Exitosamente.";
+                            $data_json['resultado'] = 2;
+                        } else {
+                            $data_json['exito'] = false;
+                            $data_json['mensaje'] = "Los datos Del Personal fueron registrados exitosamente, pero el de los datos empleados";
+                            $data_json['resultado'] = 1;
                         }
                     }
                 }
             }
         }
+
         header('Content-Type: application/json');
         echo json_encode($data_json);
     }
 
     //Actualizar familiar empleado
     public function actualizarFamiliar(
+        $idPersonal,
         $idfamiliar,
         $parentesco,
         $cedulaEmpleado,
@@ -1530,14 +1292,11 @@ class personalController extends personalModel
             'mensaje' => '',
             'resultado' => 0,
         ];
-
-        $parametro = [$cedulaEmpleado];
-        $check_empleado = $this->getExisteEmpleado_datos($parametro);
+        $check_empleado = $this->getTotalDatosIDEmpleados([$idPersonal]);
         if ($check_empleado) {
             foreach ($check_empleado as $row) {
                 $id_empleado = $row['id_empleados'];
                 $nombreEmpleado = $row['primerNombre'] . " " . $row['primerApellido'];
-                $parametrofamili = [$idfamiliar];
                 $parametrosFamilia = [
                     [
                         "campo_nombre" => "cedula",
@@ -1614,16 +1373,6 @@ class personalController extends personalModel
                         "campo_marcador" => ":activo",
                         "campo_valor" => 1
                     ],
-                    [
-                        "campo_nombre" => "fecha",
-                        "campo_marcador" => ":fecha",
-                        "campo_valor" => date("Y-m-d")
-                    ],
-                    [
-                        "campo_nombre" => "hora",
-                        "campo_marcador" => ":hora",
-                        "campo_valor" => date("h:i:s A")
-                    ]
                 ];
 
                 // Verificar si los archivos tienen nombres diferentes
@@ -1665,11 +1414,11 @@ class personalController extends personalModel
                             $data_json['resultado'] = 3;
                         } else {
 
-                            $check_exisfamiliar = $this->getExisteFamiliarID($parametrofamili);
+                            $check_exisfamiliar = $this->getDatosFamiliarID([$idfamiliar]);
                             if ($check_exisfamiliar) {
                                 foreach ($check_exisfamiliar as $rowFamiliar) {
                                     $id_nino = $rowFamiliar['id_ninos'];
-                                    $nombreFamiliar = $rowFamiliar['primerNombre'] . " " . $rowFamiliar['primerApellido'];
+                                    $nombreFamiliar = $rowFamiliar['primerNombreFamiliar'] . " " . $rowFamiliar['primerApellidoFamiliar'];
                                     // Si ninguno de los archivos existe, proceder con la subida
                                     foreach ($archivosASubir as $archivo) {
                                         $inputName = $archivo['input'];
@@ -1719,11 +1468,11 @@ class personalController extends personalModel
                             }
                         }
                     } else {
-                        $check_exisfamiliar = $this->getExisteFamiliarID($parametrofamili);
+                        $check_exisfamiliar = $this->getDatosFamiliarID([$idfamiliar]);
                         if ($check_exisfamiliar) {
                             foreach ($check_exisfamiliar as $rowFamiliar) {
                                 $id_nino = $rowFamiliar['id_ninos'];
-                                $nombreFamiliar = $rowFamiliar['primerNombre'] . " " . $rowFamiliar['primerApellido'];
+                                $nombreFamiliar = $rowFamiliar['primerNombreFamiliar'] . " " . $rowFamiliar['primerApellidoFamiliar'];
                                 $condicion = [
                                     "condicion_campo" => "id_ninos",
                                     "condicion_marcador" => ":id_ninos",

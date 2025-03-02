@@ -6,13 +6,17 @@ require_once '../../vendor/autoload.php';
 
 use App\Atlas\config\Conexion;
 use App\Atlas\controller\personalController;
-use App\Atlas\models\dependenciasModel;
-use App\Atlas\models\estatusModel;
+use App\Atlas\controller\dependenciasController;
+use App\Atlas\controller\cargoController;
+use App\Atlas\controller\departamentoController;
+use App\Atlas\controller\estatusController;
 use App\Atlas\controller\notificacionController;
 
 $conexion = new conexion();
-$dependencias = new dependenciasModel();
-$estatus = new estatusModel();
+$dependencias = new dependenciasController();
+$estatus = new estatusController();
+$cargo = new cargoController();
+$departamento = new departamentoController();
 $personal = new personalController();
 $notificacion = new notificacionController();
 
@@ -68,16 +72,16 @@ switch ($_GET['modulo_personal']) {
         );
         break;
     case 'obtenerDependencias':
-        $personal->obtenerDependencias();
+        $dependencias->obtenerdependeciasGeneral();
         break;
     case 'obtenerEstatus':
-        $personal->obtenerEstatus();
+        $estatus->obtenerEstatusGeneral();
         break;
     case 'obtenerCargo':
-        $personal->obtenerCargo();
+        $cargo->obtenerCargoGeneral();
         break;
     case 'obtenerDepartamento':
-        $personal->obtenerDepartamento();
+        $departamento->obtenerDeparmatentoGeneral();
         break;
     case 'obtenerDatosPersonal':
         $personal->obtenerDatosPersonal($cedulaEmpleado);
@@ -111,7 +115,7 @@ switch ($_GET['modulo_personal']) {
         $personal->obtenerFamiliar($idPersonal);
         break;
     case 'eliminarPersonal':
-        $personal->eliminarPersonal($idPersonal);
+        $personal->eliminarEmpleado($idPersonal);
         break;
     case 'eliminarFamiliar':
         $personal->eliminarFamiliar($idPersonal);
@@ -139,6 +143,7 @@ switch ($_GET['modulo_personal']) {
         break;
     case 'actualizarFamiliar':
         $personal->actualizarFamiliar(
+            $idPersonal,
             $idfamiliar,
             $parentesco,
             $cedulaEmpleado,

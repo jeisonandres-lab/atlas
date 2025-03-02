@@ -124,3 +124,25 @@ table tfoot tr th{
 .dt-middle {
   vertical-align: middle !important;
 }
+
+
+#myTable::-webkit-scrollbar {
+  display: none;
+}
+
+#myTable:hover::-webkit-scrollbar {
+  display: none;
+  position: absolute; /* Posiciona la barra de desplazamiento de forma absoluta */
+  top: 0; /* Posiciona la barra en la parte superior */
+  right: 0;
+  height: 7px !important;
+  width: 7px;
+  border-radius: 20px;
+}
+#myTable::-webkit-scrollbar:window-inactive {
+  display: none;
+}
+#myTable::-webkit-scrollbar-thumb {
+  background-color: red;
+  border-radius: 6px;
+}

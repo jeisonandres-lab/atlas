@@ -241,4 +241,31 @@ class cargoController extends cargoModel
         header('Content-Type: application/json');
         echo json_encode($data_json);
     }
+
+    public function obtenerCargoGeneral(){
+
+        $data_json = [
+            "exito" => false,
+            "mensaje" => ""
+        ];
+
+        $datosGeneralCargo = $this->getObtenerCargoGeneral();
+        if (!empty($datosGeneralCargo)) {
+            foreach($datosGeneralCargo as $row){
+                $data_json["exito"] = true;
+                $data_json['data'][] = [
+                    'id' => $row['id_cargo'],
+                    'value' => $row['cargo']
+                ];
+            }
+        }else{
+
+            $data_json["exito"] = false;
+            $data_json["mensaje"] = "no se lograron obtener los cargo";
+        }
+
+         // Devolver la respuesta en formato JSON
+         header('Content-Type: application/json');
+         echo json_encode($data_json);
+    }
 }
