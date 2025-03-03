@@ -1,6 +1,6 @@
 // Funcion para vlaidar campos tipo text que tambien coloquen la primera letra en mayuscula
 export async function validarNombre(input, cumplidospan) {
-  $(input).on("input", function () {
+  $(document).on("input", input, function () {
     // Convertir todo a minúsculas y capitalizar la primera letra
     this.value = this.value.toLowerCase().replace(/\b\w/g, (char) => char.toUpperCase());
     this.value = this.value.replace(/[^a-zA-Z]/g, "");
@@ -22,7 +22,7 @@ export async function validarNombre(input, cumplidospan) {
 
 // Funcion para validar campos tipo text que coloquen la primera letra de cada palabra en mayuscula y permitan espacios
 export async function validarNombreConEspacios(input, cumplidospan) {
-  $(input).on("input", function () {
+  $(document).on("input", input, function () {
     // Convertir la primera letra de cada palabra a mayúscula y mantener el resto en su estado original
     this.value = this.value.replace(/\b\w/g, (char) => char.toUpperCase());
 
@@ -89,7 +89,7 @@ export async function validarTelefono(input, cumplidospan, cumplido_span2) {
     this.value = this.value.replace(/[^0-9]/g, "");
     console.log(this.value)
     // Limitar a 12 dígitos
-    if (this.value.length > 7 ) {
+    if (this.value.length > 7) {
       this.value = this.value.slice(0, 7);
     }
     // Aplicar clases según la longitud
@@ -116,23 +116,54 @@ export async function validarTelefono(input, cumplidospan, cumplido_span2) {
 }
 
 // Funcion para validar los inputs de tipo number
-export async function validarNumeroNumber(input, cumplidospan,) {
-  $(input).on("input", function () {
-    // Si el valor es menor a 0, lo reemplazamos por 0
-    if (this.value <= 0) {
-      $(this).val("0");
-      $(this).removeClass("cumplido");
-      $(this).addClass("error_input");
-      $(cumplidospan).removeClass("cumplido_span");
-      $(cumplidospan).addClass("error_span");
-    } else {
-      $(this).removeClass("error_input");
-      $(this).addClass("cumplido");
-      $(cumplidospan).removeClass("error_span");
-      $(cumplidospan).addClass("cumplido_span");
-    }
-  })
+export async function validarNumeroNumber(input, cumplidospan, limit) {
+  $(document).on("keydown", input, function (event) {
+      const key = event.key;
 
+      // Permitir teclas de control (flechas, borrar, tab, etc.)
+      if (
+          event.keyCode === 8 || // Backspace
+          event.keyCode === 9 || // Tab
+          event.keyCode === 37 || // Flecha izquierda
+          event.keyCode === 39 || // Flecha derecha
+          event.keyCode === 46  // Delete
+      ) {
+          return;
+      }
+
+      // Permitir solo números
+      if (isNaN(parseInt(key))) {
+          event.preventDefault();
+          return;
+      }
+
+      // Limitar la longitud del valor
+      if ($(this).val().length >= limit) {
+          event.preventDefault();
+          return;
+      }
+  });
+
+  $(document).on("input", input, function () {
+      let value = $(this).val();
+
+      // Limitar la longitud del valor en el evento input
+      if (value.length > limit) {
+          $(this).val(value.slice(0, limit));
+          value = $(this).val();
+      }
+
+      value = parseInt(value);
+
+      if (value <= 0) {
+          $(this).val("0");
+          $(this).removeClass("cumplido").addClass("error_input");
+          $(cumplidospan).removeClass("cumplido_span").addClass("error_span");
+      } else {
+          $(this).removeClass("error_input").addClass("cumplido");
+          $(cumplidospan).removeClass("error_span").addClass("cumplido_span");
+      }
+  });
 }
 
 //SOLO NUMEROS 
@@ -153,6 +184,32 @@ export async function soloNumeros(input, cumplidospan) {
       $(cumplidospan).removeClass("cumplido_span");
       $(cumplidospan).addClass("error_span");
     }
+  });
+}
+
+//validar numero de departamento con solo 2 datos´
+
+export async function validarDosDatos(input, cumplidospan) {
+  $(document).on('input', input, function () {
+    let inputValue = $(this).val();
+
+    // Limita la longitud a 2 caracteres
+    if (inputValue.length >= 2) {
+      $(this).removeClass("error_input");
+      $(this).addClass("cumplido");
+      $(cumplidospan).removeClass("error_span");
+      $(cumplidospan).addClass("cumplido_span");
+      $(this).val(inputValue.slice(0, 2));
+      inputValue = $(this).val();
+    } else {
+      $(this).removeClass("cumplido");
+      $(this).addClass("error_input");
+      $(cumplidospan).removeClass("cumplido_span");
+      $(cumplidospan).addClass("error_span");
+    }
+
+    // Convierte letras a mayúsculas
+    $(this).val(inputValue.toUpperCase());
   });
 }
 
@@ -178,7 +235,7 @@ export async function validarSelectores(input, cumplidospan, tigger) {
   } else { }
 }
 
-export async function incluirSelec2(input){
+export async function incluirSelec2(input) {
   $(input).select2({
     theme: "bootstrap-5",
     width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
@@ -188,32 +245,32 @@ export async function incluirSelec2(input){
 
 export async function validarSelectoresSelec2(input, cumplidospan) {
   // Maneja el evento select2:select y change
-    $(input).on('select2:select change', function (e) {
-      const select2Container = $(this).next('.select2-container');
-      const selectedValue = $(this).val();
-      const select = $(input);
-      const span = $(cumplidospan);
-      if (select.val() == "") {
-        select2Container.removeClass('cumplido');
-        select2Container.addClass('error_input');
+  $(document).on('select2:select change', input, function (e) {
+    const select2Container = $(this).next('.select2-container');
+    const selectedValue = $(this).val();
+    const select = $(input);
+    const span = $(cumplidospan);
+    if (select.val() == "") {
+      select2Container.removeClass('cumplido');
+      select2Container.addClass('error_input');
+      select.removeClass('cumplido');
+      span.removeClass('cumplido_span');
+    } else {
+      if (selectedValue && selectedValue !== "") {
+        select2Container.addClass('cumplido');
+        select.addClass('cumplido');
+        span.addClass('cumplido_span');
+        select2Container.removeClass('error_input');
+      } else {
         select.removeClass('cumplido');
         span.removeClass('cumplido_span');
-      } else {
-        if (selectedValue && selectedValue !== "") {
-          select2Container.addClass('cumplido');
-          select.addClass('cumplido');
-          span.addClass('cumplido_span'); 
-          select2Container.removeClass('error_input');
-        } else {
-          select.removeClass('cumplido');
-          span.removeClass('cumplido_span');
 
-          select2Container.removeClass('cumplido');
-          select2Container.addClass('error_input');
-        }
+        select2Container.removeClass('cumplido');
+        select2Container.addClass('error_input');
       }
-  
-    });
+    }
+
+  });
 }
 // Funcion para validar los inputs de tipo correo
 export async function valdiarCorreos(input, cumplidospan) {
@@ -342,13 +399,13 @@ export async function colocarNivelesEducativos(input) {
 }
 
 // Validar documentos subidos
-export async function file(input, cumplidospan){
-  $(input).on("change", function(){
+export async function file(input, cumplidospan) {
+  $(input).on("change", function () {
     if (this.files && this.files[0]) {
       // Se ha seleccionado un archivo
       $(this).addClass('cumplido');
       $(this).removeClass('error_input');
-      
+
       $(cumplidospan).removeClass("error_span");
       $(cumplidospan).addClass("cumplido_span");
     } else {
@@ -384,14 +441,14 @@ export async function limpiarFormulario(idinput, span) {
   if ($(idinput).attr('type') === 'checkbox') {
     return;
   }
-  
+
   $(idinput).val("");
   $(idinput).removeClass("cumplido");
   $(idinput).addClass("error_input");
-  
+
   if (span) {
     $(span).removeClass("cumplido_span");
-    $(span).addClass("error_span");    
+    $(span).addClass("error_span");
   }
 }
 
@@ -409,6 +466,7 @@ export async function limpiarInput(idinput, span) {
     $(span).removeClass("cumplido_span");
   }
 }
+
 
 // Funcion para colocar las clases cumplido en los input y span 
 export async function clasesInputs(input, span) {

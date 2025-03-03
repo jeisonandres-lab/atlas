@@ -67,7 +67,7 @@ use App\Atlas\config\App;
                                             <tr id="tr-identity" class="tr-identity">
                                             </tr>
                                         </thead>
-                                        <tbody class="contenidoTable">
+                                        <tbody class="contenidoTable" style="font-size: 14px;">
                                         </tbody>
                                     </table>
                                 </div>

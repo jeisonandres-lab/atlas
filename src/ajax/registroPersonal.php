@@ -11,6 +11,7 @@ use App\Atlas\controller\cargoController;
 use App\Atlas\controller\departamentoController;
 use App\Atlas\controller\estatusController;
 use App\Atlas\controller\notificacionController;
+use App\Atlas\controller\ubicacionController;
 
 $conexion = new conexion();
 $dependencias = new dependenciasController();
@@ -19,6 +20,7 @@ $cargo = new cargoController();
 $departamento = new departamentoController();
 $personal = new personalController();
 $notificacion = new notificacionController();
+$ubicacion = new ubicacionController();
 
 // DATOS PARA REGISTRAR DATOS PERSONAL
 $primerNombre = isset($_POST['primerNombre']) ? $conexion->limpiarCadena($_POST['primerNombre']) : "";
@@ -34,6 +36,7 @@ $ano = isset($_POST['ano']) ? $conexion->limpiarCadena($_POST['ano']) : "";
 $mes = isset($_POST['meses']) ? $_POST['meses'] : "";
 $dia = isset($_POST['dia']) ? $conexion->limpiarCadena($_POST['dia']) : "";
 $edad = isset($_POST['edad']) ? $conexion->limpiarCadena($_POST['edad']) : "";
+$sexo = isset($_POST['sexo']) ? $conexion->limpiarCadena($_POST['sexo']) : "";
 $nivelAcademico = isset($_POST['nivelAcademico']) ? $conexion->limpiarCadena($_POST['nivelAcademico']) : "";
 
 // DATOS PARA REGISTRAR EMPELADO
@@ -48,6 +51,19 @@ $idDependencia = isset($_POST['dependencia']) ? $conexion->limpiarCadena($_POST[
 $numeroCarnet = isset($_POST['carnet']) ? $conexion->limpiarCadena($_POST['carnet']) : "";
 $tomo = isset($_POST['tomo']) ? $conexion->limpiarCadena($_POST['tomo']) : "";
 $folio = isset($_POST['folio']) ? $conexion->limpiarCadena($_POST['folio']) : "";
+
+//ubicaciones
+$idestado = isset($_POST['estado']) ? $conexion->limpiarCadena($_POST['estado']) : "";
+$idestado2 = isset($_POST['idestado']) ? $conexion->limpiarCadena($_POST['idestado']) : "";
+$idMunicipio = isset($_POST['municipio']) ? $conexion->limpiarCadena($_POST['municipio']) : "";
+$idParroquia = isset($_POST['parroquia']) ? $conexion->limpiarCadena($_POST['parroquia']) : "";
+$vivienda = isset($_POST['vivienda']) ? $conexion->limpiarCadena($_POST['vivienda']) : "";
+$calle = isset($_POST['calle']) ? $conexion->limpiarCadena($_POST['calle']) : "";
+$numeroVivienda = isset($_POST['numeroVivienda']) ? $conexion->limpiarCadena($_POST['numeroVivienda']) : "";
+
+$pisoUrba= isset($_POST['piso']) ? $conexion->limpiarCadena($_POST['piso']) : "";
+$nombreUrba = isset($_POST['urbanizacion']) ? $conexion->limpiarCadena($_POST['urbanizacion']) : "";
+$numeroDepa = isset($_POST['numeroDepa']) ? $conexion->limpiarCadena($_POST['numeroDepa']) : "";
 
 switch ($_GET['modulo_personal']) {
     case 'registrar':
@@ -68,7 +84,17 @@ switch ($_GET['modulo_personal']) {
             $idDependencia,
             $idDepartamento,
             $telefono,
-            $nivelAcademico
+            $nivelAcademico,
+            $vivienda,
+            $sexo,
+            $idestado,
+            $idMunicipio,
+            $idParroquia,
+            $calle,
+            $numeroVivienda,
+            $pisoUrba,
+            $nombreUrba,
+            $numeroDepa
         );
         break;
     case 'obtenerDependencias':
@@ -89,7 +115,16 @@ switch ($_GET['modulo_personal']) {
 
     case 'obtenerDatosFamiliar':
         $personal->obtenerDatosFamiliar($idPersonal);
-            break;
+        break;
+    case 'obtenerEstados':
+        $ubicacion->obtenerEstados();
+        break;
+    case 'obtenerMunicipio':
+        $ubicacion->obtenerMunicipio($idestado2);
+        break;
+    case 'obtenerParroquia':
+        $ubicacion->obtenerParroquia($idMunicipio);
+        break;
     case 'registrarFamilia':
         $personal->registrarFamilia(
             $parentesco,

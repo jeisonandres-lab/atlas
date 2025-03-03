@@ -139,6 +139,26 @@ use App\Atlas\config\App;
                                 </div>
                             </div>
 
+                            <div class="col-sm-6 col-md-6 col-xl-4 col-xxl-4 mb-3" id="contenTomo">
+                                <div class="form-group">
+                                    <label for="tomo">Tomo</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text span_tomo"><i class="fa-regular fa-address-card"></i></span>
+                                        <input type="text" class="form-control" id="tomo" name="tomo" placeholder="Tomo De partida De Nacimiento" required disabled>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-6 col-md-6 col-xl-4 col-xxl-4 mb-3" id="contenFolio">
+                                <div class="form-group">
+                                    <label for="folio">Folio</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text span_folio"><i class="fa-regular fa-address-card"></i></span>
+                                        <input type="text" class="form-control" id="folio" name="folio" placeholder="Número de folio" required disabled>
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="col-sm-6 col-md-6 col-xl-4 col-xxl-4 mb-3 ">
                                 <div class="form-group">
                                     <label for="parentesco">Parentesco</label>

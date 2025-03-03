@@ -48,6 +48,7 @@ use App\Atlas\config\App;
                                             <th scope="col" data-dt-order="disable" id="cedula" class="bg-primary" style="font-size: 14px;">Cédula</th>
                                             <th scope="col" data-dt-order="disable" class="bg-primary" style="font-size: 14px;">Nombres</th>
                                             <th scope="col" data-dt-order="disable" class="bg-primary" style="font-size: 14px;">Apellidos</th>
+                                            <th scope="col" data-dt-order="disable" class="bg-primary" style="font-size: 14px;">Sexo</th>
                                             <th scope="col" data-dt-order="disable" class="bg-primary" style="font-size: 14px;">Fecha Nacimiento</th>
                                             <th scope="col" data-dt-order="disable" class="bg-primary" style="font-size: 14px;">Estado Civil</th>
                                             <th scope="col" data-dt-order="disable" class="bg-primary" style="font-size: 14px;">Nivel Academico</th>
@@ -57,6 +58,11 @@ use App\Atlas\config\App;
                                             <th scope="col" data-dt-order="disable" class="bg-primary" style="font-size: 14px;">Cargo</th>
                                             <th scope="col" data-dt-order="disable" class="bg-primary" style="font-size: 14px;">Departamento</th>
                                             <th scope="col" data-dt-order="disable" class="bg-primary" style="font-size: 14px;">Fecha Ingreso</th>
+                                            <th scope="col" data-dt-order="disable" class="bg-primary" style="font-size: 14px;">Vivienda</th>
+                                            <th scope="col" data-dt-order="disable" class="bg-primary" style="font-size: 14px;">Estado</th>
+                                            <th scope="col" data-dt-order="disable" class="bg-primary" style="font-size: 14px;">Municipio</th>
+                                            <th scope="col" data-dt-order="disable" class="bg-primary" style="font-size: 14px;">Parroquia</th>
+                                            <th scope="col" data-dt-order="disable" class="bg-primary" style="font-size: 14px;">Direcciones</th>
                                             <th scope="col" data-dt-order="disable" class="bg-primary" style="font-size: 14px;">Acciones</th>
                                         </tr>
                                     </thead>
@@ -85,200 +91,276 @@ use App\Atlas\config\App;
                 </div>
                 <div class="modal-body">
                     <div class="container-fluid px-4">
-                        <div class="container-fluid card p-2" style="background-color: #f5f5f5; box-shadow: none;">
-                            <section class="card p-2" style="background-color: white; box-shadow: none;">
-                                <form action="#" class="row contact-form form-validate d-flex justify-content-center" novalidate="novalidate" id="formularioActualizar">
-                                    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-10">
-                                        <div class="row col-sm-12 col-md-7  h-100  w-100 p-2">
-                                            <p class="mb-0 mt-2">Datos Personales</p>
-                                            <hr class="mb-2">
-                                            <input type="text" class="form-control cumplido" id="idEmpleado" name="id" placeholder="Primer Nombre" required hidden>
-                                            <div class="col-sm-6 col-md-4 mb-2">
-                                                <div class="form-group">
-                                                    <label for="primerNombre">Primer Nombre</label>
-                                                    <div class="input-group">
-                                                        <span class="input-group-text span_nombre"><i class="icons fa-regular fa-user"></i></span>
-                                                        <input type="text" class="form-control" id="primerNombre" name="primerNombre" placeholder="Primer Nombre" required>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-sm-6 col-md-4 mb-2">
-                                                <div class="form-group">
-                                                    <label for="segundoNombre">Segundo Nombre</label>
-                                                    <div class="input-group ">
-                                                        <span class="input-group-text span_nombre2"><i class="icons fa-regular fa-user"></i></span>
-                                                        <input type="text" class="form-control" id="segundoNombre" name="segundoNombre" placeholder="Segundo Nombre" required>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-sm-6 col-md-4 mb-2">
-                                                <div class="form-group">
-                                                    <label for="primerApellido">Primer Apellido</label>
-                                                    <div class="input-group">
-                                                        <span class="input-group-text span_apellido"><i class="icons fa-regular fa-user"></i></span>
-                                                        <input type="text" class="form-control" id="primerApellido" name="primerApellido" placeholder="Primer Apellido" required>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-sm-6 col-md-4 mb-2">
-                                                <div class="form-group">
-                                                    <label for="segundoApellido">Segundo Apellido</label>
-                                                    <div class="input-group">
-                                                        <span class="input-group-text span_apellido2"><i class="icons fa-regular fa-user"></i></span>
-                                                        <input type="text" class="form-control" id="segundoApellido" name="segundoApellido" placeholder="segundo Apellido" required>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-sm-6 col-md-4 mb-2">
-                                                <div class="form-group">
-                                                    <label for="cedulaEdi">Cédula</label>
-                                                    <div class="input-group">
-                                                        <span class="input-group-text span_cedula"><i class="icons fa-regular fa-address-card"></i></span>
-                                                        <input type="text" class="form-control" id="cedulaEdi" name="cedula" placeholder="Cédula de Identidad" required>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-sm-6 col-md-4 mb-2">
-                                                <div class="form-group">
-                                                    <label for="civil">Estado civil</label>
-                                                    <div class="input-group">
-                                                        <span class="input-group-text span_civil"><i class="icons fa-regular fa-clipboard"></i></span>
-                                                        <select class="form-select form-select-md estado-civil" id="civil" name="civil" aria-label="Small select example" aria-placeholder="dasdas" required>
-                                                            <option value="">Estado civil</option>
-                                                            <option value="Soltero">Soltero</option>
-                                                            <option value="Casado">Casado</option>
-                                                            <option value="Viudo">Viudo</option>
-                                                            <option value="Divorciado">Divorciado</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <p class="mb-0 mt-2">Fecha de nacimiento</p>
-                                            <hr class="mb-2">
-
-                                            <div class="col-sm-12 col-md-4 mb-2 ">
-                                                <div class="form-group">
-                                                    <label class="required-field" for="message">Año</label>
-                                                    <div class="input-group">
-                                                        <span class="input-group-text span_ano"><i class="icons fa-regular fa-calendar"></i></i></span>
-                                                        <select class="form-select form-select-md" name="ano" id="ano2" required></select>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-sm-12 col-md-4 mb-2">
-                                                <div class="form-group">
-                                                    <label class="required-field" for="message">Mes</label>
-                                                    <div class="input-group">
-                                                        <span class="input-group-text span_mes"><i class="icons fa-regular fa-calendar"></i></i></span>
-                                                        <select class="form-select meses2" id="meses2" name="meses" aria-label="Default select example" required></select>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-sm-12 col-md-4 mb-2">
-                                                <div class="form-group ">
-                                                    <label class="required-field" for="message">Día</label>
-                                                    <div class="input-group">
-                                                        <span class="input-group-text span_dia"><i class="icons fa-regular fa-calendar"></i></i></span>
-                                                        <select class="form-select w-5 dias" id="dia2" name="dia" aria-label="Default select example" required></select>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <p class="mb-0 mt-2">Datos Del Trabajador</p>
-                                            <hr class="mb-2">
-
-                                            <div class="col-sm-12 col-md-12 mb-2">
-                                                <button type="button" id="cargaNoti" class="btn btn-primary btn-xs"><i class="fa-solid fa-plus me-2"></i>Actualizar notificacion</button>
-                                                <button type="button" id="cargaContrato" class="btn btn-primary"><i class="fa-solid fa-plus me-2"></i>Actualizar Contrato</button>
-                                            </div>
-
-                                            <div class="col-sm-12 col-md-4 mb-2" id="contentTelefono">
-                                                <label class="form-label mb-0" for="telefono">N.Telefono</label>
+                        <section class="card p-2" style="background-color: white; box-shadow: none;">
+                            <form action="#" class="row contact-form form-validate d-flex justify-content-center" novalidate="novalidate" id="formularioActualizar">
+                                <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-10">
+                                    <div class="row col-sm-12 col-md-7  h-100  w-100 p-2">
+                                        <p class="mb-0 mt-2">Datos Personales</p>
+                                        <hr class="mb-2">
+                                        <input type="text" class="form-control cumplido" id="idEmpleado" name="id" placeholder="Primer Nombre" required hidden>
+                                        <div class="col-sm-6 col-md-4 mb-2">
+                                            <div class="form-group">
+                                                <label for="primerNombre">Primer Nombre</label>
                                                 <div class="input-group">
-                                                    <span class="input-group-text span_telefono"><i class="icons fa-regular fa-user"></i></span>
-                                                    <input type="text" class="form-control" id="telefono" name="telefono" placeholder="Telefono" required>
+                                                    <span class="input-group-text span_nombre"><i class="icons fa-regular fa-user"></i></span>
+                                                    <input type="text" class="form-control" id="primerNombre" name="primerNombre" placeholder="Primer Nombre" required>
                                                 </div>
-                                            </div>
-
-                                            <div class="col-sm-12 col-md-4 mb-2">
-                                                <div class="form-group">
-                                                    <label for="estatus">Estatus</label>
-                                                    <div class="input-group">
-                                                        <span class="input-group-text span_estatus"><i class="icons fa-regular fa-clipboard"></i></span>
-                                                        <select class="form-select form-select-md estado-estatus" id="estatus" name="estatus" aria-label="Small select example" aria-placeholder="dasdas" required>
-                                                            <option value="">Selecione un estatus</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-sm-12 col-md-4 mb-2">
-                                                <div class="form-group">
-                                                    <label for="cargo">Cargo</label>
-                                                    <div class="input-group">
-                                                        <span class="input-group-text span_cargo"><i class="icons fa-regular fa-clipboard"></i></span>
-                                                        <select class="form-select form-select-md estado-cargo" id="cargo" name="cargo" aria-label="Small select example" aria-placeholder="dasdas" required>
-                                                            <option value="">Selecione un cargo</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-sm-12 col-md-6 mb-2">
-                                                <div class="form-group">
-                                                    <label for="departamento">Departamento</label>
-                                                    <div class="input-group">
-                                                        <span class="input-group-text span_departamento"><i class="icons fa-regular fa-clipboard"></i></span>
-                                                        <select class="form-select form-select-md estado-departamento" id="departamento" name="departamento" aria-label="Small select example" aria-placeholder="dasdas" required>
-                                                            <option value="">Selecione un departamento</option>d
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-sm-12 col-md-6 mb-2">
-                                                <div class="form-group">
-                                                    <label for="dependencia">Estado dependencia</label>
-                                                    <div class="input-group">
-                                                        <span class="input-group-text span_dependencia"><i class="icons fa-regular fa-clipboard"></i></span>
-                                                        <select class="form-select form-select-md estado-dependencia" id="dependencia" name="dependencia" aria-describedby="dependencia" required>
-
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-sm-12 mb-2">
-                                                <div class="form-group">
-                                                    <label for="academico">Nivel Academico</label>
-                                                    <div class="input-group">
-                                                        <span class="input-group-text span_academico"><i class="icons fa-regular fa-user-graduate"></i></span>
-                                                        <select class="form-select form-select-md" id="academico" name="nivelAcademico">
-                                                            <option value="">Nivel Academico</option>
-
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-sm-12 mt-3 ">
-                                                <button type="submit" id="aceptar_empleado" name="submit" class="btn btn-success" data-bs-dismiss="modal">
-                                                    Actualizar
-                                                </button>
                                             </div>
                                         </div>
+
+                                        <div class="col-sm-6 col-md-4 mb-2">
+                                            <div class="form-group">
+                                                <label for="segundoNombre">Segundo Nombre</label>
+                                                <div class="input-group ">
+                                                    <span class="input-group-text span_nombre2"><i class="icons fa-regular fa-user"></i></span>
+                                                    <input type="text" class="form-control" id="segundoNombre" name="segundoNombre" placeholder="Segundo Nombre" required>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-6 col-md-4 mb-2">
+                                            <div class="form-group">
+                                                <label for="primerApellido">Primer Apellido</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-text span_apellido"><i class="icons fa-regular fa-user"></i></span>
+                                                    <input type="text" class="form-control" id="primerApellido" name="primerApellido" placeholder="Primer Apellido" required>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-6 col-md-4 mb-2">
+                                            <div class="form-group">
+                                                <label for="segundoApellido">Segundo Apellido</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-text span_apellido2"><i class="icons fa-regular fa-user"></i></span>
+                                                    <input type="text" class="form-control" id="segundoApellido" name="segundoApellido" placeholder="segundo Apellido" required>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-6 col-md-4 mb-2">
+                                            <div class="form-group">
+                                                <label for="cedulaEdi">Cédula</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-text span_cedula"><i class="icons fa-regular fa-address-card"></i></span>
+                                                    <input type="text" class="form-control" id="cedulaEdi" name="cedula" placeholder="Cédula de Identidad" required>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-6 col-md-4 mb-2">
+                                            <div class="form-group">
+                                                <label for="civil">Estado civil</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-text span_civil"><i class="icons fa-regular fa-clipboard"></i></span>
+                                                    <select class="form-select form-select-md estado-civil" id="civil" name="civil" aria-label="Small select example" aria-placeholder="dasdas" required>
+                                                        <option value="">Estado civil</option>
+                                                        <option value="Soltero">Soltero</option>
+                                                        <option value="Casado">Casado</option>
+                                                        <option value="Viudo">Viudo</option>
+                                                        <option value="Divorciado">Divorciado</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-6 mb-2">
+                                            <div class="form-group">
+                                                <label for="sexo">Sexo</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-text span_sexo"><i class="icons fa-regular fa-clipboard"></i></span>
+                                                    <select class="form-select form-select-md sexo-sexo" id="sexo" name="sexo" aria-label="Small select example" aria-placeholder="dasdas" required>
+                                                        <option value="">Selecione el sexo</option>
+                                                        <option value="Masculino">Masculino</option>
+                                                        <option value="Femenino">Femenino</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <p class="mb-0 mt-2">Ubicación</p>
+                                        <hr class="mb-2">
+
+                                        <div class="col-sm-6 mb-2">
+                                            <div class="form-group">
+                                                <label for="estado">Estado</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-text span_estado"><i class="icons fa-regular fa-clipboard"></i></span>
+                                                    <select class="form-select form-select-md estado-estado" id="estado" name="estado" aria-label="Small select example" aria-placeholder="dasdas" required>
+                                                        <option value="">Selecione un estado</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-6 mb-2">
+                                            <div class="form-group">
+                                                <label for="municipio">Municipio</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-text span_municipio"><i class="icons fa-regular fa-clipboard"></i></span>
+                                                    <select class="form-select form-select-md municipio-municipio" id="municipio" name="municipio" aria-label="Small select example" aria-placeholder="dasdas" required>
+                                                        <option value="">Seleccione un municipio</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-6 mb-2">
+                                            <div class="form-group">
+                                                <label for="parroquia">Parroquia</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-text span_parroquia"><i class="icons fa-regular fa-clipboard"></i></span>
+                                                    <select class="form-select form-select-md parroquia-parroquia" id="parroquia" name="parroquia" aria-label="Small select example" aria-placeholder="dasdas" required>
+                                                        <option value="">Selecione un parroquia</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-6 mb-2">
+                                            <div class="form-group">
+                                                <label for="vivienda">Vivienda</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-text span_vivienda"><i class="icons fa-regular fa-clipboard"></i></span>
+                                                    <select class="form-select form-select-md vivienda-vivienda" id="vivienda" name="vivienda" aria-label="Small select example" aria-placeholder="dasdas" required>
+                                                        <option value="">Selecione un vivienda</option>
+                                                        <option value="Casa">Casa</option>
+                                                        <option value="Departamento">Departamento</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-6 col-md-6 mb-2" id="contenCalle">
+                                            <div class="form-group">
+                                                <label for="calle">Calle</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-text span_calle"><i class="icons fa-regular fa-user"></i></span>
+                                                    <input type="text" class="form-control" id="calle" name="calle" placeholder="Nombre de la Calle" required>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <p class="mb-0 mt-2">Fecha de nacimiento</p>
+                                        <hr class="mb-2">
+
+                                        <div class="col-sm-12 col-md-4 mb-2 ">
+                                            <div class="form-group">
+                                                <label class="required-field" for="message">Año</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-text span_ano"><i class="icons fa-regular fa-calendar"></i></i></span>
+                                                    <select class="form-select form-select-md" name="ano" id="ano2" required></select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-12 col-md-4 mb-2">
+                                            <div class="form-group">
+                                                <label class="required-field" for="message">Mes</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-text span_mes"><i class="icons fa-regular fa-calendar"></i></i></span>
+                                                    <select class="form-select meses2" id="meses2" name="meses" aria-label="Default select example" required></select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-12 col-md-4 mb-2">
+                                            <div class="form-group ">
+                                                <label class="required-field" for="message">Día</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-text span_dia"><i class="icons fa-regular fa-calendar"></i></i></span>
+                                                    <select class="form-select w-5 dias" id="dia2" name="dia" aria-label="Default select example" required></select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <p class="mb-0 mt-2">Datos Del Trabajador</p>
+                                        <hr class="mb-2">
+
+                                        <div class="col-sm-12 col-md-12 mb-2">
+                                            <button type="button" id="cargaNoti" class="btn btn-primary btn-xs"><i class="fa-solid fa-plus me-2"></i>Actualizar notificacion</button>
+                                            <button type="button" id="cargaContrato" class="btn btn-primary"><i class="fa-solid fa-plus me-2"></i>Actualizar Contrato</button>
+                                        </div>
+
+                                        <div class="col-sm-12 col-md-4 mb-2" id="contentTelefono">
+                                            <label class="form-label mb-0" for="telefono">N.Telefono</label>
+                                            <div class="input-group">
+                                                <span class="input-group-text span_telefono"><i class="icons fa-regular fa-user"></i></span>
+                                                <input type="text" class="form-control" id="telefono" name="telefono" placeholder="Telefono" required>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-12 col-md-4 mb-2">
+                                            <div class="form-group">
+                                                <label for="estatus">Estatus</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-text span_estatus"><i class="icons fa-regular fa-clipboard"></i></span>
+                                                    <select class="form-select form-select-md estado-estatus" id="estatus" name="estatus" aria-label="Small select example" aria-placeholder="dasdas" required>
+                                                        <option value="">Selecione un estatus</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-12 col-md-4 mb-2">
+                                            <div class="form-group">
+                                                <label for="cargo">Cargo</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-text span_cargo"><i class="icons fa-regular fa-clipboard"></i></span>
+                                                    <select class="form-select form-select-md estado-cargo" id="cargo" name="cargo" aria-label="Small select example" aria-placeholder="dasdas" required>
+                                                        <option value="">Selecione un cargo</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-12 col-md-6 mb-2">
+                                            <div class="form-group">
+                                                <label for="departamento">Departamento</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-text span_departamento"><i class="icons fa-regular fa-clipboard"></i></span>
+                                                    <select class="form-select form-select-md estado-departamento" id="departamento" name="departamento" aria-label="Small select example" aria-placeholder="dasdas" required>
+                                                        <option value="">Selecione un departamento</option>d
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-12 col-md-6 mb-2">
+                                            <div class="form-group">
+                                                <label for="dependencia">Estado dependencia</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-text span_dependencia"><i class="icons fa-regular fa-clipboard"></i></span>
+                                                    <select class="form-select form-select-md estado-dependencia" id="dependencia" name="dependencia" aria-describedby="dependencia" required>
+
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-12 mb-2">
+                                            <div class="form-group">
+                                                <label for="academico">Nivel Academico</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-text span_academico"><i class="icons fa-regular fa-user-graduate"></i></span>
+                                                    <select class="form-select form-select-md" id="academico" name="nivelAcademico">
+                                                        <option value="">Nivel Academico</option>
+
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-12 mt-3 ">
+                                            <button type="submit" id="aceptar_empleado" name="submit" class="btn btn-success" data-bs-dismiss="modal">
+                                                Actualizar
+                                            </button>
+                                        </div>
                                     </div>
-                                </form>
-                            </section>
-                        </div>
+                                </div>
+                            </form>
+                        </section>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -301,26 +383,24 @@ use App\Atlas\config\App;
                 </div>
                 <div class="modal-body">
                     <div class="container-fluid px-4">
-                        <div class="container-fluid card p-2" style="background-color: #f5f5f5; box-shadow: none;">
-                            <section class="card p-2" style="background-color: white; box-shadow: none;">
-                                <table id="myTable2" class="mitable table table-hover nowrap display">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col" class="bg-primary">Nombre</th>
-                                            <th scope="col" class="text-center bg-primary">Cédula</th>
-                                            <th scope="col" class="text-center bg-primary">Carnet</th>
-                                            <th scope="col" class="text-center bg-primary">Edad</th>
-                                            <th scope="col" class="text-center bg-primary">Tomo</th>
-                                            <th scope="col" class="text-center bg-primary">Folio</th>
-                                            <th scope="col" class="text-center bg-primary">Acciones</th>
-                                            <th scope="col" class="text-center bg-primary">Documento</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody style="font-size: 14px;">
-                                    </tbody>
-                                </table>
-                            </section>
-                        </div>
+                        <section class="card p-2" style="background-color: white; box-shadow: none;">
+                            <table id="myTable2" class="mitable table table-bordered table-hover nowrap display">
+                                <thead>
+                                    <tr>
+                                        <th scope="col" class="bg-primary" style="font-size: 14px;">Nombre</th>
+                                        <th scope="col" class="text-center bg-primary" style="font-size: 14px;">Cédula</th>
+                                        <th scope="col" class="text-center bg-primary" style="font-size: 14px;">Carnet</th>
+                                        <th scope="col" class="text-center bg-primary" style="font-size: 14px;">Edad</th>
+                                        <th scope="col" class="text-center bg-primary" style="font-size: 14px;">Tomo</th>
+                                        <th scope="col" class="text-center bg-primary" style="font-size: 14px;">Folio</th>
+                                        <th scope="col" class="text-center bg-primary" style="font-size: 14px;">Acciones</th>
+                                        <th scope="col" class="text-center bg-primary" style="font-size: 14px;">Documento</th>
+                                    </tr>
+                                </thead>
+                                <tbody style="font-size: 14px;">
+                                </tbody>
+                            </table>
+                        </section>
                     </div>
                 </div>
                 <div class="modal-footer">

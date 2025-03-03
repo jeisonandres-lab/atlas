@@ -56,7 +56,7 @@ $(function () {
 
         // Crear y agregar las nuevas celdas a la fila
         nuevosTextos.forEach(texto => {
-            const $celda = $('<th>').text(texto).addClass('bg-primary text-white');
+            const $celda = $('<th style="font-size: 14px;">').text(texto).addClass('bg-primary text-white ');
             // console.log(`Añadiendo celda con texto: ${texto}`); // Depuración
             $fila.append($celda);
         });
@@ -630,7 +630,6 @@ $(function () {
         eliminarActivar(id, 1, 'eliminarActivarDependencia', messenger, 'success');
     })
 
-
     // Delegación de cargo
     $('#tableInic').on('click', '.btnEditarCargo', async function () {
         let id = $(this).data('id');
@@ -659,7 +658,6 @@ $(function () {
         eliminarActivar(id, 1, 'eliminarActivarCargo', messenger, 'success');
     })
 
-
     // Delegación de estatus
     $('#tableInic').on('click', '.btnEditarEstatus', async function () {
         let id = $(this).data('id');
@@ -687,7 +685,6 @@ $(function () {
         const messenger = 'Estás a punto de <b class="text-success"><i class="fa-solid fa-check"></i> <u>activar</u></b> este registro. ¿Deseas continuar?';
         eliminarActivar(id, 1, 'eliminarActivarEstatus', messenger, 'success');
     })
-
 
     // Delegación de departamento
     $('#tableInic').on('click', '.btnEditarDepa', async function () {

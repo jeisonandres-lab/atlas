@@ -121,6 +121,19 @@ use App\Atlas\config\App;
                             </div>
                         </div>
 
+                        <div class="col-sm-6 mb-2">
+                            <div class="form-group">
+                                <label for="sexo">Sexo</label>
+                                <div class="input-group">
+                                    <span class="input-group-text span_sexo"><i class="icons fa-regular fa-clipboard"></i></span>
+                                    <select class="form-select form-select-md sexo-sexo" id="sexo" name="sexo" aria-label="Small select example" aria-placeholder="dasdas"  required>
+                                        <option value="">Selecione el sexo</option>
+                                        <option value="Masculino">Masculino</option>
+                                        <option value="Femenino">Femenino</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
                         <!-- <div class="col-sm-12 mb-2">
                             <div class="form-group">
                                 <label for="correo">Correo</label>
@@ -154,7 +167,7 @@ use App\Atlas\config\App;
                             </div>
                         </div>
 
-                        <div class="col-sm-4  mb-2">
+                        <div class="col-sm-4  mb-2" id="contentDia" >
                             <div class="form-group ">
                                 <label class="required-field" for="dia">Día</label>
                                 <div class="input-group">
@@ -163,6 +176,70 @@ use App\Atlas\config\App;
                                 </div>
                             </div>
                         </div>
+
+                        <p class="mb-0 mt-2">Ubicación</p>
+                        <hr class="mb-2">
+
+                        <div class="col-sm-6 mb-2">
+                            <div class="form-group">
+                                <label for="estado">Estado</label>
+                                <div class="input-group">
+                                    <span class="input-group-text span_estado"><i class="icons fa-regular fa-clipboard"></i></span>
+                                    <select class="form-select form-select-md estado-estado" id="estado" name="estado" aria-label="Small select example" aria-placeholder="dasdas"  required>
+                                        <option value="">Selecione un estado</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6 mb-2">
+                            <div class="form-group">
+                                <label for="municipio">Municipio</label>
+                                <div class="input-group">
+                                    <span class="input-group-text span_municipio"><i class="icons fa-regular fa-clipboard"></i></span>
+                                    <select class="form-select form-select-md municipio-municipio" id="municipio" name="municipio" aria-label="Small select example" aria-placeholder="dasdas"  required>
+                                        <option value="">Seleccione un municipio</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6 mb-2">
+                            <div class="form-group">
+                                <label for="parroquia">Parroquia</label>
+                                <div class="input-group">
+                                    <span class="input-group-text span_parroquia"><i class="icons fa-regular fa-clipboard"></i></span>
+                                    <select class="form-select form-select-md parroquia-parroquia" id="parroquia" name="parroquia" aria-label="Small select example" aria-placeholder="dasdas"  required>
+                                        <option value="">Selecione un parroquia</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6 mb-2">
+                            <div class="form-group">
+                                <label for="vivienda">Vivienda</label>
+                                <div class="input-group">
+                                    <span class="input-group-text span_vivienda"><i class="icons fa-regular fa-clipboard"></i></span>
+                                    <select class="form-select form-select-md vivienda-vivienda" id="vivienda" name="vivienda" aria-label="Small select example" aria-placeholder="dasdas"  required>
+                                        <option value="">Selecione un vivienda</option>
+                                        <option value="Casa">Casa</option>
+                                        <option value="Departamento">Departamento</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6 col-md-6 mb-2" id="contenCalle">
+                            <div class="form-group">
+                                <label for="calle">Calle</label>
+                                <div class="input-group">
+                                    <span class="input-group-text span_calle"><i class="icons fa-regular fa-user"></i></span>
+                                    <input type="text" class="form-control" id="calle" name="calle" placeholder="Nombre de la Calle" required>
+                                </div>
+                            </div>
+                        </div>
+
 
                         <p class="mb-0 mt-2">Datos Del Trabajador</p>
                         <hr class="mb-2">
@@ -293,7 +370,7 @@ use App\Atlas\config\App;
                     <div style="background-color:#FE9001;" class="barra_naranja w-100"></div>
                 </div>
                 <div class="container col-sm-12 col-md-5 col-lg-5 col-xl-5 col-xxl-4">
-                    <div class="w-100 h-50 bg-white containerImg col-12 mb-3">
+                    <div class="w-100 bg-white containerImg col-12 mb-3" style="height: 400px;">
                         <div class="content d-flex justify-content-center align-items-center h-100 w-100" id="img-contener">
                             <!-- Contenido aquí -->
                         </div>

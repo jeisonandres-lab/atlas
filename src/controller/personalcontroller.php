@@ -50,7 +50,17 @@ class personalController extends personalModel
         $idDependencia,
         $idDepartamento,
         $telefono,
-        $nivelAcademico
+        $nivelAcademico,
+        $vivienda,
+        $sexo,
+        $idestado,
+        $idMunicipio,
+        $idParroquia,
+        $calle,
+        $numeroVivienda,
+        $pisoUrba,
+        $nombreUrba,
+        $numeroDepa
     ) {
         // sleep(5);
         $primerNombre = $this->limpiarCadena($primerNombre);
@@ -64,6 +74,20 @@ class personalController extends personalModel
         $mes = $this->limpiarCadena($mes);
         $dia = $this->limpiarCadena($dia);
         $nivelAcademico = $this->limpiarCadena($nivelAcademico);
+        $sexo = $this->limpiarCadena($sexo);
+
+
+        $vivienda = $this->limpiarCadena($vivienda);
+        $idestado = $this->limpiarCadena($idestado);
+        $idMunicipio = $this->limpiarCadena($idMunicipio);
+        $idParroquia = $this->limpiarCadena($idParroquia);
+        $numeroVivienda = $this->limpiarCadena($numeroVivienda);
+        $pisoUrba = $this->limpiarCadena($pisoUrba);
+
+
+        $calle = $this->limpiarCadena($calle);
+        $nombreUrba = $this->limpiarCadena($nombreUrba);
+        $numeroDepa = $this->limpiarCadena($numeroDepa);
 
         // DATOS DE EMPLEAODS
         $idEstatus = $this->limpiarCadena($idEstatus);
@@ -129,6 +153,11 @@ class personalController extends personalModel
                 "campo_valor" => $ano
             ],
             [
+                "campo_nombre" => "sexo",
+                "campo_marcador" => ":sexo",
+                "campo_valor" => $sexo
+            ],
+            [
                 "campo_nombre" => "mesNacimiento",
                 "campo_marcador" => ":mesNacimiento",
                 "campo_valor" => $mes
@@ -137,11 +166,6 @@ class personalController extends personalModel
                 "campo_nombre" => "diaNacimiento",
                 "campo_marcador" => ":diaNacimiento",
                 "campo_valor" => $dia
-            ],
-            [
-                "campo_nombre" => "fechaING",
-                "campo_marcador" => ":fechaING",
-                "campo_valor" => date("Y-m-d")
             ],
             [
                 "campo_nombre" => "fecha",
@@ -265,7 +289,6 @@ class personalController extends personalModel
                                     $check_regisEmpleados = $this->getRegistrar('datosempleados', $empleados_datos_reg);
                                     if ($check_regisEmpleados) {
 
-
                                         $registroAuditoria = $this->auditoriaController->registrarAuditoria(
                                             $this->idUsuario,
                                             'Registrar empleado',
@@ -275,6 +298,60 @@ class personalController extends personalModel
                                             $check_busEmpleado = $this->getreturnIDPE([$cedula]);
                                             foreach ($check_busEmpleado as $row) {
                                                 $id_empleado = $row['id_empleados'];
+
+                                                $ubicacion_empleado = [
+                                                    [
+                                                        "campo_nombre" => "id_empleadoUbi",
+                                                        "campo_marcador" => ":id_empleadoUbi",
+                                                        "campo_valor" =>  $id_empleado
+                                                    ],
+                                                    [
+                                                        "campo_nombre" => "idEstado",
+                                                        "campo_marcador" => ":idEstado",
+                                                        "campo_valor" =>  $idestado
+                                                    ],
+                                                    [
+                                                        "campo_nombre" => "idMunicipio",
+                                                        "campo_marcador" => ":idMunicipio",
+                                                        "campo_valor" => $idMunicipio
+                                                    ],
+                                                    [
+                                                        "campo_nombre" => "idParroquia",
+                                                        "campo_marcador" => ":idParroquia",
+                                                        "campo_valor" => $idParroquia
+                                                    ],
+                                                    [
+                                                        "campo_nombre" => "vivienda",
+                                                        "campo_marcador" => ":vivienda",
+                                                        "campo_valor" => $vivienda
+                                                    ],
+                                                    [
+                                                        "campo_nombre" => "calle",
+                                                        "campo_marcador" => ":calle",
+                                                        "campo_valor" => $calle
+                                                    ],
+                                                    [
+                                                        "campo_nombre" => "nombre_urb",
+                                                        "campo_marcador" => ":nombre_urb",
+                                                        "campo_valor" =>   $nombreUrba
+                                                    ],
+                                                    [
+                                                        "campo_nombre" => "num_depar",
+                                                        "campo_marcador" => ":num_depar",
+                                                        "campo_valor" =>  $numeroDepa
+                                                    ],
+                                                    [
+                                                        "campo_nombre" => "numVivienda",
+                                                        "campo_marcador" => ":numVivienda",
+                                                        "campo_valor" =>  $numeroVivienda
+                                                    ],
+                                                    [
+                                                        "campo_nombre" => "pisoVivienda",
+                                                        "campo_marcador" => ":pisoVivienda",
+                                                        "campo_valor" => $pisoUrba
+                                                    ],
+                                                ];
+
                                                 // Si ninguno de los archivos existe, proceder con la subida
                                                 foreach ($archivosASubir as $archivo) {
                                                     $inputName = $archivo['input'];
@@ -294,11 +371,18 @@ class personalController extends personalModel
                                                     $data_json['archivo2'] = $resultados[$fileInputName2];
                                                 }
 
-                                                $data_json['exito'] = true;
-                                                $data_json['mensaje'] = "Empleado Registrado Exitosamente.";
-                                                $data_json['resultado'] = 2;
-                                                $datos_json["exitoAuditoria"] = true;
-                                                $datos_json['messengerAuditoria'] = "Auditoria registrada con exito.";
+                                                $check_regisUbicacionEmpleado = $this->getRegistrar('ubicacion',  $ubicacion_empleado);
+                                                if ($check_regisUbicacionEmpleado) {
+                                                    $data_json['exito'] = true;
+                                                    $data_json['mensaje'] = "Empleado Registrado Exitosamente.";
+                                                    $data_json['resultado'] = 2;
+                                                    $datos_json["exitoAuditoria"] = true;
+                                                    $datos_json['messengerAuditoria'] = "Auditoria registrada con exito.";
+                                                } else {
+                                                    $data_json['exito'] = false;
+                                                    $data_json['mensaje'] = "no se logro registrar la ubicación, pero el empleado ha sido registrado con exito";
+                                                    $data_json['resultado'] = 1;
+                                                }
                                             }
                                         } else {
                                             $data_json['exito'] = false;
@@ -633,20 +717,20 @@ class personalController extends personalModel
 
     //Obtener todos los datos de personal
     public function obtenerDatosPersonal(
-        string $idEmpleado
+        string $cedualEmpleado
     ) {
-        $idEmpleado = $this->limpiarCadena($idEmpleado);
+        $cedualEmpleado = $this->limpiarCadena($cedualEmpleado);
         $data_json = [
             'exito' => false, // Inicializamos a false por defecto
             'mensaje' => 'data del principio',
         ];
-        if ($idEmpleado == "") {
+        if ($cedualEmpleado == "") {
             $data_json['exito'] = true;
             $data_json['mensaje'] = "Debes de llenar el campo de la Cédula para hacer la busqueda del empleado";
             $data_json['logrado'] = false;
         } else {
 
-            $check_personal = $this->getTotalDatosIDEmpleados([$idEmpleado]);
+            $check_personal = $this->getTotalDatosCDEmpleados([$cedualEmpleado]);
             if ($check_personal == true) {
                 foreach ($check_personal as $row) {
                     $activo = $row['activo'] == 1 ? 'Activo' : 'Inactivo';
@@ -672,6 +756,23 @@ class personalController extends personalModel
                     $data_json['iddepartamento'] = $row['id_departamento'];
                     $data_json['nivelAcademico'] = $row['nivelAcademico'];
                     $data_json['telefono'] = $row['telefono'];
+                    $data_json['sexo'] = $row['sexo'];
+
+                    //ubicacion de personal
+                    $data_json['idEstado'] = $row['idEstado'];
+                    $data_json['estado'] = $row['estado'];
+                    $data_json['idMunicipio'] = $row['idMunicipio'];
+                    $data_json['municipio'] = $row['municipio'];
+                    $data_json['idParroquia'] = $row['idParroquia'];
+                    $data_json['parroquia'] = $row['parroquia'];
+                    $data_json['calle'] = $row['calle'];
+                    $data_json['vivienda'] = $row['vivienda'];
+                    $data_json['numVivienda'] = $row['numVivienda'];
+                    
+                    $data_json['nombre_urb'] = $row['nombre_urb'];
+                    $data_json['num_depar'] = $row['num_depar'];
+                    $data_json['pisoVivienda'] = $row['pisoVivienda'];
+
                     $data_json['activo'] = $activo;
                     $data_json['mensaje'] = "Trabajador Encontrado";
                     $data_json['logrado'] = true;
@@ -701,7 +802,7 @@ class personalController extends personalModel
             $data_json['exit'] = true;
             $data_json['mensaje'] = "Debes de llenar el campo de la Cédula para hacer la busqueda del empleado";
         } else {
-            $check_familiar = $this-> getDatosFamiliarID([$idPersonal]);
+            $check_familiar = $this->getDatosFamiliarID([$idPersonal]);
             if ($check_familiar) {
                 foreach ($check_familiar as $row) {
                     $data_json['exito'] = true;
@@ -744,7 +845,12 @@ class personalController extends personalModel
               INNER JOIN estatus es ON e.idEstatus = es.id_estatus
               INNER JOIN cargo ca ON e.idCargo = ca.id_cargo
               INNER JOIN dependencia depe ON e.idDependencia = depe.id_dependencia
-              INNER JOIN departamento depa ON e.idDepartamento = depa.id_departamento'; // Tabla a consultar
+              INNER JOIN departamento depa ON e.idDepartamento = depa.id_departamento
+              INNER JOIN ubicacion ubi ON e.id_empleados = ubi.id_empleadoUbi
+              INNER JOIN estados est ON ubi.idEstado = est.id_estado
+              INNER JOIN municipios m ON ubi.idMunicipio = m.id_municipio
+              INNER JOIN parroquias p ON ubi.idParroquia = p.id_parroquia
+              '; // Tabla a consultar
         $selectoresCantidad = 'COUNT(e.idPersonal) as cantidad'; // Selector para contar la cantidad de registros de la tabla
         $datosBuscar = ['depe.dependencia', 'd.primerNombre', 'd.cedula', 'ca.cargo']; // Array de selectores para buscar en la tabla
         $campoOrden = 'e.idPersonal'; // Campo por el cual se ordenará la tabla
@@ -768,7 +874,7 @@ class personalController extends personalModel
             $validarFamiliar = $this->getDatosFamiliarEmpleadoID($parametro);
             $botones = "
 
-                <button class='btn btn-primary btn-sm btn-hover-azul btnEditar ' data-bs-toggle='modal' data-bs-target='#editarDatos' data-cedula=" . $row['id_empleados'] . "><i class='fa-solid fa-pencil fa-sm me-2'></i>Editar</button>
+                <button class='btn btn-primary btn-sm btn-hover-azul btnEditar ' data-bs-toggle='modal' data-bs-target='#editarDatos' data-cedula=" . $row['cedula'] . "><i class='fa-solid fa-pencil fa-sm me-2'></i>Editar</button>
                 <button class='btn btn-danger btn-sm btn-hover-rojo btnEliminar ' data-swal-toast-template='#my-template' data-id=" . $row['id_empleados'] . "><i class='fa-solid fa-trash fa-sm me-2'></i>Eliminar</button>
                 ";
 
@@ -776,12 +882,16 @@ class personalController extends personalModel
                 $botones .= "<button class='btn btn-warning btn-sm btn-familiar btn-hover-amarillo ' data-swal-toast-template='#my-template' data-id=" . $row['id_empleados'] . "><i class='fa-duotone fa-solid fa-people-group fa-sm me-2'></i>Familiar</button>";
             }
 
-
+            if ($row['pisoVivienda'] == null) {
+                $info = "";
+            } else {
+                $info = "piso" . "-";
+            }
 
             $data_json['data'][] = [
                 '0' => $row['primerNombre'] . " " . $row['segundoNombre'],
                 '1' => $row['primerApellido'] . " " . $row['segundoApellido'],
-                '2' => $row['diaNacimiento']."-".$row['mesNacimiento']."-".$row['anoNacimiento'],
+                '2' => $row['diaNacimiento'] . "-" . $row['mesNacimiento'] . "-" . $row['anoNacimiento'],
                 '3' => $row['cedula'],
                 '4' => $row['estadoCivil'],
                 '5' => $row['estatus'],
@@ -791,7 +901,13 @@ class personalController extends personalModel
                 '9' => $row['nivelAcademico'],
                 '10' => $row['telefono'],
                 '11' => $row['fechaCreada'],
-                '12' => $botones
+                '12' => $row['sexo'],
+                '13' => $row['vivienda'],
+                '14' =>  $row['estado'],
+                '15' => $row['municipio'],
+                '16' => $row['parroquia'],
+                '17' => $row['calle'] . " " . $row['nombre_urb'] . " " . $row['vivienda'] . " " . $row['numVivienda'] . " " . $row['num_depar'] . " " . $info . $row['pisoVivienda'] . " ",
+                '18' => $botones
             ];
             $data_json['mensaje'] = "todas las personas exitoso";
         }
@@ -1505,6 +1621,7 @@ class personalController extends personalModel
             $data_json['exito'] = false;
             $data_json['mensaje'] = 'No existe el empleado al que intentas asignar el familiar.';
         }
+
 
         header('Content-Type: application/json');
         echo json_encode($data_json);

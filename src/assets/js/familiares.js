@@ -65,6 +65,8 @@ $(function () {
         $("#parentesco").prop("disabled", false);
         $("#cedula").prop("disabled", false);
         $("#noCedula").prop("disabled", false);
+        $("#tomo").prop("disabled", false);
+        $("#folio").prop("disabled", false);
         $("#disca").prop("disabled", false);
         $("#achivo").prop("disabled", false);
         $("#familiarTipo").prop("disabled", false);
@@ -271,21 +273,21 @@ $(function () {
     }
   });
 
-  $("#noCedula").on("change", function () {
-    let contenedor = $("#contenApellidoDos");
-    if ($(this).is(":checked")) {
-      let contenCedula = document.querySelector("#contenCedula");
-      contenCedula.remove();
-      $(noCedulado).insertAfter(contenedor);
-    } else {
-      let contenTomo = document.querySelector("#contenTomo");
-      let contenFolio = document.querySelector("#contenFolio");
-      contenTomo.remove();
-      contenFolio.remove();
-      // Insertamos el nuevo contenido después del contenedor
-      $(cedulaContenido).insertAfter(contenedor);
-    }
-  });
+  // $("#noCedula").on("change", function () {
+  //   let contenedor = $("#contenApellidoDos");
+  //   if ($(this).is(":checked")) {
+  //     let contenCedula = document.querySelector("#contenCedula");
+  //     contenCedula.remove();
+  //     $(noCedulado).insertAfter(contenedor);
+  //   } else {
+  //     let contenTomo = document.querySelector("#contenTomo");
+  //     let contenFolio = document.querySelector("#contenFolio");
+  //     contenTomo.remove();
+  //     contenFolio.remove();
+  //     // Insertamos el nuevo contenido después del contenedor
+  //     $(cedulaContenido).insertAfter(contenedor);
+  //   }
+  // });
 
   $("#disca").on("change", function () {
     if ($(this).is(":checked")) {
@@ -456,7 +458,7 @@ let noCedulado =
 `;
 
 let numeroCernet = `
-<div class="col-sm-6 col-md-6 col-xl-4 col-xxl-4 mb-3" id="contenCarnet">
+<div class="col-sm-6 col-md-6 col-xl-6 col-xxl-6 mb-3" id="contenCarnet">
   <div class="form-group" >
       <label for="cedula">Número de Carnet de Discapacidad</label>
         <div class="input-group">
@@ -465,6 +467,27 @@ let numeroCernet = `
     </div>
   </div>
 </div>
+
+<div class="col-sm-6 col-md-6 col-xl-6 col-xxl-6 mb-3" id="contenTipoDiscapacidad">
+  <div class="form-group" >
+      <label for="tpDiscapacidad">Tipo De Discapacidad</label>
+        <div class="input-group">
+        <span class="input-group-text span_tpDiscapacidad"><i class="fa-regular fa-address-card"></i></span>
+        <select type="text" class="form-control " id="tpDiscapacidad" name="tpDiscapacidad" placeholder="Tipo de Discapacidad ">
+          <option value="">Seleccione una discapacidad</option>
+          <option value="visual">Discapacidad visual</option>
+          <option value="auditiva">Discapacidad auditiva</option>
+          <option value="motriz">Discapacidad motriz</option>
+          <option value="intelectual">Discapacidad intelectual</option>
+          <option value="psicosocial">Discapacidad psicosocial</option>
+          <option value="visceral">Discapacidad visceral</option>
+          <option value="multiples">Discapacidades múltiples</option>
+          <option value="otra">Otra discapacidad</option>
+        </select>
+    </div>
+  </div>
+</div>
+
 
 <div class="col-sm-12 col-xl-12 col-xxl-12 mb-2" id="contentPartida">
   <div class="form-group">

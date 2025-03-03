@@ -114,6 +114,26 @@ class personalModel extends Conexion
         return $sql;
     }
 
+    // TOTAL DE DATOS DE EMPLEADO Y DATOS PERSONALES POR CD EMPELADPO
+    private function totalDatosCDEmpleados(array $parametro)
+    {
+        $sql = $this->ejecutarConsulta(
+            "SELECT * FROM datosEmpleados de
+            INNER JOIN datosPersonales dp ON de.idPersonal = dp.id_personal
+            INNER JOIN estatus e ON de.idEstatus = e.id_estatus
+            INNER JOIN cargo c ON de.idCargo = c.id_cargo
+            INNER JOIN dependencia depe ON de.idDependencia = depe.id_dependencia
+            INNER JOIN departamento d ON de.idDepartamento = d.id_departamento
+            INNER JOIN ubicacion ubi ON de.id_empleados = ubi.id_empleadoUbi
+              INNER JOIN estados est ON ubi.idEstado = est.id_estado
+              INNER JOIN municipios m ON ubi.idMunicipio = m.id_municipio
+              INNER JOIN parroquias p ON ubi.idParroquia = p.id_parroquia
+            WHERE dp.cedula = ?",
+            $parametro
+        );
+        return $sql;
+    }
+
     // TOTAL DE DATOS DE EMPLEADO Y DATOS PERSONALES POR ID EMPLEADO
     private function totalDatosIDEmpleados(array $parametro)
     {
@@ -237,6 +257,11 @@ class personalModel extends Conexion
         return $this->totalDatosIDEmpleados($parametro);
     }
 
+    public function getTotalDatosCDEmpleados($parametro)
+    {
+        return $this->totalDatosCDEmpleados($parametro);
+    }
+
     // GETTER DE VALIDAR DATOS DE EMPLEADO POR CÉDULA
     public function getTotalDatosPE($parametro)
     {
@@ -260,7 +285,8 @@ class personalModel extends Conexion
         return $this->datosFamiliarEmpleadoID($parametro);
     }
 
-    public function getDatosFamiliarID($parametro){
+    public function getDatosFamiliarID($parametro)
+    {
         return $this->datosFamiliarID($parametro);
     }
 }

@@ -1,5 +1,5 @@
 import { alertaNormalmix, AlertSW2, aletaCheck } from "./ajax/alerts.js";
-import { descargarArchivo, enviarFormulario, obtenerDatos, obtenerDatosPromise } from "./ajax/formularioAjax.js";
+import { descargarArchivo, enviarFormulario, obtenerDatos, obtenerDatosJQuery, obtenerDatosPromise } from "./ajax/formularioAjax.js";
 import {
   colocarMeses,
   colocarYear,
@@ -39,12 +39,23 @@ $(function () {
   incluirSelec2("#departamento");
   incluirSelec2("#dependencia");
   incluirSelec2("#academico");
+  incluirSelec2("#sexo");
+  incluirSelec2("#estado");
+  incluirSelec2("#municipio");
+  incluirSelec2("#parroquia");
+  incluirSelec2("#vivienda");
+
   validarSelectoresSelec2("#dependencia", ".span_dependencia");
   validarSelectoresSelec2("#estatus", ".span_estatus");
   validarSelectoresSelec2("#cargo", ".span_cargo");
   validarSelectoresSelec2("#departamento", ".span_departamento");
   validarSelectoresSelec2("#dependencia", ".span_dependencia");
   validarSelectoresSelec2("#academico", ".span_academico");
+  validarSelectoresSelec2("#sexo", ".span_sexo");
+  validarSelectoresSelec2("#estado", ".span_estado");
+  validarSelectoresSelec2("#municipio", ".span_municipio");
+  validarSelectoresSelec2("#parroquia", ".span_parroquia");
+  validarSelectoresSelec2("#vivienda", ".span_vivienda");
 
   file("#contrato", ".span_contrato");
   file("#notificacion", ".span_notificacion");
@@ -111,18 +122,11 @@ $(function () {
           }
         },
         {
-          targets: 4,
+          targets: 6,
           render: function (data, type, row) {
             return `<small class='d-inline-flex px-2 py-1 fw-semibold text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-2'>${data}</small>`;
           }
         },
-        {
-          targets: 7,
-          render: function (data, type, row) {
-            return `<small class='d-inline-flex px-2 py-1 fw-semibold text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-2'>${data}</small>`;
-          }
-        },
-
         {
           targets: 8,
           render: function (data, type, row) {
@@ -139,6 +143,13 @@ $(function () {
 
         {
           targets: 10,
+          render: function (data, type, row) {
+            return `<small class='d-inline-flex px-2 py-1 fw-semibold text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-2'>${data}</small>`;
+          }
+        },
+
+        {
+          targets: 11,
           render: function (data, type, row) {
             return `<small class='d-inline-flex px-2 py-1 fw-semibold text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-2'>${data}</small>`;
           }
@@ -285,6 +296,7 @@ $(function () {
         { "data": 3 }, // Cédula
         { "data": 0 }, // Nombre Y Apellido
         { "data": 1 }, // Nombre Y Apellido 2
+        { "data": 12 }, // sexo
         { "data": 2 }, // Dia de nacimiento
         { "data": 4 }, // estado civil
         { "data": 9 }, // nivel Academico
@@ -294,9 +306,12 @@ $(function () {
         { "data": 6 },  // cargo
         { "data": 8 },  // depeartamento
         { "data": 11 },  // fecha ingreso
-        { "data": 12 },  // botones
-
-
+        { "data": 13 },  // vivienda
+        { "data": 14 },  // estado
+        { "data": 15 },  // municipio
+        { "data": 16 },  // parroquia
+        { "data": 17 },  // Direcciones
+        { "data": 18 },  // 
       ]
     });
 
@@ -486,7 +501,8 @@ $(function () {
       "src/ajax/registroPersonal.php?modulo_personal=obtenerEstatus",
       "src/ajax/registroPersonal.php?modulo_personal=obtenerCargo",
       "src/ajax/registroPersonal.php?modulo_personal=obtenerDepartamento",
-      "src/ajax/registroPersonal.php?modulo_personal=obtenerDatosPersonal"
+      "src/ajax/registroPersonal.php?modulo_personal=obtenerDatosPersonal",
+      "src/ajax/registroPersonal.php?modulo_personal=obtenerEstados"
     ];
 
     let options = { cedulaEmpleado: idPersonal };
@@ -499,7 +515,7 @@ $(function () {
     });
 
     try {
-      const [dependencias, estatus, cargo, departamento, datosPersonal] = await Promise.all(requests);
+      const [dependencias, estatus, cargo, departamento, datosPersonal, estado] = await Promise.all(requests);
 
       // Procesar dependencias
       if (dependencias.exito && dependencias.data) {
@@ -529,6 +545,12 @@ $(function () {
         console.error('Error al obtener departamento o la estructura de la respuesta es incorrecta');
       }
 
+      if (estado.exito && estado.data) {
+        llenarSelectDependencias(estado.data, 'estado');
+      } else {
+        console.error('Error al obtener estado o la estructura de la respuesta es incorrecta');
+      }
+
       // Procesar datos personales
       if (datosPersonal.exito) {
         console.log(datosPersonal)
@@ -549,8 +571,45 @@ $(function () {
         $('#ano2').val(datosPersonal.anoNacimiento).trigger('change');
         $('#dia2').val(datosPersonal.diaNacimineto).trigger('change');
         $('#meses2').val(datosPersonal.mesNacimiento).trigger('change');
+        $('#sexo').val(datosPersonal.sexo).trigger('change');
 
-
+        //DATOS DE UBICACION
+        $('#estado').val(datosPersonal.idEstado).trigger('change');
+        $('#municipio').val(datosPersonal.idMunicipio).trigger('change');
+        $('#parroquia').val(datosPersonal.idParroquia).trigger('change');
+        $(document).on("change", "#municipio", async function () {
+          const idmunicipio = datosPersonal.idMunicipio;
+          console.log(idmunicipio)
+          try {
+            if (idmunicipio !== undefined) {
+              try {
+                let urls = ["src/ajax/registroPersonal.php?modulo_personal=obtenerParroquia",];
+                let options = { idmunicipio: idmunicipio };
+                let requests = urls.map((url, index) => {
+                  if (index === 0) { // Suponiendo que quieres pasar `options` solo a la primera solicitud
+                    return obtenerDatosJQuery(url, options);
+                  }
+                });
+      
+                const [parroquia] = await Promise.all(requests);
+      
+                if (parroquia.exito) {
+                  $("#parroquia").empty()
+                  $("#parroquia").append('<option value="">Seleccione una parroquia</option>');
+                  llenarSelectDependencias(parroquia.data, 'parroquia');
+                } else {
+                  console.error('Error al obtener parroquias o la estructura de la respuesta es incorrecta');
+                }
+              } catch (error) {
+                console.error('Error al obtener los datos de la parroquia:', error);
+              }
+            } else {
+              console.error('El idparroquia es undefined');
+            }
+          } catch (error) {
+            console.error('Error al manejar el evento de clic:', error);
+          }
+        });
         // llevarOptionIndividual(datosPersonal[0].dependencia, 'dependencia', datosPersonal[0].iddependencia);
         // se marcar cumplido logrado y se marcar span cumplido logrado 
         $("cedula_trabajador").addClass("cedulaBusqueda");
@@ -1325,6 +1384,74 @@ $(function () {
     } else {
       // Si no tiene la clase dt-button-active
       $(this).addClass('dt-button-desactive'); // Añade la clase dt-button-desactive
+    }
+  });
+
+  $(document).on("change", "#estado", async function () {
+    const idEstado = $(this).val();
+    console.log(idEstado)
+    try {
+      if (idEstado !== undefined) {
+        try {
+          let urls = ["src/ajax/registroPersonal.php?modulo_personal=obtenerMunicipio"];
+          let options = { idestado: idEstado };
+          let requests = urls.map((url, index) => {
+            if (index === 0) { // Suponiendo que quieres pasar `options` solo a la primera solicitud
+              return obtenerDatosJQuery(url, options);
+            }
+          });
+
+          const [municipio] = await Promise.all(requests);
+
+          if (municipio.exito) {
+            $("#municipio").empty()
+            $("#municipio").append('<option value="">Seleccione un municipio</option>');
+            llenarSelectDependencias(municipio.data, 'municipio');
+          } else {
+            console.error('Error al obtener estado o la estructura de la respuesta es incorrecta');
+          }
+        } catch (error) {
+          console.error('Error al obtener los datos de la estado:', error);
+        }
+      } else {
+        console.error('El idestado es undefined');
+      }
+    } catch (error) {
+      console.error('Error al manejar el evento de clic:', error);
+    }
+  });
+
+  $(document).on("change", "#municipio2", async function () {
+    const idmunicipio = $(this).val();
+    console.log(idmunicipio)
+    try {
+      if (idmunicipio !== undefined) {
+        try {
+          let urls = ["src/ajax/registroPersonal.php?modulo_personal=obtenerParroquia",];
+          let options = { idmunicipio: idmunicipio };
+          let requests = urls.map((url, index) => {
+            if (index === 0) { // Suponiendo que quieres pasar `options` solo a la primera solicitud
+              return obtenerDatosJQuery(url, options);
+            }
+          });
+
+          const [parroquia] = await Promise.all(requests);
+
+          if (parroquia.exito) {
+            $("#parroquia").empty()
+            $("#parroquia").append('<option value="">Seleccione una parroquia</option>');
+            llenarSelectDependencias(parroquia.data, 'parroquia');
+          } else {
+            console.error('Error al obtener parroquias o la estructura de la respuesta es incorrecta');
+          }
+        } catch (error) {
+          console.error('Error al obtener los datos de la parroquia:', error);
+        }
+      } else {
+        console.error('El idparroquia es undefined');
+      }
+    } catch (error) {
+      console.error('Error al manejar el evento de clic:', error);
     }
   });
 

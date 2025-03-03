@@ -12,6 +12,10 @@ import {
   limpiarInput,
   validarSelectoresSelec2,
   incluirSelec2,
+  clasesInputsError,
+  validarDosDatos,
+  validarNombreConEspacios,
+  validarNumeroNumber,
 } from "./ajax/inputs.js";
 
 import {
@@ -36,7 +40,11 @@ $(function () {
   validarNombre("#segundoNombre", ".span_nombre2");
   validarNombre("#primerApellido", ".span_apellido");
   validarNombre("#segundoApellido", ".span_apellido2");
+  validarNombreConEspacios("#calle", ".span_calle");
+  validarNombreConEspacios("#urbanizacion", ".span_urbanizacion");
   validarNumeros("#cedula", ".span_cedula");
+  validarNumeroNumber("#piso", ".span_piso", 2);
+  validarNumeroNumber("#numeroVivienda", ".span_numeroVivienda", 3);
   validarBusquedaCedula("#cedula", ["#img-modals", "#img-contener"]);
   valdiarCorreos("#correo", ".span_correo");
   colocarYear("#ano", "1900");
@@ -48,33 +56,52 @@ $(function () {
   file("#contrato", ".span_contrato");
   file("#notificacion", ".span_notificacion");
 
+  validarSelectores("#estado", ".span_estado");
+  validarSelectores("#municipio", ".span_municipio");
+  validarSelectores("#parroquia", ".span_parroquia");
+  validarSelectores("#vivienda", ".span_vivienda");
+  validarSelectores("#sexo", ".span_sexo");
   // formulario de empleados por select 2
   incluirSelec2("#estatus");
   incluirSelec2("#cargo");
   incluirSelec2("#departamento");
   incluirSelec2("#dependencia");
   incluirSelec2("#academico");
+  incluirSelec2("#sexo");
+  incluirSelec2("#estado");
+  incluirSelec2("#municipio");
+  incluirSelec2("#parroquia");
+  incluirSelec2("#vivienda");
+  incluirSelec2("#meses");
+  incluirSelec2("#dia");
+
   validarSelectoresSelec2("#dependencia", ".span_dependencia");
   validarSelectoresSelec2("#estatus", ".span_estatus");
   validarSelectoresSelec2("#cargo", ".span_cargo");
   validarSelectoresSelec2("#departamento", ".span_departamento");
   validarSelectoresSelec2("#dependencia", ".span_dependencia");
   validarSelectoresSelec2("#academico", ".span_academico");
+  validarSelectoresSelec2("#sexo", ".span_sexo");
+  validarSelectoresSelec2("#estado", ".span_estado");
+  validarSelectoresSelec2("#municipio", ".span_municipio");
+  validarSelectoresSelec2("#parroquia", ".span_parroquia");
+  validarSelectoresSelec2("#vivienda", ".span_vivienda");
+  validarSelectoresSelec2("#meses", ".span_meses");
 
-
-
+  validarDosDatos("#numeroDepa", ".span_numeroDepa");
   // URLs para las consultas
   const urls = [
     "src/ajax/registroPersonal.php?modulo_personal=obtenerDependencias",
     "src/ajax/registroPersonal.php?modulo_personal=obtenerEstatus",
     "src/ajax/registroPersonal.php?modulo_personal=obtenerCargo",
-    "src/ajax/registroPersonal.php?modulo_personal=obtenerDepartamento"
+    "src/ajax/registroPersonal.php?modulo_personal=obtenerDepartamento",
+    "src/ajax/registroPersonal.php?modulo_personal=obtenerEstados"
   ];
 
   // Función para realizar las consultas y llenar los selectores
   async function realizarConsultas() {
     try {
-      const [dependencias, estatus, cargo, departamento] = await Promise.all(urls.map(url => obtenerDatosJQuery(url)));
+      const [dependencias, estatus, cargo, departamento, estado] = await Promise.all(urls.map(url => obtenerDatosJQuery(url)));
 
       if (dependencias && dependencias.exito && dependencias.data) {
         llenarSelectDependencias(dependencias.data, 'dependencia');
@@ -99,6 +126,12 @@ $(function () {
       } else {
         console.error('Error al obtener departamento o la estructura de la respuesta es incorrecta');
       }
+
+      if (estado && estado.exito && estado.data) {
+        llenarSelectDependencias(estado.data, 'estado');
+      } else {
+        console.error('Error al obtener departamento o la estructura de la respuesta es incorrecta');
+      }
     } catch (error) {
       console.error('Error al realizar las consultas:', error);
     }
@@ -109,9 +142,7 @@ $(function () {
 
 
   async function llenarSelectDependencias(data, selectId) {
-
     const select = document.getElementById(selectId);
-    console.log(data);
     // Asegúrate de que el ID del select sea correcto
     if (!select) {
       console.error(`El elemento select con el ID "${selectId}" no se encontró en el DOM.`);
@@ -129,7 +160,6 @@ $(function () {
 
   $("#meses").on("change", function (yearnull) {
     const year = $("#ano").val();
-    console.log("holis:" + year) // Cambia el año si lo deseas
     const month = $("#meses").val();
     if (month == "") {
       $(this).removeClass("cumplido");
@@ -143,6 +173,12 @@ $(function () {
       const daysInMonth = new Date(year, monthWithoutLeadingZero, 0).getDate(); // Restamos 1 al mes porque JavaScript cuenta los meses desde 0
       // Generar las opciones de los días
       $("#dia").empty(); // Limpiar las opciones anteriores
+      $("#dia").append(
+        '<option value="">Seleccione un dia</option>'
+      );
+
+      $(".span_dia").removeClass("cumplido_span");
+      $("#contentDia .select2").removeClass("cumplido");
       for (let i = 1; i <= daysInMonth; i++) {
         const diaFormateado = i.toString().padStart(2, "0");
         $("#dia").append(
@@ -157,7 +193,6 @@ $(function () {
   });
 
   $("#meses").trigger("input");
-  validarSelectores("#dia", ".span_dia", "1");
 
   $("#formulario_registro").on("submit", function (e) {
     e.preventDefault();
@@ -183,7 +218,6 @@ $(function () {
     enviarFormulario(url, data, callbackExito, true);
   });
 
-
   $("#noCedula").on("change", function () {
     if ($(this).is(":checked")) {
       $("#disca").prop("checked", false);
@@ -193,6 +227,154 @@ $(function () {
   $("#disca").on("change", function () {
     if ($(this).is(":checked")) {
       $("#noCedula").prop("checked", false);
+    }
+  });
+
+  $("#estado").on("change", async function () {
+    const idEstado = $(this).val();
+    try {
+      if (idEstado !== undefined) {
+        try {
+          let urls = ["src/ajax/registroPersonal.php?modulo_personal=obtenerMunicipio"];
+          let options = { idestado: idEstado };
+          let requests = urls.map((url, index) => {
+            if (index === 0) { // Suponiendo que quieres pasar `options` solo a la primera solicitud
+              return obtenerDatosJQuery(url, options);
+            }
+          });
+
+          const [municipio] = await Promise.all(requests);
+
+          if (municipio.exito) {
+            $("#municipio").empty()
+            $("#municipio").append('<option value="">Seleccione un municipio</option>');
+            llenarSelectDependencias(municipio.data, 'municipio');
+          } else {
+            console.error('Error al obtener estado o la estructura de la respuesta es incorrecta');
+          }
+        } catch (error) {
+          console.error('Error al obtener los datos de la estado:', error);
+        }
+      } else {
+        console.error('El idestado es undefined');
+      }
+    } catch (error) {
+      console.error('Error al manejar el evento de clic:', error);
+    }
+  });
+
+  $("#municipio").on("change", async function () {
+    const idmunicipio = $(this).val();
+    try {
+      if (idmunicipio !== undefined) {
+        try {
+          let urls = ["src/ajax/registroPersonal.php?modulo_personal=obtenerParroquia",];
+          let options = { idmunicipio: idmunicipio };
+          let requests = urls.map((url, index) => {
+            if (index === 0) { // Suponiendo que quieres pasar `options` solo a la primera solicitud
+              return obtenerDatosJQuery(url, options);
+            }
+          });
+
+          const [parroquia] = await Promise.all(requests);
+
+          if (parroquia.exito) {
+            $("#parroquia").empty()
+            $("#parroquia").append('<option value="">Seleccione una parroquia</option>');
+            llenarSelectDependencias(parroquia.data, 'parroquia');
+          } else {
+            console.error('Error al obtener parroquias o la estructura de la respuesta es incorrecta');
+          }
+        } catch (error) {
+          console.error('Error al obtener los datos de la parroquia:', error);
+        }
+      } else {
+        console.error('El idparroquia es undefined');
+      }
+    } catch (error) {
+      console.error('Error al manejar el evento de clic:', error);
+    }
+  });
+
+  $("#vivienda").on("change", async function () {
+    let vivienda = $(this).val();
+    if (vivienda == 'Departamento') {
+      // Crea el HTML que quieres insertar
+      let nuevoHTML = `
+            <div class="col-sm-6 col-md-6 mb-2" id="contenPiso">
+                <div class="form-group">
+                    <label for="piso">N.Piso</label>
+                    <div class="input-group">
+                        <span class="input-group-text span_piso"><i class="icons fa-regular fa-user"></i></span>
+                        <input type="number" class="form-control" id="piso" name="piso" placeholder="Numero de piso" required>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-6 col-md-6 mb-2" id="contenNombreDepa">
+                <div class="form-group">
+                    <label for="urbanizacion">Nombre de la urbanización</label>
+                    <div class="input-group">
+                        <span class="input-group-text span_urbanizacion"><i class="icons fa-regular fa-user"></i></span>
+                        <input type="text" class="form-control" id="urbanizacion" name="urbanizacion" placeholder="Nombre de la urbanizacion" required>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-6 col-md-6 mb-2" id="contenNumDepa">
+                <div class="form-group">
+                    <label for="numeroDepa">Numero del departamento</label>
+                    <div class="input-group">
+                        <span class="input-group-text span_numeroDepa"><i class="icons fa-regular fa-user"></i></span>
+                        <input type="text" class="form-control" id="numeroDepa" name="numeroDepa" placeholder="Numero del departamento" required>
+                    </div>
+                </div>
+            </div>
+        `;
+
+      // Inserta el HTML después del elemento con ID "contenCalle"
+      $("#contenCalle").after(nuevoHTML);
+    } else {
+      // Si el valor del select no es "Departamento", elimina el HTML adicional (si existe)
+      $("#contenPiso").remove();
+      $("#contenNombreDepa").remove();
+      $("#contenNumDepa").remove();
+
+    }
+
+    $(document).on('input', '#numeroDepa', function () {
+      let inputValue = $(this).val();
+
+      // Limita la longitud a 2 caracteres
+      if (inputValue.length > 2) {
+        $(this).val(inputValue.slice(0, 2));
+        inputValue = $(this).val();
+      }
+
+      // Convierte letras a mayúsculas
+      $(this).val(inputValue.toUpperCase());
+    });
+
+
+    if (vivienda == 'Casa') {
+      // Crea el HTML que quieres insertar
+      let nuevoHTML = `
+            <div class="col-sm-6 col-md-6 mb-2" id="contenNVivienda">
+                <div class="form-group">
+                    <label for="numeroVivienda">N.Vivienda</label>
+                    <div class="input-group">
+                        <span class="input-group-text span_numeroVivienda"><i class="icons fa-regular fa-user"></i></span>
+                        <input type="number" class="form-control" id="numeroVivienda" name="numeroVivienda" placeholder="Numero Vivienda" required>
+                    </div>
+                </div>
+            </div>
+        `;
+
+      // Inserta el HTML después del elemento con ID "contenCalle"
+      $("#contenCalle").after(nuevoHTML);
+    } else {
+      // Si el valor del select no es "Departamento", elimina el HTML adicional (si existe)
+      $("#contenNVivienda").remove();
     }
   });
 
@@ -223,6 +405,7 @@ $(function () {
     for (const mutation of mutationsList) {
       if (mutation.type === 'childList' || mutation.type === 'attributes') {
         habilitarBoton();
+        validarSelectoresSelec2("#dia", ".span_dia");
       }
     }
   }, 300)); // Ajusta el tiempo de espera según sea necesario
