@@ -41,6 +41,11 @@ $nivelAcademico = isset($_POST['nivelAcademico']) ? $conexion->limpiarCadena($_P
 
 // DATOS PARA REGISTRAR EMPELADO
 $idPersonal = isset($_POST['id']) ? $conexion->limpiarCadena($_POST['id']) : "";
+$idPersonal2 = isset($_POST['idPersonal']) ? $conexion->limpiarCadena($_POST['idPersonal']) : "";
+$idEmpleado = isset($_POST['idEmpleado']) ? $conexion->limpiarCadena($_POST['idEmpleado']) : "";
+$fechaING = isset($_POST['fechaing']) ? $conexion->limpiarCadena($_POST['fechaing']) : "";
+
+
 $idfamiliar = isset($_POST['idfamiliar']) ? $conexion->limpiarCadena($_POST['idfamiliar']) : "";
 $telefono = isset($_POST['telefono']) ? $conexion->limpiarCadena($_POST['telefono']) : "";
 $linea = isset($_POST['linea']) ? $conexion->limpiarCadena($_POST['linea']) : "";
@@ -95,7 +100,9 @@ switch ($_GET['modulo_personal']) {
             $numeroVivienda,
             $pisoUrba,
             $nombreUrba,
-            $numeroDepa
+            $numeroDepa,
+            $fechaING,
+            $edad
         );
         break;
     case 'obtenerDependencias':
@@ -159,6 +166,7 @@ switch ($_GET['modulo_personal']) {
     case 'actualizarPersonal':
         $personal->actualizarPersonal(
             $idPersonal,
+            $idEmpleado,
             $primerNombre,
             $segundoNombre,
             $primerApellido,
@@ -174,7 +182,18 @@ switch ($_GET['modulo_personal']) {
             $idDependencia,
             $idDepartamento,
             $telefono,
-            $nivelAcademico
+            $nivelAcademico,
+            $vivienda,
+            $sexo,
+            $idestado,
+            $idMunicipio,
+            $idParroquia,
+            $calle,
+            $numeroVivienda,
+            $pisoUrba,
+            $nombreUrba,
+            $numeroDepa,
+            $fechaING
         );
         break;
     case 'actualizarFamiliar':

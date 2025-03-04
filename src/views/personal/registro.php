@@ -10,6 +10,10 @@ use App\Atlas\config\App;
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro | ATLAS</title>
     <?php require_once App::URL_INC . "total_css.php"; ?>
+    <link rel="stylesheet" href="./src/libs/jQueryUI/jquery-ui.min.css">
+    <link rel="stylesheet" href="./src/libs/jQueryUI/jquery-ui.structure.min.css">
+    <link rel="stylesheet" href="./src/libs/jQueryUI/jquery-ui.theme.min.css">
+
 
     <link rel="stylesheet" href="<?php echo App::URL_CSS . "registroPersonal.css"; ?>">
 </head>
@@ -112,8 +116,8 @@ use App\Atlas\config\App;
                                     <span class="input-group-text span_civil"><i class="icons fa-regular fa-clipboard"></i></span>
                                     <select class="form-select form-select-md estado-civil" id="civil" name="civil" aria-label="Small select example" aria-placeholder="dasdas" required>
                                         <option value="">Estado civil</option>
-                                        <option value="soltero">Soltero</option>
-                                        <option value="casado">Casado</option>
+                                        <option value="Soltero">Soltero</option>
+                                        <option value="Casado">Casado</option>
                                         <option value="Viudo">Viudo</option>
                                         <option value="Divorciado">Divorciado</option>
                                     </select>
@@ -134,6 +138,19 @@ use App\Atlas\config\App;
                                 </div>
                             </div>
                         </div>
+
+                        <div class="col-sm-6 col-md-6 mb-2">
+                            <div class="form-group">
+                                <label for="edad">Edad</label>
+                                <div class="input-group">
+                                    <span class="input-group-text span_edad"><i class="icons fa-regular fa-address-card"></i></span>
+                                    <input type="number" class="form-control" id="edad" name="edad" placeholder="Edad del personal" required readonly>
+                                </div>
+                                <p class="parrafo fs-6 fw-light mb-0">La edad se autocompleta con la fecha de nacimiento</p>
+                            </div>
+                        </div>
+
+
                         <!-- <div class="col-sm-12 mb-2">
                             <div class="form-group">
                                 <label for="correo">Correo</label>
@@ -264,6 +281,16 @@ use App\Atlas\config\App;
                             </div>
                         </div>
 
+                        <div class="col-sm-6 col-md-6 mb-2">
+                            <div class="form-group">
+                                <label for="fechaing">Fecha Ingreso</label>
+                                <div class="input-group">
+                                    <span class="input-group-text span_fechaing"><i class="icons fa-regular fa-user"></i></span>
+                                    <input type="text" class="form-control" id="fechaing" name="fechaing2" placeholder="Fecha de Ingreso" required>
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="col-sm-6 mb-2">
                             <label class="form-label mb-0" for="telefono">N.Telefono</label>
                             <div class="input-group">
@@ -293,7 +320,7 @@ use App\Atlas\config\App;
                             </div>
                         </div>
 
-                        <div class="col-sm-5 mb-2">
+                        <div class="col-sm-6 mb-2">
                             <div class="form-group">
                                 <label for="cargo">Cargo</label>
                                 <div class="input-group">
@@ -305,7 +332,7 @@ use App\Atlas\config\App;
                             </div>
                         </div>
 
-                        <div class="col-sm-7 mb-2">
+                        <div class="col-sm-12 mb-2">
                             <div class="form-group">
                                 <label for="departamento">Departamento</label>
                                 <div class="input-group">
@@ -412,6 +439,8 @@ use App\Atlas\config\App;
     </div>
     <?php require_once App::URL_INC . "/scrips.php"; ?>
     <script src="./src/libs/select2/select2.min.js"></script>
+    <script src="./src/libs/jQueryUI/jquery-ui.min.js"></script>
+
     <script src="<?php echo App::URL_SCRIPS . "registroPersonal.js" ?>" type="module"></script>
 </body>
 

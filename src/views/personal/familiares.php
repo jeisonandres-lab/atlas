@@ -143,7 +143,7 @@ use App\Atlas\config\App;
                                 <div class="form-group">
                                     <label for="tomo">Tomo</label>
                                     <div class="input-group">
-                                        <span class="input-group-text span_tomo"><i class="fa-regular fa-address-card"></i></span>
+                                        <span class="input-group-text span_tomo"><i class="icons fa-regular fa-address-card"></i></span>
                                         <input type="text" class="form-control" id="tomo" name="tomo" placeholder="Tomo De partida De Nacimiento" required disabled>
                                     </div>
                                 </div>
@@ -153,7 +153,7 @@ use App\Atlas\config\App;
                                 <div class="form-group">
                                     <label for="folio">Folio</label>
                                     <div class="input-group">
-                                        <span class="input-group-text span_folio"><i class="fa-regular fa-address-card"></i></span>
+                                        <span class="input-group-text span_folio"><i class="icons fa-regular fa-address-card"></i></span>
                                         <input type="text" class="form-control" id="folio" name="folio" placeholder="Número de folio" required disabled>
                                     </div>
                                 </div>
@@ -165,12 +165,7 @@ use App\Atlas\config\App;
                                     <div class="input-group">
                                         <span class="input-group-text span_parentesco"><i class="icons fa-regular fa-clipboard"></i></span>
                                         <select class="form-select form-select-md estado-parentesco" id="parentesco" name="parentesco" aria-label="Small select example" aria-placeholder="dasdas" required disabled>
-                                            <option value="">Selecione</option>
-                                            <option value="Hijo">Hijo</option>
-                                            <option value="Hija">Hija</option>
-                                            <option value="Padre">Padre</option>
-                                            <option value="Madre">Madre</option>
-                                            <option value="Hermano">Hermano</option>
+                                            <option value="">Selecione un parentesco</option>
                                         </select>
                                     </div>
                                 </div>

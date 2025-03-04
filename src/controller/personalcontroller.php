@@ -60,7 +60,9 @@ class personalController extends personalModel
         $numeroVivienda,
         $pisoUrba,
         $nombreUrba,
-        $numeroDepa
+        $numeroDepa,
+        $fechaING,
+        $edad
     ) {
         // sleep(5);
         $primerNombre = $this->limpiarCadena($primerNombre);
@@ -76,14 +78,12 @@ class personalController extends personalModel
         $nivelAcademico = $this->limpiarCadena($nivelAcademico);
         $sexo = $this->limpiarCadena($sexo);
 
-
         $vivienda = $this->limpiarCadena($vivienda);
         $idestado = $this->limpiarCadena($idestado);
         $idMunicipio = $this->limpiarCadena($idMunicipio);
         $idParroquia = $this->limpiarCadena($idParroquia);
         $numeroVivienda = $this->limpiarCadena($numeroVivienda);
         $pisoUrba = $this->limpiarCadena($pisoUrba);
-
 
         $calle = $this->limpiarCadena($calle);
         $nombreUrba = $this->limpiarCadena($nombreUrba);
@@ -166,6 +166,11 @@ class personalController extends personalModel
                 "campo_nombre" => "diaNacimiento",
                 "campo_marcador" => ":diaNacimiento",
                 "campo_valor" => $dia
+            ],
+            [
+                "campo_nombre" => "edadPersonal",
+                "campo_marcador" => ":edadPersonal",
+                "campo_valor" => $edad
             ],
             [
                 "campo_nombre" => "fecha",
@@ -273,6 +278,11 @@ class personalController extends personalModel
                                             "campo_nombre" => "activo",
                                             "campo_marcador" => ":activo",
                                             "campo_valor" => 1
+                                        ],
+                                        [
+                                            "campo_nombre" => "fechaING",
+                                            "campo_marcador" => ":fechaING",
+                                            "campo_valor" => $fechaING
                                         ],
                                         [
                                             "campo_nombre" => "fecha",
@@ -423,7 +433,6 @@ class personalController extends personalModel
         echo json_encode($data_json);
     }
 
-
     //Registrar Familiar a un empleado
     public function registrarFamilia(
         $parentesco,
@@ -549,7 +558,7 @@ class personalController extends personalModel
                         "campo_valor" => $mes
                     ],
                     [
-                        "campo_nombre" => "diaNacimiento",
+                        "campo_nombre" => "edadPersonal",
                         "campo_marcador" => ":diaNacimiento",
                         "campo_valor" => $dia
                     ],
@@ -757,6 +766,7 @@ class personalController extends personalModel
                     $data_json['nivelAcademico'] = $row['nivelAcademico'];
                     $data_json['telefono'] = $row['telefono'];
                     $data_json['sexo'] = $row['sexo'];
+                    $data_json['edad'] = $row['edadPersonal'];
 
                     //ubicacion de personal
                     $data_json['idEstado'] = $row['idEstado'];
@@ -1084,6 +1094,7 @@ class personalController extends personalModel
     //Actualizar personal empleado
     public function actualizarPersonal(
         $idPersonal,
+        $idEmpleado,
         $primerNombre,
         $segundoNombre,
         $primerApellido,
@@ -1099,7 +1110,18 @@ class personalController extends personalModel
         $idDependencia,
         $idDepartamento,
         $telefono,
-        $nivelAcademico
+        $nivelAcademico,
+        $vivienda,
+        $sexo,
+        $idestado,
+        $idMunicipio,
+        $idParroquia,
+        $calle,
+        $numeroVivienda,
+        $pisoUrba,
+        $nombreUrba,
+        $numeroDepa,
+        $fechaING
     ) {
         $primerNombre = $this->limpiarCadena($primerNombre);
         $segundoNombre = $this->limpiarCadena($segundoNombre);
@@ -1112,6 +1134,18 @@ class personalController extends personalModel
         $mes = $this->limpiarCadena($mes);
         $dia = $this->limpiarCadena($dia);
         $nivelAcademico = $this->limpiarCadena($nivelAcademico);
+        $sexo = $this->limpiarCadena($sexo);
+
+        //Ubicacion
+        $vivienda = $this->limpiarCadena($vivienda);
+        $idestado = $this->limpiarCadena($idestado);
+        $idMunicipio = $this->limpiarCadena($idMunicipio);
+        $idParroquia = $this->limpiarCadena($idParroquia);
+        $numeroVivienda = $this->limpiarCadena($numeroVivienda);
+        $pisoUrba = $this->limpiarCadena($pisoUrba);
+        $calle = $this->limpiarCadena($calle);
+        $nombreUrba = $this->limpiarCadena($nombreUrba);
+        $numeroDepa = $this->limpiarCadena($numeroDepa);
 
         // DATOS DE EMPLEADOS
         $idEstatus = $this->limpiarCadena($idEstatus);
@@ -1131,6 +1165,7 @@ class personalController extends personalModel
             'mensaje' => '',
             'resultado' => 0,
         ];
+
         // Asegúrate de que el marcador de parámetro coincida con el nombre del campo en la consulta SQL
         $condicion_personal = [
             "condicion_campo" => "id_personal",
@@ -1139,9 +1174,15 @@ class personalController extends personalModel
         ];
 
         $condicion_empleado = [
-            "condicion_campo" => "idPersonal",
-            "condicion_marcador" => ":idPersonal",
-            "condicion_valor" => $idPersonal
+            "condicion_campo" => "id_empleados",
+            "condicion_marcador" => ":id_empleados",
+            "condicion_valor" => $idEmpleado
+        ];
+
+        $condicion_empleadoUbi = [
+            "condicion_campo" => "id_empleadoUbi",
+            "condicion_marcador" => ":id_empleadoUbi",
+            "condicion_valor" => $idEmpleado
         ];
 
         $personal_datos_reg = [
@@ -1181,6 +1222,11 @@ class personalController extends personalModel
                 "campo_valor" => $ano
             ],
             [
+                "campo_nombre" => "sexo",
+                "campo_marcador" => ":sexo",
+                "campo_valor" => $sexo
+            ],
+            [
                 "campo_nombre" => "mesNacimiento",
                 "campo_marcador" => ":mesNacimiento",
                 "campo_valor" => $mes
@@ -1190,9 +1236,24 @@ class personalController extends personalModel
                 "campo_marcador" => ":diaNacimiento",
                 "campo_valor" => $dia
             ],
+            [
+                "campo_nombre" => "fecha",
+                "campo_marcador" => ":fecha",
+                "campo_valor" => date("Y-m-d")
+            ],
+            [
+                "campo_nombre" => "hora",
+                "campo_marcador" => ":hora",
+                "campo_valor" => date("h:i:s A")
+            ]
         ];
 
         $empleados_datos_reg = [
+            [
+                "campo_nombre" => "idPersonal",
+                "campo_marcador" => ":idPersonal",
+                "campo_valor" =>  $idPersonal
+            ],
             [
                 "campo_nombre" => "idEstatus",
                 "campo_marcador" => ":idEstatus",
@@ -1227,8 +1288,14 @@ class personalController extends personalModel
                 "campo_nombre" => "activo",
                 "campo_marcador" => ":activo",
                 "campo_valor" => 1
+            ],
+            [
+                "campo_nombre" => "fechaING",
+                "campo_marcador" => ":fechaING",
+                "campo_valor" => $fechaING
             ]
         ];
+
         // Verificar si los archivos tienen nombres diferentes
         $nombreArchivo1 = isset($_FILES[$fileInputName]) ? $_FILES[$fileInputName]['name'] : null;
         $nombreArchivo2 = isset($_FILES[$fileInputName2]) ? $_FILES[$fileInputName2]['name'] : null;
@@ -1290,6 +1357,68 @@ class personalController extends personalModel
                                             break;
                                         }
                                     }
+
+                                    $ubicacion_empleado = [
+                                        [
+                                            "campo_nombre" => "idEstado",
+                                            "campo_marcador" => ":idEstado",
+                                            "campo_valor" =>  $idestado
+                                        ],
+                                        [
+                                            "campo_nombre" => "idMunicipio",
+                                            "campo_marcador" => ":idMunicipio",
+                                            "campo_valor" => $idMunicipio
+                                        ],
+                                        [
+                                            "campo_nombre" => "idParroquia",
+                                            "campo_marcador" => ":idParroquia",
+                                            "campo_valor" => $idParroquia
+                                        ],
+                                        [
+                                            "campo_nombre" => "vivienda",
+                                            "campo_marcador" => ":vivienda",
+                                            "campo_valor" => $vivienda
+                                        ],
+                                        [
+                                            "campo_nombre" => "calle",
+                                            "campo_marcador" => ":calle",
+                                            "campo_valor" => $calle
+                                        ],
+                                        [
+                                            "campo_nombre" => "nombre_urb",
+                                            "campo_marcador" => ":nombre_urb",
+                                            "campo_valor" =>   $nombreUrba
+                                        ],
+                                        [
+                                            "campo_nombre" => "num_depar",
+                                            "campo_marcador" => ":num_depar",
+                                            "campo_valor" =>  $numeroDepa
+                                        ],
+                                        [
+                                            "campo_nombre" => "numVivienda",
+                                            "campo_marcador" => ":numVivienda",
+                                            "campo_valor" =>  $numeroVivienda
+                                        ],
+                                        [
+                                            "campo_nombre" => "pisoVivienda",
+                                            "campo_marcador" => ":pisoVivienda",
+                                            "campo_valor" => $pisoUrba
+                                        ],
+                                    ];
+
+                                    $check_actUbicacionEmpleado = $this->getActualizar('ubicacion', $ubicacion_empleado, $condicion_empleadoUbi);
+                                    if ($check_actUbicacionEmpleado) {
+                                        $data_json['exito'] = true;
+                                        $data_json['mensaje'] = "Empleado Registrado Exitosamente.";
+                                        $data_json['resultado'] = 2;
+                                        $datos_json["exitoAuditoria"] = true;
+                                        $datos_json['messengerAuditoria'] = "Auditoria registrada con exito.";
+                                    } else {
+                                        $data_json['exito'] = false;
+                                        $data_json['mensaje'] = "no se logro registrar la ubicación, pero el empleado ha sido registrado con exito";
+                                        $data_json['resultado'] = 1;
+                                    }
+
                                     if ($nombreArchivo1) {
                                         $data_json['archivo1'] = $resultados[$fileInputName];
                                     }

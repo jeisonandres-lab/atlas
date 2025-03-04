@@ -16,6 +16,8 @@ import {
   validarDosDatos,
   validarNombreConEspacios,
   validarNumeroNumber,
+  validarInputFecha,
+  clasesInputs,
 } from "./ajax/inputs.js";
 
 import {
@@ -33,6 +35,15 @@ import {
 $(function () {
   $(".formulario_empleado").hide();
 
+  $("#fechaing").datepicker({
+    dateFormat: "dd-mm-yy", // Cambia el formato de la fecha
+    showWeek: true, // Muestra el número de la semana
+    firstDay: 1, // Establece el primer día de la semana (1 = lunes)
+    changeMonth: true, // Permite cambiar el mes
+    changeYear: true, // Permite cambiar el año
+    yearRange: "1900:2025" // Establece el rango de años
+  });
+
   const cargando = document.getElementById('cargando');
 
   // formulario de registro
@@ -43,10 +54,12 @@ $(function () {
   validarNombreConEspacios("#calle", ".span_calle");
   validarNombreConEspacios("#urbanizacion", ".span_urbanizacion");
   validarNumeros("#cedula", ".span_cedula");
+  validarNumeroNumber("#edad", ".span_edad", 2);
   validarNumeroNumber("#piso", ".span_piso", 2);
   validarNumeroNumber("#numeroVivienda", ".span_numeroVivienda", 3);
   validarBusquedaCedula("#cedula", ["#img-modals", "#img-contener"]);
   valdiarCorreos("#correo", ".span_correo");
+  validarInputFecha("#fechaing", ".span_fechaing")
   colocarYear("#ano", "1900");
   colocarMeses("#meses");
   validarTelefono("#telefono", ".span_telefono", "#linea");
@@ -72,8 +85,10 @@ $(function () {
   incluirSelec2("#municipio");
   incluirSelec2("#parroquia");
   incluirSelec2("#vivienda");
+  incluirSelec2("#ano");
   incluirSelec2("#meses");
   incluirSelec2("#dia");
+  incluirSelec2("#civil");
 
   validarSelectoresSelec2("#dependencia", ".span_dependencia");
   validarSelectoresSelec2("#estatus", ".span_estatus");
@@ -86,7 +101,10 @@ $(function () {
   validarSelectoresSelec2("#municipio", ".span_municipio");
   validarSelectoresSelec2("#parroquia", ".span_parroquia");
   validarSelectoresSelec2("#vivienda", ".span_vivienda");
+  validarSelectoresSelec2("#ano", ".span_ano");
   validarSelectoresSelec2("#meses", ".span_meses");
+  validarSelectoresSelec2("#dia", ".span_dia");
+  validarSelectoresSelec2("#civil", ".span_civil");
 
   validarDosDatos("#numeroDepa", ".span_numeroDepa");
   // URLs para las consultas
@@ -157,7 +175,6 @@ $(function () {
     });
   }
 
-
   $("#meses").on("change", function (yearnull) {
     const year = $("#ano").val();
     const month = $("#meses").val();
@@ -174,7 +191,7 @@ $(function () {
       // Generar las opciones de los días
       $("#dia").empty(); // Limpiar las opciones anteriores
       $("#dia").append(
-        '<option value="">Seleccione un dia</option>'
+        '<option value="">Seleccione un día</option>'
       );
 
       $(".span_dia").removeClass("cumplido_span");
@@ -196,7 +213,16 @@ $(function () {
 
   $("#formulario_registro").on("submit", function (e) {
     e.preventDefault();
+
+    let fechaIngreso = $("#fechaing").val();
+    let partesFecha = fechaIngreso.split("-"); // Divide la fecha en día, mes y año
+
+    let dia = partesFecha[0];
+    let mes = partesFecha[1];
+    let ano = partesFecha[2];
+    let fechaFormateada = ano + "-" + mes + "-" + dia; // Formato YYYY-MM-DD
     const data = new FormData(this);
+    data.append("fechaing", fechaFormateada);
     const url = "src/ajax/registroPersonal.php?modulo_personal=registrar";
     $("#aceptar").prop("disabled", true);
 
@@ -377,6 +403,88 @@ $(function () {
       $("#contenNVivienda").remove();
     }
   });
+
+  $(document).on("change", "#fechaing", async function () {
+    let fechaING = $(this).val();
+    let diaN = $("#dia").val();
+    let mesN = $("#meses").val();
+    let anoN = $("#ano").val();
+
+    let fechaNacimientoStr = anoN + "-" + mesN + "-" + diaN; // Formato YYYY-MM-DD
+    let fechaIngresoStr = fechaING.split("-").reverse().join("-"); // Formato YYYY-MM-DD
+
+    let fechaNacimiento = new Date(fechaNacimientoStr);
+    let fechaIngreso = new Date(fechaIngresoStr);
+
+    console.log("Fecha de nacimiento:", fechaNacimiento);
+    console.log("Fecha de ingreso:", fechaIngreso);
+
+    if (fechaIngreso > fechaNacimiento) {
+      clasesInputs("#fechaing", ".span_fechaing");
+
+    } else {
+      clasesInputsError("#fechaing", ".span_fechaing");
+
+    }
+    //   const partesFecha = fechaING.split("/");
+    // const dia = parseInt(partesFecha[0], 10);
+    // const mes = parseInt(partesFecha[1], 10); // Los meses en Date van de 0 a 11
+    // const ano = parseInt(partesFecha[2], 10);
+
+    // console.log("Día:", dia);
+    // console.log("Mes:", mes);
+    // console.log("Año:", ano);
+
+    //   const fechaNacimien = new Date(anoN, mesN - 1, diaN);
+    //   const fechaNacimiento2 = new Date(ano, mes - 1, dia);
+
+    //   // let formatFechaNacimiento = diaN + "-" + mesN + "-" + anoN 
+    //   let datafecha = calcularEdad(fechaNacimiento2)
+    //   // let datafecha2 = calcularEdad2(fechaING)
+    //   console.log(datafecha);
+
+  });
+
+  $("#dia, #meses, #ano").on("input", function () {
+    const dia = $("#dia").val();
+    const mes = $("#meses").val();
+    const ano = $("#ano").val();
+    const fechaNacimiento = new Date(ano, mes - 1, dia);
+    let calcularEdad2 = calcularEdad(fechaNacimiento)
+    $("#edad").val(calcularEdad2);
+    clasesInputs("#edad", ".span_edad");
+  });
+
+  function calcularEdad(fechaNacimiento) {
+    const hoy = new Date();
+    let edad = hoy.getFullYear() - fechaNacimiento.getFullYear();
+    const mes = hoy.getMonth() - fechaNacimiento.getMonth();
+    if (mes < 0 || (mes === 0 && hoy.getDate() < fechaNacimiento.getDate())) {
+      edad--;
+    }
+    return edad;
+  }
+  function calcularEdad2(fechaString) {
+    // Dividir la cadena de fecha en día, mes y año
+    const partesFecha = fechaString.split("-");
+    const dia = parseInt(partesFecha[0], 10);
+    const mes = parseInt(partesFecha[1], 10) - 1; // Los meses en Date van de 0 a 11
+    const año = parseInt(partesFecha[2], 10);
+
+    // Crear un objeto Date con la fecha de nacimiento
+    const fechaNacimiento = new Date(año, mes, dia);
+
+    // Obtener la fecha actual
+    const fechaActual = new Date();
+
+    // Calcular la diferencia en milisegundos
+    const diferencia = fechaActual - fechaNacimiento;
+
+    // Calcular la edad en años
+    const edad = Math.floor(diferencia / (1000 * 60 * 60 * 24 * 365.25));
+
+    return edad;
+  }
 
   var boton = $('#aceptar'); // Reemplaza con el ID de tu botón
   // metodos para escuchar cambios en el dom y habilitar el boton de enviar formulario 

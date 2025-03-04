@@ -235,6 +235,25 @@ export async function validarSelectores(input, cumplidospan, tigger) {
   } else { }
 }
 
+// VALIDAR INPUTS TYPE FECHA
+// Función para validar un input de tipo date
+export async function validarInputFecha(input, cumplidospan) {
+  $(document).on("change", input, function() {
+    const fechaSeleccionada = $(this).val();
+    if (fechaSeleccionada === "") {
+      $(this).removeClass("cumplido");
+      $(this).addClass("error_input");
+      $(cumplidospan).removeClass("cumplido_span");
+      $(cumplidospan).addClass("error_span");
+    } else {
+      $(this).removeClass("error_input");
+      $(this).addClass("cumplido");
+      $(cumplidospan).removeClass("error_span");
+      $(cumplidospan).addClass("cumplido_span");
+    }
+  });
+}
+
 export async function incluirSelec2(input) {
   $(input).select2({
     theme: "bootstrap-5",

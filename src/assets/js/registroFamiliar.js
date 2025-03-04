@@ -27,6 +27,15 @@ $(function () {
   $("#contenDoc").hide();
   $("#contentPartida").hide();
 
+  $("#fechaing").datepicker({
+    dateFormat: "dd-mm-yy", // Cambia el formato de la fecha
+    showWeek: true, // Muestra el número de la semana
+    firstDay: 1, // Establece el primer día de la semana (1 = lunes)
+    changeMonth: true, // Permite cambiar el mes
+    changeYear: true, // Permite cambiar el año
+    yearRange: "1900:2025" // Establece el rango de años
+  });
+  
   validarNombre("#primerNombre", ".span_nombre");
   validarNombre("#segundoNombre", ".span_nombre2");
   validarNombre("#primerApellido", ".span_apellido");
@@ -93,7 +102,6 @@ $(function () {
   const cargando = document.getElementById('cargando');
   var boton = $('#aceptarFamilia');
 
-  window.addEventListener('load', function () {
     // Initialize your data table here
     let table = new DataTable('#myTable', {
       responsive: true,
@@ -323,8 +331,6 @@ $(function () {
         { "data": 18 },  // 
       ]
     });
-
-  });
 
   // $('#myTable tbody').on('click', 'tr', function () {
   //   var data = table.row(this).data();
@@ -564,6 +570,7 @@ $(function () {
       if (datosPersonal.exito) {
         console.log(datosPersonal)
         $("#idEmpleado").val(datosPersonal.idPersonal);
+        $("#idEmpleado2").val(datosPersonal.idEmpleado);
         $("#primerNombre").val(datosPersonal.nombre);
         $("#segundoNombre").val(datosPersonal.segundoNombre);
         $("#primerApellido").val(datosPersonal.apellido);
@@ -581,6 +588,7 @@ $(function () {
         $('#dia2').val(datosPersonal.diaNacimineto).trigger('change');
         $('#meses2').val(datosPersonal.mesNacimiento).trigger('change');
         $('#sexo').val(datosPersonal.sexo).trigger('change');
+        $('#edad').val(datosPersonal.edad).trigger('change');
 
         //DATOS DE UBICACION
         $('#estado').val(datosPersonal.idEstado).trigger('change');
@@ -597,6 +605,8 @@ $(function () {
           clasesInputs("#piso", ".span_piso");
           clasesInputs("#urbanizacion", ".span_urbanizacion");
           clasesInputs("#numeroDepa", ".span_numeroDepa");
+          
+
         }else{
           $('#numeroVivienda').val(datosPersonal.numVivienda);
           clasesInputs("#numeroVivienda", ".span_numeroVivienda");
@@ -614,7 +624,7 @@ $(function () {
         clasesInputs("#ano2", ".span_ano");
         clasesInputs("#dia2", ".span_dia");
         clasesInputs("#calle", ".span_calle");
-
+        clasesInputs("#edad", ".span_edad");
       } else {
         console.error('Error al obtener datos personales o la estructura de la respuesta es incorrecta');
       }
@@ -1214,6 +1224,58 @@ $(function () {
       $("#contenNVivienda").remove();
     }
   });
+
+  $(document).on("change", "#fechaing", async function () {
+      let fechaING = $(this).val();
+      let diaN = $("#dia").val();
+      let mesN = $("#meses").val();
+      let anoN = $("#ano").val();
+  
+      let fechaNacimientoStr = anoN + "-" + mesN + "-" + diaN; // Formato YYYY-MM-DD
+      let fechaIngresoStr = fechaING.split("-").reverse().join("-"); // Formato YYYY-MM-DD
+  
+      let fechaNacimiento = new Date(fechaNacimientoStr);
+      let fechaIngreso = new Date(fechaIngresoStr);
+  
+      console.log("Fecha de nacimiento:", fechaNacimiento);
+      console.log("Fecha de ingreso:", fechaIngreso);
+  
+      if (fechaIngreso > fechaNacimiento) {
+        clasesInputs("#fechaing", ".span_fechaing");
+  
+      } else {
+        clasesInputsError("#fechaing", ".span_fechaing");
+  
+      }
+      //   const partesFecha = fechaING.split("/");
+      // const dia = parseInt(partesFecha[0], 10);
+      // const mes = parseInt(partesFecha[1], 10); // Los meses en Date van de 0 a 11
+      // const ano = parseInt(partesFecha[2], 10);
+  
+      // console.log("Día:", dia);
+      // console.log("Mes:", mes);
+      // console.log("Año:", ano);
+  
+      //   const fechaNacimien = new Date(anoN, mesN - 1, diaN);
+      //   const fechaNacimiento2 = new Date(ano, mes - 1, dia);
+  
+      //   // let formatFechaNacimiento = diaN + "-" + mesN + "-" + anoN 
+      //   let datafecha = calcularEdad(fechaNacimiento2)
+      //   // let datafecha2 = calcularEdad2(fechaING)
+      //   console.log(datafecha);
+  
+    });
+  
+    $("#dia2, #meses2, #ano2").on("change", function () {
+      const dia = $("#dia").val();
+      const mes = $("#meses").val();
+      const ano = $("#ano").val();
+      const fechaNacimiento = new Date(ano, mes - 1, dia);
+      let calcularEdad2 = calcularEdad(fechaNacimiento)
+      $("#edad").val(calcularEdad2);
+      clasesInputs("#edad", ".span_edad");
+    });
+
 
   // Carga de Partida de Nacimiento familiar
   $(document).on("click", "#cargaPartiNacimiento", function () {

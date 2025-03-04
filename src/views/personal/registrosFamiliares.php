@@ -12,6 +12,11 @@ use App\Atlas\config\App;
     <?php require_once App::URL_INC . "total_css.php"; ?>
     <?php require_once App::URL_INC . "tablets_css.php"; ?>
     <link rel="stylesheet" href="<?php echo App::URL_CSS . "registroFamiliares.css"; ?>">
+
+    <link rel="stylesheet" href="./src/libs/jQueryUI/jquery-ui.min.css">
+    <link rel="stylesheet" href="./src/libs/jQueryUI/jquery-ui.structure.min.css">
+    <link rel="stylesheet" href="./src/libs/jQueryUI/jquery-ui.theme.min.css">
+
 </head>
 
 <body class="layout-fixed sidebar-expand-lg bg-body-tertiary">
@@ -97,7 +102,8 @@ use App\Atlas\config\App;
                                     <div class="row col-sm-12 col-md-7  h-100  w-100 p-2">
                                         <p class="mb-0 mt-2">Datos Personales</p>
                                         <hr class="mb-2">
-                                        <input type="text" class="form-control cumplido" id="idEmpleado" name="id" placeholder="Primer Nombre" required hidden>
+                                        <input type="text" class="form-control cumplido" id="idEmpleado" name="id" placeholder="id personal" required hidden>
+                                        <input type="text" class="form-control cumplido" id="idEmpleado2" name="idEmpleado" placeholder="id empleado" required hidden>
                                         <div class="col-sm-6 col-md-4 mb-2">
                                             <div class="form-group">
                                                 <label for="primerNombre">Primer Nombre</label>
@@ -175,6 +181,17 @@ use App\Atlas\config\App;
                                                         <option value="Femenino">Femenino</option>
                                                     </select>
                                                 </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-6 col-md-6 mb-2">
+                                            <div class="form-group">
+                                                <label for="edad">Edad</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-text span_edad"><i class="icons fa-regular fa-address-card"></i></span>
+                                                    <input type="number" class="form-control" id="edad" name="edad" placeholder="Edad del personal" required readonly>
+                                                </div>
+                                                <p class="parrafo fs-6 fw-light mb-0">La edad se autocompleta con la fecha de nacimiento</p>
                                             </div>
                                         </div>
 
@@ -281,6 +298,16 @@ use App\Atlas\config\App;
                                         <div class="col-sm-12 col-md-12 mb-2">
                                             <button type="button" id="cargaNoti" class="btn btn-primary btn-xs"><i class="fa-solid fa-plus me-2"></i>Actualizar notificacion</button>
                                             <button type="button" id="cargaContrato" class="btn btn-primary"><i class="fa-solid fa-plus me-2"></i>Actualizar Contrato</button>
+                                        </div>
+
+                                        <div class="col-sm-6 col-md-6 mb-2">
+                                            <div class="form-group">
+                                                <label for="fechaing">Fecha Ingreso</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-text span_fechaing"><i class="icons fa-regular fa-user"></i></span>
+                                                    <input type="text" class="form-control" id="fechaing" name="fechaing2" placeholder="Fecha de Ingreso" required>
+                                                </div>
+                                            </div>
                                         </div>
 
                                         <div class="col-sm-12 col-md-4 mb-2" id="contentTelefono">
@@ -684,6 +711,9 @@ use App\Atlas\config\App;
     <?php require_once App::URL_INC . "/tablets.php"; ?>
 
     <script src="./src/libs/select2/select2.min.js"></script>
+    <script src="./src/libs/select2/select2.min.js"></script>
+    <script src="./src/libs/jQueryUI/jquery-ui.min.js"></script>
+
     <script src="<?php echo App::URL_SCRIPS . "registroFamiliar.js" ?>" type="module"></script>
 
 </body>

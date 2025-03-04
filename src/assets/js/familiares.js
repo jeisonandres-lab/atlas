@@ -12,6 +12,8 @@ import {
   limpiarInput,
   clasesInputs,
   clasesInputsError,
+  incluirSelec2,
+  validarSelectoresSelec2,
 } from "./ajax/inputs.js";
 
 import { alertaNormalmix, AlertSW2 } from "./ajax/alerts.js";
@@ -20,6 +22,7 @@ import { enviarDatos, enviarDatosPersonalizados, enviarFormulario, obtenerDatos 
 $(function () {
   const cargando = document.getElementById('cargando');
   var boton = $('#aceptar_emepleado'); // Reemplaza con el ID de tu botón
+  const opciones = ["Hijo", "Hija", "Padre", "Madre", "Hermano"];
 
   validarNumeros("#cedula_trabajador", ".span_cedula_empleado");
   validarNombre("#nombre", ".span_nombre");
@@ -33,11 +36,22 @@ $(function () {
   validarSelectores("#dia", ".span_dia");
   validarSelectores("#parentesco", ".span_parentesco");
   validarSelectores("#familiarTipo", ".span_familiarTipo");
+  incluirSelec2("#parentesco");
+  incluirSelec2("#ano");
+  incluirSelec2("#meses");
+  incluirSelec2("#dia");
+
+  validarSelectoresSelec2("#parentesco", ".span_parentesco");
+  validarSelectoresSelec2("#ano", ".span_ano");
+  validarSelectoresSelec2("#meses", ".span_meses");
+  validarSelectoresSelec2("#dia", ".span_dia");
+
   colocarYear("#ano", "1900");
   colocarMeses("#meses");
   validarNumeros("#edad", ".span_edad");
   file("#achivo", ".span_docArchivo");
   file("#achivo", ".span_achivo");
+
   $("#dia").append('<option value="">Selecciona un día</option>');
 
   $("#cedula_trabajador").on("input", function () {
@@ -45,6 +59,21 @@ $(function () {
       if (parsedData.logrado == true) {
         let nombre = parsedData.nombre;
         let apellido = parsedData.apellido;
+
+        $("#parentesco").empty();
+
+        $("#parentesco").append($("<option>", {
+          value: "",
+          text: "Seleccione un parentesco"
+        }));
+
+        opciones.forEach(function(value) {
+          $("#parentesco").append($("<option>", {
+            value: value,
+            text: value
+          }));
+        });
+
         // si tiene marcado error
         $("#nombre").removeClass("error_input");
         $("#apellido").removeClass("error_input");
@@ -182,14 +211,28 @@ $(function () {
       $(this).removeClass("cumplido").addClass("error_input");
       $(".span_mes").removeClass("cumplido_span").addClass("error_span");
     } else {
+      // Eliminar el cero inicial si existe
       const monthWithoutLeadingZero = month.replace(/^0+/, "");
-      const daysInMonth = new Date(year, monthWithoutLeadingZero, 0).getDate();
+      // Obtener el número de días en el mes seleccionado
+      const daysInMonth = new Date(year, monthWithoutLeadingZero, 0).getDate(); // Restamos 1 al mes porque JavaScript cuenta los meses desde 0
+      // Generar las opciones de los días
+      $("#dia").empty(); // Limpiar las opciones anteriores
+      $("#dia").append(
+        '<option value="">Seleccione un día</option>'
+      );
+
+      $(".span_dia").removeClass("cumplido_span");
+      $("#contentDia .select2").removeClass("cumplido");
       for (let i = 1; i <= daysInMonth; i++) {
         const diaFormateado = i.toString().padStart(2, "0");
-        $("#dia").append('<option value="' + diaFormateado + '">' + diaFormateado + "</option>");
+        $("#dia").append(
+          '<option value="' + diaFormateado + '">' + diaFormateado + "</option>"
+        );
       }
-      $(this).removeClass("error_input").addClass("cumplido");
-      $(".span_mes").removeClass("error_span").addClass("cumplido_span");
+      $(this).removeClass("error_input");
+      $(this).addClass("cumplido");
+      $(".span_mes").removeClass("error_span");
+      $(".span_mes").addClass("cumplido_span");
     }
   });
 
@@ -238,6 +281,7 @@ $(function () {
   function cedulaEjecutar(valor) {
     if (valor == 1) {
     } else {
+
       $("#primerNombre").prop("disabled", true);
       $("#segundoNombre").prop("disabled", true);
       $("#primerApellido").prop("disabled", true);
@@ -356,14 +400,11 @@ $(function () {
 
   // funcion lick para limpiar los input y select 
   $("#limpiar").on("click", function () {
-
-    let contenedor = $("#contenApellidoDos");
-    let contenTomo = document.querySelector("#contenTomo");
-    let contenFolio = document.querySelector("#contenFolio");
-
-    let contencedual = document.querySelector("#contenCarnet");
-    let contenPartida = document.querySelector("#contentPartida");
-
+    // let contenedor = $("#contenApellidoDos");
+    // let contenTomo = document.querySelector("#contenTomo");
+    // let contenFolio = document.querySelector("#contenFolio");
+    // let contencedual = document.querySelector("#contenCarnet");
+    // let contenPartida = document.querySelector("#contentPartida");
     $("#noCedula").on("change", function () {
       if ($(this).is(":checked")) {
         contenTomo.remove();
@@ -399,6 +440,7 @@ $(function () {
     limpiarInput("#folio", ".span_folio");
     limpiarInput("#carnet", ".span_carnet");
     limpiarInput("#achivoDis", ".span_docArchivoDis");
+  
 
     $("#primerNombre").prop("disabled", true);
     $("#segundoNombre").prop("disabled", true);
@@ -416,6 +458,8 @@ $(function () {
     $("#noCedula").prop("disabled", true);
     $("#achivoDis").prop("disabled", true);
     $("#carnet").prop("disabled", true);
+    $("#parentesco").prop("disabled", true);
+
   });
 
 });
