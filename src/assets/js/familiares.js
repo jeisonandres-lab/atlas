@@ -10,6 +10,8 @@ import {
   file,
   validarNumerosMenores,
   limpiarInput,
+  clasesInputs,
+  clasesInputsError,
 } from "./ajax/inputs.js";
 
 import { alertaNormalmix, AlertSW2 } from "./ajax/alerts.js";
@@ -273,21 +275,19 @@ $(function () {
     }
   });
 
-  // $("#noCedula").on("change", function () {
-  //   let contenedor = $("#contenApellidoDos");
-  //   if ($(this).is(":checked")) {
-  //     let contenCedula = document.querySelector("#contenCedula");
-  //     contenCedula.remove();
-  //     $(noCedulado).insertAfter(contenedor);
-  //   } else {
-  //     let contenTomo = document.querySelector("#contenTomo");
-  //     let contenFolio = document.querySelector("#contenFolio");
-  //     contenTomo.remove();
-  //     contenFolio.remove();
-  //     // Insertamos el nuevo contenido después del contenedor
-  //     $(cedulaContenido).insertAfter(contenedor);
-  //   }
-  // });
+  $("#noCedula").on("change", function () {
+    let contenedor = $("#contenApellidoDos");
+    if ($(this).is(":checked")) {
+      $("#cedula").prop("disabled", true);
+      $("#cedula").val("");
+      clasesInputs("#cedula", ".span_cedula")
+
+    }else{
+      $("#cedula").removeClass("cumplido");
+      $(".span_cedula").removeClass("cumplido_span");
+      $("#cedula").prop("disabled", false);
+    }
+  });
 
   $("#disca").on("change", function () {
     if ($(this).is(":checked")) {

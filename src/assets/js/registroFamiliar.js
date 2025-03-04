@@ -15,6 +15,9 @@ import {
   incluirSelec2,
   validarSelectoresSelec2,
   validarNumerosMenores,
+  validarNombreConEspacios,
+  validarNumeroNumber,
+  validarDosDatos,
 } from "./ajax/inputs.js";
 
 $(function () {
@@ -29,6 +32,12 @@ $(function () {
   validarNombre("#primerApellido", ".span_apellido");
   validarNombre("#segundoApellido", ".span_apellido2");
   validarNumeros("#cedulaEdi", ".span_cedula");
+  validarNumeroNumber("#piso", ".span_piso", 2);
+  validarNumeroNumber("#numeroVivienda", ".span_numeroVivienda", 3);
+  validarNombreConEspacios("#calle", ".span_calle");
+  validarNombreConEspacios("#urbanizacion", ".span_urbanizacion");
+  validarDosDatos("#numeroDepa", ".span_numeroDepa");
+
   validarSelectores("#civil", ".span_civil");
   validarSelectores("#ano2", ".span_ano", "1");
   validarSelectores("#dia2", ".span_dia", "1");
@@ -575,41 +584,23 @@ $(function () {
 
         //DATOS DE UBICACION
         $('#estado').val(datosPersonal.idEstado).trigger('change');
-        $('#municipio').val(datosPersonal.idMunicipio).trigger('change');
-        $('#parroquia').val(datosPersonal.idParroquia).trigger('change');
-        $(document).on("change", "#municipio", async function () {
-          const idmunicipio = datosPersonal.idMunicipio;
-          console.log(idmunicipio)
-          try {
-            if (idmunicipio !== undefined) {
-              try {
-                let urls = ["src/ajax/registroPersonal.php?modulo_personal=obtenerParroquia",];
-                let options = { idmunicipio: idmunicipio };
-                let requests = urls.map((url, index) => {
-                  if (index === 0) { // Suponiendo que quieres pasar `options` solo a la primera solicitud
-                    return obtenerDatosJQuery(url, options);
-                  }
-                });
-      
-                const [parroquia] = await Promise.all(requests);
-      
-                if (parroquia.exito) {
-                  $("#parroquia").empty()
-                  $("#parroquia").append('<option value="">Seleccione una parroquia</option>');
-                  llenarSelectDependencias(parroquia.data, 'parroquia');
-                } else {
-                  console.error('Error al obtener parroquias o la estructura de la respuesta es incorrecta');
-                }
-              } catch (error) {
-                console.error('Error al obtener los datos de la parroquia:', error);
-              }
-            } else {
-              console.error('El idparroquia es undefined');
-            }
-          } catch (error) {
-            console.error('Error al manejar el evento de clic:', error);
-          }
-        });
+        cargarmunicipio(datosPersonal.idMunicipio, "#municipio");
+        cargarmunicipio2(datosPersonal.idParroquia, "#parroquia");
+        $('#vivienda').val(datosPersonal.vivienda).trigger('change');
+        $("#calle").val(datosPersonal.calle);
+
+        if (datosPersonal.vivienda == 'Departamento') {
+          $('#piso').val(datosPersonal.pisoVivienda);
+          $('#urbanizacion').val(datosPersonal.nombre_urb);
+          $('#numeroDepa').val(datosPersonal.num_depar);
+
+          clasesInputs("#piso", ".span_piso");
+          clasesInputs("#urbanizacion", ".span_urbanizacion");
+          clasesInputs("#numeroDepa", ".span_numeroDepa");
+        }else{
+          $('#numeroVivienda').val(datosPersonal.numVivienda);
+          clasesInputs("#numeroVivienda", ".span_numeroVivienda");
+        }
         // llevarOptionIndividual(datosPersonal[0].dependencia, 'dependencia', datosPersonal[0].iddependencia);
         // se marcar cumplido logrado y se marcar span cumplido logrado 
         $("cedula_trabajador").addClass("cedulaBusqueda");
@@ -622,6 +613,8 @@ $(function () {
         clasesInputs("#civil", ".span_civil");
         clasesInputs("#ano2", ".span_ano");
         clasesInputs("#dia2", ".span_dia");
+        clasesInputs("#calle", ".span_calle");
+
       } else {
         console.error('Error al obtener datos personales o la estructura de la respuesta es incorrecta');
       }
@@ -724,6 +717,40 @@ $(function () {
     } catch (error) {
       console.error('Error al obtener los datos:', error.status, error.error);
     }
+  }
+
+  async function cargarmunicipio(id, input) {
+    setTimeout(async function () {
+      // Coloca aquí el código que quieres ejecutar después de 800 milisegundos
+      console.log("Cargando municipios después de 800 milisegundos para el ID:", id);
+
+      // Ejemplo de cómo podrías cargar municipios (reemplaza esto con tu lógica real)
+      try {
+        // Simulación de carga de datos (reemplaza con tu lógica real)
+        $(input).val(id).trigger('change');
+
+      } catch (error) {
+        console.error("Error al cargar municipios:", error);
+      }
+
+    }, 600);
+  }
+
+  async function cargarmunicipio2(id, input) {
+    setTimeout(async function () {
+      // Coloca aquí el código que quieres ejecutar después de 800 milisegundos
+      console.log("Cargando municipios después de 800 milisegundos para el ID:", id);
+
+      // Ejemplo de cómo podrías cargar municipios (reemplaza esto con tu lógica real)
+      try {
+        // Simulación de carga de datos (reemplaza con tu lógica real)
+        $(input).val(id).trigger('change');
+
+      } catch (error) {
+        console.error("Error al cargar municipios:", error);
+      }
+
+    }, 800);
   }
 
   async function llenarSelectDependencias(data, selectId) {
@@ -1106,6 +1133,88 @@ $(function () {
     limpiarDatos();
   });
 
+  $("#vivienda").on("change", async function () {
+    let vivienda = $(this).val();
+    if (vivienda == 'Departamento') {
+      // Crea el HTML que quieres insertar
+      let nuevoHTML = `
+            <div class="col-sm-6 col-md-6 mb-2" id="contenPiso">
+                <div class="form-group">
+                    <label for="piso">N.Piso</label>
+                    <div class="input-group">
+                        <span class="input-group-text span_piso"><i class="icons fa-regular fa-user"></i></span>
+                        <input type="number" class="form-control" id="piso" name="piso" placeholder="Numero de piso" required>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-6 col-md-6 mb-2" id="contenNombreDepa">
+                <div class="form-group">
+                    <label for="urbanizacion">Nombre de la urbanización</label>
+                    <div class="input-group">
+                        <span class="input-group-text span_urbanizacion"><i class="icons fa-regular fa-user"></i></span>
+                        <input type="text" class="form-control" id="urbanizacion" name="urbanizacion" placeholder="Nombre de la urbanizacion" required>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-6 col-md-6 mb-2" id="contenNumDepa">
+                <div class="form-group">
+                    <label for="numeroDepa">Numero del departamento</label>
+                    <div class="input-group">
+                        <span class="input-group-text span_numeroDepa"><i class="icons fa-regular fa-user"></i></span>
+                        <input type="text" class="form-control" id="numeroDepa" name="numeroDepa" placeholder="Numero del departamento" required>
+                    </div>
+                </div>
+            </div>
+        `;
+
+      // Inserta el HTML después del elemento con ID "contenCalle"
+      $("#contenCalle").after(nuevoHTML);
+    } else {
+      // Si el valor del select no es "Departamento", elimina el HTML adicional (si existe)
+      $("#contenPiso").remove();
+      $("#contenNombreDepa").remove();
+      $("#contenNumDepa").remove();
+
+    }
+
+    $(document).on('input', '#numeroDepa', function () {
+      let inputValue = $(this).val();
+
+      // Limita la longitud a 2 caracteres
+      if (inputValue.length > 2) {
+        $(this).val(inputValue.slice(0, 2));
+        inputValue = $(this).val();
+      }
+
+      // Convierte letras a mayúsculas
+      $(this).val(inputValue.toUpperCase());
+    });
+
+
+    if (vivienda == 'Casa') {
+      // Crea el HTML que quieres insertar
+      let nuevoHTML = `
+            <div class="col-sm-6 col-md-6 mb-2" id="contenNVivienda">
+                <div class="form-group">
+                    <label for="numeroVivienda">N.Vivienda</label>
+                    <div class="input-group">
+                        <span class="input-group-text span_numeroVivienda"><i class="icons fa-regular fa-user"></i></span>
+                        <input type="number" class="form-control" id="numeroVivienda" name="numeroVivienda" placeholder="Numero Vivienda" required>
+                    </div>
+                </div>
+            </div>
+        `;
+
+      // Inserta el HTML después del elemento con ID "contenCalle"
+      $("#contenCalle").after(nuevoHTML);
+    } else {
+      // Si el valor del select no es "Departamento", elimina el HTML adicional (si existe)
+      $("#contenNVivienda").remove();
+    }
+  });
+
   // Carga de Partida de Nacimiento familiar
   $(document).on("click", "#cargaPartiNacimiento", function () {
     const $this = $(this);
@@ -1421,7 +1530,7 @@ $(function () {
     }
   });
 
-  $(document).on("change", "#municipio2", async function () {
+  $(document).on("change", "#municipio", async function () {
     const idmunicipio = $(this).val();
     console.log(idmunicipio)
     try {

@@ -56,6 +56,7 @@ $folio = isset($_POST['folio']) ? $conexion->limpiarCadena($_POST['folio']) : ""
 $idestado = isset($_POST['estado']) ? $conexion->limpiarCadena($_POST['estado']) : "";
 $idestado2 = isset($_POST['idestado']) ? $conexion->limpiarCadena($_POST['idestado']) : "";
 $idMunicipio = isset($_POST['municipio']) ? $conexion->limpiarCadena($_POST['municipio']) : "";
+$idMunicipio2 = isset($_POST['idmunicipio']) ? $conexion->limpiarCadena($_POST['idmunicipio']) : "";
 $idParroquia = isset($_POST['parroquia']) ? $conexion->limpiarCadena($_POST['parroquia']) : "";
 $vivienda = isset($_POST['vivienda']) ? $conexion->limpiarCadena($_POST['vivienda']) : "";
 $calle = isset($_POST['calle']) ? $conexion->limpiarCadena($_POST['calle']) : "";
@@ -123,7 +124,7 @@ switch ($_GET['modulo_personal']) {
         $ubicacion->obtenerMunicipio($idestado2);
         break;
     case 'obtenerParroquia':
-        $ubicacion->obtenerParroquia($idMunicipio);
+        $ubicacion->obtenerParroquia($idMunicipio2);
         break;
     case 'registrarFamilia':
         $personal->registrarFamilia(
