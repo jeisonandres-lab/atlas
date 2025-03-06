@@ -98,6 +98,7 @@ export async function validarTelefono(input, cumplidospan, cumplido_span2) {
       $(this).addClass("cumplido");
       $(cumplidospan).removeClass("error_span");
       $(cumplidospan).addClass("cumplido_span");
+      
 
       $(cumplido_span2).removeClass("error_span");
       $(cumplido_span2).addClass("cumplido_segundario");
@@ -107,7 +108,9 @@ export async function validarTelefono(input, cumplidospan, cumplido_span2) {
       $(this).addClass("error_input");
       $(cumplidospan).removeClass("cumplido_span");
       $(cumplidospan).addClass("error_span");
-
+      
+      
+      $(cumplido_span2).removeClass("cumplido");
       $(cumplido_span2).removeClass("cumplido_segundario");
       $(cumplido_span2).addClass("error_span");
     }
@@ -116,18 +119,13 @@ export async function validarTelefono(input, cumplidospan, cumplido_span2) {
 }
 
 // Funcion para validar los inputs de tipo number
-export async function validarNumeroNumber(input, cumplidospan, limit) {
+export async function validarNumeroNumber(input, cumplidospan, limit, ceros) {
   $(document).on("keydown", input, function (event) {
       const key = event.key;
+      const currentValue = $(this).val();
 
-      // Permitir teclas de control (flechas, borrar, tab, etc.)
-      if (
-          event.keyCode === 8 || // Backspace
-          event.keyCode === 9 || // Tab
-          event.keyCode === 37 || // Flecha izquierda
-          event.keyCode === 39 || // Flecha derecha
-          event.keyCode === 46  // Delete
-      ) {
+      // Permitir teclas de control
+      if (event.keyCode === 8 || event.keyCode === 9 || event.keyCode === 37 || event.keyCode === 39 || event.keyCode === 46) {
           return;
       }
 
@@ -138,7 +136,13 @@ export async function validarNumeroNumber(input, cumplidospan, limit) {
       }
 
       // Limitar la longitud del valor
-      if ($(this).val().length >= limit) {
+      if (currentValue.length >= limit) {
+          event.preventDefault();
+          return;
+      }
+
+      // Validación de ceros consecutivos
+      if (!ceros && currentValue.endsWith("0") && key === "0") {
           event.preventDefault();
           return;
       }
@@ -153,10 +157,30 @@ export async function validarNumeroNumber(input, cumplidospan, limit) {
           value = $(this).val();
       }
 
-      value = parseInt(value);
+      // Validación de ceros consecutivos
+      if (!ceros) {
+          while (value.includes("00")) {
+              value = value.replace("00", "0");
+          }
+          $(this).val(value);
+      }
 
-      if (value <= 0) {
-          $(this).val("0");
+      // Validar si el input está vacío
+      if (value === "") {
+          $(this).removeClass("cumplido").addClass("error_input");
+          $(cumplidospan).removeClass("cumplido_span").addClass("error_span");
+          return;
+      }
+
+      // Verificar si el valor es un número válido
+      const numericValue = parseInt(value);
+      if (isNaN(numericValue)) {
+          // No hacer nada si no es un número válido
+          return;
+      }
+
+      // Validación de valor mínimo
+      if (numericValue <= 0 && !ceros) {
           $(this).removeClass("cumplido").addClass("error_input");
           $(cumplidospan).removeClass("cumplido_span").addClass("error_span");
       } else {
@@ -165,7 +189,6 @@ export async function validarNumeroNumber(input, cumplidospan, limit) {
       }
   });
 }
-
 //SOLO NUMEROS 
 export async function soloNumeros(input, cumplidospan) {
   $(input).on("input", function () {
@@ -188,7 +211,6 @@ export async function soloNumeros(input, cumplidospan) {
 }
 
 //validar numero de departamento con solo 2 datos´
-
 export async function validarDosDatos(input, cumplidospan) {
   $(document).on('input', input, function () {
     let inputValue = $(this).val();
@@ -254,12 +276,32 @@ export async function validarInputFecha(input, cumplidospan) {
   });
 }
 
-export async function incluirSelec2(input) {
-  $(input).select2({
-    theme: "bootstrap-5",
-    width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
-    placeholder: $(this).data('placeholder'),
+export function incluirSelec2(selector) {
+  // 1. Inicialización inicial
+  $(selector).each(function() {
+    $(this).select2({
+      theme: "bootstrap-5",
+      width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
+      placeholder: $(this).data('placeholder'),
+    });
   });
+
+  // 2. MutationObserver para cambios dinámicos
+  const observer = new MutationObserver(mutations => {
+    mutations.forEach(mutation => {
+      mutation.addedNodes.forEach(node => {
+        if (node.matches && node.matches(selector)) {
+          $(node).select2({
+            theme: "bootstrap-5",
+            width: $(node).data('width') ? $(node).data('width') : $(node).hasClass('w-100') ? '100%' : 'style',
+            placeholder: $(node).data('placeholder'),
+          });
+        }
+      });
+    });
+  });
+
+  observer.observe(document.body, { childList: true, subtree: true });
 }
 
 export async function validarSelectoresSelec2(input, cumplidospan) {
@@ -273,7 +315,7 @@ export async function validarSelectoresSelec2(input, cumplidospan) {
       select2Container.removeClass('cumplido');
       select2Container.addClass('error_input');
       select.removeClass('cumplido');
-      span.removeClass('cumplido_span');
+      $(span).removeClass('cumplido_span');
     } else {
       if (selectedValue && selectedValue !== "") {
         select2Container.addClass('cumplido');
@@ -291,6 +333,7 @@ export async function validarSelectoresSelec2(input, cumplidospan) {
 
   });
 }
+
 // Funcion para validar los inputs de tipo correo
 export async function valdiarCorreos(input, cumplidospan) {
   $(input).on("input", function (evenet) {
@@ -471,21 +514,38 @@ export async function limpiarFormulario(idinput, span) {
   }
 }
 
-export async function limpiarInput(idinput, span) {
+export async function limpiarInput(idinput, span, ifselect2, ifselect, ifinput, ifnumber) {
   if ($(idinput).attr('type') === 'checkbox') {
     return;
   }
 
-  $(idinput).find('option').not(':first').remove();
-  $(idinput).val("");
-
-
-  $(idinput).removeClass("cumplido");
-  if (span) {
+  if(ifinput){
+    $(idinput).val("");
+    $(idinput).removeClass('cumplido');
     $(span).removeClass("cumplido_span");
   }
-}
 
+
+  if (ifselect2) {
+    const select2Container = $(idinput).next('.select2-container');
+    select2Container.removeClass('cumplido');
+    $(span).removeClass('cumplido_span');
+    $(idinput).find('option').not(':first').remove();
+    $(idinput).val("");
+  }
+
+  if(ifselect){
+    let select2Container = $(idinput).next('.select2-container');
+    select2Container.removeClass('cumplido');
+    $(idinput).val('').trigger('change');
+    $(span).removeClass("error_span");
+    $(span).removeClass("cumplido_span");
+  }
+
+  if(ifnumber){
+    $(idinput).val('0');
+  }
+}
 
 // Funcion para colocar las clases cumplido en los input y span 
 export async function clasesInputs(input, span) {
@@ -501,4 +561,108 @@ export async function clasesInputsError(input, span) {
   $(input).addClass("error_input");
   $(span).removeClass("cumplido_span");
   $(span).addClass("error_span");
+}
+
+//FUNCION PARA CARGAR LOS MESES POR CADA DIA QUE LE PERTENEZCA
+export async function mesesDias(input, span_mes, inputdia, span_dia) {
+  $(document).on("change", input, function () {
+    const year = 2024; // Cambia el año si lo deseas
+    const month = $(input).val();
+    if (month == "") {
+      $(this).removeClass("cumplido");
+      $(this).addClass("error_input");
+      $(span_mes).removeClass("cumplido_span");
+      $(span_mes).addClass("error_span");
+  
+      $(inputdia).removeClass("cumplido");
+      $(inputdia).addClass("error_input");
+      $(span_dia).removeClass("cumplido_span");
+      $(span_dia).addClass("error_span");
+      $(inputdia).empty();
+    } else {
+      // Verificar si month no es null o undefined
+      if (month) {
+        // Eliminar el cero inicial si existe
+        const monthWithoutLeadingZero = month.replace(/^0+/, "");
+        // Obtener el número de días en el mes seleccionado
+        const daysInMonth = new Date(year, monthWithoutLeadingZero, 0).getDate(); // Restamos 1 al mes porque JavaScript cuenta los meses desde 0
+        // Generar las opciones de los días
+        $(inputdia).empty(); // Limpiar las opciones anterior
+        $(inputdia).removeClass("error_input");
+        $(inputdia).addClass("cumplido");
+        $(span_dia).removeClass("error_span");
+        $(span_dia).addClass("cumplido_span");
+        for (let i = 1; i <= daysInMonth; i++) {
+          const diaFormateado = i.toString().padStart(2, "0");
+          $(inputdia).append(
+            '<option value="' + diaFormateado + '">' + diaFormateado + "</option>"
+          );
+        }
+        $(this).removeClass("error_input");
+        $(this).addClass("cumplido");
+        $(span_mes).removeClass("error_span");
+        $(span_mes).addClass("cumplido_span");
+      } else {
+        console.error("El valor de month es null o undefined");
+      }
+    }
+  });
+}
+
+// export async function mesesDias(input, span_mes, inputdia, span_dia, ano) {
+//   $(document).on("change", input, function () {
+//     const year = $(ano).val();
+//     const month = $(input).val();
+//     if (month == "") {
+//       $(input).removeClass("cumplido");
+//       $(input).addClass("error_input");
+//       $(span_mes).removeClass("cumplido_span");
+//       $(span_mes).addClass("error_span");
+//     } else {
+//       // Eliminar el cero inicial si existe
+//       const monthWithoutLeadingZero = month.replace(/^0+/, "");
+//       // Obtener el número de días en el mes seleccionado
+//       const daysInMonth = new Date(year, monthWithoutLeadingZero, 0).getDate(); // Restamos 1 al mes porque JavaScript cuenta los meses desde 0
+//       // Generar las opciones de los días
+//       $(inputdia).empty(); // Limpiar las opciones anteriores
+//       $(inputdia).append(
+//         '<option value="">Seleccione un día</option>'
+//       );
+
+//       $(span_dia).removeClass("cumplido_span");
+//       $("#contentDia .select2").removeClass("cumplido");
+//       for (let i = 1; i <= daysInMonth; i++) {
+//         const diaFormateado = i.toString().padStart(2, "0");
+//         $(inputdia).append(
+//           '<option value="' + diaFormateado + '">' + diaFormateado + "</option>"
+//         );
+//       }
+//       $(input).removeClass("error_input");
+//       $(input).addClass("cumplido");
+//       $(span_mes).removeClass("error_span");
+//       $(span_mes).addClass("cumplido_span");
+//     }
+//   });
+// }
+
+export async function configurarInactividad(selector, tiempoInactividad) {
+  let timeoutId;
+  const elemento = $(selector);
+
+  function iniciarTemporizador() {
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(function () {
+          elemento.hide();
+      }, tiempoInactividad);
+  }
+
+  elemento.on("mousemove keydown click", function () {
+      iniciarTemporizador();
+      if (elemento.is(":hidden")) {
+          elemento.show();
+      }
+  });
+
+  // Inicializar el temporizador al cargar la página
+  iniciarTemporizador();
 }

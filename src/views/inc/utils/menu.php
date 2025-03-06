@@ -1,5 +1,5 @@
 <!-- navbar -->
-<nav class="navbar app-header navbar " style=" box-shadow: none !important;">
+<nav class="navbar app-header navbar " style=" box-shadow: none !important;" id="narvarPrincipal">
     <div class="navbar_content me-3 ms-2">
         <li class="nav-item ms-3" style="list-style: none; ">
             <a class="" data-lte-toggle="sidebar" href="#" role="button">
@@ -87,8 +87,8 @@
                         <i class="bx bx-chevron-right arrow-left"></i>
                     </div>
                     <ul class="menu_items submenu">
-                        <a href="personal" class="nav_link sublink">Registrar Empleado</a>
-                        <a href="registrosFamiliares" class="nav_link sublink  registrosFamiliares">Familiares</a>
+                        <a href="personal" class="nav_link sublink"><i class="fa-regular fa-users-medical me-2"></i> Registrar Empleado</a>
+                        <a href="registrosFamiliares" class="nav_link sublink  registrosFamiliares"> <i class="fa-regular fa-family  me-2"></i>Familiares</a>
                     </ul>
                 </li>
             </ul>
@@ -105,8 +105,8 @@
                         <i class="bx bx-chevron-right arrow-left"></i>
                     </div>
                     <ul class="menu_items submenu">
-                        <a href="ficha" class="nav_link sublink">Ficha Técnica</a>
-                        <a href="#" class="nav_link sublink">Renuncia</a>
+                        <a href="ficha" class="nav_link sublink"><i class="fa-regular fa-file-spreadsheet me-2"></i>Ficha Técnica</a>
+                        <a href="#" class="nav_link sublink"><i class="fa-regular fa-user-xmark me-2"></i>Renuncia</a>
                     </ul>
                 </li>
             </ul>
@@ -123,8 +123,8 @@
                         <i class="bx bx-chevron-right arrow-left"></i>
                     </div>
                     <ul class="menu_items submenu">
-                        <a href="ausencia" class="nav_link sublink ausencia">Asignar ausento</a>
-                        <a href="vacaciones" class="nav_link sublink vacaciones">Vacaciones</a>
+                        <a href="ausencia" class="nav_link sublink ausencia"><i class="fa-regular fa-clock-two-thirty me-2"></i>Asignar ausento</a>
+                        <a href="vacaciones" class="nav_link sublink vacaciones"><i class="fa-regular fa-umbrella-beach me-2"></i>Vacaciones</a>
                     </ul>
                 </li>
             </ul>
@@ -182,8 +182,8 @@
                         <i class="bx bx-chevron-right arrow-left"></i>
                     </div>
                     <ul class="menu_items submenu">
-                        <a href="usuarios" class="nav_link sublink Usuarios">Usuarios</a>
-                        <a href="historial" class="nav_link sublink HistorialUsuario">Historial</a>
+                        <a href="usuarios" class="nav_link sublink Usuarios"><i class="fa-regular fa-user-plus me-2"></i>Usuarios</a>
+                        <a href="historial" class="nav_link sublink HistorialUsuario"><i class="fa-regular fa-rectangle-history-circle-user me-2"></i></i>Historial</a>
                         <!-- <a href="#" class="nav_link sublink InformeUsuario">Informe</a> -->
                     </ul>
                 </li>

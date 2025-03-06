@@ -171,3 +171,36 @@
 }
 
 
+.ui-datepicker { /* O la clase correspondiente a tu datepicker */
+  z-index: 10000 !important; /* Un valor alto para asegurar que esté encima del modal */
+}
+
+.modal { /* O la clase correspondiente a tu modal */
+  z-index: 10000 !important; /* Un valor menor que el del datepicker */
+}
+
+body main .container-fluid #cardID1{
+  border-radius: 0px !important;
+  border-bottom: 0px solid;
+}
+
+
+.contenbotonesreport .report{
+  display:  flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  flex-direction: row;
+  
+}
+
+.contenbotonesreport .report .contenbtn{
+  margin: 0.2rem;
+  width: 24%;
+}
+
+@media (max-width: 600px) {
+  .contenbotonesreport .report .contenbtn{
+    margin: 0.2rem;
+    width: auto;
+  }
+}

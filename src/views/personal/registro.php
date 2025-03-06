@@ -113,7 +113,7 @@ use App\Atlas\config\App;
                             <div class="form-group">
                                 <label for="civil">Estado civil</label>
                                 <div class="input-group">
-                                    <span class="input-group-text span_civil"><i class="icons fa-regular fa-clipboard"></i></span>
+                                    <span class="input-group-text span_civil"><i class="icons fa-regular fa-handshake"></i></span>
                                     <select class="form-select form-select-md estado-civil" id="civil" name="civil" aria-label="Small select example" aria-placeholder="dasdas" required>
                                         <option value="">Estado civil</option>
                                         <option value="Soltero">Soltero</option>
@@ -129,7 +129,7 @@ use App\Atlas\config\App;
                             <div class="form-group">
                                 <label for="sexo">Sexo</label>
                                 <div class="input-group">
-                                    <span class="input-group-text span_sexo"><i class="icons fa-regular fa-clipboard"></i></span>
+                                    <span class="input-group-text span_sexo"><i class="icons fa-regular fa-person-half-dress"></i></span>
                                     <select class="form-select form-select-md sexo-sexo" id="sexo" name="sexo" aria-label="Small select example" aria-placeholder="dasdas"  required>
                                         <option value="">Selecione el sexo</option>
                                         <option value="Masculino">Masculino</option>
@@ -143,7 +143,7 @@ use App\Atlas\config\App;
                             <div class="form-group">
                                 <label for="edad">Edad</label>
                                 <div class="input-group">
-                                    <span class="input-group-text span_edad"><i class="icons fa-regular fa-address-card"></i></span>
+                                    <span class="input-group-text span_edad"><i class="icons fa-regular fa-user-clock"></i></span>
                                     <input type="number" class="form-control" id="edad" name="edad" placeholder="Edad del personal" required readonly>
                                 </div>
                                 <p class="parrafo fs-6 fw-light mb-0">La edad se autocompleta con la fecha de nacimiento</p>
@@ -168,7 +168,7 @@ use App\Atlas\config\App;
                             <div class="form-group">
                                 <label class="required-field" for="ano">Año</label>
                                 <div class="input-group">
-                                    <span class="input-group-text span_ano"><i class="icons fa-regular fa-calendar"></i></i></span>
+                                    <span class="input-group-text span_ano"><i class="icons fa-regular fa-calendars"></i></span>
                                     <select class="form-select form-select-md" name="ano" id="ano" required></select>
                                 </div>
                             </div>
@@ -178,7 +178,7 @@ use App\Atlas\config\App;
                             <div class="form-group">
                                 <label class="required-field" for="meses">Mes</label>
                                 <div class="input-group">
-                                    <span class="input-group-text span_mes"><i class="icons fa-regular fa-calendar"></i></i></span>
+                                    <span class="input-group-text span_mes"><i class="icons fa-regular fa-calendars"></i></span>
                                     <select class="form-select" id="meses" name="meses" aria-label="Default select example" required></select>
                                 </div>
                             </div>
@@ -188,7 +188,7 @@ use App\Atlas\config\App;
                             <div class="form-group ">
                                 <label class="required-field" for="dia">Día</label>
                                 <div class="input-group">
-                                    <span class="input-group-text span_dia"><i class="icons fa-regular fa-calendar"></i></i></span>
+                                    <span class="input-group-text span_dia"><i class="icons fa-regular fa-calendars"></i></span>
                                     <select class="form-select w-5" id="dia" name="dia" aria-label="Default select example" required></select>
                                 </div>
                             </div>
@@ -201,7 +201,7 @@ use App\Atlas\config\App;
                             <div class="form-group">
                                 <label for="estado">Estado</label>
                                 <div class="input-group">
-                                    <span class="input-group-text span_estado"><i class="icons fa-regular fa-clipboard"></i></span>
+                                    <span class="input-group-text span_estado"><i class="icons fa-regular fa-location-dot"></i></span>
                                     <select class="form-select form-select-md estado-estado" id="estado" name="estado" aria-label="Small select example" aria-placeholder="dasdas"  required>
                                         <option value="">Selecione un estado</option>
                                     </select>
@@ -213,7 +213,7 @@ use App\Atlas\config\App;
                             <div class="form-group">
                                 <label for="municipio">Municipio</label>
                                 <div class="input-group">
-                                    <span class="input-group-text span_municipio"><i class="icons fa-regular fa-clipboard"></i></span>
+                                    <span class="input-group-text span_municipio"><i class="icons fa-regular fa-location-dot"></i></span>
                                     <select class="form-select form-select-md municipio-municipio" id="municipio" name="municipio" aria-label="Small select example" aria-placeholder="dasdas"  required>
                                         <option value="">Seleccione un municipio</option>
                                     </select>
@@ -225,7 +225,7 @@ use App\Atlas\config\App;
                             <div class="form-group">
                                 <label for="parroquia">Parroquia</label>
                                 <div class="input-group">
-                                    <span class="input-group-text span_parroquia"><i class="icons fa-regular fa-clipboard"></i></span>
+                                    <span class="input-group-text span_parroquia"><i class="icons fa-regular fa-location-dot"></i></span>
                                     <select class="form-select form-select-md parroquia-parroquia" id="parroquia" name="parroquia" aria-label="Small select example" aria-placeholder="dasdas"  required>
                                         <option value="">Selecione un parroquia</option>
                                     </select>
@@ -237,7 +237,7 @@ use App\Atlas\config\App;
                             <div class="form-group">
                                 <label for="vivienda">Vivienda</label>
                                 <div class="input-group">
-                                    <span class="input-group-text span_vivienda"><i class="icons fa-regular fa-clipboard"></i></span>
+                                    <span class="input-group-text span_vivienda"><i class="icons fa-regular fa-house-building"></i></span>
                                     <select class="form-select form-select-md vivienda-vivienda" id="vivienda" name="vivienda" aria-label="Small select example" aria-placeholder="dasdas"  required>
                                         <option value="">Selecione un vivienda</option>
                                         <option value="Casa">Casa</option>
@@ -251,7 +251,7 @@ use App\Atlas\config\App;
                             <div class="form-group">
                                 <label for="calle">Calle</label>
                                 <div class="input-group">
-                                    <span class="input-group-text span_calle"><i class="icons fa-regular fa-user"></i></span>
+                                    <span class="input-group-text span_calle"><i class="icons fa-regular fa-road"></i></span>
                                     <input type="text" class="form-control" id="calle" name="calle" placeholder="Nombre de la Calle" required>
                                 </div>
                             </div>
@@ -285,7 +285,7 @@ use App\Atlas\config\App;
                             <div class="form-group">
                                 <label for="fechaing">Fecha Ingreso</label>
                                 <div class="input-group">
-                                    <span class="input-group-text span_fechaing"><i class="icons fa-regular fa-user"></i></span>
+                                    <span class="input-group-text span_fechaing"><i class="icons fa-regular fa-user-tie"></i></span>
                                     <input type="text" class="form-control" id="fechaing" name="fechaing2" placeholder="Fecha de Ingreso" required>
                                 </div>
                             </div>

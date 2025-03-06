@@ -164,6 +164,7 @@ switch ($_GET['modulo_personal']) {
         $personal->eliminarFamiliar($idPersonal);
         break;
     case 'actualizarPersonal':
+        $telefono = $linea . "-" . $telefono;
         $personal->actualizarPersonal(
             $idPersonal,
             $idEmpleado,

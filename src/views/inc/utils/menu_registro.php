@@ -14,6 +14,9 @@
             <li class="nav-item">
                 <a class="nav-link " aria-current="true" id="datosInces" href="./datosInces">Datos</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" id="reporteTrabajador" href="#">Reportes</a>
+            </li>
         </ul>
     </div>
 </div>

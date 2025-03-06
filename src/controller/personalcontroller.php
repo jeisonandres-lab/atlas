@@ -742,50 +742,72 @@ class personalController extends personalModel
             $check_personal = $this->getTotalDatosCDEmpleados([$cedualEmpleado]);
             if ($check_personal == true) {
                 foreach ($check_personal as $row) {
+                    $nivelacademico = ucfirst($row['nivelAcademico']);
+                    $nombre = ucfirst($row['primerNombre']);
+                    $segundoNombre = ucfirst($row['segundoNombre']);
+                    $apellido = ucfirst($row['primerApellido']);
+                    $segundoApellido = ucfirst($row['segundoApellido']);
+                    $estadoCivil = ucfirst($row['estadoCivil']);
+                    $estatus = ucfirst($row['estatus']);
+                    $cargo = ucfirst($row['cargo']);
+                    $dependencia = ucfirst($row['dependencia']);
+                    $departamento = ucfirst($row['departamento']);
+                    $sexo = ucfirst($row['sexo']);
+
+                    $municipio = ucfirst($row['municipio']);
+                    $parroquia = ucfirst($row['parroquia']);
+                    $calle = ucfirst($row['calle']);
+                    $vivienda = ucfirst($row['vivienda']);
+                    $nombre_urb = ucfirst($row['nombre_urb']);
+
                     $activo = $row['activo'] == 1 ? 'Activo' : 'Inactivo';
+                    $data_json['activo'] = $activo;
                     $data_json['exito'] = true;
                     $data_json['idPersonal'] = $row['id_personal'];
+                    $data_json['idestatus'] = $row['id_estatus'];
+                    $data_json['idEmpleado'] = $row['id_empleados'];
+                    $data_json['iddepartamento'] = $row['id_departamento'];
+                    $data_json['idcargo'] = $row['id_cargo'];
+                    $data_json['iddependencia'] = $row['id_dependencia'];
                     $data_json['cedula'] = $row['cedula'];
-                    $data_json['nombre'] = $row['primerNombre'];
-                    $data_json['segundoNombre'] = $row['segundoNombre'];
-                    $data_json['apellido'] = $row['primerApellido'];
-                    $data_json['segundoApellido'] = $row['segundoApellido'];
-                    $data_json['estadoCivil'] = $row['estadoCivil'];
+
+                    $data_json['nombre'] = $nombre;
+                    $data_json['segundoNombre'] = $segundoNombre;
+                    $data_json['apellido'] = $apellido;
+                    $data_json['segundoApellido'] = $segundoApellido;
+                    $data_json['estadoCivil'] = $estadoCivil;
+                    $data_json['estatus'] = $estatus;
+                    $data_json['cargo'] = $cargo;
+                    $data_json['dependencia'] = $dependencia;
+                    $data_json['departamento'] = $departamento;
+                    $data_json['sexo'] = $sexo;
+                    $data_json['nivelAcademico'] = $nivelacademico;
+
                     $data_json['diaNacimiento'] = $row['diaNacimiento'];
                     $data_json['mesNacimiento'] = $row['mesNacimiento'];
                     $data_json['anoNacimiento'] = $row['anoNacimiento'];
-                    $data_json['estatus'] = $row['estatus'];
-                    $data_json['idestatus'] = $row['id_estatus'];
-                    $data_json['idEmpleado'] = $row['id_empleados'];
-                    $data_json['cargo'] = $row['cargo'];
-                    $data_json['idcargo'] = $row['id_cargo'];
-                    $data_json['dependencia'] = $row['dependencia'];
-                    $data_json['iddependencia'] = $row['id_dependencia'];
-                    $data_json['departamento'] = $row['departamento'];
-                    $data_json['iddepartamento'] = $row['id_departamento'];
-                    $data_json['nivelAcademico'] = $row['nivelAcademico'];
                     $data_json['telefono'] = $row['telefono'];
-                    $data_json['sexo'] = $row['sexo'];
                     $data_json['edad'] = $row['edadPersonal'];
+                    $data_json['fechaing'] = $row['fechaING'];
 
                     //ubicacion de personal
                     $data_json['idEstado'] = $row['idEstado'];
                     $data_json['estado'] = $row['estado'];
                     $data_json['idMunicipio'] = $row['idMunicipio'];
-                    $data_json['municipio'] = $row['municipio'];
                     $data_json['idParroquia'] = $row['idParroquia'];
-                    $data_json['parroquia'] = $row['parroquia'];
-                    $data_json['calle'] = $row['calle'];
-                    $data_json['vivienda'] = $row['vivienda'];
+
+                    $data_json['municipio'] = $municipio;
+                    $data_json['parroquia'] = $parroquia;
+                    $data_json['calle'] = $calle;
+                    $data_json['vivienda'] = $vivienda;
+                    $data_json['nombre_urb'] = $nombre_urb;
+
                     $data_json['numVivienda'] = $row['numVivienda'];
-                    
-                    $data_json['nombre_urb'] = $row['nombre_urb'];
                     $data_json['num_depar'] = $row['num_depar'];
                     $data_json['pisoVivienda'] = $row['pisoVivienda'];
 
-                    $data_json['activo'] = $activo;
+
                     $data_json['mensaje'] = "Trabajador Encontrado";
-                    $data_json['logrado'] = true;
                 }
             } else {
                 $data_json['exito'] = false;
@@ -884,7 +906,7 @@ class personalController extends personalModel
             $validarFamiliar = $this->getDatosFamiliarEmpleadoID($parametro);
             $botones = "
 
-                <button class='btn btn-primary btn-sm btn-hover-azul btnEditar ' data-bs-toggle='modal' data-bs-target='#editarDatos' data-cedula=" . $row['cedula'] . "><i class='fa-solid fa-pencil fa-sm me-2'></i>Editar</button>
+                <button class='btn btn-primary btn-sm btn-hover-azul btnEditar '  data-cedula=" . $row['cedula'] . "><i class='fa-solid fa-pencil fa-sm me-2'></i>Editar</button>
                 <button class='btn btn-danger btn-sm btn-hover-rojo btnEliminar ' data-swal-toast-template='#my-template' data-id=" . $row['id_empleados'] . "><i class='fa-solid fa-trash fa-sm me-2'></i>Eliminar</button>
                 ";
 
@@ -897,26 +919,43 @@ class personalController extends personalModel
             } else {
                 $info = "piso" . "-";
             }
+            $nivelacademico = ucfirst($row['nivelAcademico']);
+            $nombre = ucfirst($row['primerNombre']);
+            $segundoNombre = ucfirst($row['segundoNombre']);
+            $apellido = ucfirst($row['primerApellido']);
+            $segundoApellido = ucfirst($row['segundoApellido']);
+            $estadoCivil = ucfirst($row['estadoCivil']);
+            $estatus = ucfirst($row['estatus']);
+            $cargo = ucfirst($row['cargo']);
+            $dependencia = ucfirst($row['dependencia']);
+            $departamento = ucfirst($row['departamento']);
+            $sexo = ucfirst($row['sexo']);
+
+            $municipio = ucfirst($row['municipio']);
+            $parroquia = ucfirst($row['parroquia']);
+            $calle = ucfirst($row['calle']);
+            $vivienda = ucfirst($row['vivienda']);
+            $nombre_urb = ucfirst($row['nombre_urb']);
 
             $data_json['data'][] = [
-                '0' => $row['primerNombre'] . " " . $row['segundoNombre'],
-                '1' => $row['primerApellido'] . " " . $row['segundoApellido'],
+                '0' =>  $nombre . " " . $segundoNombre,
+                '1' =>$apellido  . " " . $segundoApellido,
                 '2' => $row['diaNacimiento'] . "-" . $row['mesNacimiento'] . "-" . $row['anoNacimiento'],
                 '3' => $row['cedula'],
-                '4' => $row['estadoCivil'],
-                '5' => $row['estatus'],
-                '6' => $row['cargo'],
-                '7' => $row['dependencia'],
-                '8' => $row['departamento'],
-                '9' => $row['nivelAcademico'],
+                '4' => $estadoCivil,
+                '5' =>  $estatus,
+                '6' => $cargo,
+                '7' => $dependencia,
+                '8' => $departamento,
+                '9' => $nivelacademico,
                 '10' => $row['telefono'],
                 '11' => $row['fechaCreada'],
-                '12' => $row['sexo'],
+                '12' => $sexo,
                 '13' => $row['vivienda'],
                 '14' =>  $row['estado'],
-                '15' => $row['municipio'],
-                '16' => $row['parroquia'],
-                '17' => $row['calle'] . " " . $row['nombre_urb'] . " " . $row['vivienda'] . " " . $row['numVivienda'] . " " . $row['num_depar'] . " " . $info . $row['pisoVivienda'] . " ",
+                '15' => $municipio,
+                '16' => $parroquia,
+                '17' =>  $calle . " " . $nombre_urb . " " .  $vivienda . " " . $row['numVivienda'] . " " . $row['num_depar'] . " " . $info . $row['pisoVivienda'] . " ",
                 '18' => $botones
             ];
             $data_json['mensaje'] = "todas las personas exitoso";

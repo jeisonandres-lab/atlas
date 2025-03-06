@@ -40,6 +40,7 @@ $(function () {
   incluirSelec2("#ano");
   incluirSelec2("#meses");
   incluirSelec2("#dia");
+ 
 
   validarSelectoresSelec2("#parentesco", ".span_parentesco");
   validarSelectoresSelec2("#ano", ".span_ano");
@@ -48,7 +49,10 @@ $(function () {
 
   colocarYear("#ano", "1900");
   colocarMeses("#meses");
-  validarNumeros("#edad", ".span_edad");
+  validarNumeroNumber("#edad", ".span_edad", 3);
+  validarNumeroNumber("#tomo", ".span_tomo", 5 , true);
+  validarNumeroNumber("#folio", ".span_folio", 4 , true);
+
   file("#achivo", ".span_docArchivo");
   file("#achivo", ".span_achivo");
 
@@ -56,7 +60,7 @@ $(function () {
 
   $("#cedula_trabajador").on("input", function () {
     function callbackExito(parsedData) {
-      if (parsedData.logrado == true) {
+      if (parsedData.exito == true) {
         let nombre = parsedData.nombre;
         let apellido = parsedData.apellido;
 
@@ -338,6 +342,7 @@ $(function () {
       var contenedor = $("#contenEdad");
       // Insertamos el nuevo contenido después del contenedor
       $(numeroCernet).insertAfter(contenedor);
+      incluirSelec2("#tpdiscapacidad");
     } else {
       let contencedual = document.querySelector("#contenCarnet");
       let contenPartida = document.querySelector("#contentPartida");
@@ -379,11 +384,9 @@ $(function () {
       if (mutation.type === 'childList' || mutation.type === 'attributes') {
         habilitarBoton();
         validarNumeros("#carnet", ".span_carnet");
-        validarNumeros("#cedula", ".span_cedula");
         file("#achivoDis", ".span_docArchivoDis");
         file("#achivo", ".span_docArchivo");
-        validarNumerosMenores("#tomo", ".span_tomo");
-        validarNumerosMenores("#folio", ".span_folio");
+
       }
     }
   }, 300)); // Ajusta el tiempo de espera según sea necesario
@@ -480,7 +483,7 @@ let cedulaContenido =
 
 let noCedulado =
   `
-<div class="col-sm-6 col-md-6 col-xl-4 col-xxl-4 mb-3" id="contenTomo">
+<div class="col-sm-6 col-md-6 col-xl-4 col-xxl-3 mb-3" id="contenTomo">
     <div class="form-group" >
       <label for="tomo">Tomo</label>
       <div class="input-group">
@@ -490,7 +493,7 @@ let noCedulado =
   </div>
 </div>
 
-<div class="col-sm-6 col-md-6 col-xl-4 col-xxl-4 mb-3" id="contenFolio">
+<div class="col-sm-6 col-md-6 col-xl-4 col-xxl-3 mb-3" id="contenFolio">
     <div class="form-group" >
       <label for="folio">Folio</label>
       <div class="input-group">
@@ -502,21 +505,21 @@ let noCedulado =
 `;
 
 let numeroCernet = `
-<div class="col-sm-6 col-md-6 col-xl-6 col-xxl-6 mb-3" id="contenCarnet">
+<div class="col-sm-6 col-md-6 col-xl-6 col-xxl-3 mb-3" id="contenCarnet">
   <div class="form-group" >
       <label for="cedula">Número de Carnet de Discapacidad</label>
         <div class="input-group">
-        <span class="input-group-text span_carnet"><i class="fa-regular fa-address-card"></i></span>
+        <span class="input-group-text span_carnet"><i class="icons fa-regular fa-id-badge"></i></span>
         <input type="text" class="form-control " id="carnet" name="carnet" placeholder="Cédula de Identidad" required>
     </div>
   </div>
 </div>
 
-<div class="col-sm-6 col-md-6 col-xl-6 col-xxl-6 mb-3" id="contenTipoDiscapacidad">
+<div class="col-sm-6 col-md-6 col-xl-6 col-xxl-3 mb-3" id="contenTipoDiscapacidad">
   <div class="form-group" >
       <label for="tpDiscapacidad">Tipo De Discapacidad</label>
         <div class="input-group">
-        <span class="input-group-text span_tpDiscapacidad"><i class="fa-regular fa-address-card"></i></span>
+        <span class="input-group-text span_tpDiscapacidad"><i class="icons fa-solid fa-wheelchair-move"></i></span>
         <select type="text" class="form-control " id="tpDiscapacidad" name="tpDiscapacidad" placeholder="Tipo de Discapacidad ">
           <option value="">Seleccione una discapacidad</option>
           <option value="visual">Discapacidad visual</option>
@@ -533,11 +536,11 @@ let numeroCernet = `
 </div>
 
 
-<div class="col-sm-12 col-xl-12 col-xxl-12 mb-2" id="contentPartida">
+<div class="col-sm-12 col-xl-12 col-xxl-6 mb-2" id="contentPartida">
   <div class="form-group">
       <label for="correo">Partida De Discapacidad</label>
       <div class="input-group">
-          <span class="input-group-text span_docArchivoDis"><i class="fa-regular fa-file-zipper"></i></span>
+          <span class="input-group-text span_docArchivoDis"><i class="icons fa-regular fa-file-zipper"></i></span>
           <input type="file" class="form-control" name="docArchivoDis" id="achivoDis" aria-describedby="inputGroupFileAddon04" aria-label="Upload" required>
       </div>
   </div>
@@ -549,7 +552,7 @@ let partidaNacimiento = `
   <div class="form-group">
     <label for="correo">Partida De Nacimiento</label>
     <div class="input-group">
-      <span class="input-group-text span_docArchivo"><i class="fa-regular fa-file-zipper"></i></span>
+      <span class="input-group-text span_docArchivo"><i class="icons fa-regular fa-file-zipper"></i></span>
       <input type="file" class="form-control" name="docArchivo" id="achivo" aria-describedby="inputGroupFileAddon04" aria-label="Upload" required >
     </div>
   </div>

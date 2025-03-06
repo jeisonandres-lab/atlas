@@ -31,7 +31,7 @@ use App\Atlas\config\App;
             <?php require_once App::URL_INC . "utils/menu_registro.php" ?>
             <!-- FORMULARIO DE ENVIOS DE DATOS DE EMPLEADO -->
             <div class="container-fluid px-3">
-                <form action="#" class="justify'content-center formulario_empleado contact-form form-validate justify-content-center" novalidate="novalidate" id="formulario_empleado">
+                <form action="#" style="font-size: 16px;" class="justify'content-center formulario_empleado contact-form form-validate justify-content-center" novalidate="novalidate" id="formulario_empleado">
                     <div class=" col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12 ">
                         <div class="row col-sm-12 col-md-9 h-100 bg-white w-100 p-2 m-0 content">
                             <p class="mb-0 mt-2">Datos del Empleado</p>
@@ -89,7 +89,7 @@ use App\Atlas\config\App;
                                     <p>Discapacidad</p>
                                 </div>
                             </div>
-                            <div class="col-sm-6 col-md-6 col-xl-4 col-xxl-4 mb-3">
+                            <div class="col-sm-6 col-md-4 col-xl-4 col-xxl-3 mb-3">
                                 <div class="form-group">
                                     <label for="primerNombre">Primer Nombre</label>
                                     <div class="input-group">
@@ -99,7 +99,7 @@ use App\Atlas\config\App;
                                 </div>
                             </div>
 
-                            <div class="col-sm-6 col-md-6 col-xl-4 col-xxl-4 mb-3">
+                            <div class="col-sm-6 col-md-4 col-xl-4 col-xxl-3 mb-3">
                                 <div class="form-group">
                                     <label for="segundoNombre">Segundo Nombre</label>
                                     <div class="input-group ">
@@ -109,7 +109,7 @@ use App\Atlas\config\App;
                                 </div>
                             </div>
 
-                            <div class="col-sm-6 col-md-6 col-xl-4 col-xxl-4 mb-3">
+                            <div class="col-sm-6 col-md-4 col-xl-4 col-xxl-3 mb-3">
                                 <div class="form-group">
                                     <label for="primerApellido">Primer Apellido</label>
                                     <div class="input-group">
@@ -119,7 +119,7 @@ use App\Atlas\config\App;
                                 </div>
                             </div>
 
-                            <div class="col-sm-6 col-md-6 col-xl-4 col-xxl-4 mb-3" id="contenApellidoDos">
+                            <div class="col-sm-6 col-md-4 col-xl-4 col-xxl-3 mb-3" id="contenApellidoDos">
                                 <div class="form-group">
                                     <label for="segundoApellido">Segundo Apellido</label>
                                     <div class="input-group">
@@ -129,7 +129,7 @@ use App\Atlas\config\App;
                                 </div>
                             </div>
 
-                            <div class="col-sm-6 col-md-6 col-xl-4 col-xxl-4 mb-3" id="contenCedula">
+                            <div class="col-sm-6 col-md-4 col-xl-4 col-xxl-3 mb-3" id="contenCedula">
                                 <div class="form-group">
                                     <label for="cedula">Cédula</label>
                                     <div class="input-group">
@@ -139,31 +139,31 @@ use App\Atlas\config\App;
                                 </div>
                             </div>
 
-                            <div class="col-sm-6 col-md-6 col-xl-4 col-xxl-4 mb-3" id="contenTomo">
+                            <div class="col-sm-6 col-md-4 col-xl-4 col-xxl-3 mb-3" id="contenTomo">
                                 <div class="form-group">
                                     <label for="tomo">Tomo</label>
                                     <div class="input-group">
-                                        <span class="input-group-text span_tomo"><i class="icons fa-regular fa-address-card"></i></span>
+                                        <span class="input-group-text span_tomo"><i class="icons fa-regular fa-book"></i></span>
                                         <input type="text" class="form-control" id="tomo" name="tomo" placeholder="Tomo De partida De Nacimiento" required disabled>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="col-sm-6 col-md-6 col-xl-4 col-xxl-4 mb-3" id="contenFolio">
+                            <div class="col-sm-6 col-md-4 col-xl-4 col-xxl-3 mb-3" id="contenFolio">
                                 <div class="form-group">
                                     <label for="folio">Folio</label>
                                     <div class="input-group">
-                                        <span class="input-group-text span_folio"><i class="icons fa-regular fa-address-card"></i></span>
+                                        <span class="input-group-text span_folio"><i class="icons fa-regular fa-book-open-cover"></i></span>
                                         <input type="text" class="form-control" id="folio" name="folio" placeholder="Número de folio" required disabled>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="col-sm-6 col-md-6 col-xl-4 col-xxl-4 mb-3 ">
+                            <div class="col-sm-6 col-md-4 col-xl-4 col-xxl-3 mb-3 ">
                                 <div class="form-group">
                                     <label for="parentesco">Parentesco</label>
                                     <div class="input-group">
-                                        <span class="input-group-text span_parentesco"><i class="icons fa-regular fa-clipboard"></i></span>
+                                        <span class="input-group-text span_parentesco"><i class="icons fa-regular fa-person-half-dress"></i></span>
                                         <select class="form-select form-select-md estado-parentesco" id="parentesco" name="parentesco" aria-label="Small select example" aria-placeholder="dasdas" required disabled>
                                             <option value="">Selecione un parentesco</option>
                                         </select>
@@ -171,18 +171,18 @@ use App\Atlas\config\App;
                                 </div>
                             </div>
 
-                            <div class="col-sm-6 col-md-6 col-xl-4 col-xxl-4 mb-3" id="contenEdad">
+                            <div class="col-sm-6 col-md-4 col-xl-4 col-xxl-3 mb-3" id="contenEdad">
                                 <div class="form-group">
                                     <label for="cedula">Edad</label>
                                     <div class="input-group">
                                         <span class="input-group-text span_edad"><i class="icons fa-regular fa-user-clock"></i></span>
-                                        <input type="text" class="form-control" id="edad" name="edad" placeholder="Edad Del Familiar" required disabled>
+                                        <input type="number" class="form-control" id="edad" name="edad" placeholder="Edad Del Familiar" readonly required disabled>
                                     </div>
                                     <p class="parrafo fs-6 fw-light mb-0">La edad del familiar se ingresa automáticamente con la fecha de nacimiento.</p>
                                 </div>
                             </div>
 
-                            <div class="col-sm-6  col-xl-12 col-xxl-12 mb-2" id="contenDoc">
+                            <div class="col-sm-6  col-xl-12 col-xxl-6 mb-2" id="contenDoc">
                                 <div class="form-group">
                                     <label for="correo">Partida De Nacimiento</label>
                                     <div class="input-group">
@@ -209,7 +209,7 @@ use App\Atlas\config\App;
                                 <div class="form-group">
                                     <label class="required-field" for="message">Año</label>
                                     <div class="input-group">
-                                        <span class="input-group-text span_ano "><i class="icons fa-regular fa-calendar"></i></i></span>
+                                        <span class="input-group-text span_ano "><i class="icons fa-regular fa-calendars"></i></span>
                                         <select class="form-select form-select-md" name="ano" id="ano" required disabled></select>
                                     </div>
                                 </div>
@@ -219,7 +219,7 @@ use App\Atlas\config\App;
                                 <div class="form-group">
                                     <label class="required-field" for="message">Mes</label>
                                     <div class="input-group">
-                                        <span class="input-group-text span_mes"><i class="icons fa-regular fa-calendar"></i></i></span>
+                                        <span class="input-group-text span_mes"><i class="icons fa-regular fa-calendars"></i></span>
                                         <select class="form-select" id="meses" name="meses" aria-label="Default select example" required disabled></select>
                                     </div>
                                 </div>
@@ -229,7 +229,7 @@ use App\Atlas\config\App;
                                 <div class="form-group ">
                                     <label class="required-field" for="message">Día</label>
                                     <div class="input-group">
-                                        <span class="input-group-text span_dia"><i class="icons fa-regular fa-calendar"></i></i></span>
+                                        <span class="input-group-text span_dia"><i class="icons fa-regular fa-calendars"></i></span>
                                         <select class="form-select w-5" id="dia" name="dia" aria-label="Default select example" required disabled></select>
                                     </div>
                                 </div>
