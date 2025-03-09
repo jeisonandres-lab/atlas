@@ -35578,3 +35578,21 @@ Archivo: C:\xampp\htdocs\atlas\index.php
 Línea: 37
 Fecha y hora: 2025-02-27 13:27:42
 ======================================================
+======================================================
+Error: require_once(C:\xampp\php\pear): Failed to open stream: Permission denied
+Archivo: C:\xampp\htdocs\atlas\index.php
+Línea: 37
+Fecha y hora: 2025-03-08 18:34:23
+======================================================
+======================================================
+Error: require_once(C:\xampp\php\pear): Failed to open stream: Permission denied
+Archivo: C:\xampp\htdocs\atlas\index.php
+Línea: 37
+Fecha y hora: 2025-03-08 19:08:26
+======================================================
+======================================================
+Error: require_once(C:\xampp\php\pear): Failed to open stream: Permission denied
+Archivo: C:\xampp\htdocs\atlas\index.php
+Línea: 37
+Fecha y hora: 2025-03-08 19:32:37
+======================================================

@@ -200,13 +200,13 @@ export async function descargarArchivo(url, nombreArchivo, formData = null) {
         xhr.onload = function () {
             if (xhr.status === 200) {
                 const contentType = xhr.getResponseHeader('Content-Type');
-                if (!contentType || !contentType.includes('application/pdf')) {
+                if (!contentType || (!contentType.includes('application/pdf') && !contentType.includes('application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'))) {
                     const reader = new FileReader();
                     reader.onload = function () {
                         console.error('Respuesta del servidor:', reader.result);
                     };
                     reader.readAsText(xhr.response);
-                    throw new Error('La respuesta no es un PDF válido');
+                    throw new Error('La respuesta no es un PDF o Excel válido');
                 }
 
                 const urlBlob = window.URL.createObjectURL(xhr.response);
@@ -232,12 +232,12 @@ export async function descargarArchivo(url, nombreArchivo, formData = null) {
                     title: "Archivo Descargado"
                 });
             } else {
-                throw new Error('Error al generar PDF');
+                throw new Error('Error al generar archivo');
             }
         };
 
         xhr.onerror = function () {
-            console.error('Error al generar PDF:', xhr.statusText);
+            console.error('Error al generar archivo:', xhr.statusText);
             Swal.fire({
                 title: 'Error',
                 text: 'Hubo un error al descargar el archivo.',
@@ -248,7 +248,7 @@ export async function descargarArchivo(url, nombreArchivo, formData = null) {
 
         xhr.send(formData);
     } catch (error) {
-        console.error('Error al generar PDF:', error);
+        console.error('Error al generar archivo:', error);
         Swal.fire({
             title: 'Error',
             text: 'Hubo un error al descargar el archivo.',

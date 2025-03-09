@@ -9,6 +9,8 @@ use App\Atlas\controller\report\imprimirPDFControllerLatterL;
 use App\Atlas\controller\report\imprimirPDFControllerA4;
 use App\Atlas\controller\report\imprimirPDFControllerA4L;
 use App\Atlas\controller\report\fichaTecnicaController;
+use App\Atlas\controller\report\reportesController;
+use App\Atlas\controller\generateExcelController;
 use App\Atlas\controller\notificacionController;
 use App\Atlas\config\Conexion;
 use App\Atlas\config\App;
@@ -17,7 +19,9 @@ $imprimirPDFController = new imprimirPDFControllerLatter();
 $imprimirPDFControllerL = new imprimirPDFControllerLatterL();
 $imprimirPDFControllerA4 = new imprimirPDFControllerA4();
 $imprimirPDFControllerA4L = new imprimirPDFControllerA4L();
+$excelgenerator = new generateExcelController();
 $fichaTecnicaController = new fichaTecnicaController();
+$reportes = new reportesController();
 $notificacion = new notificacionController();
 $conexion = new Conexion();
 $app = new App();
@@ -74,30 +78,54 @@ switch ($_GET['accion']) {
     case 'impirimirAusencias':
         $imprimirPDFController->generarAusenciasPDF();
         break;
-
     case 'impirimirEmpleadosCargo':
+        $reportes->generarPDFCargo($cargo);
         break;
     case 'impirimirEmpleadosSexo':
+        $reportes->generarPDFSexo($sexo);
         break;
     case 'impirimirEmpleadosEdad':
+        $reportes->generarPDFedad($edad);
         break;
     case 'impirimirEmpleadosCivil':
+        $reportes->generarPDFestadoCivil($estadoCivil);
         break;
     case 'impirimirEmpleadosVivienda':
+        $reportes->generarPDFvivienda($vivienda);
         break;
     case 'impirimirEmpleadosEstatus':
+        $reportes->generarPDFEstatus($estatus);
         break;
     case 'impirimirEmpleadosAcademico':
+        $reportes->generarPDFnivelAcademico($nivelacademico);
         break;
     case 'impirimirEmpleadosDireccion':
+        $reportes->generarPDFdireccion($estado, $municipio, $parroquia);
         break;
-    case 'impirimirEmpleadosIngreso':
-        break;
+
     case 'impirimirEmpleadosRangoFecha':
+        function convertirFecha($fecha)
+        {
+            // Crea un objeto DateTime a partir de la fecha en formato dd-mm-aaaa
+            $fechaObj = DateTime::createFromFormat('d-m-Y', $fecha);
+
+            // Si la fecha es válida, la formatea en aaaa-mm-dd
+            if ($fechaObj) {
+                return $fechaObj->format('Y-m-d');
+            } else {
+                // Si la fecha no es válida, devuelve false o lanza una excepción
+                return false; // O: throw new Exception("Formato de fecha inválido: $fecha");
+            }
+        }
+        $fecha_ini_convertida = convertirFecha($fecha_ini);
+        $fecha_fin_convertida = convertirFecha($fecha_fin);
+        $reportes->generarPDFrangoFhecha($fecha_ini_convertida,  $fecha_fin_convertida, $fecha_ini, $fecha_fin );
         break;
     case 'impirimirEmpleadosDependencia':
+        $reportes->generarPDFdependencia($dependencia);
         break;
     case 'impirimirEmpleadosDepartamento':
+        $reportes->generarPDFdepartamento($departamento);
         break;
     default:
         # code...

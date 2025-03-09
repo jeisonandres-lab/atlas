@@ -448,7 +448,8 @@ class personalController extends personalModel
         $dia,
         $numeroCarnet,
         $tomo,
-        $folio
+        $folio,
+        $discapacidad
     ) {
         sleep(1);
         $cedulaEmpleado = $this->limpiarCadena($cedulaEmpleado);
@@ -465,18 +466,17 @@ class personalController extends personalModel
         $tomo = $this->limpiarCadena($tomo);
         $folio = $this->limpiarCadena($folio);
         $parentesco = $this->limpiarCadena($parentesco);
+        $discapacidad = $this->limpiarCadena($discapacidad);
 
-        if ($cedula == "") {
-            $cedula = null;
-        }
-        if ($tomo == "") {
-            $tomo = null;
-        }
-        if ($folio == "") {
-            $folio = null;
-        }
+
+
+
         if ($numeroCarnet == "") {
             $numeroCarnet = null;
+        }
+
+        if ($discapacidad == "") {
+            $discapacidad = null;
         }
         $fileInputName = 'docArchivo';
         $fileInputName2 = 'docArchivoDis';
@@ -491,6 +491,15 @@ class personalController extends personalModel
             'archivo2' => 'no hay segundo archivo',
         ];
 
+        if ($cedula == "") {
+            $noCedulaFamiliar = $this->retornaNoCedula([$cedulaEmpleado]);
+            if (empty($noCedulaFamiliar)) {
+                $cedula = $cedulaEmpleado."001";
+            } else {
+                $cedula = intval($noCedulaFamiliar[0]['cedula']) + 1;
+
+            }
+        }
 
         if ($fileInputName == "") {
             $fileInputName = null;
@@ -509,7 +518,7 @@ class personalController extends personalModel
                 $apellidoEmpleado = $row['primerApellido'];
                 $id_nino = $check_empleado;
 
-                $parametrofamili = [$cedula, $numeroCarnet, $tomo, $folio];
+                $parametrofamili = [$cedula, $tomo, $folio];
 
                 $parametrosFamilia = [
                     [
@@ -558,7 +567,7 @@ class personalController extends personalModel
                         "campo_valor" => $mes
                     ],
                     [
-                        "campo_nombre" => "edadPersonal",
+                        "campo_nombre" => "diaNacimiento",
                         "campo_marcador" => ":diaNacimiento",
                         "campo_valor" => $dia
                     ],
@@ -566,6 +575,11 @@ class personalController extends personalModel
                         "campo_nombre" => "codigoCarnet",
                         "campo_marcador" => ":codigoCarnet",
                         "campo_valor" => $numeroCarnet
+                    ],
+                    [
+                        "campo_nombre" => "discapacidad",
+                        "campo_marcador" => ":discapacidad",
+                        "campo_valor" => $discapacidad
                     ],
                     [
                         "campo_nombre" => "idEmpleado",
@@ -599,13 +613,12 @@ class personalController extends personalModel
                     ]
                 ];
 
-
                 $parametro_registrar = $parametrosFamilia;
                 $check_familiar_exis = $this->getExisteFamilar($parametrofamili);
 
                 if ($check_familiar_exis) {
                     $data_json['exito'] = true;
-                    $data_json['mensaje'] = "Este familiar ya esta registrado";
+                    $data_json['mensaje'] = $check_familiar_exis['mensaje'];
                 } else {
                     // Verificar si los archivos tienen nombres diferentes
                     $nombreArchivo1 = isset($_FILES[$fileInputName]) ? $_FILES[$fileInputName]['name'] : null;
@@ -668,7 +681,7 @@ class personalController extends personalModel
                                         }
 
                                         $check_exisfamiliar = $this->getExisteFamilar($parametrofamili);
-                                        foreach ($check_exisfamiliar as $row) {
+                                        foreach ($check_exisfamiliar['datos'] as $row) {
                                             $id_nino = $row['id_ninos'];
                                             // Si ninguno de los archivos existe, proceder con la subida
                                             foreach ($archivosASubir as $archivo) {
@@ -688,10 +701,10 @@ class personalController extends personalModel
                                             if ($nombreArchivo2) {
                                                 $data_json['archivo2'] = $resultados[$fileInputName2];
                                             }
+                                            $data_json['exito'] = true;
+                                            $data_json['mensaje'] = "Familiar Registrado Exitosamente.";
+                                            $data_json['resultado'] = 2;
                                         }
-                                        $data_json['exito'] = true;
-                                        $data_json['mensaje'] = "Familiar Registrado Exitosamente.";
-                                        $data_json['resultado'] = 2;
                                     } else {
                                         $data_json['exito'] = false;
                                         $data_json['mensaje'] = "Los documentos fueron cargados exitosamente, pero no el familiar.";
@@ -939,7 +952,7 @@ class personalController extends personalModel
 
             $data_json['data'][] = [
                 '0' =>  $nombre . " " . $segundoNombre,
-                '1' =>$apellido  . " " . $segundoApellido,
+                '1' => $apellido  . " " . $segundoApellido,
                 '2' => $row['diaNacimiento'] . "-" . $row['mesNacimiento'] . "-" . $row['anoNacimiento'],
                 '3' => $row['cedula'],
                 '4' => $estadoCivil,

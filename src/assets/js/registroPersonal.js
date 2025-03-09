@@ -33,16 +33,40 @@ import {
 
 // jQuery
 $(function () {
+  $.datepicker.regional['es'] = {
+    closeText: 'Cerrar',
+    prevText: '< Ant',
+    nextText: 'Sig >',
+    currentText: 'Hoy',
+    monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+    monthNamesShort: ['Ene','Feb','Mar','Abr', 'May','Jun','Jul','Ago','Sep', 'Oct','Nov','Dic'],
+    dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+    dayNamesShort: ['Dom','Lun','Mar','Mié','Juv','Vie','Sáb'],
+    dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','Sá'],
+    weekHeader: 'Sm',
+    dateFormat: 'dd/mm/yy',
+    firstDay: 1,
+    isRTL: false,
+    showMonthAfterYear: false,
+    yearSuffix: ''
+};
+
+$.datepicker.setDefaults($.datepicker.regional['es']);
+
   $(".formulario_empleado").hide();
 
   $("#fechaing").datepicker({
     dateFormat: "dd-mm-yy", // Cambia el formato de la fecha
-    showWeek: true, // Muestra el número de la semana
+    showAnim: "fold",// Muestra el número de la semana
+    
     firstDay: 1, // Establece el primer día de la semana (1 = lunes)
     changeMonth: true, // Permite cambiar el mes
     changeYear: true, // Permite cambiar el año
-    yearRange: "1900:2025" // Establece el rango de años
+    yearRange: "1900:2025", // Establece el rango de años
+    regional: "es"
   });
+
+
 
   const cargando = document.getElementById('cargando');
 
@@ -157,7 +181,6 @@ $(function () {
 
   // Llamar a la función para realizar las consultas
   realizarConsultas();
-
 
   async function llenarSelectDependencias(data, selectId) {
     const select = document.getElementById(selectId);
@@ -331,7 +354,7 @@ $(function () {
                 <div class="form-group">
                     <label for="piso">N.Piso</label>
                     <div class="input-group">
-                        <span class="input-group-text span_piso"><i class="icons fa-regular fa-input-numeric"></i></i></span>
+                        <span class="input-group-text span_piso"><i class="icons fa-regular fa-input-numeric"></i></span>
                         <input type="number" class="form-control" id="piso" name="piso" placeholder="Numero de piso" required>
                     </div>
                 </div>
@@ -515,6 +538,8 @@ $(function () {
       if (mutation.type === 'childList' || mutation.type === 'attributes') {
         habilitarBoton();
         validarSelectoresSelec2("#dia", ".span_dia");
+
+  
       }
     }
   }, 300)); // Ajusta el tiempo de espera según sea necesario

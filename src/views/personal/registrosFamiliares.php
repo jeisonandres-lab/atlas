@@ -38,16 +38,22 @@ use App\Atlas\config\App;
             <?php require_once App::URL_INC . "utils/menu_registro.php" ?>
             <div class="container-fluid px-3">
                 <div class="card text-center" id="cardID1" style="background-color: white; box-shadow: 0px 6px 16px 2px rgba(0, 0, 0, 0.05) !important;">
-                    <div class="card-header pb-0">
+                    <div class="card-header py-3">
                         <ul class="nav nav-tabs card-header-tabs">
-                            <li class="nav-item">
-                                <a class="nav-link" class="reporteTrabajador" id="reporteTrabajador" href="#">Reportes</a>
+                            <li class="nav-item me-3">
+                                <a class="d-flex justify-content-center align-items-baseline icon-link reporteTrabajador " id="reporteTrabajador" href="pdf">
+                                    <i class="bi bi-file-pdf"></i>Reportes PDF
+                                </a>
+                            </li>
+                            <li class="nav-item me-3">
+                                <a class="d-flex justify-content-center align-items-baseline icon-link reporteTrabajador " id="reporteTrabajador" href="excel">
+                                    <i class="bi bi-file-earmark-spreadsheet"></i>Reportes EXCEL
+                                </a>
                             </li>
                         </ul>
                     </div>
                 </div>
                 <div class="row">
-
                     <div class="col-lg-12">
                         <section class="card contenTable" id="contenTable" style="background-color: white; box-shadow: 0px 6px 16px 2px rgba(0, 0, 0, 0.05) !important;">
                             <div class="contenTablet mitable table-responsive">
@@ -65,7 +71,7 @@ use App\Atlas\config\App;
                                             <th scope="col" data-dt-order="disable" id="cedula" class="bg-primary" style="font-size: 14px;">Cédula</th>
                                             <th scope="col" data-dt-order="disable" class="bg-primary" style="font-size: 14px;">Nombres</th>
                                             <th scope="col" data-dt-order="disable" class="bg-primary" style="font-size: 14px;">Apellidos</th>
-                                            <th scope="col" data-dt-order="disable" class="bg-primary" style="font-size: 14px;">Sexo</th>
+                                            <th scope="col" data-dt-order="disable" class="bg-primary" style="font-size: 14px;">Sexualidad</th>
                                             <th scope="col" data-dt-order="disable" class="bg-primary" style="font-size: 14px;">Fecha Nacimiento</th>
                                             <th scope="col" data-dt-order="disable" class="bg-primary" style="font-size: 14px;">Estado Civil</th>
                                             <th scope="col" data-dt-order="disable" class="bg-primary" style="font-size: 14px;">Nivel Academico</th>
@@ -162,7 +168,7 @@ use App\Atlas\config\App;
                                                 <div class="form-group">
                                                     <label for="civil">Estado civil</label>
                                                     <div class="input-group">
-                                                        <span class="input-group-text span_civil"><i class="icons fa-regular fa-clipboard"></i></span>
+                                                        <span class="input-group-text span_civil"><i class="icons fa-regular fa-handshake"></i></span>
                                                         <select class="form-select form-select-md estado-civil" id="civil" name="civil" aria-label="Small select example" aria-placeholder="dasdas" required>
                                                             <option value="">Estado civil</option>
                                                             <option value="Soltero">Soltero</option>
@@ -176,9 +182,9 @@ use App\Atlas\config\App;
 
                                             <div class="col-sm-6 col-md-3 mb-2">
                                                 <div class="form-group">
-                                                    <label for="sexo">Sexo</label>
+                                                    <label for="sexo">Sexualidad</label>
                                                     <div class="input-group">
-                                                        <span class="input-group-text span_sexo"><i class="icons fa-regular fa-clipboard"></i></span>
+                                                        <span class="input-group-text span_sexo"><i class="icons fa-regular fa-person-half-dress"></i></span>
                                                         <select class="form-select form-select-md sexo-sexo" id="sexo" name="sexo" aria-label="Small select example" aria-placeholder="dasdas" required>
                                                             <option value="">Selecione el sexo</option>
                                                             <option value="Masculino">Masculino</option>
@@ -192,7 +198,7 @@ use App\Atlas\config\App;
                                                 <div class="form-group">
                                                     <label for="edadEmp">Edad</label>
                                                     <div class="input-group">
-                                                        <span class="input-group-text span_edadEmp"><i class="icons fa-regular fa-address-card"></i></span>
+                                                        <span class="input-group-text span_edadEmp"><i class="icons fa-regular fa-user-clock"></i></span>
                                                         <input type="number" class="form-control" id="edadEmp" name="edad" placeholder="Edad del personal" required readonly>
                                                     </div>
                                                     <p class="parrafo fs-6 fw-light mb-0">La edad se autocompleta con la fecha de nacimiento</p>
@@ -206,7 +212,7 @@ use App\Atlas\config\App;
                                                 <div class="form-group">
                                                     <label for="estado">Estado</label>
                                                     <div class="input-group">
-                                                        <span class="input-group-text span_estado"><i class="icons fa-regular fa-clipboard"></i></span>
+                                                        <span class="input-group-text span_estado"><i class="icons fa-regular fa-location-dot"></i></span>
                                                         <select class="form-select form-select-md estado-estado" id="estado" name="estado" aria-label="Small select example" aria-placeholder="dasdas" required>
                                                             <option value="">Selecione un estado</option>
                                                         </select>
@@ -218,7 +224,7 @@ use App\Atlas\config\App;
                                                 <div class="form-group">
                                                     <label for="municipio">Municipio</label>
                                                     <div class="input-group">
-                                                        <span class="input-group-text span_municipio"><i class="icons fa-regular fa-clipboard"></i></span>
+                                                        <span class="input-group-text span_municipio"><i class="icons fa-regular fa-location-dot"></i></span>
                                                         <select class="form-select form-select-md municipio-municipio" id="municipio" name="municipio" aria-label="Small select example" aria-placeholder="dasdas" required>
                                                             <option value="">Seleccione un municipio</option>
                                                         </select>
@@ -230,7 +236,7 @@ use App\Atlas\config\App;
                                                 <div class="form-group">
                                                     <label for="parroquia">Parroquia</label>
                                                     <div class="input-group">
-                                                        <span class="input-group-text span_parroquia"><i class="icons fa-regular fa-clipboard"></i></span>
+                                                        <span class="input-group-text span_parroquia"><i class="icons fa-regular fa-location-dot"></i></span>
                                                         <select class="form-select form-select-md parroquia-parroquia" id="parroquia" name="parroquia" aria-label="Small select example" aria-placeholder="dasdas" required>
                                                             <option value="">Selecione un parroquia</option>
                                                         </select>
@@ -256,7 +262,7 @@ use App\Atlas\config\App;
                                                 <div class="form-group">
                                                     <label for="calle">Calle</label>
                                                     <div class="input-group">
-                                                        <span class="input-group-text span_calle"><i class="icons fa-regular fa-user"></i></span>
+                                                        <span class="input-group-text span_calle"><i class="icons fa-regular fa-road"></i></span>
                                                         <input type="text" class="form-control" id="calle" name="calle" placeholder="Nombre de la Calle" required>
                                                     </div>
                                                 </div>
@@ -400,12 +406,12 @@ use App\Atlas\config\App;
 
                             <div class="card-footer">
                                 <div class="col-sm-12  d-flex justify-content-between ">
-                                    <button type="submit" id="aceptar_empleado" name="submit" class="btn-sm btn btn-success" data-bs-dismiss="modal">
-                                        Actualizar
+                                    <button type="submit" id="aceptar_empleado" name="submit" class="btn-sm btn btn-success btn-hover-verde" data-bs-dismiss="modal">
+                                        <i class="fa-solid fa-thumbs-up fa-sm me-2"></i>Actualizar
                                     </button>
 
-                                    <button type="button" id="cerrarEdit" class="btn-sm btn btn-secondary">
-                                        Cerrar
+                                    <button type="button" id="cerrarEdit" class="btn-sm btn btn-secondary btn-hover-gris">
+                                        <i class="fa-regular fa-xmark-large fa-sm me-2"></i>Cerrar
                                     </button>
                                 </div>
                             </div>
@@ -414,10 +420,10 @@ use App\Atlas\config\App;
 
             </div>
 
-            <!-- GENERAR REPORTES -->
+            <!-- GENERAR REPORTES DE EMPELADOS PDF -->
             <div class="card mt-2" hidden id="datosReporte" style="background-color: white; box-shadow: 0px 6px 16px 2px rgba(0, 0, 0, 0.05) !important;">
                 <div class="card-header" style="background-color: #1929bb !important;">
-                    Generar reportes
+                    Generar reportes PDF
                 </div>
                 <form action="#" class="contact-form  form-validate formulario-descargarpdf formdata " id="formulario-descargarpdf">
                     <div class="card-body" id="contentBodyCard">
@@ -425,11 +431,11 @@ use App\Atlas\config\App;
                     </div>
                     <div class="card-footer">
                         <div class="col-sm-12  d-flex justify-content-between " id="buttonBody">
-                            <button type="button" id="cerrarReport" class="btn-sm btn btn-secondary">
-                            <i class="fa-regular fa-xmark-large fa-sm me-2"></i> Cerrar
+                            <button type="button" id="cerrarReport" class="btn-sm btn btn-secondary btn-hover-gris">
+                                <i class="fa-regular fa-xmark-large fa-sm me-2"></i> Cerrar
                             </button>
 
-                            <button type="submit" id="descargarReporte2" name="submit"class="btn-sm btn btn-danger btn-hover-rojo">
+                            <button type="submit" id="descargarReporte2" name="submit" class="btn-sm btn btn-danger btn-hover-rojo">
                                 <i class="fa-regular fa-file-pdf fa-sm me-2"></i>Descargar PDF
                             </button>
                         </div>
@@ -440,10 +446,6 @@ use App\Atlas\config\App;
         </main>
         <?php require_once App::URL_INC . "/footer.php"; ?>
     </div>
-
-
-    <!-- Modal para editar datos de empelados-->
-
 
     <!-- Modal Familiar-->
     <div class="modal  fade modal-xl " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

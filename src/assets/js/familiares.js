@@ -40,18 +40,20 @@ $(function () {
   incluirSelec2("#ano");
   incluirSelec2("#meses");
   incluirSelec2("#dia");
- 
+
+
 
   validarSelectoresSelec2("#parentesco", ".span_parentesco");
   validarSelectoresSelec2("#ano", ".span_ano");
   validarSelectoresSelec2("#meses", ".span_meses");
   validarSelectoresSelec2("#dia", ".span_dia");
+  validarSelectoresSelec2("#tpDiscapacidad", ".span_tpDiscapacidad");
 
   colocarYear("#ano", "1900");
   colocarMeses("#meses");
   validarNumeroNumber("#edad", ".span_edad", 3);
-  validarNumeroNumber("#tomo", ".span_tomo", 5 , true);
-  validarNumeroNumber("#folio", ".span_folio", 4 , true);
+  validarNumeroNumber("#tomo", ".span_tomo", 5, true);
+  validarNumeroNumber("#folio", ".span_folio", 4, true);
 
   file("#achivo", ".span_docArchivo");
   file("#achivo", ".span_achivo");
@@ -71,7 +73,7 @@ $(function () {
           text: "Seleccione un parentesco"
         }));
 
-        opciones.forEach(function(value) {
+        opciones.forEach(function (value) {
           $("#parentesco").append($("<option>", {
             value: value,
             text: value
@@ -109,6 +111,7 @@ $(function () {
         $("#meses").prop("disabled", false);
         $("#dia").prop("disabled", false);
         $("#edad").prop("disabled", false);
+        $("#tpDiscapacidad").prop("disabled", false);
         $("#aceptar_emepleado").show();
         alertaNormalmix(parsedData.mensaje, 4000, "success", "top-end");
       } else {
@@ -132,6 +135,7 @@ $(function () {
         $("#ano").prop("disabled", true);
         $("#meses").prop("disabled", true);
         $("#dia").prop("disabled", true);
+        $("#tpDiscapacidad").prop("disabled", true);
         $("#aceptar_emepleado").hide();
         alertaNormalmix(parsedData.mensaje, 4000, "error", "top-end");
       }
@@ -158,40 +162,40 @@ $(function () {
       $(".span_edad").addClass("cumplido_span");
       $("#edad").removeClass("error_input");
       $(".span_edad").removeClass("error_span");
-      if (!isNaN(edad)) {
-        let check = $("#noCedula");
-        if (check.is(":checked")) {
-          if (edad >= 18) {
-            let contenCedula = document.querySelector("#contenDoc");
-            let contenedor = $("#contenApellidoDos");
-            let contenTomo = document.querySelector("#contenTomo");
-            let contenFolio = document.querySelector("#contenFolio");
-            contenTomo.remove();
-            contenFolio.remove();
-            contenCedula.remove();
-            // Insertamos el nuevo contenido después del contenedor
-            $(cedulaContenido).insertAfter(contenedor);
-          } else {
-            var contenedor = $("#cedula");
-            let contenDoc = document.getElementById("contenDoc");
-            if (!contenDoc) {
-              $(partidaNacimiento).insertAfter(contenedor);
-            }
-          }
-        } else {
-          if (edad >= 18) {
-            let contenCedula = document.querySelector("#contenDoc");
-            contenCedula.remove();
-          } else {
-            var contenedor = $("#contenEdad");
-            let contenDoc = document.getElementById("contenDoc");
-            if (!contenDoc) {
-              $(partidaNacimiento).insertAfter(contenedor);
-            }
-          }
-        }
+      // if (!isNaN(edad)) {
+      //   let check = $("#noCedula");
+      //   if (check.is(":checked")) {
+      //     if (edad >= 18) {
+      //       let contenCedula = document.querySelector("#contenDoc");
+      //       let contenedor = $("#contenApellidoDos");
+      //       let contenTomo = document.querySelector("#contenTomo");
+      //       let contenFolio = document.querySelector("#contenFolio");
+      //       contenTomo.remove();
+      //       contenFolio.remove();
+      //       contenCedula.remove();
+      //       // Insertamos el nuevo contenido después del contenedor
+      //       $(cedulaContenido).insertAfter(contenedor);
+      //     } else {
+      //       var contenedor = $("#cedula");
+      //       let contenDoc = document.getElementById("contenDoc");
+      //       if (!contenDoc) {
+      //         $(partidaNacimiento).insertAfter(contenedor);
+      //       }
+      //     }
+      //   } else {
+      //     if (edad >= 18) {
+      //       let contenCedula = document.querySelector("#contenDoc");
+      //       contenCedula.remove();
+      //     } else {
+      //       var contenedor = $("#contenEdad");
+      //       let contenDoc = document.getElementById("contenDoc");
+      //       if (!contenDoc) {
+      //         $(partidaNacimiento).insertAfter(contenedor);
+      //       }
+      //     }
+      //   }
 
-      }
+      // }
       console.log(edad)
     }
   });
@@ -302,6 +306,8 @@ $(function () {
       $("#noCedula").prop("disabled", true);
       $("#achivoDis").prop("disabled", true);
       $("#carnet").prop("disabled", true);
+      $("#parentesco").prop("disabled", true);
+      $("#tpDiscapacidad").prop("disabled", true);
 
       // inputs de busqueda del familiar
       $("#nombre").val("");
@@ -330,7 +336,7 @@ $(function () {
       $("#cedula").val("");
       clasesInputs("#cedula", ".span_cedula")
 
-    }else{
+    } else {
       $("#cedula").removeClass("cumplido");
       $(".span_cedula").removeClass("cumplido_span");
       $("#cedula").prop("disabled", false);
@@ -341,8 +347,9 @@ $(function () {
     if ($(this).is(":checked")) {
       var contenedor = $("#contenEdad");
       // Insertamos el nuevo contenido después del contenedor
-      $(numeroCernet).insertAfter(contenedor);
-      incluirSelec2("#tpdiscapacidad");
+      $(contenedor).after(numeroCernet);
+      incluirSelec2("#tpDiscapacidad");
+
     } else {
       let contencedual = document.querySelector("#contenCarnet");
       let contenPartida = document.querySelector("#contentPartida");
@@ -400,7 +407,6 @@ $(function () {
 
   // Ejecutar la validación inicialmente
   habilitarBoton();
-
   // funcion lick para limpiar los input y select 
   $("#limpiar").on("click", function () {
     // let contenedor = $("#contenApellidoDos");
@@ -443,7 +449,7 @@ $(function () {
     limpiarInput("#folio", ".span_folio");
     limpiarInput("#carnet", ".span_carnet");
     limpiarInput("#achivoDis", ".span_docArchivoDis");
-  
+
 
     $("#primerNombre").prop("disabled", true);
     $("#segundoNombre").prop("disabled", true);

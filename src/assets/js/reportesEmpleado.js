@@ -24,6 +24,28 @@ import {
 } from "./ajax/inputs.js";
 
 $(function () {
+    $("#datosReporte").removeAttr("hidden");
+    $("#datosReporte").hide();
+
+    $.datepicker.regional['es'] = {
+        closeText: 'Cerrar',
+        prevText: '< Ant',
+        nextText: 'Sig >',
+        currentText: 'Hoy',
+        monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+        monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+        dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+        dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mié', 'Juv', 'Vie', 'Sáb'],
+        dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sá'],
+        weekHeader: 'Sm',
+        dateFormat: 'dd/mm/yy',
+        firstDay: 1,
+        isRTL: false,
+        showMonthAfterYear: false,
+        yearSuffix: ''
+    };
+
+    $.datepicker.setDefaults($.datepicker.regional['es']);
 
     validarSelectoresSelec2("#sexo_filtrar", ".span_sexo_filtrar");
     validarSelectoresSelec2("#cargo_filtrar", ".span_cargo_filtrar");
@@ -43,58 +65,77 @@ $(function () {
 
     validarNumeroNumber("#edad_filtrar", ".span_edad_filtrar", 2);
     //solicitud para traer el html de los reporte
-    $(document).on("click", '#reporteTrabajador', async function () {
-        
-        if ($("#contentReport").length) { // Verifica si el elemento no existe
-            console.error("Ya existe el contendo  de reprotes")
-        } else {
-            $(this).addClass("active");
-            $.ajax({
-                url: './src/views/personal/reporte.php', // Reemplaza con tu URL
-                type: 'GET',
-                dataType: 'html',
-                success: function (html) {
+    $(document).on("click", '.reporteTrabajador', async function (event) {
+        event.preventDefault();
+        const href = $(this).attr('href');
 
-                    $('#datosReporte').slideDown(500, function () {
-                        $('#datosReporte').animate({
-                            transform: 'scale(1)' // Escala final
-                        }, 350, function () {
-                            // Animación de desplazamiento después de la animación de apertura
-                            $('html, body').animate({
-                                scrollTop: $('#contentBodyCard')[0].scrollIntoView({ behavior: 'smooth' })
-                            }, 800);
-                            $('#contentBodyCard').prepend(html);
-                            $("#datosReporte").removeAttr("hidden");
-                            incluirSelec2("#sexo_filtar");
-                        });
+        $.ajax({
+            url: './src/views/personal/reporte.php',
+            type: 'GET',
+            dataType: 'html',
+            data: { tipo: href }, // O 'excel'
+            beforeSend: function () {
+                AlertSW2("info", "Cargando datos del reporte...", "top",); // Cambié "error" a "info" para mayor claridad
+            },
+            success: function (html) {
+                Swal.close(); // Cierra la alerta SweetAlert2
+                $('#contentBodyCard').html(html);
+                $('#datosReporte').slideDown(500, function () {
+                    $('#datosReporte').animate({
+                        transform: 'scale(1)'
+                    }, 350, function () {
+
+                        $('html, body').animate({
+                            scrollTop: $('#contentReport')[0].scrollIntoView({ behavior: 'smooth' })
+                        }, 800);
+
+
+                        incluirSelec2("#sexo_filtar");
                     });
-                },
-                error: function (error) {
-                    console.error('Error al cargar el contenido:', error);
-                    // Manejar el error (por ejemplo, mostrar un mensaje al usuario)
-                }
-            });
+                });
+            },
+            error: function (error) {
+                Swal.close(); // Cierra la alerta SweetAlert2
+                console.error('Error al cargar el contenido:', error);
+                AlertSW2("error", "Error al cargar el reporte", "top", 5000); // Muestra un mensaje de error
+            }
+        });
 
 
-        }
+
     })
 
     // cerrar el card de reporte
     $(document).on('click', '#cerrarReport', function () {
-        $("#reporteTrabajador").removeClass("active");
         $('#datosReporte').slideUp(800, function () {
-            
+
             // Animación de desplazamiento al narvarPrincipal después del cierre
             $('html, body').animate({
                 scrollTop: $('#narvarPrincipal')[0].scrollIntoView({ behavior: 'smooth' })
             }, 3000);
             $("#contentReport").remove();
-           
+
             // Aquí puedes agregar cualquier otra lógica que necesites después del cierre
         });
-       
+
 
     });
+
+    $(document).on("change", "#fecha_fin_filtrar, #fecha_filtrar", function () {
+        let fechaInic = $("#fecha_filtrar").val();
+        let fechaFin = $("#fecha_fin_filtrar").val();
+
+        console.log(fechaInic)
+        console.log(fechaFin)
+
+        if (fechaInic >= fechaFin) {
+
+            $("#descargarReporte2").prop("disabled", true);
+        } else {
+            $("#descargarReporte2").prop("disabled", false);
+        }
+
+    })
 
     async function llenarSelect(data, selectId) {
         const select = document.getElementById(selectId);
@@ -142,9 +183,8 @@ $(function () {
             var checkboxId = $(this).attr("id"); // Obtiene el ID del checkbox
             console.log("Checkbox seleccionado: " + checkboxId); // Muestra el ID en la consola
             $("#contentReport .report-checkbox").not(this).prop("checked", false);
-            
+
             if (checkboxId == 'reporteSexo') {
-                
                 $("#contentReporHTML").html(
                     `
                       <div class="col-sm-12 col-md-6 col-xl-6">
@@ -162,9 +202,11 @@ $(function () {
                       </div>
                     `
                 );
+                incluirSelec2("#sexo_filtrar");
+                $('#formulario-descargarpdf').data('nombre', 'reporte_empleado_sexualidad');
                 $("#formulario-descargarpdf").attr("action", "./src/ajax/tablasDescargar.php?accion=impirimirEmpleadosSexo");
             } else if (checkboxId == 'reporteCargo') {
-                
+
                 $("#contentReporHTML").html(
                     `
                       <div class="col-sm-12 col-md-6 col-xl-6">
@@ -188,10 +230,11 @@ $(function () {
                     .catch(error => {
                         console.error("Error al obtener el cargo:", error);
                     });
+                $('#formulario-descargarpdf').data('nombre', 'reporte_empleado_cargo');
                 $("#formulario-descargarpdf").attr("action", "./src/ajax/tablasDescargar.php?accion=impirimirEmpleadosCargo");
                 incluirSelec2("#cargo_filtrar");
             } else if (checkboxId == "reporteEdad") {
-                
+
                 $("#contentReporHTML").html(
                     `
                       <div class="col-sm-12 col-md-6 col-xl-6">
@@ -206,9 +249,10 @@ $(function () {
                     `,
 
                 );
+                $('#formulario-descargarpdf').data('nombre', 'reporte_empleado_edad');
                 $("#formulario-descargarpdf").attr("action", "./src/ajax/tablasDescargar.php?accion=impirimirEmpleadosEdad");
             } else if (checkboxId == "reporteEstatus") {
-                
+
                 $("#contentReporHTML").html(
                     `
                       <div class="col-sm-12 col-md-6 mb-2">
@@ -232,11 +276,12 @@ $(function () {
                     .catch(error => {
                         console.error("Error al obtener el estatus:", error);
                     });
+                $('#formulario-descargarpdf').data('nombre', 'reporte_empleado_estatus');
                 $("#formulario-descargarpdf").attr("action", "./src/ajax/tablasDescargar.php?accion=impirimirEmpleadosEstatus");
                 incluirSelec2("#estatus_filtrar");
 
             } else if (checkboxId == "reporteEstadoCivil") {
-                
+
                 $("#contentReporHTML").html(
                     `
                       <div class="col-sm-6 col-md-6 mb-2">
@@ -257,10 +302,11 @@ $(function () {
                     `,
 
                 );
+                $('#formulario-descargarpdf').data('nombre', 'reporte_empleado_estadoCivil');
                 $("#formulario-descargarpdf").attr("action", "./src/ajax/tablasDescargar.php?accion=impirimirEmpleadosCivil");
                 incluirSelec2("#civil_filtrar");
             } else if (checkboxId == "reporteVivienda") {
-                
+
                 $("#contentReporHTML").html(
                     `
                       <div class="col-sm-6 col-md-6 mb-2">
@@ -279,10 +325,11 @@ $(function () {
                     `,
 
                 );
+                $('#formulario-descargarpdf').data('nombre', 'reporte_empleado_vivienda');
                 $("#formulario-descargarpdf").attr("action", "./src/ajax/tablasDescargar.php?accion=impirimirEmpleadosVivienda");
                 incluirSelec2("#vivienda_filtrar");
             } else if (checkboxId == "reporteNivelAcademico") {
-                
+
                 $("#contentReporHTML").html(
                     `
                       <div class="col-sm-6 col-md-6 mb-2">
@@ -300,12 +347,13 @@ $(function () {
                     `,
 
                 );
+                $('#formulario-descargarpdf').data('nombre', 'reporte_empleado_nivelAcademico');
                 $("#formulario-descargarpdf").attr("action", "./src/ajax/tablasDescargar.php?accion=impirimirEmpleadosAcademico");
                 colocarNivelesEducativos("#academico_filtrar");
                 incluirSelec2("#academico_filtrar");
 
             } else if (checkboxId == "reporteDireccion") {
-                
+
                 $("#contentReporHTML").html(
                     `
                       <div class="col-sm-6 col-md-3 mb-2">
@@ -346,6 +394,7 @@ $(function () {
                     `,
 
                 );
+                $('#formulario-descargarpdf').data('nombre', 'reporte_empleado_direccion');
                 $("#formulario-descargarpdf").attr("action", "./src/ajax/tablasDescargar.php?accion=impirimirEmpleadosDireccion");
                 traerEstados()
                     .then(EtraerEstados => {
@@ -358,32 +407,8 @@ $(function () {
                 incluirSelec2("#estado_filtrar");
                 incluirSelec2("#municipio_filtrar");
                 incluirSelec2("#parroquia_filtrar");
-            } else if (checkboxId == "reporteFechaIngreso") {
-                
-                $("#contentReporHTML").html(
-                    `
-                      <div class="col-sm-6 col-md-6 mb-2">
-                        <div class="form-group">
-                            <label for="fechaing_filtrar">Fecha Ingreso</label>
-                            <div class="input-group">
-                                <span class="input-group-text span_fechaing_filtrar"><i class="icons fa-regular fa-calendars"></i></span>
-                                <input type="text" class="form-control fechaing_filtrar" id="fechaing_filtrar" name="fechaing_filtrar2" placeholder="Fecha de Ingreso" required>
-                            </div>
-                        </div>
-                    </div>
-                    `,
-                );
-                $("#formulario-descargarpdf").attr("action", "./src/ajax/tablasDescargar.php?accion=impirimirEmpleadosIngreso");
-                $("#fechaing_filtrar").datepicker({
-                    dateFormat: "dd-mm-yy", // Cambia el formato de la fecha
-                    showWeek: true, // Muestra el número de la semana
-                    firstDay: 1, // Establece el primer día de la semana (1 = lunes)
-                    changeMonth: true, // Permite cambiar el mes
-                    changeYear: true, // Permite cambiar el año
-                    yearRange: "1900:2025" // Establece el rango de años
-                });
             } else if (checkboxId == "reporteFecha") {
-                
+
                 $("#contentReporHTML").html(
                     `
                     <div class="col-sm-6 col-md-6 mb-2">
@@ -398,7 +423,7 @@ $(function () {
 
                      <div class="col-sm-6 col-md-6 mb-2">
                         <div class="form-group">
-                            <label for="fecha_fin_filtrar">Desde</label>
+                            <label for="fecha_fin_filtrar">Hasta</label>
                             <div class="input-group">
                                 <span class="input-group-text span_fecha_fin_filtrar"><i class="icons fa-regular fa-calendars"></i></span>
                                 <input type="text" class="form-control fecha_fin_filtrar" id="fecha_fin_filtrar" name="fecha_fin_filtrar2" placeholder="Fecha de Ingreso" required>
@@ -407,6 +432,7 @@ $(function () {
                     </div>
                     `,
                 );
+                $('#formulario-descargarpdf').data('nombre', 'reporte_empleado_rangoFecha');
                 $("#formulario-descargarpdf").attr("action", "./src/ajax/tablasDescargar.php?accion=impirimirEmpleadosRangoFecha");
                 $("#fecha_filtrar").datepicker({
                     dateFormat: "dd-mm-yy", // Cambia el formato de la fecha
@@ -414,7 +440,8 @@ $(function () {
                     firstDay: 1, // Establece el primer día de la semana (1 = lunes)
                     changeMonth: true, // Permite cambiar el mes
                     changeYear: true, // Permite cambiar el año
-                    yearRange: "1900:2025" // Establece el rango de años
+                    yearRange: "1900:2025",
+                    regional: "es" // Establece el rango de años
                 });
                 $("#fecha_fin_filtrar").datepicker({
                     dateFormat: "dd-mm-yy", // Cambia el formato de la fecha
@@ -422,17 +449,18 @@ $(function () {
                     firstDay: 1, // Establece el primer día de la semana (1 = lunes)
                     changeMonth: true, // Permite cambiar el mes
                     changeYear: true, // Permite cambiar el año
-                    yearRange: "1900:2025" // Establece el rango de años
+                    yearRange: "1900:2025",
+                    regional: "es" // Establece el rango de años
                 });
-            }else if (checkboxId == "reporteDependencia"){
+            } else if (checkboxId == "reporteDependencia") {
                 $("#contentReporHTML").html(
                     `
                       <div class="col-sm-12 col-md-6 mb-2">
                             <div class="form-group">
-                                <label for="dependencia_filtrar">Dependencia</label>
+                                <label for="dependencia_filtrar">Dependencia 22</label>
                                 <div class="input-group">
                                     <span class="input-group-text span_dependencia_filtrar"><i class="icons fa-regular fa-clipboard"></i></span>
-                                    <select class="form-select form-select-md estado-dependencia_filtrar" id="dependencia_filtrar" name="departamento_filtrar" aria-label="Small select example" aria-placeholder="dasdas" required>
+                                    <select class="form-select form-select-md estado-dependencia_filtrar" id="dependencia_filtrar" name="dependencia_filtrar" aria-label="Small select example" aria-placeholder="dasdas" required>
                                         <option value="">Selecione una dependencia</option>
                                     </select>
                                 </div>
@@ -448,8 +476,12 @@ $(function () {
                     .catch(error => {
                         console.error("Error al obtener el estatus:", error);
                     });
+                $('#formulario-descargarpdf').data('nombre', 'reporte_empleado_dependencia');
                 $("#formulario-descargarpdf").attr("action", "./src/ajax/tablasDescargar.php?accion=impirimirEmpleadosDependencia");
                 incluirSelec2("#dependencia_filtrar");
+
+            } else if (checkboxId == "reporteDepartamento") {
+
                 $("#contentReporHTML").html(
                     `
                       <div class="col-sm-12 col-md-6 mb-2">
@@ -473,23 +505,26 @@ $(function () {
                     .catch(error => {
                         console.error("Error al obtener el estatus:", error);
                     });
+                $('#formulario-descargarpdf').data('nombre', 'reporte_empleado_departamento');
                 $("#formulario-descargarpdf").attr("action", "./src/ajax/tablasDescargar.php?accion=impirimirEmpleadosDepartamento");
                 incluirSelec2("#departamento_filtrar");
+            } else if(checkboxId == ''){
+                
             }
         }
     });
 
     //formulario para descargar los reportes
-    $(document).on("submit", "#formulario-descargarpdf", function (event) {
+    $(document).on("submit", "#formulario-descargarpdf", async function (event) {
         event.preventDefault();
         const data = new FormData(this);
-        data.append("fechaing", '21321');
-
+        const nombreReporte = $(this).data('nombre');
+        console.log(nombreReporte);
         // Obtener el atributo 'action' del formulario
         const formAction = $(this).attr("action");
 
         // Usar el atributo 'action' en la función descargarArchivo
-        descargarArchivo(formAction, '', data);
+        await descargarArchivo(formAction, nombreReporte, data);
     });
 
     //buscar municipios por medio de los estados

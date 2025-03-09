@@ -37,6 +37,7 @@ $mes = isset($_POST['meses']) ? $_POST['meses'] : "";
 $dia = isset($_POST['dia']) ? $conexion->limpiarCadena($_POST['dia']) : "";
 $edad = isset($_POST['edad']) ? $conexion->limpiarCadena($_POST['edad']) : "";
 $sexo = isset($_POST['sexo']) ? $conexion->limpiarCadena($_POST['sexo']) : "";
+$discapacidad = isset($_POST['tpDiscapacidad']) ? $conexion->limpiarCadena($_POST['tpDiscapacidad']) : "";
 $nivelAcademico = isset($_POST['nivelAcademico']) ? $conexion->limpiarCadena($_POST['nivelAcademico']) : "";
 
 // DATOS PARA REGISTRAR EMPELADO
@@ -148,7 +149,8 @@ switch ($_GET['modulo_personal']) {
             $dia,
             $numeroCarnet,
             $tomo,
-            $folio
+            $folio,
+            $discapacidad
         );
         break;
     case 'obtenerPersonal':

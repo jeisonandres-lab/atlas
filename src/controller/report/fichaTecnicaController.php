@@ -99,7 +99,7 @@ class fichaTecnicaController extends FPDF
         $this->AddPage();
         $this->SetFont('Arial', 'B', 10);
         $parametro = [$idCedula];
-        $datosPersonal = $this->personalData->getTotalDatosPersonal($parametro);
+        $datosPersonal = $this->personalData->getTotalDatosCDEmpleados($parametro);
         $this->SetDrawColor(0,0,0); // Negro
         foreach ($datosPersonal as $row) {
             // echo "<pre>";
@@ -338,7 +338,7 @@ class fichaTecnicaController extends FPDF
             $this->Cell(210, 10, utf8_decode('DATOS FAMILIAR'), 1, 0, 'C', true); // Celda con borde y relleno
 
             $parametroBuscarFamiliar = [$row['id_empleados']];
-            $datosFamiliar = $this->personalData->getDatosFamiliarEmpleado($parametroBuscarFamiliar);
+            $datosFamiliar = $this->personalData->getDatosFamiliarEmpleadoID($parametroBuscarFamiliar);
 
             if (is_array($datosFamiliar) && !empty($datosFamiliar)) {
                 $i = 1;

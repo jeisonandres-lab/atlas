@@ -233,7 +233,7 @@ $(function () {
           {
             extend: 'copyHtml5',
             text: '<i class="fa-solid fa-copy"></i>',
-            className: 'copiar btn buttonAmarillo p-2 pe-3 ps-3',
+            className: 'copiar btn buttonAmarillo btn-hover-amarillo p-2 pe-3 ps-3',
             titleAttr: 'Copiar a portapapeles',
             exportOptions: {
               columns: ':not(:last)',
@@ -246,7 +246,7 @@ $(function () {
           {
             extend: 'excelHtml5',
             text: '<i class="fa-regular fa-table"></i>',
-            className: 'excel btn buttonVerde p-2 pe-3 ps-3',
+            className: 'excel btn buttonVerde btn-hover-verde p-2 pe-3 ps-3',
             titleAttr: 'Exportar a Excel',
             exportOptions: {
               columns: ':not(:last)',
@@ -308,7 +308,7 @@ $(function () {
           {
             extend: 'pdfHtml5', // Extensión para generar PDF
             text: '<i class="bi bi-file-earmark-pdf-fill"></i>', // Texto del botón (con icono)
-            className: 'pdf btn buttonRojo p-2 pe-3 ps-3', // Clases CSS para el botón
+            className: 'pdf btn buttonRojo btn-hover-rojo p-2 pe-3 ps-3', // Clases CSS para el botón
             titleAttr: 'Exportar a PDF', // Título al pasar el mouse por encima
             // orientation: 'landscape',
             // pageSize: 'LEGAL'
@@ -319,7 +319,7 @@ $(function () {
           {
             extend: 'colvis',
             text: '<i class="fa-solid fa-eye me-2"></i>',
-            className: ' btn buttonAzulClaro p-2 pe-3 ps-3',
+            className: ' btn buttonAzulClaro btn-hover-azul p-2 pe-3 ps-3',
             titleAttr: 'Mostrar/Ocultar Columnas',
             columns: ':not(:last)',
 
@@ -1139,7 +1139,7 @@ $(function () {
                 <div class="form-group">
                     <label for="piso">N.Piso</label>
                     <div class="input-group">
-                        <span class="input-group-text span_piso"><i class="icons fa-regular fa-user"></i></span>
+                        <span class="input-group-text span_piso"><i class="icons fa-regular fa-input-numeric"></i></span>
                         <input type="number" class="form-control" id="piso" name="piso" placeholder="Numero de piso" required>
                     </div>
                 </div>
@@ -1149,7 +1149,7 @@ $(function () {
                 <div class="form-group">
                     <label for="urbanizacion">Nombre de la urbanización</label>
                     <div class="input-group">
-                        <span class="input-group-text span_urbanizacion"><i class="icons fa-regular fa-user"></i></span>
+                        <span class="input-group-text span_urbanizacion"><i class="icons fa-regular fa-tree-city"></i></span>
                         <input type="text" class="form-control" id="urbanizacion" name="urbanizacion" placeholder="Nombre de la urbanizacion" required>
                     </div>
                 </div>
@@ -1159,7 +1159,7 @@ $(function () {
                 <div class="form-group">
                     <label for="numeroDepa">Numero del departamento</label>
                     <div class="input-group">
-                        <span class="input-group-text span_numeroDepa"><i class="icons fa-regular fa-user"></i></span>
+                        <span class="input-group-text span_numeroDepa"><i class="icons fa-regular fa-input-numeric"></i></span>
                         <input type="text" class="form-control" id="numeroDepa" name="numeroDepa" placeholder="Numero del departamento" required>
                     </div>
                 </div>
@@ -1197,7 +1197,7 @@ $(function () {
                 <div class="form-group">
                     <label for="numeroVivienda">N.Vivienda</label>
                     <div class="input-group">
-                        <span class="input-group-text span_numeroVivienda"><i class="icons fa-regular fa-user"></i></span>
+                        <span class="input-group-text span_numeroVivienda"><i class="icons fa-regular fa-input-numeric"></i></span>
                         <input type="number" class="form-control" id="numeroVivienda" name="numeroVivienda" placeholder="Numero Vivienda" required>
                     </div>
                 </div>

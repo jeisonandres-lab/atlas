@@ -33,6 +33,21 @@
     box-shadow: 0 4px 8px rgba(20, 173, 48, 0.281); /* Sombra suave */
 }
 
+.btn-hover-gris{
+  color: white !important;
+  border: none !important;
+  border-radius: 0.3rem !important;
+  transition: all ease .5s !important;
+}
+
+.btn-hover-gris:hover {
+  transform: translateY(-3px);
+  /* Mueve el botón 3px hacia arriba */
+  transition: all ease .5s ease-in-out !important;
+  box-shadow: 0 4px 8px rgba(57, 57, 57, 0.281);
+  /* Sombra suave */
+}
+
 .swal2-confirm {
     background-color: #4CAF50 !important; /* Color de fondo del botón de confirmación */
     color: white !important; /* Color del texto del botón de confirmación */

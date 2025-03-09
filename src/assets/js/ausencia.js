@@ -48,7 +48,7 @@ $(function () {
     const valor = $("#cedula").val();
     if (valor.length >= 7) {
       function callbackExito(parsedData) {
-        if (parsedData.logrado == true) {
+        if (parsedData.exito == true) {
           let nombre = parsedData.nombre;
           let apellido = parsedData.apellido;
           let cargo = parsedData.cargo;

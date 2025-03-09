@@ -127,7 +127,7 @@ use App\Atlas\config\App;
 
                         <div class="col-sm-6 mb-2">
                             <div class="form-group">
-                                <label for="sexo">Sexo</label>
+                                <label for="sexo">Sexualidad</label>
                                 <div class="input-group">
                                     <span class="input-group-text span_sexo"><i class="icons fa-regular fa-person-half-dress"></i></span>
                                     <select class="form-select form-select-md sexo-sexo" id="sexo" name="sexo" aria-label="Small select example" aria-placeholder="dasdas"  required>

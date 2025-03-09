@@ -14,6 +14,7 @@ use App\Atlas\config\App; ?>
     <link rel="stylesheet" href="<?php echo App::URL_CSS . "trabajadores.css"; ?>">
     <link rel="stylesheet" href="<?php echo App::URL_CSS . "cssUtils/buttons.css"; ?>">
     <link rel="stylesheet" href="<?php echo App::URL_CSS . "cssUtils/colorTableButtons.css"; ?>">
+    <link rel="stylesheet" href="./src/libs/jQueryUI/bootstrap-datepicker.css">
 </head>
 
 <body class="layout-fixed sidebar-expand-lg bg-body-tertiary">
@@ -46,7 +47,7 @@ use App\Atlas\config\App; ?>
                                     <div class="form-group">
                                         <label for="cedula">Cédula</label>
                                         <div class="input-group">
-                                            <span class="input-group-text span_cedula"><i class="fa-regular fa-address-card"></i></span>
+                                            <span class="input-group-text span_cedula"><i class="icons fa-regular fa-address-card"></i></span>
                                             <input type="text" class="form-control" id="cedula" name="cedula" placeholder="Cédula de Identidad" required>
                                         </div>
                                     </div>
@@ -56,7 +57,7 @@ use App\Atlas\config\App; ?>
                                     <div class="form-group">
                                         <label for="cargo">Cargo</label>
                                         <div class="input-group">
-                                            <span class="input-group-text span_cargo"><i class="fa-regular fa-clipboard"></i></span>
+                                            <span class="input-group-text span_cargo"><i class="icons fa-duotone fa-regular fa-arrows-down-to-people"></i></span>
                                             <input type="text" class="form-control" id="cargo" name="cargo" placeholder="Cargo" required readonly>
                                         </div>
                                     </div>
@@ -66,7 +67,7 @@ use App\Atlas\config\App; ?>
                                     <div class="form-group">
                                         <label for="primerNombre">Nombre</label>
                                         <div class="input-group">
-                                            <span class="input-group-text span_nombre"><i class="fa-regular fa-user"></i></span>
+                                            <span class="input-group-text span_nombre"><i class="icons fa-regular fa-user"></i></span>
                                             <input type="text" class="form-control" id="primerNombre" name="primerNombre" placeholder="Nombre" required readonly>
                                         </div>
                                     </div>
@@ -76,7 +77,7 @@ use App\Atlas\config\App; ?>
                                     <div class="form-group">
                                         <label for="primerApellido">Apellido</label>
                                         <div class="input-group">
-                                            <span class="input-group-text span_apellido"><i class="fa-regular fa-user"></i></span>
+                                            <span class="input-group-text span_apellido"><i class="icons fa-regular fa-user"></i></span>
                                             <input type="text" class="form-control" id="primerApellido" name="primerApellido" placeholder="Apellido" required readonly>
                                         </div>
                                     </div>
@@ -92,7 +93,7 @@ use App\Atlas\config\App; ?>
                                     <div class="form-group">
                                         <label for="fecha_ini">Fecha Inicio</label>
                                         <div class="input-group">
-                                            <span class="input-group-text span_fecha_ini"><i class="fa-regular fa-clipboard"></i></span>
+                                            <span class="input-group-text span_fecha_ini"><i class="icons fa-regular fa-calendars"></i></span>
                                             <input type="date" class="form-control fecha_ini" id="fecha_ini" name="fecha_ini" placeholder="Fecha Inicio" required>
                                         </div>
                                     </div>
@@ -102,7 +103,7 @@ use App\Atlas\config\App; ?>
                                     <div class="form-group">
                                         <label for="fecha_fin">Fecha Fin</label>
                                         <div class="input-group">
-                                            <span class="input-group-text span_fecha_fin"><i class="fa-regular fa-clipboard"></i></span>
+                                            <span class="input-group-text span_fecha_fin"><i class="icons fa-regular fa-calendars"></i></span>
                                             <input type="date" class="form-control" id="fecha_fin" name="fecha_fin" placeholder="Fecha Fin" required>
                                         </div>
                                     </div>
@@ -118,7 +119,7 @@ use App\Atlas\config\App; ?>
                                     <div class="form-group">
                                         <label for="permiso">Persimos</label>
                                         <div class="input-group">
-                                            <span class="input-group-text span_permiso"><i class="fa-solid fa-triangle-instrument"></i></span>
+                                            <span class="input-group-text span_permiso"><i class="icons fa-solid fa-triangle-instrument"></i></span>
                                             <select class="form-select form-select-md estado-permiso" id="permiso" name="permiso" aria-label="Small select example" aria-placeholder="dasdas" required>
                                                 <option value="">Seleciona Un Permiso</option>
                                                 <option value="Administrativo">Administrativo</option>
@@ -138,7 +139,7 @@ use App\Atlas\config\App; ?>
                                     <button type="button" id="limpiar" name="submit" class="btn btn-warning btn-hover-amarillo px-4 py-2 fs-6">
                                         <i class="fa-solid fa-rotate-right me-2"></i>Limpiar
                                     </button>
-                                    <button type="button" id="verAusencia" class="btn btn-primary btn-hover-verde  px-4 py-2 fs-6"  data-bs-toggle="modal" data-bs-target="#verAausencia">
+                                    <button type="button" id="verAusencia" class="btn btn-primary btn-hover-azul  px-4 py-2 fs-6"  data-bs-toggle="modal" data-bs-target="#verAausencia">
                                         <i class="fa-regular fa-magnifying-glass me-2"></i>Ausencias
                                     </button>
                                 </div>

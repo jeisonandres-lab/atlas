@@ -11,13 +11,11 @@ main::-webkit-scrollbar {
 body::-webkit-scrollbar {
   display: none;
 }
-.form-control[type="text"]:read-only { 
+/* .form-control[type="text"]:read-only { 
   background-color: #e9ecef; 
-}
+} */
 
-.icons{
-  color: #707070;
-}
+
 
 .parrafo{
   font-family: "Poppins", sans-serif;

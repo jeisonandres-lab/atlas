@@ -69,16 +69,51 @@ class personalModel extends Conexion
     private function existeFamilar(array $parametro)
     {
         $cedula = $parametro[0];
-        $carnet = $parametro[1];
-        $tomo = $parametro[2];
-        $folio = $parametro[3];
-        $sql = $this->ejecutarConsulta("SELECT df.id_ninos, df.tomo, df.folio FROM datosfamilia  df WHERE df.tomo = ? AND df.folio = ?", [$tomo, $folio]);
-        if (empty($sql)) {
-            $sql = $this->ejecutarConsulta("SELECT df.id_ninos, df.cedula FROM datosfamilia df WHERE df.cedula = ? ",  [$cedula]);
-            if (empty($sql)) {
-                $sql = $this->ejecutarConsulta("SELECT df.id_ninos, df.codigoCarnet FROM datosfamilia df WHERE df.codigoCarnet = ? ",  [$carnet]);
+        $tomo = $parametro[1];
+        $folio = $parametro[2];
+
+        // Primero, consulta por cédula
+        $sqlCedula = $this->ejecutarConsulta("SELECT df.id_ninos, df.cedula FROM datosfamilia df WHERE df.cedula = ?", [$cedula]);
+
+        if (!empty($sqlCedula)) {
+            return [
+                'mensaje' => "La cédula ya existe.",
+                'datos' => $sqlCedula
+            ];
+        } else {
+            // // Si la cédula no fue encontrada, consulta por tomo
+            // $sqlTomo = $this->ejecutarConsulta("SELECT df.id_ninos, df.tomo FROM datosfamilia df WHERE df.tomo = ?", [$tomo]);
+
+            // if (!empty($sqlTomo)) {
+            //     return [
+            //         'mensaje' => "El tomo ya existe.",
+            //         'datos' => $sqlTomo
+            //     ];
+            // } else {
+
+            // }
+            // Si el tomo no fue encontrado, consulta por folio
+            $sqlFolio = $this->ejecutarConsulta("SELECT df.id_ninos, df.folio FROM datosfamilia df WHERE df.folio = ?", [$folio]);
+
+            if (!empty($sqlFolio)) {
+                return [
+                    'mensaje' => "El folio ya existe.",
+                    'datos' => $sqlFolio
+                ];
+            } else {
+                return false;
             }
         }
+    }
+
+    public function retornaNoCedula(array $parametro)
+    {
+        $sql = $this->ejecutarConsulta("SELECT df.cedula
+        FROM datosfamilia df
+        INNER JOIN datosempleados dt ON dt.id_empleados = df.idEmpleado
+        INNER JOIN datospersonales dp ON dp.id_personal = dt.idPersonal
+        WHERE dp.cedula = ?
+        ORDER BY df.id_ninos DESC LIMIT 1;", $parametro);
         return $sql;
     }
 
@@ -188,6 +223,25 @@ class personalModel extends Conexion
         return $sql;
     }
 
+    // DATOS DE PERSONAL POR SEXUALIDAD
+    private function datosEmpleadoFiltro(string $clausula, array $parametro)
+    {
+        $sql = $this->ejecutarConsulta(
+            "SELECT * FROM datosEmpleados de
+        INNER JOIN datosPersonales dp ON de.idPersonal = dp.id_personal
+        INNER JOIN estatus e ON de.idEstatus = e.id_estatus
+        INNER JOIN cargo c ON de.idCargo = c.id_cargo
+        INNER JOIN dependencia depe ON de.idDependencia = depe.id_dependencia
+        INNER JOIN departamento d ON de.idDepartamento = d.id_departamento
+        INNER JOIN ubicacion ubi ON de.id_empleados = ubi.id_empleadoUbi
+        INNER JOIN estados est ON ubi.idEstado = est.id_estado
+        INNER JOIN municipios m ON ubi.idMunicipio = m.id_municipio
+        INNER JOIN parroquias p ON ubi.idParroquia = p.id_parroquia
+        WHERE $clausula",
+            $parametro
+        );
+        return $sql;
+    }
 
     // Total de datos de empleado
     public function totalDatosEmpleado()
@@ -199,6 +253,24 @@ class personalModel extends Conexion
         INNER JOIN dependencia depe ON de.idDependencia = depe.id_dependencia
         INNER JOIN departamento d ON de.idDepartamento = d.id_departamento
         INNER JOIN datospersonales dp ON dp.id_personal = de.idPersonal");
+        return $sql;
+    }
+
+    //contar cualquier dato
+    public function contarDatos($selectores, $where, $parametro)
+    {
+        $sql = $this->ejecutarConsulta("SELECT $selectores
+        FROM datosEmpleados de
+        INNER JOIN datosPersonales dp ON de.idPersonal = dp.id_personal
+        INNER JOIN estatus e ON de.idEstatus = e.id_estatus
+        INNER JOIN cargo c ON de.idCargo = c.id_cargo
+        INNER JOIN dependencia depe ON de.idDependencia = depe.id_dependencia
+        INNER JOIN departamento d ON de.idDepartamento = d.id_departamento
+        INNER JOIN ubicacion ubi ON de.id_empleados = ubi.id_empleadoUbi
+        INNER JOIN estados est ON ubi.idEstado = est.id_estado
+        INNER JOIN municipios m ON ubi.idMunicipio = m.id_municipio
+        INNER JOIN parroquias p ON ubi.idParroquia = p.id_parroquia
+        WHERE $where", $parametro);
         return $sql;
     }
 
@@ -288,5 +360,10 @@ class personalModel extends Conexion
     public function getDatosFamiliarID($parametro)
     {
         return $this->datosFamiliarID($parametro);
+    }
+
+    public function getDatosEmpleadoFiltro($clausula, $parametro)
+    {
+        return $this->datosEmpleadoFiltro($clausula, $parametro);
     }
 }
