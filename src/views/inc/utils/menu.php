@@ -79,7 +79,7 @@
             <ul class="menu_items">
                 <!-- <div class="menu_title"></div>  -->
                 <li class="item">
-                    <div href="#" class="nav_link submenu_item personal familiares">
+                    <div href="#" class="nav_link submenu_item personal familiares registrosFamiliares ">
                         <span class="navlink_icon">
                             <i class="icons_menu fa-regular fa-user-group me-2"></i>
                         </span>
@@ -87,8 +87,8 @@
                         <i class="bx bx-chevron-right arrow-left"></i>
                     </div>
                     <ul class="menu_items submenu">
-                        <a href="personal" class="nav_link sublink"><i class="fa-regular fa-users-medical me-2"></i> Registrar Empleado</a>
-                        <a href="registrosFamiliares" class="nav_link sublink  registrosFamiliares"> <i class="fa-regular fa-family  me-2"></i>Familiares</a>
+                        <a href="personal" class="nav_link sublink personal"><i class="fa-regular fa-users-medical me-2"></i> Registrar Empleado</a>
+                        <a href="registrosFamiliares" class="nav_link sublink  familiares "> <i class="fa-regular fa-family  me-2"></i>Familiares</a>
                     </ul>
                 </li>
             </ul>

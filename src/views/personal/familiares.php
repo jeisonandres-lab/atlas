@@ -109,7 +109,7 @@ use App\Atlas\config\App;
                                 </div>
                             </div>
 
-                            
+
                             <div class="col-sm-6 col-md-4 col-xl-4 col-xxl-3 mb-3">
                                 <div class="form-group">
                                     <label for="primerApellido">Primer Apellido</label>
@@ -167,6 +167,20 @@ use App\Atlas\config\App;
                                         <span class="input-group-text span_parentesco"><i class="icons fa-regular fa-person-half-dress"></i></span>
                                         <select class="form-select form-select-md estado-parentesco" id="parentesco" name="parentesco" aria-label="Small select example" aria-placeholder="dasdas" required disabled>
                                             <option value="">Selecione un parentesco</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-6 col-md-4 col-xl-4 col-xxl-3 mb-2 ">
+                                <div class="form-group">
+                                    <label for="sexo">Sexualidad</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text span_sexo"><i class="icons fa-regular fa-person-half-dress"></i></span>
+                                        <select class="form-select form-select-md sexo-sexo" id="sexo" name="sexo" aria-label="Small select example" aria-placeholder="dasdas" required disabled>
+                                            <option value="">Selecione el sexo</option>
+                                            <option value="Masculino">Masculino</option>
+                                            <option value="Femenino">Femenino</option>
                                         </select>
                                     </div>
                                 </div>

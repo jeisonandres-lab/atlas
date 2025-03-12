@@ -192,7 +192,7 @@ class reportesController extends FPDF
         $this->Output('I', 'ficha_tecnica.pdf');
     }
 
-    //FILTRAR POR EDAD
+    //FILTRAR POR CARGO
     public function generarPDFCargo(string $cargo)
     {
         $this->SetMargins(5, 0, 5); // Ajustar márgenes
@@ -677,7 +677,7 @@ class reportesController extends FPDF
 
             foreach ($datosEmpleado as $dato) {
                 if (is_array($dato)) {
-                    $registroAuditoria = $this->auditoriaController->registrarAuditoria($this->idUsuario, 'Descarga pdf de empleado', 'El usuario ' . $this->nombreUsuario . ' ha descargado un pdf de los empleados en tamaño A4 formato horizontal por rango de fecha, desde:'." ");
+                    $registroAuditoria = $this->auditoriaController->registrarAuditoria($this->idUsuario, 'Descarga pdf de empleado', 'El usuario ' . $this->nombreUsuario . ' ha descargado un pdf de los empleados en tamaño A4 formato horizontal por rango de fecha, desde:'." ". $fecha_IniESPA."    ". "hasta:"." ".$fecha_FinESPA);
 
                     $i++;
                     $this->SetTextColor(0, 0, 0); // Blanco

@@ -9,14 +9,15 @@
                 <a class="nav-link" aria-current="true" id="familiares" href="./familiares">Familiares</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link " aria-current="true" id="registrosFamiliares" href="./registrosFamiliares">Registros</a>
+                <a class="nav-link " aria-current="true" id="registrosFamiliares" href="./registrosFamiliares">Registros Empleados</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link " aria-current="true" id="registrosTotalFamilia" href="./registrosTotalFamilia">Registros Familiares</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link " aria-current="true" id="datosInces" href="./datosInces">Datos</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" id="reporteTrabajador" href="#">Reportes</a>
-            </li>
+
         </ul>
     </div>
 </div>

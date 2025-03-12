@@ -217,15 +217,14 @@ agregarClaseActive(ultimaParte);
 
 // MENU LATERAL DEL SISTEMA
 function agregarClaseActive2(ultimoSegmentoUrl2) {
-  // Buscamos el elemento con la clase contentos
-  const contenedorContenidos = document.querySelector('.menu_content');
+  // Buscamos todos los elementos con la clase que coincide con el último segmento de la URL
+  const elementosAActivar = document.querySelectorAll(`.menu_content .${ultimoSegmentoUrl2}`);
 
-  // Buscamos el elemento con el ID que coincide con el último segmento de la URL
-  const elementoAActivar = contenedorContenidos.querySelector(`.${ultimoSegmentoUrl2}`);
-
-  // Si encontramos el elemento, le agregamos la clase active
-  if (elementoAActivar) {
-    elementoAActivar.classList.add('active');
+  // Si encontramos algún elemento, les agregamos la clase 'active'
+  if (elementosAActivar.length > 0) {
+    elementosAActivar.forEach(elemento => {
+      elemento.classList.add('active');
+    });
   }
 }
 
@@ -234,9 +233,8 @@ let urlActual2 = window.location.pathname;
 let partesUrl2 = urlActual2.split('/');
 let ultimaParte2 = partesUrl2[partesUrl2.length - 1];
 
-// Llamamos a la función para agregar la clase active
+// Llamamos a la función para agregar la clase 'active'
 agregarClaseActive2(ultimaParte2);
-
 
 
 

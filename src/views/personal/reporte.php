@@ -1,5 +1,5 @@
 <?php
-sleep(2);
+sleep(1);
 $tipo = isset($_GET['tipo']) ? $_GET['tipo'] : 'pdf';
 if ($tipo === 'pdf') {
         // Generar botones para PDF

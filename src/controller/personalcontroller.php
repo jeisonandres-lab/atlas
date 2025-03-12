@@ -491,13 +491,13 @@ class personalController extends personalModel
             'archivo2' => 'no hay segundo archivo',
         ];
 
-        if ($cedula == "") {
-            $noCedulaFamiliar = $this->retornaNoCedula([$cedulaEmpleado]);
+        $parametro = [$cedulaEmpleado, $cedulaEmpleado . "%"];
+        if ($cedula == '') {
+            $noCedulaFamiliar = $this->retornaNoCedula($parametro);
             if (empty($noCedulaFamiliar)) {
                 $cedula = $cedulaEmpleado."001";
             } else {
                 $cedula = intval($noCedulaFamiliar[0]['cedula']) + 1;
-
             }
         }
 
@@ -1020,10 +1020,10 @@ class personalController extends personalModel
 
             $validarDocumentos = $this->tablas->tablas($selectores2, $tabla2, $campoOrden2, $conditions2, $conditionParams2);
             // $validarFamiliar = $this->getExisteEmpleadoFamiliar($parametro);
-            $botones = "
-                <button class='btn btn-primary btn-sm btn-hover-azul btnEditarFamiliar ' data-bs-toggle='modal' data-bs-target='#editarDatosFamiliar' data-cedula=" . $row['id_ninos'] . "><i class='fa-solid fa-pencil fa-sm me-2'></i>Editar</button>
-                <button class='btn btn-danger btn-sm btn-hover-rojo btnEliminar'  data-swal-toast-template='#my-template' data-id=" . $row['id_ninos'] .  "><i class='fa-solid fa-trash fa-sm me-2'></i>Eliminar</button>
-            ";
+            // $botones = "
+            //     <button class='btn btn-primary btn-sm btn-hover-azul btnEditarFamiliar ' data-bs-toggle='modal' data-bs-target='#editarDatosFamiliar' data-cedula=" . $row['id_ninos'] . "><i class='fa-solid fa-pencil fa-sm me-2'></i>Editar</button>
+            //     <button class='btn btn-danger btn-sm btn-hover-rojo btnEliminar'  data-swal-toast-template='#my-template' data-id=" . $row['id_ninos'] .  "><i class='fa-solid fa-trash fa-sm me-2'></i>Eliminar</button>
+            // ";
 
             $botonDoc = "<div class='btn-group' role='group' aria-label='Basic example'>";
             $documentosEncontrados = false; // Variable para verificar si se encontraron documentos
@@ -1052,8 +1052,91 @@ class personalController extends personalModel
                 '3' => $row['edad'],
                 '4' => $row['tomo'],
                 '5' => $row['folio'],
-                '6' => $botones,
-                '7' => $botonDoc,
+                '6' => $botonDoc,
+                '7' => 1,
+            ];
+            $data_json['mensaje'] = "todas las personas exitoso";
+        }
+
+        // Devolver la respuesta a DataTables
+        $response = array(
+            "draw" => intval($draw),
+            "recordsTotal" => $cantidadRegistro[0]['cantidad'],
+            "recordsFiltered" => $cantidadRegistro[0]['cantidad'],
+            "data" => $data_json['data']
+        );
+        header('Content-Type: application/json');
+        echo json_encode($response);
+    }
+
+    //Obtener todos los datos de personal para la tabla
+    public function obtenerFamiliarTotal()
+    {
+        $data_json['data'] = []; // Array de datos para enviar
+        $tabla = 'datosfamilia df INNER JOIN datosempleados de ON df.idEmpleado = de.id_empleados INNER JOIN datospersonales p ON de.idPersonal = p.id_personal'; // Tabla a consultar
+        $selectoresCantidad = 'COUNT(id_ninos) as cantidad'; // Selector para contar la cantidad de registros de la tabla
+        $datosBuscar = []; // Array de selectores para buscar en la tabla
+        $campoOrden = ' df.id_ninos'; // Campo por el cual se ordenará la tabla
+        $selectores = '*, df.primerNombre AS primerNombreFamiliar, df.primerApellido AS primerApellidoFamiliar, p.primerNombre AS primerNombreEmpleado, p.primerApellido AS primerApellidoEmpleado'; // Selectores para obtener los datos de la tabla
+        $conditions = [" df.activo = ?"];
+        $conditionParams = [ '1'];
+
+        $draw = $_REQUEST['draw'];
+        $start = $_REQUEST['start'];
+        $length = $_REQUEST['length'];
+        $searchValue = $_REQUEST['search']['value'];
+
+        // Obtener la cantidad de los datos de la tabla
+        $cantidadRegistro = $this->tablas->getCantidadRegistros($tabla, $selectoresCantidad, $conditions, $conditionParams);
+        // Obtener los datos de la tabla
+        $personal = $this->tablas->getTodoDatosPersonal($selectores, $tabla, $start, $length, $searchValue, $datosBuscar, $campoOrden, $conditions, $conditionParams, $orderTable = 'ASC');
+        // Recorrer datos de la tabla
+        foreach ($personal as $row) {
+            $data_json['exito'] = true;
+            $parametro3 = $row['id_ninos'];
+            $tabla2 = 'documentacion'; // Tabla a consultar
+            $campoOrden2 = 'idNinos'; // Campo por el cual se ordenará la tabla
+            $selectores2 = '*'; // Selectores para obtener los datos de la tabla
+            $conditions2 = [ "idNinos = ?"];
+            $conditionParams2 = [ $parametro3];
+
+            $validarDocumentos = $this->tablas->tablas($selectores2, $tabla2, $campoOrden2, $conditions2, $conditionParams2);
+            // $validarFamiliar = $this->getExisteEmpleadoFamiliar($parametro);
+            $botones = "
+                <button class='btn btn-primary btn-sm btn-hover-azul btnEditarFamiliar ' data-cedula=" . $row['id_ninos'] . "><i class='fa-solid fa-pencil fa-sm me-2'></i>Editar</button>
+                <button class='btn btn-danger btn-sm btn-hover-rojo btnEliminar'  data-swal-toast-template='#my-template' data-id=" . $row['id_ninos'] .  "><i class='fa-solid fa-trash fa-sm me-2'></i>Eliminar</button>
+            ";
+
+            $botonDoc = "<div class='btn-group' role='group' aria-label='Basic example'>";
+            $documentosEncontrados = false; // Variable para verificar si se encontraron documentos
+
+            // Generar un botón por cada archivo encontrado
+            foreach ($validarDocumentos as $documento) {
+                $documentosEncontrados = true; // Se encontró al menos un documento
+                $tipodoc = $documento['tipoDoc'];
+                if ($tipodoc == 'pdf') {
+                    $botonDoc .= "<button class='btn btn-danger btn-sm botondocumet btn-hover' data-doc='" . $documento['doc'] . "'><i class='fa-solid fa-file-pdf fa-sm'></i> " . $documento['tipoDoc'] . "</button>";
+                } elseif ($tipodoc == 'png') {
+                    $botonDoc .= "<button class='btn btn-success btn-sm botondocumet btn-hover' data-doc='" . $documento['doc'] . "'><i class='fa-solid fa-file-image fa-sm me-1'></i>" . $documento['tipoDoc'] . "</button>";
+                }
+            }
+
+            // Si no se encontraron documentos, agregar el mensaje "Sin documentos"
+            if (!$documentosEncontrados) {
+                $botonDoc .= "<span>Sin documentos</span>";
+            }
+
+            $botonDoc .= "</div>";
+            $data_json['data'][] = [
+                '0' => $row['primerNombreEmpleado'] . " " . $row['primerApellidoEmpleado'],
+                '1' => $row['primerNombreFamiliar'] . " " . $row['primerApellidoFamiliar'],
+                '2' => $row['cedula'],
+                '3' => $row['codigoCarnet'],
+                '4' => $row['edad'],
+                '5' => $row['tomo'],
+                '6' => $row['folio'],
+                '7' => $botones,
+                '8' => $botonDoc,
             ];
             $data_json['mensaje'] = "todas las personas exitoso";
         }
@@ -1581,9 +1664,16 @@ class personalController extends personalModel
         if ($numeroCarnet == '') {
             $numeroCarnet = null;
         }
+        $parametro = [$cedulaEmpleado, $cedulaEmpleado . "%"];
         if ($cedula == '') {
-            $cedulaEmpleado = null;
+            $noCedulaFamiliar = $this->retornaNoCedula($parametro);
+            if (empty($noCedulaFamiliar)) {
+                $cedula = $cedulaEmpleado."001";
+            } else {
+                $cedula = intval($noCedulaFamiliar[0]['cedula']) + 1;
+            }
         }
+
         $data_json = [
             'exito' => false, // Inicializamos a false por defecto
             'mensaje' => '',
@@ -1733,8 +1823,10 @@ class personalController extends personalModel
                                         "condicion_valor" => $id_nino
                                     ];
                                     $check_familiar = $this->getActualizar('datosFamilia', $parametrosFamilia, $condicion);
-
                                     if ($check_familiar) {
+                                        $id = intval($idPersonal);
+                                        $checkidFamilia = $this->actualuzarIDfamiliar('datosfamilia', "idEmpleado =".$id, 'id_ninos = '.$id_nino);
+                                        $checkiddocFamilia = $this->actualuzarIDfamiliar('documentacion', "idEmpleados =".$id, 'idNinos = '.$id_nino);
                                         $registrarAuditoria = $this->auditoriaController->registrarAuditoria($this->idUsuario, 'Actualizar familiar', 'El usuario ' . $this->nombreUsuario . ' Se actualizo los datos del familiar ' . $nombreFamiliar . ' asociados al empleado ' . $nombreEmpleado . '.');
                                         if ($registrarAuditoria) {
                                             $data_json['exitoAuditoria'] = true;
@@ -1775,8 +1867,24 @@ class personalController extends personalModel
                                     "condicion_marcador" => ":id_ninos",
                                     "condicion_valor" => $id_nino
                                 ];
-                                $check_familiar = $this->getActualizar('datosFamilia', $parametrosFamilia, $condicion);;
+                                $check_familiar = $this->getActualizar('datosFamilia', $parametrosFamilia, $condicion);
+
                                 if ($check_familiar) {
+                                    $id = intval($idPersonal);
+                                    $checkidFamilia = $this->actualuzarIDfamiliar('datosfamilia', "idEmpleado =".$id, 'id_ninos = '.$id_nino);
+                                    if ($checkidFamilia) {
+                                        $data_json['idFamiliar'] = 'Actualizacion de id de documento listo';
+                                    }else{
+                                        $data_json['idFamiliar'] = 'error al actualizar el id ';
+                                    }
+
+                                    $checkiddocFamilia = $this->actualuzarIDfamiliar('documentacion', "idEmpleados =".$id, 'idNinos = '.$id_nino);
+                                    if ($checkiddocFamilia) {
+                                        $data_json['idDocFamiliar'] = 'Actualizacion de id de documento listo';
+                                    }else{
+                                        $data_json['idDocFamiliar'] = 'error al actualizar el id del documento';
+                                    }
+
                                     $registrarAuditoria = $this->auditoriaController->registrarAuditoria($this->idUsuario, 'Actualizar familiar', 'El usuario ' . $this->nombreUsuario . ' actualizo los datos del familiar ' . $nombreFamiliar . ' asociados al empleado ' . $nombreEmpleado . '.');
                                     if ($registrarAuditoria) {
                                         $data_json['exitoAuditoria'] = true;

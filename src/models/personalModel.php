@@ -112,8 +112,8 @@ class personalModel extends Conexion
         FROM datosfamilia df
         INNER JOIN datosempleados dt ON dt.id_empleados = df.idEmpleado
         INNER JOIN datospersonales dp ON dp.id_personal = dt.idPersonal
-        WHERE dp.cedula = ?
-        ORDER BY df.id_ninos DESC LIMIT 1;", $parametro);
+        WHERE dp.cedula = ? AND df.cedula LIKE ?
+        ORDER BY df.id_ninos DESC LIMIT 1", $parametro);
         return $sql;
     }
 
@@ -185,6 +185,26 @@ class personalModel extends Conexion
         return $sql;
     }
 
+    //TOTAL DE DATOS DE LOS FAMILIARES
+    private function totalDatosFamiliar(){
+        $sql = $this->ejecutarConsulta(
+            "SELECT *,
+            df.cedula AS cedulaFamiliar,
+            df.primerNombre AS primerNombreFamiliar,
+            df.primerApellido AS primerApellidoFamiliar,
+            dp.primerNombre AS primerNombreEmpleado,
+            dp.primerApellido AS primerApellidoEmpleado
+            FROM datosfamilia df
+        INNER JOIN datosEmpleados de ON df.idEmpleado = de.id_empleados
+        INNER JOIN datosPersonales dp ON de.idPersonal = dp.id_personal
+        INNER JOIN estatus e ON de.idEstatus = e.id_estatus
+        INNER JOIN cargo c ON de.idCargo = c.id_cargo
+        INNER JOIN dependencia depe ON de.idDependencia = depe.id_dependencia
+        INNER JOIN departamento d ON de.idDepartamento = d.id_departamento
+        ");
+        return $sql;
+    }
+
     // DATOS DE FAMILIAR POR MEDIO ID EMPLEADO
     private function datosFamiliarEmpleadoID($parametro)
     {
@@ -227,7 +247,7 @@ class personalModel extends Conexion
     private function datosEmpleadoFiltro(string $clausula, array $parametro)
     {
         $sql = $this->ejecutarConsulta(
-            "SELECT * FROM datosEmpleados de
+            "SELECT *, DATE_FORMAT(de.fechaING, '%d-%m-%Y') AS fechaCreada FROM datosEmpleados de
         INNER JOIN datosPersonales dp ON de.idPersonal = dp.id_personal
         INNER JOIN estatus e ON de.idEstatus = e.id_estatus
         INNER JOIN cargo c ON de.idCargo = c.id_cargo
@@ -281,6 +301,18 @@ class personalModel extends Conexion
         return $sql;
     }
 
+    public function actualuzarIDfamiliar($tabla, $datos,  $condicion)
+    {
+        $sql = "UPDATE $tabla SET $datos WHERE $condicion";
+        $resultado = $this->ejecutarConsulta($sql);
+
+        if ($resultado !== false) { // Verifica si es un objeto de resultado válido
+            return true; // La consulta se ejecutó correctamente
+        } else {
+            return false; // Hubo un error en la consulta
+        }
+    }
+
     /* GETTERS */
 
     // GETTERS PARA REGISTRAR DATOS
@@ -323,6 +355,10 @@ class personalModel extends Conexion
     {
         return $this->totalDatosEmpleado();
     }
+    public function getTotalDatosFamiliar()
+    {
+        return $this->totalDatosFamiliar();
+    }
 
     public function getTotalDatosIDEmpleados($parametro)
     {
@@ -364,6 +400,7 @@ class personalModel extends Conexion
 
     public function getDatosEmpleadoFiltro($clausula, $parametro)
     {
-        return $this->datosEmpleadoFiltro($clausula, $parametro);
+        $sql = $this->datosEmpleadoFiltro($clausula, $parametro);
+        return print_r($sql);
     }
 }

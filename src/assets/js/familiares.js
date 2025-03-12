@@ -36,11 +36,13 @@ $(function () {
   validarSelectores("#dia", ".span_dia");
   validarSelectores("#parentesco", ".span_parentesco");
   validarSelectores("#familiarTipo", ".span_familiarTipo");
+  validarSelectores("#sexo", ".span_sexo");
+
   incluirSelec2("#parentesco");
   incluirSelec2("#ano");
   incluirSelec2("#meses");
   incluirSelec2("#dia");
-
+  incluirSelec2("#sexo");
 
 
   validarSelectoresSelec2("#parentesco", ".span_parentesco");
@@ -48,6 +50,7 @@ $(function () {
   validarSelectoresSelec2("#meses", ".span_meses");
   validarSelectoresSelec2("#dia", ".span_dia");
   validarSelectoresSelec2("#tpDiscapacidad", ".span_tpDiscapacidad");
+  validarSelectoresSelec2("#sexo", ".span_sexo");
 
   colocarYear("#ano", "1900");
   colocarMeses("#meses");
@@ -112,6 +115,7 @@ $(function () {
         $("#dia").prop("disabled", false);
         $("#edad").prop("disabled", false);
         $("#tpDiscapacidad").prop("disabled", false);
+        $("#sexo").prop("disabled", false);
         $("#aceptar_emepleado").show();
         alertaNormalmix(parsedData.mensaje, 4000, "success", "top-end");
       } else {
@@ -137,6 +141,7 @@ $(function () {
         $("#dia").prop("disabled", true);
         $("#tpDiscapacidad").prop("disabled", true);
         $("#aceptar_emepleado").hide();
+        $("#sexo").prop("disabled", true);
         alertaNormalmix(parsedData.mensaje, 4000, "error", "top-end");
       }
     }
@@ -270,6 +275,7 @@ $(function () {
           $("#ano").prop("disabled", false);
           $("#meses").prop("disabled", false);
           $("#dia").prop("disabled", false);
+          $("#sexo").prop("disabled", false);
           $("#aceptar_emepleado").show();
           alertaNormalmix(parsedData.mensaje, 4000, "success", "top-end");
         } else if (parsedData.resultado == 3) {
@@ -308,6 +314,7 @@ $(function () {
       $("#carnet").prop("disabled", true);
       $("#parentesco").prop("disabled", true);
       $("#tpDiscapacidad").prop("disabled", true);
+      $("#sexo").prop("disabled", true);
 
       // inputs de busqueda del familiar
       $("#nombre").val("");

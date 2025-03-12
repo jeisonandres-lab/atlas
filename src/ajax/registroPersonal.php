@@ -125,6 +125,9 @@ switch ($_GET['modulo_personal']) {
     case 'obtenerDatosFamiliar':
         $personal->obtenerDatosFamiliar($idPersonal);
         break;
+    case 'obtenerDatosFamiliarTotal':
+            $personal->obtenerFamiliarTotal();
+        break;
     case 'obtenerEstados':
         $ubicacion->obtenerEstados();
         break;

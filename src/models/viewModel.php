@@ -20,6 +20,7 @@ class viewModel extends error
             'registrosFamiliares' => "src/views/personal/registrosFamiliares.php",
             'datosInces' => "src/views/personal/DatosInces.php",
             'familiares' => "src/views/personal/familiares.php",
+            'registrosTotalFamilia' => "src/views/personal/registrosTotalFamilia.php",
             'ausencia' => "src/views/ausencia/ausencia.php",
             'vacaciones' => "src/views/ausencia/vacaciones.php",
             'historial' => "src/views/admin/usuarios.php",

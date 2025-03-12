@@ -46,7 +46,7 @@ class imprimirPDFControllerLatterL
     public function generarEmpleadoPDF()
     {
         $pdf = $this->pdf; // Obtener la instancia de pdfController
-        $pdf->title = 'Reporte de Empleado'; // Título del reporte
+        $pdf->title = 'Reporte de empleado'; // Título del reporte
 
         // Definir los encabezados, los anchos y las alineaciones de columna
         $cabezaHeader = ['Nº','Nombre', 'Apellido', 'Cédula', 'Cargo', 'Dependencia', 'Departamento', 'Estatus'];
@@ -112,14 +112,14 @@ class imprimirPDFControllerLatterL
         $pdf->Output('I', 'reporte.pdf');
     }
 
-    public function generarPDFSexo( string $sexo)
+    public function generarFamiliarPDF()
     {
         $pdf = $this->pdf; // Obtener la instancia de pdfController
-        $pdf->title = 'Reporte de Empleado Filtrado'; // Título del reporte
+        $pdf->title = 'Reporte de familiar'; // Título del reporte
 
         // Definir los encabezados, los anchos y las alineaciones de columna
-        $cabezaHeader = ['Nº','Nombre', 'Apellido', 'Cédula', 'Cargo', 'Dependencia', 'Departamento', 'Estatus'];
-        $column_widths = [10,20, 20, 26, 35, 84, 40, 30];
+        $cabezaHeader = ['Nº','Empleado', 'Nombre', 'Apellido', 'Cédula', 'Tomo', 'Folio', 'Parentesco','Discapacidad'];
+        $column_widths = [10,30, 30, 30, 35, 25, 25, 35, 40];
         $column_alignments = [];
         $column_headerAlignments = [];
         $pdf->SetHeaderData($cabezaHeader, $column_widths, $column_alignments, $column_headerAlignments);
@@ -138,7 +138,7 @@ class imprimirPDFControllerLatterL
 
         // Obtener los datos de Cargo
 
-        $datosEmpleado = $this->personalData->getDatosEmpleadoSexo([$sexo]);
+        $datosEmpleado = $this->personalData->getTotalDatosFamiliar();
 
         // Procesar los datos para asegurarse de que sean un array
         $datosImprimir = [];
@@ -151,18 +151,22 @@ class imprimirPDFControllerLatterL
                     // print_r($dato);
                     // echo '</pre>';
                     $registroAuditoria = $this->auditoriaController->registrarAuditoria($this->idUsuario, 'Descarga pdf de empleado', 'El usuario'. $this->nombreUsuario. ' a descargado un pdf de los empelados en tamaño carta formato vertical');
-
+                    $discapacidad = $dato['discapacidad'];
+                    if (empty($discapacidad)) {
+                        $discapacidad = 'Sin Discapacidad';
+                    }
                     $i++;
                     $pdf->personalContar++;
                     $datosImprimir[] = [
                         $i,
-                        $dato['primerNombre'] ?? '',
-                        $dato['primerApellido'] ?? '',
-                        $dato['cedula'] ?? '',
-                        $dato['cargo'] ?? '',
-                        $dato['dependencia'] ?? '',
-                        $dato['departamento'] ?? '',
-                        $dato['estatus'] ?? ''
+                        $dato['primerNombreEmpleado']." ".$dato['primerApellidoEmpleado'] ?? '',
+                        $dato['primerNombreFamiliar'] ?? '',
+                        $dato['primerApellidoFamiliar'] ?? '',
+                        $dato['cedulaFamiliar'] ?? '',
+                        $dato['tomo'] ?? '',
+                        $dato['folio'] ?? '',
+                        $dato['parentesco'] ?? '',
+                        $discapacidad
                     ];
                 }
             }

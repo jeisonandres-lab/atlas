@@ -1,26 +1,12 @@
-import { alertaNormalmix, AlertSW2, aletaCheck } from "./ajax/alerts.js";
-import { descargarArchivo, enviarFormulario, obtenerDatos, obtenerDatosJQuery, obtenerDatosPromise } from "./ajax/formularioAjax.js";
+import {  AlertSW2 } from "./ajax/alerts.js";
+import { descargarArchivo, obtenerDatos, obtenerDatosJQuery} from "./ajax/formularioAjax.js";
 import {
-    colocarMeses,
-    colocarYear,
-    valdiarCorreos,
-    validarNombre,
-    validarNumeros,
-    validarSelectores,
-    validarTelefono,
-    file,
-    limpiarInput,
     colocarNivelesEducativos,
-    clasesInputs,
     incluirSelec2,
     validarSelectoresSelec2,
-    validarNumerosMenores,
-    validarNombreConEspacios,
     validarNumeroNumber,
-    validarDosDatos,
     validarInputFecha,
-    mesesDias,
-    configurarInactividad,
+
 } from "./ajax/inputs.js";
 
 $(function () {
@@ -68,7 +54,7 @@ $(function () {
     $(document).on("click", '.reporteTrabajador', async function (event) {
         event.preventDefault();
         const href = $(this).attr('href');
-
+      
         $.ajax({
             url: './src/views/personal/reporte.php',
             type: 'GET',
@@ -80,6 +66,19 @@ $(function () {
             success: function (html) {
                 Swal.close(); // Cierra la alerta SweetAlert2
                 $('#contentBodyCard').html(html);
+                if (href == 'pdf') {
+                    $("#cabeza-reporte").html('Generar Reporte PDF');
+                    $("#descargarReporte2").addClass('btn-danger btn-hover-rojo');
+                    $("#descargarReporte2").removeClass('btn-success btn-verde-rojo');
+                    $("#descargarReporte2").html('<i class="fa-regular fa-file-pdf fa-sm me-2"></i>Descargar PDF');
+                    
+                }else{
+                    $("#cabeza-reporte").html('Generar Reporte EXCEL');
+                    $("#descargarReporte2").removeClass('btn-danger btn-hover-rojo');
+                    $("#descargarReporte2").addClass('btn-success btn-hover-verde');
+                    $("#descargarReporte2").html('<i class="fa-regular fa-table fa-sm me-2"></i>Descargar EXCEL');
+        
+                }
                 $('#datosReporte').slideDown(500, function () {
                     $('#datosReporte').animate({
                         transform: 'scale(1)'
@@ -89,15 +88,13 @@ $(function () {
                             scrollTop: $('#contentReport')[0].scrollIntoView({ behavior: 'smooth' })
                         }, 800);
 
-
-                        incluirSelec2("#sexo_filtar");
                     });
                 });
             },
-            error: function (error) {
+            error: async function (error) {
                 Swal.close(); // Cierra la alerta SweetAlert2
                 console.error('Error al cargar el contenido:', error);
-                AlertSW2("error", "Error al cargar el reporte", "top", 5000); // Muestra un mensaje de error
+                await AlertSW2("error", "Error al cargar el reporte", "top", 5000); // Muestra un mensaje de error
             }
         });
 
@@ -457,7 +454,7 @@ $(function () {
                     `
                       <div class="col-sm-12 col-md-6 mb-2">
                             <div class="form-group">
-                                <label for="dependencia_filtrar">Dependencia 22</label>
+                                <label for="dependencia_filtrar">Dependencia</label>
                                 <div class="input-group">
                                     <span class="input-group-text span_dependencia_filtrar"><i class="icons fa-regular fa-clipboard"></i></span>
                                     <select class="form-select form-select-md estado-dependencia_filtrar" id="dependencia_filtrar" name="dependencia_filtrar" aria-label="Small select example" aria-placeholder="dasdas" required>
@@ -508,8 +505,330 @@ $(function () {
                 $('#formulario-descargarpdf').data('nombre', 'reporte_empleado_departamento');
                 $("#formulario-descargarpdf").attr("action", "./src/ajax/tablasDescargar.php?accion=impirimirEmpleadosDepartamento");
                 incluirSelec2("#departamento_filtrar");
-            } else if(checkboxId == ''){
-                
+            } else if (checkboxId == "reporteExcelSexo"){
+                $("#contentReporHTML").html(
+                    `
+                      <div class="col-sm-12 col-md-6 col-xl-6">
+                        <div class="form-group">
+                          <label for="sexo_filtrar">Tipo de sexo</label>
+                          <div class="input-group">
+                            <span class="input-group-text span_sexo_filtrar"><i class="icons fa-regular fa-user-group-simple"></i></span>
+                            <select class="form-select form-select-md" id="sexo_filtrar" name="sexo_filtrar">
+                              <option value="">Selecione el sexo</option>
+                              <option value="Masculino">Masculino</option>
+                              <option value="Femenino">Femenino</option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                    `
+                );
+                incluirSelec2("#sexo_filtrar");
+                $('#formulario-descargarpdf').data('nombre', 'reporte_empleado_sexualidadExcel');
+                $("#formulario-descargarpdf").attr("action", "./src/ajax/tablasDescargar.php?accion=impirimirEmpleadosSexoExcel");
+            } else if (checkboxId == 'reporteExcelCargo') {
+
+                $("#contentReporHTML").html(
+                    `
+                      <div class="col-sm-12 col-md-6 col-xl-6">
+                        <div class="form-group">
+                          <label for="cargo_filtrar">cargo</label>
+                          <div class="input-group">
+                            <span class="input-group-text span_cargo_filtrar"><i class="icons fa-duotone fa-regular fa-arrows-down-to-people"></i></span>
+                            <select class="form-select form-select-md" id="cargo_filtrar" name="cargo_filtrar">
+                              <option value="">Selecione un cargo</option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                    `,
+
+                );
+                traerCargo()
+                    .then(cargo => {
+                        llenarSelect(cargo.data, "cargo_filtrar");
+                    })
+                    .catch(error => {
+                        console.error("Error al obtener el cargo:", error);
+                    });
+                $('#formulario-descargarpdf').data('nombre', 'reporte_empleado_cargoExcel');
+                $("#formulario-descargarpdf").attr("action", "./src/ajax/tablasDescargar.php?accion=impirimirEmpleadosCargoExcel");
+                incluirSelec2("#cargo_filtrar");
+            } else if (checkboxId == "reporteExcelEdad") {
+
+                $("#contentReporHTML").html(
+                    `
+                      <div class="col-sm-12 col-md-6 col-xl-6">
+                        <div class="form-group">
+                          <label for="edad_filtrar">Edad</label>
+                          <div class="input-group">
+                            <span class="input-group-text span_edad_filtrar"><i class="icons fa-regular fa-users-line"></i></span>
+                             <input type="number" class="form-control" id="edad_filtrar" name="edad_filtrar" placeholder="Edad del personal" required>
+                          </div>
+                        </div>
+                      </div>
+                    `,
+
+                );
+                $('#formulario-descargarpdf').data('nombre', 'reporte_empleado_edadExcel');
+                $("#formulario-descargarpdf").attr("action", "./src/ajax/tablasDescargar.php?accion=impirimirEmpleadosEdadExcel");
+            } else if (checkboxId == "reporteExcelEstatus") {
+
+                $("#contentReporHTML").html(
+                    `
+                      <div class="col-sm-12 col-md-6 mb-2">
+                            <div class="form-group">
+                                <label for="estatus_filtrar">Estatus</label>
+                                <div class="input-group">
+                                    <span class="input-group-text span_estatus_filtrar"><i class="icons fa-regular fa-clipboard"></i></span>
+                                    <select class="form-select form-select-md estado-estatus_filtrar" id="estatus_filtrar" name="estatus_filtrar" aria-label="Small select example" aria-placeholder="dasdas" required>
+                                        <option value="">Selecione un estatus</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    `,
+
+                );
+                traerEstatus()
+                    .then(estatus => {
+                        llenarSelect(estatus.data, "estatus_filtrar");
+                    })
+                    .catch(error => {
+                        console.error("Error al obtener el estatus:", error);
+                    });
+                $('#formulario-descargarpdf').data('nombre', 'reporte_empleado_estatusExcel');
+                $("#formulario-descargarpdf").attr("action", "./src/ajax/tablasDescargar.php?accion=impirimirEmpleadosEstatusExcel");
+                incluirSelec2("#estatus_filtrar");
+
+            } else if (checkboxId == "reporteExcelEstadoCivil") {
+
+                $("#contentReporHTML").html(
+                    `
+                      <div class="col-sm-6 col-md-6 mb-2">
+                        <div class="form-group">
+                            <label for="civil_filtrar">Estado civil</label>
+                            <div class="input-group">
+                                <span class="input-group-text span_civil_filtrar"><i class="icons fa-regular fa-clipboard"></i></span>
+                                <select class="form-select form-select-md estado-civil_filtrar" id="civil_filtrar" name="civil_filtrar" aria-label="Small select example" aria-placeholder="dasdas" required>
+                                    <option value="">Estado civil</option>
+                                    <option value="Soltero">Soltero</option>
+                                    <option value="Casado">Casado</option>
+                                    <option value="Viudo">Viudo</option>
+                                    <option value="Divorciado">Divorciado</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    `,
+
+                );
+                $('#formulario-descargarpdf').data('nombre', 'reporte_empleado_estadoCivilExcel');
+                $("#formulario-descargarpdf").attr("action", "./src/ajax/tablasDescargar.php?accion=impirimirEmpleadosCivilExcel");
+                incluirSelec2("#civil_filtrar");
+            } else if (checkboxId == "reporteExcelVivienda") {
+
+                $("#contentReporHTML").html(
+                    `
+                      <div class="col-sm-6 col-md-6 mb-2">
+                        <div class="form-group">
+                            <label for="vivienda_filtrar">Vivienda</label>
+                            <div class="input-group">
+                                <span class="input-group-text span_vivienda_filtrar"><i class="icons fa-regular fa-house-building"></i></span>
+                                <select class="form-select form-select-md vivienda_filtrar" id="vivienda_filtrar" name="vivienda_filtrar" aria-label="Small select example" aria-placeholder="dasdas" required>
+                                    <option value="">Selecione un vivienda</option>
+                                    <option value="Casa">Casa</option>
+                                    <option value="Departamento">Departamento</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    `,
+
+                );
+                $('#formulario-descargarpdf').data('nombre', 'reporte_empleado_viviendaExcel');
+                $("#formulario-descargarpdf").attr("action", "./src/ajax/tablasDescargar.php?accion=impirimirEmpleadosViviendaExcel");
+                incluirSelec2("#vivienda_filtrar");
+            } else if (checkboxId == "reporteExcelNivelAcademico") {
+
+                $("#contentReporHTML").html(
+                    `
+                      <div class="col-sm-6 col-md-6 mb-2">
+                        <div class="form-group">
+                            <label for="academico_filtrar">Nivel Academico</label>
+                            <div class="input-group">
+                                <span class="input-group-text span_academico_filtrar"><i class="icons fa-regular fa-user-graduate"></i></span>
+                                <select class="form-select form-select-md" id="academico_filtrar" name="nivelacademico_filtrar">
+                                    <option value="">Nivel Academico</option>
+
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    `,
+
+                );
+                $('#formulario-descargarpdf').data('nombre', 'reporte_empleado_nivelAcademicoExcel');
+                $("#formulario-descargarpdf").attr("action", "./src/ajax/tablasDescargar.php?accion=impirimirEmpleadosAcademicoExcel");
+                colocarNivelesEducativos("#academico_filtrar");
+                incluirSelec2("#academico_filtrar");
+
+            } else if (checkboxId == "reporteExcelDireccion") {
+
+                $("#contentReporHTML").html(
+                    `
+                      <div class="col-sm-6 col-md-3 mb-2">
+                        <div class="form-group">
+                            <label for="estado_filtrar">Estado</label>
+                            <div class="input-group">
+                                <span class="input-group-text span_estado_filtrar"><i class="icons fa-regular fa-clipboard"></i></span>
+                                <select class="form-select form-select-md estado_filtrar-estado_filtrar" id="estado_filtrar" name="estado_filtrar" aria-label="Small select example" aria-placeholder="dasdas" required>
+                                    <option value="">Selecione un estado</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6 col-md-3 mb-2">
+                        <div class="form-group">
+                            <label for="municipio_filtrar">Municipio</label>
+                            <div class="input-group">
+                                <span class="input-group-text span_municipio_filtrar"><i class="icons fa-regular fa-clipboard"></i></span>
+                                <select class="form-select form-select-md municipio_filtrar-municipio_filtrar" id="municipio_filtrar" name="municipio_filtrar" aria-label="Small select example" aria-placeholder="dasdas" required>
+                                    <option value="">Seleccione un municipio</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6 col-md-3 mb-2">
+                        <div class="form-group">
+                            <label for="parroquia_filtrar">Parroquia</label>
+                            <div class="input-group">
+                                <span class="input-group-text span_parroquia_filtrar"><i class="icons fa-regular fa-clipboard"></i></span>
+                                <select class="form-select form-select-md parroquia_filtrar-parroquia_filtrar" id="parroquia_filtrar" name="parroquia_filtrar" aria-label="Small select example" aria-placeholder="dasdas" required>
+                                    <option value="">Selecione un parroquia</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    `,
+
+                );
+                $('#formulario-descargarpdf').data('nombre', 'reporte_empleado_direccionExcel');
+                $("#formulario-descargarpdf").attr("action", "./src/ajax/tablasDescargar.php?accion=impirimirEmpleadosDireccionExcel");
+                traerEstados()
+                    .then(EtraerEstados => {
+                        llenarSelect(EtraerEstados.data, "estado_filtrar");
+                    })
+                    .catch(error => {
+                        console.error("Error al obtener el EtraerEstados:", error);
+                    });
+
+                incluirSelec2("#estado_filtrar");
+                incluirSelec2("#municipio_filtrar");
+                incluirSelec2("#parroquia_filtrar");
+            } else if (checkboxId == "reporteExcelFecha") {
+
+                $("#contentReporHTML").html(
+                    `
+                    <div class="col-sm-6 col-md-6 mb-2">
+                        <div class="form-group">
+                            <label for="fecha_filtrar">Desde</label>
+                            <div class="input-group">
+                                <span class="input-group-text span_fecha_filtrar"><i class="icons fa-regular fa-calendars"></i></span>
+                                <input type="text" class="form-control fecha_filtrar" id="fecha_filtrar" name="fecha_ini_filtrar2" placeholder="Fecha de Ingreso" required>
+                            </div>
+                        </div>
+                    </div>
+
+                     <div class="col-sm-6 col-md-6 mb-2">
+                        <div class="form-group">
+                            <label for="fecha_fin_filtrar">Hasta</label>
+                            <div class="input-group">
+                                <span class="input-group-text span_fecha_fin_filtrar"><i class="icons fa-regular fa-calendars"></i></span>
+                                <input type="text" class="form-control fecha_fin_filtrar" id="fecha_fin_filtrar" name="fecha_fin_filtrar2" placeholder="Fecha de Ingreso" required>
+                            </div>
+                        </div>
+                    </div>
+                    `,
+                );
+                $('#formulario-descargarpdf').data('nombre', 'reporte_empleado_rangoFechaExcel');
+                $("#formulario-descargarpdf").attr("action", "./src/ajax/tablasDescargar.php?accion=impirimirEmpleadosRangoFechaExcel");
+                $("#fecha_filtrar").datepicker({
+                    dateFormat: "dd-mm-yy", // Cambia el formato de la fecha
+                    showWeek: true, // Muestra el número de la semana
+                    firstDay: 1, // Establece el primer día de la semana (1 = lunes)
+                    changeMonth: true, // Permite cambiar el mes
+                    changeYear: true, // Permite cambiar el año
+                    yearRange: "1900:2025",
+                    regional: "es" // Establece el rango de años
+                });
+                $("#fecha_fin_filtrar").datepicker({
+                    dateFormat: "dd-mm-yy", // Cambia el formato de la fecha
+                    showWeek: true, // Muestra el número de la semana
+                    firstDay: 1, // Establece el primer día de la semana (1 = lunes)
+                    changeMonth: true, // Permite cambiar el mes
+                    changeYear: true, // Permite cambiar el año
+                    yearRange: "1900:2025",
+                    regional: "es" // Establece el rango de años
+                });
+            } else if (checkboxId == "reporteExcelDependencia") {
+                $("#contentReporHTML").html(
+                    `
+                      <div class="col-sm-12 col-md-6 mb-2">
+                            <div class="form-group">
+                                <label for="dependencia_filtrar">Dependencia</label>
+                                <div class="input-group">
+                                    <span class="input-group-text span_dependencia_filtrar"><i class="icons fa-regular fa-clipboard"></i></span>
+                                    <select class="form-select form-select-md estado-dependencia_filtrar" id="dependencia_filtrar" name="dependencia_filtrar" aria-label="Small select example" aria-placeholder="dasdas" required>
+                                        <option value="">Selecione una dependencia</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    `,
+
+                );
+                traerDependencia()
+                    .then(dependencia => {
+                        llenarSelect(dependencia.data, "dependencia_filtrar");
+                    })
+                    .catch(error => {
+                        console.error("Error al obtener el estatus:", error);
+                    });
+                $('#formulario-descargarpdf').data('nombre', 'reporte_empleado_dependenciaExcel');
+                $("#formulario-descargarpdf").attr("action", "./src/ajax/tablasDescargar.php?accion=impirimirEmpleadosDependenciaExcel");
+                incluirSelec2("#dependencia_filtrar");
+
+            } else if (checkboxId == "reporteExcelDepartamento") {
+
+                $("#contentReporHTML").html(
+                    `
+                      <div class="col-sm-12 col-md-6 mb-2">
+                            <div class="form-group">
+                                <label for="departamento_filtrar">Departamento</label>
+                                <div class="input-group">
+                                    <span class="input-group-text span_departamento_filtrar"><i class="icons fa-regular fa-clipboard"></i></span>
+                                    <select class="form-select form-select-md estado-departamento_filtrar" id="departamento_filtrar" name="departamento_filtrar" aria-label="Small select example" aria-placeholder="dasdas" required>
+                                        <option value="">Selecione un departamento</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    `,
+
+                );
+                traerDepartamento()
+                    .then(departamento => {
+                        llenarSelect(departamento.data, "departamento_filtrar");
+                    })
+                    .catch(error => {
+                        console.error("Error al obtener el estatus:", error);
+                    });
+                $('#formulario-descargarpdf').data('nombre', 'reporte_empleado_departamentoExcel');
+                $("#formulario-descargarpdf").attr("action", "./src/ajax/tablasDescargar.php?accion=impirimirEmpleadosDepartamentoExcel");
+                incluirSelec2("#departamento_filtrar");
             }
         }
     });

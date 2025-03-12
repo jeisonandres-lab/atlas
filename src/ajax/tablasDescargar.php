@@ -10,7 +10,7 @@ use App\Atlas\controller\report\imprimirPDFControllerA4;
 use App\Atlas\controller\report\imprimirPDFControllerA4L;
 use App\Atlas\controller\report\fichaTecnicaController;
 use App\Atlas\controller\report\reportesController;
-use App\Atlas\controller\generateExcelController;
+use App\Atlas\controller\report\generateExcelController;
 use App\Atlas\controller\notificacionController;
 use App\Atlas\config\Conexion;
 use App\Atlas\config\App;
@@ -48,7 +48,6 @@ $fecha_fin = isset($_POST['fecha_fin_filtrar2']) ? $conexion->limpiarCadena($_PO
 $dependencia = isset($_POST['dependencia_filtrar']) ? $conexion->limpiarCadena($_POST['dependencia_filtrar']) : "";
 $departamento = isset($_POST['departamento_filtrar']) ? $conexion->limpiarCadena($_POST['departamento_filtrar']) : "";
 
-
 switch ($_GET['accion']) {
     case 'imprimirDependencia':
         $imprimirPDFController->generarDependenciaPDF();
@@ -64,6 +63,9 @@ switch ($_GET['accion']) {
         break;
     case 'impirimirEmpleados':
         $imprimirPDFControllerL->generarEmpleadoPDF();
+        break;
+    case 'impirimirFamiliar':
+        $imprimirPDFControllerL->generarFamiliarPDF();
         break;
     case 'fichaTecnica':
         $app->iniciarSession();
@@ -125,7 +127,59 @@ switch ($_GET['accion']) {
         $reportes->generarPDFdependencia($dependencia);
         break;
     case 'impirimirEmpleadosDepartamento':
+
+
         $reportes->generarPDFdepartamento($departamento);
+        break;
+    //REPORTES DE EXCEL
+    case 'impirimirEmpleadosCargoExcel':
+        $excelgenerator->generarExcelCargo($cargo);
+        break;
+    case 'impirimirEmpleadosSexoExcel':
+            $excelgenerator->excelEmepleadoSexualidad($sexo);
+        break;
+    case 'impirimirEmpleadosEdadExcel':
+        $excelgenerator->generarExceledad($edad);
+        break;
+    case 'impirimirEmpleadosCivilExcel':
+        $excelgenerator->generarExcelestadoCivil($estadoCivil);
+        break;
+    case 'impirimirEmpleadosViviendaExcel':
+        $excelgenerator->generarExcelvivienda($vivienda);
+        break;
+    case 'impirimirEmpleadosEstatusExcel':
+        $excelgenerator->generarExcelEstatus($estatus);
+        break;
+    case 'impirimirEmpleadosAcademicoExcel':
+        $excelgenerator->generarExcelnivelAcademico($nivelacademico);
+        break;
+    case 'impirimirEmpleadosDireccionExcel':
+        $excelgenerator->generarExceldireccion($estado, $municipio, $parroquia);
+        break;
+
+    case 'impirimirEmpleadosRangoFechaExcel':
+        function convertirFecha($fecha)
+        {
+            // Crea un objeto DateTime a partir de la fecha en formato dd-mm-aaaa
+            $fechaObj = DateTime::createFromFormat('d-m-Y', $fecha);
+
+            // Si la fecha es válida, la formatea en aaaa-mm-dd
+            if ($fechaObj) {
+                return $fechaObj->format('Y-m-d');
+            } else {
+                // Si la fecha no es válida, devuelve false o lanza una excepción
+                return false; // O: throw new Exception("Formato de fecha inválido: $fecha");
+            }
+        }
+        $fecha_ini_convertida = convertirFecha($fecha_ini);
+        $fecha_fin_convertida = convertirFecha($fecha_fin);
+        $excelgenerator->generarExcelrangoFhecha($fecha_ini_convertida,  $fecha_fin_convertida, $fecha_ini, $fecha_fin );
+        break;
+    case 'impirimirEmpleadosDependenciaExcel':
+        $excelgenerator->generarExceldependencia($dependencia);
+        break;
+    case 'impirimirEmpleadosDepartamentoExcel':
+        $excelgenerator->generarExceldepartamento($departamento);
         break;
     default:
         # code...

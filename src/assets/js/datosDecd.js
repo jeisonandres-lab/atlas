@@ -67,6 +67,7 @@ $(function () {
         tableInic = $('#tableInic').DataTable(newConfig); // Inicializar una nueva instancia con la nueva configuración
     }
 
+    //CAMBIAR LOS TEXTOS DE LA CELDAS DINAMICAMENTE
     function cambiarTextoCeldas(nuevosTextos) {
         const $thead = $('#tableInic thead');
         let $fila = $thead.find('.tr-identity');
@@ -497,7 +498,7 @@ $(function () {
             // Manejar la respuesta exitosa aquí
             tableInic.ajax.reload(null, false);
             AlertSW2("success", parsedData.messenger, "top", 3000);
-        }
+    }
 
         function enviar() {
             enviarFormulario(`./src/ajax/datosDecd.php?modulo_datos=${modulo}`, formData, callbackExito, true);

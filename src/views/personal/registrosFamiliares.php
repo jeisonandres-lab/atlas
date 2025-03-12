@@ -44,6 +44,7 @@ use App\Atlas\config\App;
                                 <a class="d-flex justify-content-center align-items-baseline icon-link reporteTrabajador " id="reporteTrabajador" href="pdf">
                                     <i class="bi bi-file-pdf"></i>Reportes PDF
                                 </a>
+
                             </li>
                             <li class="nav-item me-3">
                                 <a class="d-flex justify-content-center align-items-baseline icon-link reporteTrabajador " id="reporteTrabajador" href="excel">
@@ -422,7 +423,7 @@ use App\Atlas\config\App;
 
             <!-- GENERAR REPORTES DE EMPELADOS PDF -->
             <div class="card mt-2" hidden id="datosReporte" style="background-color: white; box-shadow: 0px 6px 16px 2px rgba(0, 0, 0, 0.05) !important;">
-                <div class="card-header" style="background-color: #1929bb !important;">
+                <div class="card-header" id="cabeza-reporte" style="background-color: #1929bb !important;">
                     Generar reportes PDF
                 </div>
                 <form action="#" class="contact-form  form-validate formulario-descargarpdf formdata " id="formulario-descargarpdf">
@@ -467,8 +468,8 @@ use App\Atlas\config\App;
                                         <th scope="col" class="text-center bg-primary" style="font-size: 14px;">Edad</th>
                                         <th scope="col" class="text-center bg-primary" style="font-size: 14px;">Tomo</th>
                                         <th scope="col" class="text-center bg-primary" style="font-size: 14px;">Folio</th>
-                                        <th scope="col" class="text-center bg-primary" style="font-size: 14px;">Acciones</th>
-                                        <th scope="col" class="text-center bg-primary" style="font-size: 14px;">Documento</th>
+                                        <!-- <th scope="col" class="text-center bg-primary" style="font-size: 14px;">Acciones</th> -->
+                                        <th scope="col" class="text-center bg-primary" style="font-size: 14px;">Documentación</th>
                                     </tr>
                                 </thead>
                                 <tbody style="font-size: 14px;">

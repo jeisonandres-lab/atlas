@@ -1,4 +1,4 @@
-export function AlertSW2(icons, messenger, position, time) {
+export async function AlertSW2(icons, messenger, position, time) {
     const Toast = Swal.mixin({
         toast: true,
         position: position,
@@ -16,7 +16,7 @@ export function AlertSW2(icons, messenger, position, time) {
     });
 }
 
-export function AlertDirection(icons, messenger, position, time, callback) {
+export async function AlertDirection(icons, messenger, position, time, callback) {
     const Toast = Swal.mixin({
         toast: true,
         position: position,
@@ -43,7 +43,7 @@ export function AlertDirection(icons, messenger, position, time, callback) {
     });
 }
 
-export function alertaNormalmix(messenger, time, icons, position){
+export async function alertaNormalmix(messenger, time, icons, position){
     const Toast = Swal.mixin({
         toast: true,
         position: position,
@@ -57,7 +57,7 @@ export function alertaNormalmix(messenger, time, icons, position){
     });
 }
 
-export function aletaCheck(messenger, icons, position, callback){
+export async function aletaCheck(messenger, icons, position, callback){
     const Toast = Swal.mixin({
         toast: true,
         timer: 10000,

@@ -492,7 +492,7 @@ $(function () {
         { "data": 4 }, // Cargo
         { "data": 5 }, // Departamento
         { "data": 6 },
-        { "data": 7 },
+        // { "data": 7 },
       ]
     });
   }
@@ -939,6 +939,7 @@ $(function () {
 
   })
 
+  //cerrar el editar
   $(document).on('click', '#cerrarEdit', function () {
 
     $('#editarDatos').slideUp(600, function () {

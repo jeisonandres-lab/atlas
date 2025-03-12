@@ -26,6 +26,6 @@ use App\Atlas\config\App; ?>
 
 <script src="./chart.js/dist/chart.js"></script>
 <script src="./chart.js/dist/chart.umd.js"></script>
-<script src="./chart.js/dist/cjs.js"></script>
+<!-- <script src="./chart.js/dist/cjs.js"></script> -->
 <script src="./chart.js/dist/helpers.js"></script>
-<script src="./chart.js/dist/helpers.cjs.js"></script>
+<!-- <script src="./chart.js/dist/helpers.cjs.js"></script> -->
