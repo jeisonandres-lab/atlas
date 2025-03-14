@@ -29,15 +29,27 @@ $(function () {
   $("#contenDoc").hide();
   $("#contentPartida").hide();
 
-  validarSelectoresSelec2("#ano2", ".span_ano");
-  validarSelectoresSelec2("#meses2", ".span_mes");
-  validarSelectoresSelec2("#dia2", ".span_dia");
+
+  incluirSelec2("#sexo");
+  incluirSelec2("#parentesco");
+  incluirSelec2("#ano2");
+  incluirSelec2("#meses2");
+  incluirSelec2("#dia2");
+  incluirSelec2("#tpDiscapacidad");
 
   file("#contrato", ".span_contrato");
   file("#notificacion", ".span_notificacion");
   colocarYear("#ano2", "1900");
   colocarMeses("#meses2");
   colocarNivelesEducativos("#academico");
+
+  validarSelectoresSelec2("#ano2", ".span_ano");
+  validarSelectoresSelec2("#meses2", ".span_mes");
+  validarSelectoresSelec2("#dia2", ".span_dia");
+  validarSelectoresSelec2("#sexo", ".span_sexo");
+  validarSelectoresSelec2("#parentesco", ".span_parentesco");
+  validarSelectoresSelec2("#tpDiscapacidad", ".span_tpDiscapacidad");
+
 
   // Validar los campos del formulario de registro de familiares
   validarNombre("#primerNombreFamiliar", ".span_nombre1");
@@ -51,13 +63,17 @@ $(function () {
   colocarMeses("#mesesFamiliar");
   colocarYear("#anoFamiliar", "1900");
   validarNumeros("#carnet", ".span_carnet");
-  validarNumerosMenores("#tomo", ".span_tomo");
-  validarNumerosMenores("#folio", ".span_folio");
+  validarNumeroNumber("#edad", ".span_edad", 3);
+  validarNumeroNumber("#tomo", ".span_tomo", 5, true);
+  validarNumeroNumber("#folio", ".span_folio", 4, true);
   validarNumeros("#cedula_trabajador_familiar", ".span_cedula_empleado");
   file("#achivoparti", ".span_docArchivo");
   file("#achivoDis", ".span_docArchivoDis");
 
   mesesDias("#meses2", ".span_mes", "#dia2", "span_dia", "#ano2");
+
+  const opciones = ["Hijo", "Hija", "Padre", "Madre", "Hermano"];
+  const opciones2 = ["Masculino", "Femenino"];
 
   const baseConfig = {
     responsive: true,
@@ -94,7 +110,12 @@ $(function () {
         targets: 3,
         class: "text-center",
         render: function (data, type, row) {
-          return data ? data : 'Sin Discapacidad';
+          if (data == "Femenino") {
+            data = `<small class='d-inline-flex px-2 py-1 fw-semibold text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-2 small-border-rosa small-subtle-rosa small-emphasis-rosa'>${data}</small>`;
+          } else if (data == "Masculino") {
+            data = `<small class='d-inline-flex px-2 py-1 fw-semibold text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-2'>${data}</small>`;
+          } 
+          return data ? data : 'Sin Datos';
         }
       },
       {
@@ -102,18 +123,46 @@ $(function () {
         width: "8%",
         class: "text-center",
         render: function (data, type, row) {
-          return data + " Años";
+          return data ? data : 'Sin Carnet';
         }
       },
       {
         targets: 5,
+        width: "8%",
+        class: "text-center",
+        render: function (data, type, row) {
+          if (data) {
+            return '<span class="badge text-bg-primary text-white">' + data + '</span>'; // Si 'data' no es nulo, envuélvelo en un span
+          } else {
+            return 'Sin Discapacidad'; // Si 'data' es nulo, muestra "Sin Discapacidad"
+          }
+        }
+      },
+      {
+        targets: 6,
+        width: "8%",
+        class: "text-center",
+        render: function (data, type, row) {
+          return data + " Años";
+        }
+      },
+      {
+        targets: 6,
+        width: "8%",
+        class: "text-center",
+        render: function (data, type, row) {
+          return data + " Años";
+        }
+      },
+      {
+        targets: 7,
         class: "text-center",
         render: function (data, type, row) {
           return data ? data : 'Sin Tomo';
         }
       },
       {
-        targets: 6,
+        targets: 8,
         class: "text-center",
         render: function (data, type, row) {
           return data ? data : 'Sin Folio';
@@ -125,15 +174,18 @@ $(function () {
       url: "./IdiomaEspañol.json"
     },
     columns: [
-      { "data": 0 }, 
-      { "data": 1 }, 
-      { "data": 2 }, 
-      { "data": 3 }, 
-      { "data": 4 }, 
-      { "data": 5 }, 
+      { "data": 0 },
+      { "data": 1 },
+      { "data": 2 },
+      { "data": 3 },
+      { "data": 4 },
+      { "data": 5 },
       { "data": 6 },
       { "data": 7 },
       { "data": 8 },
+      { "data": 9 },
+      { "data": 10 },
+
     ],
     layout: {
       topStart: {
@@ -273,6 +325,33 @@ $(function () {
 
   let tableInic = $('#tableInic').DataTable(baseConfig);
 
+  async function limpiarDatos() {
+    $("#idEmpleadoFamiliar").val("");
+    $("#cedula_trabajador_familiar").val("");
+    $("#nombreEmpleado").val("");
+    $("#apellidoEmpleado").val("");
+    $("#primerNombreFamiliar").val("");
+    $("#segundoNombreFamiliar").val("");
+    $("#primerApellidoFamiliar").val("");
+    $("#segundoApellidoFamiliar").val("");
+    $("#edad").val("");
+    $("#identificador").val("");
+    $('#parentesco').val("").trigger('change');
+    $('#anoFamiliar').val("").trigger('change');
+    $('#diaFamiliar').val("").trigger('change');
+    $('#mesesFamiliar').val("").trigger('change');
+    $('#sexo').val("").trigger('change');
+    $('#tpDiscapacidad').val("").trigger('change');
+    $("#tomo").val("");
+    $("#folio").val("");
+    $("#cedula_familiar").val("");
+    $("#carnet").val("");
+
+    $("#disca").prop("checked", false);
+    $("#cedula").prop("disabled", false);
+
+
+  }
   // funcion para editar familiar
   async function editarFamiliar(idPersonal) {
     let url = "src/ajax/registroPersonal.php?modulo_personal=obtenerDatosFamiliar";
@@ -281,6 +360,18 @@ $(function () {
       const datosPersonal = await obtenerDatosPromise(url, options);
 
       if (datosPersonal.exito) {
+        $("#parentesco").empty();
+        $("#parentesco").append($("<option>", {
+          value: "",
+          text: "Seleccione un parentesco"
+        }));
+
+        opciones.forEach(function (value) {
+          $("#parentesco").append($("<option>", {
+            value: value,
+            text: value
+          }));
+        });
         $("#idEmpleadoFamiliar").val(datosPersonal.idEmpleado);
         $("#cedula_trabajador_familiar").val(datosPersonal.cedulaEmpleado);
         $("#nombreEmpleado").val(datosPersonal.nombreEmpleado);
@@ -296,10 +387,13 @@ $(function () {
         $('#anoFamiliar').val(datosPersonal.anoNacimiento).trigger('change');
         $('#diaFamiliar').val(datosPersonal.diaNacimineto).trigger('change');
         $('#mesesFamiliar').val(datosPersonal.mesNacimiento).trigger('change');
+        $('#sexo').val(datosPersonal.sexoFamiliar).trigger('change');
+        $('#tpDiscapacidad').val(datosPersonal.discapacidad).trigger('change');
 
+        $("#cedula_familiar").val(datosPersonal.cedula);
         $("#tomo").val(datosPersonal.tomo);
         $("#folio").val(datosPersonal.folio);
-
+        $("#carnet").val(datosPersonal.codigoCarnet);
         $("#cedula_trabajador_familiar").addClass("cedulaBusqueda");
         clasesInputs("#nombreEmpleado", ".span_nombre");
         clasesInputs("#apellidoEmpleado", ".span_apellido");
@@ -316,23 +410,33 @@ $(function () {
         clasesInputs("#folio", ".span_folio");
         clasesInputs("#carnet", ".span_carnet");
         clasesInputs("#cedula_familiar", ".span_cedula_familiar");
-        $("#cedula_familiar").val(datosPersonal.cedula);
+        clasesInputs("#sexo", ".span_sexo");
+        clasesInputs("#tpDiscapacidad", ".span_tpDiscapacidad");
 
-        $("#carnet").val(datosPersonal.codigoCarnet);
+        
+
         // $("#noCedula").prop("checked", true);
 
         if (datosPersonal.codigoCarnet == null) {
           $("#disca").prop("checked", false);
           $("#contenCarnet").hide();
+          $("#contenTipoDiscapacidad").hide();
           $("#carnet").removeClass("cumplido");
           $(".span_carnet").removeClass("cumplido_span");
+          $(".span_tpDiscapacidad").removeClass("cumplido_span");
 
           $("#carnet").addClass("ignore-validation");
+          $("#contenTipoDiscapacidad").addClass("ignore-validation");
+
         } else {
           $("#contenCarnet").show();
+          $("#contenTipoDiscapacidad").show();
           $("#carnet").addClass("cumplido");
           $(".span_carnet").addClass("cumplido_span");
           $("#carnet").removeClass("ignore-validation");
+
+          $(".span_tpDiscapacidad").addClass("cumplido_span");
+          $("#contenTipoDiscapacidad").removeClass("ignore-validation");
           $("#disca").prop("checked", true);
         }
         $('#editarDatos').removeAttr('hidden');
@@ -471,8 +575,8 @@ $(function () {
     });
   }
 
-  async function cerrarEditar(idCard){
-    $(idCard).slideUp(600, function () {
+  async function cerrarEditar(idCard) {
+    $(idCard).slideUp(800, function () {
       // Animación de desplazamiento al narvarPrincipal después del cierre
       $('html, body').animate({
         scrollTop: $('#narvarPrincipal')[0].scrollIntoView({ behavior: 'smooth' })
@@ -502,17 +606,19 @@ $(function () {
 
   //check no cedulado
   $("#noCedula").on("change", function () {
+
     if ($(this).is(":checked")) {
       $("#cedula").prop("disabled", true);
       $('#cedula_familiar').removeAttr('required');
       $("#cedula_familiar").val("");
-      clasesInputs("#cedula_familiar", ".span_cedula")
+      clasesInputs("#cedula_familiar", ".span_cedula_familiar")
 
     } else {
       $('#cedula_familiar').attr('required', 'required');
       $("#cedula_familiar").removeClass("cumplido");
-      $(".span_cedula").removeClass("cumplido_span");
+      $(".span_cedula_familiar").removeClass("cumplido_span");
       $("#cedula").prop("disabled", false);
+
     }
   });
 
@@ -520,9 +626,13 @@ $(function () {
   $("#disca").on("change", function () {
     if ($(this).is(":checked")) {
       $("#contenCarnet").show();
+      $("#contenTipoDiscapacidad").show();
+      $("#contenTipoDiscapacidad").removeClass("ignore-validation");
       $("#carnet").removeClass("ignore-validation");
     } else {
       $("#contenCarnet").hide();
+      $("#contenTipoDiscapacidad").hide();
+      $("#contenTipoDiscapacidad").addClass("ignore-validation");
       $("#carnet").addClass("ignore-validation");
     }
   });
@@ -754,9 +864,11 @@ $(function () {
     async function callbackExito(parsedData) {
       $("#aceptar_familia").prop("disabled", false);
       if (parsedData.exito) {
+        cerrarEditar("#editarDatos");
+        limpiarDatos();
         tableInic.ajax.reload(null, false);
         await AlertSW2("success", "Familiar Actualizado Con Exito", "top-end", 3000);
-        cerrarEditar("#editarDatos");
+
       } else {
         await alertaNormalmix(parsedData.mensaje, 4000, "error", "top-end")
       }
@@ -764,25 +876,12 @@ $(function () {
     await enviarFormulario(url, data, callbackExito, true);
   });
 
-  // cerrar el card de reporte
-  $(document).on('click', '#cerrarReport', function () {
-    $('#datosReporte').slideUp(800, function () {
-
-      // Animación de desplazamiento al narvarPrincipal después del cierre
-      $('html, body').animate({
-        scrollTop: $('#narvarPrincipal')[0].scrollIntoView({ behavior: 'smooth' })
-      }, 3000);
-      $("#contentReport").remove();
-
-      // Aquí puedes agregar cualquier otra lógica que necesites después del cierre
-    });
-  });
-
+  //
   $(document).on('click', '#cerrarEdit', function () {
     cerrarEditar("#editarDatos")
-    // limpiarDatos();
+    limpiarDatos();
   });
-  
+
   function todosCumplidos(formulario) {
     const elementosCumplidos = $(formulario).find('input, select').filter('.cumplido, .cumplidoNormal').not('.ignore-validation');
     const totalElementos = $(formulario).find('input, select').not('.ignore-validation').length;
@@ -825,12 +924,14 @@ $(function () {
   const aceptar_familia = $('#aceptar_familia');
 
   const formDescargarPDF = document.querySelector('#formulario-descargarpdf');
-  const descargarpdf = $('#descargarReporte');
+  const descargarpdf = $('#descargarReporte2');
 
-
+  //FORMULARIO DE ACTUALZIAR
   observarFormulario(forActualizarFamiliar, aceptar_familia);
-
   habilitarBoton(forActualizarFamiliar, aceptar_familia);
-
+  //FORMULARIO DE REPORTES
+  observarFormulario(formDescargarPDF, descargarpdf);
+  habilitarBoton(formDescargarPDF, descargarpdf);
 
 })
+

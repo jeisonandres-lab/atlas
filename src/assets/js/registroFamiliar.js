@@ -20,7 +20,6 @@ import {
   validarDosDatos,
   validarInputFecha,
   mesesDias,
-  configurarInactividad,
 } from "./ajax/inputs.js";
 
 $(function () {
@@ -96,6 +95,7 @@ $(function () {
   file("#contrato", ".span_contrato");
   file("#notificacion", ".span_notificacion");
   colocarYear("#ano2", "1900");
+  colocarMeses("#meses2");
   colocarMeses("#meses2");
   colocarNivelesEducativos("#academico");
 

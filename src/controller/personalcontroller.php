@@ -449,7 +449,8 @@ class personalController extends personalModel
         $numeroCarnet,
         $tomo,
         $folio,
-        $discapacidad
+        $discapacidad,
+        $sexo
     ) {
         sleep(1);
         $cedulaEmpleado = $this->limpiarCadena($cedulaEmpleado);
@@ -467,9 +468,7 @@ class personalController extends personalModel
         $folio = $this->limpiarCadena($folio);
         $parentesco = $this->limpiarCadena($parentesco);
         $discapacidad = $this->limpiarCadena($discapacidad);
-
-
-
+        $sexo = $this->limpiarCadena($sexo);
 
         if ($numeroCarnet == "") {
             $numeroCarnet = null;
@@ -478,6 +477,7 @@ class personalController extends personalModel
         if ($discapacidad == "") {
             $discapacidad = null;
         }
+
         $fileInputName = 'docArchivo';
         $fileInputName2 = 'docArchivoDis';
         $uploadDir1 = App::URL_PARTIDANACIMIENTO;
@@ -580,6 +580,11 @@ class personalController extends personalModel
                         "campo_nombre" => "discapacidad",
                         "campo_marcador" => ":discapacidad",
                         "campo_valor" => $discapacidad
+                    ],
+                    [
+                        "campo_nombre" => "sexoFamiliar",
+                        "campo_marcador" => ":sexoFamiliar",
+                        "campo_valor" => $sexo
                     ],
                     [
                         "campo_nombre" => "idEmpleado",
@@ -853,16 +858,16 @@ class personalController extends personalModel
                     $data_json['exito'] = true;
                     $data_json['idEmpleado'] = $row['idEmpleado'];
                     $data_json['cedulaEmpleado'] = $row['cedulaEmpleado'];
-                    $data_json['nombreEmpleado'] = $row['primerNombreEmpleado'];
-                    $data_json['apellidoEmpleado'] = $row['primerApellidoEmpleado'];
+                    $data_json['nombreEmpleado'] = ucfirst($row['primerNombreEmpleado']);
+                    $data_json['apellidoEmpleado'] = ucfirst($row['primerApellidoEmpleado']);
 
                     $data_json['idfamiliar'] = $row['id_ninos'];
                     $data_json['cedula'] = $row['cedula'];
-                    $data_json['nombre'] = $row['primerNombre'];
-                    $data_json['segundoNombre'] = $row['segundoNombre'];
-                    $data_json['apellido'] = $row['primerApellido'];
-                    $data_json['segundoApellido'] = $row['segundoApellido'];
-                    $data_json['parentesco'] = $row['parentesco'];
+                    $data_json['nombre'] =ucfirst( $row['primerNombre']);
+                    $data_json['segundoNombre'] = ucfirst($row['segundoNombre']);
+                    $data_json['apellido'] = ucfirst($row['primerApellido']);
+                    $data_json['segundoApellido'] = ucfirst($row['segundoApellido']);
+                    $data_json['parentesco'] = ucfirst($row['parentesco']);
                     $data_json['edad'] = $row['edad'];
                     $data_json['anoNacimiento'] = $row['anoNacimiento'];
                     $data_json['mesNacimiento'] = $row['mesNacimiento'];
@@ -870,6 +875,8 @@ class personalController extends personalModel
                     $data_json['codigoCarnet'] = $row['codigoCarnet'];
                     $data_json['tomo'] = $row['tomo'];
                     $data_json['folio'] = $row['folio'];
+                    $data_json['sexoFamiliar'] = ucfirst($row['sexoFamiliar']);
+                    $data_json['discapacidad'] = ucfirst($row['discapacidad']);
                     $data_json['mensaje'] = "Familiar Encontrado";
                 }
             } else {
@@ -1077,7 +1084,7 @@ class personalController extends personalModel
         $selectoresCantidad = 'COUNT(id_ninos) as cantidad'; // Selector para contar la cantidad de registros de la tabla
         $datosBuscar = []; // Array de selectores para buscar en la tabla
         $campoOrden = ' df.id_ninos'; // Campo por el cual se ordenará la tabla
-        $selectores = '*, df.primerNombre AS primerNombreFamiliar, df.primerApellido AS primerApellidoFamiliar, p.primerNombre AS primerNombreEmpleado, p.primerApellido AS primerApellidoEmpleado'; // Selectores para obtener los datos de la tabla
+        $selectores = '*, df.primerNombre AS primerNombreFamiliar, df.primerApellido AS primerApellidoFamiliar, p.primerNombre AS primerNombreEmpleado, p.primerApellido AS primerApellidoEmpleado, df.discapacidad AS discapacidadFamiliar'; // Selectores para obtener los datos de la tabla
         $conditions = [" df.activo = ?"];
         $conditionParams = [ '1'];
 
@@ -1131,12 +1138,14 @@ class personalController extends personalModel
                 '0' => $row['primerNombreEmpleado'] . " " . $row['primerApellidoEmpleado'],
                 '1' => $row['primerNombreFamiliar'] . " " . $row['primerApellidoFamiliar'],
                 '2' => $row['cedula'],
-                '3' => $row['codigoCarnet'],
-                '4' => $row['edad'],
-                '5' => $row['tomo'],
-                '6' => $row['folio'],
-                '7' => $botones,
-                '8' => $botonDoc,
+                '3' => $row['sexoFamiliar'],
+                '4' => $row['codigoCarnet'],
+                '5' => $row['discapacidadFamiliar'],
+                '6' => $row['edad'],
+                '7' => $row['tomo'],
+                '8' => $row['folio'],
+                '9' => $botones,
+                '10' => $botonDoc,
             ];
             $data_json['mensaje'] = "todas las personas exitoso";
         }
@@ -1633,7 +1642,9 @@ class personalController extends personalModel
         $dia,
         $numeroCarnet,
         $tomo,
-        $folio
+        $folio,
+        $sexo,
+        $discapacidad
     ) {
         $primerNombre = $this->limpiarCadena($primerNombre);
         $segundoNombre = $this->limpiarCadena($segundoNombre);
@@ -1649,6 +1660,8 @@ class personalController extends personalModel
         $tomo = $this->limpiarCadena($tomo);
         $folio = $this->limpiarCadena($folio);
         $parentesco = $this->limpiarCadena($parentesco);
+        $sexo = $this->limpiarCadena($sexo);
+        $discapacidad = $this->limpiarCadena($discapacidad);
 
         $fileInputName = 'docArchivo';
         $fileInputName2 = 'docArchivoDis';
@@ -1663,6 +1676,9 @@ class personalController extends personalModel
         }
         if ($numeroCarnet == '') {
             $numeroCarnet = null;
+        }
+        if ($discapacidad == '') {
+            $discapacidad = null;
         }
         $parametro = [$cedulaEmpleado, $cedulaEmpleado . "%"];
         if ($cedula == '') {
@@ -1739,6 +1755,16 @@ class personalController extends personalModel
                         "campo_nombre" => "codigoCarnet",
                         "campo_marcador" => ":codigoCarnet",
                         "campo_valor" => $numeroCarnet
+                    ],
+                    [
+                        "campo_nombre" => "sexoFamiliar",
+                        "campo_marcador" => ":sexoFamiliar",
+                        "campo_valor" => $sexo
+                    ],
+                    [
+                        "campo_nombre" => "discapacidad",
+                        "campo_marcador" => ":discapacidad",
+                        "campo_valor" => $discapacidad
                     ],
                     [
                         "campo_nombre" => "idEmpleado",

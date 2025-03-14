@@ -841,9 +841,12 @@ $(function () {
         console.log(nombreReporte);
         // Obtener el atributo 'action' del formulario
         const formAction = $(this).attr("action");
-
-        // Usar el atributo 'action' en la función descargarArchivo
-        await descargarArchivo(formAction, nombreReporte, data);
+        if (formAction == "#") {
+            await AlertSW2("error", "Seleccione una opcion", "top", 3000)
+        } else {
+            // Usar el atributo 'action' en la función descargarArchivo
+            await descargarArchivo(formAction, nombreReporte, data);
+        }
     });
 
     //buscar municipios por medio de los estados

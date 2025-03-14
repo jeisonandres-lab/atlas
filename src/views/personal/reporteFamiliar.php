@@ -2,109 +2,147 @@
 sleep(1);
 $tipo = isset($_GET['tipo']) ? $_GET['tipo'] : 'pdf';
 if ($tipo === 'pdf') {
-        // Generar botones para PDF
-    ?>
-        <div class="container-fluid contenbotonesreport" id="contentReport">
-            <p class="mb-0 mt-2">Seleccione el tipo de reporte</p>
-            <hr class="mt-1 mb-2">
-            <div class="report">
+    // Generar botones para PDF
+?>
+    <div class="container-fluid contenbotonesreport" id="contentReport">
+        <p class="mb-0 mt-2">Seleccione el tipo de reporte</p>
+        <hr class="mt-1 mb-2">
+        <div class="report">
 
-                <div class="mt-3 contenbtn">
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input report-checkbox" type="checkbox" value="" id="reporteSexo">
-                        <label class="form-check-label" for="reporteSexo">
-                            <i class="text-danger me-2 bi bi-file-pdf-fill"></i>Reporte por sexualidad
-                        </label>
-                    </div>
-                </div>
-
-                <div class="mt-3 contenbtn">
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input report-checkbox" type="checkbox" value="" id="reporteEdad">
-                        <label class="form-check-label" for="reporteEdad">
-                            <i class="text-danger me-2 bi bi-file-pdf-fill"></i>Reporte por Edad
-                        </label>
-                    </div>
-                </div>
-
-                <div class="mt-3 contenbtn">
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input report-checkbox" type="checkbox" value="" id="reporteParentesco">
-                        <label class="form-check-label" for="reporteParentesco">
-                            <i class="text-danger me-2 bi bi-file-pdf-fill"></i>Reporte por parentesco
-                        </label>
-                    </div>
-                </div>
-
-                <div class="mt-3 contenbtn">
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input report-checkbox" type="checkbox" value="" id="reporteDiscapacidad">
-                        <label class="form-check-label" for="reporteDiscapacidad">
-                            <i class="text-danger me-2 bi bi-file-pdf-fill"></i>Reporte por discapacidad
-                        </label>
+            <div class="mt-3 contenbtn">
+                <div class="form-check form-check-inline">
+                <div class="checkbox-wrapper-7 d-flex align-items-center">
+                        <input class="form-check-input tgl tgl-ios report-checkbox ignore-validation" id="reporteSexo" type="checkbox" value="" />
+                        <label class="tgl-btn pdf" for="reporteSexo"></label>
+                        <span class="ms-2">Reporte por sexualidad</span>
                     </div>
                 </div>
             </div>
-            <hr>
-            <div class="container-fluid">
-                <div class="row" id="contentReporHTML">
 
+            <div class="mt-3 contenbtn">
+                <div class="form-check form-check-inline">
+                    <div class="checkbox-wrapper-7 d-flex align-items-center">
+                        <input class="form-check-input tgl tgl-ios report-checkbox ignore-validation" id="reporteEdad" type="checkbox" value="" />
+                        <label class="tgl-btn pdf" for="reporteEdad"></label>
+                        <span class="ms-2">Reporte por edad</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-3 contenbtn">
+                <div class="form-check form-check-inline">
+                    <div class="checkbox-wrapper-7 d-flex align-items-center">
+                        <input class="form-check-input tgl tgl-ios report-checkbox ignore-validation" id="reporteParentesco" type="checkbox" value="" />
+                        <label class="tgl-btn pdf" for="reporteParentesco"></label>
+                        <span class="ms-2">Reporte de parentesco</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-3 contenbtn">
+                <div class="form-check form-check-inline">
+                    <div class="checkbox-wrapper-7 d-flex align-items-center">
+                        <input class="form-check-input tgl tgl-ios report-checkbox ignore-validation" id="reporteDiscapacidad" type="checkbox" value="" />
+                        <label class="tgl-btn pdf" for="reporteDiscapacidad"></label>
+                        <span class="ms-2">Reporte de discapacidad</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-3 contenbtn">
+                <div class="form-check form-check-inline">
+                    <div class="checkbox-wrapper-7 d-flex align-items-center">
+                        <input class="form-check-input tgl tgl-ios report-checkbox ignore-validation" id="reporteFecha" type="checkbox" value="" />
+                        <label class="tgl-btn pdf" for="reporteFecha"></label>
+                        <span class="ms-2">Reporte por fecha</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-3 contenbtn">
+                <div class="form-check form-check-inline">
+                    <div class="checkbox-wrapper-7 d-flex align-items-center">
+                        <input class="form-check-input tgl tgl-ios report-checkbox ignore-validation" id="reportePersonalizado" type="checkbox" value="" />
+                        <label class="tgl-btn pdf" for="reportePersonalizado"></label>
+                        <span class="ms-2">Reporte personalizado</span>
+                    </div>
                 </div>
             </div>
         </div>
-    <?php
+        <hr>
+        <div class="container-fluid">
+            <div class="row" id="contentReporHTML">
+
+            </div>
+        </div>
+    </div>
+<?php
 } elseif ($tipo === 'excel') {
     // Generar botones para Excel
-    ?>
-        <div class="container-fluid contenbotonesreport" id="contentReport">
-            <p class="mb-0 mt-2">Seleccione el tipo de reporte</p>
-            <hr class="mt-1 mb-2">
-            <div class="report">
+?>
+    <div class="container-fluid contenbotonesreport" id="contentReport">
+        <p class="mb-0 mt-2">Seleccione el tipo de reporte</p>
+        <hr class="mt-1 mb-2">
+        <div class="report">
 
-                <div class="mt-3 contenbtn">
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input report-checkbox" type="checkbox" value="" id="reporteExcelSexo">
-                        <label class="form-check-label" for="reporteExcelSexo">
-                            <i class="text-success fa-regular fa-table me-2"></i>Reporte por sexualidad
-                        </label>
-                    </div>
-                </div>
-
-                <div class="mt-3 contenbtn">
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input report-checkbox" type="checkbox" value="" id="reporteExcelEdad">
-                        <label class="form-check-label" for="reporteExcelEdad">
-                            <i class="text-success fa-regular fa-table me-2"></i>Reporte por Edad
-                        </label>
-                    </div>
-                </div>
-
-                <div class="mt-3 contenbtn">
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input report-checkbox" type="checkbox" value="" id="reporteExcelDiscapacidad">
-                        <label class="form-check-label" for="reporteExcelDiscapacidad">
-                            <i class="text-success fa-regular fa-table me-2"></i>Reporte por discapacidad
-                        </label>
-                    </div>
-                </div>
-
-                <div class="mt-3 contenbtn">
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input report-checkbox" type="checkbox" value="" id="reporteExcelParentesco">
-                        <label class="form-check-label" for="reporteExcelParentesco">
-                            <i class="text-success fa-regular fa-table me-2"></i>Reporte por parentesco
-                        </label>
+            <div class="mt-3 contenbtn">
+                <div class="form-check form-check-inline checkbox-wrapper-7">
+                    <div class="checkbox-wrapper-7 d-flex align-items-center">
+                        <input class="form-check-input tgl tgl-ios report-checkbox ignore-validation" id="reporteExcelSexo" type="checkbox" value="" />
+                        <label class="tgl-btn" for="reporteExcelSexo"></label>
+                        <span class="ms-2">Reporte por sexualidad</span>
                     </div>
                 </div>
             </div>
-            <hr>
-            <div class="container-fluid">
-                <div class="row" id="contentReporHTML">
 
+            <div class="mt-3 contenbtn">
+                <div class="form-check form-check-inline">
+                    <div class="checkbox-wrapper-7 d-flex align-items-center">
+                        <input class="form-check-input tgl tgl-ios report-checkbox ignore-validation" id="reporteExcelEdad" type="checkbox" value="" />
+                        <label class="tgl-btn" for="reporteExcelEdad"></label>
+                        <span class="ms-2">Reporte por Edad</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-3 contenbtn">
+                <div class="form-check form-check-inline">
+                    <div class="checkbox-wrapper-7 d-flex align-items-center">
+                        <input class="form-check-input tgl tgl-ios report-checkbox ignore-validation" id="reporteExcelDiscapacidad" type="checkbox" value="" />
+                        <label class="tgl-btn" for="reporteExcelDiscapacidad"></label>
+                        <span class="ms-2">Reporte por discapacidad</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-3 contenbtn">
+                <div class="form-check form-check-inline">
+                    <div class="checkbox-wrapper-7 d-flex align-items-center">
+                        <input class="form-check-input tgl tgl-ios report-checkbox ignore-validation" id="reporteExcelParentesco" type="checkbox" value="" />
+                        <label class="tgl-btn" for="reporteExcelParentesco"></label>
+                        <span class="ms-2">Reporte por parentesco</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-3 contenbtn">
+                <div class="form-check form-check-inline">
+                    <div class="checkbox-wrapper-7 d-flex align-items-center">
+                        <input class="form-check-input tgl tgl-ios report-checkbox ignore-validation" id="reporteExcelFecha" type="checkbox" value="" />
+                        <label class="tgl-btn" for="reporteExcelFecha"></label>
+                        <span class="ms-2">Reporte por fecha</span>
+                    </div>
                 </div>
             </div>
         </div>
-    <?php
+        <hr>
+        <div class="container-fluid">
+            <div class="row" id="contentReporHTML">
+
+            </div>
+        </div>
+    </div>
+<?php
 } else {
     echo 'Tipo de reporte no válido.';
 }

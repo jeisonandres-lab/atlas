@@ -153,7 +153,8 @@ switch ($_GET['modulo_personal']) {
             $numeroCarnet,
             $tomo,
             $folio,
-            $discapacidad
+            $discapacidad,
+            $sexo
         );
         break;
     case 'obtenerPersonal':
@@ -219,7 +220,9 @@ switch ($_GET['modulo_personal']) {
             $dia,
             $numeroCarnet,
             $tomo,
-            $folio
+            $folio,
+            $sexo,
+            $discapacidad
         );
         break;
     default:

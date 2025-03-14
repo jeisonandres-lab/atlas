@@ -89,20 +89,20 @@ class reportesController extends FPDF
         $this->SetFont('Arial', 'B', 10);
         $this->SetFillColor(25, 41, 187);
         $this->SetTextColor(255, 255, 255);
-        $datosEmpleado = $this->personalData->getDatosEmpleadoFiltro('dp.sexo = ?',[$sexo]);
+        $datosEmpleado = $this->personalData->getDatosEmpleadoFiltro('dp.sexo = ?', [$sexo]);
         $i = 0;
-              // $this->SetTextColor(255, 255, 255); // Blanco
-              $this->Cell(25, 8, utf8_decode('FILTRO'), 1, 0, 'C', true);
-              $this->SetX(30); // Posición desde el final
-              $this->SetTextColor(0, 0, 0);
-              $this->Cell(90, 8, utf8_decode(ucfirst('SEXUALIDAD: '." ".$sexo)), 1, 0, 'L');
-              $this->SetX(110); // Posición desde el final
-              $this->SetTextColor(255, 255, 255);
-              $this->Cell(60, 8, utf8_decode(ucfirst('CANTIDAD DE REGISTROS')), 1, 0, 'C', true);
-              $this->SetTextColor(0, 0, 0);
-              $contar = $this->personalData->contarDatos( ' COUNT(id_personal) AS contar', 'dp.sexo = ?', [$sexo]);
-              $this->Cell(40, 8, utf8_decode(ucfirst($contar[0]['contar'])), 1, 0, 'C');
-              $this->Ln(8);
+        // $this->SetTextColor(255, 255, 255); // Blanco
+        $this->Cell(25, 8, utf8_decode('FILTRO'), 1, 0, 'C', true);
+        $this->SetX(30); // Posición desde el final
+        $this->SetTextColor(0, 0, 0);
+        $this->Cell(90, 8, utf8_decode(ucfirst('SEXUALIDAD: ' . " " . $sexo)), 1, 0, 'L');
+        $this->SetX(110); // Posición desde el final
+        $this->SetTextColor(255, 255, 255);
+        $this->Cell(60, 8, utf8_decode(ucfirst('CANTIDAD DE REGISTROS')), 1, 0, 'C', true);
+        $this->SetTextColor(0, 0, 0);
+        $contar = $this->personalData->contarDatos(' COUNT(id_personal) AS contar', 'dp.sexo = ?', [$sexo]);
+        $this->Cell(40, 8, utf8_decode(ucfirst($contar[0]['contar'])), 1, 0, 'C');
+        $this->Ln(8);
         if (is_array($datosEmpleado)) {
 
             // Subtítulos fuera de la tabla
@@ -144,21 +144,21 @@ class reportesController extends FPDF
         $this->SetFont('Arial', 'B', 10);
         $this->SetFillColor(25, 41, 187);
         $this->SetTextColor(255, 255, 255);
-        $datosEmpleado = $this->personalData->getDatosEmpleadoFiltro('dp.edadPersonal = ?',[$edad]);
+        $datosEmpleado = $this->personalData->getDatosEmpleadoFiltro('dp.edadPersonal = ?', [$edad]);
         $i = 0;
-        $contar = $this->personalData->contarDatos( ' COUNT(id_personal) AS contar', 'dp.edadPersonal = ?', [$edad]);
+        $contar = $this->personalData->contarDatos(' COUNT(id_personal) AS contar', 'dp.edadPersonal = ?', [$edad]);
 
-              // $this->SetTextColor(255, 255, 255); // Blanco
-              $this->Cell(25, 8, utf8_decode('FILTRO'), 1, 0, 'C', true);
-              $this->SetX(30); // Posición desde el final
-              $this->SetTextColor(0, 0, 0);
-              $this->Cell(70, 8, utf8_decode(ucfirst('EDAD: '." ".$edad)), 1, 0, 'L');
-              $this->SetX(100); // Posición desde el final
-              $this->SetTextColor(255, 255, 255);
-              $this->Cell(60, 8, utf8_decode(ucfirst('CANTIDAD DE REGISTROS')), 1, 0, 'C', true);
-              $this->SetTextColor(0, 0, 0);
-              $this->Cell(40, 8, utf8_decode(ucfirst($contar[0]['contar'])), 1, 0, 'C');
-              $this->Ln(8);
+        // $this->SetTextColor(255, 255, 255); // Blanco
+        $this->Cell(25, 8, utf8_decode('FILTRO'), 1, 0, 'C', true);
+        $this->SetX(30); // Posición desde el final
+        $this->SetTextColor(0, 0, 0);
+        $this->Cell(70, 8, utf8_decode(ucfirst('EDAD: ' . " " . $edad)), 1, 0, 'L');
+        $this->SetX(100); // Posición desde el final
+        $this->SetTextColor(255, 255, 255);
+        $this->Cell(60, 8, utf8_decode(ucfirst('CANTIDAD DE REGISTROS')), 1, 0, 'C', true);
+        $this->SetTextColor(0, 0, 0);
+        $this->Cell(40, 8, utf8_decode(ucfirst($contar[0]['contar'])), 1, 0, 'C');
+        $this->Ln(8);
         if (is_array($datosEmpleado)) {
 
             // Subtítulos fuera de la tabla
@@ -200,21 +200,21 @@ class reportesController extends FPDF
         $this->SetFont('Arial', 'B', 10);
         $this->SetFillColor(25, 41, 187);
         $this->SetTextColor(255, 255, 255);
-        $datosEmpleado = $this->personalData->getDatosEmpleadoFiltro('c.id_cargo = ?',[$cargo]);
+        $datosEmpleado = $this->personalData->getDatosEmpleadoFiltro('c.id_cargo = ?', [$cargo]);
         $i = 0;
-        $contar = $this->personalData->contarDatos( 'c.cargo, COUNT(id_cargo) AS contar', 'c.id_cargo = ?', [$cargo]);
+        $contar = $this->personalData->contarDatos('c.cargo, COUNT(id_cargo) AS contar', 'c.id_cargo = ?', [$cargo]);
 
-              // $this->SetTextColor(255, 255, 255); // Blanco
-              $this->Cell(25, 8, utf8_decode('FILTRO'), 1, 0, 'C', true);
-              $this->SetX(30); // Posición desde el final
-              $this->SetTextColor(0, 0, 0);
-              $this->Cell(70, 8, utf8_decode(ucfirst('CARGO: '." ".$contar[0]['cargo'])), 1, 0, 'L');
-              $this->SetX(100); // Posición desde el final
-              $this->SetTextColor(255, 255, 255);
-              $this->Cell(60, 8, utf8_decode(ucfirst('CANTIDAD DE REGISTROS')), 1, 0, 'C', true);
-              $this->SetTextColor(0, 0, 0);
-              $this->Cell(40, 8, utf8_decode(ucfirst($contar[0]['contar'])), 1, 0, 'C');
-              $this->Ln(8);
+        // $this->SetTextColor(255, 255, 255); // Blanco
+        $this->Cell(25, 8, utf8_decode('FILTRO'), 1, 0, 'C', true);
+        $this->SetX(30); // Posición desde el final
+        $this->SetTextColor(0, 0, 0);
+        $this->Cell(70, 8, utf8_decode(ucfirst('CARGO: ' . " " . $contar[0]['cargo'])), 1, 0, 'L');
+        $this->SetX(100); // Posición desde el final
+        $this->SetTextColor(255, 255, 255);
+        $this->Cell(60, 8, utf8_decode(ucfirst('CANTIDAD DE REGISTROS')), 1, 0, 'C', true);
+        $this->SetTextColor(0, 0, 0);
+        $this->Cell(40, 8, utf8_decode(ucfirst($contar[0]['contar'])), 1, 0, 'C');
+        $this->Ln(8);
         if (is_array($datosEmpleado)) {
 
             // Subtítulos fuera de la tabla
@@ -256,21 +256,21 @@ class reportesController extends FPDF
         $this->SetFont('Arial', 'B', 10);
         $this->SetFillColor(25, 41, 187);
         $this->SetTextColor(255, 255, 255);
-        $datosEmpleado = $this->personalData->getDatosEmpleadoFiltro('e.id_estatus = ?',[$estatus]);
+        $datosEmpleado = $this->personalData->getDatosEmpleadoFiltro('e.id_estatus = ?', [$estatus]);
         $i = 0;
-        $contar = $this->personalData->contarDatos( 'e.estatus, COUNT(dp.id_personal) AS contar', 'e.id_estatus = ?', [$estatus]);
+        $contar = $this->personalData->contarDatos('e.estatus, COUNT(dp.id_personal) AS contar', 'e.id_estatus = ?', [$estatus]);
 
-              // $this->SetTextColor(255, 255, 255); // Blanco
-              $this->Cell(25, 8, utf8_decode('FILTRO'), 1, 0, 'C', true);
-              $this->SetX(30); // Posición desde el final
-              $this->SetTextColor(0, 0, 0);
-              $this->Cell(70, 8, utf8_decode(ucfirst('ESTATUS: '." ".$contar[0]['estatus'])), 1, 0, 'L');
-              $this->SetX(100); // Posición desde el final
-              $this->SetTextColor(255, 255, 255);
-              $this->Cell(60, 8, utf8_decode(ucfirst('CANTIDAD DE REGISTROS')), 1, 0, 'C', true);
-              $this->SetTextColor(0, 0, 0);
-              $this->Cell(40, 8, utf8_decode(ucfirst($contar[0]['contar'])), 1, 0, 'C');
-              $this->Ln(8);
+        // $this->SetTextColor(255, 255, 255); // Blanco
+        $this->Cell(25, 8, utf8_decode('FILTRO'), 1, 0, 'C', true);
+        $this->SetX(30); // Posición desde el final
+        $this->SetTextColor(0, 0, 0);
+        $this->Cell(70, 8, utf8_decode(ucfirst('ESTATUS: ' . " " . $contar[0]['estatus'])), 1, 0, 'L');
+        $this->SetX(100); // Posición desde el final
+        $this->SetTextColor(255, 255, 255);
+        $this->Cell(60, 8, utf8_decode(ucfirst('CANTIDAD DE REGISTROS')), 1, 0, 'C', true);
+        $this->SetTextColor(0, 0, 0);
+        $this->Cell(40, 8, utf8_decode(ucfirst($contar[0]['contar'])), 1, 0, 'C');
+        $this->Ln(8);
         if (is_array($datosEmpleado)) {
 
             // Subtítulos fuera de la tabla
@@ -312,21 +312,21 @@ class reportesController extends FPDF
         $this->SetFont('Arial', 'B', 10);
         $this->SetFillColor(25, 41, 187);
         $this->SetTextColor(255, 255, 255);
-        $datosEmpleado = $this->personalData->getDatosEmpleadoFiltro('dp.estadoCivil = ?',[$estadoCivil]);
+        $datosEmpleado = $this->personalData->getDatosEmpleadoFiltro('dp.estadoCivil = ?', [$estadoCivil]);
         $i = 0;
-        $contar = $this->personalData->contarDatos( ' COUNT(dp.id_personal) AS contar', 'dp.estadoCivil = ?', [$estadoCivil]);
+        $contar = $this->personalData->contarDatos(' COUNT(dp.id_personal) AS contar', 'dp.estadoCivil = ?', [$estadoCivil]);
 
-              // $this->SetTextColor(255, 255, 255); // Blanco
-              $this->Cell(25, 8, utf8_decode('FILTRO'), 1, 0, 'C', true);
-              $this->SetX(30); // Posición desde el final
-              $this->SetTextColor(0, 0, 0);
-              $this->Cell(70, 8, utf8_decode(ucfirst('ESTADO CIVIL: '." ". $estadoCivil)), 1, 0, 'L');
-              $this->SetX(100); // Posición desde el final
-              $this->SetTextColor(255, 255, 255);
-              $this->Cell(60, 8, utf8_decode(ucfirst('CANTIDAD DE REGISTROS')), 1, 0, 'C', true);
-              $this->SetTextColor(0, 0, 0);
-              $this->Cell(40, 8, utf8_decode(ucfirst($contar[0]['contar'])), 1, 0, 'C');
-              $this->Ln(8);
+        // $this->SetTextColor(255, 255, 255); // Blanco
+        $this->Cell(25, 8, utf8_decode('FILTRO'), 1, 0, 'C', true);
+        $this->SetX(30); // Posición desde el final
+        $this->SetTextColor(0, 0, 0);
+        $this->Cell(70, 8, utf8_decode(ucfirst('ESTADO CIVIL: ' . " " . $estadoCivil)), 1, 0, 'L');
+        $this->SetX(100); // Posición desde el final
+        $this->SetTextColor(255, 255, 255);
+        $this->Cell(60, 8, utf8_decode(ucfirst('CANTIDAD DE REGISTROS')), 1, 0, 'C', true);
+        $this->SetTextColor(0, 0, 0);
+        $this->Cell(40, 8, utf8_decode(ucfirst($contar[0]['contar'])), 1, 0, 'C');
+        $this->Ln(8);
         if (is_array($datosEmpleado)) {
 
             // Subtítulos fuera de la tabla
@@ -368,21 +368,21 @@ class reportesController extends FPDF
         $this->SetFont('Arial', 'B', 10);
         $this->SetFillColor(25, 41, 187);
         $this->SetTextColor(255, 255, 255);
-        $datosEmpleado = $this->personalData->getDatosEmpleadoFiltro('ubi.vivienda = ?',[$vivienda]);
+        $datosEmpleado = $this->personalData->getDatosEmpleadoFiltro('ubi.vivienda = ?', [$vivienda]);
         $i = 0;
-        $contar = $this->personalData->contarDatos( ' COUNT(dp.id_personal) AS contar', 'ubi.vivienda = ?', [$vivienda]);
+        $contar = $this->personalData->contarDatos(' COUNT(dp.id_personal) AS contar', 'ubi.vivienda = ?', [$vivienda]);
 
-              // $this->SetTextColor(255, 255, 255); // Blanco
-              $this->Cell(25, 8, utf8_decode('FILTRO'), 1, 0, 'C', true);
-              $this->SetX(30); // Posición desde el final
-              $this->SetTextColor(0, 0, 0);
-              $this->Cell(70, 8, utf8_decode(ucfirst('VIVIENDA: '." ". $vivienda)), 1, 0, 'L');
-              $this->SetX(100); // Posición desde el final
-              $this->SetTextColor(255, 255, 255);
-              $this->Cell(60, 8, utf8_decode(ucfirst('CANTIDAD DE REGISTROS')), 1, 0, 'C', true);
-              $this->SetTextColor(0, 0, 0);
-              $this->Cell(40, 8, utf8_decode(ucfirst($contar[0]['contar'])), 1, 0, 'C');
-              $this->Ln(8);
+        // $this->SetTextColor(255, 255, 255); // Blanco
+        $this->Cell(25, 8, utf8_decode('FILTRO'), 1, 0, 'C', true);
+        $this->SetX(30); // Posición desde el final
+        $this->SetTextColor(0, 0, 0);
+        $this->Cell(70, 8, utf8_decode(ucfirst('VIVIENDA: ' . " " . $vivienda)), 1, 0, 'L');
+        $this->SetX(100); // Posición desde el final
+        $this->SetTextColor(255, 255, 255);
+        $this->Cell(60, 8, utf8_decode(ucfirst('CANTIDAD DE REGISTROS')), 1, 0, 'C', true);
+        $this->SetTextColor(0, 0, 0);
+        $this->Cell(40, 8, utf8_decode(ucfirst($contar[0]['contar'])), 1, 0, 'C');
+        $this->Ln(8);
         if (is_array($datosEmpleado)) {
 
             // Subtítulos fuera de la tabla
@@ -424,21 +424,21 @@ class reportesController extends FPDF
         $this->SetFont('Arial', 'B', 10);
         $this->SetFillColor(25, 41, 187);
         $this->SetTextColor(255, 255, 255);
-        $datosEmpleado = $this->personalData->getDatosEmpleadoFiltro('de.nivelAcademico = ?',[$nivelAcademico]);
+        $datosEmpleado = $this->personalData->getDatosEmpleadoFiltro('de.nivelAcademico = ?', [$nivelAcademico]);
         $i = 0;
-        $contar = $this->personalData->contarDatos( ' COUNT(dp.id_personal) AS contar', 'de.nivelAcademico = ?', [$nivelAcademico]);
+        $contar = $this->personalData->contarDatos(' COUNT(dp.id_personal) AS contar', 'de.nivelAcademico = ?', [$nivelAcademico]);
 
-              // $this->SetTextColor(255, 255, 255); // Blanco
-              $this->Cell(25, 8, utf8_decode('FILTRO'), 1, 0, 'C', true);
-              $this->SetX(30); // Posición desde el final
-              $this->SetTextColor(0, 0, 0);
-              $this->Cell(70, 8, utf8_decode(ucfirst('NIVEL ACADEMICO: '." ". $nivelAcademico)), 1, 0, 'L');
-              $this->SetX(100); // Posición desde el final
-              $this->SetTextColor(255, 255, 255);
-              $this->Cell(60, 8, utf8_decode(ucfirst('CANTIDAD DE REGISTROS')), 1, 0, 'C', true);
-              $this->SetTextColor(0, 0, 0);
-              $this->Cell(40, 8, utf8_decode(ucfirst($contar[0]['contar'])), 1, 0, 'C');
-              $this->Ln(8);
+        // $this->SetTextColor(255, 255, 255); // Blanco
+        $this->Cell(25, 8, utf8_decode('FILTRO'), 1, 0, 'C', true);
+        $this->SetX(30); // Posición desde el final
+        $this->SetTextColor(0, 0, 0);
+        $this->Cell(70, 8, utf8_decode(ucfirst('NIVEL ACADEMICO: ' . " " . $nivelAcademico)), 1, 0, 'L');
+        $this->SetX(100); // Posición desde el final
+        $this->SetTextColor(255, 255, 255);
+        $this->Cell(60, 8, utf8_decode(ucfirst('CANTIDAD DE REGISTROS')), 1, 0, 'C', true);
+        $this->SetTextColor(0, 0, 0);
+        $this->Cell(40, 8, utf8_decode(ucfirst($contar[0]['contar'])), 1, 0, 'C');
+        $this->Ln(8);
         if (is_array($datosEmpleado)) {
 
             // Subtítulos fuera de la tabla
@@ -480,21 +480,21 @@ class reportesController extends FPDF
         $this->SetFont('Arial', 'B', 10);
         $this->SetFillColor(25, 41, 187);
         $this->SetTextColor(255, 255, 255);
-        $datosEmpleado = $this->personalData->getDatosEmpleadoFiltro('de.idDependencia = ?',[$dependencia]);
+        $datosEmpleado = $this->personalData->getDatosEmpleadoFiltro('de.idDependencia = ?', [$dependencia]);
         $i = 0;
-        $contar = $this->personalData->contarDatos( 'depe.dependencia, COUNT(dp.id_personal) AS contar', 'de.idDependencia = ?', [$dependencia]);
+        $contar = $this->personalData->contarDatos('depe.dependencia, COUNT(dp.id_personal) AS contar', 'de.idDependencia = ?', [$dependencia]);
 
-              // $this->SetTextColor(255, 255, 255); // Blanco
-              $this->Cell(25, 8, utf8_decode('FILTRO'), 1, 0, 'C', true);
-              $this->SetX(30); // Posición desde el final
-              $this->SetTextColor(0, 0, 0);
-              $this->Cell(160, 8, utf8_decode(ucfirst('DEPENDENCIA: '." ". $contar[0]['dependencia'])), 1, 0, 'L');
-              $this->SetX(190); // Posición desde el final
-              $this->SetTextColor(255, 255, 255);
-              $this->Cell(60, 8, utf8_decode(ucfirst('CANTIDAD DE REGISTROS')), 1, 0, 'C', true);
-              $this->SetTextColor(0, 0, 0);
-              $this->Cell(40, 8, utf8_decode(ucfirst($contar[0]['contar'])), 1, 0, 'C');
-              $this->Ln(8);
+        // $this->SetTextColor(255, 255, 255); // Blanco
+        $this->Cell(25, 8, utf8_decode('FILTRO'), 1, 0, 'C', true);
+        $this->SetX(30); // Posición desde el final
+        $this->SetTextColor(0, 0, 0);
+        $this->Cell(160, 8, utf8_decode(ucfirst('DEPENDENCIA: ' . " " . $contar[0]['dependencia'])), 1, 0, 'L');
+        $this->SetX(190); // Posición desde el final
+        $this->SetTextColor(255, 255, 255);
+        $this->Cell(60, 8, utf8_decode(ucfirst('CANTIDAD DE REGISTROS')), 1, 0, 'C', true);
+        $this->SetTextColor(0, 0, 0);
+        $this->Cell(40, 8, utf8_decode(ucfirst($contar[0]['contar'])), 1, 0, 'C');
+        $this->Ln(8);
         if (is_array($datosEmpleado)) {
 
             // Subtítulos fuera de la tabla
@@ -536,21 +536,21 @@ class reportesController extends FPDF
         $this->SetFont('Arial', 'B', 10);
         $this->SetFillColor(25, 41, 187);
         $this->SetTextColor(255, 255, 255);
-        $datosEmpleado = $this->personalData->getDatosEmpleadoFiltro('de.idDepartamento = ?',[$departamento]);
+        $datosEmpleado = $this->personalData->getDatosEmpleadoFiltro('de.idDepartamento = ?', [$departamento]);
         $i = 0;
-        $contar = $this->personalData->contarDatos( 'd.departamento, COUNT(dp.id_personal) AS contar', 'de.idDepartamento = ?', [$departamento]);
+        $contar = $this->personalData->contarDatos('d.departamento, COUNT(dp.id_personal) AS contar', 'de.idDepartamento = ?', [$departamento]);
 
-              // $this->SetTextColor(255, 255, 255); // Blanco
-              $this->Cell(25, 8, utf8_decode('FILTRO'), 1, 0, 'C', true);
-              $this->SetX(30); // Posición desde el final
-              $this->SetTextColor(0, 0, 0);
-              $this->Cell(160, 8, utf8_decode(ucfirst('DEPARTAMENTO: '." ". $contar[0]['departamento'])), 1, 0, 'L');
-              $this->SetX(190); // Posición desde el final
-              $this->SetTextColor(255, 255, 255);
-              $this->Cell(60, 8, utf8_decode(ucfirst('CANTIDAD DE REGISTROS')), 1, 0, 'C', true);
-              $this->SetTextColor(0, 0, 0);
-              $this->Cell(40, 8, utf8_decode(ucfirst($contar[0]['contar'])), 1, 0, 'C');
-              $this->Ln(8);
+        // $this->SetTextColor(255, 255, 255); // Blanco
+        $this->Cell(25, 8, utf8_decode('FILTRO'), 1, 0, 'C', true);
+        $this->SetX(30); // Posición desde el final
+        $this->SetTextColor(0, 0, 0);
+        $this->Cell(160, 8, utf8_decode(ucfirst('DEPARTAMENTO: ' . " " . $contar[0]['departamento'])), 1, 0, 'L');
+        $this->SetX(190); // Posición desde el final
+        $this->SetTextColor(255, 255, 255);
+        $this->Cell(60, 8, utf8_decode(ucfirst('CANTIDAD DE REGISTROS')), 1, 0, 'C', true);
+        $this->SetTextColor(0, 0, 0);
+        $this->Cell(40, 8, utf8_decode(ucfirst($contar[0]['contar'])), 1, 0, 'C');
+        $this->Ln(8);
         if (is_array($datosEmpleado)) {
 
             // Subtítulos fuera de la tabla
@@ -592,21 +592,21 @@ class reportesController extends FPDF
         $this->SetFont('Arial', 'B', 10);
         $this->SetFillColor(25, 41, 187);
         $this->SetTextColor(255, 255, 255);
-        $datosEmpleado = $this->personalData->getDatosEmpleadoFiltro('ubi.idEstado = ? AND ubi.idMunicipio  = ? AND ubi.idParroquia  = ?',[$estado, $municipio, $parroquia]);
+        $datosEmpleado = $this->personalData->getDatosEmpleadoFiltro('ubi.idEstado = ? AND ubi.idMunicipio  = ? AND ubi.idParroquia  = ?', [$estado, $municipio, $parroquia]);
         $i = 0;
-        $contar = $this->personalData->contarDatos( 'est.estado, m.municipio, p.parroquia, COUNT(dp.id_personal) AS contar', 'ubi.idEstado = ? AND ubi.idMunicipio  = ? AND ubi.idParroquia  = ?', [$estado, $municipio, $parroquia]);
+        $contar = $this->personalData->contarDatos('est.estado, m.municipio, p.parroquia, COUNT(dp.id_personal) AS contar', 'ubi.idEstado = ? AND ubi.idMunicipio  = ? AND ubi.idParroquia  = ?', [$estado, $municipio, $parroquia]);
 
-              // $this->SetTextColor(255, 255, 255); // Blanco
-              $this->Cell(25, 8, utf8_decode('FILTRO'), 1, 0, 'C', true);
-              $this->SetX(30); // Posición desde el final
-              $this->SetTextColor(0, 0, 0);
-              $this->Cell(180, 8, utf8_decode(ucfirst('DERECCION:'." "."Estado:"." ".$contar[0]['estado'].","."Municipio:"." ".$contar[0]['municipio'].","."Parroquia:"." ". $contar[0]['parroquia'])), 1, 0, 'L');
-              $this->SetX(210); // Posición desde el final
-              $this->SetTextColor(255, 255, 255);
-              $this->Cell(60, 8, utf8_decode(ucfirst('CANTIDAD DE REGISTROS')), 1, 0, 'C', true);
-              $this->SetTextColor(0, 0, 0);
-              $this->Cell(20, 8, utf8_decode(ucfirst($contar[0]['contar'])), 1, 0, 'C');
-              $this->Ln(8);
+        // $this->SetTextColor(255, 255, 255); // Blanco
+        $this->Cell(25, 8, utf8_decode('FILTRO'), 1, 0, 'C', true);
+        $this->SetX(30); // Posición desde el final
+        $this->SetTextColor(0, 0, 0);
+        $this->Cell(180, 8, utf8_decode(ucfirst('DERECCION:' . " " . "Estado:" . " " . $contar[0]['estado'] . "," . "Municipio:" . " " . $contar[0]['municipio'] . "," . "Parroquia:" . " " . $contar[0]['parroquia'])), 1, 0, 'L');
+        $this->SetX(210); // Posición desde el final
+        $this->SetTextColor(255, 255, 255);
+        $this->Cell(60, 8, utf8_decode(ucfirst('CANTIDAD DE REGISTROS')), 1, 0, 'C', true);
+        $this->SetTextColor(0, 0, 0);
+        $this->Cell(20, 8, utf8_decode(ucfirst($contar[0]['contar'])), 1, 0, 'C');
+        $this->Ln(8);
         if (is_array($datosEmpleado)) {
 
             // Subtítulos fuera de la tabla
@@ -648,21 +648,21 @@ class reportesController extends FPDF
         $this->SetFont('Arial', 'B', 10);
         $this->SetFillColor(25, 41, 187);
         $this->SetTextColor(255, 255, 255);
-        $datosEmpleado = $this->personalData->getDatosEmpleadoFiltro('de.fechaING BETWEEN ? AND ?',[$fecha_Ini, $fecha_Fin]);
+        $datosEmpleado = $this->personalData->getDatosEmpleadoFiltro('de.fechaING BETWEEN ? AND ?', [$fecha_Ini, $fecha_Fin]);
         $i = 0;
-        $contar = $this->personalData->contarDatos( 'COUNT(dp.id_personal) AS contar', 'de.fechaING BETWEEN ? AND ?', [$fecha_Ini, $fecha_Fin]);
+        $contar = $this->personalData->contarDatos('COUNT(dp.id_personal) AS contar', 'de.fechaING BETWEEN ? AND ?', [$fecha_Ini, $fecha_Fin]);
 
-              // $this->SetTextColor(255, 255, 255); // Blanco
-              $this->Cell(25, 8, utf8_decode('FILTRO'), 1, 0, 'C', true);
-              $this->SetX(30); // Posición desde el final
-              $this->SetTextColor(0, 0, 0);
-              $this->Cell(180, 8, utf8_decode(ucfirst('RANGO DE FECHA:'." "."Fecha inicio:"." ".$fecha_IniESPA."    "."Fecha fin:"." ".$fecha_FinESPA)), 1, 0, 'L');
-              $this->SetX(210); // Posición desde el final
-              $this->SetTextColor(255, 255, 255);
-              $this->Cell(60, 8, utf8_decode(ucfirst('CANTIDAD DE REGISTROS')), 1, 0, 'C', true);
-              $this->SetTextColor(0, 0, 0);
-              $this->Cell(20, 8, utf8_decode(ucfirst($contar[0]['contar'])), 1, 0, 'C');
-              $this->Ln(8);
+        // $this->SetTextColor(255, 255, 255); // Blanco
+        $this->Cell(25, 8, utf8_decode('FILTRO'), 1, 0, 'C', true);
+        $this->SetX(30); // Posición desde el final
+        $this->SetTextColor(0, 0, 0);
+        $this->Cell(180, 8, utf8_decode(ucfirst('RANGO DE FECHA:' . " " . "Fecha inicio:" . " " . $fecha_IniESPA . "    " . "Fecha fin:" . " " . $fecha_FinESPA)), 1, 0, 'L');
+        $this->SetX(210); // Posición desde el final
+        $this->SetTextColor(255, 255, 255);
+        $this->Cell(60, 8, utf8_decode(ucfirst('CANTIDAD DE REGISTROS')), 1, 0, 'C', true);
+        $this->SetTextColor(0, 0, 0);
+        $this->Cell(20, 8, utf8_decode(ucfirst($contar[0]['contar'])), 1, 0, 'C');
+        $this->Ln(8);
         if (is_array($datosEmpleado)) {
 
             // Subtítulos fuera de la tabla
@@ -677,7 +677,7 @@ class reportesController extends FPDF
 
             foreach ($datosEmpleado as $dato) {
                 if (is_array($dato)) {
-                    $registroAuditoria = $this->auditoriaController->registrarAuditoria($this->idUsuario, 'Descarga pdf de empleado', 'El usuario ' . $this->nombreUsuario . ' ha descargado un pdf de los empleados en tamaño A4 formato horizontal por rango de fecha, desde:'." ". $fecha_IniESPA."    ". "hasta:"." ".$fecha_FinESPA);
+                    $registroAuditoria = $this->auditoriaController->registrarAuditoria($this->idUsuario, 'Descarga pdf de empleado', 'El usuario ' . $this->nombreUsuario . ' ha descargado un pdf de los empleados en tamaño A4 formato horizontal por rango de fecha, desde:' . " " . $fecha_IniESPA . "    " . "hasta:" . " " . $fecha_FinESPA);
 
                     $i++;
                     $this->SetTextColor(0, 0, 0); // Blanco
@@ -690,6 +690,414 @@ class reportesController extends FPDF
                     $this->Cell(30, 9, utf8_decode(ucfirst($dato['estatus'] ?? '')), 1, 0, 'L');
                     $this->Cell(90, 9, utf8_decode(ucfirst($dato['dependencia'] ?? '')), 1, 0, 'L');
                     $this->Cell(60, 9, utf8_decode(ucfirst($dato['departamento'] ?? '')), 1, 1, 'L');
+                }
+            }
+        }
+        $this->Output('I', 'ficha_tecnica.pdf');
+    }
+
+    //FILTRAR POR SEXO DEL FAMILIAR
+    public function generarPDFSexoFamiliar(string $sexo)
+    {
+        $this->SetMargins(5, 0, 5); // Ajustar márgenes
+        $this->AddPage();
+        $this->SetFont('Arial', 'B', 10);
+        $this->SetFillColor(25, 41, 187);
+        $this->SetTextColor(255, 255, 255);
+        $datosEmpleado = $this->personalData->getDatosFamiliarFiltro('df.sexoFamiliar = ?', [$sexo]);
+        $i = 0;
+        // $this->SetTextColor(255, 255, 255); // Blanco
+        $this->Cell(25, 8, utf8_decode('FILTRO'), 1, 0, 'C', true);
+        $this->SetX(30); // Posición desde el final
+        $this->SetTextColor(0, 0, 0);
+        $this->Cell(90, 8, utf8_decode(ucfirst('SEXUALIDAD: ' . " " . $sexo)), 1, 0, 'L');
+        $this->SetX(110); // Posición desde el final
+        $this->SetTextColor(255, 255, 255);
+        $this->Cell(60, 8, utf8_decode(ucfirst('CANTIDAD DE REGISTROS')), 1, 0, 'C', true);
+        $this->SetTextColor(0, 0, 0);
+        $contar = $this->personalData->contarDatosFamiliar(' COUNT(id_ninos) AS contar', 'df.sexoFamiliar = ?', [$sexo]);
+        $this->Cell(40, 8, utf8_decode(ucfirst($contar[0]['contar'])), 1, 0, 'C');
+        $this->Ln(8);
+        if (is_array($datosEmpleado)) {
+
+            // Subtítulos fuera de la tabla
+            $this->SetFillColor(13, 113, 237); // Azul claro
+            $this->SetTextColor(255, 255, 255); // Blanco
+            $this->Cell(40, 10, utf8_decode('Empleado'), 1, 0, 'C', true);
+            $this->Cell(40, 10, utf8_decode('Familiar'), 1, 0, 'C', true);
+            $this->Cell(30, 10, utf8_decode('Parentesco'), 1, 0, 'C', true);
+            $this->Cell(30, 10, utf8_decode('Cédula F.'), 1, 0, 'C', true);
+            $this->Cell(30, 10, utf8_decode('sexualidad'), 1, 0, 'C', true);
+            $this->Cell(15, 10, utf8_decode('Edad'), 1, 0, 'C', true);
+            $this->Cell(50, 10, utf8_decode('Discapacidad'), 1, 0, 'C', true); // Cambiado a 0
+            $this->Cell(30, 10, utf8_decode('Fecha N.'), 1, 1, 'C', true); //fecha de nacimiento, cambiado a 0
+
+            //Eliminado el duplicado de la cabecera de edad
+            foreach ($datosEmpleado as $dato) {
+                if (is_array($dato)) {
+                    $registroAuditoria = $this->auditoriaController->registrarAuditoria($this->idUsuario, 'Descarga pdf de empleado', 'El usuario ' . $this->nombreUsuario . ' ha descargado un pdf de los empleados en tamaño carta formato vertical');
+                    $discapacidad = $dato['discapacidad'] ?? '';
+                    if ($discapacidad == null) {
+                        $discapacidad = 'Sin discapacidad';
+                    }
+                    $i++;
+                    $this->SetTextColor(0, 0, 0); // Blanco
+
+                    $this->SetFont('Arial', 'B', 9);
+                    // Contenido de la tabla
+                    $this->Cell(40, 9, utf8_decode(ucfirst($dato['primerNombreEmpleado'] ?? '') . ' ' . ucfirst($dato['primerApellidoEmpleado'] ?? '')), 1, 0, 'C');
+                    $this->Cell(40, 9, utf8_decode(ucfirst($dato['primerNombreFamiliar'] ?? '') . ' ' . ucfirst($dato['primerApellidoFamiliar'] ?? '')), 1, 0, 'C');
+                    $this->Cell(30, 9, utf8_decode(ucfirst($dato['parentesco'] ?? '')), 1, 0, 'C');
+                    $this->Cell(30, 9, utf8_decode(ucfirst($dato['cedulaFamiliar'] ?? '')), 1, 0, 'C');
+                    $this->Cell(30, 9, utf8_decode(ucfirst($dato['sexoFamiliar'] ?? '')), 1, 0, 'C');
+                    $this->Cell(15, 9, utf8_decode(ucfirst($dato['edad'] ?? '')), 1, 0, 'C');
+                    $this->Cell(50, 9, utf8_decode(ucfirst($discapacidad)), 1, 0, 'C'); //cambiado a 0
+                    $this->Cell(30, 9, utf8_decode(ucfirst($dato['diaNacimiento'] . "-" . $dato['mesNacimiento'] . "-" . $dato['anoNacimiento'])), 1, 1, 'C'); //agregado 1 para saltar a la siguiente linea de datos
+
+                }
+            }
+        }
+        $this->Output('I', 'ficha_tecnica.pdf');
+    }
+
+    //FILTRAR POR EDAD FAMILIAR
+    public function generarPDFedadFamiliar(string $edad)
+    {
+        $this->SetMargins(5, 0, 5); // Ajustar márgenes
+        $this->AddPage();
+        $this->SetFont('Arial', 'B', 10);
+        $this->SetFillColor(25, 41, 187);
+        $this->SetTextColor(255, 255, 255);
+        $datosEmpleado = $this->personalData->getDatosFamiliarFiltro('df.edad = ?', [$edad]);
+        $i = 0;
+        // $this->SetTextColor(255, 255, 255); // Blanco
+        $this->Cell(25, 8, utf8_decode('FILTRO'), 1, 0, 'C', true);
+        $this->SetX(30); // Posición desde el final
+        $this->SetTextColor(0, 0, 0);
+        $this->Cell(90, 8, utf8_decode(ucfirst('EDAD: ' . " " . $edad)), 1, 0, 'L');
+        $this->SetX(110); // Posición desde el final
+        $this->SetTextColor(255, 255, 255);
+        $this->Cell(60, 8, utf8_decode(ucfirst('CANTIDAD DE REGISTROS')), 1, 0, 'C', true);
+        $this->SetTextColor(0, 0, 0);
+        $contar = $this->personalData->contarDatosFamiliar(' COUNT(id_ninos) AS contar', 'df.edad = ?', [$edad]);
+        $this->Cell(40, 8, utf8_decode(ucfirst($contar[0]['contar'])), 1, 0, 'C');
+        $this->Ln(8);
+        if (is_array($datosEmpleado)) {
+
+            // Subtítulos fuera de la tabla
+            $this->SetFillColor(13, 113, 237); // Azul claro
+            $this->SetTextColor(255, 255, 255); // Blanco
+            $this->Cell(40, 10, utf8_decode('Empleado'), 1, 0, 'C', true);
+            $this->Cell(40, 10, utf8_decode('Familiar'), 1, 0, 'C', true);
+            $this->Cell(30, 10, utf8_decode('Parentesco'), 1, 0, 'C', true);
+            $this->Cell(30, 10, utf8_decode('Cédula F.'), 1, 0, 'C', true);
+            $this->Cell(30, 10, utf8_decode('sexualidad'), 1, 0, 'C', true);
+            $this->Cell(15, 10, utf8_decode('Edad'), 1, 0, 'C', true);
+            $this->Cell(50, 10, utf8_decode('Discapacidad'), 1, 0, 'C', true); // Cambiado a 0
+            $this->Cell(30, 10, utf8_decode('Fecha N.'), 1, 1, 'C', true); //fecha de nacimiento, cambiado a 0
+
+            //Eliminado el duplicado de la cabecera de edad
+            foreach ($datosEmpleado as $dato) {
+                if (is_array($dato)) {
+                    $registroAuditoria = $this->auditoriaController->registrarAuditoria($this->idUsuario, 'Descarga pdf de empleado', 'El usuario ' . $this->nombreUsuario . ' ha descargado un pdf de los empleados en tamaño carta formato vertical');
+                    $discapacidad = $dato['discapacidad'] ?? '';
+                    if ($discapacidad == null) {
+                        $discapacidad = 'Sin discapacidad';
+                    }
+                    $i++;
+                    $this->SetTextColor(0, 0, 0); // Blanco
+
+                    $this->SetFont('Arial', 'B', 9);
+                    // Contenido de la tabla
+                    $this->Cell(40, 9, utf8_decode(ucfirst($dato['primerNombreEmpleado'] ?? '') . ' ' . ucfirst($dato['primerApellidoEmpleado'] ?? '')), 1, 0, 'C');
+                    $this->Cell(40, 9, utf8_decode(ucfirst($dato['primerNombreFamiliar'] ?? '') . ' ' . ucfirst($dato['primerApellidoFamiliar'] ?? '')), 1, 0, 'C');
+                    $this->Cell(30, 9, utf8_decode(ucfirst($dato['parentesco'] ?? '')), 1, 0, 'C');
+                    $this->Cell(30, 9, utf8_decode(ucfirst($dato['cedulaFamiliar'] ?? '')), 1, 0, 'C');
+                    $this->Cell(30, 9, utf8_decode(ucfirst($dato['sexoFamiliar'] ?? '')), 1, 0, 'C');
+                    $this->Cell(15, 9, utf8_decode(ucfirst($dato['edad'] ?? '')), 1, 0, 'C');
+                    $this->Cell(50, 9, utf8_decode(ucfirst($discapacidad)), 1, 0, 'C'); //cambiado a 0
+                    $this->Cell(30, 9, utf8_decode(ucfirst($dato['diaNacimiento'] . "-" . $dato['mesNacimiento'] . "-" . $dato['anoNacimiento'])), 1, 1, 'C'); //agregado 1 para saltar a la siguiente linea de datos
+
+                }
+            }
+        }
+        $this->Output('I', 'ficha_tecnica.pdf');
+    }
+
+    //FILTRAR POR PARENTESCO FAMILIAR
+    public function generarPDFparentescoFamiliar(string $parentesco)
+    {
+        $this->SetMargins(5, 0, 5); // Ajustar márgenes
+        $this->AddPage();
+        $this->SetFont('Arial', 'B', 10);
+        $this->SetFillColor(25, 41, 187);
+        $this->SetTextColor(255, 255, 255);
+        $datosEmpleado = $this->personalData->getDatosFamiliarFiltro('df.parentesco = ?', [$parentesco]);
+        $i = 0;
+        // $this->SetTextColor(255, 255, 255); // Blanco
+        $this->Cell(25, 8, utf8_decode('FILTRO'), 1, 0, 'C', true);
+        $this->SetX(30); // Posición desde el final
+        $this->SetTextColor(0, 0, 0);
+        $this->Cell(90, 8, utf8_decode(ucfirst('EDAD: ' . " " . $parentesco)), 1, 0, 'L');
+        $this->SetX(110); // Posición desde el final
+        $this->SetTextColor(255, 255, 255);
+        $this->Cell(60, 8, utf8_decode(ucfirst('CANTIDAD DE REGISTROS')), 1, 0, 'C', true);
+        $this->SetTextColor(0, 0, 0);
+        $contar = $this->personalData->contarDatosFamiliar(' COUNT(id_ninos) AS contar', 'df.parentesco = ?', [$parentesco]);
+        $this->Cell(40, 8, utf8_decode(ucfirst($contar[0]['contar'])), 1, 0, 'C');
+        $this->Ln(8);
+        if (is_array($datosEmpleado)) {
+
+            // Subtítulos fuera de la tabla
+            $this->SetFillColor(13, 113, 237); // Azul claro
+            $this->SetTextColor(255, 255, 255); // Blanco
+            $this->Cell(40, 10, utf8_decode('Empleado'), 1, 0, 'C', true);
+            $this->Cell(40, 10, utf8_decode('Familiar'), 1, 0, 'C', true);
+            $this->Cell(30, 10, utf8_decode('Parentesco'), 1, 0, 'C', true);
+            $this->Cell(30, 10, utf8_decode('Cédula F.'), 1, 0, 'C', true);
+            $this->Cell(30, 10, utf8_decode('sexualidad'), 1, 0, 'C', true);
+            $this->Cell(15, 10, utf8_decode('Edad'), 1, 0, 'C', true);
+            $this->Cell(50, 10, utf8_decode('Discapacidad'), 1, 0, 'C', true); // Cambiado a 0
+            $this->Cell(30, 10, utf8_decode('Fecha N.'), 1, 1, 'C', true); //fecha de nacimiento, cambiado a 0
+
+            //Eliminado el duplicado de la cabecera de edad
+            foreach ($datosEmpleado as $dato) {
+                if (is_array($dato)) {
+                    $registroAuditoria = $this->auditoriaController->registrarAuditoria($this->idUsuario, 'Descarga pdf de empleado', 'El usuario ' . $this->nombreUsuario . ' ha descargado un pdf de los empleados en tamaño carta formato vertical');
+                    $discapacidad = $dato['discapacidad'] ?? '';
+                    if ($discapacidad == null) {
+                        $discapacidad = 'Sin discapacidad';
+                    }
+                    $i++;
+                    $this->SetTextColor(0, 0, 0); // Blanco
+
+                    $this->SetFont('Arial', 'B', 9);
+                    // Contenido de la tabla
+                    $this->Cell(40, 9, utf8_decode(ucfirst($dato['primerNombreEmpleado'] ?? '') . ' ' . ucfirst($dato['primerApellidoEmpleado'] ?? '')), 1, 0, 'C');
+                    $this->Cell(40, 9, utf8_decode(ucfirst($dato['primerNombreFamiliar'] ?? '') . ' ' . ucfirst($dato['primerApellidoFamiliar'] ?? '')), 1, 0, 'C');
+                    $this->Cell(30, 9, utf8_decode(ucfirst($dato['parentesco'] ?? '')), 1, 0, 'C');
+                    $this->Cell(30, 9, utf8_decode(ucfirst($dato['cedulaFamiliar'] ?? '')), 1, 0, 'C');
+                    $this->Cell(30, 9, utf8_decode(ucfirst($dato['sexoFamiliar'] ?? '')), 1, 0, 'C');
+                    $this->Cell(15, 9, utf8_decode(ucfirst($dato['edad'] ?? '')), 1, 0, 'C');
+                    $this->Cell(50, 9, utf8_decode(ucfirst($discapacidad)), 1, 0, 'C'); //cambiado a 0
+                    $this->Cell(30, 9, utf8_decode(ucfirst($dato['diaNacimiento'] . "-" . $dato['mesNacimiento'] . "-" . $dato['anoNacimiento'])), 1, 1, 'C'); //agregado 1 para saltar a la siguiente linea de datos
+
+                }
+            }
+        }
+        $this->Output('I', 'ficha_tecnica.pdf');
+    }
+
+    //FILTRAR POR DISCAPACIDAD FAMILIAR
+    public function generarPDFdiscapacidadFamiliar(string $discapaciadad)
+    {
+        $this->SetMargins(5, 0, 5); // Ajustar márgenes
+        $this->AddPage();
+        $this->SetFont('Arial', 'B', 10);
+        $this->SetFillColor(25, 41, 187);
+        $this->SetTextColor(255, 255, 255);
+        $datosEmpleado = $this->personalData->getDatosFamiliarFiltro('df.discapacidad = ?', [$discapaciadad]);
+        $i = 0;
+        // $this->SetTextColor(255, 255, 255); // Blanco
+        $this->Cell(25, 8, utf8_decode('FILTRO'), 1, 0, 'C', true);
+        $this->SetX(30); // Posición desde el final
+        $this->SetTextColor(0, 0, 0);
+        $this->Cell(90, 8, utf8_decode(ucfirst('EDAD: ' . " " . $discapaciadad)), 1, 0, 'L');
+        $this->SetX(110); // Posición desde el final
+        $this->SetTextColor(255, 255, 255);
+        $this->Cell(60, 8, utf8_decode(ucfirst('CANTIDAD DE REGISTROS')), 1, 0, 'C', true);
+        $this->SetTextColor(0, 0, 0);
+        $contar = $this->personalData->contarDatosFamiliar(' COUNT(id_ninos) AS contar', 'df.discapacidad = ?', [$discapaciadad]);
+        $this->Cell(40, 8, utf8_decode(ucfirst($contar[0]['contar'])), 1, 0, 'C');
+        $this->Ln(8);
+        if (is_array($datosEmpleado)) {
+
+            // Subtítulos fuera de la tabla
+            $this->SetFillColor(13, 113, 237); // Azul claro
+            $this->SetTextColor(255, 255, 255); // Blanco
+            $this->Cell(40, 10, utf8_decode('Empleado'), 1, 0, 'C', true);
+            $this->Cell(40, 10, utf8_decode('Familiar'), 1, 0, 'C', true);
+            $this->Cell(30, 10, utf8_decode('Parentesco'), 1, 0, 'C', true);
+            $this->Cell(30, 10, utf8_decode('Cédula F.'), 1, 0, 'C', true);
+            $this->Cell(30, 10, utf8_decode('sexualidad'), 1, 0, 'C', true);
+            $this->Cell(15, 10, utf8_decode('Edad'), 1, 0, 'C', true);
+            $this->Cell(50, 10, utf8_decode('Discapacidad'), 1, 0, 'C', true); // Cambiado a 0
+            $this->Cell(30, 10, utf8_decode('Fecha N.'), 1, 1, 'C', true); //fecha de nacimiento, cambiado a 0
+
+            //Eliminado el duplicado de la cabecera de edad
+            foreach ($datosEmpleado as $dato) {
+                if (is_array($dato)) {
+                    $registroAuditoria = $this->auditoriaController->registrarAuditoria($this->idUsuario, 'Descarga pdf de empleado', 'El usuario ' . $this->nombreUsuario . ' ha descargado un pdf de los empleados en tamaño carta formato vertical');
+                    $discapacidad = $dato['discapacidad'] ?? '';
+                    if ($discapacidad == null) {
+                        $discapacidad = 'Sin discapacidad';
+                    }
+                    $i++;
+                    $this->SetTextColor(0, 0, 0); // Blanco
+
+                    $this->SetFont('Arial', 'B', 9);
+                    // Contenido de la tabla
+                    $this->Cell(40, 9, utf8_decode(ucfirst($dato['primerNombreEmpleado'] ?? '') . ' ' . ucfirst($dato['primerApellidoEmpleado'] ?? '')), 1, 0, 'C');
+                    $this->Cell(40, 9, utf8_decode(ucfirst($dato['primerNombreFamiliar'] ?? '') . ' ' . ucfirst($dato['primerApellidoFamiliar'] ?? '')), 1, 0, 'C');
+                    $this->Cell(30, 9, utf8_decode(ucfirst($dato['parentesco'] ?? '')), 1, 0, 'C');
+                    $this->Cell(30, 9, utf8_decode(ucfirst($dato['cedulaFamiliar'] ?? '')), 1, 0, 'C');
+                    $this->Cell(30, 9, utf8_decode(ucfirst($dato['sexoFamiliar'] ?? '')), 1, 0, 'C');
+                    $this->Cell(15, 9, utf8_decode(ucfirst($dato['edad'] ?? '')), 1, 0, 'C');
+                    $this->Cell(50, 9, utf8_decode(ucfirst($discapacidad)), 1, 0, 'C'); //cambiado a 0
+                    $this->Cell(30, 9, utf8_decode(ucfirst($dato['diaNacimiento'] . "-" . $dato['mesNacimiento'] . "-" . $dato['anoNacimiento'])), 1, 1, 'C'); //agregado 1 para saltar a la siguiente linea de datos
+
+                }
+            }
+        }
+        $this->Output('I', 'ficha_tecnica.pdf');
+    }
+
+    //FILTRAR POR RANGO DE FECHA INICIO Y FINAL DEL FAMILIAR
+    public function generarPDFrangoFechaFamiliar(string $fecha_Ini, string $fecha_Fin, string $fecha_IniESPA, string $fecha_FinESPA)
+    {
+        $this->SetMargins(5, 0, 5); // Ajustar márgenes
+        $this->AddPage();
+        $this->SetFont('Arial', 'B', 10);
+        $this->SetFillColor(25, 41, 187);
+        $this->SetTextColor(255, 255, 255);
+        $datosEmpleado = $this->personalData->getDatosFamiliarFiltro('df.fecha BETWEEN ? AND ?', [$fecha_Ini, $fecha_Fin]);
+        $i = 0;
+        // $this->SetTextColor(255, 255, 255); // Blanco
+        $this->Cell(25, 8, utf8_decode('FILTRO'), 1, 0, 'C', true);
+        $this->SetX(30); // Posición desde el final
+        $this->SetTextColor(0, 0, 0);
+        $this->Cell(140, 8, utf8_decode(ucfirst('RANGO DE FECHA:' . " " . "Fecha inicio:" . " " . $fecha_IniESPA . "    " . "Fecha fin:" . " " . $fecha_FinESPA)), 1, 0, 'L');
+        $this->SetX(170); // Posición desde el final
+        $this->SetTextColor(255, 255, 255);
+        $this->Cell(60, 8, utf8_decode(ucfirst('CANTIDAD DE REGISTROS')), 1, 0, 'C', true);
+        $this->SetTextColor(0, 0, 0);
+        $contar = $this->personalData->contarDatosFamiliar('COUNT(df.id_ninos) AS contar', 'df.fecha BETWEEN ? AND ?', [$fecha_Ini, $fecha_Fin]);
+        $this->Cell(40, 8, utf8_decode(ucfirst($contar[0]['contar'])), 1, 0, 'C');
+        $this->Ln(8);
+        if (is_array($datosEmpleado)) {
+
+            // Subtítulos fuera de la tabla
+            $this->SetFillColor(13, 113, 237); // Azul claro
+            $this->SetTextColor(255, 255, 255); // Blanco
+            $this->Cell(40, 10, utf8_decode('Empleado'), 1, 0, 'C', true);
+            $this->Cell(40, 10, utf8_decode('Familiar'), 1, 0, 'C', true);
+            $this->Cell(30, 10, utf8_decode('Parentesco'), 1, 0, 'C', true);
+            $this->Cell(30, 10, utf8_decode('Cédula F.'), 1, 0, 'C', true);
+            $this->Cell(30, 10, utf8_decode('sexualidad'), 1, 0, 'C', true);
+            $this->Cell(15, 10, utf8_decode('Edad'), 1, 0, 'C', true);
+            $this->Cell(50, 10, utf8_decode('Discapacidad'), 1, 0, 'C', true); // Cambiado a 0
+            $this->Cell(30, 10, utf8_decode('Fecha N.'), 1, 1, 'C', true); //fecha de nacimiento, cambiado a 0
+
+            //Eliminado el duplicado de la cabecera de edad
+            foreach ($datosEmpleado as $dato) {
+                if (is_array($dato)) {
+                    $registroAuditoria = $this->auditoriaController->registrarAuditoria($this->idUsuario, 'Descarga pdf de empleado', 'El usuario ' . $this->nombreUsuario . ' ha descargado un pdf de los empleados en tamaño carta formato vertical');
+                    $discapacidad = $dato['discapacidad'] ?? '';
+                    if ($discapacidad == null) {
+                        $discapacidad = 'Sin discapacidad';
+                    }
+                    $i++;
+                    $this->SetTextColor(0, 0, 0); // Blanco
+
+                    $this->SetFont('Arial', 'B', 9);
+                    // Contenido de la tabla
+                    $this->Cell(40, 9, utf8_decode(ucfirst($dato['primerNombreEmpleado'] ?? '') . ' ' . ucfirst($dato['primerApellidoEmpleado'] ?? '')), 1, 0, 'C');
+                    $this->Cell(40, 9, utf8_decode(ucfirst($dato['primerNombreFamiliar'] ?? '') . ' ' . ucfirst($dato['primerApellidoFamiliar'] ?? '')), 1, 0, 'C');
+                    $this->Cell(30, 9, utf8_decode(ucfirst($dato['parentesco'] ?? '')), 1, 0, 'C');
+                    $this->Cell(30, 9, utf8_decode(ucfirst($dato['cedulaFamiliar'] ?? '')), 1, 0, 'C');
+                    $this->Cell(30, 9, utf8_decode(ucfirst($dato['sexoFamiliar'] ?? '')), 1, 0, 'C');
+                    $this->Cell(15, 9, utf8_decode(ucfirst($dato['edad'] ?? '')), 1, 0, 'C');
+                    $this->Cell(50, 9, utf8_decode(ucfirst($discapacidad)), 1, 0, 'C'); //cambiado a 0
+                    $this->Cell(30, 9, utf8_decode(ucfirst($dato['diaNacimiento'] . "-" . $dato['mesNacimiento'] . "-" . $dato['anoNacimiento'])), 1, 1, 'C'); //agregado 1 para saltar a la siguiente linea de datos
+
+                }
+            }
+        }
+        $this->Output('I', 'ficha_tecnica.pdf');
+    }
+
+    //FILTRAR PERSONAL POR PERSONALIZADO
+    public function generarPDFpersonalizadoFamiliar(
+        string $fecha_Ini,
+        string $fecha_Fin,
+        string $fecha_IniESPA,
+        string $fecha_FinESPA,
+        string $discapaciadad,
+        string $parentesco,
+        string $sexo,
+        string $edad
+    )
+    {
+        if($discapaciadad == ""){
+            $discapaciadad == null;
+        }
+
+        if($sexo == ""){
+            $sexo == null;
+        }
+
+        if($edad == ""){
+            $edad == null;
+        }
+
+        if($parentesco == ""){
+            $parentesco == null;
+        }
+        $this->SetMargins(5, 0, 5); // Ajustar márgenes
+        $this->AddPage();
+        $this->SetFont('Arial', 'B', 10);
+        $this->SetFillColor(25, 41, 187);
+        $this->SetTextColor(255, 255, 255);
+        $datosEmpleado = $this->personalData->getDatosFamiliarFiltro('df.sexoFamiliar = ? OR df.edad = ? OR df.parentesco = ? 0R df.discapacidad = ? OR df.fecha BETWEEN ? OR ?', [$sexo, $edad, $parentesco, $discapaciadad, $fecha_Ini, $fecha_Fin]);
+        $i = 0;
+        // $this->SetTextColor(255, 255, 255); // Blanco
+        $this->Cell(25, 8, utf8_decode('FILTRO'), 1, 0, 'C', true);
+        $this->SetX(30); // Posición desde el final
+        $this->SetTextColor(0, 0, 0);
+        $this->Cell(140, 8, utf8_decode(ucfirst('RANGO DE FECHA:' . " " . "Fecha inicio:" . " " . $fecha_IniESPA . "    " . "Fecha fin:" . " " . $fecha_FinESPA)), 1, 0, 'L');
+        $this->SetX(170); // Posición desde el final
+        $this->SetTextColor(255, 255, 255);
+        $this->Cell(60, 8, utf8_decode(ucfirst('CANTIDAD DE REGISTROS')), 1, 0, 'C', true);
+        $this->SetTextColor(0, 0, 0);
+        $contar = $this->personalData->contarDatosFamiliar('COUNT(df.id_ninos) AS contar', 'df.fecha BETWEEN ? AND ?', [$fecha_Ini, $fecha_Fin]);
+        $this->Cell(40, 8, utf8_decode(ucfirst($contar[0]['contar'])), 1, 0, 'C');
+        $this->Ln(8);
+        if (is_array($datosEmpleado)) {
+
+            // Subtítulos fuera de la tabla
+            $this->SetFillColor(13, 113, 237); // Azul claro
+            $this->SetTextColor(255, 255, 255); // Blanco
+            $this->Cell(40, 10, utf8_decode('Empleado'), 1, 0, 'C', true);
+            $this->Cell(40, 10, utf8_decode('Familiar'), 1, 0, 'C', true);
+            $this->Cell(30, 10, utf8_decode('Parentesco'), 1, 0, 'C', true);
+            $this->Cell(30, 10, utf8_decode('Cédula F.'), 1, 0, 'C', true);
+            $this->Cell(30, 10, utf8_decode('sexualidad'), 1, 0, 'C', true);
+            $this->Cell(15, 10, utf8_decode('Edad'), 1, 0, 'C', true);
+            $this->Cell(50, 10, utf8_decode('Discapacidad'), 1, 0, 'C', true); // Cambiado a 0
+            $this->Cell(30, 10, utf8_decode('Fecha N.'), 1, 1, 'C', true); //fecha de nacimiento, cambiado a 0
+
+            //Eliminado el duplicado de la cabecera de edad
+            foreach ($datosEmpleado as $dato) {
+                if (is_array($dato)) {
+                    $registroAuditoria = $this->auditoriaController->registrarAuditoria($this->idUsuario, 'Descarga pdf de empleado', 'El usuario ' . $this->nombreUsuario . ' ha descargado un pdf de los empleados en tamaño carta formato vertical');
+                    $discapacidad = $dato['discapacidad'] ?? '';
+                    if ($discapacidad == null) {
+                        $discapacidad = 'Sin discapacidad';
+                    }
+                    $i++;
+                    $this->SetTextColor(0, 0, 0); // Blanco
+
+                    $this->SetFont('Arial', 'B', 9);
+                    // Contenido de la tabla
+                    $this->Cell(40, 9, utf8_decode(ucfirst($dato['primerNombreEmpleado'] ?? '') . ' ' . ucfirst($dato['primerApellidoEmpleado'] ?? '')), 1, 0, 'C');
+                    $this->Cell(40, 9, utf8_decode(ucfirst($dato['primerNombreFamiliar'] ?? '') . ' ' . ucfirst($dato['primerApellidoFamiliar'] ?? '')), 1, 0, 'C');
+                    $this->Cell(30, 9, utf8_decode(ucfirst($dato['parentesco'] ?? '')), 1, 0, 'C');
+                    $this->Cell(30, 9, utf8_decode(ucfirst($dato['cedulaFamiliar'] ?? '')), 1, 0, 'C');
+                    $this->Cell(30, 9, utf8_decode(ucfirst($dato['sexoFamiliar'] ?? '')), 1, 0, 'C');
+                    $this->Cell(15, 9, utf8_decode(ucfirst($dato['edad'] ?? '')), 1, 0, 'C');
+                    $this->Cell(50, 9, utf8_decode(ucfirst($discapacidad)), 1, 0, 'C'); //cambiado a 0
+                    $this->Cell(30, 9, utf8_decode(ucfirst($dato['diaNacimiento'] . "-" . $dato['mesNacimiento'] . "-" . $dato['anoNacimiento'])), 1, 1, 'C'); //agregado 1 para saltar a la siguiente linea de datos
+
                 }
             }
         }

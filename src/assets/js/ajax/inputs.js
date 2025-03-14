@@ -1,3 +1,4 @@
+import { meses, niveles } from "./variablesArray.js";
 // Funcion para vlaidar campos tipo text que tambien coloquen la primera letra en mayuscula
 export async function validarNombre(input, cumplidospan) {
   $(document).on("input", input, function () {
@@ -381,37 +382,20 @@ export async function validarBusquedaCedula(input, divContens) {
 
 // Objeto para colocar los meses
 export async function colocarMeses(input) {
-  // Simular una operación asincrónica con Promise y setTimeout
-  const obtenerMeses = () => {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        const meses = [
-          { valor: '', nombre: "Meses" },
-          { valor: '01', nombre: "Enero" },
-          { valor: '02', nombre: "Febrero" },
-          { valor: '03', nombre: "Marzo" },
-          { valor: '04', nombre: "Abril" },
-          { valor: '05', nombre: "Mayo" },
-          { valor: '06', nombre: "Junio" },
-          { valor: '07', nombre: "Julio" },
-          { valor: '08', nombre: "Agosto" },
-          { valor: '09', nombre: "Septiembre" },
-          { valor: '10', nombre: "Octubre" },
-          { valor: '11', nombre: "Noviembre" },
-          { valor: '12', nombre: "Diciembre" },
-        ];
-        resolve(meses);
-      }, 1000); // Simular un retraso de 1 segundo
+  try {
+    // Limpiar el select antes de agregar nuevas opciones
+    $(input).empty();
+
+    $(input).append(`<option value="">Seleccione un mes</option>`);
+  
+    meses.forEach(mes => {
+      $(input).append(`<option value="${mes.valor}">${mes.nombre}</option>`);
     });
-  };
-
-  // Obtener los meses de forma asincrónica
-  const meses = await obtenerMeses();
-
+  } catch (error) {
+    console.error("Error al cargar niveles educativos:", error);
+  }
   // Crear las opciones del select
-  meses.forEach(mes => {
-    $(input).append(`<option value="${mes.valor}">${mes.nombre}</option>`);
-  });
+  
 }
 
 // Objeto para colocar los años
@@ -432,32 +416,20 @@ export async function colocarYear(input, desde) {
 
 // Objeto para colocar niveles de estudio de los empleados
 export async function colocarNivelesEducativos(input) {
-  // Simular una operación asincrónica con Promise y setTimeout
-  const obtenerNivelesEducativos = () => {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        const niveles = [
-          { valor: 'Bachiller', nombre: "Bachiller" },
-          { valor: 'Tecnico', nombre: "Técnico" },
-          { valor: 'Tecnologo', nombre: "Tecnólogo" },
-          { valor: 'Pregrado', nombre: "Pregrado" },
-          { valor: 'Ingeniero', nombre: "Ingeniero" },
-          { valor: 'Especialista', nombre: "Especialista" },
-          { valor: 'Maestria', nombre: "Maestría" },
-          { valor: 'Doctorado', nombre: "Doctorado" },
-        ];
-        resolve(niveles);
-      }, 1000); // Simular un retraso de 1 segundo
+  // Simplemente usa la variable importada 'niveles'
+  try {
+    // Limpiar el select antes de agregar nuevas opciones
+    $(input).empty();
+
+    
+    $(input).append(`<option value="">Seleccione un nivel academico</option>`);
+    
+    niveles.forEach(nivel => {
+      $(input).append(`<option value="${nivel.valor}">${nivel.nombre}</option>`);
     });
-  };
-
-  // Obtener los niveles educativos de forma asincrónica
-  const niveles = await obtenerNivelesEducativos();
-
-  // Crear las opciones del select
-  niveles.forEach(nivel => {
-    $(input).append(`<option value="${nivel.valor}">${nivel.nombre}</option>`);
-  });
+  } catch (error) {
+    console.error("Error al cargar niveles educativos:", error);
+  }
 }
 
 // Validar documentos subidos

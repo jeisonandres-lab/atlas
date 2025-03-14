@@ -186,7 +186,7 @@ use App\Atlas\config\App;
                                 </div>
                             </div>
 
-                            <div class="col-sm-6 col-md-4 col-xl-4 col-xxl-3 mb-3" id="contenEdad">
+                            <div class="col-sm-6 col-md-4 col-xl-4 col-xxl-3 mb-2" id="contenEdad">
                                 <div class="form-group">
                                     <label for="cedula">Edad</label>
                                     <div class="input-group">

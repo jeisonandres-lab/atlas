@@ -1251,5 +1251,540 @@ class generateExcelController {
 
         $writer->save('php://output');
     }
+
+    //FILTRAR POR FAMILIAR SEXUALIDAD
+    public function excelFamiliarSexualidad($sexo) {
+        // Generar el array de datos directamente en PHP
+        $datos = $this->personalModel->getDatosFamiliarFiltro('df.sexoFamiliar = ?',[$sexo]);
+
+        // Combinar celdas y centrar el título
+        $this->mergeCells('A1:N1'); // Combinar de A1 a E1
+        $this->setCellValue('A1', 'ATLAS');
+        $this->setCellStyle('A1', 'FF1929BB', 'FFFFFFFF', 12, true); // Estilos para ATLAS
+        $this->setCellAlignment('A1', Alignment::HORIZONTAL_CENTER); // Centrar el texto
+
+        // Establecer las cabeceras de la tabla
+        $this->setCellValue('A2', 'Empleado');
+        $this->setCellValue('B2', 'Primer Nombre');
+        $this->setCellValue('C2', 'Segundo Nombre');
+        $this->setCellValue('D2', 'Primer Apellido');
+        $this->setCellValue('E2', 'Segundo Nombre');
+        $this->setCellValue('F2', 'Cédula');
+        $this->setCellValue('G2', 'Parentesco');
+        $this->setCellValue('H2', 'Sexualidad');
+        $this->setCellValue('I2', 'Codigo Carnet');
+        $this->setCellValue('J2', 'Discapacidad');
+        $this->setCellValue('K2', 'Edad');
+        $this->setCellValue('L2', 'Tomo');
+        $this->setCellValue('M2', 'Folio');
+        $this->setCellValue('N2', 'Fecha Nacimiento');
+        // $this->setCellValue('O2', 'Fecha De ING');
+        // $this->setCellValue('O2', 'Dependencia');
+        // $this->setCellValue('P2', 'Departamento');
+
+
+        // Estilos para las cabeceras
+        $cabeceras = ['A2', 'B2', 'C2', 'D2', 'E2', 'F2', 'G2', 'H2', 'I2', 'J2', 'K2', 'L2', 'M2', 'N2'];
+        foreach ($cabeceras as $cabecera) {
+            $this->setCellStyle($cabecera, 'FF1929BB', 'FFFFFFFF', 12,true);
+            $this->setCellAlignment($cabecera, Alignment::HORIZONTAL_CENTER); // Centrar cabeceras
+        }
+
+        // Ajustar el ancho de las columnas
+        $this->setColumnWidth('A', 20);
+        $this->setColumnWidth('B', 20);
+        $this->setColumnWidth('C', 20);
+        $this->setColumnWidth('D', 20);
+        $this->setColumnWidth('E', 20);
+        $this->setColumnWidth('F', 20);
+        $this->setColumnWidth('G', 20);
+        $this->setColumnWidth('H', 20);
+        $this->setColumnWidth('I', 20);
+        $this->setColumnWidth('J', 20);
+        $this->setColumnWidth('K', 20);
+        $this->setColumnWidth('L', 20);
+        $this->setColumnWidth('M', 20);
+        $this->setColumnWidth('N', 20);
+        // $this->setColumnWidth('O', 20);
+        // $this->setColumnWidth('P', 60);
+
+
+        // Imprimir los datos del array con colores alternados
+        $fila = 3; // Comenza en la fila 3
+        $colorAlternado = true; // Iniciar con el primer color
+        foreach ($datos as $dato) {
+            $bgColor = $colorAlternado ? 'FFD6EAF8' : 'FFFFFFFF'; // Color alternado
+            $textColor = 'FF000000'; // Color de texto negro
+            $disca = $dato['discapacidad'];
+            $ccarnet = $dato['codigoCarnet'];
+            $disca2 = empty($disca) ? "Sin discapacidad" : $disca;
+            $ccarnet2 = empty($ccarnet ) ? "Sin codigo" : $ccarnet ;
+
+            $this->setCellValue('A' . $fila, $dato['primerNombreEmpleado']." ".$dato['primerApellidoEmpleado']);
+            $this->setCellValue('B' . $fila, $dato['primerNombreFamiliar']);
+            $this->setCellValue('C' . $fila, $dato['segundoNombreFamiliar']);
+            $this->setCellValue('D' . $fila, $dato['primerApellidoFamiliar']);
+            $this->setCellValue('E' . $fila, $dato['segundoApellidoFamiliar']);
+            $this->setCellValue('F' . $fila, $dato['cedulaFamiliar']);
+            $this->setCellValue('G' . $fila, $dato['parentesco']);
+            $this->setCellValue('H' . $fila, $dato['sexoFamiliar']);
+            $this->setCellValue('I' . $fila, $ccarnet2);
+            $this->setCellValue('J' . $fila, $disca2);
+            $this->setCellValue('K' . $fila, $dato['edadFamiliar']);
+            $this->setCellValue('L' . $fila, $dato['tomo']);
+            $this->setCellValue('M' . $fila, $dato['folio']);
+            $this->setCellValue('N' . $fila, $dato['diaFamiliar']."-".$dato['mesFamiliar']."-".$dato['anoFamiliar']);
+
+            // Aplicar estilos a la fila
+            $columnas = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N'];
+            foreach ($columnas as $columna) {
+                $this->setCellStyle($columna . $fila, $bgColor, $textColor, 11);
+                $this->setCellAlignment($columna . $fila, Alignment::HORIZONTAL_CENTER); //Centrar los datos
+            }
+
+            $fila++;
+            $colorAlternado = !$colorAlternado; // Cambiar el color para la siguiente fila
+        }
+        // Aplicar bordes a toda la tabla
+        $this->setBorders('A1:N' . ($fila - 1), 'FF5DADE2'); // Bordes de A1 hasta la última fila
+
+        $writer = new Xlsx($this->spreadsheet);
+        // $writer->save($this->filename);
+
+        //Devolver el archivo para descarga
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment; filename="'. basename($this->filename).'"');
+        header('Cache-Control: max-age=0');
+
+        $writer->save('php://output');
+    }
+
+    //FILTRAR POR FAMILIAR EDAD
+    public function excelFamiliarEdad($edad) {
+        // Generar el array de datos directamente en PHP
+        $datos = $this->personalModel->getDatosFamiliarFiltro('df.edad = ?',[$edad]);
+
+        // Combinar celdas y centrar el título
+        $this->mergeCells('A1:N1'); // Combinar de A1 a E1
+        $this->setCellValue('A1', 'ATLAS');
+        $this->setCellStyle('A1', 'FF1929BB', 'FFFFFFFF', 12, true); // Estilos para ATLAS
+        $this->setCellAlignment('A1', Alignment::HORIZONTAL_CENTER); // Centrar el texto
+
+        // Establecer las cabeceras de la tabla
+        $this->setCellValue('A2', 'Empleado');
+        $this->setCellValue('B2', 'Primer Nombre');
+        $this->setCellValue('C2', 'Segundo Nombre');
+        $this->setCellValue('D2', 'Primer Apellido');
+        $this->setCellValue('E2', 'Segundo Nombre');
+        $this->setCellValue('F2', 'Cédula');
+        $this->setCellValue('G2', 'Parentesco');
+        $this->setCellValue('H2', 'Sexualidad');
+        $this->setCellValue('I2', 'Codigo Carnet');
+        $this->setCellValue('J2', 'Discapacidad');
+        $this->setCellValue('K2', 'Edad');
+        $this->setCellValue('L2', 'Tomo');
+        $this->setCellValue('M2', 'Folio');
+        $this->setCellValue('N2', 'Fecha Nacimiento');
+        // $this->setCellValue('O2', 'Fecha De ING');
+        // $this->setCellValue('O2', 'Dependencia');
+        // $this->setCellValue('P2', 'Departamento');
+
+
+        // Estilos para las cabeceras
+        $cabeceras = ['A2', 'B2', 'C2', 'D2', 'E2', 'F2', 'G2', 'H2', 'I2', 'J2', 'K2', 'L2', 'M2', 'N2'];
+        foreach ($cabeceras as $cabecera) {
+            $this->setCellStyle($cabecera, 'FF1929BB', 'FFFFFFFF', 12,true);
+            $this->setCellAlignment($cabecera, Alignment::HORIZONTAL_CENTER); // Centrar cabeceras
+        }
+
+        // Ajustar el ancho de las columnas
+        $this->setColumnWidth('A', 20);
+        $this->setColumnWidth('B', 20);
+        $this->setColumnWidth('C', 20);
+        $this->setColumnWidth('D', 20);
+        $this->setColumnWidth('E', 20);
+        $this->setColumnWidth('F', 20);
+        $this->setColumnWidth('G', 20);
+        $this->setColumnWidth('H', 20);
+        $this->setColumnWidth('I', 20);
+        $this->setColumnWidth('J', 20);
+        $this->setColumnWidth('K', 20);
+        $this->setColumnWidth('L', 20);
+        $this->setColumnWidth('M', 20);
+        $this->setColumnWidth('N', 20);
+        // $this->setColumnWidth('O', 20);
+        // $this->setColumnWidth('P', 60);
+
+
+        // Imprimir los datos del array con colores alternados
+        $fila = 3; // Comenza en la fila 3
+        $colorAlternado = true; // Iniciar con el primer color
+        foreach ($datos as $dato) {
+            $bgColor = $colorAlternado ? 'FFD6EAF8' : 'FFFFFFFF'; // Color alternado
+            $textColor = 'FF000000'; // Color de texto negro
+            $disca = $dato['discapacidad'];
+            $ccarnet = $dato['codigoCarnet'];
+            $disca2 = empty($disca) ? "Sin discapacidad" : $disca;
+            $ccarnet2 = empty($ccarnet ) ? "Sin codigo" : $ccarnet ;
+
+            $this->setCellValue('A' . $fila, $dato['primerNombreEmpleado']." ".$dato['primerApellidoEmpleado']);
+            $this->setCellValue('B' . $fila, $dato['primerNombreFamiliar']);
+            $this->setCellValue('C' . $fila, $dato['segundoNombreFamiliar']);
+            $this->setCellValue('D' . $fila, $dato['primerApellidoFamiliar']);
+            $this->setCellValue('E' . $fila, $dato['segundoApellidoFamiliar']);
+            $this->setCellValue('F' . $fila, $dato['cedulaFamiliar']);
+            $this->setCellValue('G' . $fila, $dato['parentesco']);
+            $this->setCellValue('H' . $fila, $dato['sexoFamiliar']);
+            $this->setCellValue('I' . $fila, $ccarnet2);
+            $this->setCellValue('J' . $fila, $disca2);
+            $this->setCellValue('K' . $fila, $dato['edadFamiliar']);
+            $this->setCellValue('L' . $fila, $dato['tomo']);
+            $this->setCellValue('M' . $fila, $dato['folio']);
+            $this->setCellValue('N' . $fila, $dato['diaFamiliar']."-".$dato['mesFamiliar']."-".$dato['anoFamiliar']);
+
+            // Aplicar estilos a la fila
+            $columnas = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N'];
+            foreach ($columnas as $columna) {
+                $this->setCellStyle($columna . $fila, $bgColor, $textColor, 11);
+                $this->setCellAlignment($columna . $fila, Alignment::HORIZONTAL_CENTER); //Centrar los datos
+            }
+
+            $fila++;
+            $colorAlternado = !$colorAlternado; // Cambiar el color para la siguiente fila
+        }
+        // Aplicar bordes a toda la tabla
+        $this->setBorders('A1:N' . ($fila - 1), 'FF5DADE2'); // Bordes de A1 hasta la última fila
+
+        $writer = new Xlsx($this->spreadsheet);
+        // $writer->save($this->filename);
+
+        //Devolver el archivo para descarga
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment; filename="'. basename($this->filename).'"');
+        header('Cache-Control: max-age=0');
+
+        $writer->save('php://output');
+    }
+
+    //FILTRAR POR FAMILIAR DISCAPACIDAD
+    public function excelFamiliarDiscapacidad($discapacidad) {
+        // Generar el array de datos directamente en PHP
+        $datos = $this->personalModel->getDatosFamiliarFiltro('df.discapacidad = ?',[$discapacidad]);
+
+        // Combinar celdas y centrar el título
+        $this->mergeCells('A1:N1'); // Combinar de A1 a E1
+        $this->setCellValue('A1', 'ATLAS');
+        $this->setCellStyle('A1', 'FF1929BB', 'FFFFFFFF', 12, true); // Estilos para ATLAS
+        $this->setCellAlignment('A1', Alignment::HORIZONTAL_CENTER); // Centrar el texto
+
+        // Establecer las cabeceras de la tabla
+        $this->setCellValue('A2', 'Empleado');
+        $this->setCellValue('B2', 'Primer Nombre');
+        $this->setCellValue('C2', 'Segundo Nombre');
+        $this->setCellValue('D2', 'Primer Apellido');
+        $this->setCellValue('E2', 'Segundo Nombre');
+        $this->setCellValue('F2', 'Cédula');
+        $this->setCellValue('G2', 'Parentesco');
+        $this->setCellValue('H2', 'Sexualidad');
+        $this->setCellValue('I2', 'Codigo Carnet');
+        $this->setCellValue('J2', 'Discapacidad');
+        $this->setCellValue('K2', 'Edad');
+        $this->setCellValue('L2', 'Tomo');
+        $this->setCellValue('M2', 'Folio');
+        $this->setCellValue('N2', 'Fecha Nacimiento');
+        // $this->setCellValue('O2', 'Fecha De ING');
+        // $this->setCellValue('O2', 'Dependencia');
+        // $this->setCellValue('P2', 'Departamento');
+
+
+        // Estilos para las cabeceras
+        $cabeceras = ['A2', 'B2', 'C2', 'D2', 'E2', 'F2', 'G2', 'H2', 'I2', 'J2', 'K2', 'L2', 'M2', 'N2'];
+        foreach ($cabeceras as $cabecera) {
+            $this->setCellStyle($cabecera, 'FF1929BB', 'FFFFFFFF', 12,true);
+            $this->setCellAlignment($cabecera, Alignment::HORIZONTAL_CENTER); // Centrar cabeceras
+        }
+
+        // Ajustar el ancho de las columnas
+        $this->setColumnWidth('A', 20);
+        $this->setColumnWidth('B', 20);
+        $this->setColumnWidth('C', 20);
+        $this->setColumnWidth('D', 20);
+        $this->setColumnWidth('E', 20);
+        $this->setColumnWidth('F', 20);
+        $this->setColumnWidth('G', 20);
+        $this->setColumnWidth('H', 20);
+        $this->setColumnWidth('I', 20);
+        $this->setColumnWidth('J', 20);
+        $this->setColumnWidth('K', 20);
+        $this->setColumnWidth('L', 20);
+        $this->setColumnWidth('M', 20);
+        $this->setColumnWidth('N', 20);
+        // $this->setColumnWidth('O', 20);
+        // $this->setColumnWidth('P', 60);
+
+
+        // Imprimir los datos del array con colores alternados
+        $fila = 3; // Comenza en la fila 3
+        $colorAlternado = true; // Iniciar con el primer color
+        foreach ($datos as $dato) {
+            $bgColor = $colorAlternado ? 'FFD6EAF8' : 'FFFFFFFF'; // Color alternado
+            $textColor = 'FF000000'; // Color de texto negro
+            $disca = $dato['discapacidad'];
+            $ccarnet = $dato['codigoCarnet'];
+            $disca2 = empty($disca) ? "Sin discapacidad" : $disca;
+            $ccarnet2 = empty($ccarnet ) ? "Sin codigo" : $ccarnet ;
+
+            $this->setCellValue('A' . $fila, $dato['primerNombreEmpleado']." ".$dato['primerApellidoEmpleado']);
+            $this->setCellValue('B' . $fila, $dato['primerNombreFamiliar']);
+            $this->setCellValue('C' . $fila, $dato['segundoNombreFamiliar']);
+            $this->setCellValue('D' . $fila, $dato['primerApellidoFamiliar']);
+            $this->setCellValue('E' . $fila, $dato['segundoApellidoFamiliar']);
+            $this->setCellValue('F' . $fila, $dato['cedulaFamiliar']);
+            $this->setCellValue('G' . $fila, $dato['parentesco']);
+            $this->setCellValue('H' . $fila, $dato['sexoFamiliar']);
+            $this->setCellValue('I' . $fila, $ccarnet2);
+            $this->setCellValue('J' . $fila, $disca2);
+            $this->setCellValue('K' . $fila, $dato['edadFamiliar']);
+            $this->setCellValue('L' . $fila, $dato['tomo']);
+            $this->setCellValue('M' . $fila, $dato['folio']);
+            $this->setCellValue('N' . $fila, $dato['diaFamiliar']."-".$dato['mesFamiliar']."-".$dato['anoFamiliar']);
+
+            // Aplicar estilos a la fila
+            $columnas = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N'];
+            foreach ($columnas as $columna) {
+                $this->setCellStyle($columna . $fila, $bgColor, $textColor, 11);
+                $this->setCellAlignment($columna . $fila, Alignment::HORIZONTAL_CENTER); //Centrar los datos
+            }
+
+            $fila++;
+            $colorAlternado = !$colorAlternado; // Cambiar el color para la siguiente fila
+        }
+        // Aplicar bordes a toda la tabla
+        $this->setBorders('A1:N' . ($fila - 1), 'FF5DADE2'); // Bordes de A1 hasta la última fila
+
+        $writer = new Xlsx($this->spreadsheet);
+        // $writer->save($this->filename);
+
+        //Devolver el archivo para descarga
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment; filename="'. basename($this->filename).'"');
+        header('Cache-Control: max-age=0');
+
+        $writer->save('php://output');
+    }
+
+    //FILTRAR POR FAMILIAR PARENTESCO
+    public function excelFamiliarParentesco($parentesco) {
+        // Generar el array de datos directamente en PHP
+        $datos = $this->personalModel->getDatosFamiliarFiltro('df.parentesco = ?',[$parentesco]);
+
+        // Combinar celdas y centrar el título
+        $this->mergeCells('A1:N1'); // Combinar de A1 a E1
+        $this->setCellValue('A1', 'ATLAS');
+        $this->setCellStyle('A1', 'FF1929BB', 'FFFFFFFF', 12, true); // Estilos para ATLAS
+        $this->setCellAlignment('A1', Alignment::HORIZONTAL_CENTER); // Centrar el texto
+
+        // Establecer las cabeceras de la tabla
+        $this->setCellValue('A2', 'Empleado');
+        $this->setCellValue('B2', 'Primer Nombre');
+        $this->setCellValue('C2', 'Segundo Nombre');
+        $this->setCellValue('D2', 'Primer Apellido');
+        $this->setCellValue('E2', 'Segundo Nombre');
+        $this->setCellValue('F2', 'Cédula');
+        $this->setCellValue('G2', 'Parentesco');
+        $this->setCellValue('H2', 'Sexualidad');
+        $this->setCellValue('I2', 'Codigo Carnet');
+        $this->setCellValue('J2', 'Discapacidad');
+        $this->setCellValue('K2', 'Edad');
+        $this->setCellValue('L2', 'Tomo');
+        $this->setCellValue('M2', 'Folio');
+        $this->setCellValue('N2', 'Fecha Nacimiento');
+        // $this->setCellValue('O2', 'Fecha De ING');
+        // $this->setCellValue('O2', 'Dependencia');
+        // $this->setCellValue('P2', 'Departamento');
+
+
+        // Estilos para las cabeceras
+        $cabeceras = ['A2', 'B2', 'C2', 'D2', 'E2', 'F2', 'G2', 'H2', 'I2', 'J2', 'K2', 'L2', 'M2', 'N2'];
+        foreach ($cabeceras as $cabecera) {
+            $this->setCellStyle($cabecera, 'FF1929BB', 'FFFFFFFF', 12,true);
+            $this->setCellAlignment($cabecera, Alignment::HORIZONTAL_CENTER); // Centrar cabeceras
+        }
+
+        // Ajustar el ancho de las columnas
+        $this->setColumnWidth('A', 20);
+        $this->setColumnWidth('B', 20);
+        $this->setColumnWidth('C', 20);
+        $this->setColumnWidth('D', 20);
+        $this->setColumnWidth('E', 20);
+        $this->setColumnWidth('F', 20);
+        $this->setColumnWidth('G', 20);
+        $this->setColumnWidth('H', 20);
+        $this->setColumnWidth('I', 20);
+        $this->setColumnWidth('J', 20);
+        $this->setColumnWidth('K', 20);
+        $this->setColumnWidth('L', 20);
+        $this->setColumnWidth('M', 20);
+        $this->setColumnWidth('N', 20);
+        // $this->setColumnWidth('O', 20);
+        // $this->setColumnWidth('P', 60);
+
+
+        // Imprimir los datos del array con colores alternados
+        $fila = 3; // Comenza en la fila 3
+        $colorAlternado = true; // Iniciar con el primer color
+        foreach ($datos as $dato) {
+            $bgColor = $colorAlternado ? 'FFD6EAF8' : 'FFFFFFFF'; // Color alternado
+            $textColor = 'FF000000'; // Color de texto negro
+            $disca = $dato['discapacidad'];
+            $ccarnet = $dato['codigoCarnet'];
+            $disca2 = empty($disca) ? "Sin discapacidad" : $disca;
+            $ccarnet2 = empty($ccarnet ) ? "Sin codigo" : $ccarnet ;
+
+            $this->setCellValue('A' . $fila, $dato['primerNombreEmpleado']." ".$dato['primerApellidoEmpleado']);
+            $this->setCellValue('B' . $fila, $dato['primerNombreFamiliar']);
+            $this->setCellValue('C' . $fila, $dato['segundoNombreFamiliar']);
+            $this->setCellValue('D' . $fila, $dato['primerApellidoFamiliar']);
+            $this->setCellValue('E' . $fila, $dato['segundoApellidoFamiliar']);
+            $this->setCellValue('F' . $fila, $dato['cedulaFamiliar']);
+            $this->setCellValue('G' . $fila, $dato['parentesco']);
+            $this->setCellValue('H' . $fila, $dato['sexoFamiliar']);
+            $this->setCellValue('I' . $fila, $ccarnet2);
+            $this->setCellValue('J' . $fila, $disca2);
+            $this->setCellValue('K' . $fila, $dato['edadFamiliar']);
+            $this->setCellValue('L' . $fila, $dato['tomo']);
+            $this->setCellValue('M' . $fila, $dato['folio']);
+            $this->setCellValue('N' . $fila, $dato['diaFamiliar']."-".$dato['mesFamiliar']."-".$dato['anoFamiliar']);
+
+            // Aplicar estilos a la fila
+            $columnas = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N'];
+            foreach ($columnas as $columna) {
+                $this->setCellStyle($columna . $fila, $bgColor, $textColor, 11);
+                $this->setCellAlignment($columna . $fila, Alignment::HORIZONTAL_CENTER); //Centrar los datos
+            }
+
+            $fila++;
+            $colorAlternado = !$colorAlternado; // Cambiar el color para la siguiente fila
+        }
+        // Aplicar bordes a toda la tabla
+        $this->setBorders('A1:N' . ($fila - 1), 'FF5DADE2'); // Bordes de A1 hasta la última fila
+
+        $writer = new Xlsx($this->spreadsheet);
+        // $writer->save($this->filename);
+
+        //Devolver el archivo para descarga
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment; filename="'. basename($this->filename).'"');
+        header('Cache-Control: max-age=0');
+
+        $writer->save('php://output');
+    }
+
+    //FILTRAR POR RANGO DE FECHA
+    public function excelFamiliarRangoFecha(string $fecha_Ini, string $fecha_Fin, string $fecha_IniESPA, string $fecha_FinESPA) {
+        // Generar el array de datos directamente en PHP
+        $datos = $this->personalModel->getDatosFamiliarFiltro('df.fecha BETWEEN ? AND ?',[$fecha_Ini, $fecha_Fin]);
+
+        // Combinar celdas y centrar el título
+        $this->mergeCells('A1:N1'); // Combinar de A1 a E1
+        $this->setCellValue('A1', 'ATLAS');
+        $this->setCellStyle('A1', 'FF1929BB', 'FFFFFFFF', 12, true); // Estilos para ATLAS
+        $this->setCellAlignment('A1', Alignment::HORIZONTAL_CENTER); // Centrar el texto
+
+        // Establecer las cabeceras de la tabla
+        $this->setCellValue('A2', 'Empleado');
+        $this->setCellValue('B2', 'Primer Nombre');
+        $this->setCellValue('C2', 'Segundo Nombre');
+        $this->setCellValue('D2', 'Primer Apellido');
+        $this->setCellValue('E2', 'Segundo Nombre');
+        $this->setCellValue('F2', 'Cédula');
+        $this->setCellValue('G2', 'Parentesco');
+        $this->setCellValue('H2', 'Sexualidad');
+        $this->setCellValue('I2', 'Codigo Carnet');
+        $this->setCellValue('J2', 'Discapacidad');
+        $this->setCellValue('K2', 'Edad');
+        $this->setCellValue('L2', 'Tomo');
+        $this->setCellValue('M2', 'Folio');
+        $this->setCellValue('N2', 'Fecha Nacimiento');
+        // $this->setCellValue('O2', 'Fecha De ING');
+        // $this->setCellValue('O2', 'Dependencia');
+        // $this->setCellValue('P2', 'Departamento');
+
+
+        // Estilos para las cabeceras
+        $cabeceras = ['A2', 'B2', 'C2', 'D2', 'E2', 'F2', 'G2', 'H2', 'I2', 'J2', 'K2', 'L2', 'M2', 'N2'];
+        foreach ($cabeceras as $cabecera) {
+            $this->setCellStyle($cabecera, 'FF1929BB', 'FFFFFFFF', 12,true);
+            $this->setCellAlignment($cabecera, Alignment::HORIZONTAL_CENTER); // Centrar cabeceras
+        }
+
+        // Ajustar el ancho de las columnas
+        $this->setColumnWidth('A', 20);
+        $this->setColumnWidth('B', 20);
+        $this->setColumnWidth('C', 20);
+        $this->setColumnWidth('D', 20);
+        $this->setColumnWidth('E', 20);
+        $this->setColumnWidth('F', 20);
+        $this->setColumnWidth('G', 20);
+        $this->setColumnWidth('H', 20);
+        $this->setColumnWidth('I', 20);
+        $this->setColumnWidth('J', 20);
+        $this->setColumnWidth('K', 20);
+        $this->setColumnWidth('L', 20);
+        $this->setColumnWidth('M', 20);
+        $this->setColumnWidth('N', 20);
+        // $this->setColumnWidth('O', 20);
+        // $this->setColumnWidth('P', 60);
+
+
+        // Imprimir los datos del array con colores alternados
+        $fila = 3; // Comenza en la fila 3
+        $colorAlternado = true; // Iniciar con el primer color
+        foreach ($datos as $dato) {
+            $bgColor = $colorAlternado ? 'FFD6EAF8' : 'FFFFFFFF'; // Color alternado
+            $textColor = 'FF000000'; // Color de texto negro
+            $disca = $dato['discapacidad'];
+            $ccarnet = $dato['codigoCarnet'];
+            $disca2 = empty($disca) ? "Sin discapacidad" : $disca;
+            $ccarnet2 = empty($ccarnet ) ? "Sin codigo" : $ccarnet ;
+
+            $this->setCellValue('A' . $fila, $dato['primerNombreEmpleado']." ".$dato['primerApellidoEmpleado']);
+            $this->setCellValue('B' . $fila, $dato['primerNombreFamiliar']);
+            $this->setCellValue('C' . $fila, $dato['segundoNombreFamiliar']);
+            $this->setCellValue('D' . $fila, $dato['primerApellidoFamiliar']);
+            $this->setCellValue('E' . $fila, $dato['segundoApellidoFamiliar']);
+            $this->setCellValue('F' . $fila, $dato['cedulaFamiliar']);
+            $this->setCellValue('G' . $fila, $dato['parentesco']);
+            $this->setCellValue('H' . $fila, $dato['sexoFamiliar']);
+            $this->setCellValue('I' . $fila, $ccarnet2);
+            $this->setCellValue('J' . $fila, $disca2);
+            $this->setCellValue('K' . $fila, $dato['edadFamiliar']);
+            $this->setCellValue('L' . $fila, $dato['tomo']);
+            $this->setCellValue('M' . $fila, $dato['folio']);
+            $this->setCellValue('N' . $fila, $dato['diaFamiliar']."-".$dato['mesFamiliar']."-".$dato['anoFamiliar']);
+
+            // Aplicar estilos a la fila
+            $columnas = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N'];
+            foreach ($columnas as $columna) {
+                $this->setCellStyle($columna . $fila, $bgColor, $textColor, 11);
+                $this->setCellAlignment($columna . $fila, Alignment::HORIZONTAL_CENTER); //Centrar los datos
+            }
+
+            $fila++;
+            $colorAlternado = !$colorAlternado; // Cambiar el color para la siguiente fila
+        }
+        // Aplicar bordes a toda la tabla
+        $this->setBorders('A1:N' . ($fila - 1), 'FF5DADE2'); // Bordes de A1 hasta la última fila
+
+        $writer = new Xlsx($this->spreadsheet);
+        // $writer->save($this->filename);
+
+        //Devolver el archivo para descarga
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment; filename="'. basename($this->filename).'"');
+        header('Cache-Control: max-age=0');
+
+        $writer->save('php://output');
+    }
 }
 ?>

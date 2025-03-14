@@ -48,6 +48,9 @@ $fecha_fin = isset($_POST['fecha_fin_filtrar2']) ? $conexion->limpiarCadena($_PO
 $dependencia = isset($_POST['dependencia_filtrar']) ? $conexion->limpiarCadena($_POST['dependencia_filtrar']) : "";
 $departamento = isset($_POST['departamento_filtrar']) ? $conexion->limpiarCadena($_POST['departamento_filtrar']) : "";
 
+$discapacidad = isset($_POST['tpDiscapacidad']) ? $conexion->limpiarCadena($_POST['tpDiscapacidad']) : "";
+$parentesco = isset($_POST['parentesco']) ? $conexion->limpiarCadena($_POST['parentesco']) : "";
+
 switch ($_GET['accion']) {
     case 'imprimirDependencia':
         $imprimirPDFController->generarDependenciaPDF();
@@ -121,7 +124,7 @@ switch ($_GET['accion']) {
         }
         $fecha_ini_convertida = convertirFecha($fecha_ini);
         $fecha_fin_convertida = convertirFecha($fecha_fin);
-        $reportes->generarPDFrangoFhecha($fecha_ini_convertida,  $fecha_fin_convertida, $fecha_ini, $fecha_fin );
+        $reportes->generarPDFrangoFhecha($fecha_ini_convertida,  $fecha_fin_convertida, $fecha_ini, $fecha_fin);
         break;
     case 'impirimirEmpleadosDependencia':
         $reportes->generarPDFdependencia($dependencia);
@@ -136,7 +139,7 @@ switch ($_GET['accion']) {
         $excelgenerator->generarExcelCargo($cargo);
         break;
     case 'impirimirEmpleadosSexoExcel':
-            $excelgenerator->excelEmepleadoSexualidad($sexo);
+        $excelgenerator->excelEmepleadoSexualidad($sexo);
         break;
     case 'impirimirEmpleadosEdadExcel':
         $excelgenerator->generarExceledad($edad);
@@ -173,13 +176,96 @@ switch ($_GET['accion']) {
         }
         $fecha_ini_convertida = convertirFecha($fecha_ini);
         $fecha_fin_convertida = convertirFecha($fecha_fin);
-        $excelgenerator->generarExcelrangoFhecha($fecha_ini_convertida,  $fecha_fin_convertida, $fecha_ini, $fecha_fin );
+        $excelgenerator->generarExcelrangoFhecha($fecha_ini_convertida,  $fecha_fin_convertida, $fecha_ini, $fecha_fin);
         break;
     case 'impirimirEmpleadosDependenciaExcel':
         $excelgenerator->generarExceldependencia($dependencia);
         break;
     case 'impirimirEmpleadosDepartamentoExcel':
         $excelgenerator->generarExceldepartamento($departamento);
+        break;
+    //REPORTES DE FAMILIAR
+    case 'impirimirFamiliarSexo':
+        $reportes->generarPDFSexoFamiliar($sexo);
+        break;
+    case 'impirimirFamiliarEdad':
+        $reportes->generarPDFedadFamiliar($edad);
+        break;
+    case 'impirimirFamiliarParentesco':
+        $reportes->generarPDFparentescoFamiliar($parentesco);
+        break;
+    case 'impirimirFamiliarDiscapacidad':
+        $reportes->generarPDFdiscapacidadFamiliar($discapacidad);
+        break;
+    case 'impirimirFamiliarRangoFecha':
+        function convertirFecha($fecha)
+        {
+            // Crea un objeto DateTime a partir de la fecha en formato dd-mm-aaaa
+            $fechaObj = DateTime::createFromFormat('d-m-Y', $fecha);
+
+            // Si la fecha es válida, la formatea en aaaa-mm-dd
+            if ($fechaObj) {
+                return $fechaObj->format('Y-m-d');
+            } else {
+                // Si la fecha no es válida, devuelve false o lanza una excepción
+                return false; // O: throw new Exception("Formato de fecha inválido: $fecha");
+            }
+        }
+        $fecha_ini_convertida = convertirFecha($fecha_ini);
+        $fecha_fin_convertida = convertirFecha($fecha_fin);
+        $reportes->generarPDFrangoFechaFamiliar($fecha_ini_convertida,  $fecha_fin_convertida, $fecha_ini, $fecha_fin);
+        break;
+    case 'impirimirFamiliarPersonalizado':
+        function convertirFecha($fecha)
+        {
+            // Crea un objeto DateTime a partir de la fecha en formato dd-mm-aaaa
+            $fechaObj = DateTime::createFromFormat('d-m-Y', $fecha);
+
+            // Si la fecha es válida, la formatea en aaaa-mm-dd
+            if ($fechaObj) {
+                return $fechaObj->format('Y-m-d');
+            } else {
+                // Si la fecha no es válida, devuelve false o lanza una excepción
+                return false; // O: throw new Exception("Formato de fecha inválido: $fecha");
+            }
+        }
+        $fecha_ini_convertida = convertirFecha($fecha_ini);
+        $fecha_fin_convertida = convertirFecha($fecha_fin);
+        $reportes->generarPDFrangoFechaFamiliar($fecha_ini_convertida,  $fecha_fin_convertida, $fecha_ini, $fecha_fin, $discapacidad, $parentesco, $sexo, $edad);
+        break;
+    //REPORTE FAMILIAR EXCEL
+    case 'impirimirFamiliarSexoExcel':
+        $excelgenerator->excelFamiliarSexualidad($sexo);
+        break;
+    case 'impirimirFamiliarEdadExcel':
+        $excelgenerator->excelFamiliarEdad($edad);
+        break;
+    case 'impirimirFamiliarDiscapacidadExcel':
+        $excelgenerator->excelFamiliarDiscapacidad($discapacidad);
+        break;
+    case 'impirimirFamiliarParentescoExcel':
+        $excelgenerator->excelFamiliarParentesco($parentesco);
+        break;
+    case 'impirimirFamiliarRangoFechaExcel':
+        function convertirFecha($fecha)
+        {
+            // Crea un objeto DateTime a partir de la fecha en formato dd-mm-aaaa
+            $fechaObj = DateTime::createFromFormat('d-m-Y', $fecha);
+
+            // Si la fecha es válida, la formatea en aaaa-mm-dd
+            if ($fechaObj) {
+                return $fechaObj->format('Y-m-d');
+            } else {
+                // Si la fecha no es válida, devuelve false o lanza una excepción
+                return false; // O: throw new Exception("Formato de fecha inválido: $fecha");
+            }
+        }
+        $fecha_ini_convertida = convertirFecha($fecha_ini);
+        $fecha_fin_convertida = convertirFecha($fecha_fin);
+        $excelgenerator->excelFamiliarRangoFecha($fecha_ini_convertida,  $fecha_fin_convertida, $fecha_ini, $fecha_fin);
+        break;
+    case 'imprimirFamiliarPersonalizadoExcel':
+        # code...
         break;
     default:
         # code...

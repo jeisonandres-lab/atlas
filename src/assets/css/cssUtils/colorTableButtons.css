@@ -113,3 +113,36 @@ div.dt-button-collection .dt-button-desactive:after {
 .blur-background {
     filter: none !important;
 }
+
+/* small border */
+.small-border-rosa {
+    border-color: #f06292 !important;
+}
+
+/* SMALL SUBTITLE */
+.small-subtle-rosa {
+    background-color: #f7c6d7 !important;
+}
+
+/* SMALL TEXTO */
+.small-emphasis-rosa {
+    color: #72062b !important;
+}
+
+
+
+
+/* small border */
+.small-border-naranja {
+    border-color: #f06292 !important;
+}
+
+/* SMALL SUBTITLE */
+.small-subtle-naranja {
+    background-color: #fbe9e7 !important;
+}
+
+/* SMALL TEXTO */
+.small-emphasis-naraja {
+    color: #72062b !important;
+}

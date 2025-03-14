@@ -243,7 +243,7 @@ class personalModel extends Conexion
         return $sql;
     }
 
-    // DATOS DE PERSONAL POR SEXUALIDAD
+    // DATOS DE PERSONAL POR FILTRO
     private function datosEmpleadoFiltro(string $clausula, array $parametro)
     {
         $sql = $this->ejecutarConsulta(
@@ -257,6 +257,33 @@ class personalModel extends Conexion
         INNER JOIN estados est ON ubi.idEstado = est.id_estado
         INNER JOIN municipios m ON ubi.idMunicipio = m.id_municipio
         INNER JOIN parroquias p ON ubi.idParroquia = p.id_parroquia
+        WHERE $clausula",
+            $parametro
+        );
+        return $sql;
+    }
+
+    // DATOS DE FAMILIAR POR FILTRO
+    private function datosFamiliarFiltro(string $clausula, array $parametro)
+    {
+        $sql = $this->ejecutarConsulta(
+            "SELECT df . *,
+            df.edad AS edadFamiliar,
+            df.anoNacimiento AS anoFamiliar,
+            df.diaNacimiento AS diaFamiliar,
+            df.mesNacimiento AS mesFamiliar,
+            df.primerNombre AS primerNombreFamiliar,
+            df.segundoNombre AS segundoNombreFamiliar,
+            df.primerApellido AS primerApellidoFamiliar,
+            df.segundoApellido AS segundoApellidoFamiliar,
+            df.cedula AS cedulaFamiliar,
+            dp.cedula AS cedulaEmpleado,
+            dp.primerNombre AS primerNombreEmpleado,
+            dp.primerApellido AS primerApellidoEmpleado
+            FROM datosfamilia df
+            INNER JOIN datosempleados de
+            ON de.id_empleados = df.idEmpleado
+            INNER JOIN datospersonales dp ON dp.id_personal = de.idPersonal
         WHERE $clausula",
             $parametro
         );
@@ -290,6 +317,18 @@ class personalModel extends Conexion
         INNER JOIN estados est ON ubi.idEstado = est.id_estado
         INNER JOIN municipios m ON ubi.idMunicipio = m.id_municipio
         INNER JOIN parroquias p ON ubi.idParroquia = p.id_parroquia
+        WHERE $where", $parametro);
+        return $sql;
+    }
+
+    //contar cualquier dato FAMILIAR
+    public function contarDatosFamiliar($selectores, $where, $parametro)
+    {
+        $sql = $this->ejecutarConsulta("SELECT $selectores
+            FROM datosfamilia df
+            INNER JOIN datosempleados de
+            ON de.id_empleados = df.idEmpleado
+            INNER JOIN datospersonales dp ON dp.id_personal = de.idPersonal
         WHERE $where", $parametro);
         return $sql;
     }
@@ -400,7 +439,12 @@ class personalModel extends Conexion
 
     public function getDatosEmpleadoFiltro($clausula, $parametro)
     {
-        $sql = $this->datosEmpleadoFiltro($clausula, $parametro);
-        return print_r($sql);
+        return $this->datosEmpleadoFiltro($clausula, $parametro);
+    }
+
+    public function getDatosFamiliarFiltro($clausula, $parametro)
+    {
+        return $this->datosFamiliarFiltro($clausula, $parametro);
+
     }
 }

@@ -66,7 +66,9 @@ use App\Atlas\config\App;
                                             <th scope="col" class="bg-primary" style="font-size: 14px;">Empleado</th>
                                             <th scope="col" class="bg-primary" style="font-size: 14px;">Familiar</th>
                                             <th scope="col" class="text-center bg-primary" style="font-size: 14px;">Cédula</th>
+                                            <th scope="col" class="text-center bg-primary" style="font-size: 14px;">Sexualidad</th>
                                             <th scope="col" class="text-center bg-primary" style="font-size: 14px;">Carnet</th>
+                                            <th scope="col" class="text-center bg-primary" style="font-size: 14px;">Discapacidad</th>
                                             <th scope="col" class="text-center bg-primary" style="font-size: 14px;">Edad</th>
                                             <th scope="col" class="text-center bg-primary" style="font-size: 14px;">Tomo</th>
                                             <th scope="col" class="text-center bg-primary" style="font-size: 14px;">Folio</th>
@@ -178,7 +180,7 @@ use App\Atlas\config\App;
                                             <button type="button" id="cargaDiscapacidad" class="btn btn-primary btn-xs btn-hover-azul"><i class="fa-solid fa-plus me-2"></i>Documento De Discapacidad</button>
                                         </div>
 
-                                        <div class="col-sm-6 col-md-6 mb-3">
+                                        <div class="col-sm-6 col-md-3 mb-3">
                                             <div class="form-group">
                                                 <label for="primerNombre">Primer Nombre</label>
                                                 <div class="input-group">
@@ -188,7 +190,7 @@ use App\Atlas\config\App;
                                             </div>
                                         </div>
 
-                                        <div class="col-sm-6 col-md-6 mb-3">
+                                        <div class="col-sm-6 col-md-3 mb-3">
                                             <div class="form-group">
                                                 <label for="segundoNombre">Segundo Nombre</label>
                                                 <div class="input-group ">
@@ -198,7 +200,7 @@ use App\Atlas\config\App;
                                             </div>
                                         </div>
 
-                                        <div class="col-sm-6 col-md-6 mb-3">
+                                        <div class="col-sm-6 col-md-3 mb-3">
                                             <div class="form-group">
                                                 <label for="primerApellido">Primer Apellido</label>
                                                 <div class="input-group">
@@ -208,7 +210,7 @@ use App\Atlas\config\App;
                                             </div>
                                         </div>
 
-                                        <div class="col-sm-6 col-md-6 mb-3" id="contenApellidoDos">
+                                        <div class="col-sm-6 col-md-3 mb-3" id="contenApellidoDos">
                                             <div class="form-group">
                                                 <label for="segundoApellido">Segundo Apellido</label>
                                                 <div class="input-group">
@@ -218,7 +220,7 @@ use App\Atlas\config\App;
                                             </div>
                                         </div>
 
-                                        <div class="col-sm-6 col-md-6 mb-3" hidden=="true">
+                                        <div class="col-sm-6 col-md-3 mb-3" hidden=="true">
                                             <div class="form-group">
                                                 <label for="identificador">identificador</label>
                                                 <div class="input-group">
@@ -228,7 +230,7 @@ use App\Atlas\config\App;
                                             </div>
                                         </div>
 
-                                        <div class="col-sm-6 col-md-6 mb-3" id="contenCedula">
+                                        <div class="col-sm-6 col-md-3 mb-3" id="contenCedula">
                                             <div class="form-group">
                                                 <label for="cedula">Cédula</label>
                                                 <div class="input-group">
@@ -238,24 +240,33 @@ use App\Atlas\config\App;
                                             </div>
                                         </div>
 
-                                        <div class="col-sm-6 col-md-6 mb-3 ">
+                                        <div class="col-sm-6 col-md-3 mb-3 ">
                                             <div class="form-group">
                                                 <label for="parentesco">Parentesco</label>
                                                 <div class="input-group">
                                                     <span class="input-group-text span_parentesco"><i class="icons fa-regular fa-clipboard"></i></span>
                                                     <select class="form-select form-select-md estado-parentesco" id="parentesco" name="parentesco" aria-label="Small select example" aria-placeholder="dasdas" required>
-                                                        <option value="">Selecione</option>
-                                                        <option value="Hijo">Hijo</option>
-                                                        <option value="Hija">Hija</option>
-                                                        <option value="Padre">Padre</option>
-                                                        <option value="Madre">Madre</option>
-                                                        <option value="Hermano">Hermano</option>
+
                                                     </select>
                                                 </div>
                                             </div>
                                         </div>
 
-                                        <div class="col-sm-6 col-md-6 mb-3" id="">
+                                        <div class="col-sm-6 col-md-3 col-xl-4 col-xxl-3 mb-2 ">
+                                            <div class="form-group">
+                                                <label for="sexo">Sexualidad</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-text span_sexo"><i class="icons fa-regular fa-person-half-dress"></i></span>
+                                                    <select class="form-select form-select-md sexo-sexo" id="sexo" name="sexo" aria-label="Small select example" aria-placeholder="dasdas" required>
+                                                        <option value="">Selecione el sexo</option>
+                                                        <option value="Masculino">Masculino</option>
+                                                        <option value="Femenino">Femenino</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-6 col-md-3 mb-3" id="">
                                             <div class="form-group">
                                                 <label for="tomo">Tomo</label>
                                                 <div class="input-group">
@@ -265,7 +276,7 @@ use App\Atlas\config\App;
                                             </div>
                                         </div>
 
-                                        <div class="col-sm-6 col-md-6 mb-3" id="">
+                                        <div class="col-sm-6 col-md-3 mb-3" id="">
                                             <div class="form-group">
                                                 <label for="folio">Folio</label>
                                                 <div class="input-group">
@@ -275,7 +286,7 @@ use App\Atlas\config\App;
                                             </div>
                                         </div>
 
-                                        <div class="col-sm-6 col-md-6 mb-3" id="contenCarnet">
+                                        <div class="col-sm-6 col-md-3 mb-3" id="contenCarnet">
                                             <div class="form-group">
                                                 <label for="cedula">Número de Carnet de Discapacidad</label>
                                                 <div class="input-group">
@@ -285,27 +296,27 @@ use App\Atlas\config\App;
                                             </div>
                                         </div>
 
-                                        <div class="col-sm-6 mb-3" id="contenDoc">
+                                        <div class="col-sm-6 col-md-6 col-xl-6 col-xxl-3 mb-3" id="contenTipoDiscapacidad">
                                             <div class="form-group">
-                                                <label for="correo">Partida De Nacimiento</label>
+                                                <label for="tpDiscapacidad">Tipo De Discapacidad</label>
                                                 <div class="input-group">
-                                                    <span class="input-group-text span_docArchivo"><i class="fa-regular fa-file-zipper"></i></span>
-                                                    <input type="file" class="form-control ignore-validation" name="docArchivo" id="achivoparti" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+                                                    <span class="input-group-text span_tpDiscapacidad"><i class="icons fa-solid fa-wheelchair-move"></i></span>
+                                                    <select type="text" class="form-control ignore-validation" id="tpDiscapacidad" name="tpDiscapacidad" placeholder="Tipo de Discapacidad ">
+                                                        <option value="">Seleccione una discapacidad</option>
+                                                        <option value="Visual">Discapacidad visual</option>
+                                                        <option value="Auditiva">Discapacidad auditiva</option>
+                                                        <option value="Motriz">Discapacidad motriz</option>
+                                                        <option value="Intelectual">Discapacidad intelectual</option>
+                                                        <option value="Psicosocial">Discapacidad psicosocial</option>
+                                                        <option value="Visceral">Discapacidad visceral</option>
+                                                        <option value="Multiples">Discapacidades múltiples</option>
+                                                        <option value="Otra">Otra discapacidad</option>
+                                                    </select>
                                                 </div>
                                             </div>
                                         </div>
 
-                                        <div class="col-sm-6 mb-3" id="contentPartida">
-                                            <div class="form-group">
-                                                <label for="correo">Partida De Discapacidad</label>
-                                                <div class="input-group">
-                                                    <span class="input-group-text span_docArchivoDis"><i class="fa-regular fa-file-zipper"></i></span>
-                                                    <input type="file" class="form-control ignore-validation" name="docArchivoDis" id="achivoDis" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-sm-6 col-md-6 mb-3" id="contenEdad">
+                                        <div class="col-sm-6 col-md-3 " id="contenEdad">
                                             <div class="form-group">
                                                 <label for="edad">Edad</label>
                                                 <div class="input-group">
@@ -316,10 +327,30 @@ use App\Atlas\config\App;
                                             </div>
                                         </div>
 
+                                        <div class="col-sm-6 col-md-6 mb-3" id="contenDoc">
+                                            <div class="form-group">
+                                                <label for="correo">Partida De Nacimiento</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-text span_docArchivo"><i class="fa-regular fa-file-zipper"></i></span>
+                                                    <input type="file" class="form-control ignore-validation" name="docArchivo" id="achivoparti" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-6 col-md-6 mb-3" id="contentPartida">
+                                            <div class="form-group">
+                                                <label for="correo">Partida De Discapacidad</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-text span_docArchivoDis"><i class="fa-regular fa-file-zipper"></i></span>
+                                                    <input type="file" class="form-control ignore-validation" name="docArchivoDis" id="achivoDis" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+                                                </div>
+                                            </div>
+                                        </div>
+
                                         <p class="mb-0">Fecha de nacimiento</p>
                                         <hr class="mb-2">
 
-                                        <div class="col-sm-4 mb-2">
+                                        <div class="col-sm-4 col-md-4 mb-2">
                                             <div class="form-group">
                                                 <label class="required-field" for="message">Año</label>
                                                 <div class="input-group">
@@ -329,7 +360,7 @@ use App\Atlas\config\App;
                                             </div>
                                         </div>
 
-                                        <div class="col-sm-4 mb-2">
+                                        <div class="col-sm-4 col-md-4 mb-2">
                                             <div class="form-group">
                                                 <label class="required-field" for="message">Mes</label>
                                                 <div class="input-group">
@@ -339,7 +370,7 @@ use App\Atlas\config\App;
                                             </div>
                                         </div>
 
-                                        <div class="col-sm-4 mb-3">
+                                        <div class="col-sm-4 col-md-4 mb-3">
                                             <div class="form-group ">
                                                 <label class="required-field" for="message">Día</label>
                                                 <div class="input-group">
@@ -379,271 +410,6 @@ use App\Atlas\config\App;
 
         </main>
         <?php require_once App::URL_INC . "/footer.php"; ?>
-    </div>
-
-
-    <!-- Modal para editar familiar-->
-    <div class="modal  fade modal-lg" id="editarDatosFamiliar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header d-flex justify-content-between bg-primary" style=" color: #fff;">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Editar Datos</h1>
-                    <i type="button" data-bs-dismiss="modal" aria-label="Close" class="cerrarEditar close fa-solid fa-xmark"></i>
-                </div>
-                <div class="modal-body">
-                    <div class="container-fluid px-4">
-                        <section class="card p-2" style="background-color: white; box-shadow: none;">
-                            <form action="#" class="row contact-form form-validate d-flex justify-content-center formulario-familia" novalidate="novalidate" id="forActualizarFamiliar">
-                                <div class=" col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12 ">
-                                    <div class="row col-sm-12 col-md-9 h-100 bg-white w-100 p-2 m-0 content">
-                                        <p class="mb-0 mt-2">Datos del Empleado</p>
-                                        <hr class="mb-3">
-                                        <input type="text" class="form-control cumplido" id="idEmpleadoFamiliar" name="id" placeholder="Primer Nombre" required hidden>
-                                        <div class="col-sm-4 mb-2">
-                                            <label class="form-label mb-0" for="cedula_trabajador">Cédula</label>
-                                            <div class="input-group">
-                                                <span class="input-group-text span_cedula_empleado "><i class="icons fa-regular fa-address-card"></i></span>
-                                                <input type="text" class="form-control " id="cedula_trabajador_familiar" name="cedulaEmpleado" placeholder="Cédula">
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-6 col-md-4 mb-2">
-                                            <div class="form-group">
-                                                <label for="nombre">Nombre</label>
-                                                <div class="input-group">
-                                                    <span class="input-group-text span_nombre"><i class="icons fa-regular fa-user"></i></span>
-                                                    <input type="text" class="form-control" id="nombreEmpleado" name="nombre" placeholder="Primer Nombre" required readonly>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-6 col-md-4 mb-2">
-                                            <div class="form-group">
-                                                <label for="apellido">apellido</label>
-                                                <div class="input-group">
-                                                    <span class="input-group-text span_apellido"><i class="icons fa-regular fa-user"></i></span>
-                                                    <input type="text" class="form-control" id="apellidoEmpleado" name="apellido" placeholder="Primer Nombre" required readonly>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <p class="mb-0 mt-2">Datos Del Familiar</p>
-                                        <hr class="mb-3">
-                                        <div class=" d-flex justify-content-center">
-                                            <!-- CHECK NO CEDULADO -->
-                                            <div class="checkbox-wrapper-12 d-flex me-3">
-                                                <div class="cbx ">
-                                                    <input id="noCedula" class="cumplidoNormal" type="checkbox" />
-                                                    <label for="noCedula"></label>
-                                                    <i class="icons fa-solid fa-check fa-xs"></i>
-                                                </div>
-                                                <p>No Cédulado</p>
-                                            </div>
-
-                                            <!-- CHECK DE DISCAPACIDAD -->
-                                            <div class="checkbox-wrapper-12 d-flex">
-                                                <div class="cbx ">
-                                                    <input id="disca" class="cumplidoNormal" type="checkbox" />
-                                                    <label for="disca"></label>
-                                                    <i class="icons fa-solid fa-check fa-xs"></i>
-                                                </div>
-                                                <p>Discapacidad</p>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-sm-12 col-md-12 mb-2">
-                                            <button type="button" id="cargaPartiNacimiento" class="btn btn-primary btn-xs btn-hover-azul"><i class="fa-solid fa-plus me-2"></i>Partida De Nacimiento</button>
-                                            <button type="button" id="cargaDiscapacidad" class="btn btn-primary btn-xs btn-hover-azul"><i class="fa-solid fa-plus me-2"></i>Documento De Discapacidad</button>
-                                        </div>
-
-                                        <div class="col-sm-6 col-md-6 mb-3">
-                                            <div class="form-group">
-                                                <label for="primerNombre">Primer Nombre</label>
-                                                <div class="input-group">
-                                                    <span class="input-group-text span_nombre1"><i class="icons fa-regular fa-user"></i></span>
-                                                    <input type="text" class="form-control" id="primerNombreFamiliar" name="primerNombre" placeholder="Primer Nombre" required>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-sm-6 col-md-6 mb-3">
-                                            <div class="form-group">
-                                                <label for="segundoNombre">Segundo Nombre</label>
-                                                <div class="input-group ">
-                                                    <span class="input-group-text span_nombre2"><i class="icons fa-regular fa-user"></i></span>
-                                                    <input type="text" class="form-control" id="segundoNombreFamiliar" name="segundoNombre" placeholder="Segundo Nombre" required>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-sm-6 col-md-6 mb-3">
-                                            <div class="form-group">
-                                                <label for="primerApellido">Primer Apellido</label>
-                                                <div class="input-group">
-                                                    <span class="input-group-text span_apellido1"><i class="icons fa-regular fa-user"></i></span>
-                                                    <input type="text" class="form-control" id="primerApellidoFamiliar" name="primerApellido" placeholder="Primer Apellido" required>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-sm-6 col-md-6 mb-3" id="contenApellidoDos">
-                                            <div class="form-group">
-                                                <label for="segundoApellido">Segundo Apellido</label>
-                                                <div class="input-group">
-                                                    <span class="input-group-text span_apellido2"><i class="icons fa-regular fa-user"></i></span>
-                                                    <input type="text" class="form-control" id="segundoApellidoFamiliar" name="segundoApellido" placeholder="segundo Apellido" required>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-sm-6 col-md-6 mb-3" hidden=="true">
-                                            <div class="form-group">
-                                                <label for="identificador">identificador</label>
-                                                <div class="input-group">
-                                                    <span class="input-group-text span_identificador span_cumplido"><i class="icons fa-regular fa-user"></i></span>
-                                                    <input type="text" class="form-control cumplido" id="identificador" name="idfamiliar" required>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-sm-6 col-md-6 mb-3" id="contenCedula">
-                                            <div class="form-group">
-                                                <label for="cedula">Cédula</label>
-                                                <div class="input-group">
-                                                    <span class="input-group-text span_cedula_familiar "><i class="icons fa-regular fa-address-card"></i></span>
-                                                    <input type="text" class="form-control ignore-validation" id="cedula_familiar" name="cedula" placeholder="Cédula de Identidad" required>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-sm-6 col-md-6 mb-3 ">
-                                            <div class="form-group">
-                                                <label for="parentesco">Parentesco</label>
-                                                <div class="input-group">
-                                                    <span class="input-group-text span_parentesco"><i class="icons fa-regular fa-clipboard"></i></span>
-                                                    <select class="form-select form-select-md estado-parentesco" id="parentesco" name="parentesco" aria-label="Small select example" aria-placeholder="dasdas" required>
-                                                        <option value="">Selecione</option>
-                                                        <option value="Hijo">Hijo</option>
-                                                        <option value="Hija">Hija</option>
-                                                        <option value="Padre">Padre</option>
-                                                        <option value="Madre">Madre</option>
-                                                        <option value="Hermano">Hermano</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-sm-6 col-md-6 mb-3" id="contenTomo">
-                                            <div class="form-group">
-                                                <label for="tomo">Tomo</label>
-                                                <div class="input-group">
-                                                    <span class="input-group-text span_tomo"><i class="fa-regular fa-address-card"></i></span>
-                                                    <input type="text" class="form-control ignore-validation" id="tomo" name="tomo" placeholder="Tomo De partida De Nacimiento" required>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-sm-6 col-md-6 mb-3" id="contenFolio">
-                                            <div class="form-group">
-                                                <label for="folio">Folio</label>
-                                                <div class="input-group">
-                                                    <span class="input-group-text span_folio"><i class="fa-regular fa-address-card"></i></span>
-                                                    <input type="text" class="form-control ignore-validation" id="folio" name="folio" placeholder="Número de folio" required>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-sm-6 col-md-6 mb-3" id="contenCarnet">
-                                            <div class="form-group">
-                                                <label for="cedula">Número de Carnet de Discapacidad</label>
-                                                <div class="input-group">
-                                                    <span class="input-group-text span_carnet"><i class="fa-regular fa-address-card"></i></span>
-                                                    <input type="text" class="form-control ignore-validation" id="carnet" name="carnet" placeholder="Cédula de Identidad" required>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-sm-6 mb-3" id="contenDoc">
-                                            <div class="form-group">
-                                                <label for="correo">Partida De Nacimiento</label>
-                                                <div class="input-group">
-                                                    <span class="input-group-text span_docArchivo"><i class="fa-regular fa-file-zipper"></i></span>
-                                                    <input type="file" class="form-control ignore-validation" name="docArchivo" id="achivoparti" aria-describedby="inputGroupFileAddon04" aria-label="Upload" required>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-sm-6 mb-3" id="contentPartida">
-                                            <div class="form-group">
-                                                <label for="correo">Partida De Discapacidad</label>
-                                                <div class="input-group">
-                                                    <span class="input-group-text span_docArchivoDis"><i class="fa-regular fa-file-zipper"></i></span>
-                                                    <input type="file" class="form-control ignore-validation" name="docArchivoDis" id="achivoDis" aria-describedby="inputGroupFileAddon04" aria-label="Upload" required>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-sm-6 col-md-6 mb-3" id="contenEdad">
-                                            <div class="form-group">
-                                                <label for="edad">Edad</label>
-                                                <div class="input-group">
-                                                    <span class="input-group-text span_edad"><i class="icons fa-regular fa-user-clock"></i></span>
-                                                    <input type="text" class="form-control" id="edad" name="edad" placeholder="Edad Del Familiar" required readonly>
-                                                </div>
-                                                <p class="parrafo fs-6 fw-light mb-0">La edad del familiar se ingresa automáticamente con la fecha de nacimiento.</p>
-                                            </div>
-                                        </div>
-
-                                        <p class="mb-0">Fecha de nacimiento</p>
-                                        <hr class="mb-2">
-
-                                        <div class="col-sm-4 mb-2">
-                                            <div class="form-group">
-                                                <label class="required-field" for="message">Año</label>
-                                                <div class="input-group">
-                                                    <span class="input-group-text span_ano_familiar"><i class="icons fa-regular fa-calendar"></i></i></span>
-                                                    <select class="form-select form-select-md" name="ano" id="anoFamiliar" required></select>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-sm-4 mb-2">
-                                            <div class="form-group">
-                                                <label class="required-field" for="message">Mes</label>
-                                                <div class="input-group">
-                                                    <span class="input-group-text span_mes_familiar"><i class="icons fa-regular fa-calendar"></i></i></span>
-                                                    <select class="form-select meses2" id="mesesFamiliar" name="meses" aria-label="Default select example" required></select>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-sm-4 mb-3">
-                                            <div class="form-group ">
-                                                <label class="required-field" for="message">Día</label>
-                                                <div class="input-group">
-                                                    <span class="input-group-text span_dia_familiar"><i class="icons fa-regular fa-calendar"></i></i></span>
-                                                    <select class="form-select w-5 dias" id="diaFamiliar" name="dia" aria-label="Default select example" required></select>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-sm-12 ">
-                                            <button type="submit" id="aceptar_familia" name="aceptar2" class="btn btn-success " disabled>
-                                                <i class="fa-solid fa-plus me-2"></i>Aceptar
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                        </section>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="cerrarEditar btn btn-secondary btn-sm" data-bs-toggle='modal' data-bs-target='#exampleModal' data-bs-dismiss="modal">
-                        <i class="fa-solid fa-arrow-right me-2"></i>Cerrar
-                    </button>
-                </div>
-                <div style="background-color:#FE9001;" class="barra_naranja"></div>
-            </div>
-        </div>
     </div>
 
     <?php require_once App::URL_INC . "/scrips.php"; ?>
