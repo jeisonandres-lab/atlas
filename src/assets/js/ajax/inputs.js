@@ -1,4 +1,4 @@
-import { meses, niveles } from "./variablesArray.js";
+import { ARRAYMESES, niveles } from "./variablesArray.js";
 // Funcion para vlaidar campos tipo text que tambien coloquen la primera letra en mayuscula
 export async function validarNombre(input, cumplidospan) {
   $(document).on("input", input, function () {
@@ -99,7 +99,7 @@ export async function validarTelefono(input, cumplidospan, cumplido_span2) {
       $(this).addClass("cumplido");
       $(cumplidospan).removeClass("error_span");
       $(cumplidospan).addClass("cumplido_span");
-      
+
 
       $(cumplido_span2).removeClass("error_span");
       $(cumplido_span2).addClass("cumplido_segundario");
@@ -109,8 +109,8 @@ export async function validarTelefono(input, cumplidospan, cumplido_span2) {
       $(this).addClass("error_input");
       $(cumplidospan).removeClass("cumplido_span");
       $(cumplidospan).addClass("error_span");
-      
-      
+
+
       $(cumplido_span2).removeClass("cumplido");
       $(cumplido_span2).removeClass("cumplido_segundario");
       $(cumplido_span2).addClass("error_span");
@@ -122,72 +122,72 @@ export async function validarTelefono(input, cumplidospan, cumplido_span2) {
 // Funcion para validar los inputs de tipo number
 export async function validarNumeroNumber(input, cumplidospan, limit, ceros) {
   $(document).on("keydown", input, function (event) {
-      const key = event.key;
-      const currentValue = $(this).val();
+    const key = event.key;
+    const currentValue = $(this).val();
 
-      // Permitir teclas de control
-      if (event.keyCode === 8 || event.keyCode === 9 || event.keyCode === 37 || event.keyCode === 39 || event.keyCode === 46) {
-          return;
-      }
+    // Permitir teclas de control
+    if (event.keyCode === 8 || event.keyCode === 9 || event.keyCode === 37 || event.keyCode === 39 || event.keyCode === 46) {
+      return;
+    }
 
-      // Permitir solo números
-      if (isNaN(parseInt(key))) {
-          event.preventDefault();
-          return;
-      }
+    // Permitir solo números
+    if (isNaN(parseInt(key))) {
+      event.preventDefault();
+      return;
+    }
 
-      // Limitar la longitud del valor
-      if (currentValue.length >= limit) {
-          event.preventDefault();
-          return;
-      }
+    // Limitar la longitud del valor
+    if (currentValue.length >= limit) {
+      event.preventDefault();
+      return;
+    }
 
-      // Validación de ceros consecutivos
-      if (!ceros && currentValue.endsWith("0") && key === "0") {
-          event.preventDefault();
-          return;
-      }
+    // Validación de ceros consecutivos
+    if (!ceros && currentValue.endsWith("0") && key === "0") {
+      event.preventDefault();
+      return;
+    }
   });
 
   $(document).on("input", input, function () {
-      let value = $(this).val();
+    let value = $(this).val();
 
-      // Limitar la longitud del valor en el evento input
-      if (value.length > limit) {
-          $(this).val(value.slice(0, limit));
-          value = $(this).val();
-      }
+    // Limitar la longitud del valor en el evento input
+    if (value.length > limit) {
+      $(this).val(value.slice(0, limit));
+      value = $(this).val();
+    }
 
-      // Validación de ceros consecutivos
-      if (!ceros) {
-          while (value.includes("00")) {
-              value = value.replace("00", "0");
-          }
-          $(this).val(value);
+    // Validación de ceros consecutivos
+    if (!ceros) {
+      while (value.includes("00")) {
+        value = value.replace("00", "0");
       }
+      $(this).val(value);
+    }
 
-      // Validar si el input está vacío
-      if (value === "") {
-          $(this).removeClass("cumplido").addClass("error_input");
-          $(cumplidospan).removeClass("cumplido_span").addClass("error_span");
-          return;
-      }
+    // Validar si el input está vacío
+    if (value === "") {
+      $(this).removeClass("cumplido").addClass("error_input");
+      $(cumplidospan).removeClass("cumplido_span").addClass("error_span");
+      return;
+    }
 
-      // Verificar si el valor es un número válido
-      const numericValue = parseInt(value);
-      if (isNaN(numericValue)) {
-          // No hacer nada si no es un número válido
-          return;
-      }
+    // Verificar si el valor es un número válido
+    const numericValue = parseInt(value);
+    if (isNaN(numericValue)) {
+      // No hacer nada si no es un número válido
+      return;
+    }
 
-      // Validación de valor mínimo
-      if (numericValue <= 0 && !ceros) {
-          $(this).removeClass("cumplido").addClass("error_input");
-          $(cumplidospan).removeClass("cumplido_span").addClass("error_span");
-      } else {
-          $(this).removeClass("error_input").addClass("cumplido");
-          $(cumplidospan).removeClass("error_span").addClass("cumplido_span");
-      }
+    // Validación de valor mínimo
+    if (numericValue <= 0 && !ceros) {
+      $(this).removeClass("cumplido").addClass("error_input");
+      $(cumplidospan).removeClass("cumplido_span").addClass("error_span");
+    } else {
+      $(this).removeClass("error_input").addClass("cumplido");
+      $(cumplidospan).removeClass("error_span").addClass("cumplido_span");
+    }
   });
 }
 //SOLO NUMEROS 
@@ -261,7 +261,7 @@ export async function validarSelectores(input, cumplidospan, tigger) {
 // VALIDAR INPUTS TYPE FECHA
 // Función para validar un input de tipo date
 export async function validarInputFecha(input, cumplidospan) {
-  $(document).on("change", input, function() {
+  $(document).on("change", input, function () {
     const fechaSeleccionada = $(this).val();
     if (fechaSeleccionada === "") {
       $(this).removeClass("cumplido");
@@ -279,7 +279,7 @@ export async function validarInputFecha(input, cumplidospan) {
 
 export function incluirSelec2(selector) {
   // 1. Inicialización inicial
-  $(selector).each(function() {
+  $(selector).each(function () {
     $(this).select2({
       theme: "bootstrap-5",
       width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
@@ -387,15 +387,15 @@ export async function colocarMeses(input) {
     $(input).empty();
 
     $(input).append(`<option value="">Seleccione un mes</option>`);
-  
-    meses.forEach(mes => {
+
+    ARRAYMESES.forEach(mes => {
       $(input).append(`<option value="${mes.valor}">${mes.nombre}</option>`);
     });
   } catch (error) {
     console.error("Error al cargar niveles educativos:", error);
   }
   // Crear las opciones del select
-  
+
 }
 
 // Objeto para colocar los años
@@ -421,9 +421,9 @@ export async function colocarNivelesEducativos(input) {
     // Limpiar el select antes de agregar nuevas opciones
     $(input).empty();
 
-    
+
     $(input).append(`<option value="">Seleccione un nivel academico</option>`);
-    
+
     niveles.forEach(nivel => {
       $(input).append(`<option value="${nivel.valor}">${nivel.nombre}</option>`);
     });
@@ -491,7 +491,7 @@ export async function limpiarInput(idinput, span, ifselect2, ifselect, ifinput, 
     return;
   }
 
-  if(ifinput){
+  if (ifinput) {
     $(idinput).val("");
     $(idinput).removeClass('cumplido');
     $(span).removeClass("cumplido_span");
@@ -506,7 +506,7 @@ export async function limpiarInput(idinput, span, ifselect2, ifselect, ifinput, 
     $(idinput).val("");
   }
 
-  if(ifselect){
+  if (ifselect) {
     let select2Container = $(idinput).next('.select2-container');
     select2Container.removeClass('cumplido');
     $(idinput).val('').trigger('change');
@@ -514,7 +514,7 @@ export async function limpiarInput(idinput, span, ifselect2, ifselect, ifinput, 
     $(span).removeClass("cumplido_span");
   }
 
-  if(ifnumber){
+  if (ifnumber) {
     $(idinput).val('0');
   }
 }
@@ -545,7 +545,7 @@ export async function mesesDias(input, span_mes, inputdia, span_dia) {
       $(this).addClass("error_input");
       $(span_mes).removeClass("cumplido_span");
       $(span_mes).addClass("error_span");
-  
+
       $(inputdia).removeClass("cumplido");
       $(inputdia).addClass("error_input");
       $(span_dia).removeClass("cumplido_span");
@@ -622,19 +622,39 @@ export async function configurarInactividad(selector, tiempoInactividad) {
   const elemento = $(selector);
 
   function iniciarTemporizador() {
-      clearTimeout(timeoutId);
-      timeoutId = setTimeout(function () {
-          elemento.hide();
-      }, tiempoInactividad);
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(function () {
+      elemento.hide();
+    }, tiempoInactividad);
   }
 
   elemento.on("mousemove keydown click", function () {
-      iniciarTemporizador();
-      if (elemento.is(":hidden")) {
-          elemento.show();
-      }
+    iniciarTemporizador();
+    if (elemento.is(":hidden")) {
+      elemento.show();
+    }
   });
 
   // Inicializar el temporizador al cargar la página
   iniciarTemporizador();
 }
+
+export function fechasJQueyDataPikerPresente(input) {
+  fetch('./src/ajax/administrador.php?modulo_datos=HLServidor')
+    .then(response => response.json()) // Cambia response.text() por response.json()
+    .then(data => {
+      $(input).datepicker({
+        dateFormat: "dd-mm-yy",
+        showWeek: true,
+        firstDay: 1,
+        changeMonth: true,
+        changeYear: true,
+        maxDate: data.fecha_formateada_esp, // Establece la fecha máxima como hoy
+        regional: "es"
+      });
+    })
+    .catch(error => {
+      console.error('Error al obtener la hora del servidor:', error);
+    });
+}
+

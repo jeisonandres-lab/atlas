@@ -14,7 +14,7 @@ if ($tipo === 'pdf') {
                 <div class="checkbox-wrapper-7 d-flex align-items-center">
                         <input class="form-check-input tgl tgl-ios report-checkbox ignore-validation" id="reporteSexo" type="checkbox" value="" />
                         <label class="tgl-btn pdf" for="reporteSexo"></label>
-                        <span class="ms-2">Reporte por sexualidad</span>
+                        <span class="ms-2">Reporte por sexo</span>
                     </div>
                 </div>
             </div>
@@ -131,6 +131,16 @@ if ($tipo === 'pdf') {
                         <input class="form-check-input tgl tgl-ios report-checkbox ignore-validation" id="reporteExcelFecha" type="checkbox" value="" />
                         <label class="tgl-btn" for="reporteExcelFecha"></label>
                         <span class="ms-2">Reporte por fecha</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-3 contenbtn">
+                <div class="form-check form-check-inline">
+                    <div class="checkbox-wrapper-7 d-flex align-items-center">
+                        <input class="form-check-input tgl tgl-ios report-checkbox ignore-validation" id="reportePersonalizado" type="checkbox" value="" />
+                        <label class="tgl-btn" for="reportePersonalizado"></label>
+                        <span class="ms-2">Reporte personalizado</span>
                     </div>
                 </div>
             </div>

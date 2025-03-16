@@ -31,3 +31,13 @@
 </body>
 
 </html>
+<?php
+// Obtener la fecha y hora actual del servidor en formato ISO 8601
+$fecha_hora_servidor = date('c');
+echo $fecha_hora_servidor;
+
+// También puedes obtener la hora en otros formatos
+// por ejemplo, para obtener el timestamp unix.
+$timestamp = time();
+echo $timestamp;
+?>

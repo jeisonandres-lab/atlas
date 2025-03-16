@@ -2,235 +2,277 @@
 sleep(1);
 $tipo = isset($_GET['tipo']) ? $_GET['tipo'] : 'pdf';
 if ($tipo === 'pdf') {
-        // Generar botones para PDF
-    ?>
-        <div class="container-fluid contenbotonesreport" id="contentReport">
-            <p class="mb-0 mt-2">Seleccione el tipo de reporte</p>
-            <hr class="mt-1 mb-2">
-            <div class="report">
+    // Generar botones para PDF
+?>
+    <div class="container-fluid contenbotonesreport" id="contentReport">
+        <p class="mb-0 mt-2">Seleccione el tipo de reporte</p>
+        <hr class="mt-1 mb-2">
+        <div class="report">
 
-                <div class="mt-3 contenbtn">
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input report-checkbox" type="checkbox" value="" id="reporteSexo">
-                        <label class="form-check-label" for="reporteSexo">
-                            <i class="text-danger me-2 bi bi-file-pdf-fill"></i>Reporte por sexualidad
-                        </label>
-                    </div>
-                </div>
-
-                <div class="mt-3 contenbtn">
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input report-checkbox" type="checkbox" value="" id="reporteEdad">
-                        <label class="form-check-label" for="reporteEdad">
-                            <i class="text-danger me-2 bi bi-file-pdf-fill"></i>Reporte por Edad
-                        </label>
-                    </div>
-                </div>
-
-                <div class="mt-3 contenbtn">
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input report-checkbox" type="checkbox" value="" id="reporteEstadoCivil">
-                        <label class="form-check-label" for="reporteEstadoCivil">
-                            <i class="text-danger me-2 bi bi-file-pdf-fill"></i>Reporte por Estado civil
-                        </label>
-                    </div>
-                </div>
-
-                <div class="mt-3 contenbtn">
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input report-checkbox" type="checkbox" value="" id="reporteNivelAcademico">
-                        <label class="form-check-label" for="reporteNivelAcademico">
-                            <i class="text-danger me-2 bi bi-file-pdf-fill"></i>Reporte por Nivel Academico
-                        </label>
-                    </div>
-                </div>
-
-                <div class="mt-3 contenbtn">
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input report-checkbox" type="checkbox" value="" id="reporteCargo">
-                        <label class="form-check-label" for="reporteCargo">
-                            <i class="text-danger me-2 bi bi-file-pdf-fill"></i>Reporte por Cargo
-                        </label>
-                    </div>
-                </div>
-
-                <div class="mt-3 contenbtn">
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input report-checkbox" type="checkbox" value="" id="reporteEstatus">
-                        <label class="form-check-label" for="reporteEstatus">
-                            <i class="text-danger me-2 bi bi-file-pdf-fill"></i>Reporte por estatus
-                        </label>
-                    </div>
-                </div>
-
-                <div class="mt-3 contenbtn">
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input report-checkbox" type="checkbox" value="" id="reporteVivienda">
-                        <label class="form-check-label" for="reporteVivienda">
-                            <i class="text-danger me-2 bi bi-file-pdf-fill"></i>Reporte por Vivienda
-                        </label>
-                    </div>
-                </div>
-
-                <div class="mt-3 contenbtn">
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input report-checkbox" type="checkbox" value="" id="reporteDireccion">
-                        <label class="form-check-label" for="reporteDireccion">
-                            <i class="text-danger me-2 bi bi-file-pdf-fill"></i>Reporte por Dirección
-                        </label>
-                    </div>
-                </div>
-
-                <div class="mt-3 contenbtn">
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input report-checkbox" type="checkbox" value="" id="reporteFecha">
-                        <label class="form-check-label" for="reporteFechaIngreso">
-                            <i class="text-danger me-2 bi bi-file-pdf-fill"></i>Reporte por Fecha Ingreso
-                        </label>
-                    </div>
-                </div>
-
-                <div class="mt-3 contenbtn">
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input report-checkbox" type="checkbox" value="" id="reporteDependencia">
-                        <label class="form-check-label" for="reporteDependencia">
-                            <i class="text-danger me-2 bi bi-file-pdf-fill"></i>Reporte por Dependencia
-                        </label>
-                    </div>
-                </div>
-
-                <div class="mt-3 contenbtn">
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input report-checkbox" type="checkbox" value="" id="reporteDepartamento">
-                        <label class="form-check-label" for="reporteDepartamento">
-                            <i class="text-danger me-2 bi bi-file-pdf-fill"></i>Reporte por Departamento
-                        </label>
+            <div class="mt-3 contenbtn">
+                <div class="form-check form-check-inline">
+                    <div class="checkbox-wrapper-7 d-flex align-items-center">
+                        <input class="form-check-input tgl tgl-ios report-checkbox ignore-validation" id="reporteSexo" type="checkbox" value="" />
+                        <label class="tgl-btn pdf" for="reporteSexo"></label>
+                        <span class="ms-2">Reporte por sexo</span>
                     </div>
                 </div>
             </div>
-            <hr>
-            <div class="container-fluid">
-                <div class="row" id="contentReporHTML">
 
+            <div class="mt-3 contenbtn">
+                <div class="form-check form-check-inline">
+                    <div class="checkbox-wrapper-7 d-flex align-items-center">
+                        <input class="form-check-input tgl tgl-ios report-checkbox ignore-validation" id="reporteEdad" type="checkbox" value="" />
+                        <label class="tgl-btn pdf" for="reporteEdad"></label>
+                        <span class="ms-2">Reporte por edad</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-3 contenbtn">
+                <div class="form-check form-check-inline">
+                    <div class="checkbox-wrapper-7 d-flex align-items-center">
+                        <input class="form-check-input tgl tgl-ios report-checkbox ignore-validation" id="reporteEstadoCivil" type="checkbox" value="" />
+                        <label class="tgl-btn pdf" for="reporteEstadoCivil"></label>
+                        <span class="ms-2">Reporte por Estado civil</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-3 contenbtn">
+                <div class="form-check form-check-inline">
+                    <div class="checkbox-wrapper-7 d-flex align-items-center">
+                        <input class="form-check-input tgl tgl-ios report-checkbox ignore-validation" id="reporteNivelAcademico" type="checkbox" value="" />
+                        <label class="tgl-btn pdf" for="reporteNivelAcademico"></label>
+                        <span class="ms-2">Reporte por Nivel Academico</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-3 contenbtn">
+                <div class="form-check form-check-inline">
+                    <div class="checkbox-wrapper-7 d-flex align-items-center">
+                        <input class="form-check-input tgl tgl-ios report-checkbox ignore-validation" id="reporteCargo" type="checkbox" value="" />
+                        <label class="tgl-btn pdf" for="reporteCargo"></label>
+                        <span class="ms-2">Reporte por cargo</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-3 contenbtn">
+                <div class="form-check form-check-inline">
+                    <div class="checkbox-wrapper-7 d-flex align-items-center">
+                        <input class="form-check-input tgl tgl-ios report-checkbox ignore-validation" id="reporteEstatus" type="checkbox" value="" />
+                        <label class="tgl-btn pdf" for="reporteEstatus"></label>
+                        <span class="ms-2">Reporte por estatus</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-3 contenbtn">
+                <div class="form-check form-check-inline">
+                    <div class="checkbox-wrapper-7 d-flex align-items-center">
+                        <input class="form-check-input tgl tgl-ios report-checkbox ignore-validation" id="reporteVivienda" type="checkbox" value="" />
+                        <label class="tgl-btn pdf" for="reporteVivienda"></label>
+                        <span class="ms-2">Reporte por vivienda</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-3 contenbtn">
+                <div class="form-check form-check-inline">
+                    <div class="checkbox-wrapper-7 d-flex align-items-center">
+                        <input class="form-check-input tgl tgl-ios report-checkbox ignore-validation" id="reporteDireccion" type="checkbox" value="" />
+                        <label class="tgl-btn pdf" for="reporteDireccion"></label>
+                        <span class="ms-2">Reporte por direccion</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-3 contenbtn">
+                <div class="form-check form-check-inline">
+                    <div class="checkbox-wrapper-7 d-flex align-items-center">
+                        <input class="form-check-input tgl tgl-ios report-checkbox ignore-validation" id="reporteFecha" type="checkbox" value="" />
+                        <label class="tgl-btn pdf" for="reporteFecha"></label>
+                        <span class="ms-2">Reporte por fecha</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-3 contenbtn">
+                <div class="form-check form-check-inline">
+                    <div class="checkbox-wrapper-7 d-flex align-items-center">
+                        <input class="form-check-input tgl tgl-ios report-checkbox ignore-validation" id="reporteDependencia" type="checkbox" value="" />
+                        <label class="tgl-btn pdf" for="reporteDependencia"></label>
+                        <span class="ms-2">Reporte por Dependencia</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-3 contenbtn">
+                <div class="form-check form-check-inline">
+                    <div class="checkbox-wrapper-7 d-flex align-items-center">
+                        <input class="form-check-input tgl tgl-ios report-checkbox ignore-validation" id="reporteDepartamento" type="checkbox" value="" />
+                        <label class="tgl-btn pdf" for="reporteDepartamento"></label>
+                        <span class="ms-2">Reporte por Departamento</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-3 contenbtn">
+                <div class="form-check form-check-inline">
+                    <div class="checkbox-wrapper-7 d-flex align-items-center">
+                        <input class="form-check-input tgl tgl-ios report-checkbox ignore-validation" id="reportePersonalizado" type="checkbox" value="" />
+                        <label class="tgl-btn pdf" for="reportePersonalizado"></label>
+                        <span class="ms-2">Reporte personalizado</span>
+                    </div>
                 </div>
             </div>
         </div>
-    <?php
+        <hr>
+        <div class="container-fluid">
+            <div class="row" id="contentReporHTML">
+
+            </div>
+        </div>
+    </div>
+<?php
 } elseif ($tipo === 'excel') {
     // Generar botones para Excel
-    ?>
-        <div class="container-fluid contenbotonesreport" id="contentReport">
-            <p class="mb-0 mt-2">Seleccione el tipo de reporte</p>
-            <hr class="mt-1 mb-2">
-            <div class="report">
+?>
+    <div class="container-fluid contenbotonesreport" id="contentReport">
+        <p class="mb-0 mt-2">Seleccione el tipo de reporte</p>
+        <hr class="mt-1 mb-2">
+        <div class="report">
 
-                <div class="mt-3 contenbtn">
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input report-checkbox" type="checkbox" value="" id="reporteExcelSexo">
-                        <label class="form-check-label" for="reporteExcelSexo">
-                            <i class="text-success fa-regular fa-table me-2"></i>Reporte por sexualidad
-                        </label>
-                    </div>
-                </div>
-
-                <div class="mt-3 contenbtn">
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input report-checkbox" type="checkbox" value="" id="reporteExcelEdad">
-                        <label class="form-check-label" for="reporteExcelEdad">
-                            <i class="text-success fa-regular fa-table me-2"></i>Reporte por Edad
-                        </label>
-                    </div>
-                </div>
-
-                <div class="mt-3 contenbtn">
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input report-checkbox" type="checkbox" value="" id="reporteExcelEstadoCivil">
-                        <label class="form-check-label" for="reporteExcelEstadoCivil">
-                            <i class="text-success fa-regular fa-table me-2"></i>Reporte por Estado civil
-                        </label>
-                    </div>
-                </div>
-
-                <div class="mt-3 contenbtn">
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input report-checkbox" type="checkbox" value="" id="reporteExcelNivelAcademico">
-                        <label class="form-check-label" for="reporteExcelNivelAcademico">
-                            <i class="text-success fa-regular fa-table me-2"></i>Reporte por Nivel Academico
-                        </label>
-                    </div>
-                </div>
-
-                <div class="mt-3 contenbtn">
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input report-checkbox" type="checkbox" value="" id="reporteExcelCargo">
-                        <label class="form-check-label" for="reporteExcelCargo">
-                            <i class="text-success fa-regular fa-table me-2"></i>Reporte por Cargo
-                        </label>
-                    </div>
-                </div>
-
-                <div class="mt-3 contenbtn">
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input report-checkbox" type="checkbox" value="" id="reporteExcelEstatus">
-                        <label class="form-check-label" for="reporteExcelEstatus">
-                            <i class="text-success fa-regular fa-table me-2"></i>Reporte por estatus
-                        </label>
-                    </div>
-                </div>
-
-                <div class="mt-3 contenbtn">
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input report-checkbox" type="checkbox" value="" id="reporteExcelVivienda">
-                        <label class="form-check-label" for="reporteExcelVivienda">
-                            <i class="text-success fa-regular fa-table me-2"></i>Reporte por Vivienda
-                        </label>
-                    </div>
-                </div>
-
-                <div class="mt-3 contenbtn">
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input report-checkbox" type="checkbox" value="" id="reporteExcelDireccion">
-                        <label class="form-check-label" for="reporteExcelDireccion">
-                            <i class="text-success fa-regular fa-table me-2"></i>Reporte por Dirección
-                        </label>
-                    </div>
-                </div>
-
-                <div class="mt-3 contenbtn">
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input report-checkbox" type="checkbox" value="" id="reporteExcelFecha">
-                        <label class="form-check-label" for="reporteExcelFechaIngreso">
-                            <i class="text-success fa-regular fa-table me-2"></i>Reporte por Fecha Ingreso
-                        </label>
-                    </div>
-                </div>
-
-                <div class="mt-3 contenbtn">
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input report-checkbox" type="checkbox" value="" id="reporteExcelDependencia">
-                        <label class="form-check-label" for="reporteExcelDependencia">
-                            <i class="text-success fa-regular fa-table me-2"></i>Reporte por Dependencia
-                        </label>
-                    </div>
-                </div>
-
-                <div class="mt-3 contenbtn">
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input report-checkbox" type="checkbox" value="" id="reporteExcelDepartamento">
-                        <label class="form-check-label" for="reporteExcelDepartamento">
-                            <i class="text-success fa-regular fa-table me-2"></i>Reporte por Departamento
-                        </label>
+        <div class="mt-3 contenbtn">
+                <div class="form-check form-check-inline">
+                    <div class="checkbox-wrapper-7 d-flex align-items-center">
+                        <input class="form-check-input tgl tgl-ios report-checkbox ignore-validation" id="reporteExcelSexo" type="checkbox" value="" />
+                        <label class="tgl-btn" for="reporteExcelSexo"></label>
+                        <span class="ms-2">Reporte por sexo</span>
                     </div>
                 </div>
             </div>
-            <hr>
-            <div class="container-fluid">
-                <div class="row" id="contentReporHTML">
 
+            <div class="mt-3 contenbtn">
+                <div class="form-check form-check-inline">
+                    <div class="checkbox-wrapper-7 d-flex align-items-center">
+                        <input class="form-check-input tgl tgl-ios report-checkbox ignore-validation" id="reporteExcelEdad" type="checkbox" value="" />
+                        <label class="tgl-btn" for="reporteExcelEdad"></label>
+                        <span class="ms-2">Reporte por edad</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-3 contenbtn">
+                <div class="form-check form-check-inline">
+                    <div class="checkbox-wrapper-7 d-flex align-items-center">
+                        <input class="form-check-input tgl tgl-ios report-checkbox ignore-validation" id="reporteExcelEstadoCivil" type="checkbox" value="" />
+                        <label class="tgl-btn" for="reporteExcelEstadoCivil"></label>
+                        <span class="ms-2">Reporte por Estado civil</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-3 contenbtn">
+                <div class="form-check form-check-inline">
+                    <div class="checkbox-wrapper-7 d-flex align-items-center">
+                        <input class="form-check-input tgl tgl-ios report-checkbox ignore-validation" id="reporteExcelNivelAcademico" type="checkbox" value="" />
+                        <label class="tgl-btn" for="reporteExcelNivelAcademico"></label>
+                        <span class="ms-2">Reporte por Nivel Academico</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-3 contenbtn">
+                <div class="form-check form-check-inline">
+                    <div class="checkbox-wrapper-7 d-flex align-items-center">
+                        <input class="form-check-input tgl tgl-ios report-checkbox ignore-validation" id="reporteExcelCargo" type="checkbox" value="" />
+                        <label class="tgl-btn" for="reporteExcelCargo"></label>
+                        <span class="ms-2">Reporte por cargo</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-3 contenbtn">
+                <div class="form-check form-check-inline">
+                    <div class="checkbox-wrapper-7 d-flex align-items-center">
+                        <input class="form-check-input tgl tgl-ios report-checkbox ignore-validation" id="reporteExcelEstatus" type="checkbox" value="" />
+                        <label class="tgl-btn" for="reporteExcelEstatus"></label>
+                        <span class="ms-2">Reporte por estatus</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-3 contenbtn">
+                <div class="form-check form-check-inline">
+                    <div class="checkbox-wrapper-7 d-flex align-items-center">
+                        <input class="form-check-input tgl tgl-ios report-checkbox ignore-validation" id="reporteExcelVivienda" type="checkbox" value="" />
+                        <label class="tgl-btn" for="reporteExcelVivienda"></label>
+                        <span class="ms-2">Reporte por vivienda</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-3 contenbtn">
+                <div class="form-check form-check-inline">
+                    <div class="checkbox-wrapper-7 d-flex align-items-center">
+                        <input class="form-check-input tgl tgl-ios report-checkbox ignore-validation" id="reporteExcelDireccion" type="checkbox" value="" />
+                        <label class="tgl-btn" for="reporteExcelDireccion"></label>
+                        <span class="ms-2">Reporte por direccion</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-3 contenbtn">
+                <div class="form-check form-check-inline">
+                    <div class="checkbox-wrapper-7 d-flex align-items-center">
+                        <input class="form-check-input tgl tgl-ios report-checkbox ignore-validation" id="reporteExcelFecha" type="checkbox" value="" />
+                        <label class="tgl-btn" for="reporteExcelFecha"></label>
+                        <span class="ms-2">Reporte por fecha</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-3 contenbtn">
+                <div class="form-check form-check-inline">
+                    <div class="checkbox-wrapper-7 d-flex align-items-center">
+                        <input class="form-check-input tgl tgl-ios report-checkbox ignore-validation" id="reporteExcelDependencia" type="checkbox" value="" />
+                        <label class="tgl-btn" for="reporteExcelDependencia"></label>
+                        <span class="ms-2">Reporte por Dependencia</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-3 contenbtn">
+                <div class="form-check form-check-inline">
+                    <div class="checkbox-wrapper-7 d-flex align-items-center">
+                        <input class="form-check-input tgl tgl-ios report-checkbox ignore-validation" id="reporteExcelDepartamento" type="checkbox" value="" />
+                        <label class="tgl-btn" for="reporteExcelDepartamento"></label>
+                        <span class="ms-2">Reporte por Departamento</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-3 contenbtn">
+                <div class="form-check form-check-inline">
+                    <div class="checkbox-wrapper-7 d-flex align-items-center">
+                        <input class="form-check-input tgl tgl-ios report-checkbox ignore-validation" id="reportePersonalizado" type="checkbox" value="" />
+                        <label class="tgl-btn" for="reportePersonalizado"></label>
+                        <span class="ms-2">Reporte personalizado</span>
+                    </div>
                 </div>
             </div>
         </div>
-    <?php
+        <hr>
+        <div class="container-fluid">
+            <div class="row" id="contentReporHTML">
+
+            </div>
+        </div>
+    </div>
+<?php
 } else {
     echo 'Tipo de reporte no válido.';
 }
