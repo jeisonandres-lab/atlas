@@ -1,105 +1,67 @@
-@import url(colorTableButtons.css);
+@import url("colorTableButtons.css");
 
 .btn-hover:hover {
-    transform: translateY(-3px);
-    /* Mueve el botón 3px hacia arriba */
-    transition: all ease .5s !important;
-    /* Añade una transición suave */
-}
-
-.btn-hover-azul{
-    border: none !important;
-    border-radius: 0.3rem !important;
-    transition: all ease .5s !important;
+    transform: translateY(-3px); /* Mueve el botón 3px hacia arriba */
+    transition: transform 0.2s; /* Añade una transición suave */
 }
 
 .btn-hover-azul:hover {
-    transform: translateY(-3px);
-    /* Mueve el botón 3px hacia arriba */
-    transition: all ease .5s ease-in-out !important;
-    box-shadow: 0 4px 8px  rgba(20, 51, 173, 0.281) !important;
-    /* Sombra suave */
-}
-
-.btn-hover-rojo{
-    border: none !important;
-    border-radius: 0.3rem !important;
-    transition: all ease .5s !important;
+    transform: translateY(-3px); /* Mueve el botón 3px hacia arriba */
+    transition: transform 0.2s; /* Añade una transición suave */
+    box-shadow: 0 4px 8px rgba(20, 51, 173, 0.281); /* Sombra suave */
 }
 
 .btn-hover-rojo:hover {
-    transform: translateY(-3px);
-    /* Mueve el botón 3px hacia arriba */
-    transition: all ease .5s ease-in-out !important;
-    box-shadow: 0 4px 8px rgba(173, 20, 20, 0.281);
-    /* Sombra suave */
+    transform: translateY(-3px); /* Mueve el botón 3px hacia arriba */
+    transition: transform 0.2s; /* Añade una transición suave */
+    box-shadow: 0 4px 8px rgba(173, 20, 20, 0.281); /* Sombra suave */
 }
-
-.btn-hover-amarillo {
-    color: white !important;
-    border: none !important;
-    border-radius: 0.3rem !important;
-    transition: all ease .5s !important;
+.btn-hover-amarillo{
+    color: white !important; 
 }
 
 .btn-hover-amarillo:hover {
-    transform: translateY(-3px);
-    /* Mueve el botón 3px hacia arriba */
-    transition: all ease .5s ease-in-out !important;
-
-    box-shadow: 0 4px 8px rgba(254, 144, 1, 0.281);
-    /* Sombra suave */
-
-}
-
-.btn-hover-verde{
-    color: white !important;
-    border: none !important;
-    border-radius: 0.3rem !important;
-    transition: all ease .5s !important;
+    transform: translateY(-3px); /* Mueve el botón 3px hacia arriba */
+    transition: transform 0.2s; /* Añade una transición suave */
+    box-shadow: 0 4px 8px rgba(254, 144, 1, 0.281); /* Sombra suave */
 }
 
 .btn-hover-verde:hover {
-    transform: translateY(-3px);
-    /* Mueve el botón 3px hacia arriba */
-    transition: all ease .5s ease-in-out !important;
-    box-shadow: 0 4px 8px rgba(20, 173, 48, 0.281);
-    /* Sombra suave */
+    transform: translateY(-3px); /* Mueve el botón 3px hacia arriba */
+    transition: transform 0.2s; /* Añade una transición suave */
+    box-shadow: 0 4px 8px rgba(20, 173, 48, 0.281); /* Sombra suave */
 }
 
 .btn-hover-gris{
-    color: white !important;
-    border: none !important;
-    border-radius: 0.3rem !important;
-    transition: all ease .5s !important;
+  color: white !important;
+  border: none !important;
+  border-radius: 0.3rem !important;
+  transition: all ease .5s !important;
 }
 
 .btn-hover-gris:hover {
-    transform: translateY(-3px);
-    /* Mueve el botón 3px hacia arriba */
-    transition: all ease .5s ease-in-out !important;
-    box-shadow: 0 4px 8px rgba(57, 57, 57, 0.281);
-    /* Sombra suave */
+  transform: translateY(-3px);
+  /* Mueve el botón 3px hacia arriba */
+  transition: all ease .5s ease-in-out !important;
+  box-shadow: 0 4px 8px rgba(57, 57, 57, 0.281);
+  /* Sombra suave */
 }
 
 .swal2-confirm {
-    background-color: #4CAF50 !important;
-    /* Color de fondo del botón de confirmación */
-    color: white !important;
-    /* Color del texto del botón de confirmación */
+    background-color: #4CAF50 !important; /* Color de fondo del botón de confirmación */
+    color: white !important; /* Color del texto del botón de confirmación */
 }
 
 .swal2-cancel {
-    background-color: #f44336 !important;
-    /* Color de fondo del botón de cancelación */
-    color: white !important;
-    /* Color del texto del botón de cancelación */
+    background-color: #f44336 !important; /* Color de fondo del botón de cancelación */
+    color: white !important; /* Color del texto del botón de cancelación */
 }
 
 
-.icons {
-    color: #707070;
+.icons{
+  color: #707070;
 }
+
 
 .transition-3d-hover:focus,
 .transition-3d-hover:hover {

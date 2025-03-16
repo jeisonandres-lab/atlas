@@ -16,6 +16,7 @@ use App\Atlas\config\App;
 
 
     <link rel="stylesheet" href="<?php echo App::URL_CSS . "registroPersonal.css"; ?>">
+    <link rel="stylesheet" href="<?php echo App::URL_CSS . "cssUtils/buttons.css"; ?>">
 </head>
 
 <body class="layout-fixed sidebar-expand-lg bg-body-tertiary">
@@ -115,11 +116,6 @@ use App\Atlas\config\App;
                                 <div class="input-group">
                                     <span class="input-group-text span_civil"><i class="icons fa-regular fa-handshake"></i></span>
                                     <select class="form-select form-select-md estado-civil" id="civil" name="civil" aria-label="Small select example" aria-placeholder="dasdas" required>
-                                        <option value="">Estado civil</option>
-                                        <option value="Soltero">Soltero</option>
-                                        <option value="Casado">Casado</option>
-                                        <option value="Viudo">Viudo</option>
-                                        <option value="Divorciado">Divorciado</option>
                                     </select>
                                 </div>
                             </div>
@@ -130,16 +126,13 @@ use App\Atlas\config\App;
                                 <label for="sexo">Sexo</label>
                                 <div class="input-group">
                                     <span class="input-group-text span_sexo"><i class="icons fa-regular fa-person-half-dress"></i></span>
-                                    <select class="form-select form-select-md sexo-sexo" id="sexo" name="sexo" aria-label="Small select example" aria-placeholder="dasdas"  required>
-                                        <option value="">Selecione el sexo</option>
-                                        <option value="Masculino">Masculino</option>
-                                        <option value="Femenino">Femenino</option>
+                                    <select class="form-select form-select-md sexo-sexo" id="sexo" name="sexo" aria-label="Small select example" aria-placeholder="dasdas" required>
                                     </select>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="col-sm-6 col-md-6 mb-2">
+                        <div class="col-sm-6 col-md-6 mb-0">
                             <div class="form-group">
                                 <label for="edad">Edad</label>
                                 <div class="input-group">
@@ -152,7 +145,10 @@ use App\Atlas\config\App;
 
                         <div class="col-sm-6 col-md-6 mb-2">
                             <div class="form-group">
-                                    <button type="button"class="">Asignar Discapacidad</button>
+                                <button type="button" class="btn btn-primary btn-sm btn-hover-azul">
+                                    <i class="fa-solid fa-plus me-2"></i>
+                                    Asignar Discapacidad
+                                </button>
                             </div>
                         </div>
 
@@ -189,7 +185,7 @@ use App\Atlas\config\App;
                             </div>
                         </div>
 
-                        <div class="col-sm-4  mb-2" id="contentDia" >
+                        <div class="col-sm-4  mb-2" id="contentDia">
                             <div class="form-group ">
                                 <label class="required-field" for="dia">Día</label>
                                 <div class="input-group">
@@ -207,7 +203,7 @@ use App\Atlas\config\App;
                                 <label for="estado">Estado</label>
                                 <div class="input-group">
                                     <span class="input-group-text span_estado"><i class="icons fa-regular fa-location-dot"></i></span>
-                                    <select class="form-select form-select-md estado-estado" id="estado" name="estado" aria-label="Small select example" aria-placeholder="dasdas"  required>
+                                    <select class="form-select form-select-md estado-estado" id="estado" name="estado" aria-label="Small select example" aria-placeholder="dasdas" required>
                                         <option value="">Selecione un estado</option>
                                     </select>
                                 </div>
@@ -219,7 +215,7 @@ use App\Atlas\config\App;
                                 <label for="municipio">Municipio</label>
                                 <div class="input-group">
                                     <span class="input-group-text span_municipio"><i class="icons fa-regular fa-location-dot"></i></span>
-                                    <select class="form-select form-select-md municipio-municipio" id="municipio" name="municipio" aria-label="Small select example" aria-placeholder="dasdas"  required>
+                                    <select class="form-select form-select-md municipio-municipio" id="municipio" name="municipio" aria-label="Small select example" aria-placeholder="dasdas" required>
                                         <option value="">Seleccione un municipio</option>
                                     </select>
                                 </div>
@@ -231,7 +227,7 @@ use App\Atlas\config\App;
                                 <label for="parroquia">Parroquia</label>
                                 <div class="input-group">
                                     <span class="input-group-text span_parroquia"><i class="icons fa-regular fa-location-dot"></i></span>
-                                    <select class="form-select form-select-md parroquia-parroquia" id="parroquia" name="parroquia" aria-label="Small select example" aria-placeholder="dasdas"  required>
+                                    <select class="form-select form-select-md parroquia-parroquia" id="parroquia" name="parroquia" aria-label="Small select example" aria-placeholder="dasdas" required>
                                         <option value="">Selecione un parroquia</option>
                                     </select>
                                 </div>
@@ -243,10 +239,7 @@ use App\Atlas\config\App;
                                 <label for="vivienda">Vivienda</label>
                                 <div class="input-group">
                                     <span class="input-group-text span_vivienda"><i class="icons fa-regular fa-house-building"></i></span>
-                                    <select class="form-select form-select-md vivienda-vivienda" id="vivienda" name="vivienda" aria-label="Small select example" aria-placeholder="dasdas"  required>
-                                        <option value="">Selecione un vivienda</option>
-                                        <option value="Casa">Casa</option>
-                                        <option value="Departamento">Departamento</option>
+                                    <select class="form-select form-select-md vivienda-vivienda" id="vivienda" name="vivienda" aria-label="Small select example" aria-placeholder="dasdas" required>
                                     </select>
                                 </div>
                             </div>
@@ -367,15 +360,6 @@ use App\Atlas\config\App;
                                 <div class="input-group">
                                     <span class="input-group-text span_academico"><i class="icons fa-regular fa-user-graduate"></i></span>
                                     <select class="form-select form-select-md" id="academico" name="nivelAcademico">
-                                        <option value="">Nivel Academico</option>
-                                        <option value="bachiller">Bachiller</option>
-                                        <option value="tecnico">Técnico</option>
-                                        <option value="tecnologo">Tecnólogo</option>
-                                        <option value="pregrado">Pregrado</option>
-                                        <option value="ingeniero">Ingeniero</option>
-                                        <option value="especialista">Especialista</option>
-                                        <option value="maestria">Maestría</option>
-                                        <option value="doctorado">Doctorado</option>
                                     </select>
                                 </div>
                             </div>
