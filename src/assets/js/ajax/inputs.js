@@ -617,6 +617,7 @@ export async function mesesDias(input, span_mes, inputdia, span_dia) {
 //   });
 // }
 
+// validar inactividad de los pagina
 export async function configurarInactividad(selector, tiempoInactividad) {
   let timeoutId;
   const elemento = $(selector);
@@ -639,16 +640,31 @@ export async function configurarInactividad(selector, tiempoInactividad) {
   iniciarTemporizador();
 }
 
+// fechas 
 export function fechasJQueyDataPikerPresente(input) {
   fetch('./src/ajax/administrador.php?modulo_datos=HLServidor')
     .then(response => response.json()) // Cambia response.text() por response.json()
     .then(data => {
       $(input).datepicker({
+        closeText: 'Cerrar',
+        prevText: '< Ant',
+        nextText: 'Sig >',
+        currentText: 'Hoy',
+        monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+        monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+        dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+        dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mié', 'Juv', 'Vie', 'Sáb'],
+        dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sá'],
+        weekHeader: 'Sm',
         dateFormat: "dd-mm-yy",
         showWeek: true,
         firstDay: 1,
         changeMonth: true,
         changeYear: true,
+        showAnim: "fold",// Muestra el número de la semana
+        isRTL: false,
+        showMonthAfterYear: false,
+        yearSuffix: '',
         maxDate: data.fecha_formateada_esp, // Establece la fecha máxima como hoy
         regional: "es"
       });
@@ -656,5 +672,22 @@ export function fechasJQueyDataPikerPresente(input) {
     .catch(error => {
       console.error('Error al obtener la hora del servidor:', error);
     });
+}
+
+// llenar datos mediante un select
+export async function llenarSelect(data, selectId) {
+  const select = document.getElementById(selectId);
+  // Asegúrate de que el ID del select sea correcto
+  if (!select) {
+    console.error(`El elemento select con el ID "${selectId}" no se encontró en el DOM.`);
+    return;
+  }
+
+  data.forEach(item => {
+    const option = document.createElement('option');
+    option.value = item.id;
+    option.text = item.value;
+    select.appendChild(option);
+  });
 }
 

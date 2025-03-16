@@ -18,11 +18,12 @@ import {
   validarNumeroNumber,
   validarInputFecha,
   clasesInputs,
+  llenarSelect,
+  fechasJQueyDataPikerPresente,
 } from "./ajax/inputs.js";
 
 import {
   enviarFormulario,
-  obtenerDatos,
   obtenerDatosJQuery
 } from "./ajax/formularioAjax.js";
 
@@ -30,44 +31,9 @@ import {
   alertaNormalmix,
 } from "./ajax/alerts.js";
 
-
 // jQuery
 $(function () {
-  $.datepicker.regional['es'] = {
-    closeText: 'Cerrar',
-    prevText: '< Ant',
-    nextText: 'Sig >',
-    currentText: 'Hoy',
-    monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
-    monthNamesShort: ['Ene','Feb','Mar','Abr', 'May','Jun','Jul','Ago','Sep', 'Oct','Nov','Dic'],
-    dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
-    dayNamesShort: ['Dom','Lun','Mar','Mié','Juv','Vie','Sáb'],
-    dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','Sá'],
-    weekHeader: 'Sm',
-    dateFormat: 'dd/mm/yy',
-    firstDay: 1,
-    isRTL: false,
-    showMonthAfterYear: false,
-    yearSuffix: ''
-};
-
-$.datepicker.setDefaults($.datepicker.regional['es']);
-
   $(".formulario_empleado").hide();
-
-  $("#fechaing").datepicker({
-    dateFormat: "dd-mm-yy", // Cambia el formato de la fecha
-    showAnim: "fold",// Muestra el número de la semana
-    
-    firstDay: 1, // Establece el primer día de la semana (1 = lunes)
-    changeMonth: true, // Permite cambiar el mes
-    changeYear: true, // Permite cambiar el año
-    yearRange: "1900:2025", // Establece el rango de años
-    regional: "es"
-  });
-
-
-
   const cargando = document.getElementById('cargando');
 
   // formulario de registro
@@ -131,6 +97,8 @@ $.datepicker.setDefaults($.datepicker.regional['es']);
   validarSelectoresSelec2("#civil", ".span_civil");
 
   validarDosDatos("#numeroDepa", ".span_numeroDepa");
+
+  fechasJQueyDataPikerPresente("#fechaing"); // Inicializa los datepickers
   // URLs para las consultas
   const urls = [
     "src/ajax/registroPersonal.php?modulo_personal=obtenerDependencias",
@@ -146,31 +114,31 @@ $.datepicker.setDefaults($.datepicker.regional['es']);
       const [dependencias, estatus, cargo, departamento, estado] = await Promise.all(urls.map(url => obtenerDatosJQuery(url)));
 
       if (dependencias && dependencias.exito && dependencias.data) {
-        llenarSelectDependencias(dependencias.data, 'dependencia');
+        llenarSelect(dependencias.data, 'dependencia');
       } else {
         console.error('Error al obtener dependencias o la estructura de la respuesta es incorrecta');
       }
 
       if (estatus && estatus.exito && estatus.data) {
-        llenarSelectDependencias(estatus.data, 'estatus');
+        llenarSelect(estatus.data, 'estatus');
       } else {
         console.error('Error al obtener los estatus o la estructura de la respuesta es incorrecta');
       }
 
       if (cargo && cargo.exito && cargo.data) {
-        llenarSelectDependencias(cargo.data, 'cargo');
+        llenarSelect(cargo.data, 'cargo');
       } else {
         console.error('Error al obtener los cargos o la estructura de la respuesta es incorrecta');
       }
 
       if (departamento && departamento.exito && departamento.data) {
-        llenarSelectDependencias(departamento.data, 'departamento');
+        llenarSelect(departamento.data, 'departamento');
       } else {
         console.error('Error al obtener departamento o la estructura de la respuesta es incorrecta');
       }
 
       if (estado && estado.exito && estado.data) {
-        llenarSelectDependencias(estado.data, 'estado');
+        llenarSelect(estado.data, 'estado');
       } else {
         console.error('Error al obtener departamento o la estructura de la respuesta es incorrecta');
       }
@@ -179,26 +147,7 @@ $.datepicker.setDefaults($.datepicker.regional['es']);
     }
   }
 
-  // Llamar a la función para realizar las consultas
-  realizarConsultas();
-
-  async function llenarSelectDependencias(data, selectId) {
-    const select = document.getElementById(selectId);
-    // Asegúrate de que el ID del select sea correcto
-    if (!select) {
-      console.error(`El elemento select con el ID "${selectId}" no se encontró en el DOM.`);
-      return;
-    }
-
-    data.forEach(item => {
-      const option = document.createElement('option');
-      option.value = item.id;
-      option.text = item.value;
-      select.appendChild(option);
-    });
-  }
-
-  $("#meses").on("change", function (yearnull) {
+  $(document).on("change", "#meses", function (yearnull) {
     const year = $("#ano").val();
     const month = $("#meses").val();
     if (month == "") {
@@ -234,7 +183,7 @@ $.datepicker.setDefaults($.datepicker.regional['es']);
 
   $("#meses").trigger("input");
 
-  $("#formulario_registro").on("submit", function (e) {
+  $(document).on("submit", "#formulario_registro", async function (e) {
     e.preventDefault();
 
     let fechaIngreso = $("#fechaing").val();
@@ -249,7 +198,7 @@ $.datepicker.setDefaults($.datepicker.regional['es']);
     const url = "src/ajax/registroPersonal.php?modulo_personal=registrar";
     $("#aceptar").prop("disabled", true);
 
-    function callbackExito(parsedData) {
+    async function callbackExito(parsedData) {
       let dataerror = parsedData.error;
       $("#aceptar").prop("disabled", false);
       console.log(parsedData);
@@ -257,29 +206,23 @@ $.datepicker.setDefaults($.datepicker.regional['es']);
         $("#alerta").slideDown('slow', 'swing').delay(10000).slideUp();
       }
       else if (dataerror) {
-        alertaNormalmix(parsedData.mensaje, 4000, "error", "top-end")
+        await alertaNormalmix(parsedData.mensaje, 4000, "error", "top-end")
       } else {
-        alertaNormalmix(parsedData.mensaje, 4000, "success", "top-end")
+        await alertaNormalmix(parsedData.mensaje, 4000, "success", "top-end")
       }
       // const myModal = new bootstrap.Modal(document.getElementById('modal'));
       // myModal.show();
     }
-    enviarFormulario(url, data, callbackExito, true);
+    await enviarFormulario(url, data, callbackExito, true);
   });
 
-  $("#noCedula").on("change", function () {
-    if ($(this).is(":checked")) {
-      $("#disca").prop("checked", false);
-    }
-  });
-
-  $("#disca").on("change", function () {
+  $(document).on("change", "#disca", function () {
     if ($(this).is(":checked")) {
       $("#noCedula").prop("checked", false);
     }
   });
 
-  $("#estado").on("change", async function () {
+  $(document).on("change", "#estado", async function () {
     const idEstado = $(this).val();
     try {
       if (idEstado !== undefined) {
@@ -291,13 +234,11 @@ $.datepicker.setDefaults($.datepicker.regional['es']);
               return obtenerDatosJQuery(url, options);
             }
           });
-
           const [municipio] = await Promise.all(requests);
-
           if (municipio.exito) {
             $("#municipio").empty()
             $("#municipio").append('<option value="">Seleccione un municipio</option>');
-            llenarSelectDependencias(municipio.data, 'municipio');
+            llenarSelect(municipio.data, 'municipio');
           } else {
             console.error('Error al obtener estado o la estructura de la respuesta es incorrecta');
           }
@@ -312,7 +253,7 @@ $.datepicker.setDefaults($.datepicker.regional['es']);
     }
   });
 
-  $("#municipio").on("change", async function () {
+  $(document).on("change", "#municipio", async function () {
     const idmunicipio = $(this).val();
     try {
       if (idmunicipio !== undefined) {
@@ -324,13 +265,11 @@ $.datepicker.setDefaults($.datepicker.regional['es']);
               return obtenerDatosJQuery(url, options);
             }
           });
-
           const [parroquia] = await Promise.all(requests);
-
           if (parroquia.exito) {
             $("#parroquia").empty()
             $("#parroquia").append('<option value="">Seleccione una parroquia</option>');
-            llenarSelectDependencias(parroquia.data, 'parroquia');
+            llenarSelect(parroquia.data, 'parroquia');
           } else {
             console.error('Error al obtener parroquias o la estructura de la respuesta es incorrecta');
           }
@@ -345,7 +284,7 @@ $.datepicker.setDefaults($.datepicker.regional['es']);
     }
   });
 
-  $("#vivienda").on("change", async function () {
+  $(document).on("change", "#vivienda", async function () {
     let vivienda = $(this).val();
     if (vivienda == 'Departamento') {
       // Crea el HTML que quieres insertar
@@ -468,7 +407,7 @@ $.datepicker.setDefaults($.datepicker.regional['es']);
 
   });
 
-  $("#dia, #meses, #ano").on("input", function () {
+  $(document).on("input", "#dia, #meses, #ano", function () {
     const dia = $("#dia").val();
     const mes = $("#meses").val();
     const ano = $("#ano").val();
@@ -477,6 +416,9 @@ $.datepicker.setDefaults($.datepicker.regional['es']);
     $("#edad").val(calcularEdad2);
     clasesInputs("#edad", ".span_edad");
   });
+
+  // Llamar a la función para realizar las consultas
+  realizarConsultas();
 
   function calcularEdad(fechaNacimiento) {
     const hoy = new Date();
@@ -487,40 +429,18 @@ $.datepicker.setDefaults($.datepicker.regional['es']);
     }
     return edad;
   }
-  
-  function calcularEdad2(fechaString) {
-    // Dividir la cadena de fecha en día, mes y año
-    const partesFecha = fechaString.split("-");
-    const dia = parseInt(partesFecha[0], 10);
-    const mes = parseInt(partesFecha[1], 10) - 1; // Los meses en Date van de 0 a 11
-    const año = parseInt(partesFecha[2], 10);
 
-    // Crear un objeto Date con la fecha de nacimiento
-    const fechaNacimiento = new Date(año, mes, dia);
-
-    // Obtener la fecha actual
-    const fechaActual = new Date();
-
-    // Calcular la diferencia en milisegundos
-    const diferencia = fechaActual - fechaNacimiento;
-
-    // Calcular la edad en años
-    const edad = Math.floor(diferencia / (1000 * 60 * 60 * 24 * 365.25));
-
-    return edad;
-  }
-
-  var boton = $('#aceptar'); // Reemplaza con el ID de tu botón
   // metodos para escuchar cambios en el dom y habilitar el boton de enviar formulario 
   // Función para verificar si todos los campos están cumplidos
-  function todosCumplidos() {
-    const elementosCumplidos = $('form input, form select').filter('.cumplido, .cumplidoNormal, .cumplido_segundario');
-    return elementosCumplidos.length === $('form input, form select').length;
+  function todosCumplidos(formulario) {
+    const elementosCumplidos = $(formulario).find('input, select').filter('.cumplido, .cumplidoNormal, .cumplido_segundario').not('.ignore-validation');
+    const totalElementos = $(formulario).find('input, select').not('.ignore-validation').length;
+    return elementosCumplidos.length === totalElementos;
   }
 
   // Función para habilitar o deshabilitar el botón
-  function habilitarBoton() {
-    boton.prop('disabled', !todosCumplidos());
+  function habilitarBoton(formulario, boton) {
+    boton.prop('disabled', !todosCumplidos(formulario));
   }
 
   // Función de debounce para limitar la frecuencia de ejecución
@@ -532,25 +452,32 @@ $.datepicker.setDefaults($.datepicker.regional['es']);
     };
   }
 
-  // Crear una instancia de MutationObserver y observar cambios
-  const observer = new MutationObserver(debounce((mutationsList, observer) => {
-    for (const mutation of mutationsList) {
-      if (mutation.type === 'childList' || mutation.type === 'attributes') {
-        habilitarBoton();
-        validarSelectoresSelec2("#dia", ".span_dia");
-
-  
+  // Crear una instancia de MutationObserver y observar cambios en un formulario específico
+  function observarFormulario(formulario, boton) {
+    const observer = new MutationObserver(debounce((mutationsList, observer) => {
+      for (const mutation of mutationsList) {
+        if (mutation.type === 'childList' || mutation.type === 'attributes') {
+          habilitarBoton(formulario, boton);
+          validarSelectoresSelec2("#dia", ".span_dia");
+        }
       }
-    }
-  }, 300)); // Ajusta el tiempo de espera según sea necesario
+    }, 300)); // Ajusta el tiempo de espera según sea necesario
 
-  // Configurar el observer para observar cambios en los hijos y atributos del formulario
-  const config = { childList: true, attributes: true, subtree: true };
+    // Configurar el observer para observar cambios en los hijos y atributos del formulario
+    const config = { childList: true, attributes: true, subtree: true };
 
-  // Seleccionar el formulario y comenzar a observar
-  const form = document.querySelector('form');
-  observer.observe(form, config);
+    // Comenzar a observar el formulario
+    observer.observe(formulario, config);
+  }
 
+  // Seleccionar los formularios y los botones correspondientes
+  const formularioActualizar = document.querySelector('#formulario_registro');
+  const botonActualizar = $('#aceptar');
+
+  // Observar cambios en cada formulario por separado
+  observarFormulario(formularioActualizar, botonActualizar);
+  // Inicializar el estado de los botones al cargar la página
+  habilitarBoton(formularioActualizar, botonActualizar);
 
   $("#limpiar").on("click", function () {
     limpiarInput("#primerNombre", ".span_nombre");

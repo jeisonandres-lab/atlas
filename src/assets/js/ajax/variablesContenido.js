@@ -56,6 +56,22 @@ export function setVariableSexo(id, name) {
     `;
 }
 
+// VARIABLE DE DISCAPACIDAD
+export function setVariableDiscapacidad(id, name) {
+    return `
+        <div class="col-sm-12 col-md-3 col-xl-3 mb-2" id="contentDiscapacidad">
+            <div class="form-group">
+                <label for="${id}">Tipo De Discapacidad</label>
+                <div class="input-group">
+                    <span class="input-group-text span_tpDiscapacidad2"><i class="icons fa-solid fa-wheelchair-move"></i></span>
+                    <select type="text" class="form-control ignore-validation" id="${id}" name="${name}" placeholder="Tipo de Discapacidad ">
+                    </select>
+                </div>
+            </div>
+        </div>
+    `;
+}
+
 // VARIABLE DE ARCHIVO
 export function setVariableArchivo(id, name, text, placeholder, span) {
     return `
