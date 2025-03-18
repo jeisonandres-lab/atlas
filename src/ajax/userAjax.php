@@ -14,7 +14,8 @@ $usercontroller = new userController();
 $userLogin = new userController();
 $notificacion = new notificacionController();
 $id = isset($_POST['id']) ? $conexion->limpiarCadena($_POST['id']) : "";
-
+$cedula = isset($_POST['cedula']) ? $conexion->limpiarCadena($_POST['cedula']) : "";
+$pin = isset($_POST['pin']) ? $conexion->limpiarCadena($_POST['pin']) : "";
 switch ($_GET['modulo_usuario']) {
     case 'login':
         $user = $userLogin->limpiarCadena($_POST['usuario']);
@@ -43,6 +44,13 @@ switch ($_GET['modulo_usuario']) {
         $usercontroller->desactivarUsuario($id);
         break;
 
+    case 'actualizarDatosUsuario':
+        $usercontroller->desactivarUsuario($id);
+        break;
+
+    case 'verificarPin':
+        $usercontroller->CambiarUsuario($pin, $cedula, $nombre);
+        break;
     default:
         # code...
         break;

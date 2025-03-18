@@ -45,6 +45,23 @@ export async function validarNombreConEspacios(input, cumplidospan) {
   });
 }
 
+//validar texto plano que cumpla con 8 caracteres
+// Función para validar contraseñas con al menos 8 caracteres
+export async function validarTexto(input, cumplidospan) {
+  $(document).on("input", input,function () {
+    const password = $(this).val();
+
+    // Verificar si la contraseña tiene al menos 8 caracteres
+    if (password.length >= 8) {
+      $(this).removeClass("error_input").addClass("cumplido");
+      $(cumplidospan).removeClass("error_span").addClass("cumplido_span");
+    } else {
+      $(this).removeClass("cumplido").addClass("error_input");
+      $(cumplidospan).removeClass("cumplido_span").addClass("error_span");
+    }
+  });
+}
+
 // Funcion para validar que se ocloquen solo numeros mayor a 7 menor a 9 (Cédula)
 export async function validarNumeros(input, cumplidospan) {
   $(input).on("input", function (evenet) {
@@ -141,12 +158,6 @@ export async function validarNumeroNumber(input, cumplidospan, limit, ceros) {
       event.preventDefault();
       return;
     }
-
-    // Validación de ceros consecutivos
-    if (!ceros && currentValue.endsWith("0") && key === "0") {
-      event.preventDefault();
-      return;
-    }
   });
 
   $(document).on("input", input, function () {
@@ -158,14 +169,6 @@ export async function validarNumeroNumber(input, cumplidospan, limit, ceros) {
       value = $(this).val();
     }
 
-    // Validación de ceros consecutivos
-    if (!ceros) {
-      while (value.includes("00")) {
-        value = value.replace("00", "0");
-      }
-      $(this).val(value);
-    }
-
     // Validar si el input está vacío
     if (value === "") {
       $(this).removeClass("cumplido").addClass("error_input");
@@ -175,13 +178,13 @@ export async function validarNumeroNumber(input, cumplidospan, limit, ceros) {
 
     // Verificar si el valor es un número válido
     const numericValue = parseInt(value);
-    if (isNaN(numericValue)) {
+    if (isNaN(numericValue) && value !== "0") {
       // No hacer nada si no es un número válido
       return;
     }
 
     // Validación de valor mínimo
-    if (numericValue <= 0 && !ceros) {
+    if (numericValue <= 0 && !ceros && value !== "0") {
       $(this).removeClass("cumplido").addClass("error_input");
       $(cumplidospan).removeClass("cumplido_span").addClass("error_span");
     } else {
@@ -580,42 +583,6 @@ export async function mesesDias(input, span_mes, inputdia, span_dia) {
     }
   });
 }
-
-// export async function mesesDias(input, span_mes, inputdia, span_dia, ano) {
-//   $(document).on("change", input, function () {
-//     const year = $(ano).val();
-//     const month = $(input).val();
-//     if (month == "") {
-//       $(input).removeClass("cumplido");
-//       $(input).addClass("error_input");
-//       $(span_mes).removeClass("cumplido_span");
-//       $(span_mes).addClass("error_span");
-//     } else {
-//       // Eliminar el cero inicial si existe
-//       const monthWithoutLeadingZero = month.replace(/^0+/, "");
-//       // Obtener el número de días en el mes seleccionado
-//       const daysInMonth = new Date(year, monthWithoutLeadingZero, 0).getDate(); // Restamos 1 al mes porque JavaScript cuenta los meses desde 0
-//       // Generar las opciones de los días
-//       $(inputdia).empty(); // Limpiar las opciones anteriores
-//       $(inputdia).append(
-//         '<option value="">Seleccione un día</option>'
-//       );
-
-//       $(span_dia).removeClass("cumplido_span");
-//       $("#contentDia .select2").removeClass("cumplido");
-//       for (let i = 1; i <= daysInMonth; i++) {
-//         const diaFormateado = i.toString().padStart(2, "0");
-//         $(inputdia).append(
-//           '<option value="' + diaFormateado + '">' + diaFormateado + "</option>"
-//         );
-//       }
-//       $(input).removeClass("error_input");
-//       $(input).addClass("cumplido");
-//       $(span_mes).removeClass("error_span");
-//       $(span_mes).addClass("cumplido_span");
-//     }
-//   });
-// }
 
 // validar inactividad de los pagina
 export async function configurarInactividad(selector, tiempoInactividad) {

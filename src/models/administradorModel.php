@@ -3,6 +3,7 @@
 namespace App\Atlas\models;
 
 use App\Atlas\config\Conexion;
+use App\Atlas\controller\report\generateExcelController;
 
 class administradorModel extends Conexion
 {
@@ -89,4 +90,39 @@ class administradorModel extends Conexion
             return $sql;
         }
     }
+
+    private function existeUsuario(array $parametros, string $validacion)
+    {
+        $sql = $this->ejecutarConsulta("SELECT cedula, id_user FROM users INNER JOIN datosEmpleados de ON users.idEmpleado = de.id_empleados
+        INNER JOIN datosPersonales dp ON de.idPersonal = dp.id_personal WHERE $validacion = ? ", $parametros);
+        if (empty($sql)) {
+            return false;
+        } else {
+            return $sql;
+        }
+    }
+
+    private function preguntasSeguridad(array $parametros)
+    {
+        $sql = $this->ejecutarConsulta("SELECT * FROM preguntas pg INNER JOIN respuestas rp ON rp.idPreguntas = pg.id_preguntas WHERE id_user = ?", $parametros);
+        if (empty($sql)) {
+            return false;
+        } else {
+            return $sql;
+        }
+    }
+
+
+
+    // validar existencia de usuario por cedula
+    public function getExisteUsuario(array $parametros, string $validacion) {
+        return $this->existeUsuario($parametros, $validacion);
+    }
+
+    // validar las preguntas de seguridad de los usuarios
+    public function getPreguntasSeguridad(array $parametros) {
+        return $this->preguntasSeguridad($parametros);
+    }
+
+    
 }

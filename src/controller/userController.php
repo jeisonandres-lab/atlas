@@ -45,6 +45,7 @@ class  userController extends userModel
                             $data_json['usuario'] = $row['nameUser'];
                             $data_json['mensaje'] = 'Usuario encontrado con exito';
                             $data_json['password'] = $row['userPassword'];
+                            $data_json['salt'] = $row['saltPass'];
                             $data_json['activo'] = 'desactivado';
 
                             $_SESSION['usuario'] = $user;
@@ -267,6 +268,36 @@ class  userController extends userModel
             $data_json['mensaje'] = 'Usuario desactivado con exito';
         } else {
             $data_json['mensaje'] = 'Error al desactivar el usuario';
+        }
+        header('Content-Type: application/json');
+        echo json_encode($data_json);
+    }
+
+    public function CambiarUsuario(string $pin, string $cedula, string $nuevo)
+    {
+        $pin = $this->limpiarCadena($pin);
+        $cedula = $this->limpiarCadena($cedula);
+        $nuevo = $this->limpiarCadena($nuevo);
+
+        $data_json = [
+            'exito' => false, // Inicializamos a false por defecto
+            'mensaje' => ''
+        ];
+
+        $cambiar_usuario = [
+            [
+                "campo_nombre" => "nameUser",
+                "campo_marcador" => ":nameUser",
+                "campo_valor" => $nuevo
+            ]
+        ];
+
+        $pin = $this->getPinSeguridad([$pin, $cedula]);
+        if ($pin) {
+            $data_json['exito'] = true;
+            $data_json['mensaje'] = 'Usuario activado con exito';
+        } else {
+            $data_json['mensaje'] = 'Error al activar el usuario';
         }
         header('Content-Type: application/json');
         echo json_encode($data_json);

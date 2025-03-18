@@ -271,3 +271,7 @@ export function setVariableDepartamento(id, name) {
         </div>
     `;
 }
+
+export function setVariableContrasena(id, name) {
+    
+}

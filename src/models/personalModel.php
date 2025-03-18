@@ -45,7 +45,7 @@ class personalModel extends Conexion
     private function existePersonalCD(array $parametro)
     {
         $sql = $this->ejecutarConsulta("SELECT cedula FROM datosPersonales WHERE cedula = ?", $parametro);
-        if ($sql) {
+        if (empty($sql)) {
             $sql = false;
         } else {
             $sql = true;

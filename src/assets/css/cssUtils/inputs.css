@@ -101,3 +101,15 @@ body .conten-main .app-main form .cumplido {
   /* Elimina el efecto de sombra */
 }
 
+/* type number  borrar las flechas*/
+/* Para navegadores basados en WebKit (Chrome, Safari, Edge) */
+.brflechas[type="number"]::-webkit-inner-spin-button,
+.brflechas[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Para Firefox */
+.brflechas[type="number"] {
+  -moz-appearance: textfield;
+}

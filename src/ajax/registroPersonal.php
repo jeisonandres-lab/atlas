@@ -18,7 +18,7 @@ $dependencias = new dependenciasController();
 $estatus = new estatusController();
 $cargo = new cargoController();
 $departamento = new departamentoController();
-$personal = new personalController();
+$personal = new personalController(true);
 $notificacion = new notificacionController();
 $ubicacion = new ubicacionController();
 

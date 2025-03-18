@@ -15,6 +15,7 @@ class viewModel extends error
         // Configuración de rutas de vistas
         $vistas = [
             'Identificarse' => 'src/views/start/login.php',
+            'recuperarDatos' => 'src/views/start/recuperar.php',
             'inicio' => 'src/views/home/home.php',
             'personal' => "src/views/personal/registro.php",
             'registrosFamiliares' => "src/views/personal/registrosFamiliares.php",

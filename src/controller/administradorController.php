@@ -4,6 +4,7 @@ namespace App\Atlas\controller;
 
 use App\Atlas\models\administradorModel;
 use App\Atlas\controller\auditoriaController;
+use App\Atlas\models\personalModel;
 use App\Atlas\config\App;
 use App\Atlas\config\Conexion;
 use App\Atlas\config\server;
@@ -12,8 +13,8 @@ class administradorController extends administradorModel
 {
     private $auditoriaController;
     private $app;
+    private $personalModel;
     private $conexion;
-
     private $idUsuario;
     private $nombreUsuario;
 
@@ -21,15 +22,16 @@ class administradorController extends administradorModel
     {
         parent::__construct();
         $this->app = new App();
+        $this->personalModel = new personalModel();
         $this->auditoriaController = new auditoriaController();
         $this->conexion = new Conexion();
-        $this->app->iniciarSession();
-        $this->idUsuario = $_SESSION['id'];
-        $this->nombreUsuario = $_SESSION['usuario'];
     }
 
     public function datosMasivosUsuario($nombreUser)
     {
+        $this->app->iniciarSession();
+        $this->idUsuario = $_SESSION['id'];
+        $this->nombreUsuario = $_SESSION['usuario'];
         $nombreUser = $this->limpiarCadena($nombreUser);
         $data_json = [
             'exito' => false,
@@ -69,6 +71,9 @@ class administradorController extends administradorModel
 
     public function descargarBaseDatos()
     {
+        $this->app->iniciarSession();
+        $this->idUsuario = $_SESSION['id'];
+        $this->nombreUsuario = $_SESSION['usuario'];
         $data_json = [
             'exito' => false,
             'messenger' => 'NO SE PUEDE DESCARGAR LOS DATOS DE LA BVASE DE DATOS',
@@ -88,7 +93,7 @@ class administradorController extends administradorModel
         echo "Salida del comando: " . implode("\n", $output) . "\n";
 
         if ($return_var === 0) {
-            $registroAuditoria = $this->auditoriaController->registrarAuditoria($this->idUsuario,'Descargar base de datos', 'El usuario ' . $this->nombreUsuario . ' ha descargo la base de datos');
+            $registroAuditoria = $this->auditoriaController->registrarAuditoria($this->idUsuario, 'Descargar base de datos', 'El usuario ' . $this->nombreUsuario . ' ha descargo la base de datos');
             if ($registroAuditoria) {
                 $data_json["exitoAuditoria"] = true;
                 $data_json['messengerAuditoria'] = "Auditoria registrada con exito.";
@@ -96,7 +101,7 @@ class administradorController extends administradorModel
                 $data_json["exitoAuditoria"] = false;
                 $data_json['messengerAuditoria'] = "Error al registrar la auditoria.";
             }
-            
+
             header('Content-Description: File Transfer');
             header('Content-Type: application/octet-stream');
             header('Content-Disposition: attachment; filename=' . basename($backupFile));
@@ -116,4 +121,60 @@ class administradorController extends administradorModel
         header('Content-Type: application/json');
         echo json_encode($data_json);
     }
+
+    public function existeEmpleado(string $cedula)
+    {
+        $cedula = $this->limpiarCadena($cedula);
+        $data_json = [
+            'exito' => false,
+            'mensaje' => 'No se pudo obtener los datos de la dependencia',
+        ];
+
+        if (empty($cedula)) {
+            $data_json['mensaje'] = 'La cedula no puede estar vacia';
+        } elseif (ctype_digit($cedula)) {
+            $sql = $this->getExisteUsuario([$cedula], 'cedula');
+            if ($sql) {
+                $data_json['exito'] = true;
+                $data_json['mensaje'] = 'Empleado con usuario encontrado';
+                $data_json['existeEmpleado'] = $sql;
+            }else{
+                $data_json['mensaje'] = 'Este empleado no tiene un usuario asignado';
+            }
+        } else {
+            $data_json['mensaje'] = 'La cedula no puede contener letras';
+        }
+
+        // Devolver la respuesta en formato JSON
+        header('Content-Type: application/json');
+        echo json_encode($data_json);
+    }
+
+    public function preguntasSeguridad(string $cedula)
+    {
+        $cedula = $this->limpiarCadena($cedula);
+        $data_json = [
+            'exito' => false,
+            'mensaje' => 'No se pudo obtener los datos de la dependencia',
+        ];
+
+        if (empty($cedula)) {
+            $data_json['mensaje'] = 'La cedula no puede estar vacia';
+        } elseif (ctype_digit($cedula)) {
+            $sql = $this->getPreguntasSeguridad([$cedula]);
+            if ($sql) {
+                $data_json['exito'] = true;
+                $data_json['mensaje'] = 'Preguntas de seguridad encontradas';
+                $data_json['preguntas'] = $sql;
+            }else{
+                $data_json['mensaje'] = 'Este empleado no tiene preguntas de seguridad asignadas';
+            }
+        } else {
+            $data_json['mensaje'] = 'La cedula no puede contener letras';
+        }
+
+        // Devolver la respuesta en formato JSON
+        header('Content-Type: application/json');
+        echo json_encode($data_json);
+    }	
 }

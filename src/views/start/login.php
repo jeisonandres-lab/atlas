@@ -1,31 +1,23 @@
+<?php use App\Atlas\config\App; ?>
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Inicia sesión en tu cuenta para acceder a todas las funcionalidades de ATLAS, nuestro sistema de gestión de recursos humanos">
     <title>Inicio de Sesión | ATLAS</title>
     <link rel="icon" href="./src/assets/img/icons/dasdad-transformed-removebg.png" type="image/x-icon">
-    <!-- <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css"> -->
-     <link rel="stylesheet" href="./style.css">
-    <link rel="stylesheet" href="./node_modules/@fortawesome/fontawesome-free/css/fontawesome.min.css">
-    <link rel="stylesheet" href="./node_modules/@fortawesome/fontawesome-free/css/regular.min.css">
-    <link rel="stylesheet" href="./node_modules/@fortawesome/fontawesome-free/css/solid.min.css">
-    <link rel="stylesheet" href="./node_modules/@fortawesome/fontawesome-free/css/brands.min.css">
-    <link rel="stylesheet" href="./node_modules/sweetalert2/dist/sweetalert2.min.css">
-    <link rel="stylesheet" href="./src/assets/css/login.css">
+    <?php require_once App::URL_INC . "total_css.php"; ?>
+    <link rel="stylesheet" href="<?php echo App::URL_CSS . "login.css"; ?>">
 
 </head>
 
 <body>
     <?php require("./src/views/inc/load.php"); ?>
-    <?php
 
-    use App\Atlas\config\App; ?>
     <main class="principal container-fluid ">
         <div class="h-100 d-flex justify-content-center align-items-center">
-            <div class="col-md-4 col-sm-8 user_card">
+            <div class="col-md-3 col-sm-8 user_card">
                 <div class="mt-5 mb-3">
                     <div class="d-flex justify-content-center">
                         <div class="brand_logo_container">
@@ -40,7 +32,7 @@
                                 <h4 class=" text-muted">INICIO DE SESION</h4>
                             </div>
                             <div class="mb-3 mt-3">
-                                <div class="input-group mb-3 ">
+                                <div class="input-group mb-3 " >
                                     <span class="input-group-text" style="height: 40px; width: 40px;"><i class="user fas fa-user"></i></span>
                                     <input type="text" name="usuario" id="usuario" class="form-control input_user px-3" value="" placeholder="Usuario" autocomplete="username">
                                 </div>
@@ -61,9 +53,9 @@
                         <div class="d-flex justify-content-center links">
                             ¿Olvidaste Los Datos De Tu Cuenta?
                         </div>
-                        <!-- <div class="d-flex justify-content-center links">
-                            <a href="#">Recuperar Datos</a>
-                        </div> -->
+                        <div class="d-flex justify-content-center links">
+                            <a href="recuperarDatos"><i class="fa-solid fa-arrow-right me-2"></i>Recuperar Datos</a>
+                        </div>
                     </div>
                 </div>
                 <div class="barraNaranja">s</div>
@@ -72,12 +64,14 @@
     </main>
 
     <div id="particles-js"></div>
-    <script src="./node_modules/jquery/dist/jquery.min.js"></script>
-    <script src="./node_modules/sweetalert2/dist/sweetalert2.min.js"></script>
+
+    <?php require_once App::URL_INC . "/scrips.php"; ?>
     <script src="./node_modules/particles.js/particles.js"></script>
     <script src="./node_modules/crypto-js/crypto-js.js"></script>
-    <script src="./src/assets/js/particulasLogin.js"></script>
-    <script src="./src/assets/js/login.js" type="module"></script>
+    <script src="<?php echo App::URL_SCRIPS . "ajax/particulasLogin.js" ?>"></script>
+    <script src="<?php echo App::URL_SCRIPS . "login.js" ?>" type="module"></script>
+
+    <!-- <script src="./src/assets/js/login.js" type="module"></script> -->
 </body>
 
 </html>

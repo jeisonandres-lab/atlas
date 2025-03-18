@@ -10,12 +10,15 @@ use App\Atlas\controller\notificacionController;
 use App\Atlas\config\HoraLocal;
 
 $conexion = new Conexion();
+
 $admin = new administradorController();
+$admin2 = new administradorController();
 $notificacion = new notificacionController();
 $horaLocal = new HoraLocal();
 
-$id = isset($_POST['id']) ? $conexion->limpiarCadena($_POST['id']) : "";
-$usuario = isset($_POST['usuario']) ? $conexion->limpiarCadena($_POST['usuario']) : "";
+// $id = isset($_POST['id']) ? $conexion->limpiarCadena($_POST['id']) : "";
+// $usuario = isset($_POST['usuario']) ? $conexion->limpiarCadena($_POST['usuario']) : "";
+$cedula = isset($_POST['cedula']) ? $conexion->limpiarCadena($_POST['cedula']) : "";
 
 
 switch ($_GET['modulo_datos']) {
@@ -28,6 +31,9 @@ switch ($_GET['modulo_datos']) {
         $admin->descargarBaseDatos();
         break;
 
+    case 'existeCedula':
+        $admin2->existeEmpleado($cedula);
+        break;
     case 'HLServidor':
         $horaLocal->obtenerFechaHoraServidor();
         $datos = [

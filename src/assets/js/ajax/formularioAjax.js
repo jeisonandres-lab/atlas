@@ -101,21 +101,21 @@ export async function obtenerDatos(url, metodo = 'POST') {
 
 export async function obtenerDatosPromise(url, data = {}) {
     return new Promise((resolve, reject) => {
-      $.ajax({
-        url: url,
-        method: 'POST', // O 'POST', según tu necesidad
-        data: data,
-        dataType: 'json', // Asegúrate de que el servidor responde con JSON
-        success: function(response) {
-          resolve(response);
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
-          reject({ status: textStatus, error: errorThrown });
-        }
-      });
+        $.ajax({
+            url: url,
+            method: 'POST', // O 'POST', según tu necesidad
+            data: data,
+            dataType: 'json', // Asegúrate de que el servidor responde con JSON
+            success: function (response) {
+                resolve(response);
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                reject({ status: textStatus, error: errorThrown });
+            }
+        });
     });
 }
-  
+
 export async function obtenerDatosJQuery(url, options = {}) {
     let formData = new FormData();
     for (let key in options) {
@@ -140,40 +140,24 @@ export async function obtenerDatosJQuery(url, options = {}) {
     }
 }
 
-// export async function obtenerDatosJQuery(url, options = {}) {
-//     let formData = new FormData();
-//     for (let key in options) {
-//         formData.append(key, options[key]);
-//     }
-
-//     return $.ajax({
-//         url: url,
-//         type: 'POST',
-//         data: formData,
-//         processData: false,
-//         contentType: false,
-//         dataType: 'json'
-//     });
-// }
 // Función para generar un hash seguro con sal
-
 export function generarHashContrasena(contrasena) {
     // Generar una sal aleatoria de 16 bytes (32 caracteres hexadecimales)
-    const salt = CryptoJS.lib.WordArray.random(16).toString();
-    const hash = CryptoJS.SHA256(contrasena + salt).toString();
-    // Combinar el hash y la sal en un solo string
-    return hash + salt;
+    const salt = CryptoJS.lib.WordArray.random(16).toString(CryptoJS.enc.Hex);
+    const hash = CryptoJS.SHA256(contrasena + salt).toString(CryptoJS.enc.Hex);
+    // Devolver el hash y la sal por separado
+    return {
+        hash: hash,
+        salt: salt
+    };
 }
 
 // Función para verificar una contraseña
-export function verificarContrasena(contrasena, hashAlmacenado) {
-    // Separar el hash y la sal del string almacenado
-    const hashParte = hashAlmacenado.substring(0, 64); // Hash SHA-256 tiene 64 caracteres hexadecimales
-    const saltParte = hashAlmacenado.substring(64);
-    // Reconstruir el hash original con la sal
-    const hashCalculado = CryptoJS.SHA256(contrasena + saltParte).toString();
+export function verificarContrasena(contrasena, hashAlmacenado, saltAlmacenada) {
+    // Reconstruir el hash original con la sal almacenada
+    const hashCalculado = CryptoJS.SHA256(contrasena + saltAlmacenada).toString(CryptoJS.enc.Hex);
     // Comparar los hashes
-    return hashCalculado === hashParte;
+    return hashCalculado === hashAlmacenado;
 }
 
 export async function descargarArchivo(url, nombreArchivo, formData = null) {
@@ -303,4 +287,62 @@ export async function descargarArchivo2(url, nombreArchivo, formData = null) {
             botonPdf.classList.remove('processing');
         }
     }
+}
+
+// Abrebiar nombres de empelados
+export function abreviarNombre(nombreCompleto) {
+    const palabras = nombreCompleto.split(' ');
+    let nombreAbreviado = palabras[0]; // Primera palabra (nombre)
+
+    // Iniciales de las palabras intermedias del nombre
+    for (let i = 1; i < palabras.length - 2; i++) {
+        nombreAbreviado += ' ' + palabras[i].charAt(0) + '.';
+    }
+
+    // Primer apellido y iniciales de los apellidos
+    if (palabras.length > 2) {
+        nombreAbreviado += ' ' + palabras[palabras.length - 2] + ' ' + palabras[palabras.length - 1].charAt(0) + '.';
+    } else {
+        nombreAbreviado += ' ' + palabras[palabras.length - 1] + '.';
+    }
+
+    return nombreAbreviado;
+}
+
+// Función para verificar si todos los inputs y selects cumplen con las clases requeridas
+export function todosCumplidos(formulario) {
+    const elementosCumplidos = $(formulario).find('input, select').filter('.cumplido, .cumplidoNormal').not('.ignore-validation');
+    const totalElementos = $(formulario).find('input, select').not('.ignore-validation').length;
+    return elementosCumplidos.length === totalElementos;
+}
+
+// Función para habilitar o deshabilitar el botón
+export function habilitarBoton(formulario, boton) {
+    boton.prop('disabled', !todosCumplidos(formulario));
+}
+
+// Función de debounce para limitar la frecuencia de ejecución
+export function debounce(func, wait) {
+    let timeout;
+    return function (...args) {
+        clearTimeout(timeout);
+        timeout = setTimeout(() => func.apply(this, args), wait);
+    };
+}
+
+// Crear una instancia de MutationObserver y observar cambios en un formulario específico
+export function observarFormulario(formulario, boton) {
+    const observer = new MutationObserver(debounce((mutationsList, observer) => {
+        for (const mutation of mutationsList) {
+            if (mutation.type === 'childList' || mutation.type === 'attributes') {
+                habilitarBoton(formulario, boton);
+            }
+        }
+    }, 300)); // Ajusta el tiempo de espera según sea necesario
+
+    // Configurar el observer para observar cambios en los hijos y atributos del formulario
+    const config = { childList: true, attributes: true, subtree: true };
+
+    // Comenzar a observar el formulario
+    observer.observe(formulario, config);
 }

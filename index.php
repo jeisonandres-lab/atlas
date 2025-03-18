@@ -24,7 +24,11 @@ if (isset($_GET['vista'])) {
 }
 $vista2 = $viewsController->obtenerVistasControlador($vista);
 switch ($vista) {
-    case 'Identificarse':
+    // VISTAS SIN LOGIN
+    case 'Identificarse': // Pagina de login
+        require_once $vista2;
+        break;
+    case 'recuperarDatos': // Pagina de recuperar datos
         require_once $vista2;
         break;
     default:
