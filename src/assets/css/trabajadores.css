@@ -15,8 +15,6 @@ body::-webkit-scrollbar {
   background-color: #e9ecef; 
 } */
 
-
-
 .parrafo{
   font-family: "Poppins", sans-serif;
   font-size: 0.9em !important;
@@ -77,10 +75,6 @@ body::-webkit-scrollbar {
 }
 .my-button:active {
   background-color: #3e8e41;
-}
-
-form .contenCedula .ceduact{
-  
 }
 
 @keyframes salto {

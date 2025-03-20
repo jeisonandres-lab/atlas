@@ -88,8 +88,21 @@ body .conten-main .app-main form .cumplido {
   border: 2px solid green;
 }
 
+.select2-selection__rendered .input_error{
+  color:  red !important;
+}
+
+ .select2-selection__rendered {
+  font-family: 'Roboto', sans-serif;
+}
+
 .input-group {
   flex-wrap: nowrap !important;
+}
+
+.input-group-text {
+  width: 42px;
+  display: flow;
 }
 
 /* Sobrescribir el estilo de focus para Select2 */
@@ -109,7 +122,14 @@ body .conten-main .app-main form .cumplido {
   margin: 0;
 }
 
-/* Para Firefox */
-.brflechas[type="number"] {
-  -moz-appearance: textfield;
+form input {
+  height: 40px !important;
+  font-family: 'Roboto', sans-serif;
+
 }
+
+form input[type="file"] {
+  height: 38px !important;
+}
+
+/* SELECT 2 */

@@ -53,6 +53,7 @@ $(function () {
         }
     });
 
+    // Cambiar contenido de recuperar datos
     $(document).on('change', '#datosRecuperar', function () {
         if ($(this).val() === 'rpUser') {
             $('#rpPassContent').remove();
@@ -133,6 +134,7 @@ $(function () {
 
     });
 
+    // CARGAR input password
     $(document).on("click", ".usarPass", function (e) {
         $(".modalBodyUsuario").html(`
             <div class="input-group mb-3" id="rpPassContent">
@@ -163,6 +165,7 @@ $(function () {
       
 
     });
+
 
     $(document).on("submit", ".formularioVerificar", function (e) {
         e.preventDefault();

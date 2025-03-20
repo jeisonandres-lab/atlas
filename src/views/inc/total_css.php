@@ -2,7 +2,7 @@
 <link rel="stylesheet" href="<?php echo App::URL_LIBRARY."adminLTE/css/adminlte.min.css"?>" />
 
 <link rel="icon"       href="<?php echo App::URL_ICONS."dasdad-transformed-removebg.png";?>" type="image/x-icon"/>
-<!-- <link rel="stylesheet" href="<?php echo App::URL_NODE."bootstrap/dist/css/bootstrap.min.css";?>"/> -->
+<link rel="stylesheet" href="<?php echo App::URL_NODE."bootstrap/dist/css/bootstrap.min.css";?>"/>
 <link rel="stylesheet" href="./src/libs/adminLTE/css/adminlte.css">
 <link rel="stylesheet" href="./style.css">
 <link rel="stylesheet" href="<?php echo App::URL_NODE."bootstrap-icons/font/bootstrap-icons.min.css";?>"/>
@@ -20,5 +20,11 @@
 <link rel="stylesheet" href="<?php echo App::URL_LIBRARY."animate/animate.min.css"?>" />
 <link rel="stylesheet" href="<?php echo App::URL_CSS."subMenu.css"?>" />
 <link rel="stylesheet" href="<?php echo App::URL_CSS."cssUtils/inputs.css"?>" />
+<!-- MULTI FORMULARIO -->
+<link rel="stylesheet" href="<?php echo App::URL_LIBRARY."multiFrom/css/form-elements.css"?>"/>
+<link rel="stylesheet" href="<?php echo App::URL_LIBRARY."multiFrom/css/style.css"?>"/>
+
+<link rel="stylesheet" href="<?php echo App::URL_CSS . "cssUtils/buttons.css"; ?>">
+<link rel="stylesheet" href="<?php echo App::URL_CSS . "cssUtils/inputs.css"; ?>">
 
 

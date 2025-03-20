@@ -18,6 +18,7 @@ class viewModel extends error
             'recuperarDatos' => 'src/views/start/recuperar.php',
             'inicio' => 'src/views/home/home.php',
             'personal' => "src/views/personal/registro.php",
+            'personal2' => "src/views/personal/registro-respaldo.php",
             'registrosFamiliares' => "src/views/personal/registrosFamiliares.php",
             'datosInces' => "src/views/personal/DatosInces.php",
             'familiares' => "src/views/personal/familiares.php",

@@ -309,15 +309,17 @@ export function incluirSelec2(selector) {
 }
 
 export async function validarSelectoresSelec2(input, cumplidospan) {
-  // Maneja el evento select2:select y change
   $(document).on('select2:select change', input, function (e) {
     const select2Container = $(this).next('.select2-container');
+    const select2Rendered = select2Container.find('.select2-selection__rendered'); // Encuentra el elemento select2-selection__rendered
     const selectedValue = $(this).val();
     const select = $(input);
     const span = $(cumplidospan);
-    if (select.val() == "") {
+
+    if (select.val() === "") {
       select2Container.removeClass('cumplido');
       select2Container.addClass('error_input');
+      select2Rendered.addClass('input_error'); // Agrega input_error al select2-selection__rendered
       select.removeClass('cumplido');
       $(span).removeClass('cumplido_span');
     } else {
@@ -326,15 +328,15 @@ export async function validarSelectoresSelec2(input, cumplidospan) {
         select.addClass('cumplido');
         span.addClass('cumplido_span');
         select2Container.removeClass('error_input');
+        select2Rendered.removeClass('input_error'); // Elimina input_error al select2-selection__rendered
       } else {
         select.removeClass('cumplido');
         span.removeClass('cumplido_span');
-
         select2Container.removeClass('cumplido');
         select2Container.addClass('error_input');
+        select2Rendered.addClass('input_error'); // Agrega input_error al select2-selection__rendered
       }
     }
-
   });
 }
 
@@ -360,11 +362,24 @@ export async function valdiarCorreos(input, cumplidospan) {
 
 // Funcion para buscar las fotos de los empleados mediante la cédula de identidad
 export async function validarBusquedaCedula(input, divContens) {
+  let temporizador;
+
   $(input).on("input", function () {
+    clearTimeout(temporizador); // Cancela el temporizador anterior
     const cedula = $(this).val();
+
+    if (cedula.length >= 7) {
+      realizarBusqueda(cedula, divContens); // Realiza la búsqueda si la longitud es 7 o más
+    } else {
+      temporizador = setTimeout(() => {
+        realizarBusqueda(cedula, divContens); // Realiza la búsqueda después del temporizador
+      }, 500); // Espera 500 milisegundos (0.5 segundos)
+    }
+  });
+
+  function realizarBusqueda(cedula, divContens) {
     const imageUrl = `./src/global/archives/photos/${cedula}.png`;
 
-    // Creamos una nueva imagen y la agregamos a cada div
     const img = new Image();
     img.src = imageUrl;
     img.classList.add("img-fluid", "imgFoto", "w-100", "h-100");
@@ -380,7 +395,7 @@ export async function validarBusquedaCedula(input, divContens) {
         $(div).html("Imagen no encontrada");
       });
     };
-  });
+  }
 }
 
 // Objeto para colocar los meses

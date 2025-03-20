@@ -32,6 +32,7 @@ import {
 } from "./ajax/alerts.js";
 import { setCargarEstadoCivil, setCargarNivelesAcademicos, setCargarSexo, setCargarTipoVivienda } from "./ajax/variablesArray.js";
 
+
 // jQuery
 $(function () {
   $(".formulario_empleado").hide();
@@ -98,8 +99,6 @@ $(function () {
   validarSelectoresSelec2("#civil", ".span_civil");
 
   validarDosDatos("#numeroDepa", ".span_numeroDepa");
-
-  fechasJQueyDataPikerPresente("#fechaing"); // Inicializa los datepickers
   setCargarEstadoCivil("#civil"); // Carga los estados civiles
   setCargarSexo("#sexo"); // Carga los sexos
   setCargarNivelesAcademicos("#academico"); // Carga los niveles académicos

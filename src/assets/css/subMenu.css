@@ -13,10 +13,10 @@
     border: 0px !important;
 }
 
-.active {
+.sidebar .active, .nav-tabs .active {
     background-color: #1929bb !important;
     color: white !important;
-}
+} 
 
 
 .olas>div {

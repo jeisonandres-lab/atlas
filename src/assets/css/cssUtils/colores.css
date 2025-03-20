@@ -1,4 +1,12 @@
 :root {
+
+    --white-color: #fff;
+    --white-color-content: #fff;
+    --blue-color: #1929bb;
+    --grey-color: #283c50;
+    /* #475e75  */
+    --grey-color-light: #aaa;
+    --backgroud: #f2f7fc;
     --body-bg-rgb: 249, 250, 252;
     --primary-rgb: 92, 103, 247;
     --primary-tint1-rgb: 227, 84, 212;
