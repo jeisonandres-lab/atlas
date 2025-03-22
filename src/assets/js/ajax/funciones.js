@@ -144,3 +144,33 @@ export async function cedulaExisteEmpleado(input, cumplido_span) {
 
   });
 }
+
+export async function recargarConVerificacionDeCache() {
+  // Intenta recargar la página desde la caché primero
+  location.reload();
+
+  // Realiza una petición AJAX para verificar si hay cambios en el servidor
+  fetch(window.location.href, { method: 'HEAD' })
+    .then(response => {
+      // Verifica las cabeceras 'Last-Modified' y 'ETag' para comparar versiones
+      const lastModified = response.headers.get('Last-Modified');
+      const etag = response.headers.get('ETag');
+
+      // Obtiene los valores almacenados en localStorage
+      const cachedLastModified = localStorage.getItem('lastModified');
+      const cachedEtag = localStorage.getItem('etag');
+
+      // Compara los valores y fuerza la recarga si hay cambios
+      if (lastModified !== cachedLastModified || etag !== cachedEtag) {
+        // Hay cambios, fuerza la recarga desde el servidor
+        location.reload(true);
+
+        // Actualiza los valores almacenados en localStorage
+        localStorage.setItem('lastModified', lastModified);
+        localStorage.setItem('etag', etag);
+      }
+    })
+    .catch(error => {
+      console.error('Error al verificar cambios en el servidor:', error);
+    });
+}

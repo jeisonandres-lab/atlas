@@ -27,6 +27,7 @@ import {
 
 import {
   alertaNormalmix,
+  AlertDirection,
   AlertSW2,
 } from "./ajax/alerts.js";
 
@@ -42,7 +43,8 @@ import {
   calcularEdad,
   carculasDias,
   cedulaExisteEmpleado,
-  limpiarFormulario
+  limpiarFormulario,
+  recargarConVerificacionDeCache
 } from "./ajax/funciones.js";
 
 import {
@@ -88,7 +90,7 @@ $(function () {
   validarNumeros("#cedula", ".span_cedula");
   validarNumeroNumber("#edad", ".span_edad", 2);
   validarNumeroNumber("#piso", ".span_piso", 2);
-  validarNumeroNumber("#numeroVivienda", ".span_numeroVivienda", 3);
+  validarNumeroNumber("#numeroVivienda", ".span_numeroVivienda", 4);
   validarBusquedaCedula("#cedula", ["#img-modals", "#img-contener"]);
   validarInputFecha("#fechaing", ".span_fechaing")
   colocarYear("#ano", "1900");
@@ -205,8 +207,9 @@ $(function () {
     $("#aceptar").prop("disabled", true);
     async function callbackExito(parsedData) {
       if (parsedData.exito) {
+        console.log(parsedData.exito)
         $("#aceptar").prop("disabled", false);
-        await alertaNormalmix(parsedData.mensaje, 3000, "success", "top");
+        await AlertDirection("success", parsedData.mensaje, "top", 3000, recargarConVerificacionDeCache());
       } else {
         await alertaNormalmix(parsedData.mensaje, 4000, "error", "top-end");
         // if (error) limpiarFormulario($("#formulario_registro"));
