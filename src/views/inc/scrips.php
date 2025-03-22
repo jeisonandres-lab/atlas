@@ -13,5 +13,4 @@
 <script src="<?php echo App::URL_NODE."sweetalert2/dist/sweetalert2.min.js";?>"></script>
 <!-- <script src="<?php echo App::URL_LIBRARY."select2/select2.min.js";?>"></script> -->
 
-<script src="./src/libs/jQueryUI/jquery-ui.min.js"></script>
 

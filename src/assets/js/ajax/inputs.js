@@ -119,7 +119,7 @@ export async function validarTelefono(input, cumplidospan, cumplido_span2) {
 
 
       $(cumplido_span2).removeClass("error_span");
-      $(cumplido_span2).addClass("cumplido_segundario");
+      $(cumplido_span2).addClass("cumplido");
 
     } else {
       $(this).removeClass("cumplido");
@@ -129,7 +129,7 @@ export async function validarTelefono(input, cumplidospan, cumplido_span2) {
 
 
       $(cumplido_span2).removeClass("cumplido");
-      $(cumplido_span2).removeClass("cumplido_segundario");
+      $(cumplido_span2).removeClass("cumplido");
       $(cumplido_span2).addClass("error_span");
     }
   });
@@ -438,10 +438,7 @@ export async function colocarNivelesEducativos(input) {
   try {
     // Limpiar el select antes de agregar nuevas opciones
     $(input).empty();
-
-
     $(input).append(`<option value="">Seleccione un nivel academico</option>`);
-
     niveles.forEach(nivel => {
       $(input).append(`<option value="${nivel.valor}">${nivel.nombre}</option>`);
     });
@@ -469,72 +466,6 @@ export async function file(input, cumplidospan) {
       $(cumplidospan).addClass("error_span");
     }
   })
-}
-
-export async function liberarInputs(input, cumplidospan, valor) {
-  // inputs
-  if (valor == 1) {
-    $(input).addClass("cumplido");
-    $(input).removeClass("error_input");
-    // spans
-    $(cumplidospan).addClass("cumplido_span");
-    $(cumplidospan).removeClass("error_span");
-  } else {
-    $(input).val("");
-    $(input).removeClass("cumplido");
-    $(input).addClass("error_input");
-    // spans
-    $(cumplidospan).removeClass("cumplido_span");
-    $(cumplidospan).addClass("error_span");
-  }
-}
-
-export async function limpiarFormulario(idinput, span) {
-  if ($(idinput).attr('type') === 'checkbox') {
-    return;
-  }
-
-  $(idinput).val("");
-  $(idinput).removeClass("cumplido");
-  $(idinput).addClass("error_input");
-
-  if (span) {
-    $(span).removeClass("cumplido_span");
-    $(span).addClass("error_span");
-  }
-}
-
-export async function limpiarInput(idinput, span, ifselect2, ifselect, ifinput, ifnumber) {
-  if ($(idinput).attr('type') === 'checkbox') {
-    return;
-  }
-
-  if (ifinput) {
-    $(idinput).val("");
-    $(idinput).removeClass('cumplido');
-    $(span).removeClass("cumplido_span");
-  }
-
-
-  if (ifselect2) {
-    const select2Container = $(idinput).next('.select2-container');
-    select2Container.removeClass('cumplido');
-    $(span).removeClass('cumplido_span');
-    $(idinput).find('option').not(':first').remove();
-    $(idinput).val("");
-  }
-
-  if (ifselect) {
-    let select2Container = $(idinput).next('.select2-container');
-    select2Container.removeClass('cumplido');
-    $(idinput).val('').trigger('change');
-    $(span).removeClass("error_span");
-    $(span).removeClass("cumplido_span");
-  }
-
-  if (ifnumber) {
-    $(idinput).val('0');
-  }
 }
 
 // Funcion para colocar las clases cumplido en los input y span 
@@ -599,65 +530,8 @@ export async function mesesDias(input, span_mes, inputdia, span_dia) {
   });
 }
 
-// validar inactividad de los pagina
-export async function configurarInactividad(selector, tiempoInactividad) {
-  let timeoutId;
-  const elemento = $(selector);
-
-  function iniciarTemporizador() {
-    clearTimeout(timeoutId);
-    timeoutId = setTimeout(function () {
-      elemento.hide();
-    }, tiempoInactividad);
-  }
-
-  elemento.on("mousemove keydown click", function () {
-    iniciarTemporizador();
-    if (elemento.is(":hidden")) {
-      elemento.show();
-    }
-  });
-
-  // Inicializar el temporizador al cargar la página
-  iniciarTemporizador();
-}
-
-// fechas 
-export function fechasJQueyDataPikerPresente(input) {
-  fetch('./src/ajax/administrador.php?modulo_datos=HLServidor')
-    .then(response => response.json()) // Cambia response.text() por response.json()
-    .then(data => {
-      $(input).datepicker({
-        closeText: 'Cerrar',
-        prevText: '< Ant',
-        nextText: 'Sig >',
-        currentText: 'Hoy',
-        monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
-        monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
-        dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
-        dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mié', 'Juv', 'Vie', 'Sáb'],
-        dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sá'],
-        weekHeader: 'Sm',
-        dateFormat: "dd-mm-yy",
-        showWeek: true,
-        firstDay: 1,
-        changeMonth: true,
-        changeYear: true,
-        showAnim: "fold",// Muestra el número de la semana
-        isRTL: false,
-        showMonthAfterYear: false,
-        yearSuffix: '',
-        maxDate: data.fecha_formateada_esp, // Establece la fecha máxima como hoy
-        regional: "es"
-      });
-    })
-    .catch(error => {
-      console.error('Error al obtener la hora del servidor:', error);
-    });
-}
-
 // llenar datos mediante un select
-export async function llenarSelect(data, selectId) {
+export async function llenarSelect(data, selectId, placeholderText) {
   const select = document.getElementById(selectId);
   // Asegúrate de que el ID del select sea correcto
   if (!select) {
@@ -665,11 +539,26 @@ export async function llenarSelect(data, selectId) {
     return;
   }
 
+  // Crear un fragmento de documento para minimizar las manipulaciones del DOM
+  const fragment = document.createDocumentFragment();
+
+  // Añadir la opción con valor vacío y el texto de placeholder
+  const placeholderOption = document.createElement('option');
+  placeholderOption.value = '';
+  placeholderOption.text = placeholderText;
+  fragment.appendChild(placeholderOption);
+
   data.forEach(item => {
     const option = document.createElement('option');
     option.value = item.id;
     option.text = item.value;
-    select.appendChild(option);
+    fragment.appendChild(option);
   });
+
+  // Vaciar el select y agregar las nuevas opciones
+  select.innerHTML = '';
+  select.appendChild(fragment);
 }
+
+
 

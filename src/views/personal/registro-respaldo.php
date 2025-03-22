@@ -371,7 +371,7 @@ use App\Atlas\config\App;
                                 <i class="fa-solid fa-plus me-2"></i>
                                 Aceptar
                             </button>
-                            <button type="button" id="limpiar" name="submit" class="btn btn-warning" style="color: white;">
+                            <button type="button" id="limpiar" class="btn btn-warning" style="color: white;">
                                 <i class="fa-solid fa-rotate-right me-2"></i>Limpiar
                             </button>
                             <button type="button" id="mostrar" name="mostrar" class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#modalimg">

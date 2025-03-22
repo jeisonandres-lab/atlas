@@ -311,14 +311,25 @@ export function abreviarNombre(nombreCompleto) {
 
 // Función para verificar si todos los inputs y selects cumplen con las clases requeridas
 export function todosCumplidos(formulario) {
-    const elementosCumplidos = $(formulario).find('input, select').filter('.cumplido, .cumplidoNormal').not('.ignore-validation');
-    const totalElementos = $(formulario).find('input, select').not('.ignore-validation').length;
-    return elementosCumplidos.length === totalElementos;
+    const elementos = formulario.querySelectorAll('input, select');
+    const noCumplidos = Array.from(elementos).filter(el => 
+        !el.classList.contains('cumplido') && 
+        !el.classList.contains('cumplidoNormal') && 
+        !el.classList.contains('ignore-validation')
+    );
+
+    if (noCumplidos.length > 0) {
+        // console.log('Elementos que faltan:', noCumplidos);
+    }
+
+    return noCumplidos.length === 0;
 }
 
 // Función para habilitar o deshabilitar el botón
 export function habilitarBoton(formulario, boton) {
-    boton.prop('disabled', !todosCumplidos(formulario));
+    const todosCumplen = todosCumplidos(formulario);
+    console.log('Todos cumplen:', todosCumplen);
+    $(boton).prop('disabled', !todosCumplen);
 }
 
 // Función de debounce para limitar la frecuencia de ejecución
@@ -332,16 +343,22 @@ export function debounce(func, wait) {
 
 // Crear una instancia de MutationObserver y observar cambios en un formulario específico
 export function observarFormulario(formulario, boton) {
-    const observer = new MutationObserver(debounce((mutationsList, observer) => {
+    const observer = new MutationObserver(mutationsList => {
+        let shouldValidate = false;
         for (const mutation of mutationsList) {
             if (mutation.type === 'childList' || mutation.type === 'attributes') {
-                habilitarBoton(formulario, boton);
+                shouldValidate = true;
+                // console.log('Cambio detectado:', mutation);
+                break;
             }
         }
-    }, 300)); // Ajusta el tiempo de espera según sea necesario
+        if (shouldValidate) {
+            habilitarBoton(formulario, boton);
+        }
+    });
 
-    // Configurar el observer para observar cambios en los hijos y atributos del formulario
-    const config = { childList: true, attributes: true, subtree: true };
+    // Configurar el observer para observar cambios en los hijos y atributos del formulario, excluyendo el botón
+    const config = { childList: true, attributes: true, subtree: true, attributeFilter: ['class', 'style'] };
 
     // Comenzar a observar el formulario
     observer.observe(formulario, config);

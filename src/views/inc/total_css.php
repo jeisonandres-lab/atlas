@@ -17,11 +17,10 @@
 <link rel="stylesheet" href="<?php echo App::URL_LIBRARY."select2bts/select2-bootstrap-5-theme.rtl.min.css"?>" />
 
 
-<link rel="stylesheet" href="<?php echo App::URL_LIBRARY."animate/animate.min.css"?>" />
 <link rel="stylesheet" href="<?php echo App::URL_CSS."subMenu.css"?>" />
 <link rel="stylesheet" href="<?php echo App::URL_CSS."cssUtils/inputs.css"?>" />
 <!-- MULTI FORMULARIO -->
-<link rel="stylesheet" href="<?php echo App::URL_LIBRARY."multiFrom/css/form-elements.css"?>"/>
+<!-- <link rel="stylesheet" href="<?php echo App::URL_LIBRARY."multiFrom/css/form-elements.css"?>"/> -->
 <link rel="stylesheet" href="<?php echo App::URL_LIBRARY."multiFrom/css/style.css"?>"/>
 
 <link rel="stylesheet" href="<?php echo App::URL_CSS . "cssUtils/buttons.css"; ?>">

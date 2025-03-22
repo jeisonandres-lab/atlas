@@ -171,6 +171,66 @@ export function setVariableVivienda(id, name) {
     `;
 }
 
+// VARIABLE DE NUMERO DE VIVIENDA
+export function setVariableNumVivienda(id, name) {
+    return `
+        <div class="col-sm-6 col-md-6 mb-2" id="contenNVivienda">
+            <div class="form-group">
+                <label for="${id}">N.Vivienda</label>
+                <div class="input-group">
+                    <span class="input-group-text span_numeroVivienda"><i class="icons fa-regular fa-input-numeric"></i></span>
+                    <input type="number" class="form-control" id="${id}" name="${name}" placeholder="Numero Vivienda">
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+// VARIBLE DE CONTENEDOR DE PISO DE DEPARTAMENTO
+export function setContenedorPiso(id, name) {
+    return `
+        <div class="col-sm-6 col-md-6 mb-2" id="contenPiso">
+            <div class="form-group">
+                <label for="${id}">N.Piso</label>
+                <div class="input-group">
+                    <span class="input-group-text span_piso"><i class="icons fa-regular fa-input-numeric"></i></span>
+                    <input type="number" class="form-control" id="${id}" name="${name}" placeholder="Numero de piso" required>
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+// VARIABLE DE DOMBRE DE DEPARTAMENTO
+export function setContenedorNombreDepa(id, name) {
+    return `
+        <div class="col-sm-6 col-md-6 mb-2" id="contenNombreDepa">
+            <div class="form-group">
+                <label  for="${id}">Nombre de la urbanización</label>
+                <div class="input-group">
+                    <span class="input-group-text span_urbanizacion"><i class="icons fa-regular fa-tree-city"></i></span>
+                    <input type="text" class="form-control" id="${id}" name="${name}" placeholder="Nombre de la urbanizacion" required>
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+// VARAIBLE DE NUMERO DE DEPARTAMENTO
+export function setContenedorNumDepa(id, name) {
+    return `
+        <div class="col-sm-6 col-md-6 mb-2" id="contenNumDepa">
+                <div class="form-group">
+                    <label for="${id}">Numero del departamento</label>
+                    <div class="input-group">
+                        <span class="input-group-text span_numeroDepa"><i class="icons fa-regular fa-input-numeric"></i></span>
+                        <input type="text" class="form-control" id="${id}" name="${name}" placeholder="Numero del departamento" required>
+                    </div>
+                </div>
+            </div>
+    `;
+}
+
 // VARIABLE DE NIVEL ACADEMICO 
 export function setVariableAcademico(id, name) {
     return `
@@ -273,5 +333,4 @@ export function setVariableDepartamento(id, name) {
 }
 
 export function setVariableContrasena(id, name) {
-    
 }

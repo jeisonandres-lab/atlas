@@ -83,6 +83,7 @@ const ESTADO_CIVIL = [
     { valor: "Casado", nombre: "Casado" },
     { valor: "Viudo", nombre: "Viudo" },
     { valor: "Divorciado", nombre: "Divorciado" },
+    { valor: "EstadoDerecho", nombre: "Estado de derecho" },
 ];
 
 // exportar la funcion de parentesco 

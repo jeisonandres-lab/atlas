@@ -469,6 +469,7 @@ ul {
 .flatpickr-months .flatpickr-month {
   background: #1929bb !important;
 }
+
 .flatpickr-weekdays {
   background: #1929bb !important;
 }
@@ -477,10 +478,12 @@ ul {
   background: #1929bb !important;
 
 }
-span.flatpickr-weekday {
+
+.flatpickr-weekdays .flatpickr-weekdaycontainer span.flatpickr-weekday {
   background: #1929bb !important;
-  color: white;
+  color: white !important;
 }
+
 .flatpickr-day.today {
   border-color: #1929bb;
 }
@@ -489,6 +492,6 @@ span.flatpickr-weekday {
   background: #1929bb !important;
   -webkit-box-shadow: none;
   box-shadow: none;
-  color: #fff;
+  color: #fff !important;
   border-color: #1929bb;
 }
