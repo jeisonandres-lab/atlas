@@ -12,6 +12,7 @@ use App\Atlas\controller\departamentoController;
 use App\Atlas\controller\estatusController;
 use App\Atlas\controller\notificacionController;
 use App\Atlas\controller\ubicacionController;
+use App\Atlas\config\peticiones;
 
 $conexion = new conexion();
 $dependencias = new dependenciasController();
@@ -21,57 +22,65 @@ $departamento = new departamentoController();
 $personal = new personalController(true);
 $notificacion = new notificacionController();
 $ubicacion = new ubicacionController();
+$peticionHandler = new peticiones();
 
-// DATOS PARA REGISTRAR DATOS PERSONAL
-$primerNombre = isset($_POST['primerNombre']) ? $conexion->limpiarCadena($_POST['primerNombre']) : "";
-$segundoNombre = isset($_POST['segundoNombre']) ? $conexion->limpiarCadena($_POST['segundoNombre']) : "";
-$primerApellido = isset($_POST['primerApellido']) ? $conexion->limpiarCadena($_POST['primerApellido']) : "";
-$segundoApellido = isset($_POST['segundoApellido']) ? $conexion->limpiarCadena($_POST['segundoApellido']) : "";
-$parentesco = isset($_POST['parentesco']) ? $conexion->limpiarCadena($_POST['parentesco']) : "";
-$cedula = isset($_POST['cedula']) ? $conexion->limpiarCadena($_POST['cedula']) : "";
-$cedulaEmpleado = isset($_POST['cedulaEmpleado']) ? $conexion->limpiarCadena($_POST['cedulaEmpleado']) : "";
-$civil = isset($_POST['civil']) ? $conexion->limpiarCadena($_POST['civil']) : "";
-$correo = isset($_POST['correo']) ? $conexion->limpiarCadena($_POST['correo']) : "";
-$ano = isset($_POST['ano']) ? $conexion->limpiarCadena($_POST['ano']) : "";
-$mes = isset($_POST['meses']) ? $_POST['meses'] : "";
-$dia = isset($_POST['dia']) ? $conexion->limpiarCadena($_POST['dia']) : "";
-$edad = isset($_POST['edad']) ? $conexion->limpiarCadena($_POST['edad']) : "";
-$sexo = isset($_POST['sexo']) ? $conexion->limpiarCadena($_POST['sexo']) : "";
-$discapacidad = isset($_POST['tpDiscapacidad']) ? $conexion->limpiarCadena($_POST['tpDiscapacidad']) : "";
-$nivelAcademico = isset($_POST['nivelAcademico']) ? $conexion->limpiarCadena($_POST['nivelAcademico']) : "";
+// variables estraidas
+$variables = $peticionHandler->obtenerVariables();
+extract($variables);
+// // DATOS PARA REGISTRAR DATOS PERSONAL
+// $primerNombre = isset($_POST['primerNombre']) ? $conexion->limpiarCadena($_POST['primerNombre']) : "";
+// $segundoNombre = isset($_POST['segundoNombre']) ? $conexion->limpiarCadena($_POST['segundoNombre']) : "";
+// $primerApellido = isset($_POST['primerApellido']) ? $conexion->limpiarCadena($_POST['primerApellido']) : "";
+// $segundoApellido = isset($_POST['segundoApellido']) ? $conexion->limpiarCadena($_POST['segundoApellido']) : "";
+// $parentesco = isset($_POST['parentesco']) ? $conexion->limpiarCadena($_POST['parentesco']) : "";
+// $cedula = isset($_POST['cedula']) ? $conexion->limpiarCadena($_POST['cedula']) : "";
+// $cedulaEmpleado = isset($_POST['cedulaEmpleado']) ? $conexion->limpiarCadena($_POST['cedulaEmpleado']) : "";
+// $civil = isset($_POST['civil']) ? $conexion->limpiarCadena($_POST['civil']) : "";
+// $correo = isset($_POST['correo']) ? $conexion->limpiarCadena($_POST['correo']) : "";
+// $ano = isset($_POST['ano']) ? $conexion->limpiarCadena($_POST['ano']) : "";
+// $mes = isset($_POST['meses']) ? $_POST['meses'] : "";
+// $dia = isset($_POST['dia']) ? $conexion->limpiarCadena($_POST['dia']) : "";
+// $edad = isset($_POST['edad']) ? $conexion->limpiarCadena($_POST['edad']) : "";
+// $sexo = isset($_POST['sexo']) ? $conexion->limpiarCadena($_POST['sexo']) : "";
+// $discapacidad = isset($_POST['tpDiscapacidad']) ? $conexion->limpiarCadena($_POST['tpDiscapacidad']) : "";
+// $nivelAcademico = isset($_POST['nivelAcademico']) ? $conexion->limpiarCadena($_POST['nivelAcademico']) : "";
 
-// DATOS PARA REGISTRAR EMPELADO
-$idPersonal = isset($_POST['id']) ? $conexion->limpiarCadena($_POST['id']) : "";
-$idPersonal2 = isset($_POST['idPersonal']) ? $conexion->limpiarCadena($_POST['idPersonal']) : "";
-$idEmpleado = isset($_POST['idEmpleado']) ? $conexion->limpiarCadena($_POST['idEmpleado']) : "";
-$fechaING = isset($_POST['fechaing']) ? $conexion->limpiarCadena($_POST['fechaing']) : "";
+// // DATOS PARA REGISTRAR EMPELADO
+// $idPersonal = isset($_POST['id']) ? $conexion->limpiarCadena($_POST['id']) : "";
+// $idPersonal2 = isset($_POST['idPersonal']) ? $conexion->limpiarCadena($_POST['idPersonal']) : "";
+// $idEmpleado = isset($_POST['idEmpleado']) ? $conexion->limpiarCadena($_POST['idEmpleado']) : "";
+// $fechaING = isset($_POST['fechaing']) ? $conexion->limpiarCadena($_POST['fechaing']) : "";
 
 
-$idfamiliar = isset($_POST['idfamiliar']) ? $conexion->limpiarCadena($_POST['idfamiliar']) : "";
-$telefono = isset($_POST['telefono']) ? $conexion->limpiarCadena($_POST['telefono']) : "";
-$linea = isset($_POST['linea']) ? $conexion->limpiarCadena($_POST['linea']) : "";
-$idEstatus = isset($_POST['estatus']) ? $conexion->limpiarCadena($_POST['estatus']) : "";
-$idCargo = isset($_POST['cargo']) ? $conexion->limpiarCadena($_POST['cargo']) : "";
-$idDepartamento = isset($_POST['departamento']) ? $conexion->limpiarCadena($_POST['departamento']) : "";
-$idDependencia = isset($_POST['dependencia']) ? $conexion->limpiarCadena($_POST['dependencia']) : "";
-$numeroCarnet = isset($_POST['carnet']) ? $conexion->limpiarCadena($_POST['carnet']) : "";
-$tomo = isset($_POST['tomo']) ? $conexion->limpiarCadena($_POST['tomo']) : "";
-$folio = isset($_POST['folio']) ? $conexion->limpiarCadena($_POST['folio']) : "";
+// $idfamiliar = isset($_POST['idfamiliar']) ? $conexion->limpiarCadena($_POST['idfamiliar']) : "";
+// $telefono = isset($_POST['telefono']) ? $conexion->limpiarCadena($_POST['telefono']) : "";
+// $linea = isset($_POST['linea']) ? $conexion->limpiarCadena($_POST['linea']) : "";
+// $idEstatus = isset($_POST['estatus']) ? $conexion->limpiarCadena($_POST['estatus']) : "";
+// $idCargo = isset($_POST['cargo']) ? $conexion->limpiarCadena($_POST['cargo']) : "";
+// $idDepartamento = isset($_POST['departamento']) ? $conexion->limpiarCadena($_POST['departamento']) : "";
+// $idDependencia = isset($_POST['dependencia']) ? $conexion->limpiarCadena($_POST['dependencia']) : "";
+// $numeroCarnet = isset($_POST['carnet']) ? $conexion->limpiarCadena($_POST['carnet']) : "";
+// $tomo = isset($_POST['tomo']) ? $conexion->limpiarCadena($_POST['tomo']) : "";
+// $folio = isset($_POST['folio']) ? $conexion->limpiarCadena($_POST['folio']) : "";
 
-//ubicaciones
-$idestado = isset($_POST['estado']) ? $conexion->limpiarCadena($_POST['estado']) : "";
-$idestado2 = isset($_POST['idestado']) ? $conexion->limpiarCadena($_POST['idestado']) : "";
-$idMunicipio = isset($_POST['municipio']) ? $conexion->limpiarCadena($_POST['municipio']) : "";
-$idMunicipio2 = isset($_POST['idmunicipio']) ? $conexion->limpiarCadena($_POST['idmunicipio']) : "";
-$idParroquia = isset($_POST['parroquia']) ? $conexion->limpiarCadena($_POST['parroquia']) : "";
-$vivienda = isset($_POST['vivienda']) ? $conexion->limpiarCadena($_POST['vivienda']) : "";
-$calle = isset($_POST['calle']) ? $conexion->limpiarCadena($_POST['calle']) : "";
-$numeroVivienda = isset($_POST['numeroVivienda']) ? $conexion->limpiarCadena($_POST['numeroVivienda']) : "";
+// //ubicaciones
+// $idestado = isset($_POST['estado']) ? $conexion->limpiarCadena($_POST['estado']) : "";
+// $idestado2 = isset($_POST['idestado']) ? $conexion->limpiarCadena($_POST['idestado']) : "";
+// $idMunicipio = isset($_POST['municipio']) ? $conexion->limpiarCadena($_POST['municipio']) : "";
+// $idMunicipio2 = isset($_POST['idmunicipio']) ? $conexion->limpiarCadena($_POST['idmunicipio']) : "";
+// $idParroquia = isset($_POST['parroquia']) ? $conexion->limpiarCadena($_POST['parroquia']) : "";
+// $vivienda = isset($_POST['vivienda']) ? $conexion->limpiarCadena($_POST['vivienda']) : "";
+// $calle = isset($_POST['calle']) ? $conexion->limpiarCadena($_POST['calle']) : "";
+// $numeroVivienda = isset($_POST['numeroVivienda']) ? $conexion->limpiarCadena($_POST['numeroVivienda']) : "";
 
-$pisoUrba= isset($_POST['piso']) ? $conexion->limpiarCadena($_POST['piso']) : "";
+// $pisoUrba= isset($_POST['piso']) ? $conexion->limpiarCadena($_POST['piso']) : "";
+// $nombreUrba = isset($_POST['urbanizacion']) ? $conexion->limpiarCadena($_POST['urbanizacion']) : "";
+// $numeroDepa = isset($_POST['numeroDepa']) ? $conexion->limpiarCadena($_POST['numeroDepa']) : "";
+
+
+$FamiliarInces= isset($_POST['FamiliarInces']) ? $conexion->limpiarCadena($_POST['FamiliarInces']) : "";
 $nombreUrba = isset($_POST['urbanizacion']) ? $conexion->limpiarCadena($_POST['urbanizacion']) : "";
 $numeroDepa = isset($_POST['numeroDepa']) ? $conexion->limpiarCadena($_POST['numeroDepa']) : "";
-
 switch ($_GET['modulo_personal']) {
     case 'registrar':
         $telefono = $linea . "-" . $telefono;
@@ -103,8 +112,32 @@ switch ($_GET['modulo_personal']) {
             $nombreUrba,
             $numeroDepa,
             $fechaING,
-            $edad
+            $edad,
+
+            $discapacidad,
+            $FamiliarInces,
+            $primerNombreFamiliar,
+            $primerApellidoFamiliar,
+            $cedulaFamiliar,
         );
+        // $fileInputName5 = 'docArchivoDis';
+        // if ($fileInputName5 == "") {
+        //     $fileInputName5 = null;
+        // }
+        // $uploadDir5 = ".globas/pedro/";
+        // $nombreArchivo5 = isset($_FILES[$fileInputName5]) ? $_FILES[$fileInputName5]['name'] : 'sin archivo';
+        // $archivosASubir = [];
+        // if ($nombreArchivo5) {
+        //     $archivosASubir[] = ['input' => $fileInputName5, 'dir' => $uploadDir5, 'nombreArchivo' => 'Acta De Discapacidad']; // Asegúrate de definir $uploadDir2
+        // }
+        // $data_json = [
+        //     'exito' => true, // Inicializamos a false por defecto
+        //     'mensaje' => $fileInputName5,
+        //     'resultado' =>  $nombreArchivo5,
+        //     'otro' => $archivosASubir,
+        // ];
+        // header('Content-Type: application/json');
+        // echo json_encode($data_json);
         break;
     case 'obtenerDependencias':
         $dependencias->obtenerdependeciasGeneral();

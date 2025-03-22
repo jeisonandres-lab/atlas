@@ -332,5 +332,81 @@ export function setVariableDepartamento(id, name) {
     `;
 }
 
+// CEDULA 
+export function setVariableCedulaFamiliar(id, name) {
+    return `
+      <div class="col-sm-12 col-mb-6 col-xl-6" id="contentCedulaFamiliar">
+        <div class="form-group mb-3">
+          <label for="${id}">Cédula</label>
+          <div class="input-group">
+            <span class="input-group-text span_cedulaFamiliar"><i class="icons fa-regular fa-address-card"></i></span>
+            <input type="text" class="form-control busquedaCedula" id="${id}" name="${name}" placeholder="Cédula de Identidad">
+          </div>
+        </div>
+      </div>
+    `;
+}
+
+// PRIMER NOMBRE 
+export function setVariableNombreFamiliar(id, name) {
+    return `
+      <div class="col-sm-12 col-mb-6 col-xl-6" id="contentNombreFamiliar">
+        <div class="form-group mb-3">
+          <label for="${id}">Nombre</label>
+          <div class="input-group">
+            <span class="input-group-text span_nombreFamiliar"><i class="icons fa-regular fa-user"></i></span>
+            <input type="text" class="form-control" id="${id}" name="${name}" placeholder="Primer Nombre">
+          </div>
+        </div>
+      </div>
+    `;
+}
+
+// PRIMER APELLIDO
+export function setVariableApellidoFamiliar(id, name) {
+    return `
+      <div class="col-sm-12 col-mb-6 col-xl-6" id="contentApellidoFamiliar">
+        <div class="form-group mb-3">
+          <label for="${id}">Apellido</label>
+          <div class="input-group">
+            <span class="input-group-text span_apellidoFamiliar"><i class="icons fa-regular fa-user"></i></span>
+            <input type="text" class="form-control " id="${id}" name="${name}" placeholder="Primer Apellido">
+          </div>
+        </div>
+      </div>
+    `;
+}
+
+// CARGAR DOCUMENTO DE ESTADO DE DERECHO
+export function setVariableDocumentoFamiliar(id, name, span) {
+    return `
+      <div class="col-sm-12 col-mb-6 col-xl-6" id="contentdocumnetoFamiliar">
+        <div class="form-group mb-3">
+          <label for="${id}">Documento</label>
+          <div class="input-group">
+            <span class="input-group-text ${span}"><i class="icons fa-regular fa-file-zipper"></i></span>
+            <input type="file" name="${name}" class="form-control " id="${id}" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+          </div>
+        </div>
+      </div>
+    `;
+}
+
+export function setVariableCheckboxInces(id, labelText, content) {
+    return `
+      <div class="mt-3 contenbtn" id=${content}>
+        <div class="form-check form-check-inline mb-3 p-0" >
+          <div class="checkbox-wrapper-7 d-flex align-items-center">
+            <input class="form-check-input tgl tgl-ios ignore-validation" id="${id}" type="checkbox" value="" />
+            <label class="tgl-btn pdf" for="${id}"></label>
+            <span class="ms-2">${labelText}</span>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+//variable de contrasena
 export function setVariableContrasena(id, name) {
 }
+
+

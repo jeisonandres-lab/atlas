@@ -68,7 +68,7 @@ class fileUploaderController extends Conexion
      * @param string $extension Extensión del archivo.
      * @return array Resultado de la operación de subida.
      */
-    public function moverArchivo($file, $destination, $extension, $id_empleado, $fileInfo, $id_Nino)
+    public function moverArchivo($file, $destination, $extension, $id_empleado, $fileInfo, $id_Nino,$nombreDoc)
     {
         $tamano = $this->formatSizeUnits($file['size']); // Añadir el tamaño del archivo con formato legible
         $codigo = $this->generarCodigoAleatorio(6);
@@ -97,6 +97,11 @@ class fileUploaderController extends Conexion
                 "campo_nombre" => "tipoDoc",
                 "campo_marcador" => ":tipoDoc",
                 "campo_valor" => $extension
+            ],
+            [
+                "campo_nombre" => "nombreDoc",
+                "campo_marcador" => ":nombreDoc",
+                "campo_valor" => $nombreDoc
             ],
             [
                 "campo_nombre" => "fecha",
@@ -150,7 +155,7 @@ class fileUploaderController extends Conexion
      * @param string|null $uploadDir Directorio de subida (opcional).
      * @return array Resultado de la operación de subida.
      */
-    public function subirArchivo($file, $cedula, $uploadDir = null, $id_empleado, $id_Nino)
+    public function subirArchivo($file, $cedula, $uploadDir = null, $id_empleado, $id_Nino, $nombreDoc)
     {
         if (!isset($file)) {
             return ['error' => true, 'mensaje' => 'No se ha subido ningún archivo'];
@@ -183,7 +188,7 @@ class fileUploaderController extends Conexion
         // }
 
         // Mover el archivo y regresar el resultado
-        return $this->moverArchivo($file, $destination, $extension, $id_empleado, $fileInfo, $id_Nino);
+        return $this->moverArchivo($file, $destination, $extension, $id_empleado, $fileInfo, $id_Nino, $nombreDoc);
     }
 
     private function formatSizeUnits($bytes)

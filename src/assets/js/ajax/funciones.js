@@ -1,4 +1,6 @@
-import { alertaNormalmix } from "./alerts";
+import { alertaNormalmix } from "./alerts.js";
+import { enviarFormulario } from "./formularioAjax.js";
+import { clasesInputsError } from "./inputs.js";
 
 //funcion para calcular la edad por medio del año 
 export function calcularEdad(fechaNacimiento) {
@@ -38,11 +40,14 @@ export async function configurarInactividad(selector, tiempoInactividad) {
 export async function carculasDias(meses, ano, dia, cumplidospanMeses) {
   $(document).on("change", meses, function () {
     const year = $(ano).val();
-    const month = $(this).val();
-
-    if (!month) {
-      $(this).toggleClass("cumplido error_input");
-      $(cumplidospanMeses).toggleClass("cumplido_span error_span");
+    const month = $(meses).val();
+    
+    // validar el contendio del año
+    if (month == "") {
+      $(meses).addClass("error_input");
+      $(cumplidospanMeses).addClass("error_span");
+      $(meses).removeClass("cumplido");
+      $(cumplidospanMeses).removeClass("cumplido_span");
     } else {
       const daysInMonth = new Date(year, month, 0).getDate();
       const $dia = $(dia).empty().append('<option value="">Seleccione un día</option>');
@@ -51,8 +56,10 @@ export async function carculasDias(meses, ano, dia, cumplidospanMeses) {
         const diaFormateado = i.toString().padStart(2, "0");
         $dia.append(`<option value="${diaFormateado}">${diaFormateado}</option>`);
       }
-      $(this).toggleClass("error_input cumplido");
-      $(cumplidospanMeses).toggleClass("error_span cumplido_span");
+      $(meses).removeClass("error_input");
+      $(meses).addClass("cumplido");
+      $(cumplidospanMeses).removeClass("error_span");
+      $(cumplidospanMeses).addClass("cumplido_span");
     }
   });
 }
@@ -114,5 +121,26 @@ export function limpiarFormulario(formulario) {
       default:
         break;
     }
+  });
+}
+
+export async function cedulaExisteEmpleado(input, cumplido_span) {
+  $(document).on("input", input, async function () {
+    if ($(this).hasClass("busquedaCedula")) {
+      async function callbackExito(parsedData) {
+        if (parsedData.exito == true) {
+          clasesInputsError(input, cumplido_span);
+          await alertaNormalmix("Esta cédula le pertenece a un empleado inces", 4000, "error", "top-end");
+        }
+      }
+
+      if ($(this).val().length >= 7) {
+        const datoCedula = $(this).val();
+        const formData = new FormData(); // Crea un nuevo objeto FormData
+        formData.append('cedulaEmpleado', datoCedula);
+        await enviarFormulario("src/ajax/registroPersonal.php?modulo_personal=obtenerDatosPersonal", formData, callbackExito, true);
+      }
+    }
+
   });
 }

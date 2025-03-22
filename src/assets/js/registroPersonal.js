@@ -38,11 +38,37 @@ import {
   setCargarTipoVivienda
 } from "./ajax/variablesArray.js";
 
-import { calcularEdad, carculasDias, limpiarFormulario } from "./ajax/funciones.js";
-import { buscarMunicipioPorEstado, buscarParroquiaPorMunicipio } from "./ajax/peticiones.js";
-import { setContenedorNombreDepa, setContenedorNumDepa, setContenedorPiso, setVariableDiscapacidad, setVariableNumVivienda } from "./ajax/variablesContenido.js";
-import { configurarFlatpickrSinFinesDeSemana } from "./ajax/inputCalendar.js";
-import { formulariomultiple } from "./ajax/multiForm.js";
+import {
+  calcularEdad,
+  carculasDias,
+  cedulaExisteEmpleado,
+  limpiarFormulario
+} from "./ajax/funciones.js";
+
+import {
+  buscarMunicipioPorEstado,
+  buscarParroquiaPorMunicipio
+} from "./ajax/peticiones.js";
+
+import {
+  setContenedorNombreDepa,
+  setContenedorNumDepa,
+  setContenedorPiso,
+  setVariableApellidoFamiliar,
+  setVariableCedulaFamiliar,
+  setVariableCheckboxInces,
+  setVariableDocumentoFamiliar,
+  setVariableNombreFamiliar,
+  setVariableNumVivienda
+} from "./ajax/variablesContenido.js";
+
+import {
+  configurarFlatpickrSinFinesDeSemana
+} from "./ajax/inputCalendar.js";
+
+import {
+  formulariomultiple
+} from "./ajax/multiForm.js";
 // jQuery
 $(function () {
   $(".formulario_empleado").hide();
@@ -88,6 +114,7 @@ $(function () {
   incluirSelec2("#civil");
   incluirSelec2("#sexo");
   incluirSelec2("#vivienda");
+  incluirSelec2("#academico");
 
   validarSelectoresSelec2("#dependencia", ".span_dependencia");
   validarSelectoresSelec2("#estatus", ".span_estatus");
@@ -116,10 +143,22 @@ $(function () {
   carculasDias("#meses", "#ano", "#dia", ".span_mes"); // funcion de calcular dias de los meses
   $("#meses").trigger("input"); // ejecucion de calcular los meses
 
+
+  // modal de estado civil
+
   //cargar calendario 
   configurarFlatpickrSinFinesDeSemana("#fechaing3");
-
-  formulariomultiple('.f1 .btn-next');
+  let contenidoAlerta = `
+              <div class="d-flex alert alert-warning alert-dismissible m-0 contentAlerta" role="alert" >
+                <div class="d-flex align-items-center alert-icon me-3">
+                  <i class="fas fa-exclamation-triangle"></i>
+                </div>
+                <div class="alert-text">
+                  <strong>Debes de llenar los campos </strong> con los datos necesarios, <strong class="text-success">cada campo debe de estar de color verde</strong>, si alguno esta de<strong class="text-danger"> color rojo</strong> no podra pasar a la otra página.
+                </div>
+              </div>
+            `;
+  formulariomultiple('.f1 .btn-next', "#alert", contenidoAlerta);
   //Función para realizar consultas y llenar selectores
   async function realizarConsultas() {
     const urls = [
@@ -156,19 +195,21 @@ $(function () {
   //formulario de registro de trabajadores 
   $(document).on("submit", "#formulario_registro", async function (e) {
     e.preventDefault();
-    const fechaIngreso = $("#fechaing").val().split("-").reverse().join("-");
+    const fechaIngreso = $("#fechaing3").val().split("-").reverse().join("-");
     const data = new FormData(this);
     data.append("fechaing", fechaIngreso);
+    if ($("#btnEDInces").prop('checked')) {
+      data.append("FamiliarInces", "si");
+    }
     const url = "src/ajax/registroPersonal.php?modulo_personal=registrar";
     $("#aceptar").prop("disabled", true);
     async function callbackExito(parsedData) {
-      $("#aceptar").prop("disabled", false);
-      const { error, mensaje, personalEncontrado } = parsedData;
-      if (personalEncontrado) {
-        $("#alerta").slideDown('slow', 'swing').delay(10000).slideUp();
+      if (parsedData.exito) {
+        $("#aceptar").prop("disabled", false);
+        await alertaNormalmix(parsedData.mensaje, 3000, "success", "top");
       } else {
-        await alertaNormalmix(mensaje, 4000, error ? "error" : "success", "top-end");
-        if (error) limpiarFormulario($("#formulario_registro"));
+        await alertaNormalmix(parsedData.mensaje, 4000, "error", "top-end");
+        // if (error) limpiarFormulario($("#formulario_registro"));
       }
     }
     await enviarFormulario(url, data, callbackExito, true);
@@ -277,21 +318,66 @@ $(function () {
     const dia = $("#dia").val();
     const mes = $("#meses").val();
     const ano = $("#ano").val();
+
+    if (!ano) {
+      alertaNormalmix("Seleccione un año.", 2000, "warning", "top");
+      return; // Detiene la ejecución si el año está vacío
+    }
+
+    if (!mes) {
+      alertaNormalmix("Seleccione un mes.", 2000, "warning", "top");
+      return; // Detiene la ejecución si el mes está vacío
+    }
+
+    if (!dia) {
+      alertaNormalmix("Seleccione un día.", 2000, "warning", "top");
+      return; // Detiene la ejecución si el día está vacío
+    }
+
+
     const fechaNacimiento = new Date(ano, mes - 1, dia);
-    let calcularEdad2 = calcularEdad(fechaNacimiento)
+    const calcularEdad2 = calcularEdad(fechaNacimiento);
     $("#edad").val(calcularEdad2);
     clasesInputs("#edad", ".span_edad");
+
+    // Validar la edad (si la fecha de nacimiento es válida)
+    if (!isNaN(fechaNacimiento.getTime())) {
+      if (calcularEdad2 >= 100) {
+        alertaNormalmix(`¡Wow! Tienes ${calcularEdad2} de edad, ¡felicitaciones! al empleado`, 4000, "info", "top");
+      }
+    }
   });
 
   // el evento de estado civil del modal
   $(document).on("change", "#civil", async function () {
+    const cedulaHTML = setVariableCedulaFamiliar("cedulaFamiliar", "cedulaFamiliar");
+    const nombreHTML = setVariableNombreFamiliar("nombreFamiliar", "primerNombreFamiliar");
+    const apellidoHTML = setVariableApellidoFamiliar("apellidoFamiliar", "primerApellidoFamiliar");
+    const documentoEstadoDerechoHTML = setVariableDocumentoFamiliar("docEstadoDerecho", "docEstadoDerechoArchivo", ".span_docEstadoDerecho");
+    const documentoCasadoHTML = setVariableDocumentoFamiliar("docCasado", "docCasadoArchivo", ".span_docCasado");
+    const checkboxHTML = setVariableCheckboxInces("btnEDInces", `Empleado <strong class="text-danger">INCES</strong>`, "contenchecbox")
+    $('#estadoDerecho').modal({
+      backdrop: 'static',
+      keyboard: true
+    });
+
     if ($(this).val() === "EstadoDerecho") {
-      $('#estadoDerecho').modal({
-        backdrop: 'static',
-        keyboard: true
-      });
       $('#estadoDerecho').modal('show');
+      $("#exampleModalLabel").text("Estado De Derecho");
+      $(".contendorEstadoDerecho").html(checkboxHTML + cedulaHTML + nombreHTML + apellidoHTML + documentoEstadoDerechoHTML);
+
+      file("#docEstadoDerecho", ".span_docEstadoDerecho");
     }
+    // if ($(this).val() === "Casado") {
+    //   $('#estadoDerecho').modal('show');
+    //   $("#exampleModalLabel").text("Casado");
+    //   $(".contendorEstadoDerecho").html(checkboxHTML + cedulaHTML + nombreHTML + apellidoHTML + documentoCasadoHTML);
+
+    //   file("#docCasado", ".span_docCasado");
+    // }
+    validarNumeros("#cedulaFamiliar", ".span_cedulaFamiliar");
+    validarNombre("#nombreFamiliar", ".span_nombreFamiliar");
+    validarNombre("#apellidoFamiliar", ".span_apellidoFamiliar");
   });
 
   // Maneja el clic en el botón "aceptarModalEstadoDerecho"
@@ -302,51 +388,58 @@ $(function () {
 
   // Maneja el clic en el botón "cerrarModalEstadoDerecho"
   $(document).on('click', '#cerrarModalEstadoDerecho', function () {
-    // Limpia los inputs y aplica las clases (misma lógica que "aceptar")
-    $('#cedulaFamiliar, #nombreFamiliar, #apellidoFamiliar, #docEstadoDerecho').val('').addClass('ignore-validation cumplidoNormal'); // Limpia y agrega clases
-    $('#cedulaFamiliar, #nombreFamiliar, #apellidoFamiliar, #docEstadoDerecho').val('').removeClass('cumplido'); // Limpia y agrega clases
-    $('.span_cedulaFamiliar, .span_nombreFamiliar, .span_apellidoFamiliar, .span_docEstadoDerecho').removeClass('cumplido_span');
-    $('#civil').val('');
-    $('#civil').val(null).trigger('change');
+    // // Limpia los inputs y aplica las clases (misma lógica que "aceptar")
+    // $('#cedulaFamiliar, #nombreFamiliar, #apellidoFamiliar, #docEstadoDerecho').val('').addClass('ignore-validation cumplidoNormal'); // Limpia y agrega clases
+    // $('#cedulaFamiliar, #nombreFamiliar, #apellidoFamiliar, #docEstadoDerecho').val('').removeClass('cumplido'); // Limpia y agrega clases
+    // $('.span_cedulaFamiliar, .span_nombreFamiliar, .span_apellidoFamiliar, .span_docEstadoDerecho').removeClass('cumplido_span');
+    // $('#civil').val('');
+    // $('#civil').val(null).trigger('change');
     $('#estadoDerecho').modal('hide'); // Oculta el modal
     $("#botonModalEstadoDerecho").slideUp(400);
-    if ($('#btnEDInces').hasClass('activadobutton')) {
-      // Si el botón tiene la clase "activado", quita las clases y limpia los inputs
-      $('#nombreFamiliar, #apellidoFamiliar').prop('disabled', false).removeClass('cumplido ignore-validation').val('');
-      $('#btnEDInces').removeClass('activadobutton');
-    }
   })
 
   // evento de escucha del evento modal abierto 
   $('#estadoDerecho').on('show.bs.modal', function (e) {
     // Remueve las clases cuando el modal se muestra
-    validarNumeros("#cedulaFamiliar", ".span_cedulaFamiliar");
-    validarNombre("#nombreFamiliar", ".span_nombreFamiliar");
-    validarNombre("#apellidoFamiliar", ".span_apellidoFamiliar");
     file("#docEstadoDerecho", ".span_docEstadoDerecho");
     $('#cedulaFamiliar, #nombreFamiliar, #apellidoFamiliar, #docEstadoDerecho').removeClass('ignore-validation cumplidoNormal');
   });
 
   // validar doble cedula
-  $(document).on('input', '#cedulaFamiliar, #cedula', function () {
-    if($(this).val() == $("#cedula").val()){
-      AlertSW2("error", "La cédula del familiar no puede ser la misma que la del trabajador", "top", 3000);
-      clasesInputsError("#cedulaFamiliar", ".span_cedulaFamiliar");
+  $(document).on('input', '#cedulaFamiliar', function () {
+    const cedulaFamiliarValue = $('#cedulaFamiliar').val();
+    const cedulaValue = $('#cedula').val();
+    if (cedulaFamiliarValue.length >= 7 && cedulaValue.length >= 7) {
+      if ($(this).val() == $("#cedula").val()) {
+        AlertSW2("error", "La cédula del familiar no puede ser la misma que la del trabajador", "top", 3000);
+        clasesInputsError("#cedulaFamiliar", ".span_cedulaFamiliar");
+      }
     }
   })
 
-  $('#btnEDInces').click(function() {
-    if ($(this).hasClass('activadobutton')) {
-      // Si el botón tiene la clase "activado", quita las clases y limpia los inputs
-      $('#nombreFamiliar, #apellidoFamiliar').prop('disabled', false).removeClass('cumplido ignore-validation').val('');
-      $(this).removeClass('activadobutton');
-    } else {
-      // Si el botón no tiene la clase "activado", aplica el comportamiento original
-      $(this).addClass('activadobutton');
+  // validar el evneto del boton de estado de derecho inces
+  $(document).on("change", '#btnEDInces', async function () {
+    $("#cedulaFamiliar").val("");
+
+    if ($(this).prop('checked')) {
+      console.log("activo")
+      $("#cedulaFamiliar").removeClass("busquedaCedula");
       $('#nombreFamiliar, #apellidoFamiliar').prop('disabled', true).val('').addClass('cumplido ignore-validation');
+
+    } else {
+      // Si el checkbox está marcado, habilita los inputs y agrega la clase busquedaCedula
+      $('#nombreFamiliar, #apellidoFamiliar').prop('disabled', false).removeClass('cumplido ignore-validation').val('');
+      $("#cedulaFamiliar").addClass("busquedaCedula");
+
     }
   });
 
+  // buscar empelado por medio de la dcedula del familiar por si ecxiste ya esa cedula como empleado
+  $(document).on("input", "#cedulaFamiliar", async function () {
+    if ($(this).hasClass("busquedaCedula")) {
+      await cedulaExisteEmpleado("#cedulaFamiliar", ".span_cedulaFamiliar");
+    }
+  });
   // Llamar a la función para realizar las consultas
   realizarConsultas();// realizar la cunsultas por promesas
   //cargar los datos de estaod y municipio

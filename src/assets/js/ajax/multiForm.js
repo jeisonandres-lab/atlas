@@ -1,6 +1,6 @@
 import { clasesInputs, clasesInputsError } from "./inputs.js";
 // next step
-export function formulariomultiple(datos){
+export function formulariomultiple(datos, alerta, contenido){
   $(document).on('click', datos, function () {
     var parent_fieldset = $(this).parents('fieldset');
     var next_step = true;
@@ -18,22 +18,13 @@ export function formulariomultiple(datos){
         if (!$(this).hasClass('ignore-validation')) {
           if (!$(this).hasClass('cumplido') && !$(this).hasClass('cumplidoNormal')) {
             clasesInputsError($(this));
-            $("#alert").empty();
-            $("#alert").html(`
-              <div class="d-flex alert alert-warning alert-dismissible m-0 contentAlerta" role="alert" >
-                <div class="d-flex align-items-center alert-icon me-3">
-                  <i class="fas fa-exclamation-triangle"></i>
-                </div>
-                <div class="alert-text">
-                  <strong>Debes de llenar los campos </strong> con los datos necesarios, <strong class="text-success">cada campo debe de estar de color verde</strong>, si alguno esta de<strong class="text-danger"> color rojo</strong> no podra pasar a la otra página.
-                </div>
-              </div>
-            `);
-            $("#alert").hide();
-            $("#alert").slideDown("slow");
+            $(alerta).empty();
+            $(alerta).html(contenido);
+            $(alerta).hide();
+            $(alerta).slideDown("slow");
 
             setTimeout(function () {
-              $("#alert").slideUp("slow");
+              $(alerta).slideUp("slow");
             }, 10000);
             next_step = false;
           } else {
@@ -66,37 +57,6 @@ export function formulariomultiple(datos){
     });
 
     // submit
-    $('.f1').on('submit', function (e) {
-      var formValidar = true;
-
-      $(this).find('input[type="text"], input[type="password"], textarea, select, input[type="number"]').each(function () {
-        if (!$(this).hasClass('ignore-validation')) {
-          if (!$(this).hasClass('cumplido') && !$(this).hasClass('cumplidoNormal')) {
-            e.preventDefault();
-            $(this).addClass('input-error');
-            formValidar = false;
-          } else {
-            $(this).removeClass('input-error');
-          }
-        }
-      });
-
-      $(this).find('select').each(function () {
-        if (!$(this).hasClass('ignore-validation')) {
-          if (!$(this).next('.select2').hasClass('cumplido') && !$(this).next('.select2').hasClass('cumplidoNormal')) {
-            e.preventDefault();
-            $(this).next('.select2').addClass('input-error');
-            formValidar = false;
-          } else {
-            $(this).next('.select2').removeClass('input-error');
-          }
-        }
-      });
-
-      if (!formValidar) {
-        e.preventDefault();
-      }
-    });
   });
 }
 

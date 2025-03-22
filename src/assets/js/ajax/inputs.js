@@ -404,7 +404,7 @@ export async function colocarMeses(input) {
     // Limpiar el select antes de agregar nuevas opciones
     $(input).empty();
 
-    $(input).append(`<option value="">Seleccione un mes</option>`);
+    // $(input).append(`<option value="">Seleccione un mes</option>`);
 
     ARRAYMESES.forEach(mes => {
       $(input).append(`<option value="${mes.valor}">${mes.nombre}</option>`);

@@ -11,9 +11,11 @@ use App\Atlas\config\App;
     <title>Registro | ATLAS</title>
     <!-- CSS DEL SISTEMA -->
     <?php require_once App::URL_INC . "total_css.php"; ?>
-    <link rel="stylesheet" href="<?php echo App::URL_CSS . "registroPersonal.css"; ?>">
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/material_blue.css">
+    <link rel="stylesheet" href="<?php echo App::URL_CSS . "registroPersonal.css"; ?>">
+    <link rel="stylesheet" href="<?php echo App::URL_CSS . "cssUtils/checkbox.css"; ?>">
 </head>
 
 <body class="layout-fixed sidebar-expand-lg bg-body-tertiary">
@@ -222,7 +224,7 @@ use App\Atlas\config\App;
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header bg-primary">
-                                                <h1 class="modal-title fs-5 text-white" id="exampleModalLabel">Estado de derecho</h1>
+                                                <h1 class="modal-title fs-5 text-white" id="exampleModalLabel">Modal Estado Civil</h1>
                                                 <button type="button" class="btn-close text-white" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
@@ -238,60 +240,8 @@ use App\Atlas\config\App;
 
                                                 <div class="container-fluid">
                                                     <div class="row contendorEstadoDerecho">
-                                                        <div class="col-sm-12 col-mb-12 col-xl-12 mt-3 mb-3">
-                                                            <button type="button" class="btn btn-primary btn-hover-azul" id="btnEDInces">Estado derecho inces</button>
-                                                        </div>
-                                                        <!-- CEDULA FAMILIAR -->
-                                                        <div class="col-sm-12 col-mb-6 col-xl-6">
-                                                            <div class="form-group mb-3">
-                                                                <label for="cedulaFamiliar">Cédula</label>
-                                                                <div class="input-group">
-                                                                    <span class="input-group-text span_cedulaFamiliar"><i class="icons fa-regular fa-address-card"></i></span>
-                                                                    <input type="text" class="form-control ignore-validation" id="cedulaFamiliar" name="cedulaFamiliar" placeholder="Cédula de Identidad">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-
-                                                        <!-- PRIMER NOMBRE DEL FAMILIAR -->
-                                                        <div class="col-sm-12 col-mb-6 col-xl-6">
-                                                            <div class="form-group mb-3">
-                                                                <label for="nombreFamiliar">Nombre</label>
-                                                                <div class="input-group">
-                                                                    <span class="input-group-text span_nombreFamiliar"><i class="icons fa-regular fa-user"></i></span>
-                                                                    <input type="text" class="form-control ignore-validation" id="nombreFamiliar" name="nombreFamiliar" placeholder="Primer Nombre">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-
-                                                        <!-- PRIMER APELLIDO -->
-                                                        <div class="col-sm-12 col-mb-6 col-xl-6">
-                                                            <div class="form-group mb-3">
-                                                                <label for="apellidoFamiliar">Apellido</label>
-                                                                <div class="input-group">
-                                                                    <span class="input-group-text span_apellidoFamiliar"><i class="icons fa-regular fa-user"></i></span>
-                                                                    <input type="text" class="form-control ignore-validation" id="apellidoFamiliar" name="apellidoFamiliar" placeholder="Primer Apellido">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-
-                                                        <!-- CARGAR DOCUMENTO DE ESTADO DE DERECHO -->
-                                                        <div class="col-sm-12 col-mb-6 col-xl-6">
-                                                            <div class="form-group mb-3">
-                                                                <label for="docEstadoDerecho">Documento</label>
-                                                                <div class="input-group">
-                                                                    <span class="input-group-text span_docEstadoDerecho"><i class="icons fa-regular fa-file-zipper"></i></span>
-                                                                    <input type="file" name="docEstado" class="form-control ignore-validation" id="docEstadoDerecho" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
                                                     </div>
                                                 </div>
-
-
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" id="cerrarModalEstadoDerecho" class="btn btn-secondary btn-hover-gris" data-bs-dismiss="modal"><i class="fa-regular fa-xmark-large fa-sm me-2"></i>Cerrar</button>
@@ -305,7 +255,7 @@ use App\Atlas\config\App;
                                 <div class="f1-buttons">
                                     <!-- Button trigger modal -->
                                     <button type="button" class="btn btn-primary" id="botonModalEstadoDerecho" data-bs-toggle="modal" data-bs-target="#estadoDerecho">
-                                        Ver estado de derecho
+                                    <i class="fa-regular fa-eye me-2"></i>Ver estado de derecho
                                     </button>
                                     <button type="button" class="btn btn-primary btn-hover-azul buttonDisca" id="asignarDisca">
                                         <i class="fa-solid fa-plus me-2"></i>
@@ -524,7 +474,7 @@ use App\Atlas\config\App;
                                 <!-- BOTONES DE INTECTIVOS DEL FORMULARIO MULTIPLE -->
                                 <div class="f1-buttons">
                                     <button type="button" class="btn btn-previous btn-secondary btn-hover-gris"><i class="fa-solid fa-arrow-left me-2"></i>Atrás</button>
-                                    <button type="submit" class="btn btn-next btn-warning text-white btn-hover-amarillo" id="aceptar"><i class="fa-regular fa-thumbs-up me-2"></i>Guardar Información</button>
+                                    <button type="submit" class="btn btn-warning text-white btn-hover-amarillo" id="aceptar"><i class="fa-regular fa-thumbs-up me-2"></i>Guardar Información</button>
                                 </div>
                             </fieldset>
                             <!--fin -->

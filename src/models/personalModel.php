@@ -65,6 +65,18 @@ class personalModel extends Conexion
         return $sql;
     }
 
+
+    public function existeFamiliarCedula(array $parametro){
+        $sqlCedula = $this->ejecutarConsulta("SELECT df.id_ninos, df.cedula FROM datosfamilia df WHERE df.cedula = ?", $parametro);
+        if (empty($sqlCedula)) {
+            // La consulta no devolvió datos o hubo un error
+            return false;
+        } else {
+            // La consulta devolvió datos
+            return true;
+        }
+    }
+
     // EXISTE FAMILIAR POR TOMO, FOLIO Y CÉDULA
     private function existeFamilar(array $parametro)
     {
@@ -78,7 +90,8 @@ class personalModel extends Conexion
         if (!empty($sqlCedula)) {
             return [
                 'mensaje' => "La cédula ya existe.",
-                'datos' => $sqlCedula
+                'datos' => $sqlCedula,
+                'exito' => true
             ];
         } else {
             // // Si la cédula no fue encontrada, consulta por tomo

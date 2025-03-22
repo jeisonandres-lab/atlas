@@ -24,6 +24,9 @@ class App
     public const URL_FOTOS_PERSONAL = "../global/archives/photos/";
     public const URL_CONTRATOS = "../global/archives/contratos/";
     public const URL_NOTACION = "../global/archives/notacion/";
+    public const URL_MATRIMONIO = "../global/archives/personal/actaMatrimonio/";
+    public const URL_ESTADODEDERECHO = "../global/archives/personal/estadoDeDerecho/";
+    public const URL_DISCAPACIDADEMPELADO = "../global/archives/personal/actaDiscapacidad/";
 
     public static function zonaHoraria()
     {
