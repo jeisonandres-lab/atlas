@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 12-03-2025 a las 04:46:56
+-- Tiempo de generación: 22-03-2025 a las 01:43:12
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -1161,7 +1161,147 @@ INSERT INTO `auditoria` (`id_auditoria`, `codigo`, `user_id`, `fecha`, `hora`, `
 (1050, '00000771', 1, '2025-03-11', '21:58:13 PM', 'Descarga pdf de empleado', 'El usuarioJeison12345 a descargado un pdf de los empelados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
 (1051, '00000917', 1, '2025-03-11', '21:59:42 PM', 'Descarga pdf de empleado', 'El usuarioJeison12345 a descargado un pdf de los empelados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
 (1052, '00000672', 1, '2025-03-11', '23:14:45 PM', 'Inicio de sesion', 'el usuario Jeison12345 a iniciado sesion en el sistema', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
-(1053, '00000853', 1, '2025-03-11', '23:15:40 PM', 'Inicio de sesion', 'el usuario Jeison12345 a iniciado sesion en el sistema', NULL, '::1', 'Chrome', 'Windows 10', '64-bit');
+(1053, '00000853', 1, '2025-03-11', '23:15:40 PM', 'Inicio de sesion', 'el usuario Jeison12345 a iniciado sesion en el sistema', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1054, '00000215', 1, '2025-03-12', '07:35:31 AM', 'Inicio de sesion', 'el usuario Jeison12345 a iniciado sesion en el sistema', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1055, '00000312', 1, '2025-03-12', '07:41:00 AM', 'Registrar familiar', 'El usuario Jeison12345 asigno un nuevo familiar en el sistema al empleado Jeison Balduz portador de la cedula 30012937 el familiar asignado fue Jose Martinez.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1056, '00000948', 1, '2025-03-12', '07:41:00 AM', 'Registrar documento', 'El usuario Jeison12345 ha colocado un nuevo documento en el sistema llamado Captura_de_pantalla_2025-03-04_224330-30012937001.png con el código: tfnp7I y un tamaño de: 163.91 KB', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1057, '00000603', 1, '2025-03-12', '08:44:01 AM', 'Inicio de sesion', 'el usuario Jeison12345 a iniciado sesion en el sistema', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1058, '00000537', 1, '2025-03-12', '09:38:27 AM', 'Actualizar familiar', 'El usuario Jeison12345 actualizo los datos del familiar Jose Martinez asociados al empleado Jeison Balduz.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1059, '00000795', 1, '2025-03-12', '13:43:09 PM', 'Actualizar familiar', 'El usuario Jeison12345 actualizo los datos del familiar Jose Martinez asociados al empleado Jeison Balduz.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1060, '00000155', 1, '2025-03-12', '13:43:45 PM', 'Actualizar familiar', 'El usuario Jeison12345 actualizo los datos del familiar Jose Martinez asociados al empleado Jeison Balduz.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1061, '00000422', 1, '2025-03-12', '13:44:30 PM', 'Actualizar familiar', 'El usuario Jeison12345 actualizo los datos del familiar Jose Martinez asociados al empleado Jeison Balduz.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1062, '00000381', 1, '2025-03-12', '13:44:36 PM', 'Actualizar familiar', 'El usuario Jeison12345 actualizo los datos del familiar Juana Gonzalez asociados al empleado Emili Torres.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1063, '00000001', 1, '2025-03-12', '19:48:26 PM', 'Inicio de sesion', 'el usuario Jeison12345 a iniciado sesion en el sistema', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1064, '00000603', 1, '2025-03-12', '23:28:30 PM', 'Descarga pdf de empleado', 'El usuario Jeison12345 ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1065, '00000303', 1, '2025-03-12', '23:31:22 PM', 'Descarga pdf de empleado', 'El usuario Jeison12345 ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1066, '00000202', 1, '2025-03-12', '23:31:47 PM', 'Descarga pdf de empleado', 'El usuario Jeison12345 ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1067, '00000413', 1, '2025-03-12', '23:37:38 PM', 'Descarga pdf de empleado', 'El usuario Jeison12345 ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1068, '00000883', 1, '2025-03-12', '23:38:15 PM', 'Descarga pdf de empleado', 'El usuario Jeison12345 ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1069, '00000428', 1, '2025-03-12', '23:38:39 PM', 'Descarga pdf de empleado', 'El usuario Jeison12345 ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1070, '00000582', 1, '2025-03-12', '23:39:20 PM', 'Descarga pdf de empleado', 'El usuario Jeison12345 ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1071, '00000887', 1, '2025-03-12', '23:40:59 PM', 'Descarga pdf de empleado', 'El usuario Jeison12345 ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1072, '00000046', 1, '2025-03-12', '23:41:31 PM', 'Descarga pdf de empleado', 'El usuario Jeison12345 ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1073, '00000949', 1, '2025-03-12', '23:41:53 PM', 'Descarga pdf de empleado', 'El usuario Jeison12345 ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1074, '00000548', 1, '2025-03-12', '23:46:20 PM', 'Descarga pdf de empleado', 'El usuario Jeison12345 ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1075, '00000965', 1, '2025-03-12', '23:49:49 PM', 'Descarga pdf de empleado', 'El usuario Jeison12345 ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1076, '00000075', 1, '2025-03-12', '23:53:34 PM', 'Descarga pdf de empleado', 'El usuario Jeison12345 ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1077, '00000935', 1, '2025-03-12', '23:55:06 PM', 'Descarga pdf de empleado', 'El usuario Jeison12345 ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1078, '00000607', 1, '2025-03-12', '23:56:19 PM', 'Descarga pdf de empleado', 'El usuario Jeison12345 ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1079, '00000996', 1, '2025-03-13', '00:04:18 AM', 'Descarga pdf de empleado', 'El usuario Jeison12345 ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1080, '00000939', 1, '2025-03-13', '00:06:14 AM', 'Descarga pdf de empleado', 'El usuario Jeison12345 ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1081, '00000871', 1, '2025-03-13', '00:08:54 AM', 'Descarga pdf de empleado', 'El usuario Jeison12345 ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1082, '00000035', 1, '2025-03-13', '00:13:47 AM', 'Descarga pdf de empleado', 'El usuario Jeison12345 ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1083, '00000281', 1, '2025-03-13', '00:13:47 AM', 'Descarga pdf de empleado', 'El usuario Jeison12345 ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1084, '00000037', 1, '2025-03-13', '00:15:01 AM', 'Descarga pdf de empleado', 'El usuario Jeison12345 ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1085, '00000792', 1, '2025-03-13', '00:15:01 AM', 'Descarga pdf de empleado', 'El usuario Jeison12345 ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1086, '00000939', 1, '2025-03-13', '00:16:27 AM', 'Descarga pdf de empleado', 'El usuario Jeison12345 ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1087, '00000776', 1, '2025-03-13', '00:16:27 AM', 'Descarga pdf de empleado', 'El usuario Jeison12345 ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1088, '00000800', 1, '2025-03-13', '00:17:40 AM', 'Inicio de sesion', 'el usuario Jeison12345 a iniciado sesion en el sistema', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1089, '00000139', 1, '2025-03-13', '00:18:00 AM', 'Descarga pdf de empleado', 'El usuario Jeison12345 ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1090, '00000500', 1, '2025-03-13', '00:18:00 AM', 'Descarga pdf de empleado', 'El usuario Jeison12345 ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1091, '00000866', 1, '2025-03-13', '00:18:23 AM', 'Descarga pdf de empleado', 'El usuario Jeison12345 ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1092, '00000190', 1, '2025-03-13', '00:18:23 AM', 'Descarga pdf de empleado', 'El usuario Jeison12345 ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1093, '00000466', 1, '2025-03-13', '00:18:45 AM', 'Descarga pdf de empleado', 'El usuario Jeison12345 ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1094, '00000842', 1, '2025-03-13', '00:18:45 AM', 'Descarga pdf de empleado', 'El usuario Jeison12345 ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1095, '00000680', 1, '2025-03-13', '00:52:19 AM', 'Descarga pdf de empleado', 'El usuario Jeison12345 ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1096, '00000311', 1, '2025-03-13', '00:56:01 AM', 'Descarga pdf de empleado', 'El usuario Jeison12345 ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1097, '00000032', 1, '2025-03-13', '00:58:46 AM', 'Descarga pdf de empleado', 'El usuario Jeison12345 ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1098, '00000081', 1, '2025-03-13', '08:02:16 AM', 'Inicio de sesion', 'el usuario Jeison12345 a iniciado sesion en el sistema', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1099, '00000938', 1, '2025-03-13', '08:33:07 AM', 'Descarga pdf de empleado', 'El usuario Jeison12345 ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1100, '00000561', 1, '2025-03-13', '08:33:39 AM', 'Descarga pdf de empleado', 'El usuario Jeison12345 ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1101, '00000023', 1, '2025-03-13', '14:29:53 PM', 'Inicio de sesion', 'el usuario Jeison12345 a iniciado sesion en el sistema', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1102, '00000430', 1, '2025-03-13', '14:30:16 PM', 'Inicio de sesion', 'el usuario Jeison12345 a iniciado sesion en el sistema', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1103, '00000389', 1, '2025-03-13', '14:30:21 PM', 'Inicio de sesion', 'el usuario Jeison12345 a iniciado sesion en el sistema', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1104, '00000797', 1, '2025-03-13', '14:39:52 PM', 'Descarga pdf de empleado', 'El usuario Jeison12345 ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1105, '00000480', 1, '2025-03-13', '14:39:52 PM', 'Descarga pdf de empleado', 'El usuario Jeison12345 ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1106, '00000578', 1, '2025-03-13', '14:39:52 PM', 'Descarga pdf de empleado', 'El usuario Jeison12345 ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1107, '00000301', 1, '2025-03-13', '14:40:40 PM', 'Descarga pdf de empleado', 'El usuario Jeison12345 ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1108, '00000260', 1, '2025-03-13', '14:40:40 PM', 'Descarga pdf de empleado', 'El usuario Jeison12345 ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1109, '00000764', 1, '2025-03-13', '14:41:14 PM', 'Descarga pdf de empleado', 'El usuario Jeison12345 ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1110, '00000824', 1, '2025-03-13', '14:41:14 PM', 'Descarga pdf de empleado', 'El usuario Jeison12345 ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1111, '00000373', 1, '2025-03-13', '14:42:58 PM', 'Descarga pdf de empleado', 'El usuario Jeison12345 ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1112, '00000850', 1, '2025-03-13', '14:42:58 PM', 'Descarga pdf de empleado', 'El usuario Jeison12345 ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1113, '00000733', 1, '2025-03-13', '15:00:12 PM', 'Descarga pdf de empleado', 'El usuario Jeison12345 ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1114, '00000377', 1, '2025-03-13', '15:00:12 PM', 'Descarga pdf de empleado', 'El usuario Jeison12345 ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1115, '00000452', 1, '2025-03-13', '15:03:46 PM', 'Descarga pdf de empleado', 'El usuario Jeison12345 ha descargado un pdf de los empleados en tamaño A4 formato horizontal por rango de fecha, desde: 01-03-2025    hasta: 21-03-2025', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1116, '00000665', 1, '2025-03-13', '15:04:36 PM', 'Descarga pdf de empleado', 'El usuario Jeison12345 ha descargado un pdf de los empleados en tamaño A4 formato horizontal por rango de fecha, desde: 20-03-2025    hasta: 26-03-2025', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1117, '00000913', 1, '2025-03-13', '15:06:45 PM', 'Descarga pdf de empleado', 'El usuario Jeison12345 ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1118, '00000491', 1, '2025-03-13', '15:08:24 PM', 'Descarga pdf de empleado', 'El usuario Jeison12345 ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1119, '00000206', 1, '2025-03-13', '15:12:45 PM', 'Descargar ficha técnica', 'El usuarioJeison12345 a generado la ficha técnica del empleado Jeison Balduz', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1120, '00000816', 1, '2025-03-13', '15:13:15 PM', 'Descargar ficha técnica', 'El usuarioJeison12345 a generado la ficha técnica del empleado Isbelia Marquina', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1121, '00000006', 1, '2025-03-13', '15:14:07 PM', 'Descarga pdf de empleado', 'El usuario Jeison12345 ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1122, '00000707', 1, '2025-03-13', '15:14:07 PM', 'Descarga pdf de empleado', 'El usuario Jeison12345 ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1123, '00000379', 1, '2025-03-14', '13:32:24 PM', 'Inicio de sesion', 'el usuario Jeison12345 a iniciado sesion en el sistema', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1124, '00000154', 1, '2025-03-15', '14:12:50 PM', 'Inicio de sesion', 'el usuario Jeison12345 a iniciado sesion en el sistema', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1125, '00000046', 1, '2025-03-15', '17:01:06 PM', 'Descarga pdf de empleado', 'El usuario Jeison12345 ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1126, '00000165', 1, '2025-03-15', '17:24:19 PM', 'Inicio de sesion', 'el usuario Jeison12345 a iniciado sesion en el sistema', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1127, '00000758', 1, '2025-03-16', '11:42:46 AM', 'Inicio de sesion', 'el usuario Jeison12345 a iniciado sesion en el sistema', NULL, '127.0.0.1', 'Chrome', 'Windows 10', '64-bit'),
+(1128, '00000208', 1, '2025-03-16', '11:44:49 AM', 'Inicio de sesion', 'el usuario Jeison12345 a iniciado sesion en el sistema', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1129, '00000961', 1, '2025-03-17', '20:39:12 PM', 'Inicio de sesion', 'el usuario Jeison12345 a iniciado sesion en el sistema', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1130, '00000733', 1, '2025-03-18', '04:11:54 AM', 'Inicio de sesion', 'el usuario Jeison12345 a iniciado sesion en el sistema', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1131, '00000924', 1, '2025-03-18', '04:14:23 AM', 'Inicio de sesion', 'el usuario Jeison12345 a iniciado sesion en el sistema', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1132, '00000515', 1, '2025-03-18', '04:14:36 AM', 'Inicio de sesion', 'el usuario Jeison12345 a iniciado sesion en el sistema', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1133, '00000606', 1, '2025-03-18', '04:16:10 AM', 'Inicio de sesion', 'el usuario Jeison12345 a iniciado sesion en el sistema', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1134, '00000463', 1, '2025-03-18', '04:17:36 AM', 'Inicio de sesion', 'el usuario Jeison12345 a iniciado sesion en el sistema', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1135, '00000626', 1, '2025-03-18', '04:17:56 AM', 'Inicio de sesion', 'el usuario Jeison12345 a iniciado sesion en el sistema', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1136, '00000580', 1, '2025-03-18', '04:17:57 AM', 'Inicio de sesion', 'el usuario Jeison12345 a iniciado sesion en el sistema', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1137, '00000610', 1, '2025-03-18', '04:17:57 AM', 'Inicio de sesion', 'el usuario Jeison12345 a iniciado sesion en el sistema', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1138, '00000624', 1, '2025-03-18', '04:17:58 AM', 'Inicio de sesion', 'el usuario Jeison12345 a iniciado sesion en el sistema', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1139, '00000895', 1, '2025-03-18', '04:17:58 AM', 'Inicio de sesion', 'el usuario Jeison12345 a iniciado sesion en el sistema', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1140, '00000683', 1, '2025-03-18', '04:17:59 AM', 'Inicio de sesion', 'el usuario Jeison12345 a iniciado sesion en el sistema', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1141, '00000793', 1, '2025-03-18', '04:17:59 AM', 'Inicio de sesion', 'el usuario Jeison12345 a iniciado sesion en el sistema', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1142, '00000599', 1, '2025-03-18', '04:18:53 AM', 'Inicio de sesion', 'el usuario Jeison12345 a iniciado sesion en el sistema', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1143, '00000170', 1, '2025-03-18', '04:19:11 AM', 'Inicio de sesion', 'el usuario Jeison12345 a iniciado sesion en el sistema', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1144, '00000485', 1, '2025-03-18', '04:19:12 AM', 'Inicio de sesion', 'el usuario Jeison12345 a iniciado sesion en el sistema', NULL, '::1', 'Chrome', 'Windows 10', '64-bit');
+INSERT INTO `auditoria` (`id_auditoria`, `codigo`, `user_id`, `fecha`, `hora`, `tipo_evento`, `descripcion`, `tabla_afectada`, `ip`, `navegador`, `sistemaOperativo`, `arquitectura`) VALUES
+(1145, '00000462', 1, '2025-03-18', '04:19:13 AM', 'Inicio de sesion', 'el usuario Jeison12345 a iniciado sesion en el sistema', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1146, '00000314', 1, '2025-03-18', '04:19:13 AM', 'Inicio de sesion', 'el usuario Jeison12345 a iniciado sesion en el sistema', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1147, '00000992', 1, '2025-03-18', '04:19:13 AM', 'Inicio de sesion', 'el usuario Jeison12345 a iniciado sesion en el sistema', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1148, '00000230', 1, '2025-03-18', '04:19:13 AM', 'Inicio de sesion', 'el usuario Jeison12345 a iniciado sesion en el sistema', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1149, '00000113', 1, '2025-03-18', '04:19:14 AM', 'Inicio de sesion', 'el usuario Jeison12345 a iniciado sesion en el sistema', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1150, '00000035', 1, '2025-03-18', '04:19:14 AM', 'Inicio de sesion', 'el usuario Jeison12345 a iniciado sesion en el sistema', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1151, '00000397', 1, '2025-03-18', '04:20:04 AM', 'Inicio de sesion', 'el usuario Jeison12345 a iniciado sesion en el sistema', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1152, '00000082', 1, '2025-03-18', '04:23:17 AM', 'Inicio de sesion', 'el usuario Jeison12345 a iniciado sesion en el sistema', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1153, '00000414', 1, '2025-03-18', '04:23:18 AM', 'Inicio de sesion', 'el usuario Jeison12345 a iniciado sesion en el sistema', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1154, '00000829', 1, '2025-03-18', '04:23:19 AM', 'Inicio de sesion', 'el usuario Jeison12345 a iniciado sesion en el sistema', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1155, '00000995', 1, '2025-03-18', '04:23:19 AM', 'Inicio de sesion', 'el usuario Jeison12345 a iniciado sesion en el sistema', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1156, '00000583', 1, '2025-03-18', '04:23:19 AM', 'Inicio de sesion', 'el usuario Jeison12345 a iniciado sesion en el sistema', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1157, '00000279', 1, '2025-03-18', '04:23:20 AM', 'Inicio de sesion', 'el usuario Jeison12345 a iniciado sesion en el sistema', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1158, '00000811', 1, '2025-03-18', '04:23:40 AM', 'Inicio de sesion', 'el usuario Jeison12345 a iniciado sesion en el sistema', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1159, '00000016', 1, '2025-03-18', '04:23:41 AM', 'Inicio de sesion', 'el usuario Jeison12345 a iniciado sesion en el sistema', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1160, '00000272', 1, '2025-03-18', '04:23:41 AM', 'Inicio de sesion', 'el usuario Jeison12345 a iniciado sesion en el sistema', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1161, '00000949', 1, '2025-03-18', '04:28:56 AM', 'Inicio de sesion', 'el usuario Jeison12345 a iniciado sesion en el sistema', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1162, '00000636', 1, '2025-03-18', '04:35:04 AM', 'Inicio de sesion', 'el usuario Jeison12345 a iniciado sesion en el sistema', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1163, '00000478', 1, '2025-03-18', '04:36:24 AM', 'Inicio de sesion', 'el usuario Jeison12345 a iniciado sesion en el sistema', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1164, '00000611', 1, '2025-03-18', '04:38:37 AM', 'Inicio de sesion', 'el usuario Jeison12345 a iniciado sesion en el sistema', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1165, '00000111', 1, '2025-03-18', '04:39:35 AM', 'Inicio de sesion', 'el usuario Jeison12345 a iniciado sesion en el sistema', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1166, '00000979', 1, '2025-03-18', '04:39:55 AM', 'cierre de sesion', 'el usuario Jeison12345 a cerrado sesion en el sistema', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1167, '00000967', 1, '2025-03-18', '21:58:46 PM', 'Inicio de sesion', 'el usuario Jeison12345 a iniciado sesion en el sistema', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1168, '00000432', 1, '2025-03-18', '23:43:01 PM', 'Inicio de sesion', 'el usuario Jeison12345 a iniciado sesion en el sistema', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1169, '00000768', 1, '2025-03-19', '01:54:08 AM', 'cierre de sesion', 'el usuario Jeison12345 a cerrado sesion en el sistema', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1170, '00000226', 1, '2025-03-19', '01:55:28 AM', 'Inicio de sesion', 'el usuario Jeison12345 a iniciado sesion en el sistema', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1171, '00000613', 1, '2025-03-19', '09:02:56 AM', 'Inicio de sesion', 'el usuario Jeison12345 a iniciado sesion en el sistema', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1172, '00000505', 1, '2025-03-19', '09:03:39 AM', 'Inicio de sesion', 'el usuario Jeison12345 a iniciado sesion en el sistema', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1173, '00000026', 1, '2025-03-19', '10:22:18 AM', 'Inicio de sesion', 'el usuario Jeison12345 a iniciado sesion en el sistema', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1174, '00000213', 1, '2025-03-19', '21:35:46 PM', 'Inicio de sesion', 'el usuario Jeison12345 a iniciado sesion en el sistema', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1175, '00000829', 1, '2025-03-20', '09:00:03 AM', 'Inicio de sesion', 'el usuario Jeison12345 a iniciado sesion en el sistema', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1176, '00000600', 1, '2025-03-20', '11:48:56 AM', 'cierre de sesion', 'el usuario Jeison12345 a cerrado sesion en el sistema', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1177, '00000569', 1, '2025-03-20', '11:49:29 AM', 'Inicio de sesion', 'el usuario Jeison12345 a iniciado sesion en el sistema', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1178, '00000559', 1, '2025-03-20', '11:51:12 AM', 'cierre de sesion', 'el usuario Jeison12345 a cerrado sesion en el sistema', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1179, '00000108', 1, '2025-03-20', '11:52:57 AM', 'Inicio de sesion', 'el usuario Jeison12345 a iniciado sesion en el sistema', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1180, '00000369', 1, '2025-03-20', '11:59:06 AM', 'cierre de sesion', 'el usuario Jeison12345 a cerrado sesion en el sistema', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1181, '00000394', 1, '2025-03-20', '11:59:09 AM', 'Inicio de sesion', 'el usuario Jeison12345 a iniciado sesion en el sistema', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1182, '00000322', 1, '2025-03-20', '11:59:25 AM', 'cierre de sesion', 'el usuario Jeison12345 a cerrado sesion en el sistema', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1183, '00000351', 1, '2025-03-20', '11:59:27 AM', 'Inicio de sesion', 'el usuario Jeison12345 a iniciado sesion en el sistema', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1184, '00000625', 1, '2025-03-20', '11:59:35 AM', 'cierre de sesion', 'el usuario Jeison12345 a cerrado sesion en el sistema', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1185, '00000480', 1, '2025-03-20', '12:00:51 PM', 'Inicio de sesion', 'el usuario Jeison12345 a iniciado sesion en el sistema', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1186, '00000297', 1, '2025-03-20', '18:33:13 PM', 'Inicio de sesion', 'el usuario Jeison12345 a iniciado sesion en el sistema', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1187, '00000828', 1, '2025-03-20', '21:00:01 PM', 'Inicio de sesion', 'el usuario Jeison12345 a iniciado sesion en el sistema', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1188, '00000187', 1, '2025-03-20', '21:12:27 PM', 'Inicio de sesion', 'el usuario Jeison12345 a iniciado sesion en el sistema', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1189, '00000961', 1, '2025-03-20', '21:30:23 PM', 'Inicio de sesion', 'el usuario Jeison12345 a iniciado sesion en el sistema', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1190, '00000894', 1, '2025-03-21', '00:14:27 AM', 'Inicio de sesion', 'el usuario Jeison12345 a iniciado sesion en el sistema', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1191, '00000556', 1, '2025-03-21', '12:15:01 PM', 'Inicio de sesion', 'el usuario Jeison12345 a iniciado sesion en el sistema', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1192, '00000287', 1, '2025-03-21', '19:43:31 PM', 'Inicio de sesion', 'el usuario Jeison12345 a iniciado sesion en el sistema', NULL, '::1', 'Chrome', 'Windows 10', '64-bit');
 
 -- --------------------------------------------------------
 
@@ -1849,7 +1989,8 @@ CREATE TABLE `datosfamilia` (
 --
 
 INSERT INTO `datosfamilia` (`id_ninos`, `idEmpleado`, `primerNombre`, `segundoNombre`, `primerApellido`, `segundoApellido`, `parentesco`, `cedula`, `codigoCarnet`, `discapacidad`, `tomo`, `folio`, `edad`, `sexoFamiliar`, `anoNacimiento`, `mesNacimiento`, `diaNacimiento`, `tallaFranela`, `tallaPantalon`, `activo`, `fecha`, `hora`) VALUES
-(191, 73, 'Juan', 'Pedro', 'Gonzalez', 'Perez', 'Hija', '30197049001', NULL, NULL, '3030', '2424', 8, NULL, '2017', '03', '01', NULL, NULL, 1, '2025-03-11', '07:51:02 PM');
+(191, 73, 'Juana', 'Maria', 'Gonzalez', 'Perez', 'Hermano', '30197049001', NULL, 'Visual', '3030', '2424', 8, 'Femenino', '2017', '03', '01', NULL, NULL, 1, '2025-03-11', '07:51:02 PM'),
+(192, 1, 'Jose', 'Camilo', 'Martinez', 'Rojas', 'Hijo', '30012937001', '77777777', 'Motriz', '14032', '003', 10, 'Masculino', '2014', '04', '01', NULL, NULL, 1, '2025-03-12', '07:41:00 AM');
 
 -- --------------------------------------------------------
 
@@ -1882,6 +2023,7 @@ CREATE TABLE `datospersonales` (
   `cedula` varchar(20) DEFAULT NULL,
   `estadoCivil` varchar(30) DEFAULT NULL,
   `sexo` varchar(20) NOT NULL,
+  `discapacidadPersonal` varchar(100) DEFAULT NULL,
   `diaNacimiento` varchar(2) NOT NULL,
   `mesNacimiento` varchar(2) NOT NULL,
   `anoNacimiento` varchar(4) NOT NULL,
@@ -1895,12 +2037,12 @@ CREATE TABLE `datospersonales` (
 -- Volcado de datos para la tabla `datospersonales`
 --
 
-INSERT INTO `datospersonales` (`id_personal`, `primerNombre`, `segundoNombre`, `primerApellido`, `segundoApellido`, `cedula`, `estadoCivil`, `sexo`, `diaNacimiento`, `mesNacimiento`, `anoNacimiento`, `edadPersonal`, `correo`, `fecha`, `hora`) VALUES
-(1, 'Jeison', 'Andres', 'Balduz', 'Gonzalezzz', '30012937', 'Viudo', 'Masculino', '01', '08', '2003', 21, '', '2025-03-11', '07:33:37 PM'),
-(149, 'Emili', 'Gabriela', 'Torres', 'Girand', '30197049', 'Divorciado', 'Masculino', '01', '05', '2003', 21, NULL, '2025-03-05', '02:03:55 PM'),
-(172, 'Maria', 'Josefa', 'Ramirez', 'Castillo', '1573459', 'Divorciado', 'Femenino', '12', '08', '1985', 39, NULL, '2025-03-04', '01:09:18 PM'),
-(173, 'Carlos', 'Jose', 'Tovar', 'Solozar', '5000322', 'Viudo', 'Masculino', '14', '04', '1960', 64, NULL, '2025-03-04', '02:56:42 PM'),
-(174, 'Isbelia', 'Petra', 'Marquina', 'Marquez', '21098127', 'casado', 'Femenino', '03', '03', '1994', 31, NULL, '2025-03-04', '03:15:56 PM');
+INSERT INTO `datospersonales` (`id_personal`, `primerNombre`, `segundoNombre`, `primerApellido`, `segundoApellido`, `cedula`, `estadoCivil`, `sexo`, `discapacidadPersonal`, `diaNacimiento`, `mesNacimiento`, `anoNacimiento`, `edadPersonal`, `correo`, `fecha`, `hora`) VALUES
+(1, 'Jeison', 'Andres', 'Balduz', 'Gonzalezzz', '30012937', 'Viudo', 'Masculino', '', '01', '08', '2003', 21, '', '2025-03-11', '07:33:37 PM'),
+(149, 'Emili', 'Gabriela', 'Torres', 'Girand', '30197049', 'Divorciado', 'Femenino', '', '01', '05', '2003', 21, NULL, '2025-03-05', '02:03:55 PM'),
+(172, 'Maria', 'Josefa', 'Ramirez', 'Castillo', '1573459', 'Divorciado', 'Femenino', '', '12', '08', '1985', 39, NULL, '2025-03-04', '01:09:18 PM'),
+(173, 'Carlos', 'Jose', 'Tovar', 'Solozar', '5000322', 'Viudo', 'Masculino', '', '14', '04', '1960', 64, NULL, '2025-03-04', '02:56:42 PM'),
+(174, 'Isbelia', 'Petra', 'Marquina', 'Marquez', '21098127', 'casado', 'Femenino', '', '03', '03', '1994', 31, NULL, '2025-03-04', '03:15:56 PM');
 
 -- --------------------------------------------------------
 
@@ -2131,7 +2273,8 @@ INSERT INTO `documentacion` (`id_doc`, `idEmpleados`, `idNinos`, `tipoDoc`, `nom
 (246, 1, 187, 'pdf', NULL, '413.69 KB', 'DatosEmpleado_(4)-324324234.pdf', NULL, '2025-03-07', '12:48:02 AM', 0),
 (247, 1, 189, 'jpg', NULL, '33.42 KB', 'pm_1720997133352_cmp-30012937001.jpg', NULL, '2025-03-11', '07:47:37 PM', 0),
 (248, 1, 190, 'jpg', NULL, '33.42 KB', 'pm_1720997133352_cmp-.jpg', NULL, '2025-03-11', '07:49:32 PM', 0),
-(249, 73, 191, 'png', NULL, '97.35 KB', '1111-30012937001.png', NULL, '2025-03-11', '07:51:02 PM', 0);
+(249, 73, 191, 'png', NULL, '97.35 KB', '1111-30012937001.png', NULL, '2025-03-11', '07:51:02 PM', 0),
+(250, 1, 192, 'png', NULL, '163.91 KB', 'Captura_de_pantalla_2025-03-04_224330-30012937001.png', NULL, '2025-03-12', '07:41:00 AM', 0);
 
 -- --------------------------------------------------------
 
@@ -2733,7 +2876,9 @@ INSERT INTO `notificaciones` (`id_noti`, `idUser`, `userRol`, `userQuien`, `noti
 (12, 1, 1, NULL, 'El usuario  Jeison12345 a descagadola ficha tecnica del cedulado 30012937', '2025-02-27', '02:19:23 P'),
 (13, 1, 1, NULL, 'El usuario  Jeison12345 a descagadola ficha tecnica del cedulado 30012937', '2025-02-27', '02:44:32 P'),
 (14, 1, 1, NULL, 'El usuario  Jeison12345 a descagadola ficha tecnica del cedulado 30012937', '2025-03-07', '06:33:49 P'),
-(15, 1, 1, NULL, 'El usuario  Jeison12345 a descagadola ficha tecnica del cedulado 30012937', '2025-03-07', '07:21:24 P');
+(15, 1, 1, NULL, 'El usuario  Jeison12345 a descagadola ficha tecnica del cedulado 30012937', '2025-03-07', '07:21:24 P'),
+(16, 1, 1, NULL, 'El usuario  Jeison12345 a descagadola ficha tecnica del cedulado 30012937', '2025-03-13', '03:12:49 P'),
+(17, 1, 1, NULL, 'El usuario  Jeison12345 a descagadola ficha tecnica del cedulado 21098127', '2025-03-13', '03:13:18 P');
 
 -- --------------------------------------------------------
 
@@ -3919,10 +4064,17 @@ INSERT INTO `permiso` (`id_permisos`, `permiso`) VALUES
 CREATE TABLE `preguntas` (
   `id_preguntas` int(11) NOT NULL,
   `idUser` int(11) NOT NULL,
-  `pregunta1` varchar(100) NOT NULL,
-  `pregunta2` varchar(100) NOT NULL,
-  `pregunta3` varchar(100) NOT NULL
+  `pregunta` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `preguntas`
+--
+
+INSERT INTO `preguntas` (`id_preguntas`, `idUser`, `pregunta`) VALUES
+(1, 1, 'Que país te gustaria visitar?'),
+(2, 1, 'De que color es mi perro?'),
+(3, 1, 'Cual es mi color Favorito?');
 
 -- --------------------------------------------------------
 
@@ -3949,10 +4101,17 @@ CREATE TABLE `prescripcion` (
 
 CREATE TABLE `respuestas` (
   `idPreguntas` int(11) NOT NULL,
-  `respuesta1` varchar(100) NOT NULL,
-  `respuesta2` varchar(100) NOT NULL,
-  `respuesta3` varchar(100) NOT NULL
+  `respuesta` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `respuestas`
+--
+
+INSERT INTO `respuestas` (`idPreguntas`, `respuesta`) VALUES
+(1, 'España'),
+(2, 'Marron'),
+(3, 'Rojo');
 
 -- --------------------------------------------------------
 
@@ -4072,6 +4231,7 @@ CREATE TABLE `users` (
   `idRol` int(11) DEFAULT NULL,
   `nameUser` varchar(100) NOT NULL,
   `userPassword` varchar(150) NOT NULL,
+  `saltPass` varchar(250) DEFAULT NULL,
   `permiso` int(3) DEFAULT NULL,
   `prioridad` int(2) DEFAULT NULL,
   `pin` int(5) DEFAULT NULL,
@@ -4086,9 +4246,9 @@ CREATE TABLE `users` (
 -- Volcado de datos para la tabla `users`
 --
 
-INSERT INTO `users` (`id_user`, `idEmpleado`, `idRol`, `nameUser`, `userPassword`, `permiso`, `prioridad`, `pin`, `activo`, `enUso`, `fotoPérfil`, `fecha`, `hora`) VALUES
-(1, 1, 1, 'Jeison12345', 'ff2c1c5042200d8a7e6802fe3447281a6979e5b49a9c3ca3e9f24c6303486cf493ad4ffb6adac23930e60b17d5a13d19', NULL, NULL, NULL, 1, 1, NULL, NULL, NULL),
-(11, 73, 2, 'Emili123', 'd43d21546739cf0e6ba7f20e703123cd282eaf4a41fc313d851719cee4ab7700790efe72aabc8d520e5e23861319e925', NULL, NULL, NULL, 2, 1, NULL, NULL, NULL);
+INSERT INTO `users` (`id_user`, `idEmpleado`, `idRol`, `nameUser`, `userPassword`, `saltPass`, `permiso`, `prioridad`, `pin`, `activo`, `enUso`, `fotoPérfil`, `fecha`, `hora`) VALUES
+(1, 1, 1, 'Jeison12345', '56d06151c384548044534e5579f33855fda4a994110b71babd553e130bd51b53', 'f5a1c10ab4667bd7997a23a6b5574fcd', NULL, NULL, NULL, 1, 1, NULL, NULL, NULL),
+(11, 73, 2, 'Emili123', 'd43d21546739cf0e6ba7f20e703123cd282eaf4a41fc313d851719cee4ab7700790efe72aabc8d520e5e23861319e925', NULL, NULL, NULL, NULL, 2, 1, NULL, NULL, NULL);
 
 --
 -- Índices para tablas volcadas
@@ -4268,6 +4428,12 @@ ALTER TABLE `prescripcion`
   ADD PRIMARY KEY (`id_pre`);
 
 --
+-- Indices de la tabla `respuestas`
+--
+ALTER TABLE `respuestas`
+  ADD PRIMARY KEY (`idPreguntas`);
+
+--
 -- Indices de la tabla `rol`
 --
 ALTER TABLE `rol`
@@ -4311,7 +4477,7 @@ ALTER TABLE `atencionmedica`
 -- AUTO_INCREMENT de la tabla `auditoria`
 --
 ALTER TABLE `auditoria`
-  MODIFY `id_auditoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1054;
+  MODIFY `id_auditoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1193;
 
 --
 -- AUTO_INCREMENT de la tabla `ausenciajustificada`
@@ -4353,7 +4519,7 @@ ALTER TABLE `datosempleados`
 -- AUTO_INCREMENT de la tabla `datosfamilia`
 --
 ALTER TABLE `datosfamilia`
-  MODIFY `id_ninos` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=192;
+  MODIFY `id_ninos` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=193;
 
 --
 -- AUTO_INCREMENT de la tabla `datosninos`
@@ -4383,7 +4549,7 @@ ALTER TABLE `dependencia`
 -- AUTO_INCREMENT de la tabla `documentacion`
 --
 ALTER TABLE `documentacion`
-  MODIFY `id_doc` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=250;
+  MODIFY `id_doc` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=251;
 
 --
 -- AUTO_INCREMENT de la tabla `estados`
@@ -4425,7 +4591,7 @@ ALTER TABLE `municipios`
 -- AUTO_INCREMENT de la tabla `notificaciones`
 --
 ALTER TABLE `notificaciones`
-  MODIFY `id_noti` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id_noti` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT de la tabla `parroquias`
@@ -4443,7 +4609,7 @@ ALTER TABLE `permiso`
 -- AUTO_INCREMENT de la tabla `preguntas`
 --
 ALTER TABLE `preguntas`
-  MODIFY `id_preguntas` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_preguntas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `prescripcion`
@@ -4542,6 +4708,12 @@ ALTER TABLE `parroquias`
 --
 ALTER TABLE `preguntas`
   ADD CONSTRAINT `preguntas_ibfk_1` FOREIGN KEY (`idUser`) REFERENCES `users` (`id_user`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `respuestas`
+--
+ALTER TABLE `respuestas`
+  ADD CONSTRAINT `respuestas_ibfk_1` FOREIGN KEY (`idPreguntas`) REFERENCES `preguntas` (`id_preguntas`);
 
 --
 -- Filtros para la tabla `ubicacion`

@@ -89,7 +89,6 @@ $(function () {
   incluirSelec2("#sexo");
   incluirSelec2("#vivienda");
 
-
   validarSelectoresSelec2("#dependencia", ".span_dependencia");
   validarSelectoresSelec2("#estatus", ".span_estatus");
   validarSelectoresSelec2("#cargo", ".span_cargo");
