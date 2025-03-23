@@ -220,12 +220,12 @@ export async function validarDosDatos(input, cumplidospan) {
     let inputValue = $(this).val();
 
     // Limita la longitud a 2 caracteres
-    if (inputValue.length >= 2) {
+    if (inputValue.length >= 5) {
       $(this).removeClass("error_input");
       $(this).addClass("cumplido");
       $(cumplidospan).removeClass("error_span");
       $(cumplidospan).addClass("cumplido_span");
-      $(this).val(inputValue.slice(0, 2));
+      $(this).val(inputValue.slice(0, 5));
       inputValue = $(this).val();
     } else {
       $(this).removeClass("cumplido");

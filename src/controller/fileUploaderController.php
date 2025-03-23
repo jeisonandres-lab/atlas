@@ -119,19 +119,11 @@ class fileUploaderController extends Conexion
         if ($cargarDOC) {
             $registroAuditoria = $this->auditoriaController->registrarAuditoria($this->idUsuario, 'Registrar documento', 'El usuario ' . $this->nombreUsuario . ' ha colocado un nuevo documento en el sistema llamado ' . $fileInfo['nombre'] . " con el código: " . $codigo . " y un tamaño de: " . $tamano);
             if ($registroAuditoria) {
-                // Verificar si existe una carpeta con el nombre de la cédula
-                $carpetaCedula = $destination . '/' . $cedula;
-                if (!is_dir($carpetaCedula)) {
-                    mkdir($cedula, 0777, true);
-                }
-
-                // Mover el archivo a la carpeta de la cédula
-                $destinationPath = $carpetaCedula . '/' . $fileInfo['nombre'];
-                if (move_uploaded_file($file['tmp_name'], $destinationPath)) {
+                if (move_uploaded_file($file['tmp_name'], $destination)) {
                     return [
                         'error' => false,
                         'mensaje' => 'Archivo subido con éxito',
-                        'ruta' => $destinationPath,
+                        'ruta' => $destination,
                         'nombre' => $fileInfo['nombre'],
                         'extension' => $extension,
                         'tamano' => $tamano, // Añadir el tamaño del archivo con formato legible
@@ -144,13 +136,13 @@ class fileUploaderController extends Conexion
             } else {
                 return [
                     'error' => true,
-                    'mensaje' => 'Error al registrar la auditoría',
+                    'mensaje' => 'error al cargar los datos del archivo en la bse de datos',
                 ];
             }
         } else {
             return [
                 'error' => true,
-                'mensaje' => 'Error al cargar los datos del archivo en la base de datos',
+                'mensaje' => 'error al cargar los datos del archivo en la bse de datos',
             ];
         }
     }
@@ -183,11 +175,17 @@ class fileUploaderController extends Conexion
             mkdir($uploadDir, 0777, true);
         }
 
+        // Verificar si existe una carpeta con el nombre de la cédula
+        $cedulaDir = $uploadDir . '/' . $cedula;
+        if (!is_dir($cedulaDir)) {
+            mkdir($cedulaDir, 0777, true);
+        }
+
         // Obtener el nombre del archivo
         $fileInfo = $this->obtenerNombreArchivo($file, $cedula);
         $fileName = $fileInfo['nombre'];
         $extension = $fileInfo['extension'];
-        $destination = $uploadDir . $fileName;
+        $destination = $cedulaDir . '/' . $fileName;
 
         // Validar si el archivo ya existe
         // $verificacion = $this->archivoExiste2($destination);

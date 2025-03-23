@@ -18,18 +18,21 @@ class App
     public const APP_NAME = "ATLAS";
 
     // Rutas De Carpetas Y Archivos De Personal
-    public const URL_PARTIDANACIMIENTO = "../global/archives/personal/familiares/partidasNacimiento/";
-    public const URL_PARTIDADEISCAPACIDAD = "../global/archives/personal/familiares/partidasDiscapacidad/";
+    public const URL_PARTIDANACIMIENTO = "../global/archives/archivoFamiliaresPersonal/partidasNacimiento/";
+    public const URL_PARTIDADEISCAPACIDAD = "../global/archives/archivoFamiliaresPersonal/partidasDiscapacidad/";
     public const URL_CURRICULUMS = "../global/archives/curriculums/";
-    public const URL_FOTOS_PERSONAL = "../global/archives/photos/";
-    public const URL_CONTRATOS = "../global/archives/contratos/";
-    public const URL_NOTACION = "../global/archives/notacion/";
-    public const URL_MATRIMONIO = "../global/archives/personal/actaMatrimonio/";
-    public const URL_DIRVORCIO = "../global/archives/personal/dirvorciadoArchivo/";
-    public const URL_ESTADODEDERECHO = "../global/archives/personal/estadoDeDerecho/";
-    public const URL_DISCAPACIDADEMPELADO = "../global/archives/personal/actaDiscapacidad/";
-    public const URL_VIUDO = "../global/archives/personal/viudoArchivo/";
-    public const URL_SOLICITUDCAMBIOESTADOCIVIL = "../global/archives/personal/solicitudCambioEstadoCivil/";
+    public const URL_CONTRATOS = "../global/archives/archivoContratos/";
+    public const URL_NOTACION = "../global/archives/archivoNotacion/";
+    public const URL_MATRIMONIO = "../global/archives/archivoActaMatrimonio/";
+    public const URL_DIRVORCIO = "../global/archives/archivoActaDivorcio/";
+    public const URL_ESTADODEDERECHO = "../global/archives/archivoEstadoDeDerecho/";
+    public const URL_DISCAPACIDADEMPELADO = "../global/archives/archivoActaDiscapacidad/";
+    public const URL_VIUDO = "../global/archives/archivoActaDifucion/";
+    public const URL_SOLICITUDCAMBIOESTADOCIVIL = "../global/archives/archivoSolicitudCambioEstadoCivil/";
+
+    public const URL_COPIADECEDULACASADO = "../global/archives/archivoActaMatrimonio/copiaCedula";
+    public const URL_COPIADECEDULACAMBIOESTADOCIVIL = "../global/archives/archivoSolicitudCambioEstadoCivil/copiaCedula";
+    public const URL_COPIADECEDULAVIUDO = "../global/archives/archivoActaDifucion/copiaCedula";
 
     public static function zonaHoraria()
     {

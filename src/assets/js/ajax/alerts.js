@@ -82,3 +82,17 @@ export async function aletaCheck(messenger, icons, position, callback){
         }
       });
 }
+
+export function alertaBasica(messenger, time, icons, position, titulo){
+    Swal.fire({
+        position: position,
+        icon: icons,
+        title: titulo,
+        text: messenger,
+        showCancelButton: true,
+        cancelButtonColor: "#d33",
+        cancelButtonText: "<i class='fa-solid fa-xmark fa-sm me-2'></i>Ok!, Salir",
+        showConfirmButton: false,
+        timer: time
+      });
+}

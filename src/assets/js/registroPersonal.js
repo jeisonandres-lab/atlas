@@ -26,6 +26,7 @@ import {
 } from "./ajax/formularioAjax.js";
 
 import {
+  alertaBasica,
   alertaNormalmix,
   AlertDirection,
   AlertSW2,
@@ -43,7 +44,6 @@ import {
   calcularEdad,
   carculasDias,
   cedulaExisteEmpleado,
-  limpiarFormulario,
   recargarConVerificacionDeCache
 } from "./ajax/funciones.js";
 
@@ -209,7 +209,7 @@ $(function () {
       if (parsedData.exito) {
         console.log(parsedData.exito)
         $("#aceptar").prop("disabled", false);
-        await AlertDirection("success", parsedData.mensaje, "top", 5000, recargarConVerificacionDeCache());
+        await AlertDirection("success", parsedData.mensaje, "top", 7000, recargarConVerificacionDeCache());
       } else {
         await alertaNormalmix(parsedData.mensaje, 4000, "error", "top-end");
         // if (error) limpiarFormulario($("#formulario_registro"));
@@ -273,17 +273,6 @@ $(function () {
       $("#contenNumDepa").remove();
     }
 
-    $(document).on('input', '#numeroDepa', function () {
-      let inputValue = $(this).val();
-      // Limita la longitud a 2 caracteres
-      if (inputValue.length > 2) {
-        $(this).val(inputValue.slice(0, 2));
-        inputValue = $(this).val();
-      }
-      // Convierte letras a mayúsculas
-      $(this).val(inputValue.toUpperCase());
-    });
-
     if (vivienda == 'Casa') {
       // Crea el HTML que quieres insertar
       const vivienda = setVariableNumVivienda('numeroVivienda', 'numeroVivienda');
@@ -345,6 +334,12 @@ $(function () {
       if (calcularEdad2 >= 100) {
         alertaNormalmix(`¡Wow! Tienes ${calcularEdad2} de edad, ¡felicitaciones! al empleado`, 4000, "info", "top");
       }
+
+      if (calcularEdad2 < 18) {
+        alertaBasica(`Lamentablemente, no podemos permitir el acceso a esta persona. La edad mínima requerida es de 18 años, y esta persona tiene ${calcularEdad2} años`, 7000, "info", "top-center", "Edad no requerida");
+        clasesInputsError("#edad", ".span_edad");
+      }
+      
     }
   });
 

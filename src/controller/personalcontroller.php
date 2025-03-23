@@ -177,7 +177,7 @@ class personalController extends personalModel
                                 } else {
 
                                     //registrar documentacion
-                                    $registrarDocumentos = $this->registrarArchivos($cedula, $id_empleado);
+                                    $registrarDocumentos = $this->registrarArchivos($cedula, $id_empleado, $civil);
 
                                     //validamos la subida de los archivos y damos evento de exito del registro
                                     if ($registrarDocumentos['exito']) {
@@ -500,7 +500,7 @@ class personalController extends personalModel
         }
     }
 
-    public function registrarArchivos($cedula, $id_empleado)
+    public function registrarArchivos($cedula, $id_empleado, $estadoCivil = null)
     {
         $fileInputs = [
             'contratoArchivo' => App::URL_CONTRATOS,
@@ -513,13 +513,22 @@ class personalController extends personalModel
             "docSolicEstCivilArchivo" => App::URL_SOLICITUDCAMBIOESTADOCIVIL
         ];
 
+        // Determinar la carpeta de destino para docCopiaCedulaArchivo según el estado civil
+        if ($estadoCivil === 'Casado') {
+            $fileInputs['docCopiaCedulaArchivo'] = App::URL_COPIADECEDULACASADO;
+        } elseif ($estadoCivil === 'Divorciado') {
+            $fileInputs['docCopiaCedulaArchivo'] = App::URL_COPIADECEDULACAMBIOESTADOCIVIL;
+        } elseif ($estadoCivil === 'Viudo') {
+            $fileInputs['docCopiaCedulaArchivo'] = App::URL_COPIADECEDULAVIUDO;
+        }
+
         $archivosASubir = [];
         foreach ($fileInputs as $inputName => $uploadDir) {
             if (isset($_FILES[$inputName]) && $_FILES[$inputName]['error'] === UPLOAD_ERR_OK) {
                 $archivosASubir[] = [
                     'input' => $inputName,
                     'dir' => $uploadDir,
-                    'nombreArchivo' => $this->getNombreArchivo($inputName)
+                    'nombreArchivo' => $this->getNombreArchivo($inputName, $estadoCivil)
                 ];
             }
         }
@@ -532,7 +541,7 @@ class personalController extends personalModel
         foreach ($archivosASubir as $archivo) {
             $inputName = $archivo['input'];
             $nombreArchivos[$inputName] = $this->fileUploader->obtenerNombreArchivo($_FILES[$inputName], $cedula);
-            $direccion = $archivo['dir'] . $nombreArchivos[$inputName]['nombre'];
+            $direccion = $archivo['dir'] .$cedula. $nombreArchivos[$inputName]['nombre'];
             $existeArchivoCheck = $this->fileUploader->archivoExiste2($direccion);
             if ($existeArchivoCheck['error']) {
                 $existeArchivo = true;
@@ -549,7 +558,7 @@ class personalController extends personalModel
             foreach ($archivosASubir as $archivo) {
                 $inputName = $archivo['input'];
                 $nombreArchivo = $archivo['nombreArchivo'];
-                $direccion = $archivo['dir'] . $nombreArchivos[$inputName]['nombre'];
+                $direccion = $archivo['dir'] ;  //. $nombreArchivos[$inputName]['nombre']
                 $resultados[$inputName] = $this->fileUploader->subirArchivo($_FILES[$inputName], $cedula, $archivo['dir'], $id_empleado, null, $nombreArchivo);
                 if ($resultados[$inputName]['error']) {
                     $resultados['mensaje'] = $resultados[$inputName]['mensaje'];
@@ -567,23 +576,39 @@ class personalController extends personalModel
         return $resultados;
     }
 
-    private function getNombreArchivo($inputName)
-    {
-        switch ($inputName) {
-            case 'contratoArchivo':
-                return 'Contrato';
-            case 'notacionAchivo':
-                return 'Notacion Archivo';
-            case 'docEstadoDerechoArchivo':
-                return 'Documento Estado De Derecho';
-            case 'docCasadoArchivo':
-                return 'Acta De Matrimonio';
-            case 'docArchivoDis':
-                return 'Acta De Discapacidad';
-            default:
-                return 'Archivo';
-        }
+    public function getNombreArchivo($inputName, $estadoCivil = null)
+{
+    switch ($inputName) {
+        case 'contratoArchivo':
+            return 'Contrato';
+        case 'notacionAchivo':
+            return 'Notacion Archivo';
+        case 'docEstadoDerechoArchivo':
+            return 'Documento Estado De Derecho';
+        case 'docCasadoArchivo':
+            return 'Acta De Matrimonio';
+        case 'docArchivoDis':
+            return 'Acta De Discapacidad';
+        case 'docViudaArchivo':
+            return 'Acta De Difución';
+        case 'docDivorcioArchivo':
+            return 'Acta De Divorcio';
+        case 'docSolicEstCivilArchivo':
+            return 'Carta solicitando el cambio de estado civil';
+        case 'docCopiaCedulaArchivo':
+            if ($estadoCivil === 'Casado') {
+                return 'Copia de Cédula-Casado';
+            } elseif ($estadoCivil === 'Divorciado') {
+                return 'Copia de Cédula-Divorciado';
+            } elseif ($estadoCivil === 'Viudo') {
+                return 'Copia de Cédula-Acta De Difución';
+            } else {
+                return 'Copia de Cédula';
+            }
+        default:
+            return 'Archivo';
     }
+}
 
     public function registrarFamiliarInces(
         $FamiliarInces,
