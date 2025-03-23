@@ -16,12 +16,10 @@ switch ($_GET['modulo_Datos']) {
         break;
 
     case 'totalArchivosMes':
-        sleep(2);
         $totalDatos->totalArchivosMes();
         break;
 
     case 'totalArchivosDia':
-        sleep(1);
         $totalDatos->totalArchivosDia();
         break;
 

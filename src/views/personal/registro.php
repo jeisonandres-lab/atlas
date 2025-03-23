@@ -11,11 +11,7 @@ use App\Atlas\config\App;
     <title>Registro | ATLAS</title>
     <!-- CSS DEL SISTEMA -->
     <?php require_once App::URL_INC . "total_css.php"; ?>
-
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/material_blue.css">
     <link rel="stylesheet" href="<?php echo App::URL_CSS . "registroPersonal.css"; ?>">
-    <link rel="stylesheet" href="<?php echo App::URL_CSS . "cssUtils/checkbox.css"; ?>">
 </head>
 
 <body class="layout-fixed sidebar-expand-lg bg-body-tertiary">
@@ -116,7 +112,7 @@ use App\Atlas\config\App;
                                                 <label for="cedula">Cédula</label>
                                                 <div class="input-group">
                                                     <span class="input-group-text span_cedula"><i class="icons fa-regular fa-address-card"></i></span>
-                                                    <input type="text" class="form-control" id="cedula" name="cedula" placeholder="Cédula de Identidad">
+                                                    <input type="text" class="form-control busquedaCedula" id="cedula" name="cedula" placeholder="Cédula de Identidad">
                                                 </div>
                                             </div>
                                         </div>
@@ -497,15 +493,10 @@ use App\Atlas\config\App;
         <?php require_once App::URL_INC . "/footer.php"; ?>
     </div>
 
-    <!-- SCRIPS DEL SISTEMA JS  -->
-    <?php require_once App::URL_INC . "/scrips.php"; ?>
-    <script src="./src/libs/select2/select2.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-    <script src="https://npmcdn.com/flatpickr/dist/l10n/es.js"></script>
-    <!-- <script src="<?php echo App::URL_SCRIPS . "ajax/multiForm.js" ?>" type="module"></script> -->
-    <script src="<?php echo App::URL_SCRIPS . "registroPersonal.js" ?>" type="module"></script>
+<!-- SCRIPS DEL SISTEMA JS  -->
+<?php require_once App::URL_INC . "/scrips.php"; ?>
 
-
+<script src="<?php echo App::URL_SCRIPS . "registroPersonal.js" ?>" type="module" defer></script>
 </body>
 
 </html>

@@ -14,7 +14,7 @@ class App
     public const URL_CSS = "./src/assets/css/";
     public const URL_IMG = "./src/assets/img/images/";
     public const URL_ICONS = "./src/assets/img/icons/";
-    public const URL_FOTOS = "./src/assets/photos/";
+    public const URL_FOTOS = "./src/global/photos/";
     public const APP_NAME = "ATLAS";
 
     // Rutas De Carpetas Y Archivos De Personal
@@ -25,8 +25,11 @@ class App
     public const URL_CONTRATOS = "../global/archives/contratos/";
     public const URL_NOTACION = "../global/archives/notacion/";
     public const URL_MATRIMONIO = "../global/archives/personal/actaMatrimonio/";
+    public const URL_DIRVORCIO = "../global/archives/personal/dirvorciadoArchivo/";
     public const URL_ESTADODEDERECHO = "../global/archives/personal/estadoDeDerecho/";
     public const URL_DISCAPACIDADEMPELADO = "../global/archives/personal/actaDiscapacidad/";
+    public const URL_VIUDO = "../global/archives/personal/viudoArchivo/";
+    public const URL_SOLICITUDCAMBIOESTADOCIVIL = "../global/archives/personal/solicitudCambioEstadoCivil/";
 
     public static function zonaHoraria()
     {

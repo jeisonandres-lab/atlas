@@ -16,8 +16,8 @@ $admin2 = new administradorController();
 $notificacion = new notificacionController();
 $horaLocal = new HoraLocal();
 
-// $id = isset($_POST['id']) ? $conexion->limpiarCadena($_POST['id']) : "";
-// $usuario = isset($_POST['usuario']) ? $conexion->limpiarCadena($_POST['usuario']) : "";
+ $id = isset($_POST['id']) ? $conexion->limpiarCadena($_POST['id']) : "";
+ $usuario = isset($_POST['usuario']) ? $conexion->limpiarCadena($_POST['usuario']) : "";
 $cedula = isset($_POST['cedula']) ? $conexion->limpiarCadena($_POST['cedula']) : "";
 
 

@@ -5,19 +5,15 @@ import {
   validarNumeroNumber,
   validarNumeros,
   validarSelectores,
-  limpiarFormulario,
-  liberarInputs,
   file,
-  validarNumerosMenores,
-  limpiarInput,
   clasesInputs,
-  clasesInputsError,
   incluirSelec2,
   validarSelectoresSelec2,
 } from "./ajax/inputs.js";
 
-import { alertaNormalmix, AlertSW2 } from "./ajax/alerts.js";
-import { enviarDatos, enviarDatosPersonalizados, enviarFormulario, obtenerDatos } from "./ajax/formularioAjax.js";
+import { alertaNormalmix,  } from "./ajax/alerts.js";
+import {enviarFormulario} from "./ajax/formularioAjax.js";
+import { setCargarParentesco } from "./ajax/variablesArray.js";
 
 $(function () {
   const cargando = document.getElementById('cargando');
@@ -68,20 +64,8 @@ $(function () {
       if (parsedData.exito == true) {
         let nombre = parsedData.nombre;
         let apellido = parsedData.apellido;
-
         $("#parentesco").empty();
-
-        $("#parentesco").append($("<option>", {
-          value: "",
-          text: "Seleccione un parentesco"
-        }));
-
-        opciones.forEach(function (value) {
-          $("#parentesco").append($("<option>", {
-            value: value,
-            text: value
-          }));
-        });
+        setCargarParentesco("#parentesco")
 
         // si tiene marcado error
         $("#nombre").removeClass("error_input");

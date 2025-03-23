@@ -4,24 +4,16 @@ import { descargarArchivo, enviarFormulario, obtenerDatosJQuery, obtenerDatosPro
 import {
   colocarMeses,
   colocarYear,
-  valdiarCorreos,
   validarNombre,
   validarNumeros,
   validarSelectores,
-  validarTelefono,
   file,
-  limpiarInput,
   colocarNivelesEducativos,
   clasesInputs,
   incluirSelec2,
   validarSelectoresSelec2,
-  validarNumerosMenores,
-  validarNombreConEspacios,
   validarNumeroNumber,
-  validarDosDatos,
-  validarInputFecha,
   mesesDias,
-  configurarInactividad,
 } from "./ajax/inputs.js";
 
 $(function () {
@@ -92,6 +84,7 @@ $(function () {
     },
     processing: true,
     serverSide: true,
+    deferRender: true,
     info: false,
     order: [[0, 'desc']],
     paging: true,

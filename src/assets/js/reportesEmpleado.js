@@ -11,7 +11,6 @@ import {
     validarSelectoresSelec2,
     validarNumeroNumber,
     validarInputFecha,
-    fechasJQueyDataPikerPresente,
 } from "./ajax/inputs.js";
 
 import { 

@@ -172,19 +172,19 @@ $(function () {
     ];
 
     try {
-      const [dependencias, estatus, cargo, departamento, estado] = await Promise.all(urls.map(url => obtenerDatosJQuery(url)));
+      const results = await Promise.allSettled(urls.map(url => obtenerDatosJQuery(url)));
 
       const selectores = [
-        { data: dependencias, selector: 'dependencia', mensaje: 'Seleccione una dependencia' },
-        { data: estatus, selector: 'estatus', mensaje: 'Seleccione un estatus' },
-        { data: cargo, selector: 'cargo', mensaje: 'Seleccione un cargo' },
-        { data: departamento, selector: 'departamento', mensaje: 'Seleccione un departamento' },
-        { data: estado, selector: 'estado', mensaje: 'Seleccione un estado' },
+        { result: results[0], selector: 'dependencia', mensaje: 'Seleccione una dependencia' },
+        { result: results[1], selector: 'estatus', mensaje: 'Seleccione un estatus' },
+        { result: results[2], selector: 'cargo', mensaje: 'Seleccione un cargo' },
+        { result: results[3], selector: 'departamento', mensaje: 'Seleccione un departamento' },
+        { result: results[4], selector: 'estado', mensaje: 'Seleccione un estado' },
       ];
 
-      selectores.forEach(async ({ data, selector, mensaje }) => {
-        if (data && data.exito && data.data) {
-          await llenarSelect(data.data, selector, mensaje);
+      selectores.forEach(async ({ result, selector, mensaje }) => {
+        if (result.status === 'fulfilled' && result.value.exito && result.value.data) {
+          await llenarSelect(result.value.data, selector, mensaje);
         } else {
           console.error(`Error al obtener ${selector} o la estructura de la respuesta es incorrecta`);
         }
@@ -209,7 +209,7 @@ $(function () {
       if (parsedData.exito) {
         console.log(parsedData.exito)
         $("#aceptar").prop("disabled", false);
-        await AlertDirection("success", parsedData.mensaje, "top", 3000, recargarConVerificacionDeCache());
+        await AlertDirection("success", parsedData.mensaje, "top", 5000, recargarConVerificacionDeCache());
       } else {
         await alertaNormalmix(parsedData.mensaje, 4000, "error", "top-end");
         // if (error) limpiarFormulario($("#formulario_registro"));
@@ -227,9 +227,6 @@ $(function () {
 
     // Verificar el ID del botón
     if (boton.attr("id") === "asignarDisca") {
-      // Eliminar la clase ignore-validation de los inputs
-      // $("#tpDiscapacidad").removeClass("ignore-validation");
-      // $("#achivoDis").removeClass("ignore-validation");
 
       // Mostrar contenedores con animación
       tipoDiscapacidad.slideDown(500);
@@ -353,31 +350,72 @@ $(function () {
 
   // el evento de estado civil del modal
   $(document).on("change", "#civil", async function () {
+    // DATOS DE IDENTIFICACION 
     const cedulaHTML = setVariableCedulaFamiliar("cedulaFamiliar", "cedulaFamiliar");
     const nombreHTML = setVariableNombreFamiliar("nombreFamiliar", "primerNombreFamiliar");
     const apellidoHTML = setVariableApellidoFamiliar("apellidoFamiliar", "primerApellidoFamiliar");
-    const documentoEstadoDerechoHTML = setVariableDocumentoFamiliar("docEstadoDerecho", "docEstadoDerechoArchivo", ".span_docEstadoDerecho");
-    const documentoCasadoHTML = setVariableDocumentoFamiliar("docCasado", "docCasadoArchivo", ".span_docCasado");
+    // DOCUMENTO DE ESTADO DE DERECHO
+    const documentoEstadoDerechoHTML = setVariableDocumentoFamiliar("docEstadoDerecho", "docEstadoDerechoArchivo", "span_docEstadoDerecho", "Documento estado derecho");
+    // DOCUMENTO DE CASADO
+    const documentoCasadoHTML = setVariableDocumentoFamiliar("docCasado", "docCasadoArchivo", "span_docCasado", "Acta de matrimonio");
+    // DOCUMENTO DE LA COPIA DE LA CEDULA DE IDENTIDAD
+    const documentoCopiaCedulaHTML = setVariableDocumentoFamiliar("docCopiaCedula", "docCopiaCedulaArchivo", "span_docCopiaCedula", 'Copia de cédula');
+    // DOCUMENTO DE VIUDO
+    const documentoViudoHTML = setVariableDocumentoFamiliar("docViuda", "docViudaArchivo", "span_docViuda", "Acta de defunción");
+    // DOCUMENTO DEL DIVORCIO
+    const documentoActaDivorcioHTML = setVariableDocumentoFamiliar("docDivorcio", "docDivorcioArchivo", "span_docDivorcio", "Acta de divorcio");
+    // DOCUMENTO DE ACTA DE CAMBIO DE ESTADO CIVIL DEL DEVORCIO
+    const documentoActaDivorcioCivilHTML = setVariableDocumentoFamiliar("docSolicEstCivil", "docSolicEstCivilArchivo", "span_docSolicEstCivil", "Carta de cambio de estado civil");
+    // CHECKBOX DE EMPLEAOD INCES
     const checkboxHTML = setVariableCheckboxInces("btnEDInces", `Empleado <strong class="text-danger">INCES</strong>`, "contenchecbox")
+    // MODAL DE ESTADO DE DERECHO TOTAL DE TODOS LOS ESADOS CIVIL
     $('#estadoDerecho').modal({
       backdrop: 'static',
       keyboard: true
     });
 
+    // documentos de estado de derecho
     if ($(this).val() === "EstadoDerecho") {
       $('#estadoDerecho').modal('show');
       $("#exampleModalLabel").text("Estado De Derecho");
       $(".contendorEstadoDerecho").html(checkboxHTML + cedulaHTML + nombreHTML + apellidoHTML + documentoEstadoDerechoHTML);
-
+      // validaciones
       file("#docEstadoDerecho", ".span_docEstadoDerecho");
     }
-    // if ($(this).val() === "Casado") {
-    //   $('#estadoDerecho').modal('show');
-    //   $("#exampleModalLabel").text("Casado");
-    //   $(".contendorEstadoDerecho").html(checkboxHTML + cedulaHTML + nombreHTML + apellidoHTML + documentoCasadoHTML);
 
-    //   file("#docCasado", ".span_docCasado");
-    // }
+    // documento de casado
+    if ($(this).val() === "Casado") {
+      $('#estadoDerecho').modal('show');
+      $("#exampleModalLabel").text("Casado");
+      $(".contendorEstadoDerecho").html(documentoCasadoHTML + documentoCopiaCedulaHTML);
+      // validaciones
+      file("#docCasado", ".span_docCasado");
+      file("#docCopiaCedula", ".span_docCopiaCedula");
+
+    }
+
+    // documento de viudo
+    if ($(this).val() === "Viudo") {
+      $('#estadoDerecho').modal('show');
+      $("#exampleModalLabel").text("Viudo");
+      $(".contendorEstadoDerecho").html(documentoViudoHTML + documentoCopiaCedulaHTML);
+      // validaciones
+      file("#docViuda", ".span_docViuda");
+      file("#docCopiaCedula", ".span_docCopiaCedula");
+    }
+
+    // documento de divorcio
+    if ($(this).val() === "Divorciado") {
+      $('#estadoDerecho').modal('show');
+      $("#exampleModalLabel").text("Divorciado");
+      $(".contendorEstadoDerecho").html(documentoActaDivorcioHTML + documentoActaDivorcioCivilHTML);
+
+      // validaciones
+      file("#docDivorcio", ".span_docDivorcio");
+      file("#docSolicEstCivil", ".span_docSolicEstCivil");
+    }
+
+    // validaciones general de estado de derecho
     validarNumeros("#cedulaFamiliar", ".span_cedulaFamiliar");
     validarNombre("#nombreFamiliar", ".span_nombreFamiliar");
     validarNombre("#apellidoFamiliar", ".span_apellidoFamiliar");
@@ -392,11 +430,6 @@ $(function () {
   // Maneja el clic en el botón "cerrarModalEstadoDerecho"
   $(document).on('click', '#cerrarModalEstadoDerecho', function () {
     // // Limpia los inputs y aplica las clases (misma lógica que "aceptar")
-    // $('#cedulaFamiliar, #nombreFamiliar, #apellidoFamiliar, #docEstadoDerecho').val('').addClass('ignore-validation cumplidoNormal'); // Limpia y agrega clases
-    // $('#cedulaFamiliar, #nombreFamiliar, #apellidoFamiliar, #docEstadoDerecho').val('').removeClass('cumplido'); // Limpia y agrega clases
-    // $('.span_cedulaFamiliar, .span_nombreFamiliar, .span_apellidoFamiliar, .span_docEstadoDerecho').removeClass('cumplido_span');
-    // $('#civil').val('');
-    // $('#civil').val(null).trigger('change');
     $('#estadoDerecho').modal('hide'); // Oculta el modal
     $("#botonModalEstadoDerecho").slideUp(400);
   })
@@ -440,9 +473,16 @@ $(function () {
   // buscar empelado por medio de la dcedula del familiar por si ecxiste ya esa cedula como empleado
   $(document).on("input", "#cedulaFamiliar", async function () {
     if ($(this).hasClass("busquedaCedula")) {
-      await cedulaExisteEmpleado("#cedulaFamiliar", ".span_cedulaFamiliar");
+      await cedulaExisteEmpleado("#cedulaFamiliar", ".span_cedulaFamiliar", "La cédula le pertenece a un trabajador inces");
     }
   });
+// buscar empelado por medio de la dcedula del familiar por si ecxiste ya esa cedula como empleado
+$(document).on("input", "#cedula", async function () {
+  if ($(this).hasClass("busquedaCedula")) {
+    await cedulaExisteEmpleado("#cedula", ".span_cedula", "Este empleado ya esta registrado en el sistema ");
+  }
+});
+
   // Llamar a la función para realizar las consultas
   realizarConsultas();// realizar la cunsultas por promesas
   //cargar los datos de estaod y municipio

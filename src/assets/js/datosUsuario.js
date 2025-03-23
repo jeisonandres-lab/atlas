@@ -48,7 +48,7 @@ $(function () {
                                 <div class="card d-flex flex-row p-0" style="box-shadow: 0px 6px 16px 2px rgba(0, 0, 0, 0.05) !important;">
                                     <div class="col-1 contenedor-img rounded-start-2 d-flex justify-content-center align-items-center border-end">
                                         <div class="conten-img d-flex justify-content-center align-items-center">
-                                            <img class="img-img" style="width: 70px; height: 70px; border-radius: 50%;" src="./src/global/archives/photos/${usuario.cedula}.png" alt="Img del trabajador">
+                                            <img class="img-img" style="width: 70px; height: 70px; border-radius: 50%;" src="./src/global/photos/${usuario.cedula}.png" alt="Img del trabajador">
                                         </div>
                                     </div>
                                     <div class="col rounded-end-2 ms-2">
@@ -146,7 +146,7 @@ $(function () {
     
     setTimeout(function() {
         $(".firs").text("<<");
-      }, 5000); // Retraso de 100 milisegundos
+      }, 3000); // Retraso de 100 milisegundos
 
 });
 

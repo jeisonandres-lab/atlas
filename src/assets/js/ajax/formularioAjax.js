@@ -117,8 +117,8 @@ export async function obtenerDatosPromise(url, data = {}) {
 }
 
 export async function obtenerDatosJQuery(url, options = {}) {
-    let formData = new FormData();
-    for (let key in options) {
+    const formData = new FormData();
+    for (const key in options) {
         formData.append(key, options[key]);
     }
 
@@ -132,8 +132,7 @@ export async function obtenerDatosJQuery(url, options = {}) {
             throw new Error('Error en la solicitud');
         }
 
-        const data = await response.json();
-        return data;
+        return await response.json();
     } catch (error) {
         console.error('Error al obtener los datos:', error);
         throw error;

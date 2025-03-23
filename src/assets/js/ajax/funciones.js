@@ -124,13 +124,13 @@ export function limpiarFormulario(formulario) {
   });
 }
 
-export async function cedulaExisteEmpleado(input, cumplido_span) {
+export async function cedulaExisteEmpleado(input, cumplido_span, text) {
   $(document).on("input", input, async function () {
     if ($(this).hasClass("busquedaCedula")) {
       async function callbackExito(parsedData) {
         if (parsedData.exito == true) {
           clasesInputsError(input, cumplido_span);
-          await alertaNormalmix("Esta cédula le pertenece a un empleado inces", 4000, "error", "top-end");
+          await alertaNormalmix(text, 4000, "error", "top-end");
         }
       }
 

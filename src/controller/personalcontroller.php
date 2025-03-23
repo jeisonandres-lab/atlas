@@ -507,7 +507,10 @@ class personalController extends personalModel
             'notacionAchivo' => App::URL_NOTACION,
             'docEstadoDerechoArchivo' => App::URL_ESTADODEDERECHO,
             'docCasadoArchivo' => App::URL_MATRIMONIO,
-            'docArchivoDis' => App::URL_DISCAPACIDADEMPELADO
+            'docArchivoDis' => App::URL_DISCAPACIDADEMPELADO,
+            'docViudaArchivo'  => App::URL_VIUDO,
+            'docDivorcioArchivo' => App::URL_DIRVORCIO,
+            "docSolicEstCivilArchivo" => App::URL_SOLICITUDCAMBIOESTADOCIVIL
         ];
 
         $archivosASubir = [];

@@ -14,7 +14,7 @@ export function formulariomultiple(datos, alerta, contenido){
       var current_active_step = $(this).parents('.f1').find('.f1-step.active');
       var progress_line = $(this).parents('.f1').find('.f1-progress-line');
 
-      parent_fieldset.find('input[type="text"], input[type="password"], textarea, select, .select2, input[type="number"]').each(function () {
+      parent_fieldset.find().each(function () {
         if (!$(this).hasClass('ignore-validation')) {
           if (!$(this).hasClass('cumplido') && !$(this).hasClass('cumplidoNormal')) {
             clasesInputsError($(this));

@@ -132,4 +132,8 @@ form input[type="file"] {
   height: 38px !important;
 }
 
+form input[type="checkbox"] {
+  height: 20px !important;
+}
+
 /* SELECT 2 */

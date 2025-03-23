@@ -68,7 +68,7 @@ class fileUploaderController extends Conexion
      * @param string $extension Extensión del archivo.
      * @return array Resultado de la operación de subida.
      */
-    public function moverArchivo($file, $destination, $extension, $id_empleado, $fileInfo, $id_Nino,$nombreDoc)
+    public function moverArchivo($file, $destination, $extension, $id_empleado, $fileInfo, $id_Nino, $nombreDoc, $cedula)
     {
         $tamano = $this->formatSizeUnits($file['size']); // Añadir el tamaño del archivo con formato legible
         $codigo = $this->generarCodigoAleatorio(6);
@@ -117,13 +117,21 @@ class fileUploaderController extends Conexion
         $tabla = 'documentacion';
         $cargarDOC = $this->subirDoc->getRegistrarDOCS($tabla, $parametros_doc);
         if ($cargarDOC) {
-            $registroAuditoria = $this->auditoriaController->registrarAuditoria($this->idUsuario, 'Registrar documento', 'El usuario ' . $this->nombreUsuario . ' ha colocado un nuevo documento en el sistema llamado '. $fileInfo['nombre']. " con el código: ".$codigo. " y un tamaño de: ".$tamano);
+            $registroAuditoria = $this->auditoriaController->registrarAuditoria($this->idUsuario, 'Registrar documento', 'El usuario ' . $this->nombreUsuario . ' ha colocado un nuevo documento en el sistema llamado ' . $fileInfo['nombre'] . " con el código: " . $codigo . " y un tamaño de: " . $tamano);
             if ($registroAuditoria) {
-                if (move_uploaded_file($file['tmp_name'], $destination)) {
+                // Verificar si existe una carpeta con el nombre de la cédula
+                $carpetaCedula = $destination . '/' . $cedula;
+                if (!is_dir($carpetaCedula)) {
+                    mkdir($cedula, 0777, true);
+                }
+
+                // Mover el archivo a la carpeta de la cédula
+                $destinationPath = $carpetaCedula . '/' . $fileInfo['nombre'];
+                if (move_uploaded_file($file['tmp_name'], $destinationPath)) {
                     return [
                         'error' => false,
                         'mensaje' => 'Archivo subido con éxito',
-                        'ruta' => $destination,
+                        'ruta' => $destinationPath,
                         'nombre' => $fileInfo['nombre'],
                         'extension' => $extension,
                         'tamano' => $tamano, // Añadir el tamaño del archivo con formato legible
@@ -136,13 +144,13 @@ class fileUploaderController extends Conexion
             } else {
                 return [
                     'error' => true,
-                    'mensaje' => 'error al cargar los datos del archivo en la bse de datos',
+                    'mensaje' => 'Error al registrar la auditoría',
                 ];
             }
         } else {
             return [
                 'error' => true,
-                'mensaje' => 'error al cargar los datos del archivo en la bse de datos',
+                'mensaje' => 'Error al cargar los datos del archivo en la base de datos',
             ];
         }
     }
@@ -188,7 +196,7 @@ class fileUploaderController extends Conexion
         // }
 
         // Mover el archivo y regresar el resultado
-        return $this->moverArchivo($file, $destination, $extension, $id_empleado, $fileInfo, $id_Nino, $nombreDoc);
+        return $this->moverArchivo($file, $destination, $extension, $id_empleado, $fileInfo, $id_Nino, $nombreDoc, $cedula);
     }
 
     private function formatSizeUnits($bytes)

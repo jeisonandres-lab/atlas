@@ -5,16 +5,19 @@ namespace App\Atlas\controller;
 use App\Atlas\config\Conexion;
 use App\Atlas\models\tablasModel;
 use App\Atlas\models\bienestarSocialModel;
+use App\Atlas\config\App;
 
 class bienestarSocialController extends bienestarSocialModel
 {
 
     private $tablas;
+    private $App;
 
     public function __construct()
     {
         parent::__construct();
         $this->tablas = new tablasModel();
+        $this->App = new App ();
     }
 
     public function datosBienestar()
@@ -44,7 +47,7 @@ class bienestarSocialController extends bienestarSocialModel
             $nombre = $row['primerNombre']; // Suponiendo que el nombre del personal está en el campo 'primerNombre'
             $apellido = $row['primerApellido']; // Suponiendo que el apellido del personal está en el campo 'primerApellido'
             // Buscar la imagen PNG por medio de la cédula
-            $imagenPath = "./src/global/archives/photos/{$cedula}.png"; // Ajusta la ruta según sea necesario
+            $imagenPath = $this->App::URL_FOTOS . $cedula . ".png"; // Ajusta la ruta según sea necesario
 
             $imagen = "
                 <div class='d-flex align-items-center text-center'>
@@ -52,19 +55,16 @@ class bienestarSocialController extends bienestarSocialModel
                 <p class ='m-0'>{$nombre} {$apellido}</p>
                 </div>";
 
-        $botones = "
-
-        <button class='btn btn-danger btnDescargarFicha btn-sm btn-hover-rojo' data-id=" . $row['cedula'] .  "><i class='fa-solid fa-inbox-in me-2'></i>Solicitar Ficha</button>
-        ";
-
+            $botones = "
+                <button class='btn btn-danger btnDescargarFicha btn-sm btn-hover-rojo' data-id='{$row['cedula']}'><i class='fa-solid fa-inbox-in me-2'></i>Solicitar Ficha</button>
+            ";
 
             $data_json['data'][] = [
                 '0' => $imagen,
                 '1' => $row['correo'],
                 '2' => $row['cargo'],
                 '3' => $row['telefono'],
-                '4' =>$botones
-
+                '4' => $botones
             ];
             $data_json['mensaje'] = "todas las dependencias de manera exitosa";
         }
@@ -80,7 +80,7 @@ class bienestarSocialController extends bienestarSocialModel
         echo json_encode($response);
     }
 
-    
+
 
     public function datosRnuncia()
     {

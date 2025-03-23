@@ -72,12 +72,28 @@ use App\Atlas\config\App;
             </div>
 
             <!-- subMenu de la vista -->
-            <div class="container-fluid">
+            <div class="container-fluid mb-3">
                 <div class="row">
-                    <div class="col">
-                        <div class="row">
+                    <div class="col-sm-12 col-mb-6 col-xl-6">
+                        <div class="bg-white p-3">
+                            <table id="tableUsers" class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th scope="col" class="text-center bg-primary">#</th>
+                                        <th scope="col" class="text-center bg-primary">Usuario</th>
+                                        <th scope="col" class="text-center bg-primary">Rol</th>
+                                        <th scope="col" class="text-center bg-primary">Activo</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-mb-6 col-xl-6">
+                        <div class="row d-flex flex-wrap position-relative h-100 ">
                             <!-- PERSONAL REGISTRADO -->
-                            <div class="col-lg-4 col-md-4 col-sm-12">
+                            <div class="col-lg-4 col-md-4 col-sm-12 w-50 mb-2">
                                 <div class="card custom-card">
                                     <div class="card-body">
                                         <div class="d-flex align-items-start justify-content-between mb-2">
@@ -106,36 +122,36 @@ use App\Atlas\config\App;
                             </div>
 
                             <!-- TOTAL DE ARCHIVOS SUBIDOS EN EL MES ACTUAL-->
-                            <div class="col-lg-4 col-md-4 col-sm-12">
-                                <div class="card custom-card">
-                                    <div class="card-body">
-                                        <div class="d-flex align-items-start justify-content-between mb-2">
-                                            <div>
-                                                <span class="text-muted fs-13 d-block mb-1">
-                                                    Total de achivos
-                                                </span>
-                                                <h4 class="fw-medium mb-0" id="totalArchivos">
-                                                    860
-                                                </h4>
-                                            </div>
-                                            <div class="lh-1">
-                                                <span class="avatar avatar-md avatar-rounded color-primary-tint2">
-                                                    <i class="fa-regular fa-book fs-5 icon-menu"></i>
-                                                </span>
-                                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-12 w-50  mb-2"">
+                                <div class=" card custom-card">
+                                <div class="card-body">
+                                    <div class="d-flex align-items-start justify-content-between mb-2">
+                                        <div>
+                                            <span class="text-muted fs-13 d-block mb-1">
+                                                Total de achivos
+                                            </span>
+                                            <h4 class="fw-medium mb-0" id="totalArchivos">
+                                                860
+                                            </h4>
                                         </div>
-                                        <!-- <div class="text-muted fs-13">
+                                        <div class="lh-1">
+                                            <span class="avatar avatar-md avatar-rounded color-primary-tint2">
+                                                <i class="fa-regular fa-book fs-5 icon-menu"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <!-- <div class="text-muted fs-13">
                                             Aumentó un
                                             <span class="text-success">
                                                 <span id="porcentajeArchivos">2,56% </span><i class="fa-regular fa-arrow-up ms-1"></i>
                                             </span>
                                         </div> -->
-                                    </div>
                                 </div>
                             </div>
+                        </div>
 
-                            <!-- ATENCION MEDICA -->
-                            <!-- <div class="col-lg-4 col-md-4 col-sm-12">
+                        <!-- ATENCION MEDICA -->
+                        <!-- <div class="col-lg-4 col-md-4 col-sm-12 w-50">
                                 <div class="card custom-card">
                                     <div class="card-body">
                                         <div class="d-flex align-items-start justify-content-between mb-2">
@@ -163,8 +179,8 @@ use App\Atlas\config\App;
                                 </div>
                             </div> -->
 
-                            <!-- MEDICAMENTOS -->
-                            <!-- <div class="col-lg-4 col-md-4 col-sm-12">
+                        <!-- MEDICAMENTOS -->
+                        <!-- <div class="col-lg-4 col-md-4 col-sm-12 w-50">
                                 <div class="card custom-card">
                                     <div class="card-body">
                                         <div class="d-flex align-items-start justify-content-between mb-2">
@@ -192,112 +208,99 @@ use App\Atlas\config\App;
                                 </div>
                             </div> -->
 
-                            <!-- PERSONAL DE VACACIONES -->
-                            <div class="col-lg-4 col-md-4 col-sm-12">
-                                <div class="card custom-card">
-                                    <div class="card-body">
-                                        <div class="d-flex align-items-start justify-content-between mb-2">
-                                            <div>
-                                                <span class="text-muted fs-13 d-block mb-1">
-                                                    Personal de vacaciones
-                                                </span>
-                                                <h4 class="fw-medium mb-0" id="personalVacaciones">
-                                                    12
-                                                </h4>
-                                            </div>
-                                            <div class="lh-1">
-                                                <span class="avatar avatar-md avatar-rounded color-primary">
-                                                    <i class="fa-light fa-island-tropical fs-5 icon-menu"></i>
-                                                </span>
-                                            </div>
+                        <!-- PERSONAL DE VACACIONES -->
+                        <div class="col-lg-4 col-md-4 col-sm-12 w-50">
+                            <div class="card custom-card">
+                                <div class="card-body">
+                                    <div class="d-flex align-items-start justify-content-between mb-2">
+                                        <div>
+                                            <span class="text-muted fs-13 d-block mb-1">
+                                                Personal de vacaciones
+                                            </span>
+                                            <h4 class="fw-medium mb-0" id="personalVacaciones">
+                                                12
+                                            </h4>
                                         </div>
-                                        <!-- <div class="text-muted fs-13">
+                                        <div class="lh-1">
+                                            <span class="avatar avatar-md avatar-rounded color-primary">
+                                                <i class="fa-light fa-island-tropical fs-5 icon-menu"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <!-- <div class="text-muted fs-13">
                                             Aumentó un
                                             <span class="text-success">
                                                 2,56% <i class="fa-regular fa-arrow-up"></i>
                                             </span>
                                         </div> -->
-                                    </div>
                                 </div>
                             </div>
+                        </div>
 
-                            <!-- PERSONAL EN AUSENCIA -->
-                            <div class="col-lg-4 col-md-4 col-sm-12">
-                                <div class="card custom-card">
-                                    <div class="card-body">
-                                        <div class="d-flex align-items-start justify-content-between mb-2">
-                                            <div>
-                                                <span class="text-muted fs-13 d-block mb-1">
-                                                    Personal en ausencia
-                                                </span>
-                                                <h4 class="fw-medium mb-0" id="personalAusencia">
-                                                    82
-                                                </h4>
-                                            </div>
-                                            <div class="lh-1">
-                                                <span class="avatar avatar-md avatar-rounded color-primary">
-                                                    <i class="fa-regular fa-users-gear fs-5 icon-menu"></i>
-                                                </span>
-                                            </div>
+                        <!-- PERSONAL EN AUSENCIA -->
+                        <div class="col-lg-4 col-md-4 col-sm-12 w-50">
+                            <div class="card custom-card">
+                                <div class="card-body">
+                                    <div class="d-flex align-items-start justify-content-between mb-2">
+                                        <div>
+                                            <span class="text-muted fs-13 d-block mb-1">
+                                                Personal en ausencia
+                                            </span>
+                                            <h4 class="fw-medium mb-0" id="personalAusencia">
+                                                82
+                                            </h4>
                                         </div>
-                                        <!-- <div class="text-muted fs-13">
+                                        <div class="lh-1">
+                                            <span class="avatar avatar-md avatar-rounded color-primary">
+                                                <i class="fa-regular fa-users-gear fs-5 icon-menu"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <!-- <div class="text-muted fs-13">
                                             Aumentó un
                                             <span class="text-success">
                                                 2,56% <i class="fa-regular fa-arrow-up"></i>
                                             </span>
                                         </div> -->
-                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+    </div>
 
-            <!-- USUARIOS Y ESTADISTICAS DEL DATOS -->
-            <div class="container-fluid mb-2">
-                <div class="row">
-                    <div class="col">
-                        <div class="bg-white p-3">
-                            <table id="tableUsers" class="table table-hover">
-                                <thead>
-                                    <tr>
-                                        <th scope="col" class="text-center bg-primary">#</th>
-                                        <th scope="col" class="text-center bg-primary">Usuario</th>
-                                        <th scope="col" class="text-center bg-primary">Rol</th>
-                                        <th scope="col" class="text-center bg-primary">Activo</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="bg-white p-3" style="height: 100%;">
-                            <canvas id="scoreChart2">
-                            </canvas>
-                        </div>
-                    </div>
+
+    <!-- USUARIOS Y ESTADISTICAS DEL DATOS -->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12 col-mb-12 col-xl-12 mb-4">
+                <div class="bg-white px-2 position-relative" style="height: 500px; width: 100%;">
+                    <div id="contentbutton" class="position-absolute"></div>
+                    <canvas id="scoreChart2"></canvas>
                 </div>
             </div>
-            <!-- ARCHIVOS SUBIDOS -->
-            <div class="container-fluid px-2">
-                <!-- ESTADISTICAS -->
-                <div class="bg-white px-2">
-                    <di class="char">
-                        <canvas id="scoreChart">
-                        </canvas>
-                    </di>
-                </div>
+
+        </div>
+    </div>
+
+    <!-- ARCHIVOS SUBIDOS -->
+    <div class="container-fluid mb-4">
+        <!-- ESTADISTICAS -->
+        <div class="col-sm-12 col-mb-12 col-xl-12 ">
+            <div class="bg-white px-2" style="height: 600px; width: 100%;">
+                <canvas id="scoreChart"></canvas>
             </div>
-        </main>
-        <?php require_once App::URL_INC . "/footer.php"; ?>
+        </div>
+    </div>
+
+    </main>
+    <?php require_once App::URL_INC . "/footer.php"; ?>
     </div>
 
     <?php require_once App::URL_INC . "/scrips.php"; ?>
     <?php require_once App::URL_INC . "/tablets.php"; ?>
-    <script type="module" src="<?php echo App::URL_SCRIPS . "home.js" ?>"></script>
+    <script type="module" src="<?php echo App::URL_SCRIPS . "home.js" ?>" defer></script>
 </body>
 
 </html>

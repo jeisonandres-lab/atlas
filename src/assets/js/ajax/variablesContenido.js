@@ -378,11 +378,11 @@ export function setVariableApellidoFamiliar(id, name) {
 }
 
 // CARGAR DOCUMENTO DE ESTADO DE DERECHO
-export function setVariableDocumentoFamiliar(id, name, span) {
+export function setVariableDocumentoFamiliar(id, name, span, nombreDoc) {
     return `
       <div class="col-sm-12 col-mb-6 col-xl-6" id="contentdocumnetoFamiliar">
         <div class="form-group mb-3">
-          <label for="${id}">Documento</label>
+          <label for="${id}">${nombreDoc}</label>
           <div class="input-group">
             <span class="input-group-text ${span}"><i class="icons fa-regular fa-file-zipper"></i></span>
             <input type="file" name="${name}" class="form-control " id="${id}" aria-describedby="inputGroupFileAddon04" aria-label="Upload">

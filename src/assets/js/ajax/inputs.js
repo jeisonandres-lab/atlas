@@ -378,7 +378,7 @@ export async function validarBusquedaCedula(input, divContens) {
   });
 
   function realizarBusqueda(cedula, divContens) {
-    const imageUrl = `./src/global/archives/photos/${cedula}.png`;
+    const imageUrl = `./src/global/photos/${cedula}.png`;
 
     const img = new Image();
     img.src = imageUrl;

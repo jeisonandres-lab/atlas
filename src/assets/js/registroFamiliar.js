@@ -9,7 +9,6 @@ import {
   validarSelectores,
   validarTelefono,
   file,
-  limpiarInput,
   colocarNivelesEducativos,
   clasesInputs,
   incluirSelec2,
@@ -31,18 +30,7 @@ $(function () {
   $("#editarDatos").hide();
   $("#datosReporte").hide();
 
-
-  $("#fechaing").datepicker({
-    dateFormat: "dd-mm-yy", // Cambia el formato de la fecha
-    showWeek: true, // Muestra el número de la semana
-    firstDay: 1, // Establece el primer día de la semana (1 = lunes)
-    changeMonth: true, // Permite cambiar el mes
-    changeYear: true, // Permite cambiar el año
-    yearRange: "1900:2025" // Establece el rango de años
-  });
-
   // configurarInactividad("#editarDatos", 10000); // 10 segundos
-
   validarNombre("#primerNombre", ".span_nombre");
   validarNombre("#segundoNombre", ".span_nombre2");
   validarNombre("#primerApellido", ".span_apellido");
