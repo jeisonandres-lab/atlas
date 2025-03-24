@@ -35,41 +35,44 @@ class personalController extends personalModel
 
     //Registro de personal
     public function registro(
-        $primerNombre,
-        $segundoNombre,
-        $primerApellido,
-        $segundoApellido,
-        $cedula,
-        $civil,
-        $correo,
-        $ano,
-        $mes,
-        $dia,
-        $idEstatus,
-        $idCargo,
-        $idDependencia,
-        $idDepartamento,
-        $telefono,
-        $nivelAcademico,
-        $vivienda,
-        $sexo,
-        $idestado,
-        $idMunicipio,
-        $idParroquia,
-        $calle,
-        $numeroVivienda,
-        $pisoUrba,
-        $nombreUrba,
-        $numeroDepa,
-        $fechaING,
-        $edad,
-        $discapacidad,
-        $FamiliarInces,
-        $primerNombreFamiliar,
-        $primerApellidoFamiliar,
-        $cedulaFamiliar,
+      string $primerNombre,
+      string $segundoNombre,
+      string $primerApellido,
+      string $segundoApellido,
+      string $cedula,
+      string $civil,
+      string $correo,
+      string $ano,
+      string $mes,
+      string $dia,
+      string $idEstatus,
+      string $idCargo,
+      string $idDependencia,
+      string $idDepartamento,
+      string $telefono,
+      string $nivelAcademico,
+      string $vivienda,
+      string $sexo,
+      string $idestado,
+      string $idMunicipio,
+      string $idParroquia,
+      string $calle,
+      string $numeroVivienda,
+      string $pisoUrba,
+      string $nombreUrba,
+      string $numeroDepa,
+      string $fechaING,
+      string $edad,
+      string $discapacidad,
+      string $FamiliarInces,
+      string $primerNombreFamiliar,
+      string $primerApellidoFamiliar,
+      string $cedulaFamiliar,
 
     ) {
+        if ($discapacidad == "") {
+            $discapacidad = null;
+        }
         // sleep(5); // Descomenta esta línea si necesitas una pausa de 5 segundos (útil para depuración o simulación de latencia)
         $data_json = [
             'exito' => false, // Inicializamos 'exito' a false por defecto, asumimos que habrá un error
@@ -166,14 +169,15 @@ class personalController extends personalModel
                                     $primerNombreFamiliar,
                                     $primerApellidoFamiliar,
                                     $cedulaFamiliar,
-                                    $id_empleado
+                                    $id_empleado,
+                                    2
                                 );
 
 
                                 //valdiamos si se cumplio el registro
                                 if (empty($registrarFamiliarInces)) {
                                     $data_json['exito'] = false;
-                                    $data_json['mensaje'] =  "Empleado registrado, pero familiar no";
+                                    $data_json['mensaje'] =  "Empleado registrado, pero familiar NO SE LOGRO";
                                 } else {
 
                                     //registrar documentacion
@@ -218,19 +222,19 @@ class personalController extends personalModel
     }
 
     public function registrarDatosPersonal(
-        $primerNombre,
-        $segundoNombre,
-        $primerApellido,
-        $segundoApellido,
-        $cedula,
-        $civil,
-        $correo,
-        $ano,
-        $mes,
-        $dia,
-        $discapacidad,
-        $sexo,
-        $edad
+       string $primerNombre,
+       string $segundoNombre,
+       string $primerApellido,
+       string $segundoApellido,
+       string $cedula,
+       string $civil,
+       string $correo,
+       string $ano,
+       string $mes,
+       string $dia,
+       string $discapacidad,
+       string $sexo,
+       string $edad
     ) {
         $personal_datos_reg = [
             [
@@ -324,17 +328,17 @@ class personalController extends personalModel
     }
 
     public function registrarDatosEmpleado(
-        $primerNombre,
-        $primerApellido,
-        $cedula,
-        $idEstatus,
-        $idCargo,
-        $idDependencia,
-        $idDepartamento,
-        $telefono,
-        $idPersonal,
-        $nivelAcademico,
-        $fechaING
+        string $primerNombre,
+        string $primerApellido,
+        string $cedula,
+        string $idEstatus,
+        string $idCargo,
+        string $idDependencia,
+        string $idDepartamento,
+        string $telefono,
+        string $idPersonal,
+        string $nivelAcademico,
+        string $fechaING
     ) {
         $empleados_datos_reg = [
             [
@@ -415,20 +419,20 @@ class personalController extends personalModel
     }
 
     public function registrarUbicacionEmpleado(
-        $id_empleado,
-        $idestado,
-        $idMunicipio,
-        $idParroquia,
-        $calle,
-        $numeroVivienda,
-        $pisoUrba,
-        $nombreUrba,
-        $numeroDepa,
-        $vivienda,
-        $primerNombre,
-        $primerApellido,
-        $cedula
-    ) {
+        string $id_empleado,
+        string $idestado,
+        string $idMunicipio,
+        string $idParroquia,
+        string $calle,
+        string $numeroVivienda,
+        string $pisoUrba,
+        string $nombreUrba,
+        string $numeroDepa,
+        string $vivienda,
+        string $primerNombre,
+        string $primerApellido,
+        string $cedula
+    ):bool {
         $ubicacion_empleado = [
             [
                 "campo_nombre" => "id_empleadoUbi",
@@ -500,7 +504,7 @@ class personalController extends personalModel
         }
     }
 
-    public function registrarArchivos($cedula, $id_empleado, $estadoCivil = null)
+    public function registrarArchivos(string $cedula, string $id_empleado, string|int|null $estadoCivil)
     {
         $fileInputs = [
             'contratoArchivo' => App::URL_CONTRATOS,
@@ -510,7 +514,8 @@ class personalController extends personalModel
             'docArchivoDis' => App::URL_DISCAPACIDADEMPELADO,
             'docViudaArchivo'  => App::URL_VIUDO,
             'docDivorcioArchivo' => App::URL_DIRVORCIO,
-            "docSolicEstCivilArchivo" => App::URL_SOLICITUDCAMBIOESTADOCIVIL
+            "docSolicEstCivilArchivo" => App::URL_SOLICITUDCAMBIOESTADOCIVIL,
+            "docPartidaNacimiento" => App::URL_PARTIDANACIMIENTO
         ];
 
         // Determinar la carpeta de destino para docCopiaCedulaArchivo según el estado civil
@@ -541,7 +546,7 @@ class personalController extends personalModel
         foreach ($archivosASubir as $archivo) {
             $inputName = $archivo['input'];
             $nombreArchivos[$inputName] = $this->fileUploader->obtenerNombreArchivo($_FILES[$inputName], $cedula);
-            $direccion = $archivo['dir'] .$cedula. $nombreArchivos[$inputName]['nombre'];
+            $direccion = $archivo['dir'] . $cedula . $nombreArchivos[$inputName]['nombre'];
             $existeArchivoCheck = $this->fileUploader->archivoExiste2($direccion);
             if ($existeArchivoCheck['error']) {
                 $existeArchivo = true;
@@ -558,7 +563,7 @@ class personalController extends personalModel
             foreach ($archivosASubir as $archivo) {
                 $inputName = $archivo['input'];
                 $nombreArchivo = $archivo['nombreArchivo'];
-                $direccion = $archivo['dir'] ;  //. $nombreArchivos[$inputName]['nombre']
+                $direccion = $archivo['dir'];  //. $nombreArchivos[$inputName]['nombre']
                 $resultados[$inputName] = $this->fileUploader->subirArchivo($_FILES[$inputName], $cedula, $archivo['dir'], $id_empleado, null, $nombreArchivo);
                 if ($resultados[$inputName]['error']) {
                     $resultados['mensaje'] = $resultados[$inputName]['mensaje'];
@@ -576,46 +581,47 @@ class personalController extends personalModel
         return $resultados;
     }
 
-    public function getNombreArchivo($inputName, $estadoCivil = null)
-{
-    switch ($inputName) {
-        case 'contratoArchivo':
-            return 'Contrato';
-        case 'notacionAchivo':
-            return 'Notacion Archivo';
-        case 'docEstadoDerechoArchivo':
-            return 'Documento Estado De Derecho';
-        case 'docCasadoArchivo':
-            return 'Acta De Matrimonio';
-        case 'docArchivoDis':
-            return 'Acta De Discapacidad';
-        case 'docViudaArchivo':
-            return 'Acta De Difución';
-        case 'docDivorcioArchivo':
-            return 'Acta De Divorcio';
-        case 'docSolicEstCivilArchivo':
-            return 'Carta solicitando el cambio de estado civil';
-        case 'docCopiaCedulaArchivo':
-            if ($estadoCivil === 'Casado') {
-                return 'Copia de Cédula-Casado';
-            } elseif ($estadoCivil === 'Divorciado') {
-                return 'Copia de Cédula-Divorciado';
-            } elseif ($estadoCivil === 'Viudo') {
-                return 'Copia de Cédula-Acta De Difución';
-            } else {
-                return 'Copia de Cédula';
-            }
-        default:
-            return 'Archivo';
+    public function getNombreArchivo(string $inputName, $estadoCivil = null)
+    {
+        switch ($inputName) {
+            case 'contratoArchivo':
+                return 'Contrato';
+            case 'notacionAchivo':
+                return 'Notacion Archivo';
+            case 'docEstadoDerechoArchivo':
+                return 'Documento Estado De Derecho';
+            case 'docCasadoArchivo':
+                return 'Acta De Matrimonio';
+            case 'docArchivoDis':
+                return 'Acta De Discapacidad';
+            case 'docViudaArchivo':
+                return 'Acta De Difución';
+            case 'docDivorcioArchivo':
+                return 'Acta De Divorcio';
+            case 'docSolicEstCivilArchivo':
+                return 'Carta solicitando el cambio de estado civil';
+            case 'docCopiaCedulaArchivo':
+                if ($estadoCivil === 'Casado') {
+                    return 'Copia de Cédula-Casado';
+                } elseif ($estadoCivil === 'Divorciado') {
+                    return 'Copia de Cédula-Divorciado';
+                } elseif ($estadoCivil === 'Viudo') {
+                    return 'Copia de Cédula-Acta De Difución';
+                } else {
+                    return 'Copia de Cédula';
+                }
+            default:
+                return 'Archivo';
+        }
     }
-}
 
     public function registrarFamiliarInces(
-        $FamiliarInces,
-        $primerNombreFamiliar,
-        $primerApellidoFamiliar,
-        $cedulaFamiliar,
-        $id_empleado
+        string $FamiliarInces,
+        string $primerNombreFamiliar,
+        string $primerApellidoFamiliar,
+        string $cedulaFamiliar,
+        string $id_empleado,
+        int $estatus = 1
     ) {
         if ($FamiliarInces == "si") {
             $check_familiar = $this->getreturnIDP([$cedulaFamiliar]);
@@ -675,7 +681,7 @@ class personalController extends personalModel
                     [
                         "campo_nombre" => "activo",
                         "campo_marcador" => ":activo",
-                        "campo_valor" =>  3
+                        "campo_valor" =>  $estatus
                     ],
                     [
                         "campo_nombre" => "fecha",
@@ -701,22 +707,22 @@ class personalController extends personalModel
     }
     //Registrar Familiar a un empleado
     public function registrarFamilia(
-        $parentesco,
-        $cedulaEmpleado,
-        $primerNombre,
-        $segundoNombre,
-        $primerApellido,
-        $segundoApellido,
-        $cedula,
-        $edad,
-        $ano,
-        $mes,
-        $dia,
-        $numeroCarnet,
-        $tomo,
-        $folio,
-        $discapacidad,
-        $sexo
+        string $parentesco,
+        string $cedulaEmpleado,
+        string $primerNombre,
+        string $segundoNombre,
+        string $primerApellido,
+        string $segundoApellido,
+        string $cedula,
+        string $edad,
+        string $ano,
+        string $mes,
+        string $dia,
+        string $numeroCarnet,
+        string $tomo,
+        string $folio,
+        string $discapacidad,
+        string $sexo
     ) {
         sleep(1);
         $cedulaEmpleado = $this->limpiarCadena($cedulaEmpleado);
@@ -1039,6 +1045,7 @@ class personalController extends personalModel
                     $dependencia = ucfirst($row['dependencia']);
                     $departamento = ucfirst($row['departamento']);
                     $sexo = ucfirst($row['sexo']);
+                    $discapacidad = ucfirst($row['discapacidadPersonal']);
 
                     $municipio = ucfirst($row['municipio']);
                     $parroquia = ucfirst($row['parroquia']);
@@ -1068,6 +1075,7 @@ class personalController extends personalModel
                     $data_json['departamento'] = $departamento;
                     $data_json['sexo'] = $sexo;
                     $data_json['nivelAcademico'] = $nivelacademico;
+                    $data_json['discapacidadPersonal'] =  $discapacidad;
 
                     $data_json['diaNacimiento'] = $row['diaNacimiento'];
                     $data_json['mesNacimiento'] = $row['mesNacimiento'];
@@ -1308,9 +1316,9 @@ class personalController extends personalModel
                 $documentosEncontrados = true; // Se encontró al menos un documento
                 $tipodoc = $documento['tipoDoc'];
                 if ($tipodoc == 'pdf') {
-                    $botonDoc .= "<button class='btn btn-danger btn-sm botondocumet btn-hover' data-doc='" . $documento['doc'] . "'><i class='fa-solid fa-file-pdf fa-sm'></i> " . $documento['tipoDoc'] . "</button>";
+                    $botonDoc .= "<button class='btn btn-danger btn-sm botondocumet btn-hover' data-cedula='". $row['cedula'] . "' data-doc='" . $documento['doc'] . "'><i class='fa-solid fa-file-pdf fa-sm'></i> " . $documento['tipoDoc'] . "</button>";
                 } elseif ($tipodoc == 'png') {
-                    $botonDoc .= "<button class='btn btn-success btn-sm botondocumet btn-hover' data-doc='" . $documento['doc'] . "'><i class='fa-solid fa-file-image fa-sm me-1'></i>" . $documento['tipoDoc'] . "</button>";
+                    $botonDoc .= "<button class='btn btn-success btn-sm botondocumet btn-hover' data-cedula='". $row['cedula'] . "' data-doc='" . $documento['doc'] . "'><i class='fa-solid fa-file-image fa-sm me-1'></i>" . $documento['tipoDoc'] . "</button>";
                 }
             }
 
@@ -1533,7 +1541,8 @@ class personalController extends personalModel
         $pisoUrba,
         $nombreUrba,
         $numeroDepa,
-        $fechaING
+        $fechaING,
+        $discapacidad,
     ) {
         $primerNombre = $this->limpiarCadena($primerNombre);
         $segundoNombre = $this->limpiarCadena($segundoNombre);
@@ -1547,6 +1556,7 @@ class personalController extends personalModel
         $dia = $this->limpiarCadena($dia);
         $nivelAcademico = $this->limpiarCadena($nivelAcademico);
         $sexo = $this->limpiarCadena($sexo);
+        $discapacidad = $this->limpiarCadena($discapacidad);
 
         //Ubicacion
         $vivienda = $this->limpiarCadena($vivienda);
@@ -1566,11 +1576,6 @@ class personalController extends personalModel
         $idDepartamento = $this->limpiarCadena($idDepartamento);
         $telefono = $this->limpiarCadena($telefono);
 
-        $fileInputName = 'contratoArchivo';
-        $fileInputName2 = 'notacionAchivo';
-
-        $uploadDir1 = App::URL_CONTRATOS;
-        $uploadDir2 = App::URL_NOTACION;
 
         $data_json = [
             'exito' => false, // Inicializamos a false por defecto
@@ -1583,18 +1588,6 @@ class personalController extends personalModel
             "condicion_campo" => "id_personal",
             "condicion_marcador" => ":id_personal",
             "condicion_valor" =>  $idPersonal
-        ];
-
-        $condicion_empleado = [
-            "condicion_campo" => "id_empleados",
-            "condicion_marcador" => ":id_empleados",
-            "condicion_valor" => $idEmpleado
-        ];
-
-        $condicion_empleadoUbi = [
-            "condicion_campo" => "id_empleadoUbi",
-            "condicion_marcador" => ":id_empleadoUbi",
-            "condicion_valor" => $idEmpleado
         ];
 
         $personal_datos_reg = [
@@ -1708,188 +1701,143 @@ class personalController extends personalModel
             ]
         ];
 
-        // Verificar si los archivos tienen nombres diferentes
-        $nombreArchivo1 = isset($_FILES[$fileInputName]) ? $_FILES[$fileInputName]['name'] : null;
-        $nombreArchivo2 = isset($_FILES[$fileInputName2]) ? $_FILES[$fileInputName2]['name'] : null;
+        //primero actualizacmos la data del personal del empleado
+        $actualizarDataPersonal = $this->getActualizar('datospersonales', $personal_datos_reg, $condicion_personal);
+        if ($actualizarDataPersonal) {
 
-        if ($nombreArchivo1 && $nombreArchivo2 && $nombreArchivo1 === $nombreArchivo2) {
-            $data_json['exito'] = false;
-            $data_json['mensaje'] = 'Los dos archivos no pueden tener el mismo nombre.';
-        } else {
-            // Crear un array con los archivos que se están subiendo
-            $archivosASubir = [];
-            if ($nombreArchivo1) {
-                $archivosASubir[] = ['input' => $fileInputName, 'dir' => $uploadDir1, 'nombreArchivo' => 'contrato'];
+            //generamos auditoria de este registro
+            $registroAuditoria = $this->auditoriaController->registrarAuditoria($this->idUsuario, 'Actualizar personal', 'El usuario ' . $this->nombreUsuario . ' actualizo los datos del personal con cedula ' . $cedula . '.');
+            if ($registroAuditoria) {
+                $data_json["exitoAuditoria"] = true;
+                $data_json['messengerAuditoria'] = "Auditoria de la actualizacion del personal registrada con exito.";
+            } else {
+                $data_json["exitoAuditoria"] = false;
+                $data_json['messengerAuditoria'] = "Error al registrar la auditoria.";
             }
-            if ($nombreArchivo2) {
-                $archivosASubir[] = ['input' => $fileInputName2, 'dir' => $uploadDir2, 'nombreArchivo' => 'Notacion']; // Asegúrate de definir $uploadDir2
-            }
-            // Ejecutar el código de subida si hay archivos para subir
-            if (!empty($archivosASubir)) {
-                $resultados = [];
-                $existeArchivo = false;
-                // Verificar si alguno de los archivos ya existe
-                foreach ($archivosASubir as $archivo) {
-                    $inputName = $archivo['input'];
-                    $nombreArchivos[$inputName] = $this->fileUploader->obtenerNombreArchivo($_FILES[$inputName], $cedula);
-                    $direccion = $archivo['dir'] . $nombreArchivos[$inputName]['nombre'];
-                    $existeArchivoCheck = $this->fileUploader->archivoExiste2($direccion);
-                    if ($existeArchivoCheck['error']) {
-                        $existeArchivo = true;
-                        $data_json['mensaje'] = $existeArchivoCheck['mensaje'];
-                        break;
-                    }
-                }
-                // Si alguno de los archivos ya existe, no subir ninguno
-                if ($existeArchivo) {
-                    $data_json['exito'] = false;
-                    $data_json['resultado'] = 3;
+
+            // retornamos el id de personal y del empleado
+            $retornarIDEmpleado = $this->getreturnIDPE([$cedula]);
+            $id_empleado = $retornarIDEmpleado[0]['id_empleados'];
+            //  condicion apra poder actualizar la data del empleado
+            $condicion_empleado = [
+                "condicion_campo" => "id_empleados",
+                "condicion_marcador" => ":id_empleados",
+                "condicion_valor" => $id_empleado
+            ];
+            // actualizamos la data del empleado
+            $actualizarDataEmpleado = $this->getActualizar('datosempleados', $empleados_datos_reg,  $condicion_empleado);
+
+            //actualizacion de datos de empleado
+            if ($actualizarDataEmpleado) {
+                //generamos auditoria de este registro
+                $registroAuditoria = $this->auditoriaController->registrarAuditoria($this->idUsuario, 'Actualizar empleado', 'El usuario ' . $this->nombreUsuario . ' actualizo los datos del empleado con cedula ' . $cedula . '.');
+                if ($registroAuditoria) {
+                    $data_json["exitoAuditoria"] = true;
+                    $data_json['messengerAuditoria3'] = "Auditoria de la actualizacion del personal registrada con exito.";
                 } else {
-                    $viejosDatos = $this->getTotalDatosPEID([$idPersonal]);
-                    foreach ($viejosDatos as $row) {
-                        $check_regisPersonal = $this->getActualizar('datospersonales', $personal_datos_reg,  $condicion_personal);
-                        if ($check_regisPersonal) {
+                    $data_json["exitoAuditoria"] = false;
+                    $data_json['messengerAuditoria2'] = "Error al registrar la auditoria.";
+                }
 
-                            $registroAuditoria = $this->auditoriaController->registrarAuditoria($this->idUsuario, 'Actualizar personal', 'El usuario ' . $this->nombreUsuario . ' actualizo los datos del personal con cedula ' . $cedula . '.');
-                            $check_regisEmpleados = $this->getActualizar('datosempleados', $empleados_datos_reg,  $condicion_empleado);
-                            if ($check_regisEmpleados) {
-                                $registroAuditoria = $this->auditoriaController->registrarAuditoria($this->idUsuario, 'Actualizar empleado', 'El usuario ' . $this->nombreUsuario . ' actualizo los datos del empleado con cedula ' . $cedula . '.');
 
-                                $check_busEmpleado = $this->getTotalDatosPEID([$idPersonal]);
-                                foreach ($check_busEmpleado as $row) {
-                                    $id_empleado = $row['id_empleados'];
-                                    // Si ninguno de los archivos existe, proceder con la subida
-                                    foreach ($archivosASubir as $archivo) {
-                                        $inputName = $archivo['input'];
-                                        $direccion = $archivo['dir'] . $nombreArchivos[$inputName]['nombre'];
-                                        $nombreArchivodoc =  $archivo['nombreArchivo'];
-                                        $resultados[$inputName] = $this->fileUploader->subirArchivo($_FILES[$inputName], $cedula, $archivo['dir'], $id_empleado, null, $nombreArchivodoc);
-                                        if ($resultados[$inputName]['error']) {
-                                            $data_json['mensaje'] = $resultados[$inputName]['mensaje'];
-                                            $data_json['resultado'] = 3;
-                                            break;
-                                        }
-                                    }
+                //actualizar la data de la ubicacion
+                // variable de registro de toda las data
+                $ubicacion_empleado = [
+                    [
+                        "campo_nombre" => "idEstado",
+                        "campo_marcador" => ":idEstado",
+                        "campo_valor" =>  $idestado
+                    ],
+                    [
+                        "campo_nombre" => "idMunicipio",
+                        "campo_marcador" => ":idMunicipio",
+                        "campo_valor" => $idMunicipio
+                    ],
+                    [
+                        "campo_nombre" => "idParroquia",
+                        "campo_marcador" => ":idParroquia",
+                        "campo_valor" => $idParroquia
+                    ],
+                    [
+                        "campo_nombre" => "vivienda",
+                        "campo_marcador" => ":vivienda",
+                        "campo_valor" => $vivienda
+                    ],
+                    [
+                        "campo_nombre" => "calle",
+                        "campo_marcador" => ":calle",
+                        "campo_valor" => $calle
+                    ],
+                    [
+                        "campo_nombre" => "nombre_urb",
+                        "campo_marcador" => ":nombre_urb",
+                        "campo_valor" =>   $nombreUrba
+                    ],
+                    [
+                        "campo_nombre" => "num_depar",
+                        "campo_marcador" => ":num_depar",
+                        "campo_valor" =>  $numeroDepa
+                    ],
+                    [
+                        "campo_nombre" => "numVivienda",
+                        "campo_marcador" => ":numVivienda",
+                        "campo_valor" =>  $numeroVivienda
+                    ],
+                    [
+                        "campo_nombre" => "pisoVivienda",
+                        "campo_marcador" => ":pisoVivienda",
+                        "campo_valor" => $pisoUrba
+                    ],
+                ];
 
-                                    $ubicacion_empleado = [
-                                        [
-                                            "campo_nombre" => "idEstado",
-                                            "campo_marcador" => ":idEstado",
-                                            "campo_valor" =>  $idestado
-                                        ],
-                                        [
-                                            "campo_nombre" => "idMunicipio",
-                                            "campo_marcador" => ":idMunicipio",
-                                            "campo_valor" => $idMunicipio
-                                        ],
-                                        [
-                                            "campo_nombre" => "idParroquia",
-                                            "campo_marcador" => ":idParroquia",
-                                            "campo_valor" => $idParroquia
-                                        ],
-                                        [
-                                            "campo_nombre" => "vivienda",
-                                            "campo_marcador" => ":vivienda",
-                                            "campo_valor" => $vivienda
-                                        ],
-                                        [
-                                            "campo_nombre" => "calle",
-                                            "campo_marcador" => ":calle",
-                                            "campo_valor" => $calle
-                                        ],
-                                        [
-                                            "campo_nombre" => "nombre_urb",
-                                            "campo_marcador" => ":nombre_urb",
-                                            "campo_valor" =>   $nombreUrba
-                                        ],
-                                        [
-                                            "campo_nombre" => "num_depar",
-                                            "campo_marcador" => ":num_depar",
-                                            "campo_valor" =>  $numeroDepa
-                                        ],
-                                        [
-                                            "campo_nombre" => "numVivienda",
-                                            "campo_marcador" => ":numVivienda",
-                                            "campo_valor" =>  $numeroVivienda
-                                        ],
-                                        [
-                                            "campo_nombre" => "pisoVivienda",
-                                            "campo_marcador" => ":pisoVivienda",
-                                            "campo_valor" => $pisoUrba
-                                        ],
-                                    ];
+                // condicion para actualizar la data del empelado
+                $condicion_empleadoUbi = [
+                    "condicion_campo" => "id_empleadoUbi",
+                    "condicion_marcador" => ":id_empleadoUbi",
+                    "condicion_valor" => $id_empleado
+                ];
 
-                                    $check_actUbicacionEmpleado = $this->getActualizar('ubicacion', $ubicacion_empleado, $condicion_empleadoUbi);
-                                    if ($check_actUbicacionEmpleado) {
-                                        $data_json['exito'] = true;
-                                        $data_json['mensaje'] = "Empleado Registrado Exitosamente.";
-                                        $data_json['resultado'] = 2;
-                                        $datos_json["exitoAuditoria"] = true;
-                                        $datos_json['messengerAuditoria'] = "Auditoria registrada con exito.";
-                                    } else {
-                                        $data_json['exito'] = false;
-                                        $data_json['mensaje'] = "no se logro registrar la ubicación, pero el empleado ha sido registrado con exito";
-                                        $data_json['resultado'] = 1;
-                                    }
+                //actualizar ubicacion del empleado en el sistema
+                $actulizarUBIempleado = $this->getActualizar('ubicacion', $ubicacion_empleado, $condicion_empleadoUbi);
 
-                                    if ($nombreArchivo1) {
-                                        $data_json['archivo1'] = $resultados[$fileInputName];
-                                    }
-                                    if ($nombreArchivo2) {
-                                        $data_json['archivo2'] = $resultados[$fileInputName2];
-                                    }
-                                    if ($registroAuditoria) {
-                                        $data_json["exitoAuditoria"] = true;
-                                        $data_json['messengerAuditoria'] = "Auditoria registrada con exito.";
-                                    } else {
-                                        $data_json["exitoAuditoria"] = false;
-                                        $data_json['messengerAuditoria'] = "Error al registrar la auditoria.";
-                                    }
-                                    $data_json['exito'] = true;
-                                    $data_json['mensaje'] = "Empleado Registrado Exitosamente.";
-                                    $data_json['resultado'] = 2;
-                                }
-                            } else {
-                                $data_json['exito'] = false;
-                                $data_json['mensaje'] = "Los datos Del Personal fueron registrados exitosamente, pero el de los datos empleados";
-                                $data_json['resultado'] = 1;
-                            }
-                        }
+                // validacion de la actualizacion del la ubicacaion del trabajador
+                if ($actulizarUBIempleado) {
+                    //generamos auditoria de este registro
+                    $registroAuditoria = $this->auditoriaController->registrarAuditoria($this->idUsuario, 'Actualizar ubicacion de empleado', 'El usuario ' . $this->nombreUsuario . ' actualizo los datos de ubicación del empleado con cedula ' . $cedula . '.');
+                    if ($registroAuditoria) {
+                        $data_json["exitoAuditoria"] = true;
+                        $data_json['messengerAuditoria3'] = "Auditoria de la actualizacion del personal registrada con exito.";
+                    } else {
+                        $data_json["exitoAuditoria"] = false;
+                        $data_json['messengerAuditoria3'] = "Error al registrar la auditoria.";
                     }
+
+                    // DATA DE EXITO DE LOS DATOS
+                    $data_json['exito'] = true;
+                    $data_json['mensaje'] = "Empleado actualizado correctamente.";
+
+                    //cargamos los nuevos documentos del empleado
+                    $cargarArchivo = $this->registrarArchivos($cedula, $id_empleado, $civil);
+                    //validamos la subida de los archivos y damos evento de exito del registro
+                    if ( $cargarArchivo['exito']) {
+                        $data_json['exito'] = true;
+                        $data_json['mensaje'] = "Registrado exitosamente";
+                        $data_json['archivos'] =  $cargarArchivo;
+                    } else {
+                        $data_json['exito'] = false; // si la carga de los archivos salio mal igual se cargaron lso datos del empleado
+                        $data_json['mensaje'] = "El registro de los datos se completó con éxito. Sin embargo, se produjo un error al cargar los archivos adjuntos. Le pedimos que, por favor, acceda a la sección de edición del empleado y vuelva a cargar los archivos necesarios.";
+                        $data_json['archivos'] =  $cargarArchivo;
+                    }
+
                 }
             } else {
-                // Si no hay archivos para subir, proceder con la actualización de los datos
-                $viejosDatos = $this->getTotalDatosPEID([$idPersonal]);
-                foreach ($viejosDatos as $row) {
-                    $idPersonal = $row['id_personal'];
-
-                    $check_regisPersonal = $this->getActualizar('datospersonales', $personal_datos_reg,  $condicion_personal);
-                    if ($check_regisPersonal) {
-                        $registroAuditoria = $this->auditoriaController->registrarAuditoria($this->idUsuario, 'Actualizar personal', 'El usuario ' . $this->nombreUsuario . ' actualizo los datos del personal ' . $primerNombre . ' ' . $primerApellido . ' por tador de la cédula ' . $cedula . '.');
-
-                        $check_busEmpleado = $this->getActualizar('datosempleados', $empleados_datos_reg, $condicion_empleado);
-                        if ($check_busEmpleado) {
-                            $registroAuditoria = $this->auditoriaController->registrarAuditoria($this->idUsuario, 'Actualizar empleado', 'El usuario ' . $this->nombreUsuario . ' actualizo los datos del empleado con cedula ' . $cedula . '.');
-                            if ($registroAuditoria) {
-                                $data_json["exitoAuditoria"] = true;
-                                $data_json['messengerAuditoria'] = "Auditoria registrada con exito.";
-                            } else {
-                                $data_json["exitoAuditoria"] = false;
-                                $data_json['messengerAuditoria'] = "Error al registrar la auditoria.";
-                            }
-                            $data_json['exito'] = true;
-                            $data_json['mensaje'] = "Empleado Registrado Exitosamente.";
-                            $data_json['resultado'] = 2;
-                        } else {
-                            $data_json['exito'] = false;
-                            $data_json['mensaje'] = "Los datos Del Personal fueron registrados exitosamente, pero el de los datos empleados";
-                            $data_json['resultado'] = 1;
-                        }
-                    }
-                }
+                $data_json['exito'] = true;
+                $data_json['mensaje'] = "Empleado Registrado Exitosamente pero no la demas información";
             }
+        } else {
+            $data_json['exito'] = false;
+            $data_json['mensaje'] = "Los datos Del Personal fueron registrados exitosamente, pero el de los datos empleados";
         }
-
         header('Content-Type: application/json');
         echo json_encode($data_json);
     }

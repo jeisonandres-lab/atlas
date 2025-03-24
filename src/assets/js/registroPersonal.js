@@ -74,8 +74,6 @@ import {
 // jQuery
 $(function () {
   $(".formulario_empleado").hide();
-  const cargando = document.getElementById('cargando');
-
   // todos los elementos del body en hide
   $("#contenTipoDiscapacidad").hide();
   $("#contentPartida").hide();
@@ -339,7 +337,7 @@ $(function () {
         alertaBasica(`Lamentablemente, no podemos permitir el acceso a esta persona. La edad mínima requerida es de 18 años, y esta persona tiene ${calcularEdad2} años`, 7000, "info", "top-center", "Edad no requerida");
         clasesInputsError("#edad", ".span_edad");
       }
-      
+
     }
   });
 
@@ -471,12 +469,13 @@ $(function () {
       await cedulaExisteEmpleado("#cedulaFamiliar", ".span_cedulaFamiliar", "La cédula le pertenece a un trabajador inces");
     }
   });
-// buscar empelado por medio de la dcedula del familiar por si ecxiste ya esa cedula como empleado
-$(document).on("input", "#cedula", async function () {
-  if ($(this).hasClass("busquedaCedula")) {
-    await cedulaExisteEmpleado("#cedula", ".span_cedula", "Este empleado ya esta registrado en el sistema ");
-  }
-});
+  
+  // buscar empelado por medio de la dcedula del familiar por si ecxiste ya esa cedula como empleado
+  $(document).on("input", "#cedula", async function () {
+    if ($(this).hasClass("busquedaCedula")) {
+      await cedulaExisteEmpleado("#cedula", ".span_cedula", "Este empleado ya esta registrado en el sistema ");
+    }
+  });
 
   // Llamar a la función para realizar las consultas
   realizarConsultas();// realizar la cunsultas por promesas

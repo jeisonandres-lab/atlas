@@ -39,7 +39,7 @@ class App
         date_default_timezone_set("America/Caracas");
     }
 
-    public function analizarURL($url)
+    public function analizarURL($url): array
     {
         $partes = explode('?', $url);
         $vista = explode('/', $partes[0])[2]; // Obtener la vista (tercera parte)
@@ -73,19 +73,26 @@ class App
     //     return ['rol' => $rol, 'vista' => $vista, 'parametros' => $parametros];
     // }
 
-    public function iniciarSession()
+    public function imprimirRespuestaJSON(array $respuesta): array
+    {
+        header('Content-Type: application/json');
+        echo json_encode($respuesta);
+        return $respuesta; // Devuelve el array después de imprimirlo
+    }
+
+    public function iniciarSession(): void
     {
         if (session_status() == PHP_SESSION_NONE) {
             session_start();
         }
     }
 
-    public function iniciarName()
+    public function iniciarName(): string
     {
         return session_name(App::APP_NAME);
     }
 
-    public function cerrarSession()
+    public function cerrarSession(): bool
     {
         session_start();
         return session_destroy();

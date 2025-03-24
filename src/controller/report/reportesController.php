@@ -133,7 +133,16 @@ class reportesController extends FPDF
                 }
             }
         }
-        $this->Output('I', 'ficha_tecnica.pdf');
+         // Guardar el PDF en una variable
+        $pdfContent = $this->Output('S');
+
+        // Convertir el contenido del PDF a base64
+        $pdfBase64 = base64_encode($pdfContent);
+
+        // Devolver el PDF como una cadena base64
+        $response = json_encode(['pdfBase64' => $pdfBase64]);
+        echo $response;
+        exit;
     }
 
     //FILTRAR POR EDAD DEL TRABAJADOR
@@ -189,7 +198,16 @@ class reportesController extends FPDF
                 }
             }
         }
-        $this->Output('I', 'ficha_tecnica.pdf');
+         // Guardar el PDF en una variable
+         $pdfContent = $this->Output('S');
+
+         // Convertir el contenido del PDF a base64
+         $pdfBase64 = base64_encode($pdfContent);
+
+         // Devolver el PDF como una cadena base64
+         $response = json_encode(['pdfBase64' => $pdfBase64]);
+         echo $response;
+         exit;
     }
 
     //FILTRAR POR CARGO
@@ -245,7 +263,16 @@ class reportesController extends FPDF
                 }
             }
         }
-        $this->Output('I', 'ficha_tecnica.pdf');
+         // Guardar el PDF en una variable
+         $pdfContent = $this->Output('S');
+
+         // Convertir el contenido del PDF a base64
+         $pdfBase64 = base64_encode($pdfContent);
+
+         // Devolver el PDF como una cadena base64
+         $response = json_encode(['pdfBase64' => $pdfBase64]);
+         echo $response;
+         exit;
     }
 
     //ESTATUS
@@ -301,7 +328,16 @@ class reportesController extends FPDF
                 }
             }
         }
-        $this->Output('I', 'ficha_tecnica.pdf');
+         // Guardar el PDF en una variable
+         $pdfContent = $this->Output('S');
+
+         // Convertir el contenido del PDF a base64
+         $pdfBase64 = base64_encode($pdfContent);
+
+         // Devolver el PDF como una cadena base64
+         $response = json_encode(['pdfBase64' => $pdfBase64]);
+         echo $response;
+         exit;
     }
 
     //ESTADO CIVIL
@@ -357,7 +393,16 @@ class reportesController extends FPDF
                 }
             }
         }
-        $this->Output('I', 'ficha_tecnica.pdf');
+        // Guardar el PDF en una variable
+        $pdfContent = $this->Output('S');
+
+        // Convertir el contenido del PDF a base64
+        $pdfBase64 = base64_encode($pdfContent);
+
+        // Devolver el PDF como una cadena base64
+        $response = json_encode(['pdfBase64' => $pdfBase64]);
+        echo $response;
+        exit;
     }
 
     //VIVIENDA
@@ -413,7 +458,16 @@ class reportesController extends FPDF
                 }
             }
         }
-        $this->Output('I', 'ficha_tecnica.pdf');
+         // Guardar el PDF en una variable
+         $pdfContent = $this->Output('S');
+
+         // Convertir el contenido del PDF a base64
+         $pdfBase64 = base64_encode($pdfContent);
+
+         // Devolver el PDF como una cadena base64
+         $response = json_encode(['pdfBase64' => $pdfBase64]);
+         echo $response;
+         exit;
     }
 
     //NIVEL ACADEMICO
@@ -469,7 +523,16 @@ class reportesController extends FPDF
                 }
             }
         }
-        $this->Output('I', 'ficha_tecnica.pdf');
+         // Guardar el PDF en una variable
+         $pdfContent = $this->Output('S');
+
+         // Convertir el contenido del PDF a base64
+         $pdfBase64 = base64_encode($pdfContent);
+
+         // Devolver el PDF como una cadena base64
+         $response = json_encode(['pdfBase64' => $pdfBase64]);
+         echo $response;
+         exit;
     }
 
     //NIVEL DEPENDENCIA
@@ -525,7 +588,16 @@ class reportesController extends FPDF
                 }
             }
         }
-        $this->Output('I', 'ficha_tecnica.pdf');
+         // Guardar el PDF en una variable
+         $pdfContent = $this->Output('S');
+
+         // Convertir el contenido del PDF a base64
+         $pdfBase64 = base64_encode($pdfContent);
+
+         // Devolver el PDF como una cadena base64
+         $response = json_encode(['pdfBase64' => $pdfBase64]);
+         echo $response;
+         exit;
     }
 
     //NIVEL DEPARTAMENTO
@@ -581,7 +653,16 @@ class reportesController extends FPDF
                 }
             }
         }
-        $this->Output('I', 'ficha_tecnica.pdf');
+        // Guardar el PDF en una variable
+        $pdfContent = $this->Output('S');
+
+        // Convertir el contenido del PDF a base64
+        $pdfBase64 = base64_encode($pdfContent);
+
+        // Devolver el PDF como una cadena base64
+        $response = json_encode(['pdfBase64' => $pdfBase64]);
+        echo $response;
+        exit;
     }
 
     //NIVEL DIRECCION
@@ -637,7 +718,16 @@ class reportesController extends FPDF
                 }
             }
         }
-        $this->Output('I', 'ficha_tecnica.pdf');
+         // Guardar el PDF en una variable
+         $pdfContent = $this->Output('S');
+
+         // Convertir el contenido del PDF a base64
+         $pdfBase64 = base64_encode($pdfContent);
+
+         // Devolver el PDF como una cadena base64
+         $response = json_encode(['pdfBase64' => $pdfBase64]);
+         echo $response;
+         exit;
     }
 
     //RANGO DE FECHAS, FECHA INICIO Y FECHA FIN
@@ -693,7 +783,16 @@ class reportesController extends FPDF
                 }
             }
         }
-        $this->Output('I', 'ficha_tecnica.pdf');
+         // Guardar el PDF en una variable
+         $pdfContent = $this->Output('S');
+
+         // Convertir el contenido del PDF a base64
+         $pdfBase64 = base64_encode($pdfContent);
+
+         // Devolver el PDF como una cadena base64
+         $response = json_encode(['pdfBase64' => $pdfBase64]);
+         echo $response;
+         exit;
     }
 
     //FILTRAR POR SEXO DEL FAMILIAR
@@ -1026,21 +1125,20 @@ class reportesController extends FPDF
         string $parentesco,
         string $sexo,
         string $edad
-    )
-    {
-        if($discapaciadad == ""){
+    ) {
+        if ($discapaciadad == "") {
             $discapaciadad == null;
         }
 
-        if($sexo == ""){
+        if ($sexo == "") {
             $sexo == null;
         }
 
-        if($edad == ""){
+        if ($edad == "") {
             $edad == null;
         }
 
-        if($parentesco == ""){
+        if ($parentesco == "") {
             $parentesco == null;
         }
         $this->SetMargins(5, 0, 5); // Ajustar márgenes

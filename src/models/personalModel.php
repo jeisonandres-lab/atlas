@@ -65,7 +65,6 @@ class personalModel extends Conexion
         return $sql;
     }
 
-
     public function existeFamiliarCedula(array $parametro){
         $sqlCedula = $this->ejecutarConsulta("SELECT df.id_ninos, df.cedula FROM datosfamilia df WHERE df.cedula = ?", $parametro);
         if (empty($sqlCedula)) {

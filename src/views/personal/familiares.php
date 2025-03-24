@@ -9,15 +9,18 @@ use App\Atlas\config\App;
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trabajadores | ATLAS</title>
+    <!-- css -->
     <?php require_once App::URL_INC . "total_css.php"; ?>
+    <!-- css de esta pagina -->
     <link rel="stylesheet" href="<?php echo App::URL_CSS . "trabajadores.css"; ?>">
 </head>
 
 <body class="layout-fixed sidebar-expand-lg bg-body-tertiary">
+    <!-- load de carga de la pagina -->
     <?php require("./src/views/inc/load.php"); ?>
     <div class="app-wrapper conten-main" id="conten-main">
+        <!-- MENU DEL SISTEMA -->
         <?php require_once App::URL_INC . "utils/menu.php"; ?>
-        <!-- MODAL RESPONSIVEk -->
         <!-- CUERPO DEL SISTEMA -->
         <main class=" app-main p-0 pb-4">
             <!-- NOMBRE DEL MODULO -->
@@ -27,23 +30,29 @@ use App\Atlas\config\App;
                 </div>
                 <img src="<?php echo App::URL_IMG . "top-header.png"; ?>" alt="" class="w-100 h-100" style="object-fit: cover; object-position:center;">
             </div>
-            <!-- SUB MENU DEL MODULO -->
+
+            <!-- SUB MENU DEL MODULO DEL SISTEMA-->
             <?php require_once App::URL_INC . "utils/menu_registro.php" ?>
             <!-- FORMULARIO DE ENVIOS DE DATOS DE EMPLEADO -->
             <div class="container-fluid px-3">
                 <form action="#" style="font-size: 16px;" class="justify'content-center formulario_empleado contact-form form-validate justify-content-center" novalidate="novalidate" id="formulario_empleado">
                     <div class=" col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12 ">
                         <div class="row col-sm-12 col-md-9 h-100 bg-white w-100 p-2 m-0 content">
+
                             <p class="mb-0 mt-2">Datos del Empleado</p>
                             <hr class="mb-3">
-                            <div class="col-sm-4 col-xl-4 col-xxl-4  mb-2">
+
+                            <!-- cedula del empledao a asignar familiar -->
+                            <div class="col-sm-12 col-xl-3 col-xxl-3  mb-2">
                                 <label class="form-label mb-0" for="cedula_trabajador">Cédula</label>
                                 <div class="input-group">
                                     <span class="input-group-text span_cedula_empleado "><i class="icons fa-regular fa-address-card"></i></span>
                                     <input type="text" class="form-control " id="cedula_trabajador" name="cedulaEmpleado" placeholder="Cédula">
                                 </div>
                             </div>
-                            <div class="col-sm-6 col-md-4 col-xl-4 col-xxl-4  mb-2">
+
+                            <!-- nombre del empleado -->
+                            <div class="col-sm-12 col-md-3 col-xl-3 col-xxl-3  mb-2">
                                 <div class="form-group">
                                     <label for="nombre">Nombre</label>
                                     <div class="input-group">
@@ -52,7 +61,9 @@ use App\Atlas\config\App;
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-sm-6 col-md-4 col-xl-4 col-xxl-4 mb-2">
+
+                            <!-- apellido del empleado -->
+                            <div class="col-sm-12 col-md-3 col-xl-3 col-xxl-3 mb-2">
                                 <div class="form-group">
                                     <label for="apellido">apellido</label>
                                     <div class="input-group">
@@ -62,12 +73,14 @@ use App\Atlas\config\App;
                                 </div>
                             </div>
 
+                            <div class="col-sm-12 col-xl-3 col-xxl-3 d-flex align-items-end mt-2 mb-2">
+                                <button type="button" id="buttonPendiente" class="btn btn-warning btn-hover-amarillo text-white w-100 h-75 " data-bs-toggle="modal" data-bs-target="#modalPendiente"><i class="fa-regular fa-restroom fa-sm me-2"></i>Familiar Pendiente</button>
+                            </div>
+
                             <p class="mb-0 mt-2">Datos Del Familiar</p>
                             <hr class="mb-3">
-                            <!-- <div class="contenCedula d-flex mb-3">
-                                <div class="cedu ceduact" id="cedulado">Cédulado</div>
-                                <div class="cedu " id="noCedulado">No Cédulado</div>
-                            </div> -->
+
+                            <!-- contenedor de checkbox de seleccion  -->
                             <div class=" d-flex justify-content-center">
                                 <!-- CHECK NO CEDULADO -->
                                 <div class="checkbox-wrapper-12 d-flex me-3">
@@ -80,7 +93,7 @@ use App\Atlas\config\App;
                                 </div>
 
                                 <!-- CHECK DE DISCAPACIDAD -->
-                                <div class="checkbox-wrapper-12 d-flex">
+                                <div class="checkbox-wrapper-12 d-flex me-3">
                                     <div class="cbx ">
                                         <input id="disca" class="cumplidoNormal" type="checkbox" disabled />
                                         <label for="disca"></label>
@@ -88,7 +101,19 @@ use App\Atlas\config\App;
                                     </div>
                                     <p>Discapacidad</p>
                                 </div>
+
+                                <!-- CHECK DE ESTADO DE DERECHO -->
+                                <div class="checkbox-wrapper-12 d-flex">
+                                    <div class="cbx ">
+                                        <input id="estadoDerecho" class="cumplidoNormal" type="checkbox" disabled />
+                                        <label for="estadoDerecho"></label>
+                                        <i class="icons fa-solid fa-check fa-xs"></i>
+                                    </div>
+                                    <p>Estado Derecho</p>
+                                </div>
                             </div>
+
+                            <!-- primer nombre del familiar -->
                             <div class="col-sm-6 col-md-4 col-xl-4 col-xxl-3 mb-3">
                                 <div class="form-group">
                                     <label for="primerNombre">Primer Nombre</label>
@@ -99,6 +124,7 @@ use App\Atlas\config\App;
                                 </div>
                             </div>
 
+                            <!-- segundo nombre del familiar -->
                             <div class="col-sm-6 col-md-4 col-xl-4 col-xxl-3 mb-3">
                                 <div class="form-group">
                                     <label for="segundoNombre">Segundo Nombre</label>
@@ -109,7 +135,7 @@ use App\Atlas\config\App;
                                 </div>
                             </div>
 
-
+                            <!-- primer apellido del familiar -->
                             <div class="col-sm-6 col-md-4 col-xl-4 col-xxl-3 mb-3">
                                 <div class="form-group">
                                     <label for="primerApellido">Primer Apellido</label>
@@ -120,6 +146,7 @@ use App\Atlas\config\App;
                                 </div>
                             </div>
 
+                            <!-- segundo apellido del familiar -->
                             <div class="col-sm-6 col-md-4 col-xl-4 col-xxl-3 mb-3" id="contenApellidoDos">
                                 <div class="form-group">
                                     <label for="segundoApellido">Segundo Apellido</label>
@@ -130,6 +157,7 @@ use App\Atlas\config\App;
                                 </div>
                             </div>
 
+                            <!-- cedula del familiar -->
                             <div class="col-sm-6 col-md-4 col-xl-4 col-xxl-3 mb-3" id="contenCedula">
                                 <div class="form-group">
                                     <label for="cedula">Cédula</label>
@@ -140,6 +168,7 @@ use App\Atlas\config\App;
                                 </div>
                             </div>
 
+                            <!-- tomo de la aprtida de nacimiento del familiar -->
                             <div class="col-sm-6 col-md-4 col-xl-4 col-xxl-3 mb-3" id="contenTomo">
                                 <div class="form-group">
                                     <label for="tomo">Tomo</label>
@@ -150,6 +179,7 @@ use App\Atlas\config\App;
                                 </div>
                             </div>
 
+                            <!-- folio de la partida de nacimiento -->
                             <div class="col-sm-6 col-md-4 col-xl-4 col-xxl-3 mb-3" id="contenFolio">
                                 <div class="form-group">
                                     <label for="folio">Folio</label>
@@ -160,6 +190,7 @@ use App\Atlas\config\App;
                                 </div>
                             </div>
 
+                            <!-- parentesco con el familiar -->
                             <div class="col-sm-6 col-md-4 col-xl-4 col-xxl-3 mb-3 ">
                                 <div class="form-group">
                                     <label for="parentesco">Parentesco</label>
@@ -172,9 +203,10 @@ use App\Atlas\config\App;
                                 </div>
                             </div>
 
+                            <!-- sexo del familiar -->
                             <div class="col-sm-6 col-md-4 col-xl-4 col-xxl-3 mb-2 ">
                                 <div class="form-group">
-                                    <label for="sexo">Sexualidad</label>
+                                    <label for="sexo">sexo</label>
                                     <div class="input-group">
                                         <span class="input-group-text span_sexo"><i class="icons fa-regular fa-person-half-dress"></i></span>
                                         <select class="form-select form-select-md sexo-sexo" id="sexo" name="sexo" aria-label="Small select example" aria-placeholder="dasdas" required disabled>
@@ -186,6 +218,7 @@ use App\Atlas\config\App;
                                 </div>
                             </div>
 
+                            <!-- edad del familiar -->
                             <div class="col-sm-6 col-md-4 col-xl-4 col-xxl-3 mb-2" id="contenEdad">
                                 <div class="form-group">
                                     <label for="cedula">Edad</label>
@@ -197,29 +230,22 @@ use App\Atlas\config\App;
                                 </div>
                             </div>
 
+                            <!-- partida de nacimiento del familiar -->
                             <div class="col-sm-6  col-xl-12 col-xxl-6 mb-2" id="contenDoc">
                                 <div class="form-group">
-                                    <label for="correo">Partida De Nacimiento</label>
+                                    <label for="docArchivo">Partida De Nacimiento</label>
                                     <div class="input-group">
                                         <span class="input-group-text span_docArchivo"><i class="icons fa-regular fa-file-zipper"></i></span>
-                                        <input type="file" class="form-control" name="docArchivo" id="achivo" aria-describedby="inputGroupFileAddon04" aria-label="Upload" required disabled>
+                                        <input type="file" class="form-control" name="docArchivo" id="archivo" aria-describedby="inputGroupFileAddon04" aria-label="Upload" required disabled>
                                     </div>
                                 </div>
                             </div>
 
-                            <!-- <div class="col-sm-12 mb-2" id="contentPartida">
-                                <div class="form-group">
-                                    <label for="correo">Partida De Discapacidad</label>
-                                    <div class="input-group">
-                                        <span class="input-group-text span_docArchivoDis"><i class="fa-regular fa-file-zipper"></i></span>
-                                        <input type="file" class="form-control" name="docArchivoDis" id="achivoDis" aria-describedby="inputGroupFileAddon04" aria-label="Upload" required>
-                                    </div>
-                                </div>
-                            </div> -->
 
                             <p class="mb-0">Fecha de nacimiento</p>
                             <hr class="mb-2">
 
+                            <!-- año en que nacio el familiar -->
                             <div class="col-sm-4 mb-2">
                                 <div class="form-group">
                                     <label class="required-field" for="message">Año</label>
@@ -230,6 +256,7 @@ use App\Atlas\config\App;
                                 </div>
                             </div>
 
+                            <!-- mes en cuando nacio el familiar -->
                             <div class="col-sm-4 mb-2">
                                 <div class="form-group">
                                     <label class="required-field" for="message">Mes</label>
@@ -240,6 +267,7 @@ use App\Atlas\config\App;
                                 </div>
                             </div>
 
+                            <!-- dia en que nacio el familiar -->
                             <div class="col-sm-4 mb-3">
                                 <div class="form-group ">
                                     <label class="required-field" for="message">Día</label>
@@ -250,11 +278,12 @@ use App\Atlas\config\App;
                                 </div>
                             </div>
 
+                            <!-- botones de acciones  -->
                             <div class="col-sm-12 ">
-                                <button type="submit" id="aceptar_emepleado" name="aceptar" class="btn btn-success" disabled>
-                                    <i class="fa-solid fa-plus me-2"></i>Aceptar
+                                <button type="submit" id="aceptar_emepleado" name="aceptar" class="btn btn-primary btn-hover-azul" disabled>
+                                    <i class="fa-solid fa-thumbs-up fa-sm me-2"></i>Aceptar
                                 </button>
-                                <button type="button" id="limpiar" name="submit" class="btn btn-warning" style="color: white;">
+                                <button type="button" id="limpiar" name="submit" class="btn btn-warning btn-hover-amarillo text-white">
                                     <i class="fa-solid fa-rotate-right me-2"></i>Limpiar
                                 </button>
                             </div>
@@ -263,12 +292,55 @@ use App\Atlas\config\App;
                     </div>
                 </form>
             </div>
+
+
+            <!-- Modal Para buscar familiar es estado pendiente -->
+            <div class="modal fade" id="modalPendiente" tabindex="-1" aria-labelledby="modalPendienteLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header bg-primary ">
+                            <h1 class="modal-title fs-5 text-white" id="modalPendienteLabel">Buscar familiar pendiente</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <form action="" class="burcadorCedula" id="formularioPendiente">
+                            <div class="modal-body">
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col-sm-12 mb-3">
+                                            <!-- cedula del familiar en estado pendiente -->
+                                            <div class="form-group ">
+                                                <label class="required-field" for="cedulaPendiente">Cédula</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-text span_cedulaFamiliarPendiente"><i class="icons fa-regular fa-address-card"></i></span>
+                                                    <input type="text" class="form-control " id="cedulaFamiliarPendiente" name="cedulaFamiliar" placeholder="Cédula">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- botones de acciones del modal de familiar pendiente -->
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary btn-hover-gris btn-sm" data-bs-dismiss="modal"><i class="fa-regular fa-xmark-large fa-sm me-2"></i>Cerrar</button>
+                                <button type="button" class="btn btn-primary btn-hover-azul btn-sm" id="buscarFamiliarPendiente"><i class="fa-regular fa-magnifying-glass fa-sm me-2"></i>Buscar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+
         </main>
+
+        <!-- footer de la pagina -->
         <?php require_once App::URL_INC . "/footer.php"; ?>
     </div>
+
+    <!-- scrips de js -->
     <?php require_once App::URL_INC . "/scrips.php"; ?>
-    <script src="./src/libs/select2/select2.min.js"></script>
-    <script src="<?php echo App::URL_SCRIPS . "familiares.js" ?>" type="module"></script>
+    <!-- scrip de la pantalla familiar -->
+    <script src="<?php echo App::URL_SCRIPS . "familiares.js" ?>" type="module" defer></script>
 </body>
 
 </html>

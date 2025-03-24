@@ -46,7 +46,8 @@ export const ARRAYPARENTESCO = [
     { valor: 'Hija', nombre: "Hija" },
     { valor: 'Padre', nombre: "Padre" },
     { valor: 'Madre', nombre: "Madre" },
-    { valor: 'Hermano', nombre: "Hermano" }
+    { valor: 'Hermano', nombre: "Hermano" },
+    { valor: 'Estado De Derecho', nombre: "Estado De Derecho" }
 ];
 
 // objeto de discapacidades

@@ -1,6 +1,5 @@
 import { alertaNormalmix, AlertSW2, aletaCheck } from "./ajax/alerts.js";
-import { descargarArchivo, enviarFormulario, observarFormulario, obtenerDatosJQuery, obtenerDatosPromise } from "./ajax/formularioAjax.js";
-import { configurarFlatpickrSinFinesDeSemana } from "./ajax/inputCalendar.js";
+import { descargarArchivo, enviarFormulario, obtenerDatosJQuery, obtenerDatosPromise } from "./ajax/formularioAjax.js";
 import {
   colocarMeses,
   colocarYear,
@@ -21,8 +20,6 @@ import {
   validarInputFecha,
   mesesDias,
 } from "./ajax/inputs.js";
-import { setCargarDiscapacidad } from "./ajax/variablesArray.js";
-import { setVariableApellidoFamiliar, setVariableCedulaFamiliar, setVariableCheckboxInces, setVariableDocumentoFamiliar, setVariableNombreFamiliar } from "./ajax/variablesContenido.js";
 
 $(function () {
   $("#contenTomo").hide();
@@ -82,7 +79,6 @@ $(function () {
   validarSelectoresSelec2("#ano2", ".span_ano");
   validarSelectoresSelec2("#meses2", ".span_mes");
   // validarSelectoresSelec2("#dia2", ".span_dia");
-  validarSelectoresSelec2("#tpDiscapacidad", ".span_tpDiscapacidad");
 
   file("#contrato", ".span_contrato");
   file("#notificacion", ".span_notificacion");
@@ -111,29 +107,9 @@ $(function () {
 
   mesesDias("#meses2", ".span_mes", "#dia2", "span_dia", "#ano2");
 
-  configurarFlatpickrSinFinesDeSemana("#fechaing");
+
   const cargando = document.getElementById('cargando');
   var boton = $('#aceptarFamilia');
-
-
-  // DATOS DE IDENTIFICACION 
-  const cedulaHTML = setVariableCedulaFamiliar("cedulaFamiliar", "cedulaFamiliar");
-  const nombreHTML = setVariableNombreFamiliar("nombreFamiliar", "primerNombreFamiliar");
-  const apellidoHTML = setVariableApellidoFamiliar("apellidoFamiliar", "primerApellidoFamiliar");
-  // DOCUMENTO DE ESTADO DE DERECHO
-  const documentoEstadoDerechoHTML = setVariableDocumentoFamiliar("docEstadoDerecho", "docEstadoDerechoArchivo", "span_docEstadoDerecho", "Documento estado derecho");
-  // DOCUMENTO DE CASADO
-  const documentoCasadoHTML = setVariableDocumentoFamiliar("docCasado", "docCasadoArchivo", "span_docCasado", "Acta de matrimonio");
-  // DOCUMENTO DE LA COPIA DE LA CEDULA DE IDENTIDAD
-  const documentoCopiaCedulaHTML = setVariableDocumentoFamiliar("docCopiaCedula", "docCopiaCedulaArchivo", "span_docCopiaCedula", 'Copia de cédula');
-  // DOCUMENTO DE VIUDO
-  const documentoViudoHTML = setVariableDocumentoFamiliar("docViuda", "docViudaArchivo", "span_docViuda", "Acta de defunción");
-  // DOCUMENTO DEL DIVORCIO
-  const documentoActaDivorcioHTML = setVariableDocumentoFamiliar("docDivorcio", "docDivorcioArchivo", "span_docDivorcio", "Acta de divorcio");
-  // DOCUMENTO DE ACTA DE CAMBIO DE ESTADO CIVIL DEL DEVORCIO
-  const documentoActaDivorcioCivilHTML = setVariableDocumentoFamiliar("docSolicEstCivil", "docSolicEstCivilArchivo", "span_docSolicEstCivil", "Carta de cambio de estado civil");
-  // CHECKBOX DE EMPLEAOD INCES
-  const checkboxHTML = setVariableCheckboxInces("btnEDInces", `Empleado <strong class="text-danger">INCES</strong>`, "contenchecbox")
 
   // Initialize your data table here
   let table = new DataTable('#myTable', {
@@ -508,91 +484,54 @@ $(function () {
       ]
     });
   }
-//-----------------------------------------------------------------
-  // todo esto para ver los archivos que se tienen
-  function DescargarDocumento(doc, cedula) {
-    const baseDir = './src/global/archives/archivoFamiliaresPersonal/';
-    const subDirs = [`partidasDiscapacidad/${cedula}`, `partidasNacimiento/${cedula}`]; // Lista de subdirectorios conocidos
+
+  // Funcion para descargar documentos 
+  function DescargarDocumento(doc) {
+    const baseDir = './src/global/archives/personal/familiares/';
+    const subDirs = ['partidasDiscapacidad', 'partidasNacimiento']; // Lista de subdirectorios conocidos
 
     let found = false;
-    let foundPath = null;
+    let pendingRequests = subDirs.length;
+    // Ejemplo de uso
+    Swal.bindClickHandler();
+    /* Bind a mixin to a click handler */
+    Swal.mixin({
+      toast: true
+    }).bindClickHandler("data-swal-toast-template");
 
-    for (let subDir of subDirs) {
+
+    $('#saveButton').on('click', function () {
+      let cedula = $(this).data('cedula');
+    })
+
+    subDirs.forEach(subDir => {
       const filePath = `${baseDir}${subDir}/${doc}`;
-      if (archivoExiste(filePath)) {
-        found = true;
-        foundPath = filePath;
-        break; // Detener la búsqueda si se encuentra el archivo
-      }
-    }
-
-    if (found) {
-      mostrarArchivo(foundPath, doc);
-    } else {
-      alert("No se encontró el archivo: " + doc);
-    }
+      $.ajax({
+        url: filePath,
+        type: 'HEAD', // Usamos HEAD para verificar si el archivo existe sin descargarlo
+        success: function () {
+          if (!found) {
+            found = true;
+            // Crear un enlace temporal para descargar el archivo
+            const link = document.createElement('a');
+            link.target = "_blank";
+            link.href = filePath;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+          }
+        },
+        error: function () {
+          pendingRequests--;
+          if (pendingRequests === 0 && !found) {
+            alert("No se consiguió el archivo: " + doc);
+          }
+          // No imprimir el error en la consola
+        }
+      });
+    });
   }
 
-  //valida si existe un archivo 
-  function archivoExiste(filePath) {
-    try {
-      const xhr = new XMLHttpRequest();
-      xhr.open('HEAD', filePath, false); // Síncrono para simplificar
-      xhr.send();
-      return xhr.status === 200;
-    } catch (error) {
-      return false;
-    }
-  }
-
-  //carga el archivo 
-  function mostrarArchivo(filePath, doc) {
-    // Verificar si el modal existe
-    if ($('#miModalimagen').length === 0) {
-      // Crear el modal dinámicamente
-      $('body').append(`
-            <div class="modal modal-xl fade" id="miModalimagen" tabindex="-1" aria-labelledby="miModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                        <div class="modal-body">
-                            <div class="container-fluid">
-                                <div class="row">
-                                    <div class="col-sm-12 col-md-12 col-xl-12 mb-3" id="columna1"></div>
-                                    <div class="col-sm-12 col-md-12 col-xl-12 mb-3" id="columna2"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        `);
-    }
-
-    // Verificar si el archivo es una imagen
-    const imageExtensions = ['jpg', 'jpeg', 'png', 'gif'];
-    const fileExtension = doc.split('.').pop().toLowerCase();
-    if (imageExtensions.includes(fileExtension)) {
-      // Cargar la imagen y los botones en el modal
-      $('#columna1').html(`<img src="${filePath}" alt="Previsualización de la imagen" class="w-100">`);
-      $('#columna2').html(`
-            <a href="${filePath}" download="${doc}" class="btn btn-primary" style="margin-right: 10px;">Descargar</a>
-            <button class="btn btn-secondary" onclick="$('#miModalimagen').modal('hide');">Cerrar</button>
-        `);
-
-      // Mostrar el modal
-      $('#miModalimagen').modal('show');
-    } else {
-      // Crear un enlace temporal para descargar el archivo
-      const link = document.createElement('a');
-      link.target = "_blank";
-      link.href = filePath;
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    }
-  }
-
-//----------------------------------------------------------------
   // Editar empledos
   async function editar(idPersonal) {
     let urls = [
@@ -688,41 +627,6 @@ $(function () {
         $('#vivienda').val(datosPersonal.vivienda).trigger('change');
         $("#calle").val(datosPersonal.calle);
 
-        // Verifica si datosPersonal.discapacidadPersonal tiene contenido.
-        if (typeof datosPersonal !== 'undefined' && datosPersonal.discapacidadPersonal && datosPersonal.discapacidadPersonal.trim() !== '') {
-          // Verifica si el elemento con ID contenTipoDiscapacidad ya existe.
-          if ($("#contenTipoDiscapacidad").length) {
-            // Si existe, lo elimina.
-            $("#contenTipoDiscapacidad").remove();
-          }
-
-          // Inserta el nuevo contenido después de #contentEdad.
-          $("#contentEdad").after(`
-          <div class="col-sm-6 col-md-6 col-xl-6 col-xxl-6 mb-3" id="contenTipoDiscapacidad">
-              <div class="form-group">
-                  <label for="tpDiscapacidad">Tipo De Discapacidad</label>
-                  <div class="input-group">
-                      <span class="input-group-text span_tpDiscapacidad"><i class="icons fa-solid fa-wheelchair-move"></i></span>
-                      <select type="text" class="form-control ignore-validation cumplidoNormal" id="tpDiscapacidad" name="tpDiscapacidad" placeholder="Tipo de Discapacidad "></select>
-                  </div>
-              </div>
-          </div>
-      `);
-
-          // Llama a las funciones para cargar y configurar el select.
-          setCargarDiscapacidad("#tpDiscapacidad");
-          incluirSelec2("#tpDiscapacidad");
-
-          // Establece el valor seleccionado y dispara el evento change.
-          $("#tpDiscapacidad").val(datosPersonal.discapacidadPersonal).trigger('change');
-        } else {
-          // Si datosPersonal.discapacidadPersonal está vacío o es null, elimina el elemento.
-          if ($("#contenTipoDiscapacidad").length) {
-            $("#contenTipoDiscapacidad").remove();
-            $("#contentPartida").remove();
-          }
-        }
-
         if (datosPersonal.vivienda == 'Departamento') {
           $('#piso').val(datosPersonal.pisoVivienda);
           $('#urbanizacion').val(datosPersonal.nombre_urb);
@@ -753,7 +657,6 @@ $(function () {
         clasesInputs("#calle", ".span_calle");
         clasesInputs("#edad", ".span_edad");
         clasesInputs("#fechaing", ".span_fechaing");
-        clasesInputs("#tpDiscapacidad", ".span_tpDiscapacidad");
         $('#editarDatos').removeAttr('hidden');
         // Animación de apertura
         $('#editarDatos').slideDown(500, function () {
@@ -1015,8 +918,7 @@ $(function () {
 
   $(document).on('click', '.botondocumet', function () {
     let doc = $(this).data('doc');
-    let cedula = $(this).data('cedula');
-    DescargarDocumento(doc, cedula);
+    DescargarDocumento(doc);
   });
 
   $(document).on("click", ".btnEditarFamiliar", function () {
@@ -1073,7 +975,8 @@ $(function () {
       // } else {
       //   alertaNormalmix(parsedData.mensaje, 4000, "success", "top-end")
       // }
-
+      // const myModal = new bootstrap.Modal(document.getElementById('modal'));
+      // myModal.show();
 
     }
     enviarFormulario(url, data, callbackExito, true);
@@ -1358,140 +1261,6 @@ $(function () {
 
       clasesInputs("#edadEmp", ".span_edadEmp"); // Actualizar clasesInputs
     }
-  });
-
-  //caragar Discapaciadad
-  $(document).on("click", "#discapacidad", function () {
-    if ($("#contenTipoDiscapacidad").length) {
-      // El elemento contenTipoDiscapacidad existe.
-      if ($("#contentPartida").length) {
-        // contentPartida existe, eliminarlo.
-        $("#contentPartida").remove();
-      } else {
-        // contentPartida no existe, agregarlo.
-        $("#contentEdad").after(`
-              <div class="col-sm-12 col-xl-12 col-xxl-6 mb-2" id="contentPartida">
-                  <div class="form-group">
-                      <label for="correo">Partida De Discapacidad</label>
-                      <div class="input-group">
-                          <span class="input-group-text span_docArchivoDis"><i class="icons fa-regular fa-file-zipper"></i></span>
-                          <input type="file" class="form-control ignore-validation cumplidoNormal" name="docArchivoDis" id="achivoDis" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
-                      </div>
-                  </div>
-              </div>
-          `);
-      }
-    } else {
-      // El elemento contenTipoDiscapacidad no existe.
-      $("#contentEdad").after(`
-          <div class="col-sm-6 col-md-6 col-xl-6 col-xxl-6 mb-3" id="contenTipoDiscapacidad">
-              <div class="form-group">
-                  <label for="tpDiscapacidad">Tipo De Discapacidad</label>
-                  <div class="input-group">
-                      <span class="input-group-text span_tpDiscapacidad"><i class="icons fa-solid fa-wheelchair-move"></i></span>
-                      <select type="text" class="form-control ignore-validation cumplidoNormal" id="tpDiscapacidad" name="tpDiscapacidad" placeholder="Tipo de Discapacidad "></select>
-                  </div>
-              </div>
-          </div>
-          <div class="col-sm-12 col-xl-12 col-xxl-6 mb-2" id="contentPartida">
-              <div class="form-group">
-                  <label for="correo">Partida De Discapacidad</label>
-                  <div class="input-group">
-                      <span class="input-group-text span_docArchivoDis"><i class="icons fa-regular fa-file-zipper"></i></span>
-                      <input type="file" class="form-control ignore-validation cumplidoNormal" name="docArchivoDis" id="achivoDis" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
-                  </div>
-              </div>
-          </div>
-      `);
-      //carga el select con los datos.
-      setCargarDiscapacidad("#tpDiscapacidad");
-      incluirSelec2("#tpDiscapacidad");
-    }
-  })
-
-  //actualizar acta de matrimonio
-  $(document).on("click", "#casado", async function () {
-    if ($("#contentdocumnetoFamiliar").length) {
-      // El elemento contentdocumnetoFamiliar existe, lo elimina y no inserta el nuevo contenido.
-      $("#contentdocumnetoFamiliar").remove();
-    } else {
-      // El elemento contentDocumentoFamiliar no existe, inserta el nuevo contenido.
-      $("#contentEdad").after(documentoCasadoHTML);
-    }
-    // validaciones
-    file("#docCasado", ".span_docCasado");
-    file("#docCopiaCedula", ".span_docCopiaCedula");
-  });
-
-  //actualizar acta de estadoi de derecho
-  $(document).on("click", "#estadoDerecho", async function () {
-    if ($("#contentdocumnetoFamiliar").length) {
-      // El elemento contentdocumnetoFamiliar existe, lo elimina y no inserta el nuevo contenido.
-      $(".contentdocumnetoFamiliar").remove();
-    } else {
-      // El elemento contentDocumentoFamiliar no existe, inserta el nuevo contenido.
-      $("#contentEdad").after(documentoEstadoDerechoHTML);
-    }
-    file("#docEstadoDerecho", ".span_docEstadoDerecho");
-
-  });
-
-  //actualizar acta de divorcio
-  $(document).on("click", "#divorciado", async function () {
-    if ($("#contentdocumnetoFamiliar").length) {
-      // El elemento contentdocumnetoFamiliar existe, lo elimina y no inserta el nuevo contenido.
-      $(".contentdocumnetoFamiliar").remove();
-    } else {
-      // El elemento contentDocumentoFamiliar no existe, inserta el nuevo contenido.
-      $("#contentEdad").after(documentoActaDivorcioHTML + documentoActaDivorcioCivilHTML + documentoCopiaCedulaHTML);
-    }
-    // validaciones
-    file("#docCopiaCedula", ".span_docCopiaCedula");
-    file("#docDivorcio", ".span_docDivorcio");
-    file("#docSolicEstCivil", ".span_docSolicEstCivil");
-  });
-
-  //actualizar acta de viudo
-  $(document).on("click", "#viudo", async function () {
-    if ($("#contentdocumnetoFamiliar").length) {
-      // El elemento contentdocumnetoFamiliar existe, lo elimina y no inserta el nuevo contenido.
-      $(".contentdocumnetoFamiliar").remove();
-    } else {
-      // El elemento contentDocumentoFamiliar no existe, inserta el nuevo contenido.
-      $("#contentEdad").after(documentoViudoHTML + documentoCopiaCedulaHTML);
-    }
-    // validaciones
-    file("#docViuda", ".span_docViuda");
-    file("#docCopiaCedula", ".span_docCopiaCedula");
-  });
-
-  //evento shwtf apra los botones de estado civil
-  $(document).on("change", "#civil", function () {
-    let valorSeleccionado = $(this).val();
-    let botonHTML = "";
-    $(".contentdocumnetoFamiliar").remove();
-    switch (valorSeleccionado) {
-      case "Casado":
-        botonHTML = `<button type="button" id="casado" class="btn btn-sm btn-primary btn-xs btn-hover-azul mb-2"><i class="fa-solid fa-plus me-2"></i>Actualizar documento Casado</button>`;
-        break;
-      case "Divorciado":
-        botonHTML = `<button type="button" id="divorciado" class="btn btn-sm btn-primary btn-xs btn-hover-azul mb-2"><i class="fa-solid fa-plus me-2"></i>Actualizar documento Divorciado</button>`;
-        break;
-      case "EstadoDerecho":
-        botonHTML = `<button type="button" id="estadoDerecho" class="btn btn-sm btn-primary btn-xs btn-hover-azul mb-2"><i class="fa-solid fa-plus me-2"></i>Actualizar documento Estado Derecho</button>`;
-        break;
-      case "Viudo":
-        botonHTML = `<button type="button" id="viudo" class="btn btn-sm btn-primary btn-xs btn-hover-azul mb-2"><i class="fa-solid fa-plus me-2"></i>Actualizar documento estado civil viudo</button>`;
-        break;
-      case "Discapacidad":
-        botonHTML = `<button type="button" id="discapacidad" class="btn btn-sm btn-primary btn-xs btn-hover-azul mb-2"><i class="fa-solid fa-plus me-2"></i>Actualizar documento Discapaciadad</button>`;
-        break;
-      default:
-        botonHTML = ""; // No se crea botón para otros valores (incluyendo "Soltero").
-        break;
-    }
-
-    $("#contenButton").html(botonHTML);
   });
 
   // Carga de Partida de Nacimiento familiar
@@ -1885,6 +1654,17 @@ $(function () {
   // Evento de input para el campo de búsqueda
   $("#cedula_trabajador_familiar").on("input", buscarDatosDebounced);
 
+  function todosCumplidos(formulario) {
+    const elementosCumplidos = $(formulario).find('input, select').filter('.cumplido, .cumplidoNormal').not('.ignore-validation');
+    const totalElementos = $(formulario).find('input, select').not('.ignore-validation').length;
+    return elementosCumplidos.length === totalElementos;
+  }
+
+  // Función para habilitar o deshabilitar el botón
+  function habilitarBoton(formulario, boton) {
+    boton.prop('disabled', !todosCumplidos(formulario));
+  }
+
   // Función de debounce para limitar la frecuencia de ejecución
   function debounce(func, wait) {
     let timeout;
@@ -1893,10 +1673,48 @@ $(function () {
       timeout = setTimeout(() => func.apply(this, args), wait);
     };
   }
+
+  // Crear una instancia de MutationObserver y observar cambios en un formulario específico
+  function observarFormulario(formulario, boton) {
+    const observer = new MutationObserver(debounce((mutationsList, observer) => {
+      for (const mutation of mutationsList) {
+        if (mutation.type === 'childList' || mutation.type === 'attributes') {
+          habilitarBoton(formulario, boton);
+          file("#notificacion", ".span_notificacion");
+          file("#contrato", ".span_contrato");
+        }
+      }
+    }, 300)); // Ajusta el tiempo de espera según sea necesario
+
+    // Configurar el observer para observar cambios en los hijos y atributos del formulario
+    const config = { childList: true, attributes: true, subtree: true };
+
+    // Comenzar a observar el formulario
+    observer.observe(formulario, config);
+  }
+
+  // Seleccionar los formularios y los botones correspondientes
+  const formularioActualizar = document.querySelector('#formularioActualizar');
+  const botonActualizar = $('#aceptar_empleado');
+
+  const forActualizarFamiliar = document.querySelector('.formulario-familia');
+  const aceptar_familia = $('#aceptar_familia');
+
+  const formDescargarPDF = document.querySelector('#formulario-descargarpdf');
+  const descargarpdf = $('#descargarReporte');
+
   // Observar cambios en cada formulario por separado
-  observarFormulario($("#formularioActualizar")[0], $('#aceptar_empleado'));
-  observarFormulario($(".formulario-familia")[0], $('#aceptar_familia'));
-  observarFormulario($("#formulario-descargarpdf")[0], $('#descargarReporte'));
+  observarFormulario(formularioActualizar, botonActualizar);
+  observarFormulario(forActualizarFamiliar, aceptar_familia);
+
+  observarFormulario(formDescargarPDF, descargarpdf);
+
+  // Inicializar el estado de los botones al cargar la página
+  habilitarBoton(formularioActualizar, botonActualizar);
+  // Inicializar el estado de los botones al cargar la página
+  habilitarBoton(forActualizarFamiliar, aceptar_familia);
+ // Inicializar el estado de los botones al cargar la página
+  habilitarBoton(formDescargarPDF, descargarpdf);
 
 });
 

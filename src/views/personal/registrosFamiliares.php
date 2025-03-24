@@ -176,6 +176,7 @@ use App\Atlas\config\App;
                                                             <option value="Casado">Casado</option>
                                                             <option value="Viudo">Viudo</option>
                                                             <option value="Divorciado">Divorciado</option>
+                                                            <option value="EstadoDerecho">Estado De Derecho</option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -195,7 +196,7 @@ use App\Atlas\config\App;
                                                 </div>
                                             </div>
 
-                                            <div class="col-sm-6 col-md-2 mb-2">
+                                            <div class="col-sm-6 col-md-2 mb-2" id="contentEdad">
                                                 <div class="form-group">
                                                     <label for="edadEmp">Edad</label>
                                                     <div class="input-group">
@@ -203,6 +204,39 @@ use App\Atlas\config\App;
                                                         <input type="number" class="form-control" id="edadEmp" name="edad" placeholder="Edad del personal" required readonly>
                                                     </div>
                                                     <p class="parrafo fs-6 fw-light mb-0">La edad se autocompleta con la fecha de nacimiento</p>
+                                                </div>
+                                            </div>
+
+                                            <p class="mb-0 mt-2">Fecha de nacimiento</p>
+                                            <hr class="mb-2">
+
+                                            <div class="col-sm-12 col-md-4 mb-2 ">
+                                                <div class="form-group">
+                                                    <label class="required-field" for="ano2">Año</label>
+                                                    <div class="input-group">
+                                                        <span class="input-group-text span_ano"><i class="icons fa-regular fa-calendar"></i></i></span>
+                                                        <select class="form-select form-select-md" name="ano" id="ano2" required></select>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-12 col-md-4 mb-2">
+                                                <div class="form-group">
+                                                    <label class="required-field" for="message">Mes</label>
+                                                    <div class="input-group">
+                                                        <span class="input-group-text span_mes"><i class="icons fa-regular fa-calendar"></i></i></span>
+                                                        <select class="form-select meses2" id="meses2" name="meses" aria-label="Default select example" required></select>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-12 col-md-4 mb-2">
+                                                <div class="form-group ">
+                                                    <label class="required-field" for="message">Día</label>
+                                                    <div class="input-group">
+                                                        <span class="input-group-text span_dia"><i class="icons fa-regular fa-calendar"></i></i></span>
+                                                        <select class="form-select w-5 dias" id="dia2" name="dia" aria-label="Default select example" required></select>
+                                                    </div>
                                                 </div>
                                             </div>
 
@@ -269,46 +303,15 @@ use App\Atlas\config\App;
                                                 </div>
                                             </div>
 
-
-                                            <p class="mb-0 mt-2">Fecha de nacimiento</p>
-                                            <hr class="mb-2">
-
-                                            <div class="col-sm-12 col-md-4 mb-2 ">
-                                                <div class="form-group">
-                                                    <label class="required-field" for="ano2">Año</label>
-                                                    <div class="input-group">
-                                                        <span class="input-group-text span_ano"><i class="icons fa-regular fa-calendar"></i></i></span>
-                                                        <select class="form-select form-select-md" name="ano" id="ano2" required></select>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-sm-12 col-md-4 mb-2">
-                                                <div class="form-group">
-                                                    <label class="required-field" for="message">Mes</label>
-                                                    <div class="input-group">
-                                                        <span class="input-group-text span_mes"><i class="icons fa-regular fa-calendar"></i></i></span>
-                                                        <select class="form-select meses2" id="meses2" name="meses" aria-label="Default select example" required></select>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-sm-12 col-md-4 mb-2">
-                                                <div class="form-group ">
-                                                    <label class="required-field" for="message">Día</label>
-                                                    <div class="input-group">
-                                                        <span class="input-group-text span_dia"><i class="icons fa-regular fa-calendar"></i></i></span>
-                                                        <select class="form-select w-5 dias" id="dia2" name="dia" aria-label="Default select example" required></select>
-                                                    </div>
-                                                </div>
-                                            </div>
-
                                             <p class="mb-0 mt-2">Datos Del Trabajador</p>
                                             <hr class="mb-2">
 
                                             <div class="col-sm-12 col-md-12 mb-2">
-                                                <button type="button" id="cargaNoti" class="btn btn-sm btn-primary btn-xs  btn-hover-azul"><i class="fa-solid fa-plus me-2"></i>Actualizar notificacion</button>
-                                                <button type="button" id="cargaContrato" class="btn btn-sm btn-primary btn-xs btn-hover-azul"><i class="fa-solid fa-plus me-2"></i>Actualizar Contrato</button>
+                                                <div class="col-sm-12 col-md-12 " id="contenButton">
+
+                                                </div>
+                                                <button type="button" id="cargaNoti" class="btn btn-sm btn-primary btn-xs  btn-hover-azul mb-2"><i class="fa-solid fa-plus me-2"></i>Actualizar notificacion</button>
+                                                <button type="button" id="cargaContrato" class="btn btn-sm btn-primary btn-xs btn-hover-azul mb-2"><i class="fa-solid fa-plus me-2"></i>Actualizar Contrato</button>
                                             </div>
 
                                             <div class="col-sm-6 col-md-3 mb-2" id="contentIngreso">
@@ -436,8 +439,8 @@ use App\Atlas\config\App;
                                 <i class="fa-regular fa-xmark-large fa-sm me-2"></i> Cerrar
                             </button>
 
-                            <button type="submit" id="descargarReporte2" name="submit" class="btn-sm btn btn-danger btn-hover-rojo">
-                                <i class="fa-regular fa-file-pdf fa-sm me-2"></i>Descargar PDF
+                            <button type="submit" id="descargarReporte2" name="submit" class="btn-sm btn btn-danger btn-hover-rojo" >
+                                <i class="fa-regular fa-file-pdf fa-sm me-2"></i>Generar PDF
                             </button>
                         </div>
                     </div>
@@ -491,11 +494,8 @@ use App\Atlas\config\App;
     <?php require_once App::URL_INC . "/scrips.php"; ?>
     <?php require_once App::URL_INC . "/tablets.php"; ?>
 
-    <script src="./src/libs/select2/select2.min.js"></script>
-    <script src="./src/libs/jQueryUI/jquery-ui.min.js"></script>
-
-    <script src="<?php echo App::URL_SCRIPS . "registroFamiliar.js" ?>" type="module"></script>
-    <script src="<?php echo App::URL_SCRIPS . "reportesEmpleado.js" ?>" type="module"></script>
+    <script src="<?php echo App::URL_SCRIPS . "registroFamiliar.js" ?>" type="module" defer></script>
+    <script src="<?php echo App::URL_SCRIPS . "reportesEmpleado.js" ?>" type="module" defer></script>
 
 </body>
 

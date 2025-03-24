@@ -72,6 +72,21 @@ export function setVariableDiscapacidad(id, name) {
     `;
 }
 
+// VARIABLE DE NUMERO DE CARNET
+export function setVariableCarnetDiscapacidad(id, name) {
+    return `
+        <div class="col-sm-6 col-md-6 col-xl-6 col-xxl-3 mb-3" id="contenCarnet">
+            <div class="form-group" >
+                <label for="${id}">Número de Carnet de Discapacidad</label>
+                <div class="input-group">
+                    <span class="input-group-text span_carnet"><i class="icons fa-regular fa-id-badge"></i></span>
+                    <input type="text" class="form-control " id="${id}" name="${name}" placeholder="Cédula de Identidad" required>
+                </div>
+            </div>
+        </div>
+    `;
+}
+
 // VARIABLE DE ARCHIVO
 export function setVariableArchivo(id, name, text, placeholder, span) {
     return `
@@ -380,7 +395,7 @@ export function setVariableApellidoFamiliar(id, name) {
 // CARGAR DOCUMENTO DE ESTADO DE DERECHO
 export function setVariableDocumentoFamiliar(id, name, span, nombreDoc) {
     return `
-      <div class="col-sm-12 col-mb-6 col-xl-6" id="contentdocumnetoFamiliar">
+      <div class="col-sm-12 col-mb-6 col-xl-6 contentdocumnetoFamiliar" id="contentdocumnetoFamiliar">
         <div class="form-group mb-3">
           <label for="${id}">${nombreDoc}</label>
           <div class="input-group">
@@ -404,9 +419,15 @@ export function setVariableCheckboxInces(id, labelText, content) {
         </div>
       </div>
     `;
-  }
+}
+
 //variable de contrasena
 export function setVariableContrasena(id, name) {
 }
 
+// variable de aelrta basica del sistema 
+export function setVariableDeAlertaBasica(texto) {
+    return `
 
+`
+}

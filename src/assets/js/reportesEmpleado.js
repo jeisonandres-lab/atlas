@@ -1,9 +1,10 @@
 import { AlertSW2 } from "./ajax/alerts.js";
+import { mostrarPDFenModal } from "./ajax/descargar.js";
 
-import { 
-    descargarArchivo, 
-    obtenerDatos, 
-    obtenerDatosJQuery 
+import {
+    descargarArchivo,
+    obtenerDatos,
+    obtenerDatosJQuery
 } from "./ajax/formularioAjax.js";
 
 import {
@@ -11,14 +12,14 @@ import {
     validarSelectoresSelec2,
     validarNumeroNumber,
     validarInputFecha,
+    llenarSelect,
 } from "./ajax/inputs.js";
 
-import { 
-    setCargarDiscapacidad, 
-    setCargarEstadoCivil, 
-    setCargarNivelesAcademicos, 
-    setCargarSexo, 
-    setCargarTipoVivienda 
+import {
+    setCargarEstadoCivil,
+    setCargarNivelesAcademicos,
+    setCargarSexo,
+    setCargarTipoVivienda
 } from "./ajax/variablesArray.js";
 
 import {
@@ -27,7 +28,6 @@ import {
     setVariableCivil,
     setVariableDepartamento,
     setVariableDependencia,
-    setVariableDiscapacidad,
     setVariableEdad,
     setVariableEstado,
     setVariableEstatus,
@@ -78,7 +78,7 @@ $(function () {
                     $("#cabeza-reporte").html('Generar Reporte PDF');
                     $("#descargarReporte2").addClass('btn-danger btn-hover-rojo');
                     $("#descargarReporte2").removeClass('btn-success btn-verde-rojo');
-                    $("#descargarReporte2").html('<i class="fa-regular fa-file-pdf fa-sm me-2"></i>Descargar PDF');
+                    $("#descargarReporte2").html('<i class="fa-regular fa-file-pdf fa-sm me-2"></i>Generar PDF');
 
                 } else {
                     $("#cabeza-reporte").html('Generar Reporte EXCEL');
@@ -122,42 +122,21 @@ $(function () {
 
             // Aquí puedes agregar cualquier otra lógica que necesites después del cierre
         });
-
-
     });
 
+    //calcular las fecha inicio y fecha fin 
     $(document).on("change", "#fecha_fin_filtrar, #fecha_filtrar", function () {
         let fechaInic = $("#fecha_filtrar").val();
         let fechaFin = $("#fecha_fin_filtrar").val();
-
         console.log(fechaInic)
         console.log(fechaFin)
-
         if (fechaInic >= fechaFin) {
-
             $("#descargarReporte2").prop("disabled", true);
         } else {
             $("#descargarReporte2").prop("disabled", false);
         }
 
     })
-
-    // llenar selectores
-    async function llenarSelect(data, selectId) {
-        const select = document.getElementById(selectId);
-        // Asegúrate de que el ID del select sea correcto
-        if (!select) {
-            console.error(`El elemento select con el ID "${selectId}" no se encontró en el DOM.`);
-            return;
-        }
-
-        data.forEach(item => {
-            const option = document.createElement('option');
-            option.value = item.id;
-            option.text = item.value;
-            select.appendChild(option);
-        });
-    }
 
     // solicitud de buscar cargos
     async function traerCargo() {
@@ -451,18 +430,16 @@ $(function () {
     //formulario para descargar los reportes
     $(document).on("submit", "#formulario-descargarpdf", async function (event) {
         event.preventDefault();
-        const data = new FormData(this);
-        const nombreReporte = $(this).data('nombre');
-        console.log(nombreReporte);
-        // Obtener el atributo 'action' del formulario
         const formAction = $(this).attr("action");
+        const nombreReporte = $(this).data('nombre');
+        const modalId = 'miModalPDF'; // ID del modal
+        const formElement = this; // El formulario actual
+    
         if (formAction == "#") {
-            await AlertSW2("error", "Seleccione una opcion", "top", 3000)
+            await AlertSW2("error", "Seleccione una opcion", "top", 3000);
         } else {
-            // Usar el atributo 'action' en la función descargarArchivo
-            await descargarArchivo(formAction, nombreReporte, data);
+            await mostrarPDFenModal(formAction, nombreReporte, modalId, formElement);
         }
-
     });
 
     //buscar municipios por medio de los estados
