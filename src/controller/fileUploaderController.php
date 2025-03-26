@@ -245,22 +245,114 @@ class fileUploaderController extends Conexion
     }
 
 
+    public function registrarArchivos(string $cedula, string $id_empleado, string|int|null $estadoCivil)
+    {
+        $fileInputs = [
+            'contratoArchivo' => App::URL_CONTRATOS,
+            'notacionAchivo' => App::URL_NOTACION,
+            'docEstadoDerechoArchivo' => App::URL_ESTADODEDERECHO,
+            'docCasadoArchivo' => App::URL_MATRIMONIO,
+            'docArchivoDis' => App::URL_DISCAPACIDADEMPELADO,
+            'docViudaArchivo'  => App::URL_VIUDO,
+            'docDivorcioArchivo' => App::URL_DIRVORCIO,
+            "docSolicEstCivilArchivo" => App::URL_SOLICITUDCAMBIOESTADOCIVIL,
+            "docPartidaNacimiento" => App::URL_PARTIDANACIMIENTO
+        ];
 
+        // Determinar la carpeta de destino para docCopiaCedulaArchivo según el estado civil
+        if ($estadoCivil === 'Casado') {
+            $fileInputs['docCopiaCedulaArchivo'] = App::URL_COPIADECEDULACASADO;
+        } elseif ($estadoCivil === 'Divorciado') {
+            $fileInputs['docCopiaCedulaArchivo'] = App::URL_COPIADECEDULACAMBIOESTADOCIVIL;
+        } elseif ($estadoCivil === 'Viudo') {
+            $fileInputs['docCopiaCedulaArchivo'] = App::URL_COPIADECEDULAVIUDO;
+        }
 
+        $archivosASubir = [];
+        foreach ($fileInputs as $inputName => $uploadDir) {
+            if (isset($_FILES[$inputName]) && $_FILES[$inputName]['error'] === UPLOAD_ERR_OK) {
+                $archivosASubir[] = [
+                    'input' => $inputName,
+                    'dir' => $uploadDir,
+                    'nombreArchivo' => $this->getNombreArchivo($inputName, $estadoCivil)
+                ];
+            }
+        }
 
+        $resultados = [];
+        $existeArchivo = false;
+        $nombreArchivos = [];
 
+        // Verificar si alguno de los archivos ya existe
+        foreach ($archivosASubir as $archivo) {
+            $inputName = $archivo['input'];
+            $nombreArchivos[$inputName] = $this->obtenerNombreArchivo($_FILES[$inputName], $cedula);
+            $direccion = $archivo['dir'] . $cedula . $nombreArchivos[$inputName]['nombre'];
+            $existeArchivoCheck = $this->archivoExiste2($direccion);
+            if ($existeArchivoCheck['error']) {
+                $existeArchivo = true;
+                $resultados['mensaje'] = $existeArchivoCheck['mensaje'];
+                break;
+            }
+        }
 
+        if ($existeArchivo) {
+            $resultados['exito'] = false;
+            $resultados['resultado'] = 3;
+        } else {
+            // Si ninguno de los archivos existe, proceder con la subida
+            foreach ($archivosASubir as $archivo) {
+                $inputName = $archivo['input'];
+                $nombreArchivo = $archivo['nombreArchivo'];
+                $direccion = $archivo['dir'];  //. $nombreArchivos[$inputName]['nombre']
+                $resultados[$inputName] = $this->subirArchivo($_FILES[$inputName], $cedula, $archivo['dir'], $id_empleado, null, $nombreArchivo);
+                if ($resultados[$inputName]['error']) {
+                    $resultados['mensaje'] = $resultados[$inputName]['mensaje'];
+                    $resultados['resultado'] = 3;
+                    break;
+                }
+            }
 
+            if (!isset($resultados['mensaje'])) {
+                $resultados['exito'] = true;
+                $resultados['mensaje'] = 'Archivos subidos exitosamente.';
+            }
+        }
 
+        return $resultados;
+    }
 
-
-
-
-
-
-
-
-    // Otras funciones como formatSizeUnits y generarCodigoAleatorio
-
-
+    public function getNombreArchivo(string $inputName, $estadoCivil = null)
+    {
+        switch ($inputName) {
+            case 'contratoArchivo':
+                return 'Contrato';
+            case 'notacionAchivo':
+                return 'Notacion Archivo';
+            case 'docEstadoDerechoArchivo':
+                return 'Documento Estado De Derecho';
+            case 'docCasadoArchivo':
+                return 'Acta De Matrimonio';
+            case 'docArchivoDis':
+                return 'Acta De Discapacidad';
+            case 'docViudaArchivo':
+                return 'Acta De Difución';
+            case 'docDivorcioArchivo':
+                return 'Acta De Divorcio';
+            case 'docSolicEstCivilArchivo':
+                return 'Carta solicitando el cambio de estado civil';
+            case 'docCopiaCedulaArchivo':
+                if ($estadoCivil === 'Casado') {
+                    return 'Copia de Cédula-Casado';
+                } elseif ($estadoCivil === 'Divorciado') {
+                    return 'Copia de Cédula-Divorciado';
+                } elseif ($estadoCivil === 'Viudo') {
+                    return 'Copia de Cédula-Acta De Difución';
+                } else {
+                    return 'Copia de Cédula';
+                }
+            default:
+                return 'Archivo';
+        }
+    }
 }

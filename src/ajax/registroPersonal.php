@@ -104,6 +104,8 @@ switch ($_GET['modulo_personal']) {
         $ubicacion->obtenerParroquia($idMunicipio2);
         break;
     case 'registrarFamilia':
+
+        $FamiliarInces = '1';
         $personal->registrarFamilia(
             $parentesco,
             $cedulaEmpleado,
@@ -120,7 +122,8 @@ switch ($_GET['modulo_personal']) {
             $tomo,
             $folio,
             $discapacidad,
-            $sexo
+            $sexo,
+            $familiarInces
         );
         break;
     case 'obtenerPersonal':
@@ -194,6 +197,9 @@ switch ($_GET['modulo_personal']) {
             $sexo,
             $discapacidad
         );
+        break;
+    case 'obtenerDataEmpleados':
+        $personal->obtenerTodaDataEmpleado($cedulaFamiliar);
         break;
     default:
 

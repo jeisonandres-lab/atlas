@@ -17,6 +17,7 @@ import {
   validarInputFecha,
   clasesInputs,
   llenarSelect,
+  buscarDataEmpledoSelect2,
 } from "./ajax/inputs.js";
 
 import {
@@ -192,6 +193,25 @@ $(function () {
     }
   }
 
+  async function obtenerDatosEmpleados(url, selectElement) {
+    try {
+      const response = await fetch(url);
+      const data = await response.json();
+
+      if (data.exito && data.datos) {
+        selectElement.empty();
+        data.datos.forEach(item => {
+          selectElement.append($('<option>', { value: item.cedula, text: item.primerNombre + " " + item.primerApellido }));
+
+        });
+
+      } else {
+        console.error('Error en la respuesta del servidor:', data.mensaje);
+      }
+    } catch (error) {
+      console.error('Error al obtener datos del servidor:', error);
+    }
+  }
   //formulario de registro de trabajadores 
   $(document).on("submit", "#formulario_registro", async function (e) {
     e.preventDefault();
@@ -205,9 +225,9 @@ $(function () {
     $("#aceptar").prop("disabled", true);
     async function callbackExito(parsedData) {
       if (parsedData.exito) {
-        console.log(parsedData.exito)
         $("#aceptar").prop("disabled", false);
-        await AlertDirection("success", parsedData.mensaje, "top", 7000, recargarConVerificacionDeCache());
+        // recargarConVerificacionDeCache()
+        await AlertDirection("success", parsedData.mensaje, "top", 7000);
       } else {
         await alertaNormalmix(parsedData.mensaje, 4000, "error", "top-end");
         // if (error) limpiarFormulario($("#formulario_registro"));
@@ -380,7 +400,7 @@ $(function () {
     if ($(this).val() === "Casado") {
       $('#estadoDerecho').modal('show');
       $("#exampleModalLabel").text("Casado");
-      $(".contendorEstadoDerecho").html(documentoCasadoHTML + documentoCopiaCedulaHTML);
+      $(".contendorEstadoDerecho").html(checkboxHTML+cedulaHTML+nombreHTML+apellidoHTML+documentoCasadoHTML + documentoCopiaCedulaHTML);
       // validaciones
       file("#docCasado", ".span_docCasado");
       file("#docCopiaCedula", ".span_docCopiaCedula");
@@ -421,11 +441,13 @@ $(function () {
   })
 
   // Maneja el clic en el botón "cerrarModalEstadoDerecho"
-  $(document).on('click', '#cerrarModalEstadoDerecho', function () {
-    // // Limpia los inputs y aplica las clases (misma lógica que "aceptar")
+  $(document).on('click', '#cerrarModalEstadoDerecho, .cerrarX', function () {
+    // Limpia los inputs y aplica las clases (misma lógica que "aceptar")
+    $('.contendorEstadoDerecho').empty();
     $('#estadoDerecho').modal('hide'); // Oculta el modal
-    $("#botonModalEstadoDerecho").slideUp(400);
-  })
+    $('#botonModalEstadoDerecho').slideUp(400);
+    $('#civil').val("").trigger('change');
+  });
 
   // evento de escucha del evento modal abierto 
   $('#estadoDerecho').on('show.bs.modal', function (e) {
@@ -450,26 +472,64 @@ $(function () {
   $(document).on("change", '#btnEDInces', async function () {
     $("#cedulaFamiliar").val("");
 
+    // validamos si el check esta es true
     if ($(this).prop('checked')) {
-      console.log("activo")
+      console.log("activo");
+      const inputElement = $('#cedulaFamiliar');
+      const selectElement = $('<select></select>');
+      // Transferir atributos y clases del input al select
+      // Transferir atributos del input al select
+      Array.from(inputElement[0].attributes).forEach(attr => {
+        selectElement.attr(attr.name, attr.value);
+      });
+      selectElement.addClass(inputElement.attr('class'));
+      selectElement.addClass("selectCedula");
+
+      // Reemplazar el input con el select
+      inputElement.replaceWith(selectElement);
+
+      // Inicializar Select2 después de cargar los datos
+      buscarDataEmpledoSelect2('.selectCedula');
+      validarSelectoresSelec2("#cedulaFamiliar", ".span_cedulaFamiliar");
       $("#cedulaFamiliar").removeClass("busquedaCedula");
       $('#nombreFamiliar, #apellidoFamiliar').prop('disabled', true).val('').addClass('cumplido ignore-validation');
 
     } else {
-      // Si el checkbox está marcado, habilita los inputs y agrega la clase busquedaCedula
+      // Si el checkbox está desmarcado, habilita los inputs y agrega la clase busquedaCedula
       $('#nombreFamiliar, #apellidoFamiliar').prop('disabled', false).removeClass('cumplido ignore-validation').val('');
       $("#cedulaFamiliar").addClass("busquedaCedula");
+      const selectElement = $('#cedulaFamiliar');
 
+      // Destruir select2 antes de reemplazar el select con el input
+      if (selectElement.data('select2')) {
+        selectElement.select2('destroy');
+      }
+
+      selectElement.remove();
+      // Crear el nuevo input
+      const inputElement = $('<input>');
+
+      // Agregar clases y atributos al nuevo input
+      inputElement.addClass('form-control busquedaCedula');
+      inputElement.attr('placeholder', 'Cédula de identidad');
+      inputElement.attr('id', 'cedulaFamiliar');
+      inputElement.attr('name', 'cedulaFamiliar');
+      // Agregar el nuevo input al DOM
+      $('.span_cedulaFamiliar').parent().append(inputElement);
+      // Actualizar las referencias al nuevo ID
+      validarNumeros("#cedulaFamiliar", ".span_cedulaFamiliar");
     }
+    $(".span_cedulaFamiliar").removeClass("cumplido_span error_span");
   });
 
+  $(document).on("input", "")
   // buscar empelado por medio de la dcedula del familiar por si ecxiste ya esa cedula como empleado
   $(document).on("input", "#cedulaFamiliar", async function () {
     if ($(this).hasClass("busquedaCedula")) {
       await cedulaExisteEmpleado("#cedulaFamiliar", ".span_cedulaFamiliar", "La cédula le pertenece a un trabajador inces");
     }
   });
-  
+
   // buscar empelado por medio de la dcedula del familiar por si ecxiste ya esa cedula como empleado
   $(document).on("input", "#cedula", async function () {
     if ($(this).hasClass("busquedaCedula")) {

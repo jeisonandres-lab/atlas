@@ -88,15 +88,14 @@ export function setVariableCarnetDiscapacidad(id, name) {
 }
 
 // VARIABLE DE ARCHIVO
-export function setVariableArchivo(id, name, text, placeholder, span) {
+export function setVariableArchivo(id, name, text, span, content) {
     return `
-        <div class="col-sm-12 col-md-3 col-xl-3 mb-2" id="contentDiscapacidad">
+        <div class="col-sm-12 col-xl-12 col-xxl-6 mb-2" id="${content}">
             <div class="form-group">
                 <label for="${id}">${text}</label>
                 <div class="input-group">
-                    <span class="input-group-text ${span}"><i class="icons fa-solid fa-wheelchair-move"></i></span>
-                    <select type="text" class="form-control ignore-validation" id="${id}" name="${name}" placeholder="${placeholder}">
-                    </select>
+                    <span class="input-group-text ${span}"><i class="icons fa-regular fa-file-zipper"></i></span>
+                    <input type="file" class="form-control" name="${name}" id="${id}" aria-describedby="inputGroupFileAddon04" aria-label="Upload" required>
                 </div>
             </div>
         </div>
@@ -355,7 +354,7 @@ export function setVariableCedulaFamiliar(id, name) {
           <label for="${id}">Cédula</label>
           <div class="input-group">
             <span class="input-group-text span_cedulaFamiliar"><i class="icons fa-regular fa-address-card"></i></span>
-            <input type="text" class="form-control busquedaCedula" id="${id}" name="${name}" placeholder="Cédula de Identidad">
+            <input type="text" class="form-control busquedaCedula selectCedula" id="${id}" name="${name}" placeholder="Cédula de Identidad">
           </div>
         </div>
       </div>
@@ -428,6 +427,13 @@ export function setVariableContrasena(id, name) {
 // variable de aelrta basica del sistema 
 export function setVariableDeAlertaBasica(texto) {
     return `
-
+    <div class="d-flex alert alert-warning alert-dismissible m-0 contentAlerta mt-2 mb-2" role="alert">
+            <div class="d-flex align-items-center alert-icon me-3">
+                <i class="fas fa-exclamation-triangle"></i>
+            </div>
+            <div class="alert-text">
+            ${texto}
+            </div>
+    </div>
 `
 }

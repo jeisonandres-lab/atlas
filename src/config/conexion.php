@@ -42,7 +42,6 @@ class Conexion extends Error
             // Capturar cualquier otra excepción
             error::captureError();
             print_r('Error connection: ' . $th->getMessage());
-
         }
     }
     public function validarConexion()
@@ -159,7 +158,8 @@ class Conexion extends Error
         return $sql;
     }
 
-    protected function actualizarDatos($tabla, $datos, $condicion) {
+    protected function actualizarDatos($tabla, $datos, $condicion)
+    {
         $query = "UPDATE $tabla SET ";
 
         $C = 0;
@@ -214,5 +214,17 @@ class Conexion extends Error
 
         return $sql;
     }
-}
 
+    /*---------- funcion para obtener la primera columna de una tabala -------------*/
+    protected function obtenerPrimeraColumna(string $tabla)
+    {
+        $consulta = "SHOW COLUMNS FROM " . $tabla . " LIMIT 1;";
+        $resultado = $this->ejecutarConsulta($consulta);
+
+        if ($resultado && count($resultado) > 0) {
+            return $resultado[0]['Field'];
+        }
+
+        return null;
+    }
+}

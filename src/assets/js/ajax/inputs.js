@@ -1,3 +1,4 @@
+import { formatState } from "./funciones.js";
 import { ARRAYMESES, niveles } from "./variablesArray.js";
 // Funcion para vlaidar campos tipo text que tambien coloquen la primera letra en mayuscula
 export async function validarNombre(input, cumplidospan) {
@@ -16,7 +17,6 @@ export async function validarNombre(input, cumplidospan) {
       $(this).addClass("cumplido");
       $(cumplidospan).removeClass("error_span");
       $(cumplidospan).addClass("cumplido_span");
-      console.log("Okay, el valor es válido.");
     }
   });
 }
@@ -26,10 +26,8 @@ export async function validarNombreConEspacios(input, cumplidospan) {
   $(document).on("input", input, function () {
     // Convertir la primera letra de cada palabra a mayúscula y mantener el resto en su estado original
     this.value = this.value.replace(/\b\w/g, (char) => char.toUpperCase());
-
     // Permitir solo letras y espacios
     this.value = this.value.replace(/[^a-zA-Z\s]/g, "");
-
     if (this.value.length < 3) {
       $(this).removeClass("cumplido");
       $(this).addClass("error_input");
@@ -40,7 +38,6 @@ export async function validarNombreConEspacios(input, cumplidospan) {
       $(this).addClass("cumplido");
       $(cumplidospan).removeClass("error_span");
       $(cumplidospan).addClass("cumplido_span");
-      console.log("Okay, el valor es válido.");
     }
   });
 }
@@ -48,7 +45,7 @@ export async function validarNombreConEspacios(input, cumplidospan) {
 //validar texto plano que cumpla con 8 caracteres
 // Función para validar contraseñas con al menos 8 caracteres
 export async function validarTexto(input, cumplidospan) {
-  $(document).on("input", input,function () {
+  $(document).on("input", input, function () {
     const password = $(this).val();
 
     // Verificar si la contraseña tiene al menos 8 caracteres
@@ -280,14 +277,45 @@ export async function validarInputFecha(input, cumplidospan) {
   });
 }
 
-export function incluirSelec2(selector) {
+// tranformal el select a select2
+export function incluirSelec2(selector, contexto, options = {}) {
   // 1. Inicialización inicial
   $(selector).each(function () {
-    $(this).select2({
+    const select2Options = {
+      dropdownParent: contexto,
+      language: "es",
       theme: "bootstrap-5",
       width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
       placeholder: $(this).data('placeholder'),
-    });
+    };
+
+    // Si se proporciona una URL en las opciones, configurar ajax
+    if (options.url) {
+      select2Options.ajax = {
+        url: options.url,
+        dataType: 'json',
+        delay: 250,
+        data: function (params) {
+          return {
+            q: params.term,
+            page: params.page
+          };
+        },
+        processResults: function (data, params) {
+          params.page = params.page || 1;
+          return {
+            results: data.items,
+            pagination: {
+              more: (params.page * 30) < data.total_count
+            }
+          };
+        },
+        cache: true
+      };
+      select2Options.minimumInputLength = 1;
+    }
+
+    $(this).select2(select2Options);
   });
 
   // 2. MutationObserver para cambios dinámicos
@@ -308,6 +336,7 @@ export function incluirSelec2(selector) {
   observer.observe(document.body, { childList: true, subtree: true });
 }
 
+// validar selectores de select2
 export async function validarSelectoresSelec2(input, cumplidospan) {
   $(document).on('select2:select change', input, function (e) {
     const select2Container = $(this).next('.select2-container');
@@ -337,6 +366,56 @@ export async function validarSelectoresSelec2(input, cumplidospan) {
         select2Rendered.addClass('input_error'); // Agrega input_error al select2-selection__rendered
       }
     }
+  });
+}
+
+// buscar datos de empleados pro select 2
+export function buscarDataEmpledoSelect2(input) {
+  $(input).select2({
+    dropdownParent: $("#estadoDerecho"),
+    language: "es",
+    theme: "bootstrap-5",
+    width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
+    placeholder: 'Coloque la cédula',
+    ajax: {
+      url: 'src/ajax/registroPersonal.php?modulo_personal=obtenerDataEmpleados',
+      dataType: 'json',
+      type: 'POST',
+      delay: 250,
+      data: function (params) {
+        return {
+          cedulaFamiliar: params.term
+        };
+      },
+      processResults: function (data, params) {
+        params.page = params.page || 1;
+        if (data && data.datos && Array.isArray(data.datos)) {
+          const results = data.datos.map(item => {
+            return {
+              id: item.cedula,
+              text: item.primerNombre + ' ' + item.primerApellido,
+              img: item.cedula // Asegúrate de que este campo exista y sea el nombre del archivo de la imagen
+            };
+          });
+
+          return {
+            results: results,
+            pagination: {
+              more: (params.page * 30) < data.total_count
+            }
+          };
+        } else {
+          console.error("Error: 'data.datos' no es un array válido.", data);
+          return {
+            results: []
+          };
+        }
+      },
+      cache: true
+    },
+    minimumInputLength: 1,
+    templateResult: formatState, // Usar formatState para mostrar las opciones
+    templateSelection: formatState // Usar formatState para mostrar la selección
   });
 }
 

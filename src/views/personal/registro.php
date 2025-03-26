@@ -12,6 +12,7 @@ use App\Atlas\config\App;
     <!-- CSS DEL SISTEMA -->
     <?php require_once App::URL_INC . "total_css.php"; ?>
     <link rel="stylesheet" href="<?php echo App::URL_CSS . "registroPersonal.css"; ?>">
+    <link rel="stylesheet" href="<?php echo App::URL_CSS . "cssUtils/checkbox.css"; ?>">
 </head>
 
 <body class="layout-fixed sidebar-expand-lg bg-body-tertiary">
@@ -221,7 +222,7 @@ use App\Atlas\config\App;
                                         <div class="modal-content">
                                             <div class="modal-header bg-primary">
                                                 <h1 class="modal-title fs-5 text-white" id="exampleModalLabel">Modal Estado Civil</h1>
-                                                <button type="button" class="btn-close text-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                <button type="button" class="btn-close text-white cerrarX" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
                                                 <!-- CEDULA DEL FAMILIAR -->
@@ -248,7 +249,7 @@ use App\Atlas\config\App;
                                 </div>
 
                                 <!-- BOTONES DE INTECTIVOS DEL FORMULARIO MULTIPLE -->
-                                <div class="f1-buttons">
+                                <div class="f1-buttons px-3">
                                     <!-- Button trigger modal -->
                                     <button type="button" class="btn btn-primary" id="botonModalEstadoDerecho" data-bs-toggle="modal" data-bs-target="#estadoDerecho">
                                     <i class="fa-regular fa-eye me-2"></i>Ver estado de derecho
@@ -333,7 +334,7 @@ use App\Atlas\config\App;
                                         </div>
 
                                         <!-- BOTONES DE INTECTIVOS DEL FORMULARIO MULTIPLE -->
-                                        <div class="f1-buttons mt-3">
+                                        <div class="f1-buttons px-3 mt-3">
                                             <button type="button" class="btn btn-previous btn-secondary btn-hover-gris"><i class="fa-solid fa-arrow-left me-2"></i>Atrás</button>
                                             <button type="button" class="btn btn-next btn-warning text-white btn-hover-amarillo"><i class="fa-solid fa-arrow-right me-2"></i>Siguiente</button>
                                         </div>
@@ -468,7 +469,7 @@ use App\Atlas\config\App;
                                 </div>
 
                                 <!-- BOTONES DE INTECTIVOS DEL FORMULARIO MULTIPLE -->
-                                <div class="f1-buttons">
+                                <div class="f1-buttons px-3">
                                     <button type="button" class="btn btn-previous btn-secondary btn-hover-gris"><i class="fa-solid fa-arrow-left me-2"></i>Atrás</button>
                                     <button type="submit" class="btn btn-warning text-white btn-hover-amarillo" id="aceptar"><i class="fa-regular fa-thumbs-up me-2"></i>Guardar Información</button>
                                 </div>

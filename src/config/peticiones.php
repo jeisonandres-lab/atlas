@@ -39,6 +39,7 @@ class peticiones extends Conexion {
             'linea' => isset($_POST['linea']) ? $this->limpiarCadena($_POST['linea']) : "",
             'numeroCarnet' => isset($_POST['carnet']) ? $this->limpiarCadena($_POST['carnet']) : "",
             'tomo' => isset($_POST['tomo']) ? $this->limpiarCadena($_POST['tomo']) : "",
+            'familiarInces' => isset($_POST['familiarInces']) ? $this->limpiarCadena($_POST['familiarInces']) : "",
             'folio' => isset($_POST['folio']) ? $this->limpiarCadena($_POST['folio']) : "",
             'vivienda' => isset($_POST['vivienda']) ? $this->limpiarCadena($_POST['vivienda']) : "",
             'calle' => isset($_POST['calle']) ? $this->limpiarCadena($_POST['calle']) : "",

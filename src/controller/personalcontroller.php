@@ -3,9 +3,11 @@
 namespace App\Atlas\controller;
 
 use App\Atlas\models\personalModel;
+use App\Atlas\controller\familiarController;
 use App\Atlas\controller\fileUploaderController;
 use App\Atlas\models\tablasModel;
 use App\Atlas\config\App;
+use App\Atlas\models\familiarModel;
 
 date_default_timezone_set("America/Caracas");
 
@@ -16,7 +18,7 @@ class personalController extends personalModel
     private $fileUploader;
     private $tablas;
     private $app;
-
+    private $familiar;
     private $auditoriaController;
     private $idUsuario;
     private $nombreUsuario;
@@ -28,6 +30,7 @@ class personalController extends personalModel
         $this->tablas = new tablasModel();
         $this->app = new App();
         $this->auditoriaController = new auditoriaController();
+        $this->familiar = new familiarModel();
         $this->app->iniciarSession();
         $this->idUsuario = $_SESSION['id'];
         $this->nombreUsuario = $_SESSION['usuario'];
@@ -35,44 +38,42 @@ class personalController extends personalModel
 
     //Registro de personal
     public function registro(
-      string $primerNombre,
-      string $segundoNombre,
-      string $primerApellido,
-      string $segundoApellido,
-      string $cedula,
-      string $civil,
-      string $correo,
-      string $ano,
-      string $mes,
-      string $dia,
-      string $idEstatus,
-      string $idCargo,
-      string $idDependencia,
-      string $idDepartamento,
-      string $telefono,
-      string $nivelAcademico,
-      string $vivienda,
-      string $sexo,
-      string $idestado,
-      string $idMunicipio,
-      string $idParroquia,
-      string $calle,
-      string $numeroVivienda,
-      string $pisoUrba,
-      string $nombreUrba,
-      string $numeroDepa,
-      string $fechaING,
-      string $edad,
-      string $discapacidad,
-      string $FamiliarInces,
-      string $primerNombreFamiliar,
-      string $primerApellidoFamiliar,
-      string $cedulaFamiliar,
+        string $primerNombre,
+        string $segundoNombre,
+        string $primerApellido,
+        string $segundoApellido,
+        string $cedula,
+        string $civil,
+        string $correo,
+        string $ano,
+        string $mes,
+        string $dia,
+        string $idEstatus,
+        string $idCargo,
+        string $idDependencia,
+        string $idDepartamento,
+        string $telefono,
+        string $nivelAcademico,
+        string $vivienda,
+        string $sexo,
+        string $idestado,
+        string $idMunicipio,
+        string $idParroquia,
+        string $calle,
+        string $numeroVivienda,
+        string $pisoUrba,
+        string $nombreUrba,
+        string $numeroDepa,
+        string $fechaING,
+        string $edad,
+        $discapacidad,
+        string $FamiliarInces,
+        string $primerNombreFamiliar,
+        string $primerApellidoFamiliar,
+        string $cedulaFamiliar,
 
-    ) {
-        if ($discapacidad == "") {
-            $discapacidad = null;
-        }
+    ): array {
+
         // sleep(5); // Descomenta esta línea si necesitas una pausa de 5 segundos (útil para depuración o simulación de latencia)
         $data_json = [
             'exito' => false, // Inicializamos 'exito' a false por defecto, asumimos que habrá un error
@@ -80,19 +81,37 @@ class personalController extends personalModel
         ];
 
         // Verifica si el familiar que se intenta registrar ya existe usando la función existeFamiliarCedula
-        $check_familiar_exis = $this->existeFamiliarCedula([$cedulaFamiliar]);
+        $check_familiar_exis = $this->existeFamiliarCedula([$cedula]);
 
         // Si el familiar ya existe, actualiza $data_json con un mensaje de éxito y sale del bloque else
         if ($check_familiar_exis) {
             $data_json = [
                 'exito' => true,
-                'mensaje' => 'El familiar que se intenta registrar ya existe',
+                'mensaje' => 'El familiar que se intenta registrar ya esta asignado',
             ];
         } else {
+
+            // SE VERIFICA AHORA SI EL FAMILIAR AHORA INCES EXISTE SI EXISTE RETORNA UNA ALERTA
+            // SI NO EXIZTE AHORA PUEDE PROCESAR A CARGAR LOS DATOS DEL TRABAJADOR
+            // COMO TAMBIEN SU NUEVO FAMILIAR ASIGNAR SI ES QUE SE LE ASIGNA
+            if (!empty($cedulaFamiliar)) {
+                $validarFamiliar = $this->familiar->getExisteFamiliarIncesPorCedula([$cedulaFamiliar]);
+
+                // validar si el familiar existe
+                if ($validarFamiliar) {
+                    $data_json['exito'] = false;
+                    $data_json['mensaje'] = "EL familiar inces que intestas registrar ya esta asignado a otro trabajador.";
+                    return $this->app->imprimirRespuestaJSON($data_json);
+                }
+            }
+
+
+            // registro de empleados
             // Si el familiar no existe, procede a verificar si el personal ya está registrado
             $check_exisPersonal = $this->getExistePersonalCD([$cedula]);
             // Si el personal no está registrado, procede a registrar los datos personales
             if (!$check_exisPersonal) {
+
                 // Llama a la función registrarDatosPersonal para registrar los datos del personal
                 $registrarPersonal = $this->registrarDatosPersonal(
                     $primerNombre,
@@ -123,7 +142,7 @@ class personalController extends personalModel
                         // Si se obtuvo el ID del personal, procede a registrar los datos del empleado
                         $idPersonal = $retornarIDpersonal[0]['id_personal']; // obtenemos el id de la persona por medio el array
                         // Llama a la función registrarDatosEmpleado para registrar los datos del empleado
-                        $registrarEmpelado = $this->registrarDatosEmpleado(
+                        $registrarEmpleado = $this->registrarDatosEmpleado(
                             $primerNombre,
                             $primerApellido,
                             $cedula,
@@ -137,11 +156,12 @@ class personalController extends personalModel
                             $fechaING
                         );
                         // Si el registro de datos del empleado fue exitoso, actualiza $data_json con un mensaje de éxito
-                        if ($registrarEmpelado) {
+                        if ($registrarEmpleado) {
 
                             // retornamos el id del empleado registrado por medio de la misma cedula
                             $retornarIDEmpleado = $this->getreturnIDPE([$cedula]);
                             $id_empleado = $retornarIDEmpleado[0]['id_empleados'];
+
                             // registramos la ubicacion del empleado
                             $registrarIDUbicacion = $this->registrarUbicacionEmpleado(
                                 $id_empleado,
@@ -177,7 +197,7 @@ class personalController extends personalModel
                                 //valdiamos si se cumplio el registro
                                 if (empty($registrarFamiliarInces)) {
                                     $data_json['exito'] = false;
-                                    $data_json['mensaje'] =  "Empleado registrado, pero familiar NO SE LOGRO";
+                                    $data_json['mensaje'] = $FamiliarInces . "primerNombre" . $primerNombreFamiliar . "primerApellido" . $primerApellidoFamiliar . "cedula" . $cedulaFamiliar . "id" . $id_empleado;
                                 } else {
 
                                     //registrar documentacion
@@ -196,7 +216,7 @@ class personalController extends personalModel
                                 }
                             } else {
                                 $data_json['exito'] = false;
-                                $data_json['mensaje'] = "Los daots de personal y empleado fueron registrado, pero  no se logro registrar la ubicaicon del empleado";
+                                $data_json['mensaje'] = "Los datos de personal y empleado fueron registrado, pero  no se logro registrar la ubicaicon del empleado";
                             }
                         } else {
                             // Si el registro de datos del empleado falló, actualiza $data_json con un mensaje de error
@@ -217,24 +237,23 @@ class personalController extends personalModel
         }
 
         // Envía la respuesta como JSON
-        header('Content-Type: application/json');
-        echo json_encode($data_json);
+        return $this->app->imprimirRespuestaJSON($data_json);
     }
 
     public function registrarDatosPersonal(
-       string $primerNombre,
-       string $segundoNombre,
-       string $primerApellido,
-       string $segundoApellido,
-       string $cedula,
-       string $civil,
-       string $correo,
-       string $ano,
-       string $mes,
-       string $dia,
-       string $discapacidad,
-       string $sexo,
-       string $edad
+        string $primerNombre,
+        string $segundoNombre,
+        string $primerApellido,
+        string $segundoApellido,
+        string $cedula,
+        string $civil,
+        string $correo,
+        string $ano,
+        string $mes,
+        string $dia,
+        string $discapacidad,
+        string $sexo,
+        string $edad
     ) {
         $personal_datos_reg = [
             [
@@ -432,7 +451,7 @@ class personalController extends personalModel
         string $primerNombre,
         string $primerApellido,
         string $cedula
-    ):bool {
+    ): bool {
         $ubicacion_empleado = [
             [
                 "campo_nombre" => "id_empleadoUbi",
@@ -626,6 +645,7 @@ class personalController extends personalModel
         if ($FamiliarInces == "si") {
             $check_familiar = $this->getreturnIDP([$cedulaFamiliar]);
             foreach ($check_familiar as $row) {
+                $idPersonal = $row['id_personal'];
                 $registrarFamiliarInces = [
                     [
                         "campo_nombre" => "idEmpleado",
@@ -635,7 +655,7 @@ class personalController extends personalModel
                     [
                         "campo_nombre" => "idPersonal",
                         "campo_marcador" => ":idPersonal",
-                        "campo_valor" =>  $row['id_personal']
+                        "campo_valor" =>  $idPersonal
                     ],
                     [
                         "campo_nombre" => "fecha",
@@ -721,8 +741,9 @@ class personalController extends personalModel
         string $numeroCarnet,
         string $tomo,
         string $folio,
-        string $discapacidad,
-        string $sexo
+        $discapacidad,
+        string $sexo,
+        string $familiarInces
     ) {
         sleep(1);
         $cedulaEmpleado = $this->limpiarCadena($cedulaEmpleado);
@@ -1316,9 +1337,9 @@ class personalController extends personalModel
                 $documentosEncontrados = true; // Se encontró al menos un documento
                 $tipodoc = $documento['tipoDoc'];
                 if ($tipodoc == 'pdf') {
-                    $botonDoc .= "<button class='btn btn-danger btn-sm botondocumet btn-hover' data-cedula='". $row['cedula'] . "' data-doc='" . $documento['doc'] . "'><i class='fa-solid fa-file-pdf fa-sm'></i> " . $documento['tipoDoc'] . "</button>";
+                    $botonDoc .= "<button class='btn btn-danger btn-sm botondocumet btn-hover' data-cedula='" . $row['cedula'] . "' data-doc='" . $documento['doc'] . "'><i class='fa-solid fa-file-pdf fa-sm'></i> " . $documento['tipoDoc'] . "</button>";
                 } elseif ($tipodoc == 'png') {
-                    $botonDoc .= "<button class='btn btn-success btn-sm botondocumet btn-hover' data-cedula='". $row['cedula'] . "' data-doc='" . $documento['doc'] . "'><i class='fa-solid fa-file-image fa-sm me-1'></i>" . $documento['tipoDoc'] . "</button>";
+                    $botonDoc .= "<button class='btn btn-success btn-sm botondocumet btn-hover' data-cedula='" . $row['cedula'] . "' data-doc='" . $documento['doc'] . "'><i class='fa-solid fa-file-image fa-sm me-1'></i>" . $documento['tipoDoc'] . "</button>";
                 }
             }
 
@@ -1437,6 +1458,17 @@ class personalController extends personalModel
         echo json_encode($response);
     }
 
+    // obtener toda la data de tofdos los trabajadores a nivel persona
+    // ojo no a nivel empleado solo datos personales
+    public function obtenerTodaDataEmpleado(string $cedula){
+        $cedula =  $cedula . '%';
+        $datos = $this->getDatosEmpleadoFiltro("dp.cedula LIKE ?", [$cedula]);
+        $data['exito'] = true;
+        $data['datos'] = $datos;
+
+        return $this->app->imprimirRespuestaJSON($data);
+    }
+    
     //Eliminar personal empleado
     public function eliminarEmpleado($idEmpleado)
     {
@@ -1819,7 +1851,7 @@ class personalController extends personalModel
                     //cargamos los nuevos documentos del empleado
                     $cargarArchivo = $this->registrarArchivos($cedula, $id_empleado, $civil);
                     //validamos la subida de los archivos y damos evento de exito del registro
-                    if ( $cargarArchivo['exito']) {
+                    if ($cargarArchivo['exito']) {
                         $data_json['exito'] = true;
                         $data_json['mensaje'] = "Registrado exitosamente";
                         $data_json['archivos'] =  $cargarArchivo;
@@ -1828,7 +1860,6 @@ class personalController extends personalModel
                         $data_json['mensaje'] = "El registro de los datos se completó con éxito. Sin embargo, se produjo un error al cargar los archivos adjuntos. Le pedimos que, por favor, acceda a la sección de edición del empleado y vuelva a cargar los archivos necesarios.";
                         $data_json['archivos'] =  $cargarArchivo;
                     }
-
                 }
             } else {
                 $data_json['exito'] = true;

@@ -124,6 +124,7 @@ export function limpiarFormulario(formulario) {
   });
 }
 
+// validar la existencia de un trabajador por cedula 
 export async function cedulaExisteEmpleado(input, cumplido_span, text) {
   $(document).on("input", input, async function () {
     if ($(this).hasClass("busquedaCedula")) {
@@ -145,6 +146,7 @@ export async function cedulaExisteEmpleado(input, cumplido_span, text) {
   });
 }
 
+// no recargar cache de pagina 
 export async function recargarConVerificacionDeCache() {
   // Intenta recargar la página desde la caché primero
   location.reload();
@@ -173,4 +175,19 @@ export async function recargarConVerificacionDeCache() {
     .catch(error => {
       console.error('Error al verificar cambios en el servidor:', error);
     });
+}
+
+// funcion de retotrno de imagens de select2
+export function formatState(state) {
+  if (!state.id) {
+    return state.text;
+  }
+  if (state.img) { // Usar state.img en lugar de state.cedula
+    console.log(state);
+    var $state = $(
+      '<span><img src="src/global/photos/' + state.img + '.png" class="img-flag rounded-circle" style="width: 30px; height: 30px; margin-right: 5px;" /> ' + state.text + '</span>'
+    );
+    return $state;
+  }
+  return state.text;
 }

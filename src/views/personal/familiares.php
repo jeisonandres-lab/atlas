@@ -13,6 +13,7 @@ use App\Atlas\config\App;
     <?php require_once App::URL_INC . "total_css.php"; ?>
     <!-- css de esta pagina -->
     <link rel="stylesheet" href="<?php echo App::URL_CSS . "trabajadores.css"; ?>">
+
 </head>
 
 <body class="layout-fixed sidebar-expand-lg bg-body-tertiary">
@@ -35,10 +36,9 @@ use App\Atlas\config\App;
             <?php require_once App::URL_INC . "utils/menu_registro.php" ?>
             <!-- FORMULARIO DE ENVIOS DE DATOS DE EMPLEADO -->
             <div class="container-fluid px-3">
-                <form action="#" style="font-size: 16px;" class="justify'content-center formulario_empleado contact-form form-validate justify-content-center" novalidate="novalidate" id="formulario_empleado">
+                <form action="#" style="font-size: 14px;" class="justify'content-center formulario_empleado contact-form form-validate justify-content-center" novalidate="novalidate" id="formulario_empleado">
                     <div class=" col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12 ">
                         <div class="row col-sm-12 col-md-9 h-100 bg-white w-100 p-2 m-0 content">
-
                             <p class="mb-0 mt-2">Datos del Empleado</p>
                             <hr class="mb-3">
 
@@ -65,7 +65,7 @@ use App\Atlas\config\App;
                             <!-- apellido del empleado -->
                             <div class="col-sm-12 col-md-3 col-xl-3 col-xxl-3 mb-2">
                                 <div class="form-group">
-                                    <label for="apellido">apellido</label>
+                                    <label for="apellido">Apellido</label>
                                     <div class="input-group">
                                         <span class="input-group-text span_apellido"><i class="icons fa-regular fa-user"></i></span>
                                         <input type="text" class="form-control" id="apellido" name="apellido" placeholder="Primer Nombre" required readonly>
@@ -103,7 +103,7 @@ use App\Atlas\config\App;
                                 </div>
 
                                 <!-- CHECK DE ESTADO DE DERECHO -->
-                                <div class="checkbox-wrapper-12 d-flex">
+                                <div class="checkbox-wrapper-12 d-flex me-3">
                                     <div class="cbx ">
                                         <input id="estadoDerecho" class="cumplidoNormal" type="checkbox" disabled />
                                         <label for="estadoDerecho"></label>
@@ -111,7 +111,21 @@ use App\Atlas\config\App;
                                     </div>
                                     <p>Estado Derecho</p>
                                 </div>
+
+                                <!-- CHECK DE TRABAJADOR INCES -->
+                                <div class="checkbox-wrapper-12 d-flex">
+                                    <div class="cbx ">
+                                        <input id="familiarInces" class="cumplidoNormal" type="checkbox" disabled />
+                                        <label for="familiarInces"></label>
+                                        <i class="icons fa-solid fa-check fa-xs"></i>
+                                    </div>
+                                    <p>Familiar INCES</p>
+                                </div>
                             </div>
+
+                            <!-- ALERTAs  -->
+                            <div class="" id="alerta"></div>
+                            <div class="noCedulada" id="alertaNoCedula"></div>
 
                             <!-- primer nombre del familiar -->
                             <div class="col-sm-6 col-md-4 col-xl-4 col-xxl-3 mb-3">
@@ -174,7 +188,7 @@ use App\Atlas\config\App;
                                     <label for="tomo">Tomo</label>
                                     <div class="input-group">
                                         <span class="input-group-text span_tomo"><i class="icons fa-regular fa-book"></i></span>
-                                        <input type="text" class="form-control" id="tomo" name="tomo" placeholder="Tomo De partida De Nacimiento" required disabled>
+                                        <input type="text" class="form-control" id="tomo" name="tomo" placeholder="Numero de tomo" required disabled>
                                     </div>
                                 </div>
                             </div>
@@ -206,7 +220,7 @@ use App\Atlas\config\App;
                             <!-- sexo del familiar -->
                             <div class="col-sm-6 col-md-4 col-xl-4 col-xxl-3 mb-2 ">
                                 <div class="form-group">
-                                    <label for="sexo">sexo</label>
+                                    <label for="sexo">Sexo</label>
                                     <div class="input-group">
                                         <span class="input-group-text span_sexo"><i class="icons fa-regular fa-person-half-dress"></i></span>
                                         <select class="form-select form-select-md sexo-sexo" id="sexo" name="sexo" aria-label="Small select example" aria-placeholder="dasdas" required disabled>
@@ -236,7 +250,7 @@ use App\Atlas\config\App;
                                     <label for="docArchivo">Partida De Nacimiento</label>
                                     <div class="input-group">
                                         <span class="input-group-text span_docArchivo"><i class="icons fa-regular fa-file-zipper"></i></span>
-                                        <input type="file" class="form-control" name="docArchivo" id="archivo" aria-describedby="inputGroupFileAddon04" aria-label="Upload" required disabled>
+                                        <input type="file" class="form-control partidaNacimiento" name="docArchivo" id="archivo" aria-describedby="inputGroupFileAddon04" aria-label="Upload" required disabled>
                                     </div>
                                 </div>
                             </div>

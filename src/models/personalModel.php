@@ -11,6 +11,21 @@ class personalModel extends Conexion
     private function registrarDatos(string $tabla, array $datos)
     {
         $sql = $this->guardarDatos($tabla, $datos);
+        // Ejecutar las consultas adicionales
+        // Reordenar IDs
+
+        // Obtener el nombre de la primera columna
+        $primeraColumna = $this->obtenerPrimeraColumna($tabla);
+
+        if ($primeraColumna) {
+            // Reordenar IDs
+            $this->ejecutarConsulta("SET @row_number = 0;");
+            $this->ejecutarConsulta("UPDATE " . $tabla . " SET " . $primeraColumna . " = (@row_number:=@row_number + 1) ORDER BY " . $primeraColumna . ";");
+            $this->ejecutarConsulta("ALTER TABLE " . $tabla . " AUTO_INCREMENT = 1;");
+        } else {
+            // Manejar el caso en que no se pudo obtener el nombre de la primera columna
+            error_log("No se pudo obtener el nombre de la primera columna de la tabla: " . $tabla);
+        }
         return $sql;
     }
 
@@ -65,7 +80,9 @@ class personalModel extends Conexion
         return $sql;
     }
 
-    public function existeFamiliarCedula(array $parametro){
+    // existe el familiar por cedula
+    public function existeFamiliarCedula(array $parametro)
+    {
         $sqlCedula = $this->ejecutarConsulta("SELECT df.id_ninos, df.cedula FROM datosfamilia df WHERE df.cedula = ?", $parametro);
         if (empty($sqlCedula)) {
             // La consulta no devolvió datos o hubo un error
@@ -118,6 +135,7 @@ class personalModel extends Conexion
         }
     }
 
+    // RETORNAR FAMILIAR NO CEDULADO POR CEDULA
     public function retornaNoCedula(array $parametro)
     {
         $sql = $this->ejecutarConsulta("SELECT df.cedula
@@ -198,7 +216,8 @@ class personalModel extends Conexion
     }
 
     //TOTAL DE DATOS DE LOS FAMILIARES
-    private function totalDatosFamiliar(){
+    private function totalDatosFamiliar()
+    {
         $sql = $this->ejecutarConsulta(
             "SELECT *,
             df.cedula AS cedulaFamiliar,
@@ -213,7 +232,8 @@ class personalModel extends Conexion
         INNER JOIN cargo c ON de.idCargo = c.id_cargo
         INNER JOIN dependencia depe ON de.idDependencia = depe.id_dependencia
         INNER JOIN departamento d ON de.idDepartamento = d.id_departamento
-        ");
+        "
+        );
         return $sql;
     }
 
@@ -352,6 +372,7 @@ class personalModel extends Conexion
         return $sql;
     }
 
+    // ACTUALIZAR FAMILIAR POR ID DEL FAMILIAR
     public function actualuzarIDfamiliar($tabla, $datos,  $condicion)
     {
         $sql = "UPDATE $tabla SET $datos WHERE $condicion";
@@ -365,7 +386,6 @@ class personalModel extends Conexion
     }
 
     /* GETTERS */
-
     // GETTERS PARA REGISTRAR DATOS
     public function getRegistrar($tabla, $datos)
     {
@@ -406,16 +426,20 @@ class personalModel extends Conexion
     {
         return $this->totalDatosEmpleado();
     }
+
+    // GETTER PARA OBTENER EL TOTAL DE FAMILIARES
     public function getTotalDatosFamiliar()
     {
         return $this->totalDatosFamiliar();
     }
 
+    // GETTER PARA OBTENER LOS DATOS DE LOS EMPELADOS POR MEDIO DEL ID
     public function getTotalDatosIDEmpleados($parametro)
     {
         return $this->totalDatosIDEmpleados($parametro);
     }
 
+    // GETTER PARA OBTENER LOS DATOS DE UN TRABAJADOR POR MEDIO DE LA CEDULA
     public function getTotalDatosCDEmpleados($parametro)
     {
         return $this->totalDatosCDEmpleados($parametro);
@@ -439,24 +463,27 @@ class personalModel extends Conexion
         return $this->totalDatosPEID($parametro);
     }
 
+    // OBTENER FAMILIAR POR MEDIO DEL ID DEL EMPLEADO
     public function getDatosFamiliarEmpleadoID($parametro)
     {
         return $this->datosFamiliarEmpleadoID($parametro);
     }
 
+    // OBTENER FAMILIAR POR MEDIO DEL ID
     public function getDatosFamiliarID($parametro)
     {
         return $this->datosFamiliarID($parametro);
     }
 
+    // FILTRAR DATOS DEL TRABAJADOR
     public function getDatosEmpleadoFiltro($clausula, $parametro)
     {
         return $this->datosEmpleadoFiltro($clausula, $parametro);
     }
 
+    // FILTAR DATOS DEL FAMILIAR
     public function getDatosFamiliarFiltro($clausula, $parametro)
     {
         return $this->datosFamiliarFiltro($clausula, $parametro);
-
     }
 }
