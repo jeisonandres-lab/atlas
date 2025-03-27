@@ -174,7 +174,7 @@ $(function () {
     // FORMUALRIO DE ENVIO
     const formData = new FormData(this); // CREAR FORMULARIO DEL FORM
     if ($("#familiarInces").is(":checked")) {
-      formData.append("familiarInces", 1); // AGREGAR EL NUEVO VALOR DEL FAMILIAR INCES
+      formData.append("familiarInces", 'si'); // AGREGAR EL NUEVO VALOR DEL FAMILIAR INCES
       formData.append("parentesco", $("#parentesco").val()); // AGREGAR EL NUEVO VALOR DEL PARENTESCO
     }
     // SI EL BOTON TIENE EL PARAMETRO ACEPTAR
@@ -182,7 +182,7 @@ $(function () {
 
       // callback de exito
       function callbackExito(parsedData) {
-        if (parsedData.resultado == 2) {
+        if (parsedData.exito) {
           // esta parte se puede mejorar
           // se marcar cumplido logrado
           $("#cedula_trabajador").addClass("cedulaBusqueda");
@@ -191,17 +191,12 @@ $(function () {
           $(".span_nombre").addClass("cumplido_span");
           $(".span_apellido").addClass("cumplido_span");
           alertaNormalmix(parsedData.mensaje, 4000, "success", "top-end");
-        } else if (parsedData.resultado == 3) {
-          // ALERTA DE EXITO
-          alertaNormalmix(parsedData.mensaje, 4000, "error", "top-end");
         } else {
           // ALERTA DE ERROR
           alertaNormalmix(parsedData.mensaje, 4000, "warning", "top-end");
         }
       }
-      const formDataArray = Array.from(formData.entries());
-      console.log(formDataArray);
-      // enviarFormulario("src/ajax/registroPersonal.php?modulo_personal=registrarFamilia", formData, callbackExito, true);
+      enviarFormulario("src/ajax/registroPersonal.php?modulo_personal=registrarFamilia", formData, callbackExito, true);
     } else {
       console.log("los destinos deben de tener un  error");
     }
@@ -250,6 +245,7 @@ $(function () {
       $('#noCedula').prop('checked', false).trigger('change');
       $('#estadoDerecho').prop('checked', true).trigger('change');
 
+
       // VALIDAR LOS DATOS DE LA CEDULA
       if (!$("#cedula").hasClass("cumplido") && $("#cedula").val().trim() !== "") {
         clasesInputs("#cedula", ".span_cedula");
@@ -282,6 +278,17 @@ $(function () {
     }
   });
 
+  // VALIDAR QUE AMBAS CEDULAS NO SEAN IGUALES
+  $(document).on("input", "#cedula_trabajador, #cedula_familiar", function () {
+    let cedulaTrabajador = $("#cedula_trabajador").val();
+    let cedulaFamiliar = $("#cedula_familiar").val();
+    // si ambas cedulas se parecen esto dara error
+    if (cedulaTrabajador && cedulaFamiliar && cedulaTrabajador === cedulaFamiliar) {
+      clasesInputsError("#cedula", ".span_cedula");
+    } else {
+      clasesInputsError("#cedula", ".span_cedula");
+    }
+  });
   // funcion lick para limpiar los input y select 
   $("#limpiar").on("click", function () {
     $('#formulario_empleado input[type="checkbox"]').prop('checked', false).trigger('change');

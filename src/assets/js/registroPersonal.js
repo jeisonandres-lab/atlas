@@ -193,25 +193,6 @@ $(function () {
     }
   }
 
-  async function obtenerDatosEmpleados(url, selectElement) {
-    try {
-      const response = await fetch(url);
-      const data = await response.json();
-
-      if (data.exito && data.datos) {
-        selectElement.empty();
-        data.datos.forEach(item => {
-          selectElement.append($('<option>', { value: item.cedula, text: item.primerNombre + " " + item.primerApellido }));
-
-        });
-
-      } else {
-        console.error('Error en la respuesta del servidor:', data.mensaje);
-      }
-    } catch (error) {
-      console.error('Error al obtener datos del servidor:', error);
-    }
-  }
   //formulario de registro de trabajadores 
   $(document).on("submit", "#formulario_registro", async function (e) {
     e.preventDefault();
@@ -522,7 +503,6 @@ $(function () {
     $(".span_cedulaFamiliar").removeClass("cumplido_span error_span");
   });
 
-  $(document).on("input", "")
   // buscar empelado por medio de la dcedula del familiar por si ecxiste ya esa cedula como empleado
   $(document).on("input", "#cedulaFamiliar", async function () {
     if ($(this).hasClass("busquedaCedula")) {

@@ -106,7 +106,7 @@ switch ($_GET['modulo_personal']) {
     case 'registrarFamilia':
 
         $FamiliarInces = '1';
-        $personal->registrarFamilia(
+        $familiar->registrarFamiliar(
             $parentesco,
             $cedulaEmpleado,
             $primerNombre,

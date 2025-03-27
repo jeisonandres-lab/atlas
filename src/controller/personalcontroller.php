@@ -19,6 +19,7 @@ class personalController extends personalModel
     private $tablas;
     private $app;
     private $familiar;
+    private $familiarController;
     private $auditoriaController;
     private $idUsuario;
     private $nombreUsuario;
@@ -31,6 +32,7 @@ class personalController extends personalModel
         $this->app = new App();
         $this->auditoriaController = new auditoriaController();
         $this->familiar = new familiarModel();
+        $this->familiarController = new familiarController();
         $this->app->iniciarSession();
         $this->idUsuario = $_SESSION['id'];
         $this->nombreUsuario = $_SESSION['usuario'];
@@ -184,7 +186,7 @@ class personalController extends personalModel
 
                                 // validamos si se esta registrando un familiar por medio del registro del empleado
                                 // si es asi familiar inces trae el valor "si" y si no simplemente nada
-                                $registrarFamiliarInces = $this->registrarFamiliarInces(
+                                $registrarFamiliarInces = $this->familiarController->registrarFamiliarInces(
                                     $FamiliarInces,
                                     $primerNombreFamiliar,
                                     $primerApellidoFamiliar,
@@ -634,97 +636,6 @@ class personalController extends personalModel
         }
     }
 
-    public function registrarFamiliarInces(
-        string $FamiliarInces,
-        string $primerNombreFamiliar,
-        string $primerApellidoFamiliar,
-        string $cedulaFamiliar,
-        string $id_empleado,
-        int $estatus = 1
-    ) {
-        if ($FamiliarInces == "si") {
-            $check_familiar = $this->getreturnIDP([$cedulaFamiliar]);
-            foreach ($check_familiar as $row) {
-                $idPersonal = $row['id_personal'];
-                $registrarFamiliarInces = [
-                    [
-                        "campo_nombre" => "idEmpleado",
-                        "campo_marcador" => ":idEmpleado",
-                        "campo_valor" =>  $id_empleado
-                    ],
-                    [
-                        "campo_nombre" => "idPersonal",
-                        "campo_marcador" => ":idPersonal",
-                        "campo_valor" =>  $idPersonal
-                    ],
-                    [
-                        "campo_nombre" => "fecha",
-                        "campo_marcador" => ":fecha",
-                        "campo_valor" => date("Y-m-d")
-                    ],
-                    [
-                        "campo_nombre" => "hora",
-                        "campo_marcador" => ":hora",
-                        "campo_valor" => date("h:i:s A")
-                    ]
-                ];
-                $check_familiar = $this->getRegistrar('datosFamiliarinces',   $registrarFamiliarInces);
-                if ($check_familiar) {
-                    return "El familiar inces fue asignado.";
-                } else {
-                    return "";
-                }
-            }
-        } else {
-            if (!$cedulaFamiliar == "") {
-                $registrarFamiliar = [
-                    [
-                        "campo_nombre" => "idEmpleado",
-                        "campo_marcador" => ":idEmpleado",
-                        "campo_valor" =>  $id_empleado
-                    ],
-                    [
-                        "campo_nombre" => "primerNombre",
-                        "campo_marcador" => ":primerNombre",
-                        "campo_valor" =>  $primerNombreFamiliar
-                    ],
-                    [
-                        "campo_nombre" => "primerApellido",
-                        "campo_marcador" => ":primerApellido",
-                        "campo_valor" =>  $primerApellidoFamiliar
-                    ],
-                    [
-                        "campo_nombre" => "cedula",
-                        "campo_marcador" => ":cedula",
-                        "campo_valor" =>  $cedulaFamiliar
-                    ],
-                    [
-                        "campo_nombre" => "activo",
-                        "campo_marcador" => ":activo",
-                        "campo_valor" =>  $estatus
-                    ],
-                    [
-                        "campo_nombre" => "fecha",
-                        "campo_marcador" => ":fecha",
-                        "campo_valor" => date("Y-m-d")
-                    ],
-                    [
-                        "campo_nombre" => "hora",
-                        "campo_marcador" => ":hora",
-                        "campo_valor" => date("h:i:s A")
-                    ]
-                ];
-                $check_familiar = $this->getRegistrar('datosFamilia',  $registrarFamiliar);
-                if ($check_familiar) {
-                    return  "El familiar fue asignado.";
-                } else {
-                    return "";
-                }
-            } else {
-                return  "El empleado no tiene ningun familiar por ser asignado";
-            }
-        }
-    }
     //Registrar Familiar a un empleado
     public function registrarFamilia(
         string $parentesco,
@@ -1468,7 +1379,7 @@ class personalController extends personalModel
 
         return $this->app->imprimirRespuestaJSON($data);
     }
-    
+
     //Eliminar personal empleado
     public function eliminarEmpleado($idEmpleado)
     {
@@ -1575,39 +1486,7 @@ class personalController extends personalModel
         $numeroDepa,
         $fechaING,
         $discapacidad,
-    ) {
-        $primerNombre = $this->limpiarCadena($primerNombre);
-        $segundoNombre = $this->limpiarCadena($segundoNombre);
-        $primerApellido = $this->limpiarCadena($primerApellido);
-        $segundoApellido = $this->limpiarCadena($segundoApellido);
-        $cedula = $this->limpiarCadena($cedula);
-        $civil = $this->limpiarCadena($civil);
-        $correo = $this->limpiarCadena($correo);
-        $ano = $this->limpiarCadena($ano);
-        $mes = $this->limpiarCadena($mes);
-        $dia = $this->limpiarCadena($dia);
-        $nivelAcademico = $this->limpiarCadena($nivelAcademico);
-        $sexo = $this->limpiarCadena($sexo);
-        $discapacidad = $this->limpiarCadena($discapacidad);
-
-        //Ubicacion
-        $vivienda = $this->limpiarCadena($vivienda);
-        $idestado = $this->limpiarCadena($idestado);
-        $idMunicipio = $this->limpiarCadena($idMunicipio);
-        $idParroquia = $this->limpiarCadena($idParroquia);
-        $numeroVivienda = $this->limpiarCadena($numeroVivienda);
-        $pisoUrba = $this->limpiarCadena($pisoUrba);
-        $calle = $this->limpiarCadena($calle);
-        $nombreUrba = $this->limpiarCadena($nombreUrba);
-        $numeroDepa = $this->limpiarCadena($numeroDepa);
-
-        // DATOS DE EMPLEADOS
-        $idEstatus = $this->limpiarCadena($idEstatus);
-        $idCargo = $this->limpiarCadena($idCargo);
-        $idDependencia = $this->limpiarCadena($idDependencia);
-        $idDepartamento = $this->limpiarCadena($idDepartamento);
-        $telefono = $this->limpiarCadena($telefono);
-
+    ): array {
 
         $data_json = [
             'exito' => false, // Inicializamos a false por defecto
@@ -1765,7 +1644,7 @@ class personalController extends personalModel
                 $registroAuditoria = $this->auditoriaController->registrarAuditoria($this->idUsuario, 'Actualizar empleado', 'El usuario ' . $this->nombreUsuario . ' actualizo los datos del empleado con cedula ' . $cedula . '.');
                 if ($registroAuditoria) {
                     $data_json["exitoAuditoria"] = true;
-                    $data_json['messengerAuditoria3'] = "Auditoria de la actualizacion del personal registrada con exito.";
+                    $data_json['messengerAuditoria2'] = "Auditoria de la actualizacion de los datos del trabajador registrada con exito.";
                 } else {
                     $data_json["exitoAuditoria"] = false;
                     $data_json['messengerAuditoria2'] = "Error al registrar la auditoria.";
@@ -1869,8 +1748,8 @@ class personalController extends personalModel
             $data_json['exito'] = false;
             $data_json['mensaje'] = "Los datos Del Personal fueron registrados exitosamente, pero el de los datos empleados";
         }
-        header('Content-Type: application/json');
-        echo json_encode($data_json);
+
+        return $this->app->imprimirRespuestaJSON($data_json);
     }
 
     //Actualizar familiar empleado

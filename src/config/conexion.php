@@ -218,11 +218,16 @@ class Conexion extends Error
     /*---------- funcion para obtener la primera columna de una tabala -------------*/
     protected function obtenerPrimeraColumna(string $tabla)
     {
-        $consulta = "SHOW COLUMNS FROM " . $tabla . " LIMIT 1;";
-        $resultado = $this->ejecutarConsulta($consulta);
+        $consulta = "SELECT COLUMN_NAME
+                 FROM INFORMATION_SCHEMA.COLUMNS
+                 WHERE TABLE_NAME = ?
+                 ORDER BY ORDINAL_POSITION
+                 LIMIT 1";
+
+        $resultado = $this->ejecutarConsulta($consulta, [$tabla]);
 
         if ($resultado && count($resultado) > 0) {
-            return $resultado[0]['Field'];
+            return $resultado[0]['COLUMN_NAME'];
         }
 
         return null;

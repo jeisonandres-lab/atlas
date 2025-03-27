@@ -36,10 +36,10 @@ use App\Atlas\config\App;
             <?php require_once App::URL_INC . "utils/menu_registro.php" ?>
             <!-- FORMULARIO DE ENVIOS DE DATOS DE EMPLEADO -->
             <div class="container-fluid px-3">
-                <form action="#" style="font-size: 14px;" class="justify'content-center formulario_empleado contact-form form-validate justify-content-center" novalidate="novalidate" id="formulario_empleado">
+                <form action="#" style="font-size: 16px;" class="justify-content-center formulario_empleado contact-form form-validate justify-content-center" novalidate="novalidate" id="formulario_empleado">
                     <div class=" col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12 ">
                         <div class="row col-sm-12 col-md-9 h-100 bg-white w-100 p-2 m-0 content">
-                            <p class="mb-0 mt-2">Datos del Empleado</p>
+                            <p class="mb-0 mt-2 titulo">Datos del Empleado</p>
                             <hr class="mb-3">
 
                             <!-- cedula del empledao a asignar familiar -->
@@ -77,7 +77,7 @@ use App\Atlas\config\App;
                                 <button type="button" id="buttonPendiente" class="btn btn-warning btn-hover-amarillo text-white w-100 h-75 " data-bs-toggle="modal" data-bs-target="#modalPendiente"><i class="fa-regular fa-restroom fa-sm me-2"></i>Familiar Pendiente</button>
                             </div>
 
-                            <p class="mb-0 mt-2">Datos Del Familiar</p>
+                            <p class="mb-0 mt-2 titulo">Datos Del Familiar</p>
                             <hr class="mb-3">
 
                             <!-- contenedor de checkbox de seleccion  -->
@@ -250,13 +250,13 @@ use App\Atlas\config\App;
                                     <label for="docArchivo">Partida De Nacimiento</label>
                                     <div class="input-group">
                                         <span class="input-group-text span_docArchivo"><i class="icons fa-regular fa-file-zipper"></i></span>
-                                        <input type="file" class="form-control partidaNacimiento" name="docArchivo" id="archivo" aria-describedby="inputGroupFileAddon04" aria-label="Upload" required disabled>
+                                        <input type="file" class="form-control partidaNacimiento" name="docPartidaNacimiento" id="archivo" aria-describedby="inputGroupFileAddon04" aria-label="Upload" required disabled>
                                     </div>
                                 </div>
                             </div>
 
 
-                            <p class="mb-0">Fecha de nacimiento</p>
+                            <p class="mb-0 titulo">Fecha de nacimiento</p>
                             <hr class="mb-2">
 
                             <!-- año en que nacio el familiar -->

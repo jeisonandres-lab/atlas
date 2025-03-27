@@ -60,7 +60,7 @@ use App\Atlas\config\App;
                                 <!-- DATOS PERSONALES -->
                                 <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
                                     <div class="row col-sm-12 col-md-7  h-100  w-100 p-2">
-                                        <p class="mb-0 mt-1">Datos del Personal</p>
+                                        <p class="mb-0 mt-1 titulo">Datos del Personal</p>
                                         <hr class="mb-3">
 
                                         <!-- primer nombre -->
@@ -176,7 +176,7 @@ use App\Atlas\config\App;
                                         </div>
 
                                         <!-- FECHA DE NACIMIENTO -->
-                                        <p class="mb-0 mt-2">Fecha de nacimiento</p>
+                                        <p class="mb-0 mt-1 titulo">Fecha de nacimiento</p>
                                         <hr class="mb-2">
 
                                         <!-- año -->
@@ -268,7 +268,7 @@ use App\Atlas\config\App;
                                 <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
                                     <div class="row col-sm-12 col-md-7  h-100   w-100 p-2">
                                         <!-- DATOS DE UBICACION -->
-                                        <p class="mb-0 mt-2">Ubicación</p>
+                                        <p class="mb-0 mt-2 titulo">Ubicación</p>
                                         <hr class="mb-2">
 
                                         <!-- ESTADO -->
@@ -348,7 +348,7 @@ use App\Atlas\config\App;
                                 <!-- DATOS DEL TRABAJADOR -->
                                 <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
                                     <div class="row col-sm-12 col-md-7  h-100   w-100 p-2">
-                                        <p class="mb-0 mt-2">Datos Del Trabajador</p>
+                                        <p class="mb-0 mt-2 titulo">Datos Del Trabajador</p>
                                         <hr class="mb-2">
 
                                         <!-- cargar contrato colectivo -->

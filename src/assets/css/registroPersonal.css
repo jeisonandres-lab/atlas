@@ -12,6 +12,9 @@ body::-webkit-scrollbar {
   display: none;
 }
 
+form .titulo{
+  color: black !important;
+}
 .row {
   margin: 0px !important;
 }

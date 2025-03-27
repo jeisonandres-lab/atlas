@@ -12,10 +12,6 @@ use App\Atlas\config\App;
     <?php require_once App::URL_INC . "total_css.php"; ?>
     <?php require_once App::URL_INC . "tablets_css.php"; ?>
 
-    <link rel="stylesheet" href="./src/libs/jQueryUI/jquery-ui.min.css">
-    <link rel="stylesheet" href="./src/libs/jQueryUI/jquery-ui.structure.min.css">
-    <link rel="stylesheet" href="./src/libs/jQueryUI/jquery-ui.theme.min.css">
-
     <link rel="stylesheet" href="<?php echo App::URL_CSS . "registroFamiliares.css"; ?>">
 
 </head>
@@ -414,9 +410,6 @@ use App\Atlas\config\App;
 
     <?php require_once App::URL_INC . "/scrips.php"; ?>
     <?php require_once App::URL_INC . "/tablets.php"; ?>
-
-    <script src="./src/libs/select2/select2.min.js"></script>
-    <script src="./src/libs/jQueryUI/jquery-ui.min.js"></script>
 
     <script src="<?php echo App::URL_SCRIPS . "registroTotalFamiliares.js" ?>" type="module"></script>
     <script src="<?php echo App::URL_SCRIPS . "reporteFamiliar.js" ?>" type="module"></script>

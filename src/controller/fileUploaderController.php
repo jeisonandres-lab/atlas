@@ -197,6 +197,7 @@ class fileUploaderController extends Conexion
         return $this->moverArchivo($file, $destination, $extension, $id_empleado, $fileInfo, $id_Nino, $nombreDoc, $cedula);
     }
 
+    // CALCULAR EL TRAMANO DE UN ARCHIVO
     private function formatSizeUnits($bytes)
     {
         // if ($bytes >= 1024) {
@@ -211,6 +212,7 @@ class fileUploaderController extends Conexion
         return number_format($bytes / 1024, 2) . ' KB';
     }
 
+    // DESCARGAR UN ARCHIVO
     public function download($fileName)
     {
         $filePath = $this->defaultUploadDir . $fileName;
@@ -233,6 +235,7 @@ class fileUploaderController extends Conexion
         exit;
     }
 
+    // GENERAR EL CODIGO DE 6 DIGITOS AL DOCUMENTO
     private function generarCodigoAleatorio($longitud = 6)
     {
         $caracteres = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -244,8 +247,8 @@ class fileUploaderController extends Conexion
         return $codigo;
     }
 
-
-    public function registrarArchivos(string $cedula, string $id_empleado, string|int|null $estadoCivil)
+    // REGISTRAR DOCUMENTO
+    public function registrarArchivos(string $cedula, string $id_empleado, string|int|null $estadoCivil = null)
     {
         $fileInputs = [
             'contratoArchivo' => App::URL_CONTRATOS,
@@ -322,6 +325,7 @@ class fileUploaderController extends Conexion
         return $resultados;
     }
 
+    // OBTENER NOMBRE DEL DOCUMENTO 
     public function getNombreArchivo(string $inputName, $estadoCivil = null)
     {
         switch ($inputName) {

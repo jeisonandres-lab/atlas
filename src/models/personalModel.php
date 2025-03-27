@@ -15,17 +15,17 @@ class personalModel extends Conexion
         // Reordenar IDs
 
         // Obtener el nombre de la primera columna
-        $primeraColumna = $this->obtenerPrimeraColumna($tabla);
+        // $primeraColumna = $this->obtenerPrimeraColumna($tabla);
 
-        if ($primeraColumna) {
-            // Reordenar IDs
-            $this->ejecutarConsulta("SET @row_number = 0;");
-            $this->ejecutarConsulta("UPDATE " . $tabla . " SET " . $primeraColumna . " = (@row_number:=@row_number + 1) ORDER BY " . $primeraColumna . ";");
-            $this->ejecutarConsulta("ALTER TABLE " . $tabla . " AUTO_INCREMENT = 1;");
-        } else {
-            // Manejar el caso en que no se pudo obtener el nombre de la primera columna
-            error_log("No se pudo obtener el nombre de la primera columna de la tabla: " . $tabla);
-        }
+        // if ($primeraColumna) {
+        //     Reordenar IDs
+        //     $this->ejecutarConsulta("SET @row_number = 0;");
+        //     $this->ejecutarConsulta("UPDATE " . $tabla . " SET " . $primeraColumna . " = (@row_number:=@row_number + 1) ORDER BY " . $primeraColumna . ";");
+        //     $this->ejecutarConsulta("ALTER TABLE " . $tabla . " AUTO_INCREMENT = 1;");
+        // } else {
+        //     Manejar el caso en que no se pudo obtener el nombre de la primera columna
+        //     error_log("No se pudo obtener el nombre de la primera columna de la tabla: " . $tabla);
+        // }
         return $sql;
     }
 
@@ -42,6 +42,9 @@ class personalModel extends Conexion
         $sql = $this->ejecutarConsulta("SELECT id_personal
          FROM datospersonales dp
          WHERE dp.cedula = ?", $parametro);
+        if (empty($sql)) {
+            return false;
+        }
         return $sql;
     }
 
@@ -101,11 +104,11 @@ class personalModel extends Conexion
         $folio = $parametro[2];
 
         // Primero, consulta por cédula
-        $sqlCedula = $this->ejecutarConsulta("SELECT df.id_ninos, df.cedula FROM datosfamilia df WHERE df.cedula = ?", [$cedula]);
+        $sqlCedula = $this->ejecutarConsulta("SELECT df.id_ninos, df.cedula FROM datosfamilia df WHERE df.cedula = ? AND df.activo = 1", [$cedula]);
 
         if (!empty($sqlCedula)) {
             return [
-                'mensaje' => "La cédula ya existe.",
+                'mensaje' => "La cédula del familiar ya existe.",
                 'datos' => $sqlCedula,
                 'exito' => true
             ];
