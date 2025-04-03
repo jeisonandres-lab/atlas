@@ -29,7 +29,7 @@ use App\Atlas\config\App;
             </div> -->
             <div class="container-fluid text-center  pb-4">
                 <div class="row">
-                    <div class="d-flex" style="background-color: white; box-shadow: 0 0 2px #aaa;">
+                    <div class="d-flex" style="background-color: white; box-shadow: 0 0 1px #aaa;">
                         <div class="content-img-inces">
                             <img class="img-inces" src="./src/assets/img/images/logoince2-removebg-preview.png" alt="logo del inces">
                         </div>

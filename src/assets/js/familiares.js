@@ -289,6 +289,7 @@ $(function () {
       clasesInputsError("#cedula", ".span_cedula");
     }
   });
+  
   // funcion lick para limpiar los input y select 
   $("#limpiar").on("click", function () {
     $('#formulario_empleado input[type="checkbox"]').prop('checked', false).trigger('change');

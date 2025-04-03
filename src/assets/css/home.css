@@ -6,6 +6,7 @@
     line-height: 2.5rem !important;
 }
 
+/* COLORES DE LOS CIRCULOS DE CARD */
 .color-primary {
     background-color: var(--primary-color) !important;
 }
@@ -83,21 +84,22 @@
     /* Sombreado suave */
 }
 
-.conten-panel{
+.conten-panel {
     padding: 0px 10px 0px 0px !important;
-      margin-top: 10px !important;
-      margin-bottom: 10px !important;
-      border-right: 1px solid #cdd4e8 !important;
-  }
+    margin-top: 10px !important;
+    margin-bottom: 10px !important;
+    border-right: 1px solid #cdd4e8 !important;
+}
 
-
-  #contentbutton {
+/* button de la grafica */
+#contentbutton {
     top: 10px;
     right: 10px;
     z-index: 10;
 }
 
-#scoreChart2, #scoreChart {
+#scoreChart2,
+#scoreChart {
     width: 100% !important;
     height: 100% !important;
 }

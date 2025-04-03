@@ -6,6 +6,7 @@ import {
     obtenerDatos,
     obtenerDatosJQuery
 } from "./ajax/formularioAjax.js";
+import { configurarFlatpickrSinFinesDeSemana } from "./ajax/inputCalendar.js";
 
 import {
     incluirSelec2,
@@ -190,7 +191,7 @@ $(function () {
                 $("#contentReporHTML").append(setVariableCargo("cargo_filtrar", "cargo"));
                 traerCargo()
                     .then(cargo => {
-                        llenarSelect(cargo.data, "cargo_filtrar");
+                        llenarSelect(cargo.data, "cargo_filtrar", 'Seleccione un cargo');
                         incluirSelec2("#cargo_filtrar");
                     })
                     .catch(error => {
@@ -210,7 +211,7 @@ $(function () {
                 $("#contentReporHTML").append(setVariableEstatus("estatus_filtrar", "estatus"));
                 traerEstatus()
                     .then(estatus => {
-                        llenarSelect(estatus.data, "estatus_filtrar");
+                        llenarSelect(estatus.data, "estatus_filtrar", 'Seleccione un estatus');
                         incluirSelec2("#estatus_filtrar");
                     })
                     .catch(error => {
@@ -239,7 +240,7 @@ $(function () {
                     $("#formulario-descargarpdf").attr("action", "./src/ajax/tablasDescargar.php?accion=impirimirEmpleadosVivienda");
                 }
             } else if (checkboxId == "reporteNivelAcademico") {
-                $("#contentReporHTML").append(setVariableAcademico("academico_filtrar", "academico"));
+                $("#contentReporHTML").append(setVariableAcademico("academico_filtrar", "nivelAcademico"));
                 setCargarNivelesAcademicos("#academico_filtrar");
                 incluirSelec2("#academico_filtrar");
                 if (!$("#reportePersonalizado").is(":checked")) {
@@ -250,7 +251,7 @@ $(function () {
                 $("#contentReporHTML").append(setVariableEstado("estado_filtrar", "estado"), setVariableMunicipio("municipio_filtrar", "municipio"), setVariableParroquia("parroquia_filtrar", "parroquia"));
                 traerEstados()
                     .then(EtraerEstados => {
-                        llenarSelect(EtraerEstados.data, "estado_filtrar");
+                        llenarSelect(EtraerEstados.data, "estado_filtrar", 'seleccione un estado');
                         incluirSelec2("#estado_filtrar");
                     })
                     .catch(error => {
@@ -264,8 +265,8 @@ $(function () {
                 }
             } else if (checkboxId == "reporteFecha") {
                 $("#contentReporHTML").append(setVariableFechaRango("fecha_filtrar", "fecha_fin_filtrar", "fecha_fin_filtrar", "fecha_fin_filtrar"));
-                fechasJQueyDataPikerPresente("#fecha_filtrar"); // Inicializa los datepickers
-                fechasJQueyDataPikerPresente("#fecha_fin_filtrar"); // Inicializa los datepickers
+                configurarFlatpickrSinFinesDeSemana("#fecha_filtrar"); // Inicializa los datepickers
+                configurarFlatpickrSinFinesDeSemana("#fecha_fin_filtrar"); // Inicializa los datepickers
                 if (!$("#reportePersonalizado").is(":checked")) {
                     $('#formulario-descargarpdf').data('nombre', 'reporte_empleado_rangoFecha');
                     $("#formulario-descargarpdf").attr("action", "./src/ajax/tablasDescargar.php?accion=impirimirEmpleadosRangoFecha");
@@ -274,7 +275,7 @@ $(function () {
                 $("#contentReporHTML").append(setVariableDependencia("dependencia_filtrar", "dependencia"));
                 traerDependencia()
                     .then(dependencia => {
-                        llenarSelect(dependencia.data, "dependencia_filtrar");
+                        llenarSelect(dependencia.data, "dependencia_filtrar", 'Selecione una dependencia');
                         incluirSelec2("#dependencia_filtrar");
                     })
                     .catch(error => {
@@ -289,7 +290,7 @@ $(function () {
                 $("#contentReporHTML").append(setVariableDepartamento("departamento_filtrar", "departamento"));
                 traerDepartamento()
                     .then(departamento => {
-                        llenarSelect(departamento.data, "departamento_filtrar");
+                        llenarSelect(departamento.data, "departamento_filtrar", 'Seleccione un departamento');
                         incluirSelec2("#departamento_filtrar");
                     })
                     .catch(error => {
@@ -461,7 +462,7 @@ $(function () {
                     if (municipio.exito) {
                         $("#municipio_filtrar").empty()
                         $("#municipio_filtrar").append('<option value="">Seleccione un municipio</option>');
-                        llenarSelect(municipio.data, 'municipio_filtrar');
+                        llenarSelect(municipio.data, 'municipio_filtrar', 'Seleccione un municipio');
                     } else {
                         console.error('Error al obtener estado o la estructura de la respuesta es incorrecta');
                     }
@@ -495,7 +496,7 @@ $(function () {
                     if (parroquia.exito) {
                         $("#parroquia_filtrar").empty()
                         $("#parroquia_filtrar").append('<option value="">Seleccione una parroquia</option>');
-                        llenarSelect(parroquia.data, 'parroquia_filtrar');
+                        llenarSelect(parroquia.data, 'parroquia_filtrar', 'Seleccione una parroquia');
                     } else {
                         console.error('Error al obtener parroquias o la estructura de la respuesta es incorrecta');
                     }

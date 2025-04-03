@@ -111,6 +111,27 @@ class familiarModel extends Conexion
         return !empty($sqlID);
     }
 
+    //DATOS DE UN FAMILIAR INCES
+    private function datosFamiliarIncesFiltrado(array $parametro = [], $clausula = "")
+    {
+        $sql = $this->ejecutarConsulta("SELECT
+            de.id_empleados,
+            dpf.id_personal AS idEmpleadoAsignado,
+            dp.primerNombre AS nombreEmpleado,
+            dp.primerApellido AS apellidoEmpleado,
+            dpf.primerNombre AS nombreEmpleadoAsignado,
+            dpf.primerApellido AS apellidoEmpledoAsignado,
+            dpf.cedula AS cedulaEmpleadoAsignado,
+            dpf.edadPersonal AS edadEmpleadoAsignado
+            FROM datosfamiliarinces dfi
+            LEFT JOIN datosempleados de ON dfi.idEmpleado = de.id_empleados
+            LEFT JOIN datospersonales dp ON de.idPersonal = dp.id_personal
+            LEFT JOIN datospersonales dpf ON dfi.idPersonal = dpf.id_personal
+            WHERE $clausula", $parametro);
+
+        return $sql;
+    }
+
     // DATOS DE FAMILIAR POR FILTRO
     private function datosFamiliarFiltro(string $clausula, array $parametro)
     {
@@ -137,7 +158,6 @@ class familiarModel extends Conexion
         );
         return $sql;
     }
-
 
     /*-------------------- EXISTE FAMILIAR INCES --------------------- */
     /// GETTER DE EXISTENCIA DEL FAMILIAR INCES por cedula
@@ -170,6 +190,10 @@ class familiarModel extends Conexion
     public function getDatosFamiliarFiltro($clausula, $parametro)
     {
         return $this->datosFamiliarFiltro($clausula, $parametro);
+    }
+
+    public function getDatosFamiliarIncesFiltrado($parametro, $clausula){
+        return $this->datosFamiliarIncesFiltrado($parametro, $clausula);
     }
 
     /*-------------------- REGISTROS Y ACTUALIZACION --------------------- */

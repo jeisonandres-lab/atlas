@@ -34,7 +34,7 @@ $(function () {
     $("#descargarReporte2").prop("disable", true);
 
     //SOLICITUD DE REPORTE DE FAMILIAR
-    $(document).on("click", '.reporteTrabajador', async function (event) {
+    $(document).on("click", '#reporteTrabajador', async function (event) {
         event.preventDefault();
         const href = $(this).attr('href');
 

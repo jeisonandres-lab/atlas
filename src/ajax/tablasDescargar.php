@@ -89,7 +89,7 @@ switch ($_GET['accion']) {
         $imprimirPDFController->generarAusenciasPDF();
         break;
     case 'impirimirEmpleadosCargo':
-        $reportes->generarPDFCargo($cargo);
+        $reportes->generarPDFCargo($idCargo);
         break;
     case 'impirimirEmpleadosSexo':
         $reportes->generarPDFSexo($sexo);
@@ -98,19 +98,19 @@ switch ($_GET['accion']) {
         $reportes->generarPDFedad($edad);
         break;
     case 'impirimirEmpleadosCivil':
-        $reportes->generarPDFestadoCivil($estadoCivil);
+        $reportes->generarPDFestadoCivil($civil);
         break;
     case 'impirimirEmpleadosVivienda':
         $reportes->generarPDFvivienda($vivienda);
         break;
     case 'impirimirEmpleadosEstatus':
-        $reportes->generarPDFEstatus($estatus);
+        $reportes->generarPDFEstatus($idEstatus);
         break;
     case 'impirimirEmpleadosAcademico':
-        $reportes->generarPDFnivelAcademico($nivelacademico);
+        $reportes->generarPDFnivelAcademico($nivelAcademico);
         break;
     case 'impirimirEmpleadosDireccion':
-        $reportes->generarPDFdireccion($estado, $municipio, $parroquia);
+        $reportes->generarPDFdireccion($idestado, $idMunicipio, $idParroquia);
         break;
 
     case 'impirimirEmpleadosRangoFecha':
@@ -132,12 +132,12 @@ switch ($_GET['accion']) {
         $reportes->generarPDFrangoFhecha($fecha_ini_convertida,  $fecha_fin_convertida, $fecha_ini, $fecha_fin);
         break;
     case 'impirimirEmpleadosDependencia':
-        $reportes->generarPDFdependencia($dependencia);
+        $reportes->generarPDFdependencia($idDependencia);
         break;
     case 'impirimirEmpleadosDepartamento':
 
 
-        $reportes->generarPDFdepartamento($departamento);
+        $reportes->generarPDFdepartamento($idDepartamento);
         break;
     //REPORTES DE EXCEL
     case 'impirimirEmpleadosCargoExcel':

@@ -98,7 +98,6 @@ class personalController extends personalModel
             // COMO TAMBIEN SU NUEVO FAMILIAR ASIGNAR SI ES QUE SE LE ASIGNA
             if (!empty($cedulaFamiliar)) {
                 $validarFamiliar = $this->familiar->getExisteFamiliarIncesPorCedula([$cedulaFamiliar]);
-
                 // validar si el familiar existe
                 if ($validarFamiliar) {
                     $data_json['exito'] = false;
@@ -157,6 +156,7 @@ class personalController extends personalModel
                             $nivelAcademico,
                             $fechaING
                         );
+
                         // Si el registro de datos del empleado fue exitoso, actualiza $data_json con un mensaje de éxito
                         if ($registrarEmpleado) {
 
@@ -184,37 +184,43 @@ class personalController extends personalModel
                             // validamos si se logro registrar la ubicacion
                             if ($registrarIDUbicacion) {
 
-                                // validamos si se esta registrando un familiar por medio del registro del empleado
-                                // si es asi familiar inces trae el valor "si" y si no simplemente nada
-                                $registrarFamiliarInces = $this->familiarController->registrarFamiliarInces(
-                                    $FamiliarInces,
-                                    $primerNombreFamiliar,
-                                    $primerApellidoFamiliar,
-                                    $cedulaFamiliar,
-                                    $id_empleado,
-                                    2
-                                );
+                                // si el familiar que se va a cargar es un familiar inces
+                                if ($FamiliarInces == 'si') {
+                                    // validamos si se esta registrando un familiar por medio del registro del empleado
+                                    // si es asi familiar inces trae el valor "si" y si no simplemente nada
+                                    $registrarFamiliarInces = $this->familiarController->registrarFamiliarInces(
+                                        $FamiliarInces,
+                                        $primerNombreFamiliar,
+                                        $primerApellidoFamiliar,
+                                        $cedulaFamiliar,
+                                        $id_empleado,
+                                        2
+                                    );
 
+                                    //valdiamos si se cumplio el registro
+                                    if ($registrarFamiliarInces['exito']) {
 
-                                //valdiamos si se cumplio el registro
-                                if (empty($registrarFamiliarInces)) {
-                                    $data_json['exito'] = false;
-                                    $data_json['mensaje'] = $FamiliarInces . "primerNombre" . $primerNombreFamiliar . "primerApellido" . $primerApellidoFamiliar . "cedula" . $cedulaFamiliar . "id" . $id_empleado;
-                                } else {
-
-                                    //registrar documentacion
-                                    $registrarDocumentos = $this->registrarArchivos($cedula, $id_empleado, $civil);
-
-                                    //validamos la subida de los archivos y damos evento de exito del registro
-                                    if ($registrarDocumentos['exito']) {
+                                        $data_json['mensaje'] = $registrarFamiliarInces['mensaje'];
                                         $data_json['exito'] = true;
-                                        $data_json['mensaje'] = "Registrado exitosamente";
-                                        $data_json['archivos'] = $registrarDocumentos;
                                     } else {
-                                        $data_json['exito'] = false; // si la carga de los archivos salio mal igual se cargaron lso datos del empleado
-                                        $data_json['mensaje'] = "El registro de los datos se completó con éxito. Sin embargo, se produjo un error al cargar los archivos adjuntos. Le pedimos que, por favor, acceda a la sección de edición del empleado y vuelva a cargar los archivos necesarios.";
-                                        $data_json['archivos'] = $registrarDocumentos;
+                                        $data_json['mensaje'] = $registrarFamiliarInces['mensaje'];
+                                        $data_json['exito'] = false;
                                     }
+                                }
+
+
+                                //registrar documentacion
+                                $registrarDocumentos = $this->registrarArchivos($cedula, $id_empleado, $civil);
+
+                                //validamos la subida de los archivos y damos evento de exito del registro
+                                if ($registrarDocumentos['exito']) {
+                                    $data_json['exito'] = true;
+                                    $data_json['mensajeArchivo1'] = "Registrado exitosamente";
+                                    $data_json['archivos'] = $registrarDocumentos;
+                                } else {
+                                    $data_json['exito'] = false; // si la carga de los archivos salio mal igual se cargaron lso datos del empleado
+                                    $data_json['mensajeArchivo2'] = "El registro de los datos se completó con éxito. Sin embargo, se produjo un error al cargar los archivos adjuntos. Le pedimos que, por favor, acceda a la sección de edición del empleado y vuelva a cargar los archivos necesarios.";
+                                    $data_json['archivos'] = $registrarDocumentos;
                                 }
                             } else {
                                 $data_json['exito'] = false;
@@ -1234,12 +1240,6 @@ class personalController extends personalModel
             $conditionParams2 = [$parametro2, $parametro3];
 
             $validarDocumentos = $this->tablas->tablas($selectores2, $tabla2, $campoOrden2, $conditions2, $conditionParams2);
-            // $validarFamiliar = $this->getExisteEmpleadoFamiliar($parametro);
-            // $botones = "
-            //     <button class='btn btn-primary btn-sm btn-hover-azul btnEditarFamiliar ' data-bs-toggle='modal' data-bs-target='#editarDatosFamiliar' data-cedula=" . $row['id_ninos'] . "><i class='fa-solid fa-pencil fa-sm me-2'></i>Editar</button>
-            //     <button class='btn btn-danger btn-sm btn-hover-rojo btnEliminar'  data-swal-toast-template='#my-template' data-id=" . $row['id_ninos'] .  "><i class='fa-solid fa-trash fa-sm me-2'></i>Eliminar</button>
-            // ";
-
             $botonDoc = "<div class='btn-group' role='group' aria-label='Basic example'>";
             $documentosEncontrados = false; // Variable para verificar si se encontraron documentos
 
@@ -1253,6 +1253,7 @@ class personalController extends personalModel
                     $botonDoc .= "<button class='btn btn-success btn-sm botondocumet btn-hover' data-cedula='" . $row['cedula'] . "' data-doc='" . $documento['doc'] . "'><i class='fa-solid fa-file-image fa-sm me-1'></i>" . $documento['tipoDoc'] . "</button>";
                 }
             }
+
 
             // Si no se encontraron documentos, agregar el mensaje "Sin documentos"
             if (!$documentosEncontrados) {
@@ -1273,6 +1274,49 @@ class personalController extends personalModel
             $data_json['mensaje'] = "todas las personas exitoso";
         }
 
+        $validarFamiliarInces = $this->familiar->getDatosFamiliarIncesFiltrado([$idEmpleado], "de.id_empleados = ?");
+        if ($validarFamiliarInces) {
+            foreach ($validarFamiliarInces as $row) {
+                $data_json['exito'] = true;
+                $tabla2 = 'documentacion'; // Tabla a consultar
+                $campoOrden2 = 'idNinos'; // Campo por el cual se ordenará la tabla
+                $selectores2 = '*'; // Selectores para obtener los datos de la tabla
+                $conditions2 = ["idEmpleados = ?", "idNinos = ?"];
+                $conditionParams2 = [$idEmpleado, $row['idEmpleadoAsignado']];
+
+                $validarDocumentos = $this->tablas->tablas($selectores2, $tabla2, $campoOrden2, $conditions2, $conditionParams2);
+                $botonDoc = "<div class='btn-group' role='group' aria-label='Basic example'>";
+                $documentosEncontrados = false; // Variable para verificar si se encontraron documentos
+
+                foreach ($validarDocumentos as $documento) {
+                    $documentosEncontrados = true; // Se encontró al menos un documento
+                    $tipodoc = $documento['tipoDoc'];
+                    if ($tipodoc == 'pdf') {
+                        $botonDoc .= "<button class='btn btn-danger btn-sm botondocumet btn-hover' data-cedula='" . $row['cedulaEmpleadoAsignado'] . "' data-doc='" . $documento['doc'] . "'><i class='fa-solid fa-file-pdf fa-sm'></i> " . $documento['tipoDoc'] . "</button>";
+                    } elseif ($tipodoc == 'png') {
+                        $botonDoc .= "<button class='btn btn-success btn-sm botondocumet btn-hover' data-cedula='" . $row['cedulaEmpleadoAsignado'] . "' data-doc='" . $documento['doc'] . "'><i class='fa-solid fa-file-image fa-sm me-1'></i>" . $documento['tipoDoc'] . "</button>";
+                    }
+                }
+
+                // Si no se encontraron documentos, agregar el mensaje "Sin documentos"
+            if (!$documentosEncontrados) {
+                $botonDoc .= "<span>Sin documentos</span>";
+            }
+
+                $botonDoc .= "</div>";
+                $data_json['data'][] = [
+                    '0' => $row['nombreEmpleadoAsignado'] . " " . $row['apellidoEmpledoAsignado'],
+                    '1' => $row['cedulaEmpleadoAsignado'],
+                    '2' => '',
+                    '3' => $row['edadEmpleadoAsignado'],
+                    '4' => '',
+                    '5' => '',
+                    '6' => $botonDoc,
+                    '7' => 1,
+                ];
+            }
+        }
+
         // Devolver la respuesta a DataTables
         $response = array(
             "draw" => intval($draw),
@@ -1280,8 +1324,7 @@ class personalController extends personalModel
             "recordsFiltered" => $cantidadRegistro[0]['cantidad'],
             "data" => $data_json['data']
         );
-        header('Content-Type: application/json');
-        echo json_encode($response);
+        return $this->app->imprimirRespuestaJSON($response);
     }
 
     //Obtener todos los datos de personal para la tabla
@@ -1371,7 +1414,8 @@ class personalController extends personalModel
 
     // obtener toda la data de tofdos los trabajadores a nivel persona
     // ojo no a nivel empleado solo datos personales
-    public function obtenerTodaDataEmpleado(string $cedula){
+    public function obtenerTodaDataEmpleado(string $cedula)
+    {
         $cedula =  $cedula . '%';
         $datos = $this->getDatosEmpleadoFiltro("dp.cedula LIKE ?", [$cedula]);
         $data['exito'] = true;

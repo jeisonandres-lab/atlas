@@ -154,6 +154,7 @@ use App\Atlas\config\App;
                                             </div>
                                         </div>
 
+                                        <!-- Tipo de discapacidad -->
                                         <div class="col-sm-6 col-md-6 col-xl-6 col-xxl-6 mb-3" id="contenTipoDiscapacidad">
                                             <div class="form-group">
                                                 <label for="tpDiscapacidad">Tipo De Discapacidad</label>

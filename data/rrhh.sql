@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 22-03-2025 a las 01:43:12
+-- Tiempo de generación: 03-04-2025 a las 03:28:25
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -53,16 +53,6 @@ CREATE TABLE `asignarvacaciones` (
   `fecha` varchar(20) NOT NULL,
   `hora` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `asignarvacaciones`
---
-
-INSERT INTO `asignarvacaciones` (`id_vacaciones`, `idEmpleado`, `activo`, `ano`, `dias`, `fecha`, `hora`) VALUES
-(1, 1, 0, 2014, 3, '2025-02-26', '00:58:17'),
-(4, 73, 0, 2015, 10, '2025-02-26', '01:31:58 AM'),
-(5, 73, 0, 2017, 3, '2025-02-26', '01:31:58 AM'),
-(6, 73, NULL, 2017, 27, '2025-02-27', '02:23:16 PM');
 
 -- --------------------------------------------------------
 
@@ -1301,7 +1291,505 @@ INSERT INTO `auditoria` (`id_auditoria`, `codigo`, `user_id`, `fecha`, `hora`, `
 (1189, '00000961', 1, '2025-03-20', '21:30:23 PM', 'Inicio de sesion', 'el usuario Jeison12345 a iniciado sesion en el sistema', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
 (1190, '00000894', 1, '2025-03-21', '00:14:27 AM', 'Inicio de sesion', 'el usuario Jeison12345 a iniciado sesion en el sistema', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
 (1191, '00000556', 1, '2025-03-21', '12:15:01 PM', 'Inicio de sesion', 'el usuario Jeison12345 a iniciado sesion en el sistema', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
-(1192, '00000287', 1, '2025-03-21', '19:43:31 PM', 'Inicio de sesion', 'el usuario Jeison12345 a iniciado sesion en el sistema', NULL, '::1', 'Chrome', 'Windows 10', '64-bit');
+(1192, '00000287', 1, '2025-03-21', '19:43:31 PM', 'Inicio de sesion', 'el usuario Jeison12345 a iniciado sesion en el sistema', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1193, '00000258', 1, '2025-03-22', '04:47:59 AM', 'Registrar personal', 'El usuario Jeison12345 ha colocado un nuevo personal en el sistema con el nombre Pedro Jonaiker y la cedula 5626556.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1194, '00000360', 1, '2025-03-22', '04:47:59 AM', 'Registrar empleado', 'El usuario Jeison12345 ha colocado un nuevo empleado en el sistemaPedro Jonaiker y la cedula 5626556.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1195, '00000801', 1, '2025-03-22', '04:47:59 AM', 'Registrar documento', 'El usuario Jeison12345 ha colocado un nuevo documento en el sistema llamado Captura_de_pantalla_2025-02-22_194920-5626556.png con el código: lo2BCX y un tamaño de: 159.56 KB', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1196, '00000843', 1, '2025-03-22', '04:47:59 AM', 'Registrar documento', 'El usuario Jeison12345 ha colocado un nuevo documento en el sistema llamado Captura_de_pantalla_2025-03-19_224847-5626556.png con el código: r5RKdu y un tamaño de: 68.35 KB', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1197, '00000726', 1, '2025-03-22', '04:47:59 AM', 'Registrar documento', 'El usuario Jeison12345 ha colocado un nuevo documento en el sistema llamado Captura_de_pantalla_2025-03-21_223412-5626556.png con el código: JKO2Oi y un tamaño de: 77.51 KB', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1198, '00000024', 1, '2025-03-22', '04:58:35 AM', 'Registrar personal', 'El usuario Jeison12345 ha colocado un nuevo personal en el sistema con el nombre Pedro Jonaiker y la cedula 5626556.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1199, '00000505', 1, '2025-03-22', '04:58:35 AM', 'Registrar empleado', 'El usuario Jeison12345 ha colocado un nuevo empleado en el sistemaPedro Jonaiker y la cedula 5626556.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1200, '00000866', 1, '2025-03-22', '04:58:35 AM', 'Registrar documento', 'El usuario Jeison12345 ha colocado un nuevo documento en el sistema llamado Captura_de_pantalla_2025-02-22_194920-5626556.png con el código: e1eHk5 y un tamaño de: 159.56 KB', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1201, '00000670', 1, '2025-03-22', '04:58:35 AM', 'Registrar documento', 'El usuario Jeison12345 ha colocado un nuevo documento en el sistema llamado Captura_de_pantalla_2025-03-19_224847-5626556.png con el código: 34wyXA y un tamaño de: 68.35 KB', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1202, '00000245', 1, '2025-03-22', '04:58:35 AM', 'Registrar documento', 'El usuario Jeison12345 ha colocado un nuevo documento en el sistema llamado Captura_de_pantalla_2025-03-21_223412-5626556.png con el código: p1dnB0 y un tamaño de: 77.51 KB', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1203, '00000376', 1, '2025-03-22', '05:19:11 AM', 'Registrar personal', 'El usuario Jeison12345 ha colocado un nuevo personal en el sistema con el nombre Pedro Carlos y la cedula 7181898.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1204, '00000454', 1, '2025-03-22', '05:19:11 AM', 'Registrar empleado', 'El usuario Jeison12345 ha colocado un nuevo empleado en el sistemaPedro Carlos y la cedula 7181898.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1205, '00000955', 1, '2025-03-22', '05:19:11 AM', 'Registrar documento', 'El usuario Jeison12345 ha colocado un nuevo documento en el sistema llamado Captura_de_pantalla_2025-02-21_043751-7181898.png con el código: 8oR1TO y un tamaño de: 63.05 KB', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1206, '00000054', 1, '2025-03-22', '05:19:11 AM', 'Registrar documento', 'El usuario Jeison12345 ha colocado un nuevo documento en el sistema llamado Captura_de_pantalla_2025-03-02_215851-7181898.png con el código: HzG09x y un tamaño de: 395.25 KB', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1207, '00000615', 1, '2025-03-22', '05:42:24 AM', 'Registrar personal', 'El usuario Jeison12345 ha colocado un nuevo personal en el sistema con el nombre Pedro Carlos y la cedula 7181898.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1208, '00000337', 1, '2025-03-22', '05:42:24 AM', 'Registrar empleado', 'El usuario Jeison12345 ha colocado un nuevo empleado en el sistemaPedro Carlos y la cedula 7181898.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1209, '00000825', 1, '2025-03-22', '05:42:24 AM', 'Registrar documento', 'El usuario Jeison12345 ha colocado un nuevo documento en el sistema llamado Captura_de_pantalla_2025-02-21_043751-7181898.png con el código: sWMWBJ y un tamaño de: 63.05 KB', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1210, '00000180', 1, '2025-03-22', '05:42:24 AM', 'Registrar documento', 'El usuario Jeison12345 ha colocado un nuevo documento en el sistema llamado Captura_de_pantalla_2025-03-02_215851-7181898.png con el código: GeWxqP y un tamaño de: 395.25 KB', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1211, '00000105', 1, '2025-03-22', '05:49:44 AM', 'Registrar personal', 'El usuario Jeison12345 ha colocado un nuevo personal en el sistema con el nombre Pedro Carlos y la cedula 7181898.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1212, '00000976', 1, '2025-03-22', '05:49:44 AM', 'Registrar empleado', 'El usuario Jeison12345 ha colocado un nuevo empleado en el sistemaPedro Carlos y la cedula 7181898.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1213, '00000014', 1, '2025-03-22', '05:49:44 AM', 'Registrar documento', 'El usuario Jeison12345 ha colocado un nuevo documento en el sistema llamado Captura_de_pantalla_2025-02-21_043751-7181898.png con el código: KX7V73 y un tamaño de: 63.05 KB', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1214, '00000301', 1, '2025-03-22', '05:49:44 AM', 'Registrar documento', 'El usuario Jeison12345 ha colocado un nuevo documento en el sistema llamado Captura_de_pantalla_2025-03-02_215851-7181898.png con el código: YgRTKe y un tamaño de: 395.25 KB', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1215, '00000819', 1, '2025-03-22', '05:49:44 AM', 'Registrar documento', 'El usuario Jeison12345 ha colocado un nuevo documento en el sistema llamado 1111-7181898.jpg con el código: KTOUhh y un tamaño de: 97.35 KB', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1216, '00000211', 1, '2025-03-22', '05:52:58 AM', 'Registrar personal', 'El usuario Jeison12345 ha colocado un nuevo personal en el sistema con el nombre Pedro Carlos y la cedula 7181898.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1217, '00000013', 1, '2025-03-22', '05:52:58 AM', 'Registrar empleado', 'El usuario Jeison12345 ha colocado un nuevo empleado en el sistemaPedro Carlos y la cedula 7181898.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1218, '00000915', 1, '2025-03-22', '05:52:58 AM', 'Registrar documento', 'El usuario Jeison12345 ha colocado un nuevo documento en el sistema llamado Captura_de_pantalla_2025-02-21_043751-7181898.png con el código: J0nF6M y un tamaño de: 63.05 KB', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1219, '00000598', 1, '2025-03-22', '05:52:58 AM', 'Registrar documento', 'El usuario Jeison12345 ha colocado un nuevo documento en el sistema llamado Captura_de_pantalla_2025-03-02_215851-7181898.png con el código: guYxxa y un tamaño de: 395.25 KB', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1220, '00000399', 1, '2025-03-22', '05:52:58 AM', 'Registrar documento', 'El usuario Jeison12345 ha colocado un nuevo documento en el sistema llamado 1111-7181898.jpg con el código: Jxrq4r y un tamaño de: 97.35 KB', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1221, '00000642', 1, '2025-03-22', '05:54:23 AM', 'Registrar personal', 'El usuario Jeison12345 ha colocado un nuevo personal en el sistema con el nombre Pedro Carlos y la cedula 7181898.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1222, '00000452', 1, '2025-03-22', '05:54:23 AM', 'Registrar empleado', 'El usuario Jeison12345 ha colocado un nuevo empleado en el sistemaPedro Carlos y la cedula 7181898.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1223, '00000708', 1, '2025-03-22', '05:54:23 AM', 'Registrar documento', 'El usuario Jeison12345 ha colocado un nuevo documento en el sistema llamado Captura_de_pantalla_2025-02-21_043751-7181898.png con el código: ygsp2y y un tamaño de: 63.05 KB', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1224, '00000132', 1, '2025-03-22', '05:54:23 AM', 'Registrar documento', 'El usuario Jeison12345 ha colocado un nuevo documento en el sistema llamado Captura_de_pantalla_2025-03-02_215851-7181898.png con el código: USUUxW y un tamaño de: 395.25 KB', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1225, '00000310', 1, '2025-03-22', '05:54:23 AM', 'Registrar documento', 'El usuario Jeison12345 ha colocado un nuevo documento en el sistema llamado 1111-7181898.jpg con el código: S8Rlpn y un tamaño de: 97.35 KB', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1226, '00000574', 1, '2025-03-22', '05:57:15 AM', 'Registrar personal', 'El usuario Jeison12345 ha colocado un nuevo personal en el sistema con el nombre Pedro Carlos y la cedula 7181898.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1227, '00000180', 1, '2025-03-22', '05:57:15 AM', 'Registrar empleado', 'El usuario Jeison12345 ha colocado un nuevo empleado en el sistemaPedro Carlos y la cedula 7181898.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1228, '00000505', 1, '2025-03-22', '05:57:15 AM', 'Registrar documento', 'El usuario Jeison12345 ha colocado un nuevo documento en el sistema llamado Captura_de_pantalla_2025-02-21_043751-7181898.png con el código: fhINFJ y un tamaño de: 63.05 KB', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1229, '00000639', 1, '2025-03-22', '05:57:15 AM', 'Registrar documento', 'El usuario Jeison12345 ha colocado un nuevo documento en el sistema llamado Captura_de_pantalla_2025-03-02_215851-7181898.png con el código: EPHrn7 y un tamaño de: 395.25 KB', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1230, '00000721', 1, '2025-03-22', '05:57:15 AM', 'Registrar documento', 'El usuario Jeison12345 ha colocado un nuevo documento en el sistema llamado 1111-7181898.jpg con el código: Lw7RPz y un tamaño de: 97.35 KB', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1231, '00000486', 1, '2025-03-22', '06:59:23 AM', 'Registrar Personal', 'El usuario Jeison12345 ha colocado un nuevo personal al sistema: Pedro Carlos con la cédula 213123213.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1232, '00000394', 1, '2025-03-22', '07:03:09 AM', 'Registrar Personal', 'El usuario Jeison12345 ha colocado un nuevo personal al sistema: Pedro Carlos con la cédula 213123213.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1233, '00000902', 1, '2025-03-22', '07:05:16 AM', 'Registrar Personal', 'El usuario Jeison12345 ha colocado un nuevo personal al sistema: Emilio Carlata con la cédula 7235686.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1234, '00000648', 1, '2025-03-22', '07:05:41 AM', 'Registrar Personal', 'El usuario Jeison12345 ha colocado un nuevo personal al sistema: Emilio Carlata con la cédula 7235686.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1235, '00000395', 1, '2025-03-22', '07:07:34 AM', 'Registrar Personal', 'El usuario Jeison12345 ha colocado un nuevo personal al sistema: Emilio Carlata con la cédula 7235686.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1236, '00000247', 1, '2025-03-22', '07:10:37 AM', 'Registrar Personal', 'El usuario Jeison12345 ha colocado un nuevo personal al sistema: Emilio Carlata con la cédula 7235686.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1237, '00000667', 1, '2025-03-22', '07:11:33 AM', 'Registrar Personal', 'El usuario Jeison12345 ha colocado un nuevo personal al sistema: Emilio Carlata con la cédula 7235686.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1238, '00000339', 1, '2025-03-22', '07:12:38 AM', 'Registrar Personal', 'El usuario Jeison12345 ha colocado un nuevo personal al sistema: Emilio Carlata con la cédula 7235686.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1239, '00000914', 1, '2025-03-22', '07:13:53 AM', 'Registrar Personal', 'El usuario Jeison12345 ha colocado un nuevo personal al sistema: Emilio Carlata con la cédula 7235686.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1240, '00000304', 1, '2025-03-22', '07:14:25 AM', 'Registrar Personal', 'El usuario Jeison12345 ha colocado un nuevo personal al sistema: Emilio Carlata con la cédula 7235686.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1241, '00000984', 1, '2025-03-22', '07:14:57 AM', 'Registrar Personal', 'El usuario Jeison12345 ha colocado un nuevo personal al sistema: Emilio Carlata con la cédula 7235686.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1242, '00000456', 1, '2025-03-22', '07:15:34 AM', 'Registrar Personal', 'El usuario Jeison12345 ha colocado un nuevo personal al sistema: Emilio Carlata con la cédula 7235686.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1243, '00000299', 1, '2025-03-22', '07:16:37 AM', 'Registrar Personal', 'El usuario Jeison12345 ha colocado un nuevo personal al sistema: Emilio Carlata con la cédula 7235686.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1244, '00000935', 1, '2025-03-22', '07:17:06 AM', 'Registrar Personal', 'El usuario Jeison12345 ha colocado un nuevo personal al sistema: Emilio Carlata con la cédula 7235686.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1245, '00000383', 1, '2025-03-22', '07:19:48 AM', 'Registrar Personal', 'El usuario Jeison12345 ha colocado un nuevo personal al sistema: Pepito Jesus con la cédula 6025033.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1246, '00000899', 1, '2025-03-22', '07:21:16 AM', 'Registrar Personal', 'El usuario Jeison12345 ha colocado un nuevo personal al sistema: Pepito Jesus con la cédula 6025033.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1247, '00000975', 1, '2025-03-22', '07:22:46 AM', 'Registrar Personal', 'El usuario Jeison12345 ha colocado un nuevo personal al sistema: Pepito Jesus con la cédula 6025033.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1248, '00000813', 1, '2025-03-22', '07:23:35 AM', 'Registrar Personal', 'El usuario Jeison12345 ha colocado un nuevo personal al sistema: Pepito Jesus con la cédula 6025033.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1249, '00000497', 1, '2025-03-22', '07:23:35 AM', 'Registrar empleado', 'El usuario Jeison12345 ha colocado un nuevo empleado en el sistema: Pepito Jesus con la cédula 6025033.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1250, '00000394', 1, '2025-03-22', '07:24:13 AM', 'Registrar Personal', 'El usuario Jeison12345 ha colocado un nuevo personal al sistema: Pepito Jesus con la cédula 6025033.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1251, '00000956', 1, '2025-03-22', '07:24:13 AM', 'Registrar empleado', 'El usuario Jeison12345 ha colocado un nuevo empleado en el sistema: Pepito Jesus con la cédula 6025033.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1252, '00000696', 1, '2025-03-22', '07:30:34 AM', 'Registrar Personal', 'El usuario Jeison12345 ha colocado un nuevo personal al sistema: Pepito Jesus con la cédula 6025033.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1253, '00000542', 1, '2025-03-22', '07:30:34 AM', 'Registrar empleado', 'El usuario Jeison12345 ha colocado un nuevo empleado en el sistema: Pepito Jesus con la cédula 6025033.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1254, '00000568', 1, '2025-03-22', '07:31:29 AM', 'Registrar Personal', 'El usuario Jeison12345 ha colocado un nuevo personal al sistema: Pepito Jesus con la cédula 6025033.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1255, '00000592', 1, '2025-03-22', '07:31:29 AM', 'Registrar empleado', 'El usuario Jeison12345 ha colocado un nuevo empleado en el sistema: Pepito Jesus con la cédula 6025033.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1256, '00000776', 1, '2025-03-22', '07:31:54 AM', 'Registrar Personal', 'El usuario Jeison12345 ha colocado un nuevo personal al sistema: Pepito Jesus con la cédula 6025033.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1257, '00000348', 1, '2025-03-22', '07:31:54 AM', 'Registrar empleado', 'El usuario Jeison12345 ha colocado un nuevo empleado en el sistema: Pepito Jesus con la cédula 6025033.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1258, '00000309', 1, '2025-03-22', '07:42:45 AM', 'Registrar Personal', 'El usuario Jeison12345 ha colocado un nuevo personal al sistema: Pepito Jesus con la cédula 6025033.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1259, '00000227', 1, '2025-03-22', '07:42:45 AM', 'Registrar empleado', 'El usuario Jeison12345 ha colocado un nuevo empleado en el sistema: Pepito Jesus con la cédula 6025033.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1260, '00000666', 1, '2025-03-22', '07:42:45 AM', 'Registrar Ubicacion del Empleado', 'El usuario Jeison12345 ha registrado la ubicacion a Pepito Jesus con la cédula 6025033.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1261, '00000068', 1, '2025-03-22', '07:44:44 AM', 'Registrar Personal', 'El usuario Jeison12345 ha colocado un nuevo personal al sistema: Pepito Jesus con la cédula 6025033.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1262, '00000370', 1, '2025-03-22', '07:44:44 AM', 'Registrar empleado', 'El usuario Jeison12345 ha colocado un nuevo empleado en el sistema: Pepito Jesus con la cédula 6025033.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1263, '00000488', 1, '2025-03-22', '07:44:44 AM', 'Registrar Ubicacion del Empleado', 'El usuario Jeison12345 ha registrado la ubicacion a Pepito Jesus con la cédula 6025033.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1264, '00000514', 1, '2025-03-22', '07:47:18 AM', 'Registrar Personal', 'El usuario Jeison12345 ha colocado un nuevo personal al sistema: Pepito Jesus con la cédula 6025033.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1265, '00000575', 1, '2025-03-22', '07:47:18 AM', 'Registrar empleado', 'El usuario Jeison12345 ha colocado un nuevo empleado en el sistema: Pepito Jesus con la cédula 6025033.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1266, '00000582', 1, '2025-03-22', '07:47:18 AM', 'Registrar Ubicacion del Empleado', 'El usuario Jeison12345 ha registrado la ubicacion a Pepito Jesus con la cédula 6025033.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1267, '00000069', 1, '2025-03-22', '07:50:59 AM', 'Registrar Personal', 'El usuario Jeison12345 ha colocado un nuevo personal al sistema: Pepito Jesus con la cédula 6025033.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1268, '00000542', 1, '2025-03-22', '07:51:00 AM', 'Registrar empleado', 'El usuario Jeison12345 ha colocado un nuevo empleado en el sistema: Pepito Jesus con la cédula 6025033.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1269, '00000736', 1, '2025-03-22', '07:51:00 AM', 'Registrar Ubicacion del Empleado', 'El usuario Jeison12345 ha registrado la ubicacion a Pepito Jesus con la cédula 6025033.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1270, '00000500', 1, '2025-03-22', '07:51:04 AM', 'Registrar Personal', 'El usuario Jeison12345 ha colocado un nuevo personal al sistema:   con la cédula .', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1271, '00000968', 1, '2025-03-22', '07:55:46 AM', 'Registrar Personal', 'El usuario Jeison12345 ha colocado un nuevo personal al sistema: Pepito Jesus con la cédula 6025033.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1272, '00000067', 1, '2025-03-22', '07:55:46 AM', 'Registrar empleado', 'El usuario Jeison12345 ha colocado un nuevo empleado en el sistema: Pepito Jesus con la cédula 6025033.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1273, '00000382', 1, '2025-03-22', '07:55:46 AM', 'Registrar Ubicacion del Empleado', 'El usuario Jeison12345 ha registrado la ubicacion a Pepito Jesus con la cédula 6025033.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1274, '00000208', 1, '2025-03-22', '08:02:48 AM', 'Registrar Personal', 'El usuario Jeison12345 ha colocado un nuevo personal al sistema: Pepito Jesus con la cédula 6025033.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1275, '00000210', 1, '2025-03-22', '08:02:48 AM', 'Registrar empleado', 'El usuario Jeison12345 ha colocado un nuevo empleado en el sistema: Pepito Jesus con la cédula 6025033.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1276, '00000980', 1, '2025-03-22', '08:02:48 AM', 'Registrar Ubicacion del Empleado', 'El usuario Jeison12345 ha registrado la ubicacion a Pepito Jesus con la cédula 6025033.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1277, '00000742', 1, '2025-03-22', '08:02:48 AM', 'Registrar documento', 'El usuario Jeison12345 ha colocado un nuevo documento en el sistema llamado Captura_de_pantalla_2025-02-21_043751-6025033.png con el código: vyaDan y un tamaño de: 63.05 KB', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1278, '00000666', 1, '2025-03-22', '08:02:48 AM', 'Registrar documento', 'El usuario Jeison12345 ha colocado un nuevo documento en el sistema llamado Captura_de_pantalla_2025-02-28_191121-6025033.png con el código: gdZEgF y un tamaño de: 26.38 KB', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1279, '00000881', 1, '2025-03-22', '08:02:48 AM', 'Registrar documento', 'El usuario Jeison12345 ha colocado un nuevo documento en el sistema llamado Captura_de_pantalla_2025-03-21_223412-6025033.png con el código: F8VOv2 y un tamaño de: 77.51 KB', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1280, '00000896', 1, '2025-03-22', '08:02:48 AM', 'Registrar documento', 'El usuario Jeison12345 ha colocado un nuevo documento en el sistema llamado Captura_de_pantalla_2025-02-17_232457-6025033.png con el código: sDB7OJ y un tamaño de: 303.19 KB', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1281, '00000180', 1, '2025-03-22', '08:05:07 AM', 'Registrar Personal', 'El usuario Jeison12345 ha colocado un nuevo personal al sistema: Pepito Jesus con la cédula 6025033.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1282, '00000821', 1, '2025-03-22', '08:05:07 AM', 'Registrar empleado', 'El usuario Jeison12345 ha colocado un nuevo empleado en el sistema: Pepito Jesus con la cédula 6025033.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1283, '00000213', 1, '2025-03-22', '08:05:07 AM', 'Registrar Ubicacion del Empleado', 'El usuario Jeison12345 ha registrado la ubicacion a Pepito Jesus con la cédula 6025033.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1284, '00000254', 1, '2025-03-22', '08:05:07 AM', 'Registrar documento', 'El usuario Jeison12345 ha colocado un nuevo documento en el sistema llamado Captura_de_pantalla_2025-02-21_043751-6025033.png con el código: jF0nC1 y un tamaño de: 63.05 KB', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1285, '00000048', 1, '2025-03-22', '08:05:07 AM', 'Registrar documento', 'El usuario Jeison12345 ha colocado un nuevo documento en el sistema llamado Captura_de_pantalla_2025-02-28_191121-6025033.png con el código: 3g068P y un tamaño de: 26.38 KB', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1286, '00000960', 1, '2025-03-22', '08:05:07 AM', 'Registrar documento', 'El usuario Jeison12345 ha colocado un nuevo documento en el sistema llamado Captura_de_pantalla_2025-03-21_223412-6025033.png con el código: zVuUnV y un tamaño de: 77.51 KB', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1287, '00000722', 1, '2025-03-22', '08:05:07 AM', 'Registrar documento', 'El usuario Jeison12345 ha colocado un nuevo documento en el sistema llamado Captura_de_pantalla_2025-02-17_232457-6025033.png con el código: 0MJU8z y un tamaño de: 303.19 KB', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1288, '00000881', 1, '2025-03-22', '08:12:39 AM', 'Registrar Personal', 'El usuario Jeison12345 ha colocado un nuevo personal al sistema: Pepito Jesus con la cédula 6025033.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1289, '00000686', 1, '2025-03-22', '08:12:39 AM', 'Registrar empleado', 'El usuario Jeison12345 ha colocado un nuevo empleado en el sistema: Pepito Jesus con la cédula 6025033.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1290, '00000015', 1, '2025-03-22', '08:12:39 AM', 'Registrar Ubicacion del Empleado', 'El usuario Jeison12345 ha registrado la ubicacion a Pepito Jesus con la cédula 6025033.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1291, '00000014', 1, '2025-03-22', '08:12:39 AM', 'Registrar documento', 'El usuario Jeison12345 ha colocado un nuevo documento en el sistema llamado Captura_de_pantalla_2025-02-21_043751-6025033.png con el código: 25l2RH y un tamaño de: 63.05 KB', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1292, '00000776', 1, '2025-03-22', '08:12:39 AM', 'Registrar documento', 'El usuario Jeison12345 ha colocado un nuevo documento en el sistema llamado Captura_de_pantalla_2025-02-28_191121-6025033.png con el código: jomchf y un tamaño de: 26.38 KB', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1293, '00000939', 1, '2025-03-22', '08:12:39 AM', 'Registrar documento', 'El usuario Jeison12345 ha colocado un nuevo documento en el sistema llamado Captura_de_pantalla_2025-03-21_223412-6025033.png con el código: zUEaW7 y un tamaño de: 77.51 KB', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1294, '00000524', 1, '2025-03-22', '08:12:39 AM', 'Registrar documento', 'El usuario Jeison12345 ha colocado un nuevo documento en el sistema llamado Captura_de_pantalla_2025-02-17_232457-6025033.png con el código: aesbbN y un tamaño de: 303.19 KB', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1295, '00000676', 1, '2025-03-22', '08:25:04 AM', 'Registrar Personal', 'El usuario Jeison12345 ha colocado un nuevo personal al sistema: Leydi Emili con la cédula 15471594.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1296, '00000294', 1, '2025-03-22', '08:25:04 AM', 'Registrar empleado', 'El usuario Jeison12345 ha colocado un nuevo empleado en el sistema: Leydi Emili con la cédula 15471594.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1297, '00000970', 1, '2025-03-22', '08:25:04 AM', 'Registrar Ubicacion del Empleado', 'El usuario Jeison12345 ha registrado la ubicacion a Leydi Emili con la cédula 15471594.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1298, '00000131', 1, '2025-03-22', '08:25:04 AM', 'Registrar documento', 'El usuario Jeison12345 ha colocado un nuevo documento en el sistema llamado Captura_de_pantalla_2025-03-18_231033-15471594.png con el código: 9buUFq y un tamaño de: 1,377.09 KB', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1299, '00000025', 1, '2025-03-22', '08:25:04 AM', 'Registrar documento', 'El usuario Jeison12345 ha colocado un nuevo documento en el sistema llamado Captura_de_pantalla_2025-03-03_002118-15471594.png con el código: nn5nGp y un tamaño de: 61.74 KB', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1300, '00000789', 1, '2025-03-22', '08:25:04 AM', 'Registrar documento', 'El usuario Jeison12345 ha colocado un nuevo documento en el sistema llamado Captura_de_pantalla_2025-03-21_214002-15471594.png con el código: aFAgXh y un tamaño de: 82.88 KB', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1301, '00000051', 1, '2025-03-22', '08:25:04 AM', 'Registrar documento', 'El usuario Jeison12345 ha colocado un nuevo documento en el sistema llamado Captura_de_pantalla_2025-02-22_194920-15471594.png con el código: U9zpB6 y un tamaño de: 159.56 KB', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1302, '00000142', 1, '2025-03-22', '08:58:51 AM', 'cierre de sesion', 'el usuario Jeison12345 a cerrado sesion en el sistema', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1303, '00000145', 1, '2025-03-22', '08:58:57 AM', 'Inicio de sesion', 'el usuario Jeison12345 a iniciado sesion en el sistema', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1304, '00000985', 1, '2025-03-22', '09:41:19 AM', 'Inicio de sesion', 'el usuario Jeison12345 a iniciado sesion en el sistema', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1305, '00000152', 1, '2025-03-22', '14:33:20 PM', 'Inicio de sesion', 'el usuario Jeison12345 a iniciado sesion en el sistema', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1306, '00000071', 1, '2025-03-22', '15:37:47 PM', 'cierre de sesion', 'el usuario Jeison12345 a cerrado sesion en el sistema', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1307, '00000561', 1, '2025-03-22', '15:37:51 PM', 'Inicio de sesion', 'el usuario Jeison12345 a iniciado sesion en el sistema', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1308, '00000268', 1, '2025-03-22', '20:10:40 PM', 'Registrar Personal', 'El usuario Jeison12345 ha colocado un nuevo personal al sistema: Pedro Gonzalez con la cédula 25448484.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1309, '00000128', 1, '2025-03-22', '20:10:40 PM', 'Registrar empleado', 'El usuario Jeison12345 ha colocado un nuevo empleado en el sistema: Pedro Gonzalez con la cédula 25448484.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1310, '00000321', 1, '2025-03-22', '20:10:40 PM', 'Registrar Ubicacion del Empleado', 'El usuario Jeison12345 ha registrado la ubicacion a Pedro Gonzalez con la cédula 25448484.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1311, '00000900', 1, '2025-03-22', '20:10:40 PM', 'Registrar documento', 'El usuario Jeison12345 ha colocado un nuevo documento en el sistema llamado Captura_de_pantalla_2025-03-21_215614-25448484.png con el código: 0esnee y un tamaño de: 13.36 KB', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1312, '00000182', 1, '2025-03-22', '20:10:40 PM', 'Registrar documento', 'El usuario Jeison12345 ha colocado un nuevo documento en el sistema llamado Captura_de_pantalla_2025-03-21_223404-25448484.png con el código: 5dbOib y un tamaño de: 74.42 KB', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1313, '00000001', 1, '2025-03-22', '20:10:40 PM', 'Registrar documento', 'El usuario Jeison12345 ha colocado un nuevo documento en el sistema llamado Captura_de_pantalla_2025-02-22_194915-25448484.png con el código: TclDd3 y un tamaño de: 159.56 KB', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1314, '00000327', 1, '2025-03-22', '20:10:40 PM', 'Registrar documento', 'El usuario Jeison12345 ha colocado un nuevo documento en el sistema llamado Captura_de_pantalla_2025-02-28_192252-25448484.png con el código: 50HnVF y un tamaño de: 151.63 KB', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1315, '00000035', 1, '2025-03-22', '20:19:10 PM', 'cierre de sesion', 'el usuario Jeison12345 a cerrado sesion en el sistema', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1316, '00000953', 1, '2025-03-22', '20:19:18 PM', 'Inicio de sesion', 'el usuario Administrador a iniciado sesion en el sistema', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1317, '00000543', 1, '2025-03-22', '21:43:03 PM', 'Registrar Personal', 'El usuario Administrador ha colocado un nuevo personal al sistema: Luisa Gonzalez con la cédula 3845620.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1318, '00000644', 1, '2025-03-22', '21:43:03 PM', 'Registrar empleado', 'El usuario Administrador ha colocado un nuevo empleado en el sistema: Luisa Gonzalez con la cédula 3845620.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1319, '00000062', 1, '2025-03-22', '21:43:03 PM', 'Registrar Ubicacion del Empleado', 'El usuario Administrador ha registrado la ubicacion a Luisa Gonzalez con la cédula 3845620.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1320, '00000959', 1, '2025-03-22', '21:43:03 PM', 'Registrar documento', 'El usuario Administrador ha colocado un nuevo documento en el sistema llamado Captura_de_pantalla_2025-02-28_191118-3845620.png con el código: aX0ucH y un tamaño de: 26.38 KB', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1321, '00000343', 1, '2025-03-22', '21:45:09 PM', 'Registrar Personal', 'El usuario Administrador ha colocado un nuevo personal al sistema: Luisa Gonzalez con la cédula 3845620.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1322, '00000967', 1, '2025-03-22', '21:45:09 PM', 'Registrar empleado', 'El usuario Administrador ha colocado un nuevo empleado en el sistema: Luisa Gonzalez con la cédula 3845620.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1323, '00000788', 1, '2025-03-22', '21:45:09 PM', 'Registrar Ubicacion del Empleado', 'El usuario Administrador ha registrado la ubicacion a Luisa Gonzalez con la cédula 3845620.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1324, '00000371', 1, '2025-03-22', '21:45:09 PM', 'Registrar documento', 'El usuario Administrador ha colocado un nuevo documento en el sistema llamado Captura_de_pantalla_2025-02-28_191118-3845620.png con el código: tV56v4 y un tamaño de: 26.38 KB', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1325, '00000170', 1, '2025-03-22', '21:48:13 PM', 'Registrar Personal', 'El usuario Administrador ha colocado un nuevo personal al sistema: Luisa Gonzalez con la cédula 3845620.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1326, '00000838', 1, '2025-03-22', '21:48:13 PM', 'Registrar empleado', 'El usuario Administrador ha colocado un nuevo empleado en el sistema: Luisa Gonzalez con la cédula 3845620.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1327, '00000635', 1, '2025-03-22', '21:48:13 PM', 'Registrar Ubicacion del Empleado', 'El usuario Administrador ha registrado la ubicacion a Luisa Gonzalez con la cédula 3845620.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1328, '00000743', 1, '2025-03-22', '21:48:13 PM', 'Registrar documento', 'El usuario Administrador ha colocado un nuevo documento en el sistema llamado Captura_de_pantalla_2025-02-28_191118-3845620.png con el código: KsK7le y un tamaño de: 26.38 KB', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1329, '00000051', 1, '2025-03-22', '21:50:05 PM', 'Registrar Personal', 'El usuario Administrador ha colocado un nuevo personal al sistema: Luisa Gonzalez con la cédula 3845620.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1330, '00000906', 1, '2025-03-22', '21:50:05 PM', 'Registrar empleado', 'El usuario Administrador ha colocado un nuevo empleado en el sistema: Luisa Gonzalez con la cédula 3845620.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1331, '00000373', 1, '2025-03-22', '21:50:05 PM', 'Registrar Ubicacion del Empleado', 'El usuario Administrador ha registrado la ubicacion a Luisa Gonzalez con la cédula 3845620.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1332, '00000592', 1, '2025-03-22', '21:50:05 PM', 'Registrar documento', 'El usuario Administrador ha colocado un nuevo documento en el sistema llamado Captura_de_pantalla_2025-02-28_191118-3845620.png con el código: 1T6JOt y un tamaño de: 26.38 KB', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1333, '00000529', 1, '2025-03-22', '21:51:02 PM', 'Registrar Personal', 'El usuario Administrador ha colocado un nuevo personal al sistema: Luisa Gonzalez con la cédula 3845620.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1334, '00000110', 1, '2025-03-22', '21:51:02 PM', 'Registrar empleado', 'El usuario Administrador ha colocado un nuevo empleado en el sistema: Luisa Gonzalez con la cédula 3845620.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1335, '00000958', 1, '2025-03-22', '21:51:02 PM', 'Registrar Ubicacion del Empleado', 'El usuario Administrador ha registrado la ubicacion a Luisa Gonzalez con la cédula 3845620.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1336, '00000909', 1, '2025-03-22', '21:51:02 PM', 'Registrar documento', 'El usuario Administrador ha colocado un nuevo documento en el sistema llamado Captura_de_pantalla_2025-02-28_191118-3845620.png con el código: 8AJ1Jt y un tamaño de: 26.38 KB', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1337, '00000574', 1, '2025-03-22', '21:52:13 PM', 'Registrar Personal', 'El usuario Administrador ha colocado un nuevo personal al sistema: Luisa Gonzalez con la cédula 3845620.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1338, '00000164', 1, '2025-03-22', '21:52:13 PM', 'Registrar empleado', 'El usuario Administrador ha colocado un nuevo empleado en el sistema: Luisa Gonzalez con la cédula 3845620.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1339, '00000050', 1, '2025-03-22', '21:52:13 PM', 'Registrar Ubicacion del Empleado', 'El usuario Administrador ha registrado la ubicacion a Luisa Gonzalez con la cédula 3845620.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1340, '00000022', 1, '2025-03-22', '21:52:13 PM', 'Registrar documento', 'El usuario Administrador ha colocado un nuevo documento en el sistema llamado Captura_de_pantalla_2025-02-28_191118-3845620.png con el código: QieNXb y un tamaño de: 26.38 KB', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1341, '00000677', 1, '2025-03-22', '21:54:26 PM', 'Registrar Personal', 'El usuario Administrador ha colocado un nuevo personal al sistema: Luisa Gonzalez con la cédula 3845620.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1342, '00000183', 1, '2025-03-22', '21:54:26 PM', 'Registrar empleado', 'El usuario Administrador ha colocado un nuevo empleado en el sistema: Luisa Gonzalez con la cédula 3845620.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1343, '00000470', 1, '2025-03-22', '21:54:26 PM', 'Registrar Ubicacion del Empleado', 'El usuario Administrador ha registrado la ubicacion a Luisa Gonzalez con la cédula 3845620.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1344, '00000105', 1, '2025-03-22', '21:54:26 PM', 'Registrar documento', 'El usuario Administrador ha colocado un nuevo documento en el sistema llamado Captura_de_pantalla_2025-02-28_191118-3845620.png con el código: R9aMJo y un tamaño de: 26.38 KB', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1345, '00000535', 1, '2025-03-22', '21:54:57 PM', 'Registrar Personal', 'El usuario Administrador ha colocado un nuevo personal al sistema: Luisa Gonzalez con la cédula 3845620.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1346, '00000884', 1, '2025-03-22', '21:54:57 PM', 'Registrar empleado', 'El usuario Administrador ha colocado un nuevo empleado en el sistema: Luisa Gonzalez con la cédula 3845620.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1347, '00000346', 1, '2025-03-22', '21:54:57 PM', 'Registrar Ubicacion del Empleado', 'El usuario Administrador ha registrado la ubicacion a Luisa Gonzalez con la cédula 3845620.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1348, '00000877', 1, '2025-03-22', '21:54:57 PM', 'Registrar documento', 'El usuario Administrador ha colocado un nuevo documento en el sistema llamado Captura_de_pantalla_2025-02-28_191118-3845620.png con el código: EnFU2f y un tamaño de: 26.38 KB', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1349, '00000700', 1, '2025-03-22', '21:54:57 PM', 'Registrar documento', 'El usuario Administrador ha colocado un nuevo documento en el sistema llamado Captura_de_pantalla_2025-02-28_192252-3845620.png con el código: H1vjRs y un tamaño de: 151.63 KB', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1350, '00000570', 1, '2025-03-22', '21:54:57 PM', 'Registrar documento', 'El usuario Administrador ha colocado un nuevo documento en el sistema llamado Captura_de_pantalla_2025-02-17_232447-3845620.png con el código: ATonRG y un tamaño de: 278.04 KB', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1351, '00000271', 1, '2025-03-22', '21:54:57 PM', 'Registrar documento', 'El usuario Administrador ha colocado un nuevo documento en el sistema llamado Captura_de_pantalla_2025-02-17_234719-3845620.png con el código: j3AB1a y un tamaño de: 248.63 KB', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1352, '00000801', 1, '2025-03-22', '21:54:57 PM', 'Registrar documento', 'El usuario Administrador ha colocado un nuevo documento en el sistema llamado Captura_de_pantalla_2025-02-17_234719-3845620.png con el código: 3zdXAN y un tamaño de: 248.63 KB', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1353, '00000816', 1, '2025-03-22', '21:58:29 PM', 'Registrar Personal', 'El usuario Administrador ha colocado un nuevo personal al sistema: Pedro Torres con la cédula 3282357.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1354, '00000931', 1, '2025-03-22', '21:58:29 PM', 'Registrar empleado', 'El usuario Administrador ha colocado un nuevo empleado en el sistema: Pedro Torres con la cédula 3282357.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1355, '00000008', 1, '2025-03-22', '21:58:29 PM', 'Registrar Ubicacion del Empleado', 'El usuario Administrador ha registrado la ubicacion a Pedro Torres con la cédula 3282357.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1356, '00000412', 1, '2025-03-22', '21:58:29 PM', 'Registrar documento', 'El usuario Administrador ha colocado un nuevo documento en el sistema llamado Captura_de_pantalla_2025-02-22_194915-3282357.png con el código: Eml39V y un tamaño de: 159.56 KB', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1357, '00000515', 1, '2025-03-22', '21:59:54 PM', 'Registrar Personal', 'El usuario Administrador ha colocado un nuevo personal al sistema: Pedro Torres con la cédula 3282357.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1358, '00000494', 1, '2025-03-22', '21:59:54 PM', 'Registrar empleado', 'El usuario Administrador ha colocado un nuevo empleado en el sistema: Pedro Torres con la cédula 3282357.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1359, '00000641', 1, '2025-03-22', '21:59:54 PM', 'Registrar Ubicacion del Empleado', 'El usuario Administrador ha registrado la ubicacion a Pedro Torres con la cédula 3282357.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit');
+INSERT INTO `auditoria` (`id_auditoria`, `codigo`, `user_id`, `fecha`, `hora`, `tipo_evento`, `descripcion`, `tabla_afectada`, `ip`, `navegador`, `sistemaOperativo`, `arquitectura`) VALUES
+(1360, '00000048', 1, '2025-03-22', '21:59:54 PM', 'Registrar documento', 'El usuario Administrador ha colocado un nuevo documento en el sistema llamado Captura_de_pantalla_2025-02-22_194915-3282357.png con el código: zhgymL y un tamaño de: 159.56 KB', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1361, '00000168', 1, '2025-03-22', '22:11:09 PM', 'Registrar Personal', 'El usuario Administrador ha colocado un nuevo personal al sistema: Pedro Torres con la cédula 3282357.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1362, '00000636', 1, '2025-03-22', '22:11:09 PM', 'Registrar empleado', 'El usuario Administrador ha colocado un nuevo empleado en el sistema: Pedro Torres con la cédula 3282357.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1363, '00000051', 1, '2025-03-22', '22:11:09 PM', 'Registrar Ubicacion del Empleado', 'El usuario Administrador ha registrado la ubicacion a Pedro Torres con la cédula 3282357.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1364, '00000404', 1, '2025-03-22', '22:11:09 PM', 'Registrar documento', 'El usuario Administrador ha colocado un nuevo documento en el sistema llamado Captura_de_pantalla_2025-02-22_194915-3282357.png con el código: gW2ZBx y un tamaño de: 159.56 KB', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1365, '00000069', 1, '2025-03-22', '22:11:09 PM', 'Registrar documento', 'El usuario Administrador ha colocado un nuevo documento en el sistema llamado Captura_de_pantalla_2025-02-28_191118-3282357.png con el código: sIpJkb y un tamaño de: 26.38 KB', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1366, '00000931', 1, '2025-03-22', '22:11:09 PM', 'Registrar documento', 'El usuario Administrador ha colocado un nuevo documento en el sistema llamado Captura_de_pantalla_2025-02-28_192252-3282357.png con el código: QAf99O y un tamaño de: 151.63 KB', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1367, '00000800', 1, '2025-03-22', '22:11:09 PM', 'Registrar documento', 'El usuario Administrador ha colocado un nuevo documento en el sistema llamado Captura_de_pantalla_2025-03-02_215848-3282357.png con el código: 8AbTjK y un tamaño de: 395.26 KB', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1368, '00000685', 1, '2025-03-22', '22:11:09 PM', 'Registrar documento', 'El usuario Administrador ha colocado un nuevo documento en el sistema llamado Captura_de_pantalla_2025-02-21_043745-3282357.png con el código: K9ezxO y un tamaño de: 63.05 KB', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1369, '00000171', 1, '2025-03-22', '22:15:30 PM', 'Registrar Personal', 'El usuario Administrador ha colocado un nuevo personal al sistema: Anthony Pepere con la cédula 3849395.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1370, '00000071', 1, '2025-03-22', '22:15:30 PM', 'Registrar empleado', 'El usuario Administrador ha colocado un nuevo empleado en el sistema: Anthony Pepere con la cédula 3849395.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1371, '00000109', 1, '2025-03-22', '22:15:30 PM', 'Registrar Ubicacion del Empleado', 'El usuario Administrador ha registrado la ubicacion a Anthony Pepere con la cédula 3849395.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1372, '00000371', 1, '2025-03-22', '22:15:30 PM', 'Registrar documento', 'El usuario Administrador ha colocado un nuevo documento en el sistema llamado Captura_de_pantalla_2025-02-22_194915-3849395.png con el código: cNeVeS y un tamaño de: 159.56 KB', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1373, '00000612', 1, '2025-03-22', '22:15:30 PM', 'Registrar documento', 'El usuario Administrador ha colocado un nuevo documento en el sistema llamado 1111-3849395.jpg con el código: 48W84j y un tamaño de: 97.35 KB', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1374, '00000912', 1, '2025-03-22', '22:15:30 PM', 'Registrar documento', 'El usuario Administrador ha colocado un nuevo documento en el sistema llamado Captura_de_pantalla_2025-02-17_232447-3849395.png con el código: JR4fDE y un tamaño de: 278.04 KB', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1375, '00000112', 1, '2025-03-22', '22:15:30 PM', 'Registrar documento', 'El usuario Administrador ha colocado un nuevo documento en el sistema llamado Captura_de_pantalla_2025-03-19_224843-3849395.png con el código: T8UMzH y un tamaño de: 68.36 KB', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1376, '00000960', 1, '2025-03-22', '22:26:32 PM', 'Inicio de sesion', 'el usuario Administrador a iniciado sesion en el sistema', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1377, '00000559', 1, '2025-03-22', '22:51:49 PM', 'Actualizar personal', 'El usuario Administrador actualizo los datos del personal Luisa Gonzalez por tador de la cédula 3845620.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1378, '00000739', 1, '2025-03-22', '22:51:49 PM', 'Actualizar empleado', 'El usuario Administrador actualizo los datos del empleado con cedula 3845620.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1379, '00000949', 1, '2025-03-23', '00:31:28 AM', 'Registrar familiar', 'El usuario Administrador asigno un nuevo familiar en el sistema al empleado Jeison Balduz portador de la cedula 30012937 el familiar asignado fue Juan Torres.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1380, '00000911', 1, '2025-03-23', '00:31:28 AM', 'Registrar documento', 'El usuario Administrador ha colocado un nuevo documento en el sistema llamado Captura_de_pantalla_2025-03-21_223412-11591381.png con el código: 71A2QJ y un tamaño de: 77.51 KB', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1381, '00000738', 1, '2025-03-23', '01:18:44 AM', 'Actualizar personal', 'El usuario Administrador actualizo los datos del personal con cedula 30012937.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1382, '00000202', 1, '2025-03-23', '01:18:44 AM', 'Actualizar empleado', 'El usuario Administrador actualizo los datos del empleado con cedula 30012937.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1383, '00000519', 1, '2025-03-23', '01:30:37 AM', 'Actualizar personal', 'El usuario Administrador actualizo los datos del personal con cedula 30012937.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1384, '00000455', 1, '2025-03-23', '01:30:37 AM', 'Actualizar empleado', 'El usuario Administrador actualizo los datos del empleado con cedula 30012937.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1385, '00000285', 1, '2025-03-23', '01:30:37 AM', 'Actualizar ubicacion de empleado', 'El usuario Administrador actualizo los datos de ubicación del empleado con cedula 30012937.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1386, '00000552', 1, '2025-03-23', '01:31:43 AM', 'Actualizar personal', 'El usuario Administrador actualizo los datos del personal con cedula 30012937.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1387, '00000220', 1, '2025-03-23', '01:31:43 AM', 'Actualizar empleado', 'El usuario Administrador actualizo los datos del empleado con cedula 30012937.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1388, '00000048', 1, '2025-03-23', '01:31:43 AM', 'Actualizar ubicacion de empleado', 'El usuario Administrador actualizo los datos de ubicación del empleado con cedula 30012937.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1389, '00000716', 1, '2025-03-23', '01:40:24 AM', 'Actualizar personal', 'El usuario Administrador actualizo los datos del personal con cedula 30012937.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1390, '00000669', 1, '2025-03-23', '01:40:24 AM', 'Actualizar empleado', 'El usuario Administrador actualizo los datos del empleado con cedula 30012937.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1391, '00000572', 1, '2025-03-23', '01:40:24 AM', 'Actualizar ubicacion de empleado', 'El usuario Administrador actualizo los datos de ubicación del empleado con cedula 30012937.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1392, '00000495', 1, '2025-03-23', '01:40:24 AM', 'Registrar documento', 'El usuario Administrador ha colocado un nuevo documento en el sistema llamado 1111-30012937.jpg con el código: A7MkhD y un tamaño de: 97.35 KB', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1393, '00000339', 1, '2025-03-23', '01:41:20 AM', 'Actualizar personal', 'El usuario Administrador actualizo los datos del personal con cedula 30012937.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1394, '00000921', 1, '2025-03-23', '01:41:20 AM', 'Actualizar empleado', 'El usuario Administrador actualizo los datos del empleado con cedula 30012937.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1395, '00000469', 1, '2025-03-23', '01:41:20 AM', 'Actualizar ubicacion de empleado', 'El usuario Administrador actualizo los datos de ubicación del empleado con cedula 30012937.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1396, '00000067', 1, '2025-03-23', '01:41:20 AM', 'Registrar documento', 'El usuario Administrador ha colocado un nuevo documento en el sistema llamado Captura_de_pantalla_2025-02-28_192326-30012937.png con el código: On6yro y un tamaño de: 4.40 KB', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1397, '00000552', 1, '2025-03-23', '01:43:01 AM', 'Actualizar personal', 'El usuario Administrador actualizo los datos del personal con cedula 30012937.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1398, '00000928', 1, '2025-03-23', '01:43:01 AM', 'Actualizar empleado', 'El usuario Administrador actualizo los datos del empleado con cedula 30012937.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1399, '00000549', 1, '2025-03-23', '01:43:01 AM', 'Actualizar ubicacion de empleado', 'El usuario Administrador actualizo los datos de ubicación del empleado con cedula 30012937.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1400, '00000559', 1, '2025-03-23', '03:01:17 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1401, '00000533', 1, '2025-03-23', '03:01:17 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1402, '00000227', 1, '2025-03-23', '03:01:17 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1403, '00000365', 1, '2025-03-23', '03:03:55 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1404, '00000442', 1, '2025-03-23', '03:03:55 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1405, '00000286', 1, '2025-03-23', '03:03:55 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1406, '00000660', 1, '2025-03-23', '03:10:33 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1407, '00000532', 1, '2025-03-23', '03:10:33 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1408, '00000970', 1, '2025-03-23', '03:10:33 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1409, '00000797', 1, '2025-03-23', '03:11:32 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1410, '00000159', 1, '2025-03-23', '03:11:32 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1411, '00000937', 1, '2025-03-23', '03:11:32 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1412, '00000482', 1, '2025-03-23', '03:14:05 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1413, '00000564', 1, '2025-03-23', '03:14:05 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1414, '00000207', 1, '2025-03-23', '03:14:05 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1415, '00000029', 1, '2025-03-23', '03:14:53 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1416, '00000834', 1, '2025-03-23', '03:14:53 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1417, '00000826', 1, '2025-03-23', '03:14:53 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1418, '00000725', 1, '2025-03-23', '03:16:45 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1419, '00000578', 1, '2025-03-23', '03:16:45 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1420, '00000098', 1, '2025-03-23', '03:16:45 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1421, '00000610', 1, '2025-03-23', '03:24:25 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1422, '00000728', 1, '2025-03-23', '03:24:25 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1423, '00000524', 1, '2025-03-23', '03:24:25 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1424, '00000077', 1, '2025-03-23', '03:29:33 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1425, '00000817', 1, '2025-03-23', '03:29:33 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1426, '00000579', 1, '2025-03-23', '03:29:33 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1427, '00000470', 1, '2025-03-23', '03:33:46 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1428, '00000792', 1, '2025-03-23', '03:33:46 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1429, '00000580', 1, '2025-03-23', '03:33:46 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1430, '00000164', 1, '2025-03-23', '03:34:23 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1431, '00000238', 1, '2025-03-23', '03:34:23 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1432, '00000515', 1, '2025-03-23', '03:34:23 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1433, '00000981', 1, '2025-03-23', '03:44:16 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1434, '00000376', 1, '2025-03-23', '03:44:16 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1435, '00000116', 1, '2025-03-23', '03:44:16 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1436, '00000691', 1, '2025-03-23', '03:44:39 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1437, '00000185', 1, '2025-03-23', '03:44:39 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1438, '00000747', 1, '2025-03-23', '03:44:39 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1439, '00000639', 1, '2025-03-23', '03:44:42 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1440, '00000117', 1, '2025-03-23', '03:44:42 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1441, '00000219', 1, '2025-03-23', '03:44:42 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1442, '00000586', 1, '2025-03-23', '03:44:52 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1443, '00000470', 1, '2025-03-23', '03:44:52 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1444, '00000587', 1, '2025-03-23', '03:44:52 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1445, '00000586', 1, '2025-03-23', '03:50:34 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1446, '00000301', 1, '2025-03-23', '03:50:34 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1447, '00000008', 1, '2025-03-23', '03:50:34 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1448, '00000124', 1, '2025-03-23', '04:01:21 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1449, '00000775', 1, '2025-03-23', '04:01:21 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1450, '00000093', 1, '2025-03-23', '04:01:21 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1451, '00000582', 1, '2025-03-23', '04:01:36 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1452, '00000739', 1, '2025-03-23', '04:01:36 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1453, '00000223', 1, '2025-03-23', '04:01:36 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1454, '00000217', 1, '2025-03-23', '04:02:53 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1455, '00000704', 1, '2025-03-23', '04:02:53 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1456, '00000899', 1, '2025-03-23', '04:02:53 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1457, '00000284', 1, '2025-03-23', '04:04:07 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1458, '00000303', 1, '2025-03-23', '04:04:07 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1459, '00000184', 1, '2025-03-23', '04:04:07 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1460, '00000109', 1, '2025-03-23', '04:04:25 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1461, '00000427', 1, '2025-03-23', '04:04:25 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1462, '00000301', 1, '2025-03-23', '04:04:25 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1463, '00000962', 1, '2025-03-23', '04:05:29 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1464, '00000805', 1, '2025-03-23', '04:05:37 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1465, '00000815', 1, '2025-03-23', '04:06:51 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1466, '00000785', 1, '2025-03-23', '04:06:51 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1467, '00000467', 1, '2025-03-23', '04:06:51 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1468, '00000108', 1, '2025-03-23', '04:06:58 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1469, '00000938', 1, '2025-03-23', '04:06:58 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1470, '00000664', 1, '2025-03-23', '04:06:58 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1471, '00000788', 1, '2025-03-23', '04:07:05 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1472, '00000176', 1, '2025-03-23', '04:08:19 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1473, '00000387', 1, '2025-03-23', '04:09:17 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1474, '00000542', 1, '2025-03-23', '04:09:17 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1475, '00000304', 1, '2025-03-23', '04:09:17 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1476, '00000854', 1, '2025-03-23', '04:09:26 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1477, '00000214', 1, '2025-03-23', '04:11:10 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1478, '00000862', 1, '2025-03-23', '04:11:10 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1479, '00000508', 1, '2025-03-23', '04:11:10 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1480, '00000604', 1, '2025-03-23', '04:11:37 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1481, '00000361', 1, '2025-03-23', '04:11:37 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1482, '00000887', 1, '2025-03-23', '04:11:37 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1483, '00000786', 1, '2025-03-23', '04:12:08 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1484, '00000705', 1, '2025-03-23', '04:12:38 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1485, '00000386', 1, '2025-03-23', '04:16:42 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1486, '00000949', 1, '2025-03-23', '04:16:42 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1487, '00000588', 1, '2025-03-23', '04:16:42 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1488, '00000404', 1, '2025-03-23', '04:18:50 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1489, '00000546', 1, '2025-03-23', '04:20:37 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1490, '00000978', 1, '2025-03-23', '04:21:39 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1491, '00000626', 1, '2025-03-23', '04:22:58 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1492, '00000334', 1, '2025-03-23', '04:22:58 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1493, '00000177', 1, '2025-03-23', '04:22:58 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1494, '00000361', 1, '2025-03-23', '10:49:12 AM', 'Inicio de sesion', 'el usuario Administrador a iniciado sesion en el sistema', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1495, '00000366', 1, '2025-03-23', '10:53:27 AM', 'Actualizar personal', 'El usuario Administrador actualizo los datos del personal con cedula 30012937.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1496, '00000116', 1, '2025-03-23', '10:53:27 AM', 'Actualizar empleado', 'El usuario Administrador actualizo los datos del empleado con cedula 30012937.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1497, '00000021', 1, '2025-03-23', '10:53:27 AM', 'Actualizar ubicacion de empleado', 'El usuario Administrador actualizo los datos de ubicación del empleado con cedula 30012937.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1498, '00000490', 1, '2025-03-23', '12:45:22 PM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1499, '00000848', 1, '2025-03-23', '12:45:22 PM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1500, '00000228', 1, '2025-03-23', '12:45:22 PM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1501, '00000995', 1, '2025-03-23', '12:48:33 PM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1502, '00000759', 1, '2025-03-23', '12:48:33 PM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1503, '00000473', 1, '2025-03-23', '12:48:33 PM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1504, '00000300', 1, '2025-03-23', '18:47:55 PM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1505, '00000494', 1, '2025-03-23', '18:47:55 PM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1506, '00000944', 1, '2025-03-23', '18:47:55 PM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1507, '00000836', 1, '2025-03-23', '19:22:53 PM', 'Registrar Personal', 'El usuario Administrador ha colocado un nuevo personal al sistema: Emilio Hermandez con la cédula 2518689.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1508, '00000494', 1, '2025-03-23', '19:22:53 PM', 'Registrar empleado', 'El usuario Administrador ha colocado un nuevo empleado en el sistema: Emilio Hermandez con la cédula 2518689.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1509, '00000163', 1, '2025-03-23', '19:22:53 PM', 'Registrar Ubicacion del Empleado', 'El usuario Administrador ha registrado la ubicacion a Emilio Hermandez con la cédula 2518689.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1510, '00000823', 1, '2025-03-23', '19:22:53 PM', 'Registrar documento', 'El usuario Administrador ha colocado un nuevo documento en el sistema llamado pexels-eberhardgross-1366919-2518689.jpg con el código: RrYDyx y un tamaño de: 1,066.30 KB', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1511, '00000758', 1, '2025-03-23', '19:22:53 PM', 'Registrar documento', 'El usuario Administrador ha colocado un nuevo documento en el sistema llamado Captura_de_pantalla_2025-03-21_213958-2518689.png con el código: RRQ9rW y un tamaño de: 82.88 KB', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1512, '00000250', 1, '2025-03-23', '19:22:53 PM', 'Registrar documento', 'El usuario Administrador ha colocado un nuevo documento en el sistema llamado 1111-2518689.jpg con el código: HzytVi y un tamaño de: 97.35 KB', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1513, '00000174', 1, '2025-03-23', '19:22:53 PM', 'Registrar documento', 'El usuario Administrador ha colocado un nuevo documento en el sistema llamado reporte_empleado_sexualidad-2518689.pdf con el código: BtTjsC y un tamaño de: 413.01 KB', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1514, '00000280', 1, '2025-03-23', '19:25:10 PM', 'Inicio de sesion', 'el usuario Administrador a iniciado sesion en el sistema', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1515, '00000148', 1, '2025-03-23', '19:25:15 PM', 'Inicio de sesion', 'el usuario Administrador a iniciado sesion en el sistema', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1516, '00000453', 1, '2025-03-23', '19:26:45 PM', 'Inicio de sesion', 'el usuario Administrador a iniciado sesion en el sistema', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1517, '00000907', 1, '2025-03-23', '20:51:44 PM', 'Inicio de sesion', 'el usuario Administrador a iniciado sesion en el sistema', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1518, '00000736', 1, '2025-03-24', '08:23:53 AM', 'Inicio de sesion', 'el usuario Administrador a iniciado sesion en el sistema', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1519, '00000054', 1, '2025-03-24', '08:41:41 AM', 'cierre de sesion', 'el usuario Administrador a cerrado sesion en el sistema', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1520, '00000660', 1, '2025-03-24', '08:42:03 AM', 'Inicio de sesion', 'el usuario Administrador a iniciado sesion en el sistema', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1521, '00000296', 1, '2025-03-24', '08:45:28 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1522, '00000328', 1, '2025-03-24', '08:45:28 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1523, '00000670', 1, '2025-03-24', '08:45:28 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1524, '00000563', 1, '2025-03-24', '08:45:28 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1525, '00000038', 1, '2025-03-24', '08:53:42 AM', 'cierre de sesion', 'el usuario Administrador a cerrado sesion en el sistema', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1526, '00000159', 1, '2025-03-24', '12:09:33 PM', 'Inicio de sesion', 'el usuario Administrador a iniciado sesion en el sistema', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1527, '00000683', 1, '2025-03-25', '00:02:03 AM', 'Inicio de sesion', 'el usuario Administrador a iniciado sesion en el sistema', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1528, '00000359', 1, '2025-03-25', '10:47:23 AM', 'Inicio de sesion', 'el usuario Administrador a iniciado sesion en el sistema', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1529, '00000216', 1, '2025-03-25', '13:57:12 PM', 'Registrar Personal', 'El usuario Administrador ha colocado un nuevo personal al sistema: Dadadasdas Asdadasd con la cédula 7261792.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1530, '00000394', 1, '2025-03-25', '13:57:12 PM', 'Registrar empleado', 'El usuario Administrador ha colocado un nuevo empleado en el sistema: Dadadasdas Asdadasd con la cédula 7261792.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1531, '00000839', 1, '2025-03-25', '13:57:12 PM', 'Registrar Ubicacion del Empleado', 'El usuario Administrador ha registrado la ubicacion a Dadadasdas Asdadasd con la cédula 7261792.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1532, '00000221', 1, '2025-03-25', '13:57:12 PM', 'Registrar documento', 'El usuario Administrador ha colocado un nuevo documento en el sistema llamado Captura_de_pantalla_2025-02-28_192323-7261792.png con el código: 67w4Vf y un tamaño de: 4.41 KB', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1533, '00000396', 1, '2025-03-25', '13:57:12 PM', 'Registrar documento', 'El usuario Administrador ha colocado un nuevo documento en el sistema llamado Captura_de_pantalla_2025-02-28_192252-7261792.png con el código: 1OpktM y un tamaño de: 151.63 KB', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1534, '00000119', 1, '2025-03-25', '13:57:12 PM', 'Registrar documento', 'El usuario Administrador ha colocado un nuevo documento en el sistema llamado Captura_de_pantalla_2025-02-19_102330-7261792.png con el código: bLbLvy y un tamaño de: 0.22 KB', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1535, '00000148', 1, '2025-03-25', '14:13:00 PM', 'Registrar Personal', 'El usuario Administrador ha colocado un nuevo personal al sistema: Dadadasdas Asdadasd con la cédula 7261792.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1536, '00000768', 1, '2025-03-25', '14:13:00 PM', 'Registrar empleado', 'El usuario Administrador ha colocado un nuevo empleado en el sistema: Dadadasdas Asdadasd con la cédula 7261792.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1537, '00000769', 1, '2025-03-25', '14:13:00 PM', 'Registrar Ubicacion del Empleado', 'El usuario Administrador ha registrado la ubicacion a Dadadasdas Asdadasd con la cédula 7261792.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1538, '00000948', 1, '2025-03-25', '14:13:52 PM', 'Registrar Personal', 'El usuario Administrador ha colocado un nuevo personal al sistema: Dadadasdas Asdadasd con la cédula 7261792.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1539, '00000418', 1, '2025-03-25', '14:13:52 PM', 'Registrar empleado', 'El usuario Administrador ha colocado un nuevo empleado en el sistema: Dadadasdas Asdadasd con la cédula 7261792.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1540, '00000129', 1, '2025-03-25', '14:13:52 PM', 'Registrar Ubicacion del Empleado', 'El usuario Administrador ha registrado la ubicacion a Dadadasdas Asdadasd con la cédula 7261792.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1541, '00000520', 1, '2025-03-25', '14:16:00 PM', 'Registrar Personal', 'El usuario Administrador ha colocado un nuevo personal al sistema: Dadadasdas Asdadasd con la cédula 7261792.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1542, '00000367', 1, '2025-03-25', '14:16:00 PM', 'Registrar empleado', 'El usuario Administrador ha colocado un nuevo empleado en el sistema: Dadadasdas Asdadasd con la cédula 7261792.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1543, '00000831', 1, '2025-03-25', '14:16:00 PM', 'Registrar Ubicacion del Empleado', 'El usuario Administrador ha registrado la ubicacion a Dadadasdas Asdadasd con la cédula 7261792.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1544, '00000041', 1, '2025-03-25', '14:21:24 PM', 'Registrar Personal', 'El usuario Administrador ha colocado un nuevo personal al sistema: Dadadasdas Asdadasd con la cédula 7261792.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1545, '00000044', 1, '2025-03-25', '14:21:24 PM', 'Registrar empleado', 'El usuario Administrador ha colocado un nuevo empleado en el sistema: Dadadasdas Asdadasd con la cédula 7261792.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1546, '00000114', 1, '2025-03-25', '14:21:24 PM', 'Registrar Ubicacion del Empleado', 'El usuario Administrador ha registrado la ubicacion a Dadadasdas Asdadasd con la cédula 7261792.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1547, '00000580', 1, '2025-03-25', '14:22:17 PM', 'Registrar Personal', 'El usuario Administrador ha colocado un nuevo personal al sistema: Dadadasdas Asdadasd con la cédula 7261792.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1548, '00000192', 1, '2025-03-25', '14:22:17 PM', 'Registrar empleado', 'El usuario Administrador ha colocado un nuevo empleado en el sistema: Dadadasdas Asdadasd con la cédula 7261792.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1549, '00000597', 1, '2025-03-25', '14:22:17 PM', 'Registrar Ubicacion del Empleado', 'El usuario Administrador ha registrado la ubicacion a Dadadasdas Asdadasd con la cédula 7261792.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1550, '00000726', 1, '2025-03-25', '14:28:53 PM', 'Registrar Personal', 'El usuario Administrador ha colocado un nuevo personal al sistema: Dadadasdas Asdadasd con la cédula 7261792.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1551, '00000752', 1, '2025-03-25', '14:28:53 PM', 'Registrar empleado', 'El usuario Administrador ha colocado un nuevo empleado en el sistema: Dadadasdas Asdadasd con la cédula 7261792.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1552, '00000107', 1, '2025-03-25', '14:28:54 PM', 'Registrar Ubicacion del Empleado', 'El usuario Administrador ha registrado la ubicacion a Dadadasdas Asdadasd con la cédula 7261792.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1553, '00000985', 1, '2025-03-25', '14:34:25 PM', 'Registrar Personal', 'El usuario Administrador ha colocado un nuevo personal al sistema: Dadadasdas Asdadasd con la cédula 7261792.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1554, '00000233', 1, '2025-03-25', '14:34:25 PM', 'Registrar empleado', 'El usuario Administrador ha colocado un nuevo empleado en el sistema: Dadadasdas Asdadasd con la cédula 7261792.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1555, '00000814', 1, '2025-03-25', '14:34:25 PM', 'Registrar Ubicacion del Empleado', 'El usuario Administrador ha registrado la ubicacion a Dadadasdas Asdadasd con la cédula 7261792.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1556, '00000651', 1, '2025-03-25', '14:34:25 PM', 'Registrar documento', 'El usuario Administrador ha colocado un nuevo documento en el sistema llamado Captura_de_pantalla_2025-02-28_192323-7261792.png con el código: ab3icm y un tamaño de: 4.41 KB', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1557, '00000918', 1, '2025-03-25', '14:34:25 PM', 'Registrar documento', 'El usuario Administrador ha colocado un nuevo documento en el sistema llamado Captura_de_pantalla_2025-02-28_192252-7261792.png con el código: 4qzg8i y un tamaño de: 151.63 KB', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1558, '00000591', 1, '2025-03-25', '14:34:25 PM', 'Registrar documento', 'El usuario Administrador ha colocado un nuevo documento en el sistema llamado Captura_de_pantalla_2025-02-19_102330-7261792.png con el código: PQBEBi y un tamaño de: 0.22 KB', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1559, '00000245', 1, '2025-03-25', '14:43:36 PM', 'Registrar Personal', 'El usuario Administrador ha colocado un nuevo personal al sistema: Sasdadsada Asdadasd con la cédula 3519938.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1560, '00000384', 1, '2025-03-25', '14:43:36 PM', 'Registrar empleado', 'El usuario Administrador ha colocado un nuevo empleado en el sistema: Sasdadsada Asdadasd con la cédula 3519938.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1561, '00000804', 1, '2025-03-25', '14:43:36 PM', 'Registrar Ubicacion del Empleado', 'El usuario Administrador ha registrado la ubicacion a Sasdadsada Asdadasd con la cédula 3519938.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1562, '00000205', 1, '2025-03-25', '14:43:36 PM', 'Registrar documento', 'El usuario Administrador ha colocado un nuevo documento en el sistema llamado Captura_de_pantalla_2025-03-21_223404-3519938.png con el código: 6POefn y un tamaño de: 74.42 KB', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1563, '00000247', 1, '2025-03-25', '14:43:36 PM', 'Registrar documento', 'El usuario Administrador ha colocado un nuevo documento en el sistema llamado Captura_de_pantalla_2025-03-21_215614-3519938.png con el código: Ju8oKO y un tamaño de: 13.36 KB', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1564, '00000584', 1, '2025-03-25', '14:49:10 PM', 'Registrar Personal', 'El usuario Administrador ha colocado un nuevo personal al sistema: Sasdadsada Asdadasd con la cédula 3519938.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1565, '00000611', 1, '2025-03-25', '14:49:10 PM', 'Registrar empleado', 'El usuario Administrador ha colocado un nuevo empleado en el sistema: Sasdadsada Asdadasd con la cédula 3519938.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1566, '00000996', 1, '2025-03-25', '14:49:10 PM', 'Registrar Ubicacion del Empleado', 'El usuario Administrador ha registrado la ubicacion a Sasdadsada Asdadasd con la cédula 3519938.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1567, '00000977', 1, '2025-03-25', '14:49:10 PM', 'Registrar documento', 'El usuario Administrador ha colocado un nuevo documento en el sistema llamado Captura_de_pantalla_2025-03-21_223404-3519938.png con el código: jtdD8V y un tamaño de: 74.42 KB', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1568, '00000163', 1, '2025-03-25', '14:49:10 PM', 'Registrar documento', 'El usuario Administrador ha colocado un nuevo documento en el sistema llamado Captura_de_pantalla_2025-03-21_215614-3519938.png con el código: nGL0AJ y un tamaño de: 13.36 KB', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1569, '00000990', 1, '2025-03-25', '14:49:10 PM', 'Registrar documento', 'El usuario Administrador ha colocado un nuevo documento en el sistema llamado Captura_de_pantalla_2025-02-28_192252-3519938.png con el código: 7NERNA y un tamaño de: 151.63 KB', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1570, '00000632', 1, '2025-03-25', '15:03:01 PM', 'Registrar Personal', 'El usuario Administrador ha colocado un nuevo personal al sistema: Dsasdads Adasdad con la cédula 5626556.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1571, '00000527', 1, '2025-03-25', '15:03:01 PM', 'Registrar empleado', 'El usuario Administrador ha colocado un nuevo empleado en el sistema: Dsasdads Adasdad con la cédula 5626556.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1572, '00000359', 1, '2025-03-25', '15:03:01 PM', 'Registrar Ubicacion del Empleado', 'El usuario Administrador ha registrado la ubicacion a Dsasdads Adasdad con la cédula 5626556.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1573, '00000957', 1, '2025-03-25', '15:03:01 PM', 'Registrar documento', 'El usuario Administrador ha colocado un nuevo documento en el sistema llamado Captura_de_pantalla_2025-02-28_191118-5626556.png con el código: SSURUn y un tamaño de: 26.38 KB', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1574, '00000851', 1, '2025-03-25', '15:03:01 PM', 'Registrar documento', 'El usuario Administrador ha colocado un nuevo documento en el sistema llamado Captura_de_pantalla_2025-03-21_223404-5626556.png con el código: eFQXmP y un tamaño de: 74.42 KB', NULL, '::1', 'Chrome', 'Windows 10', '64-bit');
+INSERT INTO `auditoria` (`id_auditoria`, `codigo`, `user_id`, `fecha`, `hora`, `tipo_evento`, `descripcion`, `tabla_afectada`, `ip`, `navegador`, `sistemaOperativo`, `arquitectura`) VALUES
+(1575, '00000362', 1, '2025-03-25', '16:43:53 PM', 'Registrar Personal', 'El usuario Administrador ha colocado un nuevo personal al sistema: Adsdadsa Sadsadsa con la cédula 6418885.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1576, '00000371', 1, '2025-03-25', '16:43:53 PM', 'Registrar empleado', 'El usuario Administrador ha colocado un nuevo empleado en el sistema: Adsdadsa Sadsadsa con la cédula 6418885.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1577, '00000538', 1, '2025-03-25', '16:43:53 PM', 'Registrar Ubicacion del Empleado', 'El usuario Administrador ha registrado la ubicacion a Adsdadsa Sadsadsa con la cédula 6418885.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1578, '00000572', 1, '2025-03-25', '16:43:53 PM', 'Registrar documento', 'El usuario Administrador ha colocado un nuevo documento en el sistema llamado CLEMENTE_MENDOZA_COT.44-6418885.pdf con el código: zi0Xuv y un tamaño de: 342.43 KB', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1579, '00000464', 1, '2025-03-25', '16:43:53 PM', 'Registrar documento', 'El usuario Administrador ha colocado un nuevo documento en el sistema llamado clemente_050-6418885.pdf con el código: iGpqCs y un tamaño de: 141.17 KB', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1580, '00000819', 1, '2025-03-25', '16:43:53 PM', 'Registrar documento', 'El usuario Administrador ha colocado un nuevo documento en el sistema llamado Captura_de_pantalla_2025-02-28_191118-6418885.png con el código: zRTMgE y un tamaño de: 26.38 KB', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1581, '00000620', 1, '2025-03-25', '16:46:06 PM', 'Registrar Personal', 'El usuario Administrador ha colocado un nuevo personal al sistema: Adsdadsa Sadsadsa con la cédula 6418885.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1582, '00000926', 1, '2025-03-25', '16:46:06 PM', 'Registrar empleado', 'El usuario Administrador ha colocado un nuevo empleado en el sistema: Adsdadsa Sadsadsa con la cédula 6418885.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1583, '00000008', 1, '2025-03-25', '16:46:06 PM', 'Registrar Ubicacion del Empleado', 'El usuario Administrador ha registrado la ubicacion a Adsdadsa Sadsadsa con la cédula 6418885.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1584, '00000051', 1, '2025-03-25', '16:46:06 PM', 'Registrar documento', 'El usuario Administrador ha colocado un nuevo documento en el sistema llamado CLEMENTE_MENDOZA_COT.44-6418885.pdf con el código: W9BYRJ y un tamaño de: 342.43 KB', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1585, '00000136', 1, '2025-03-25', '16:46:06 PM', 'Registrar documento', 'El usuario Administrador ha colocado un nuevo documento en el sistema llamado clemente_050-6418885.pdf con el código: Yq35m9 y un tamaño de: 141.17 KB', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1586, '00000658', 1, '2025-03-25', '16:46:06 PM', 'Registrar documento', 'El usuario Administrador ha colocado un nuevo documento en el sistema llamado Captura_de_pantalla_2025-02-28_191118-6418885.png con el código: I4eqoh y un tamaño de: 26.38 KB', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1587, '00000489', 1, '2025-03-25', '16:46:51 PM', 'Registrar Personal', 'El usuario Administrador ha colocado un nuevo personal al sistema: Adsdadsa Sadsadsa con la cédula 6418885.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1588, '00000861', 1, '2025-03-25', '16:46:51 PM', 'Registrar empleado', 'El usuario Administrador ha colocado un nuevo empleado en el sistema: Adsdadsa Sadsadsa con la cédula 6418885.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1589, '00000710', 1, '2025-03-25', '16:46:51 PM', 'Registrar Ubicacion del Empleado', 'El usuario Administrador ha registrado la ubicacion a Adsdadsa Sadsadsa con la cédula 6418885.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1590, '00000597', 1, '2025-03-25', '16:46:51 PM', 'Registrar documento', 'El usuario Administrador ha colocado un nuevo documento en el sistema llamado CLEMENTE_MENDOZA_COT.44-6418885.pdf con el código: 95y5za y un tamaño de: 342.43 KB', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1591, '00000742', 1, '2025-03-25', '16:46:51 PM', 'Registrar documento', 'El usuario Administrador ha colocado un nuevo documento en el sistema llamado clemente_050-6418885.pdf con el código: 2EQnTn y un tamaño de: 141.17 KB', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1592, '00000122', 1, '2025-03-25', '16:46:51 PM', 'Registrar documento', 'El usuario Administrador ha colocado un nuevo documento en el sistema llamado Captura_de_pantalla_2025-02-28_191118-6418885.png con el código: lqxNQb y un tamaño de: 26.38 KB', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1593, '00000187', 1, '2025-03-25', '18:07:37 PM', 'Registrar Personal', 'El usuario Administrador ha colocado un nuevo personal al sistema: Maria Perez con la cédula 6418885.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1594, '00000406', 1, '2025-03-25', '18:07:37 PM', 'Registrar empleado', 'El usuario Administrador ha colocado un nuevo empleado en el sistema: Maria Perez con la cédula 6418885.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1595, '00000826', 1, '2025-03-25', '18:07:37 PM', 'Registrar Ubicacion del Empleado', 'El usuario Administrador ha registrado la ubicacion a Maria Perez con la cédula 6418885.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1596, '00000441', 1, '2025-03-25', '18:07:37 PM', 'Registrar documento', 'El usuario Administrador ha colocado un nuevo documento en el sistema llamado CLEMENTE_MENDOZA_COT.44-6418885.pdf con el código: P5F997 y un tamaño de: 342.43 KB', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1597, '00000023', 1, '2025-03-25', '18:07:37 PM', 'Registrar documento', 'El usuario Administrador ha colocado un nuevo documento en el sistema llamado clemente_050-6418885.pdf con el código: 94pjj3 y un tamaño de: 141.17 KB', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1598, '00000293', 1, '2025-03-26', '08:04:12 AM', 'Inicio de sesion', 'el usuario Administrador a iniciado sesion en el sistema', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1599, '00000007', 1, '2025-03-26', '10:58:30 AM', 'Inicio de sesion', 'el usuario Administrador a iniciado sesion en el sistema', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1600, '00000103', 1, '2025-03-26', '13:22:53 PM', 'Inicio de sesion', 'el usuario Administrador a iniciado sesion en el sistema', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1601, '00000190', 1, '2025-03-26', '18:26:59 PM', 'Inicio de sesion', 'el usuario Administrador a iniciado sesion en el sistema', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1602, '00000617', 1, '2025-03-26', '18:27:03 PM', 'Inicio de sesion', 'el usuario Administrador a iniciado sesion en el sistema', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1603, '00000538', 1, '2025-03-26', '18:27:09 PM', 'Inicio de sesion', 'el usuario Administrador a iniciado sesion en el sistema', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1604, '00000482', 1, '2025-03-26', '18:48:56 PM', 'Actualizar personal', 'El usuario Administrador actualizo los datos del personal con cedula 30012937.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1605, '00000597', 1, '2025-03-26', '18:48:56 PM', 'Actualizar empleado', 'El usuario Administrador actualizo los datos del empleado con cedula 30012937.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1606, '00000809', 1, '2025-03-26', '18:48:56 PM', 'Actualizar ubicacion de empleado', 'El usuario Administrador actualizo los datos de ubicación del empleado con cedula 30012937.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1607, '00000805', 1, '2025-03-26', '18:56:23 PM', 'Actualizar personal', 'El usuario Administrador actualizo los datos del personal con cedula 30012937.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1608, '00000788', 1, '2025-03-26', '18:56:23 PM', 'Actualizar empleado', 'El usuario Administrador actualizo los datos del empleado con cedula 30012937.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1609, '00000235', 1, '2025-03-26', '18:56:23 PM', 'Actualizar ubicacion de empleado', 'El usuario Administrador actualizo los datos de ubicación del empleado con cedula 30012937.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1610, '00000854', 1, '2025-03-26', '18:56:37 PM', 'Actualizar personal', 'El usuario Administrador actualizo los datos del personal con cedula 30012937.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1611, '00000010', 1, '2025-03-26', '18:56:37 PM', 'Actualizar empleado', 'El usuario Administrador actualizo los datos del empleado con cedula 30012937.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1612, '00000242', 1, '2025-03-26', '18:56:37 PM', 'Actualizar ubicacion de empleado', 'El usuario Administrador actualizo los datos de ubicación del empleado con cedula 30012937.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1613, '00000562', 1, '2025-03-26', '19:37:23 PM', 'Registrar familiar', 'El usuario Administrador asigno un nuevo familiar en el sistema al empleado Jeison Balduz portador de la cedula 30012937 el familiar asignado fue Dsadasd Asdasda.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1614, '00000103', 1, '2025-03-26', '19:48:27 PM', 'Registrar familiar', 'El usuario Administrador asigno un nuevo familiar en el sistema al empleado Jeison Balduz portador de la cedula 30012937 el familiar asignado fue Dsadasd Asdasda.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1615, '00000462', 1, '2025-03-26', '19:49:56 PM', 'Registrar familiar', 'El usuario Administrador asigno un nuevo familiar en el sistema al empleado Jeison Balduz portador de la cedula 30012937 el familiar asignado fue Dsadasd Asdasda.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1616, '00000393', 1, '2025-03-26', '20:17:42 PM', 'Registrar familiar', 'El usuario Administrador asigno un nuevo familiar en el sistema al empleado Jeison Balduz portador de la cedula 30012937 el familiar asignado fue Dsadasd Asdasda.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1617, '00000495', 1, '2025-03-26', '20:20:00 PM', 'Registrar familiar', 'El usuario Administrador asigno un nuevo familiar en el sistema al empleado Jeison Balduz portador de la cedula 30012937 el familiar asignado fue Dsadasd Asdasda.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1618, '00000517', 1, '2025-03-26', '20:21:22 PM', 'Registrar familiar', 'El usuario Administrador asigno un nuevo familiar en el sistema al empleado Jeison Balduz portador de la cedula 30012937 el familiar asignado fue Roberto Balduz.', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1619, '00000034', 1, '2025-03-26', '20:21:22 PM', 'Registrar documento', 'El usuario Administrador ha colocado un nuevo documento en el sistema llamado reporte_empleado_sexualidad-155338977.pdf con el código: 886WTw y un tamaño de: 413.01 KB', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1620, '00000270', 1, '2025-03-26', '22:20:35 PM', 'Registrar documento', 'El usuario Administrador ha colocado un nuevo documento en el sistema llamado view-old-tree-lake-with-snow-covered-mountains-cloudy-day-30012937.jpg con el código: DuXvj1 y un tamaño de: 800.48 KB', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1621, '00000467', 1, '2025-03-26', '22:22:48 PM', 'Registrar documento', 'El usuario Administrador ha colocado un nuevo documento en el sistema llamado view-old-tree-lake-with-snow-covered-mountains-cloudy-day-30012937.jpg con el código: HVYKuW y un tamaño de: 800.48 KB', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1622, '00000395', 1, '2025-03-26', '22:26:08 PM', 'Registrar documento', 'El usuario Administrador ha colocado un nuevo documento en el sistema llamado view-old-tree-lake-with-snow-covered-mountains-cloudy-day-30012937.jpg con el código: Q3tiri y un tamaño de: 800.48 KB', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1623, '00000447', 1, '2025-03-26', '23:50:17 PM', 'Registrar documento', 'El usuario Administrador ha colocado un nuevo documento en el sistema llamado reporte_empleado_sexualidad-300131231.pdf con el código: 6nAV3z y un tamaño de: 413.01 KB', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1624, '00000737', 1, '2025-03-26', '23:53:11 PM', 'Registrar documento', 'El usuario Administrador ha colocado un nuevo documento en el sistema llamado reporte_empleado_sexualidad-300131231.pdf con el código: nlHt00 y un tamaño de: 413.01 KB', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1625, '00000630', 1, '2025-03-26', '23:53:16 PM', 'Registrar documento', 'El usuario Administrador ha colocado un nuevo documento en el sistema llamado reporte_empleado_sexualidad-300131231.pdf con el código: BGQeE9 y un tamaño de: 413.01 KB', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1626, '00000854', 1, '2025-03-26', '23:53:17 PM', 'Registrar documento', 'El usuario Administrador ha colocado un nuevo documento en el sistema llamado reporte_empleado_sexualidad-300131231.pdf con el código: 0ZbSzS y un tamaño de: 413.01 KB', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1627, '00000056', 1, '2025-03-26', '23:53:17 PM', 'Registrar documento', 'El usuario Administrador ha colocado un nuevo documento en el sistema llamado reporte_empleado_sexualidad-300131231.pdf con el código: YG9pwg y un tamaño de: 413.01 KB', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1628, '00000601', 1, '2025-03-26', '23:53:17 PM', 'Registrar documento', 'El usuario Administrador ha colocado un nuevo documento en el sistema llamado reporte_empleado_sexualidad-300131231.pdf con el código: J68OSB y un tamaño de: 413.01 KB', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1629, '00000613', 1, '2025-03-26', '23:53:18 PM', 'Registrar documento', 'El usuario Administrador ha colocado un nuevo documento en el sistema llamado reporte_empleado_sexualidad-300131231.pdf con el código: 4Dg9Wk y un tamaño de: 413.01 KB', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1630, '00000648', 1, '2025-03-26', '23:54:44 PM', 'Registrar documento', 'El usuario Administrador ha colocado un nuevo documento en el sistema llamado reporte_empleado_sexualidad-300131231.pdf con el código: AxVXF5 y un tamaño de: 413.01 KB', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1631, '00000888', 1, '2025-03-26', '23:56:37 PM', 'Registrar documento', 'El usuario Administrador ha colocado un nuevo documento en el sistema llamado reporte_empleado_sexualidad-300131231.pdf con el código: 2bIaK2 y un tamaño de: 413.01 KB', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1632, '00000922', 1, '2025-03-27', '00:06:21 AM', 'Registrar documento', 'El usuario Administrador ha colocado un nuevo documento en el sistema llamado reporte_empleado_sexualidad-3845620.pdf con el código: 7IqV9h y un tamaño de: 413.01 KB', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1633, '00000932', 1, '2025-03-27', '10:52:56 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1634, '00000843', 1, '2025-03-27', '10:52:56 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1635, '00000472', 1, '2025-03-27', '10:52:56 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1636, '00000711', 1, '2025-03-27', '10:52:56 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1637, '00000150', 1, '2025-03-27', '10:52:56 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1638, '00000179', 1, '2025-03-27', '10:52:56 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1639, '00000209', 1, '2025-03-27', '10:53:31 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1640, '00000198', 1, '2025-03-27', '10:53:31 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1641, '00000390', 1, '2025-03-27', '10:53:31 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1642, '00000712', 1, '2025-03-27', '10:53:31 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1643, '00000662', 1, '2025-03-27', '10:53:31 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1644, '00000085', 1, '2025-03-27', '10:53:31 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1645, '00000795', 1, '2025-03-27', '11:19:23 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1646, '00000428', 1, '2025-03-27', '11:20:53 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1647, '00000447', 1, '2025-03-27', '11:20:53 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1648, '00000289', 1, '2025-03-27', '11:21:10 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1649, '00000227', 1, '2025-03-27', '11:21:56 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1650, '00000296', 1, '2025-03-27', '11:21:56 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1651, '00000303', 1, '2025-03-27', '11:21:56 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1652, '00000888', 1, '2025-03-27', '11:21:56 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1653, '00000046', 1, '2025-03-27', '11:21:56 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1654, '00000148', 1, '2025-03-27', '11:21:56 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1655, '00000509', 1, '2025-03-27', '11:27:31 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1656, '00000932', 1, '2025-03-27', '11:29:06 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1657, '00000345', 1, '2025-03-27', '11:29:06 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1658, '00000036', 1, '2025-03-27', '11:30:58 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1659, '00000896', 1, '2025-03-27', '11:30:58 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1660, '00000236', 1, '2025-03-27', '11:30:58 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1661, '00000692', 1, '2025-03-27', '11:34:08 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1662, '00000857', 1, '2025-03-27', '11:34:08 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1663, '00000199', 1, '2025-03-27', '11:35:12 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1664, '00000537', 1, '2025-03-27', '11:35:12 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1665, '00000137', 1, '2025-03-27', '11:36:35 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1666, '00000956', 1, '2025-03-27', '11:36:35 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1667, '00000372', 1, '2025-03-27', '11:36:35 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1668, '00000575', 1, '2025-03-27', '11:38:35 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño A4 formato horizontal por rango de fecha, desde:     hasta: 27-03-2025', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1669, '00000793', 1, '2025-03-27', '11:38:35 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño A4 formato horizontal por rango de fecha, desde:     hasta: 27-03-2025', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1670, '00000449', 1, '2025-03-27', '11:38:35 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño A4 formato horizontal por rango de fecha, desde:     hasta: 27-03-2025', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1671, '00000055', 1, '2025-03-27', '11:38:35 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño A4 formato horizontal por rango de fecha, desde:     hasta: 27-03-2025', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1672, '00000250', 1, '2025-03-27', '11:38:35 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño A4 formato horizontal por rango de fecha, desde:     hasta: 27-03-2025', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1673, '00000394', 1, '2025-03-27', '11:38:35 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño A4 formato horizontal por rango de fecha, desde:     hasta: 27-03-2025', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1674, '00000548', 1, '2025-03-27', '11:38:35 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño A4 formato horizontal por rango de fecha, desde:     hasta: 27-03-2025', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1675, '00000829', 1, '2025-03-27', '11:38:35 AM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño A4 formato horizontal por rango de fecha, desde:     hasta: 27-03-2025', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1676, '00000045', 1, '2025-03-27', '11:43:37 AM', 'Inicio de sesion', 'el usuario Administrador a iniciado sesion en el sistema', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1677, '00000526', 1, '2025-03-27', '13:15:40 PM', 'Inicio de sesion', 'el usuario Administrador a iniciado sesion en el sistema', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1678, '00000336', 1, '2025-03-27', '14:01:37 PM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1679, '00000392', 1, '2025-03-27', '14:01:37 PM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1680, '00000194', 1, '2025-03-27', '14:01:37 PM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1681, '00000815', 1, '2025-03-27', '14:01:37 PM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1682, '00000847', 1, '2025-03-27', '14:01:37 PM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1683, '00000700', 1, '2025-03-27', '14:01:37 PM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1684, '00000751', 1, '2025-03-27', '14:02:39 PM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1685, '00000210', 1, '2025-03-27', '14:02:39 PM', 'Descarga pdf de empleado', 'El usuario Administrador ha descargado un pdf de los empleados en tamaño carta formato vertical', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1686, '00000140', 1, '2025-03-27', '14:05:46 PM', 'Registrar Ausencia', 'El usuario Administrador registro una ausencia justificada para el empleado Jeison Balduz con cedula 30012937', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1687, '00000668', 1, '2025-03-27', '14:44:21 PM', 'cierre de sesion', 'el usuario Administrador a cerrado sesion en el sistema', NULL, '::1', 'Chrome', 'Windows 10', '64-bit'),
+(1688, '00000782', 1, '2025-03-28', '10:57:45 AM', 'Inicio de sesion', 'el usuario Administrador a iniciado sesion en el sistema', NULL, '::1', 'Chrome', 'Windows 10', '64-bit');
 
 -- --------------------------------------------------------
 
@@ -1319,6 +1807,13 @@ CREATE TABLE `ausenciajustificada` (
   `fecha` varchar(10) NOT NULL,
   `hora` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `ausenciajustificada`
+--
+
+INSERT INTO `ausenciajustificada` (`id_ausencia`, `idEmpleado`, `idPermiso`, `fechaInicio`, `fechaFinal`, `activo`, `fecha`, `hora`) VALUES
+(38, 1, 'Urgencia', '2025-03-01', '2025-03-31', 1, '2025-03-27', '02:05:46 PM');
 
 -- --------------------------------------------------------
 
@@ -1947,11 +2442,16 @@ CREATE TABLE `datosempleados` (
 --
 
 INSERT INTO `datosempleados` (`id_empleados`, `idPersonal`, `idEstatus`, `idCargo`, `idDependencia`, `idDepartamento`, `nivelAcademico`, `idGrp`, `telefono`, `telOficina`, `fechaING`, `estadoEmpleado`, `activo`, `fecha`, `hora`) VALUES
-(1, 1, 1, 8, 11, 3, 'Maestria', 1, '0412-8977094', '0243', '2025-03-20', 'Jubilado', 1, '2025-02-27', '08:42:37 AM'),
+(1, 1, 1, 8, 11, 3, 'Maestria', 1, '0412-8977094', '0243', '07-03-2025', 'Jubilado', 1, '2025-02-27', '08:42:37 AM'),
 (73, 149, 1, 1, 40, 1, 'bachiller', NULL, '0424-3406780', NULL, '2025-09-04', NULL, 1, '2025-03-04', '11:19:32 AM'),
-(86, 172, 4, 2, 1, 3, 'bachiller', NULL, '0412-9375907', NULL, '2004-03-26', NULL, 1, '2025-03-04', '01:09:19 PM'),
-(87, 173, 10, 5, 2, 7, 'pregrado', NULL, '0424-0243568', NULL, '2007-10-17', NULL, 1, '2025-03-04', '02:56:42 PM'),
-(88, 174, 4, 21, 39, 1, 'ingeniero', NULL, '0424-3030653', NULL, '2015-03-19', NULL, 1, '2025-03-04', '03:15:56 PM');
+(121, 223, 3, 3, 1, 2, 'Ingeniero', NULL, '0412-6356536', NULL, '2025-03-21', NULL, 1, '2025-03-22', '09:54:57 PM'),
+(124, 226, 4, 6, 3, 4, 'Especialista', NULL, '0412-3213213', NULL, '2025-03-21', NULL, 1, '2025-03-22', '10:11:09 PM'),
+(125, 227, 4, 1, 41, 16, 'Especialista', NULL, '0426-1212123', NULL, '2008-03-28', NULL, 1, '2025-03-22', '10:15:30 PM'),
+(126, 228, 4, 3, 3, 1, 'Tecnico', NULL, '0426-7896543', NULL, '2025-03-21', NULL, 1, '2025-03-23', '07:22:53 PM'),
+(134, 236, 2, 5, 4, 2, 'Ingeniero', NULL, '0412-2131322', NULL, '2025-03-25', NULL, 1, '2025-03-25', '02:34:25 PM'),
+(136, 238, 6, 3, 3, 5, 'Pregrado', NULL, '0426-3234234', NULL, '2025-03-25', NULL, 1, '2025-03-25', '02:49:10 PM'),
+(137, 239, 1, 5, 3, 3, 'Ingeniero', NULL, '0412-3242234', NULL, '2025-03-25', NULL, 1, '2025-03-25', '03:03:01 PM'),
+(141, 243, 4, 5, 3, 3, 'Pregrado', NULL, '0416-2132132', NULL, '2025-03-25', NULL, 1, '2025-03-25', '06:07:37 PM');
 
 -- --------------------------------------------------------
 
@@ -1963,20 +2463,21 @@ CREATE TABLE `datosfamilia` (
   `id_ninos` int(11) NOT NULL,
   `idEmpleado` int(11) NOT NULL,
   `primerNombre` text NOT NULL,
-  `segundoNombre` text NOT NULL,
+  `segundoNombre` text DEFAULT NULL,
   `primerApellido` text NOT NULL,
-  `segundoApellido` text NOT NULL,
-  `parentesco` varchar(20) NOT NULL,
-  `cedula` varchar(12) DEFAULT NULL,
+  `segundoApellido` text DEFAULT NULL,
+  `parentesco` varchar(20) DEFAULT NULL,
+  `estatus` varchar(100) DEFAULT NULL,
+  `cedula` varchar(12) NOT NULL,
   `codigoCarnet` varchar(20) DEFAULT NULL,
   `discapacidad` varchar(50) DEFAULT NULL,
   `tomo` varchar(20) DEFAULT NULL,
   `folio` varchar(20) DEFAULT NULL,
-  `edad` int(2) NOT NULL,
+  `edad` int(2) DEFAULT NULL,
   `sexoFamiliar` varchar(50) DEFAULT NULL,
-  `anoNacimiento` varchar(4) NOT NULL,
-  `mesNacimiento` varchar(2) NOT NULL,
-  `diaNacimiento` varchar(2) NOT NULL,
+  `anoNacimiento` varchar(4) DEFAULT NULL,
+  `mesNacimiento` varchar(2) DEFAULT NULL,
+  `diaNacimiento` varchar(2) DEFAULT NULL,
   `tallaFranela` int(2) DEFAULT NULL,
   `tallaPantalon` int(2) DEFAULT NULL,
   `activo` int(1) NOT NULL,
@@ -1988,9 +2489,33 @@ CREATE TABLE `datosfamilia` (
 -- Volcado de datos para la tabla `datosfamilia`
 --
 
-INSERT INTO `datosfamilia` (`id_ninos`, `idEmpleado`, `primerNombre`, `segundoNombre`, `primerApellido`, `segundoApellido`, `parentesco`, `cedula`, `codigoCarnet`, `discapacidad`, `tomo`, `folio`, `edad`, `sexoFamiliar`, `anoNacimiento`, `mesNacimiento`, `diaNacimiento`, `tallaFranela`, `tallaPantalon`, `activo`, `fecha`, `hora`) VALUES
-(191, 73, 'Juana', 'Maria', 'Gonzalez', 'Perez', 'Hermano', '30197049001', NULL, 'Visual', '3030', '2424', 8, 'Femenino', '2017', '03', '01', NULL, NULL, 1, '2025-03-11', '07:51:02 PM'),
-(192, 1, 'Jose', 'Camilo', 'Martinez', 'Rojas', 'Hijo', '30012937001', '77777777', 'Motriz', '14032', '003', 10, 'Masculino', '2014', '04', '01', NULL, NULL, 1, '2025-03-12', '07:41:00 AM');
+INSERT INTO `datosfamilia` (`id_ninos`, `idEmpleado`, `primerNombre`, `segundoNombre`, `primerApellido`, `segundoApellido`, `parentesco`, `estatus`, `cedula`, `codigoCarnet`, `discapacidad`, `tomo`, `folio`, `edad`, `sexoFamiliar`, `anoNacimiento`, `mesNacimiento`, `diaNacimiento`, `tallaFranela`, `tallaPantalon`, `activo`, `fecha`, `hora`) VALUES
+(201, 1, 'Juan', 'Gabriel', 'Torres', 'Girand', 'Madre', NULL, '11591381', NULL, NULL, '12321', '1231', 3, 'Masculino', '2022', '03', '04', NULL, NULL, 1, '2025-03-23', '12:31:28 AM'),
+(202, 126, 'Leydi', NULL, 'Gonzalez', NULL, NULL, NULL, '15533807', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, '2025-03-23', '07:22:53 PM'),
+(203, 134, 'Dsdadad', NULL, 'Dadadads', NULL, NULL, NULL, '121212121', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, '2025-03-25', '02:34:25 PM'),
+(219, 1, 'Roberto', 'Andres', 'Balduz', 'Gonzalez', 'Hijo', NULL, '155338977', NULL, NULL, '21321', '2132', 3, 'Masculino', '2021', '05', '01', NULL, NULL, 1, '2025-03-26', '08:21:22 PM');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `datosfamiliarinces`
+--
+
+CREATE TABLE `datosfamiliarinces` (
+  `id_datosFamiliarInces` int(11) NOT NULL,
+  `idEmpleado` int(11) DEFAULT NULL,
+  `idPersonal` int(11) DEFAULT NULL,
+  `fecha` varchar(11) DEFAULT NULL,
+  `hora` varchar(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `datosfamiliarinces`
+--
+
+INSERT INTO `datosfamiliarinces` (`id_datosFamiliarInces`, `idEmpleado`, `idPersonal`, `fecha`, `hora`) VALUES
+(3, 1, 149, '2', '2'),
+(8, 1, 223, '2025', '12');
 
 -- --------------------------------------------------------
 
@@ -2038,11 +2563,16 @@ CREATE TABLE `datospersonales` (
 --
 
 INSERT INTO `datospersonales` (`id_personal`, `primerNombre`, `segundoNombre`, `primerApellido`, `segundoApellido`, `cedula`, `estadoCivil`, `sexo`, `discapacidadPersonal`, `diaNacimiento`, `mesNacimiento`, `anoNacimiento`, `edadPersonal`, `correo`, `fecha`, `hora`) VALUES
-(1, 'Jeison', 'Andres', 'Balduz', 'Gonzalezzz', '30012937', 'Viudo', 'Masculino', '', '01', '08', '2003', 21, '', '2025-03-11', '07:33:37 PM'),
-(149, 'Emili', 'Gabriela', 'Torres', 'Girand', '30197049', 'Divorciado', 'Femenino', '', '01', '05', '2003', 21, NULL, '2025-03-05', '02:03:55 PM'),
-(172, 'Maria', 'Josefa', 'Ramirez', 'Castillo', '1573459', 'Divorciado', 'Femenino', '', '12', '08', '1985', 39, NULL, '2025-03-04', '01:09:18 PM'),
-(173, 'Carlos', 'Jose', 'Tovar', 'Solozar', '5000322', 'Viudo', 'Masculino', '', '14', '04', '1960', 64, NULL, '2025-03-04', '02:56:42 PM'),
-(174, 'Isbelia', 'Petra', 'Marquina', 'Marquez', '21098127', 'casado', 'Femenino', '', '03', '03', '1994', 31, NULL, '2025-03-04', '03:15:56 PM');
+(1, 'Jeison', 'Andres', 'Balduz', 'Gonzalezz', '30012937', 'Viudo', 'Masculino', NULL, '01', '08', '2003', 21, '', '2025-03-26', '06:56:37 PM'),
+(149, 'Emili', 'Gabriela', 'Torres', 'Girand', '30197049', 'Divorciado', 'Femenino', NULL, '01', '05', '2003', 21, NULL, '2025-03-05', '02:03:55 PM'),
+(223, 'Luisa', 'Angeles', 'Gonzalez', 'Martinez', '3845620', 'Casado', 'Femenino', 'Intelectual', '04', '05', '1990', 34, NULL, '2025-03-22', '10:51:49 PM'),
+(226, 'Pedro', 'Juancho', 'Torres', 'Correa', '3282357', 'Viudo', 'Masculino', 'Motriz', '05', '05', '1971', 53, NULL, '2025-03-22', '10:11:09 PM'),
+(227, 'Anthony', 'Anthonio', 'Pepere', 'Gomez', '3849395', 'Divorciado', 'Masculino', NULL, '04', '03', '1981', 44, NULL, '2025-03-22', '10:15:30 PM'),
+(228, 'Emilio', 'Rafael', 'Hermandez', 'Perez', '2518689', 'EstadoDerecho', 'Masculino', 'Motriz', '04', '04', '2001', 23, NULL, '2025-03-23', '07:22:53 PM'),
+(236, 'Juan', 'Carlos', 'Rio', 'Garcia', '7261792', 'EstadoDerecho', 'Masculino', '', '06', '06', '2001', 23, NULL, '2025-03-25', '02:34:25 PM'),
+(238, 'Elio', 'Giovanni', 'Balduz', 'Martinez', '3519938', 'Soltero', 'Masculino', 'Intelectual', '10', '05', '1999', 25, NULL, '2025-03-25', '02:49:10 PM'),
+(239, 'Maria', 'Victoria', 'Gonzalez', 'Girand', '5626556', 'Soltero', 'Masculino', '', '05', '05', '1971', 53, NULL, '2025-03-25', '03:03:01 PM'),
+(243, 'Maria', 'Alejandra', 'Perez', 'Marquina', '6418885', 'EstadoDerecho', 'Femenino', '', '05', '05', '1991', 33, NULL, '2025-03-25', '06:07:37 PM');
 
 -- --------------------------------------------------------
 
@@ -2250,12 +2780,6 @@ INSERT INTO `documentacion` (`id_doc`, `idEmpleados`, `idNinos`, `tipoDoc`, `nom
 (215, 73, NULL, 'png', NULL, '150.32 KB', 'Captura_de_pantalla_2025-02-28_192256-3019704.png', NULL, '2025-03-01', '06:48:56 PM', 0),
 (224, 73, NULL, 'png', NULL, '44.68 KB', 'Captura_de_pantalla_2025-01-14_235355-3019704.png', NULL, '2025-03-04', '11:09:39 AM', 0),
 (225, 73, NULL, 'png', NULL, '44.68 KB', 'Captura_de_pantalla_2025-01-14_235355-3019704.png', NULL, '2025-03-04', '11:19:32 AM', 0),
-(226, 86, NULL, 'png', NULL, '28.21 KB', 'Captura_de_pantalla_2025-01-14_235326-1573459.png', NULL, '2025-03-04', '01:09:19 PM', 0),
-(227, 86, NULL, 'png', NULL, '18.40 KB', 'Captura_de_pantalla_2025-01-14_234527-1573459.png', NULL, '2025-03-04', '01:09:19 PM', 0),
-(228, 87, NULL, 'jpg', NULL, '335.99 KB', 'natasha-5000322.jpg', NULL, '2025-03-04', '02:56:42 PM', 0),
-(229, 87, NULL, 'jpg', NULL, '124.14 KB', 'zorocartel-5000322.jpg', NULL, '2025-03-04', '02:56:42 PM', 0),
-(230, 88, NULL, 'png', NULL, '541.86 KB', 'tivo-21098127.png', NULL, '2025-03-04', '03:15:56 PM', 0),
-(231, 88, NULL, 'jpg', NULL, '33.80 KB', 'tia_rosa-21098127.jpg', NULL, '2025-03-04', '03:15:56 PM', 0),
 (232, 1, 173, 'png', NULL, '395.25 KB', 'Captura_de_pantalla_2025-03-02_215851-11256783.png', NULL, '2025-03-06', '03:24:31 PM', 0),
 (233, 1, 174, 'png', NULL, '150.32 KB', 'Captura_de_pantalla_2025-02-28_192256-298907229.png', NULL, '2025-03-06', '03:32:35 PM', 0),
 (234, 1, 174, 'png', NULL, '163.91 KB', 'Captura_de_pantalla_2025-03-04_224330-298907229.png', NULL, '2025-03-06', '03:32:35 PM', 0),
@@ -2274,7 +2798,52 @@ INSERT INTO `documentacion` (`id_doc`, `idEmpleados`, `idNinos`, `tipoDoc`, `nom
 (247, 1, 189, 'jpg', NULL, '33.42 KB', 'pm_1720997133352_cmp-30012937001.jpg', NULL, '2025-03-11', '07:47:37 PM', 0),
 (248, 1, 190, 'jpg', NULL, '33.42 KB', 'pm_1720997133352_cmp-.jpg', NULL, '2025-03-11', '07:49:32 PM', 0),
 (249, 73, 191, 'png', NULL, '97.35 KB', '1111-30012937001.png', NULL, '2025-03-11', '07:51:02 PM', 0),
-(250, 1, 192, 'png', NULL, '163.91 KB', 'Captura_de_pantalla_2025-03-04_224330-30012937001.png', NULL, '2025-03-12', '07:41:00 AM', 0);
+(250, 1, 192, 'png', NULL, '163.91 KB', 'Captura_de_pantalla_2025-03-04_224330-30012937001.png', NULL, '2025-03-12', '07:41:00 AM', 0),
+(300, 121, NULL, 'png', 'Contrato', '26.38 KB', 'Captura_de_pantalla_2025-02-28_191118-3845620.png', NULL, '2025-03-22', '09:54:57 PM', 0),
+(301, 121, NULL, 'png', 'Notacion Archivo', '151.63 KB', 'Captura_de_pantalla_2025-02-28_192252-3845620.png', NULL, '2025-03-22', '09:54:57 PM', 0),
+(302, 121, NULL, 'png', 'Acta De Matrimonio', '278.04 KB', 'Captura_de_pantalla_2025-02-17_232447-3845620.png', NULL, '2025-03-22', '09:54:57 PM', 0),
+(303, 121, NULL, 'png', 'Acta De Discapacidad', '248.63 KB', 'Captura_de_pantalla_2025-02-17_234719-3845620.png', NULL, '2025-03-22', '09:54:57 PM', 0),
+(304, 121, NULL, 'png', 'Copia de Cédula-Casado', '248.63 KB', 'Captura_de_pantalla_2025-02-17_234719-3845620.png', NULL, '2025-03-22', '09:54:57 PM', 0),
+(307, 124, NULL, 'png', 'Contrato', '159.56 KB', 'Captura_de_pantalla_2025-02-22_194915-3282357.png', NULL, '2025-03-22', '10:11:09 PM', 0),
+(308, 124, NULL, 'png', 'Notacion Archivo', '26.38 KB', 'Captura_de_pantalla_2025-02-28_191118-3282357.png', NULL, '2025-03-22', '10:11:09 PM', 0),
+(309, 124, NULL, 'png', 'Acta De Discapacidad', '151.63 KB', 'Captura_de_pantalla_2025-02-28_192252-3282357.png', NULL, '2025-03-22', '10:11:09 PM', 0),
+(310, 124, NULL, 'png', 'Acta De Difución', '395.26 KB', 'Captura_de_pantalla_2025-03-02_215848-3282357.png', NULL, '2025-03-22', '10:11:09 PM', 0),
+(311, 124, NULL, 'png', 'Copia de Cédula-Acta De Difución', '63.05 KB', 'Captura_de_pantalla_2025-02-21_043745-3282357.png', NULL, '2025-03-22', '10:11:09 PM', 0),
+(312, 125, NULL, 'png', 'Contrato', '159.56 KB', 'Captura_de_pantalla_2025-02-22_194915-3849395.png', NULL, '2025-03-22', '10:15:30 PM', 0),
+(313, 125, NULL, 'jpg', 'Notacion Archivo', '97.35 KB', '1111-3849395.jpg', NULL, '2025-03-22', '10:15:30 PM', 0),
+(314, 125, NULL, 'png', 'Acta De Divorcio', '278.04 KB', 'Captura_de_pantalla_2025-02-17_232447-3849395.png', NULL, '2025-03-22', '10:15:30 PM', 0),
+(315, 125, NULL, 'png', 'Carta solicitando el cambio de estado civil', '68.36 KB', 'Captura_de_pantalla_2025-03-19_224843-3849395.png', NULL, '2025-03-22', '10:15:30 PM', 0),
+(316, 1, 201, 'png', 'Partida Nacimiento', '77.51 KB', 'Captura_de_pantalla_2025-03-21_223412-11591381.png', NULL, '2025-03-23', '12:31:28 AM', 0),
+(317, 1, NULL, 'jpg', 'Acta De Matrimonio', '97.35 KB', '1111-30012937.jpg', NULL, '2025-03-23', '01:40:24 AM', 0),
+(318, 1, NULL, 'png', 'Acta De Matrimonio', '4.40 KB', 'Captura_de_pantalla_2025-02-28_192326-30012937.png', NULL, '2025-03-23', '01:41:20 AM', 0),
+(319, 126, NULL, 'jpg', 'Contrato', '1,066.30 KB', 'pexels-eberhardgross-1366919-2518689.jpg', NULL, '2025-03-23', '07:22:53 PM', 0),
+(320, 126, NULL, 'png', 'Notacion Archivo', '82.88 KB', 'Captura_de_pantalla_2025-03-21_213958-2518689.png', NULL, '2025-03-23', '07:22:53 PM', 0),
+(321, 126, NULL, 'jpg', 'Documento Estado De Derecho', '97.35 KB', '1111-2518689.jpg', NULL, '2025-03-23', '07:22:53 PM', 0),
+(322, 126, NULL, 'pdf', 'Acta De Discapacidad', '413.01 KB', 'reporte_empleado_sexualidad-2518689.pdf', NULL, '2025-03-23', '07:22:53 PM', 0),
+(326, 134, NULL, 'png', 'Contrato', '4.41 KB', 'Captura_de_pantalla_2025-02-28_192323-7261792.png', NULL, '2025-03-25', '02:34:25 PM', 0),
+(327, 134, NULL, 'png', 'Notacion Archivo', '151.63 KB', 'Captura_de_pantalla_2025-02-28_192252-7261792.png', NULL, '2025-03-25', '02:34:25 PM', 0),
+(328, 134, NULL, 'png', 'Documento Estado De Derecho', '0.22 KB', 'Captura_de_pantalla_2025-02-19_102330-7261792.png', NULL, '2025-03-25', '02:34:25 PM', 0),
+(331, 136, NULL, 'png', 'Contrato', '74.42 KB', 'Captura_de_pantalla_2025-03-21_223404-3519938.png', NULL, '2025-03-25', '02:49:10 PM', 0),
+(332, 136, NULL, 'png', 'Notacion Archivo', '13.36 KB', 'Captura_de_pantalla_2025-03-21_215614-3519938.png', NULL, '2025-03-25', '02:49:10 PM', 0),
+(333, 136, NULL, 'png', 'Acta De Discapacidad', '151.63 KB', 'Captura_de_pantalla_2025-02-28_192252-3519938.png', NULL, '2025-03-25', '02:49:10 PM', 0),
+(334, 137, NULL, 'png', 'Contrato', '26.38 KB', 'Captura_de_pantalla_2025-02-28_191118-5626556.png', NULL, '2025-03-25', '03:03:01 PM', 0),
+(335, 137, NULL, 'png', 'Notacion Archivo', '74.42 KB', 'Captura_de_pantalla_2025-03-21_223404-5626556.png', NULL, '2025-03-25', '03:03:01 PM', 0),
+(345, 141, NULL, 'pdf', 'Contrato', '342.43 KB', 'CLEMENTE_MENDOZA_COT.44-6418885.pdf', NULL, '2025-03-25', '06:07:37 PM', 0),
+(346, 141, NULL, 'pdf', 'Notacion Archivo', '141.17 KB', 'clemente_050-6418885.pdf', NULL, '2025-03-25', '06:07:37 PM', 0),
+(347, 1, 149, 'pdf', 'Archivo', '413.01 KB', 'reporte_empleado_sexualidad-155338977.pdf', NULL, '2025-03-26', '08:21:22 PM', 0),
+(348, 1, NULL, 'jpg', 'Documento Estado De Derecho', '800.48 KB', 'view-old-tree-lake-with-snow-covered-mountains-cloudy-day-30012937.jpg', NULL, '2025-03-26', '10:20:35 PM', 0),
+(349, 1, NULL, 'jpg', 'Documento Estado De Derecho', '800.48 KB', 'view-old-tree-lake-with-snow-covered-mountains-cloudy-day-30012937.jpg', NULL, '2025-03-26', '10:22:48 PM', 0),
+(350, 1, NULL, 'jpg', 'Documento Estado De Derecho', '800.48 KB', 'view-old-tree-lake-with-snow-covered-mountains-cloudy-day-30012937.jpg', NULL, '2025-03-26', '10:26:08 PM', 0),
+(351, 1, NULL, 'pdf', 'Documento Estado De Derecho', '413.01 KB', 'reporte_empleado_sexualidad-300131231.pdf', NULL, '2025-03-26', '11:50:17 PM', 0),
+(352, 1, NULL, 'pdf', 'Documento Estado De Derecho', '413.01 KB', 'reporte_empleado_sexualidad-300131231.pdf', NULL, '2025-03-26', '11:53:11 PM', 0),
+(353, 1, NULL, 'pdf', 'Documento Estado De Derecho', '413.01 KB', 'reporte_empleado_sexualidad-300131231.pdf', NULL, '2025-03-26', '11:53:16 PM', 0),
+(354, 1, NULL, 'pdf', 'Documento Estado De Derecho', '413.01 KB', 'reporte_empleado_sexualidad-300131231.pdf', NULL, '2025-03-26', '11:53:17 PM', 0),
+(355, 1, NULL, 'pdf', 'Documento Estado De Derecho', '413.01 KB', 'reporte_empleado_sexualidad-300131231.pdf', NULL, '2025-03-26', '11:53:17 PM', 0),
+(356, 1, NULL, 'pdf', 'Documento Estado De Derecho', '413.01 KB', 'reporte_empleado_sexualidad-300131231.pdf', NULL, '2025-03-26', '11:53:17 PM', 0),
+(357, 1, NULL, 'pdf', 'Documento Estado De Derecho', '413.01 KB', 'reporte_empleado_sexualidad-300131231.pdf', NULL, '2025-03-26', '11:53:18 PM', 0),
+(358, 1, NULL, 'pdf', 'Documento Estado De Derecho', '413.01 KB', 'reporte_empleado_sexualidad-300131231.pdf', NULL, '2025-03-26', '11:54:44 PM', 0),
+(359, 1, NULL, 'pdf', 'Documento Estado De Derecho', '413.01 KB', 'reporte_empleado_sexualidad-300131231.pdf', NULL, '2025-03-26', '11:56:37 PM', 0),
+(360, 1, NULL, 'pdf', 'Documento Estado De Derecho', '413.01 KB', 'reporte_empleado_sexualidad-3845620.pdf', NULL, '2025-03-27', '12:06:21 AM', 0);
 
 -- --------------------------------------------------------
 
@@ -4213,11 +4782,15 @@ CREATE TABLE `ubicacion` (
 --
 
 INSERT INTO `ubicacion` (`id_ubi`, `id_empleadoUbi`, `idEstado`, `idMunicipio`, `idParroquia`, `vivienda`, `calle`, `nombreVivienda`, `nombre_urb`, `num_depar`, `numVivienda`, `pisoVivienda`) VALUES
-(3, 1, 1, 1, 1, 'Casa', 'Maracaya', NULL, NULL, NULL, '14', NULL),
-(4, 73, 1, 1, 1, 'Departamento', 'Los Samanes', NULL, 'La soledad', 'B1', '', '17'),
-(5, 86, 4, 39, 118, 'Casa', 'La Morita I', NULL, '', '', '12', ''),
-(6, 87, 3, 32, 94, 'Departamento', 'Maracaya', NULL, 'La Floresta', 'B9', '', '6'),
-(7, 88, 4, 43, 128, 'Departamento', 'La Morita I', NULL, 'Turmeroubr', '18', '', '4');
+(3, 1, 1, 1, 1, 'Casa', 'Maracaya', NULL, '', '', '14', ''),
+(33, 121, 4, 36, 110, 'Casa', 'Maracaya', NULL, '', '', '12', ''),
+(36, 124, 4, 38, 116, 'Casa', 'Maracaya', NULL, '', '', '12', ''),
+(37, 125, 4, 36, 111, 'Departamento', 'Samanes', NULL, 'Los Samanes', 'B1', '', '3'),
+(38, 126, 1, 1, 3, 'Departamento', 'Avenida Las Delicias', NULL, 'Parque Residencia Los Girasoles', 'B1234', '', '3'),
+(48, 136, 4, 41, 124, 'Casa', 'Maracaya', NULL, '', '', '12', ''),
+(49, 137, 4, 41, 122, 'Casa', 'Bermudez', NULL, '', '', '12', ''),
+(53, 141, 4, 40, 121, 'Casa', 'Maracaya', NULL, '', '', '14', ''),
+(54, 73, 1, 1, 1, 'cada', 'maracaya', NULL, NULL, NULL, '43', NULL);
 
 -- --------------------------------------------------------
 
@@ -4247,7 +4820,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id_user`, `idEmpleado`, `idRol`, `nameUser`, `userPassword`, `saltPass`, `permiso`, `prioridad`, `pin`, `activo`, `enUso`, `fotoPérfil`, `fecha`, `hora`) VALUES
-(1, 1, 1, 'Jeison12345', '56d06151c384548044534e5579f33855fda4a994110b71babd553e130bd51b53', 'f5a1c10ab4667bd7997a23a6b5574fcd', NULL, NULL, NULL, 1, 1, NULL, NULL, NULL),
+(1, 1, 1, 'Administrador', '56d06151c384548044534e5579f33855fda4a994110b71babd553e130bd51b53', 'f5a1c10ab4667bd7997a23a6b5574fcd', NULL, NULL, NULL, 1, 1, NULL, NULL, NULL),
 (11, 73, 2, 'Emili123', 'd43d21546739cf0e6ba7f20e703123cd282eaf4a41fc313d851719cee4ab7700790efe72aabc8d520e5e23861319e925', NULL, NULL, NULL, NULL, 2, 1, NULL, NULL, NULL);
 
 --
@@ -4324,6 +4897,12 @@ ALTER TABLE `datosempleados`
 ALTER TABLE `datosfamilia`
   ADD PRIMARY KEY (`id_ninos`),
   ADD KEY `idEmpleado` (`idEmpleado`);
+
+--
+-- Indices de la tabla `datosfamiliarinces`
+--
+ALTER TABLE `datosfamiliarinces`
+  ADD PRIMARY KEY (`id_datosFamiliarInces`);
 
 --
 -- Indices de la tabla `datosninos`
@@ -4477,13 +5056,13 @@ ALTER TABLE `atencionmedica`
 -- AUTO_INCREMENT de la tabla `auditoria`
 --
 ALTER TABLE `auditoria`
-  MODIFY `id_auditoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1193;
+  MODIFY `id_auditoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1689;
 
 --
 -- AUTO_INCREMENT de la tabla `ausenciajustificada`
 --
 ALTER TABLE `ausenciajustificada`
-  MODIFY `id_ausencia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `id_ausencia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT de la tabla `beneficios`
@@ -4513,13 +5092,19 @@ ALTER TABLE `ciudades`
 -- AUTO_INCREMENT de la tabla `datosempleados`
 --
 ALTER TABLE `datosempleados`
-  MODIFY `id_empleados` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=89;
+  MODIFY `id_empleados` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=142;
 
 --
 -- AUTO_INCREMENT de la tabla `datosfamilia`
 --
 ALTER TABLE `datosfamilia`
-  MODIFY `id_ninos` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=193;
+  MODIFY `id_ninos` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=223;
+
+--
+-- AUTO_INCREMENT de la tabla `datosfamiliarinces`
+--
+ALTER TABLE `datosfamiliarinces`
+  MODIFY `id_datosFamiliarInces` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `datosninos`
@@ -4531,7 +5116,7 @@ ALTER TABLE `datosninos`
 -- AUTO_INCREMENT de la tabla `datospersonales`
 --
 ALTER TABLE `datospersonales`
-  MODIFY `id_personal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=175;
+  MODIFY `id_personal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=244;
 
 --
 -- AUTO_INCREMENT de la tabla `departamento`
@@ -4549,7 +5134,7 @@ ALTER TABLE `dependencia`
 -- AUTO_INCREMENT de la tabla `documentacion`
 --
 ALTER TABLE `documentacion`
-  MODIFY `id_doc` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=251;
+  MODIFY `id_doc` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=361;
 
 --
 -- AUTO_INCREMENT de la tabla `estados`
@@ -4627,7 +5212,7 @@ ALTER TABLE `rol`
 -- AUTO_INCREMENT de la tabla `ubicacion`
 --
 ALTER TABLE `ubicacion`
-  MODIFY `id_ubi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_ubi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 
 --
 -- AUTO_INCREMENT de la tabla `users`

@@ -23,7 +23,6 @@ class peticiones extends Conexion {
             'cedulaFamiliar' => isset($_POST['cedulaFamiliar']) ? $this->limpiarCadena($_POST['cedulaFamiliar']) : "",
             'cedulaEmpleado' => isset($_POST['cedulaEmpleado']) ? $this->limpiarCadena($_POST['cedulaEmpleado']) : "",
             'civil' => isset($_POST['civil']) ? $this->limpiarCadena($_POST['civil']) : "",
-            'civil' => isset($_POST['civil']) ? $this->limpiarCadena($_POST['civil']) : "",
             'correo' => isset($_POST['correo']) ? $this->limpiarCadena($_POST['correo']) : "",
             'ano' => isset($_POST['ano']) ? $this->limpiarCadena($_POST['ano']) : "",
             'mes' => isset($_POST['meses']) ? $_POST['meses'] : "",

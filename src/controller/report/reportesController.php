@@ -523,15 +523,14 @@ class reportesController extends FPDF
                 }
             }
         }
-         // Guardar el PDF en una variable
-         $pdfContent = $this->Output('S');
+        $pdfContent = $this->Output('S');
 
-         // Convertir el contenido del PDF a base64
-         $pdfBase64 = base64_encode($pdfContent);
+        // Convertir el contenido del PDF a base64
+        $pdfBase64 = base64_encode($pdfContent);
 
-         // Devolver el PDF como una cadena base64
-         $response = json_encode(['pdfBase64' => $pdfBase64]);
-         echo $response;
+        // Devolver el PDF como una cadena base64
+        $response = json_encode(['pdfBase64' => $pdfBase64]);
+        echo $response;
          exit;
     }
 
