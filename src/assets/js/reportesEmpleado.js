@@ -2,7 +2,6 @@ import { AlertSW2 } from "./ajax/alerts.js";
 import { mostrarPDFenModal } from "./ajax/descargar.js";
 
 import {
-    descargarArchivo,
     obtenerDatos,
     obtenerDatosJQuery
 } from "./ajax/formularioAjax.js";

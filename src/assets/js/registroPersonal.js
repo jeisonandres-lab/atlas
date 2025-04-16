@@ -1,4 +1,8 @@
-
+// IMPORT DE VALIDACION DE INPUTS 
+import { alertaBasica, alertaNormalmix } from "./ajax/alerts.js";
+import { enviarFormulario, observarFormulario } from "./ajax/formularioAjax.js";
+import { calcularEdad, carculasDias } from "./ajax/funciones.js";
+import { configurarFlatpickrSinFinesDeSemana } from "./ajax/inputCalendar.js";
 import {
   colocarMeses,
   colocarYear,
@@ -19,511 +23,359 @@ import {
   llenarSelect,
   buscarDataEmpledoSelect2,
 } from "./ajax/inputs.js";
+import { formulariomultiple } from "./ajax/multiForm.js";
+import { buscarMunicipioPorEstado, buscarParroquiaPorMunicipio } from "./ajax/peticiones.js";
+import { setCargarDiscapacidad, setCargarEstadoCivil, setCargarNivelesAcademicos, setCargarSexo, setCargarTipoVivienda } from "./ajax/variablesArray.js";
 
-import {
-  enviarFormulario,
-  observarFormulario,
-  obtenerDatosJQuery
-} from "./ajax/formularioAjax.js";
+// Mantener otros imports...
 
-import {
-  alertaBasica,
-  alertaNormalmix,
-  AlertDirection,
-  AlertSW2,
-} from "./ajax/alerts.js";
-
-import {
-  setCargarDiscapacidad,
-  setCargarEstadoCivil,
-  setCargarNivelesAcademicos,
-  setCargarSexo,
-  setCargarTipoVivienda
-} from "./ajax/variablesArray.js";
-
-import {
-  calcularEdad,
-  carculasDias,
-  cedulaExisteEmpleado,
-  recargarConVerificacionDeCache
-} from "./ajax/funciones.js";
-
-import {
-  buscarMunicipioPorEstado,
-  buscarParroquiaPorMunicipio
-} from "./ajax/peticiones.js";
-
-import {
-  setContenedorNombreDepa,
-  setContenedorNumDepa,
-  setContenedorPiso,
-  setVariableApellidoFamiliar,
-  setVariableCedulaFamiliar,
-  setVariableCheckboxInces,
-  setVariableDocumentoFamiliar,
-  setVariableNombreFamiliar,
-  setVariableNumVivienda
-} from "./ajax/variablesContenido.js";
-
-import {
-  configurarFlatpickrSinFinesDeSemana
-} from "./ajax/inputCalendar.js";
-
-import {
-  formulariomultiple
-} from "./ajax/multiForm.js";
-// jQuery
-$(function () {
-  $(".formulario_empleado").hide();
-  // todos los elementos del body en hide
-  $("#contenTipoDiscapacidad").hide();
-  $("#contentPartida").hide();
-  $("#botonModalEstadoDerecho").hide();
-  // formulario de registro
-  validarNombre("#primerNombre", ".span_nombre");
-  validarNombre("#segundoNombre", ".span_nombre2");
-  validarNombre("#primerApellido", ".span_apellido");
-  validarNombre("#segundoApellido", ".span_apellido2");
-  validarNombreConEspacios("#calle", ".span_calle");
-  validarNombreConEspacios("#urbanizacion", ".span_urbanizacion");
-  validarNumeros("#cedula", ".span_cedula");
-  validarNumeroNumber("#edad", ".span_edad", 2);
-  validarNumeroNumber("#piso", ".span_piso", 2);
-  validarNumeroNumber("#numeroVivienda", ".span_numeroVivienda", 4);
-  validarBusquedaCedula("#cedula", ["#img-modals", "#img-contener"]);
-  validarInputFecha("#fechaing", ".span_fechaing")
-  colocarYear("#ano", "1900");
-  colocarMeses("#meses");
-  validarTelefono("#telefono", ".span_telefono", "#linea");
-  validarSelectores("#ano", ".span_ano", "1");
-  validarSelectores("#dia", ".span_dia", "1");
-  file("#contrato", ".span_contrato");
-  file("#notificacion", ".span_notificacion");
-  file("#achivoDis", ".span_docArchivoDis");
-
-  // formulario de empleados por select 2
-  incluirSelec2("#estatus");
-  incluirSelec2("#cargo");
-  incluirSelec2("#departamento");
-  incluirSelec2("#dependencia");
-  incluirSelec2("#estado");
-  incluirSelec2("#municipio");
-  incluirSelec2("#parroquia");
-  incluirSelec2("#ano");
-  incluirSelec2("#meses");
-  incluirSelec2("#dia");
-  incluirSelec2("#civil");
-  incluirSelec2("#sexo");
-  incluirSelec2("#vivienda");
-  incluirSelec2("#academico");
-
-  validarSelectoresSelec2("#dependencia", ".span_dependencia");
-  validarSelectoresSelec2("#estatus", ".span_estatus");
-  validarSelectoresSelec2("#cargo", ".span_cargo");
-  validarSelectoresSelec2("#departamento", ".span_departamento");
-  validarSelectoresSelec2("#dependencia", ".span_dependencia");
-  validarSelectoresSelec2("#academico", ".span_academico");
-  validarSelectoresSelec2("#sexo", ".span_sexo");
-  validarSelectoresSelec2("#estado", ".span_estado");
-  validarSelectoresSelec2("#municipio", ".span_municipio");
-  validarSelectoresSelec2("#parroquia", ".span_parroquia");
-  validarSelectoresSelec2("#vivienda", ".span_vivienda");
-  validarSelectoresSelec2("#ano", ".span_ano");
-  validarSelectoresSelec2("#meses", ".span_meses");
-  validarSelectoresSelec2("#dia", ".span_dia");
-  validarSelectoresSelec2("#civil", ".span_civil");
-  validarSelectoresSelec2("#tpDiscapacidad", ".span_tpDiscapacidad");
-
-  validarDosDatos("#numeroDepa", ".span_numeroDepa");
-  setCargarEstadoCivil("#civil"); // Carga los estados civiles
-  setCargarSexo("#sexo"); // Carga los sexos
-  setCargarNivelesAcademicos("#academico"); // Carga los niveles académicos
-  setCargarTipoVivienda("#vivienda"); // Carga los tipos de vivienda
-  setCargarDiscapacidad("#tpDiscapacidad")
-
-  carculasDias("#meses", "#ano", "#dia", ".span_mes"); // funcion de calcular dias de los meses
-  $("#meses").trigger("input"); // ejecucion de calcular los meses
-
-
-  // modal de estado civil
-
-  //cargar calendario 
-  configurarFlatpickrSinFinesDeSemana("#fechaing3");
-  let contenidoAlerta = `
-              <div class="d-flex alert alert-warning alert-dismissible m-0 contentAlerta" role="alert" >
-                <div class="d-flex align-items-center alert-icon me-3">
-                  <i class="fas fa-exclamation-triangle"></i>
-                </div>
-                <div class="alert-text">
-                  <strong>Debes de llenar los campos </strong> con los datos necesarios, <strong class="text-success">cada campo debe de estar de color verde</strong>, si alguno esta de<strong class="text-danger"> color rojo</strong> no podra pasar a la otra página.
-                </div>
-              </div>
-            `;
-  formulariomultiple('.f1 .btn-next', "#alert", contenidoAlerta);
-  //Función para realizar consultas y llenar selectores
-  async function realizarConsultas() {
-    const urls = [
-      "src/ajax/registroPersonal.php?modulo_personal=obtenerDependencias",
-      "src/ajax/registroPersonal.php?modulo_personal=obtenerEstatus",
-      "src/ajax/registroPersonal.php?modulo_personal=obtenerCargo",
-      "src/ajax/registroPersonal.php?modulo_personal=obtenerDepartamento",
-      "src/ajax/registroPersonal.php?modulo_personal=obtenerEstados"
-    ];
-
-    try {
-      const results = await Promise.allSettled(urls.map(url => obtenerDatosJQuery(url)));
-
-      const selectores = [
-        { result: results[0], selector: 'dependencia', mensaje: 'Seleccione una dependencia' },
-        { result: results[1], selector: 'estatus', mensaje: 'Seleccione un estatus' },
-        { result: results[2], selector: 'cargo', mensaje: 'Seleccione un cargo' },
-        { result: results[3], selector: 'departamento', mensaje: 'Seleccione un departamento' },
-        { result: results[4], selector: 'estado', mensaje: 'Seleccione un estado' },
-      ];
-
-      selectores.forEach(async ({ result, selector, mensaje }) => {
-        if (result.status === 'fulfilled' && result.value.exito && result.value.data) {
-          await llenarSelect(result.value.data, selector, mensaje);
-        } else {
-          console.error(`Error al obtener ${selector} o la estructura de la respuesta es incorrecta`);
-        }
-      });
-    } catch (error) {
-      console.error('Error al realizar las consultas:', error);
+/**
+ * Módulo Personal: gestiona todas las funciones relacionadas con el registro de personal
+ */
+const ModuloPersonal = (() => {
+  // Selectores del DOM
+  const SELECTORES = {
+    cedula: '#cedula',
+    primerNombre: '#primerNombre',
+    segundoNombre: '#segundoNombre',
+    primerApellido: '#primerApellido',
+    segundoApellido: '#segundoApellido',
+    calle: '#calle',
+    urbanizacion: '#urbanizacion',
+    edad: '#edad',
+    fechaIngreso: '#fechaing3',
+    ano: '#ano',
+    meses: '#meses',
+    dia: '#dia',
+    civil: '#civil',
+    sexo: '#sexo',
+    vivienda: '#vivienda',
+    academico: '#academico',
+    formulario: '#formulario_registro',
+    btnAceptar: '#aceptar',
+    discapacidad: '.buttonDisca',
+    contenedores: {
+      formularioEmpleado: '.formulario_empleado',
+      discapacidad: '#contenTipoDiscapacidad',
+      partida: '#contentPartida',
+      estadoDerecho: '#botonModalEstadoDerecho'
     }
-  }
+  };
 
-  //formulario de registro de trabajadores 
-  $(document).on("submit", "#formulario_registro", async function (e) {
-    e.preventDefault();
-    const fechaIngreso = $("#fechaing3").val().split("-").reverse().join("-");
-    const data = new FormData(this);
-    data.append("fechaing", fechaIngreso);
-    if ($("#btnEDInces").prop('checked')) {
-      data.append("FamiliarInces", "si");
-    }
-    const url = "src/ajax/registroPersonal.php?modulo_personal=registrar";
-    $("#aceptar").prop("disabled", true);
-    async function callbackExito(parsedData) {
-      if (parsedData.exito) {
-        $("#aceptar").prop("disabled", false);
-        // recargarConVerificacionDeCache()
-        await AlertDirection("success", parsedData.mensaje, "top", 7000);
-      } else {
-        await alertaNormalmix(parsedData.mensaje, 4000, "error", "top-end");
-        // if (error) limpiarFormulario($("#formulario_registro"));
-      }
-    }
-    await enviarFormulario(url, data, callbackExito, true);
-  });
+  // Constantes para mensajes y configuración
+  const MENSAJES = {
+    FALTA_ANO: "Seleccione un año.",
+    FALTA_MES: "Seleccione un mes.",
+    FALTA_DIA: "Seleccione un día.",
+    EDAD_ALTA: (edad) => `¡Wow! Tienes ${edad} años de edad, ¡felicitaciones! al empleado`,
+    EDAD_BAJA: (edad) => `Lamentablemente, no podemos permitir el acceso a esta persona. La edad mínima requerida es de 18 años, y esta persona tiene ${edad} años`
+  };
 
-  // cargar datos de personal de discapacidad
-  $(document).on("click", ".buttonDisca", function () {
-    incluirSelec2("#tpDiscapacidad");
-    const boton = $(this);
-    const contenedor = $("#contentPartida");
-    const tipoDiscapacidad = $("#contenTipoDiscapacidad");
+  /**
+   * Maneja el cálculo de edad cuando cambian los campos de fecha
+   */
+  const manejarCalculoEdad = () => {
+    const dia = $(SELECTORES.dia).val();
+    const mes = $(SELECTORES.meses).val();
+    const ano = $(SELECTORES.ano).val();
+    const $edad = $(SELECTORES.edad);
 
-    // Verificar el ID del botón
-    if (boton.attr("id") === "asignarDisca") {
-
-      // Mostrar contenedores con animación
-      tipoDiscapacidad.slideDown(500);
-      contenedor.slideDown(500);
-
-      // Cambiar el ID y texto del botón
-      boton.attr("id", "cargaDiscaEliminar");
-      boton.html('<i class="fa-solid fa-xmark me-2"></i> Eliminar Todo');
-    } else if (boton.attr("id") === "cargaDiscaEliminar") {
-      // Agregar la clase ignore-validation a los inputs
-      $("#tpDiscapacidad").addClass("ignore-validation");
-      $("#achivoDis").addClass("ignore-validation");
-
-      $("#tpDiscapacidad").select2('destroy');
-      // Limpiar los valores de los inputs
-      $("#tpDiscapacidad").val("");
-      $("#achivoDis").val("");
-
-      // Ocultar contenedores con animación
-      tipoDiscapacidad.slideUp(500);
-      contenedor.slideUp(500);
-
-      // Cambiar el ID y texto del botón
-      boton.attr("id", "asignarDisca");
-      boton.html('<i class="fa-solid fa-plus me-2"></i> Asignar Discapacidad');
-    }
-  });
-
-  // cargar vivienda
-  $(document).on("change", "#vivienda", async function () {
-    let vivienda = $(this).val();
-    if (vivienda == 'Departamento') {
-      // Crea el HTML que quieres insertar
-      const pisoContenedor = setContenedorPiso('piso', 'piso');
-      const nombreDepaContenedor = setContenedorNombreDepa('urbanizacion', 'urbanizacion');
-      const numDepaContenedor = setContenedorNumDepa('numeroDepa', 'numeroDepa');
-      const nuevoHTML = pisoContenedor + nombreDepaContenedor + numDepaContenedor;
-      // Inserta el HTML después del elemento con ID "contenCalle"
-      $("#contenCalle").after(nuevoHTML);
-    } else {
-      // Si el valor del select no es "Departamento", elimina el HTML adicional (si existe)
-      $("#contenPiso").remove();
-      $("#contenNombreDepa").remove();
-      $("#contenNumDepa").remove();
-    }
-
-    if (vivienda == 'Casa') {
-      // Crea el HTML que quieres insertar
-      const vivienda = setVariableNumVivienda('numeroVivienda', 'numeroVivienda');
-      // Inserta el HTML después del elemento con ID "contenCalle"
-      $("#contenCalle").after(vivienda);
-    } else {
-      // Si el valor del select no es "Departamento", elimina el HTML adicional (si existe)
-      $("#contenNVivienda").remove();
-    }
-  });
-
-  // fechas de ingreso de los trabajadores
-  $(document).on("change", "#fechaing3", async function () {
-    let fechaING = $(this).val();
-    let diaN = $("#dia").val();
-    let mesN = $("#meses").val();
-    let anoN = $("#ano").val();
-    let fechaNacimientoStr = anoN + "-" + mesN + "-" + diaN; // Formato YYYY-MM-DD
-    let fechaIngresoStr = fechaING.split("-").reverse().join("-"); // Formato YYYY-MM-DD
-    let fechaNacimiento = new Date(fechaNacimientoStr);
-    let fechaIngreso = new Date(fechaIngresoStr);
-    if (fechaIngreso > fechaNacimiento) {
-      await clasesInputs("#fechaing3", ".span_fechaing");
-    } else {
-      await clasesInputsError("#fechaing3", ".span_fechaing");
-
-    }
-  });
-
-  // calcular la edad por los días 
-  $(document).on("input", "#dia, #meses, #ano", function () {
-    const dia = $("#dia").val();
-    const mes = $("#meses").val();
-    const ano = $("#ano").val();
-
+    // Validar campos requeridos
     if (!ano) {
-      alertaNormalmix("Seleccione un año.", 2000, "warning", "top");
-      return; // Detiene la ejecución si el año está vacío
+      alertaNormalmix(MENSAJES.FALTA_ANO, 2000, "warning", "top");
+      return;
     }
 
     if (!mes) {
-      alertaNormalmix("Seleccione un mes.", 2000, "warning", "top");
-      return; // Detiene la ejecución si el mes está vacío
+      alertaNormalmix(MENSAJES.FALTA_MES, 2000, "warning", "top");
+      return;
     }
 
     if (!dia) {
-      alertaNormalmix("Seleccione un día.", 2000, "warning", "top");
-      return; // Detiene la ejecución si el día está vacío
+      alertaNormalmix(MENSAJES.FALTA_DIA, 2000, "warning", "top");
+      return;
     }
 
-
+    // Calcular edad
     const fechaNacimiento = new Date(ano, mes - 1, dia);
-    const calcularEdad2 = calcularEdad(fechaNacimiento);
-    $("#edad").val(calcularEdad2);
-    clasesInputs("#edad", ".span_edad");
+    if (isNaN(fechaNacimiento.getTime())) return;
 
-    // Validar la edad (si la fecha de nacimiento es válida)
-    if (!isNaN(fechaNacimiento.getTime())) {
-      if (calcularEdad2 >= 100) {
-        alertaNormalmix(`¡Wow! Tienes ${calcularEdad2} de edad, ¡felicitaciones! al empleado`, 4000, "info", "top");
-      }
+    const edadCalculada = calcularEdad(fechaNacimiento);
 
-      if (calcularEdad2 < 18) {
-        alertaBasica(`Lamentablemente, no podemos permitir el acceso a esta persona. La edad mínima requerida es de 18 años, y esta persona tiene ${calcularEdad2} años`, 7000, "info", "top-center", "Edad no requerida");
-        clasesInputsError("#edad", ".span_edad");
-      }
+    // Actualizar campo de edad
+    $edad.val(edadCalculada);
+    clasesInputs(SELECTORES.edad, ".span_edad");
 
+    // Validar edad
+    if (edadCalculada >= 100) {
+      alertaNormalmix(
+        MENSAJES.EDAD_ALTA(edadCalculada),
+        4000,
+        "info",
+        "top"
+      );
     }
-  });
 
-  // el evento de estado civil del modal
-  $(document).on("change", "#civil", async function () {
-    // DATOS DE IDENTIFICACION 
-    const cedulaHTML = setVariableCedulaFamiliar("cedulaFamiliar", "cedulaFamiliar");
-    const nombreHTML = setVariableNombreFamiliar("nombreFamiliar", "primerNombreFamiliar");
-    const apellidoHTML = setVariableApellidoFamiliar("apellidoFamiliar", "primerApellidoFamiliar");
-    // DOCUMENTO DE ESTADO DE DERECHO
-    const documentoEstadoDerechoHTML = setVariableDocumentoFamiliar("docEstadoDerecho", "docEstadoDerechoArchivo", "span_docEstadoDerecho", "Documento estado derecho");
-    // DOCUMENTO DE CASADO
-    const documentoCasadoHTML = setVariableDocumentoFamiliar("docCasado", "docCasadoArchivo", "span_docCasado", "Acta de matrimonio");
-    // DOCUMENTO DE LA COPIA DE LA CEDULA DE IDENTIDAD
-    const documentoCopiaCedulaHTML = setVariableDocumentoFamiliar("docCopiaCedula", "docCopiaCedulaArchivo", "span_docCopiaCedula", 'Copia de cédula');
-    // DOCUMENTO DE VIUDO
-    const documentoViudoHTML = setVariableDocumentoFamiliar("docViuda", "docViudaArchivo", "span_docViuda", "Acta de defunción");
-    // DOCUMENTO DEL DIVORCIO
-    const documentoActaDivorcioHTML = setVariableDocumentoFamiliar("docDivorcio", "docDivorcioArchivo", "span_docDivorcio", "Acta de divorcio");
-    // DOCUMENTO DE ACTA DE CAMBIO DE ESTADO CIVIL DEL DEVORCIO
-    const documentoActaDivorcioCivilHTML = setVariableDocumentoFamiliar("docSolicEstCivil", "docSolicEstCivilArchivo", "span_docSolicEstCivil", "Carta de cambio de estado civil");
-    // CHECKBOX DE EMPLEAOD INCES
-    const checkboxHTML = setVariableCheckboxInces("btnEDInces", `Empleado <strong class="text-danger">INCES</strong>`, "contenchecbox")
-    // MODAL DE ESTADO DE DERECHO TOTAL DE TODOS LOS ESADOS CIVIL
-    $('#estadoDerecho').modal({
-      backdrop: 'static',
-      keyboard: true
+    if (edadCalculada < 18) {
+      alertaBasica(
+        MENSAJES.EDAD_BAJA(edadCalculada),
+        7000,
+        "info",
+        "top-center",
+        "Edad no requerida"
+      );
+      clasesInputsError(SELECTORES.edad, ".span_edad");
+    }
+  };
+
+
+  // cargar alerta del formulario
+  const contenidoAlerta = `
+    <div class="d-flex alert alert-warning alert-dismissible m-0 contentAlerta" role="alert" >
+      <div class="d-flex align-items-center alert-icon me-3">
+        <i class="fas fa-exclamation-triangle"></i>
+      </div>
+      <div class="alert-text">
+        <strong>Debes de llenar los campos </strong> con los datos necesarios, <strong class="text-success">cada campo debe de estar de color verde</strong>, si alguno esta de<strong class="text-danger"> color rojo</strong> no podra pasar a la otra página.
+      </div>
+    </div>
+  `;
+
+  // Endpoints de API
+  const ENDPOINTS = {
+    //registrar: 'src/ajax/registroPersonal.php?modulo_personal=registrar',
+    obtenerDependencias: 'src/ajax/registroPersonal.php?modulo_personal=obtenerDependencias',
+    obtenerEstatus: 'src/ajax/registroPersonal.php?modulo_personal=obtenerEstatus',
+    obtenerCargo: 'src/ajax/registroPersonal.php?modulo_personal=obtenerCargo',
+    obtenerDepartamento: 'src/ajax/registroPersonal.php?modulo_personal=obtenerDepartamento',
+    obtenerEstados: 'src/ajax/registroPersonal.php?modulo_personal=obtenerEstados'
+  };
+
+  // Configuración de validaciones
+  const VALIDACIONES = {
+    nombres: [
+      { selector: SELECTORES.primerNombre, span: '.span_nombre' },
+      { selector: SELECTORES.segundoNombre, span: '.span_nombre2' },
+      { selector: SELECTORES.primerApellido, span: '.span_apellido' },
+      { selector: SELECTORES.segundoApellido, span: '.span_apellido2' }
+    ],
+    direccion: [
+      { selector: SELECTORES.calle, span: '.span_calle' },
+      { selector: SELECTORES.urbanizacion, span: '.span_urbanizacion' }
+    ],
+    selectores: [
+      { selector: '#estatus', span: '.span_estatus' },
+      { selector: '#cargo', span: '.span_cargo' },
+      { selector: '#departamento', span: '.span_departamento' },
+      { selector: '#dependencia', span: '.span_dependencia' }
+    ]
+  };
+
+  // Configuración de Select2
+  const SELECT2_CONFIG = [
+    'estatus', 'cargo', 'departamento', 'dependencia',
+    'estado', 'municipio', 'parroquia', 'ano', 'meses',
+    'dia', 'civil', 'sexo', 'vivienda', 'academico'
+  ];
+
+  /**
+   * Inicializa los validadores del formulario
+   */
+  const inicializarValidadores = () => {
+    // Validar nombres
+    VALIDACIONES.nombres.forEach(({ selector, span }) =>
+      validarNombre(selector, span));
+
+    // Validar dirección
+    VALIDACIONES.direccion.forEach(({ selector, span }) =>
+      validarNombreConEspacios(selector, span));
+
+    // Validar selectores
+    VALIDACIONES.selectores.forEach(({ selector, span }) =>
+      validarSelectoresSelec2(selector, span));
+
+    // Otras validaciones específicas
+    validarNumeros(SELECTORES.cedula, '.span_cedula');
+    validarNumeroNumber(SELECTORES.edad, '.span_edad', 2);
+    validarBusquedaCedula(SELECTORES.cedula, ["#img-modals", "#img-contener"]);
+    validarInputFecha(SELECTORES.fechaIngreso, '.span_fechaing');
+  };
+
+  /**
+   * Inicializa los componentes Select2
+   */
+  const inicializarSelect2 = () => {
+    SELECT2_CONFIG.forEach(selector => {
+      incluirSelec2(`#${selector}`);
+      validarSelectoresSelec2(`#${selector}`, `.span_${selector}`);
     });
 
-    // documentos de estado de derecho
-    if ($(this).val() === "EstadoDerecho") {
-      $('#estadoDerecho').modal('show');
-      $("#exampleModalLabel").text("Estado De Derecho");
-      $(".contendorEstadoDerecho").html(checkboxHTML + cedulaHTML + nombreHTML + apellidoHTML + documentoEstadoDerechoHTML);
-      // validaciones
-      file("#docEstadoDerecho", ".span_docEstadoDerecho");
+    // Configuración inicial de fechas
+    colocarYear(SELECTORES.ano, "1900");
+    colocarMeses(SELECTORES.meses);
+  };
+
+  /**
+   * Maneja el envío del formulario
+   */
+  const manejarEnvioFormulario = async (enviarFormulario) => {
+    enviarFormulario.preventDefault();
+    const formData = new FormData(enviarFormulario.target);
+    const fechaIngreso = $(SELECTORES.fechaIngreso).val().split("-").reverse().join("-");
+
+    formData.append("fechaing", fechaIngreso);
+
+    if ($("#btnEDInces").prop('checked')) {
+      formData.append("FamiliarInces", "si");
     }
 
-    // documento de casado
-    if ($(this).val() === "Casado") {
-      $('#estadoDerecho').modal('show');
-      $("#exampleModalLabel").text("Casado");
-      $(".contendorEstadoDerecho").html(checkboxHTML+cedulaHTML+nombreHTML+apellidoHTML+documentoCasadoHTML + documentoCopiaCedulaHTML);
-      // validaciones
-      file("#docCasado", ".span_docCasado");
-      file("#docCopiaCedula", ".span_docCopiaCedula");
+    $(SELECTORES.btnAceptar).prop("disabled", true);
 
+    try {
+      const response = await enviarFormulario(
+        ENDPOINTS.registrar,
+        formData,
+        async (parsedData) => {
+          $(SELECTORES.btnAceptar).prop("disabled", false);
+          if (parsedData.exito) {
+            await AlertDirection("success", parsedData.mensaje, "top", 7000);
+          } else {
+            await alertaNormalmix(parsedData.mensaje, 4000, "error", "top-end");
+          }
+        },
+        true
+      );
+    } catch (error) {
+      console.error('Error en el envío:', error);
+      $(SELECTORES.btnAceptar).prop("disabled", false);
     }
+  };
 
-    // documento de viudo
-    if ($(this).val() === "Viudo") {
-      $('#estadoDerecho').modal('show');
-      $("#exampleModalLabel").text("Viudo");
-      $(".contendorEstadoDerecho").html(documentoViudoHTML + documentoCopiaCedulaHTML);
-      // validaciones
-      file("#docViuda", ".span_docViuda");
-      file("#docCopiaCedula", ".span_docCopiaCedula");
+  /**
+     * Maneja la visualización de los contenedores de discapacidad
+     * @param {jQuery} $boton - Elemento botón que disparó el evento
+     */
+  const manejarDiscapacidad = ($boton) => {
+    const contenedor = $('#contentPartida');
+    const tipoDiscapacidad = $('#contenTipoDiscapacidad');
+    const tpDiscapacidad = $('#tpDiscapacidad');
+    const archivoDis = $('#achivoDis');
+    const DURACION_ANIMACION = 500;
+
+    const mostrarContenedores = () => {
+        incluirSelec2('#tpDiscapacidad');
+        tipoDiscapacidad.slideDown(DURACION_ANIMACION);
+        contenedor.slideDown(DURACION_ANIMACION);
+        
+        $boton
+            .attr('id', 'cargaDiscaEliminar')
+            .html('<i class="fa-solid fa-xmark me-2"></i> Eliminar Todo');
+    };
+
+    const ocultarContenedores = () => {
+        tpDiscapacidad
+            .addClass('ignore-validation')
+            .select2('destroy')
+            .val('');
+
+        archivoDis
+            .addClass('ignore-validation')
+            .val('');
+
+        tipoDiscapacidad.slideUp(DURACION_ANIMACION);
+        contenedor.slideUp(DURACION_ANIMACION);
+        
+        $boton
+            .attr('id', 'asignarDisca')
+            .html('<i class="fa-solid fa-plus me-2"></i> Asignar Discapacidad');
+    };
+
+    // Ejecutar acción según el ID del botón
+    if ($boton.attr('id') === 'asignarDisca') {
+        mostrarContenedores();
+    } else if ($boton.attr('id') === 'cargaDiscaEliminar') {
+        ocultarContenedores();
     }
+};
+  /**
+   * Configura los event listeners
+   */
+  const configurarEventListeners = () => {
+    $(SELECTORES.formulario).on('submit', manejarEnvioFormulario);
+    // $(SELECTORES.vivienda).on('change', manejarCambioVivienda);
+    //$(SELECTORES.civil).on('change', manejarCambioEstadoCivil);
+    $(SELECTORES.discapacidad).on('click', function() {
+      manejarDiscapacidad($(this));
+    }); 
 
-    // documento de divorcio
-    if ($(this).val() === "Divorciado") {
-      $('#estadoDerecho').modal('show');
-      $("#exampleModalLabel").text("Divorciado");
-      $(".contendorEstadoDerecho").html(documentoActaDivorcioHTML + documentoActaDivorcioCivilHTML);
+    // calcular la edad por los días 
+    // Evento para calcular edad con debounce
+    const calcularEdadDebounced = manejarCalculoEdad;
+    $(document).on('change', `${SELECTORES.dia}, ${SELECTORES.meses}, ${SELECTORES.ano}`, calcularEdadDebounced);
+  };
 
-      // validaciones
-      file("#docDivorcio", ".span_docDivorcio");
-      file("#docSolicEstCivil", ".span_docSolicEstCivil");
-    }
+  /**
+   * Carga los datos iniciales necesarios
+   */
+  const cargarDatosIniciales = async () => {
+    try {
+      const promesas = Object.values(ENDPOINTS).map(url =>
+        fetch(url).then(res => res.json())
+      );
 
-    // validaciones general de estado de derecho
-    validarNumeros("#cedulaFamiliar", ".span_cedulaFamiliar");
-    validarNombre("#nombreFamiliar", ".span_nombreFamiliar");
-    validarNombre("#apellidoFamiliar", ".span_apellidoFamiliar");
-  });
+      const resultados = await Promise.all(promesas);
 
-  // Maneja el clic en el botón "aceptarModalEstadoDerecho"
-  $(document).on('click', '#aceptarModalEstadoDerecho', function () {
-    $('#estadoDerecho').modal('hide'); // Oculta el modal
-    $("#botonModalEstadoDerecho").slideDown(400);
-  })
-
-  // Maneja el clic en el botón "cerrarModalEstadoDerecho"
-  $(document).on('click', '#cerrarModalEstadoDerecho, .cerrarX', function () {
-    // Limpia los inputs y aplica las clases (misma lógica que "aceptar")
-    $('.contendorEstadoDerecho').empty();
-    $('#estadoDerecho').modal('hide'); // Oculta el modal
-    $('#botonModalEstadoDerecho').slideUp(400);
-    $('#civil').val("").trigger('change');
-  });
-
-  // evento de escucha del evento modal abierto 
-  $('#estadoDerecho').on('show.bs.modal', function (e) {
-    // Remueve las clases cuando el modal se muestra
-    file("#docEstadoDerecho", ".span_docEstadoDerecho");
-    $('#cedulaFamiliar, #nombreFamiliar, #apellidoFamiliar, #docEstadoDerecho').removeClass('ignore-validation cumplidoNormal');
-  });
-
-  // validar doble cedula
-  $(document).on('input', '#cedulaFamiliar', function () {
-    const cedulaFamiliarValue = $('#cedulaFamiliar').val();
-    const cedulaValue = $('#cedula').val();
-    if (cedulaFamiliarValue.length >= 7 && cedulaValue.length >= 7) {
-      if ($(this).val() == $("#cedula").val()) {
-        AlertSW2("error", "La cédula del familiar no puede ser la misma que la del trabajador", "top", 3000);
-        clasesInputsError("#cedulaFamiliar", ".span_cedulaFamiliar");
-      }
-    }
-  })
-
-  // validar el evneto del boton de estado de derecho inces
-  $(document).on("change", '#btnEDInces', async function () {
-    $("#cedulaFamiliar").val("");
-
-    // validamos si el check esta es true
-    if ($(this).prop('checked')) {
-      console.log("activo");
-      const inputElement = $('#cedulaFamiliar');
-      const selectElement = $('<select></select>');
-      // Transferir atributos y clases del input al select
-      // Transferir atributos del input al select
-      Array.from(inputElement[0].attributes).forEach(attr => {
-        selectElement.attr(attr.name, attr.value);
+      resultados.forEach((data, index) => {
+        if (data.exito) {
+          const selectores = ['dependencia', 'estatus', 'cargo', 'departamento', 'estado'];
+          llenarSelect(data.data, selectores[index], "Seleccione una opción");
+        }
       });
-      selectElement.addClass(inputElement.attr('class'));
-      selectElement.addClass("selectCedula");
-
-      // Reemplazar el input con el select
-      inputElement.replaceWith(selectElement);
-
-      // Inicializar Select2 después de cargar los datos
-      buscarDataEmpledoSelect2('.selectCedula');
-      validarSelectoresSelec2("#cedulaFamiliar", ".span_cedulaFamiliar");
-      $("#cedulaFamiliar").removeClass("busquedaCedula");
-      $('#nombreFamiliar, #apellidoFamiliar').prop('disabled', true).val('').addClass('cumplido ignore-validation');
-
-    } else {
-      // Si el checkbox está desmarcado, habilita los inputs y agrega la clase busquedaCedula
-      $('#nombreFamiliar, #apellidoFamiliar').prop('disabled', false).removeClass('cumplido ignore-validation').val('');
-      $("#cedulaFamiliar").addClass("busquedaCedula");
-      const selectElement = $('#cedulaFamiliar');
-
-      // Destruir select2 antes de reemplazar el select con el input
-      if (selectElement.data('select2')) {
-        selectElement.select2('destroy');
-      }
-
-      selectElement.remove();
-      // Crear el nuevo input
-      const inputElement = $('<input>');
-
-      // Agregar clases y atributos al nuevo input
-      inputElement.addClass('form-control busquedaCedula');
-      inputElement.attr('placeholder', 'Cédula de identidad');
-      inputElement.attr('id', 'cedulaFamiliar');
-      inputElement.attr('name', 'cedulaFamiliar');
-      // Agregar el nuevo input al DOM
-      $('.span_cedulaFamiliar').parent().append(inputElement);
-      // Actualizar las referencias al nuevo ID
-      validarNumeros("#cedulaFamiliar", ".span_cedulaFamiliar");
+    } catch (error) {
+      console.error('Error al cargar datos iniciales:', error);
     }
-    $(".span_cedulaFamiliar").removeClass("cumplido_span error_span");
-  });
+  };
 
-  // buscar empelado por medio de la dcedula del familiar por si ecxiste ya esa cedula como empleado
-  $(document).on("input", "#cedulaFamiliar", async function () {
-    if ($(this).hasClass("busquedaCedula")) {
-      await cedulaExisteEmpleado("#cedulaFamiliar", ".span_cedulaFamiliar", "La cédula le pertenece a un trabajador inces");
-    }
-  });
+  /**
+   * Inicializa el módulo
+   */
+  const inicializar = () => {
+    // Ocultar elementos iniciales
+    Object.values(SELECTORES.contenedores).forEach(selector => $(selector).hide());
 
-  // buscar empelado por medio de la dcedula del familiar por si ecxiste ya esa cedula como empleado
-  $(document).on("input", "#cedula", async function () {
-    if ($(this).hasClass("busquedaCedula")) {
-      await cedulaExisteEmpleado("#cedula", ".span_cedula", "Este empleado ya esta registrado en el sistema ");
-    }
-  });
+    inicializarValidadores();
+    inicializarSelect2();
+    configurarEventListeners();
+    cargarDatosIniciales();
 
-  // Llamar a la función para realizar las consultas
-  realizarConsultas();// realizar la cunsultas por promesas
-  //cargar los datos de estaod y municipio
-  buscarMunicipioPorEstado('#estado', '#municipio');
-  buscarParroquiaPorMunicipio('#municipio', '#parroquia');
-  // Observar cambios en cada formulario por separado
-  observarFormulario($("#formulario_registro")[0], $('#aceptar'));
-  observarFormulario($(".contendorEstadoDerecho")[0], $('#aceptarModalEstadoDerecho'));
+    // CARGAR VALIABLES DE HTML
+    setCargarEstadoCivil("#civil"); // Carga los estados civiles
+    setCargarSexo("#sexo"); // Carga los sexos
+    setCargarNivelesAcademicos("#academico"); // Carga los niveles académicos
+    setCargarTipoVivienda("#vivienda"); // Carga los tipos de vivienda
+    setCargarDiscapacidad("#tpDiscapacidad")
+    carculasDias("#meses", "#ano", "#dia", ".span_mes"); // funcion de calcular dias de los meses
 
+    //cargar calendario 
+    configurarFlatpickrSinFinesDeSemana("#fechaing3");
+
+
+    // cargar el alert en el contenedor de la alerta del formulario multiple
+    formulariomultiple('.f1 .btn-next', "#alert", contenidoAlerta);
+
+    // Inicializar funcionalidades adicionales
+    buscarMunicipioPorEstado('#estado', '#municipio');
+    buscarParroquiaPorMunicipio('#municipio', '#parroquia');
+    observarFormulario($(SELECTORES.formulario)[0], $(SELECTORES.btnAceptar));
+  };
+
+  // API pública
+  return {
+    inicializar
+  };
+})();
+
+// Inicializar cuando el documento esté listo
+$(function () {
+  ModuloPersonal.inicializar();
 });

@@ -29,7 +29,7 @@ use App\Atlas\config\App;
                 <div class="d-flex align-items-center" style="position: absolute;">
                     <span class="ms-4 fw-bold fs-4 mt-3 text-white">Movimientos de usuarios</span>
                 </div>
-                <img src="<?php echo App::URL_IMG . "top-header.png"; ?>" alt="Header Image" class="w-100 h-100" style="object-fit: cover; object-position:center;">
+                <img src="<?php echo App::URL_IMG . "top-header.webp"; ?>" alt="Header Image" class="w-100 h-100" style="object-fit: cover; object-position:center;">
             </header>
             <?php require_once App::URL_INC . "utils/menu_usuarios.php" ?>
             <section class="card me-3 ms-3 mb-3 contentSubMenu" style="box-shadow: 0px 6px 16px 2px rgba(0, 0, 0, 0.05) !important;">

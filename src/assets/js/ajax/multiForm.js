@@ -1,96 +1,96 @@
 import { clasesInputs, clasesInputsError } from "./inputs.js";
-// next step
-export function formulariomultiple(datos, alerta, contenido){
-  $(document).on('click', datos, function () {
-    var parent_fieldset = $(this).parents('fieldset');
-    var next_step = true;
-    var current_active_step = $(this).parents('.f1').find('.f1-step.active');
-    var progress_line = $(this).parents('.f1').find('.f1-progress-line');
 
-    // next step
-    $(document).on('click', datos, function () {
-      var parent_fieldset = $(this).parents('fieldset');
-      var next_step = true;
-      var current_active_step = $(this).parents('.f1').find('.f1-step.active');
-      var progress_line = $(this).parents('.f1').find('.f1-progress-line');
+export function formulariomultiple(datos, alerta, contenido) {
+  // Manejar el botón "Siguiente"
+  $(document).on("click", datos, function () {
+    const parentFieldset = $(this).closest("fieldset");
+    const currentStep = $(".f1-step.active");
+    const progressLine = $(".f1-progress-line");
+    let nextStep = true;
 
-      parent_fieldset.find().each(function () {
-        if (!$(this).hasClass('ignore-validation')) {
-          if (!$(this).hasClass('cumplido') && !$(this).hasClass('cumplidoNormal')) {
-            clasesInputsError($(this));
-            $(alerta).empty();
-            $(alerta).html(contenido);
-            $(alerta).hide();
-            $(alerta).slideDown("slow");
+    // Validar inputs dentro del fieldset actual
+    //input, select, textarea
+    parentFieldset.find("").each(function () {
+      if (!$(this).hasClass("ignore-validation")) {
+        if (!$(this).hasClass("cumplido") && !$(this).hasClass("cumplidoNormal")) {
+          clasesInputsError($(this));
+          $(alerta).empty().html(contenido).hide().slideDown("slow");
 
-            setTimeout(function () {
-              $(alerta).slideUp("slow");
-            }, 10000);
-            next_step = false;
-          } else {
-            clasesInputs($(this));
-          }
+          setTimeout(() => {
+            $(alerta).slideUp("slow");
+          }, 10000);
+
+          nextStep = false;
+        } else {
+          clasesInputs($(this));
         }
-      });
-
-      if (next_step) {
-        parent_fieldset.fadeOut(400, function () {
-          current_active_step.removeClass('active').addClass('activated').next().addClass('active');
-          bar_progress(progress_line, 'right');
-          $(this).next().fadeIn();
-          scroll_to_class($('.f1'), 20);
-        });
       }
     });
 
-    // previous step
-    $('.f1 .btn-previous').on('click', function () {
-      var current_active_step = $(this).parents('.f1').find('.f1-step.active');
-      var progress_line = $(this).parents('.f1').find('.f1-progress-line');
-
-      $(this).parents('fieldset').fadeOut(400, function () {
-        current_active_step.removeClass('active').prev().removeClass('activated').addClass('active');
-        bar_progress(progress_line, 'left');
-        $(this).prev().fadeIn();
-        scroll_to_class($('.f1'), 20);
+    // Si la validación es exitosa, avanzar al siguiente paso
+    if (nextStep) {
+      parentFieldset.fadeOut(400, function () {
+        currentStep
+          .removeClass("active")
+          .addClass("activated")
+          .next()
+          .addClass("active");
+        updateProgress(progressLine, "right");
+        $(this).next().fadeIn(400);
+        scrollToElement(".f1", 20);
       });
+    }
+  });
+
+  // Manejar el botón "Atrás"
+  $(document).on("click", ".btn-previous", function () {
+    const parentFieldset = $(this).closest("fieldset");
+    const currentStep = $(".f1-step.active");
+    const progressLine = $(".f1-progress-line");
+
+    parentFieldset.fadeOut(400, function () {
+      currentStep
+        .removeClass("active")
+        .prev()
+        .removeClass("activated")
+        .addClass("active");
+      updateProgress(progressLine, "left");
+      $(this).prev().fadeIn(400);
+      scrollToElement(".f1", 20);
     });
-
-    // submit
   });
 }
 
-function scroll_to_class(element_class, removed_height) {
-  var scroll_to = $(element_class).offset().top - removed_height;
-  if ($(window).scrollTop() != scroll_to) {
-    $('html, body').stop().animate({ scrollTop: scroll_to }, 0);
-  }
+// Función para actualizar la barra de progreso
+function updateProgress(progressLine, direction) {
+  const steps = progressLine.data("number-of-steps");
+  const currentValue = progressLine.data("now-value");
+  const newValue =
+    direction === "right"
+      ? currentValue + 100 / steps
+      : currentValue - 100 / steps;
+
+  progressLine.css("width", `${newValue}%`).data("now-value", newValue);
 }
 
-function bar_progress(progress_line_object, direction) {
-  var number_of_steps = progress_line_object.data('number-of-steps');
-  var now_value = progress_line_object.data('now-value');
-  var new_value = 0;
-  if (direction == 'right') {
-    new_value = now_value + (100 / number_of_steps);
-  } else if (direction == 'left') {
-    new_value = now_value - (100 / number_of_steps);
-  }
-  progress_line_object.attr('style', 'width: ' + new_value + '%;').data('now-value', new_value);
+// Función para desplazarse a un elemento
+function scrollToElement(element, offset) {
+  const position = $(element).offset().top - offset;
+  $("html, body").stop().animate({ scrollTop: position }, 400); // Desplazamiento en 400ms
 }
 
-jQuery(document).ready(function () {
-  $('#top-navbar-1').on('shown.bs.collapse', function () {
-    $.backstretch("resize");
-  });
-  $('#top-navbar-1').on('hidden.bs.collapse', function () {
+// Inicialización del script
+$(function () {
+  // Ajustar el fondo al mostrar/ocultar el navbar
+  $("#top-navbar-1").on("shown.bs.collapse hidden.bs.collapse", function () {
     $.backstretch("resize");
   });
 
-  $('.f1 fieldset:first').fadeIn('slow');
+  // Mostrar el primer fieldset con un efecto de deslizamiento
+  $(".f1 fieldset:first").hide().slideDown(600); // Efecto de aparición en 600ms
 
-  $('.f1 input[type="text"], .f1 input[type="password"], .f1 textarea, .f1 select, .f1 input[type="number"]').on('focus', function () {
-    $(this).removeClass('input-error');
+  // Eliminar clase de error al enfocar un input
+  $(".f1 input, .f1 textarea, .f1 select").on("focus", function () {
+    $(this).removeClass("input-error");
   });
-
 });

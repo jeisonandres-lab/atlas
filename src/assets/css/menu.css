@@ -74,7 +74,6 @@ body main .content {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 15px 30px;
   z-index: 1000;
   box-shadow: 0 0 2px var(--grey-color-light);
 }
@@ -132,8 +131,7 @@ body main .content {
 
 /* admin lte */
 .sidebar-brand {
-  /* width: 200px; */
-  padding: 38px !important;
+  padding: 32px !important;
 }
 
 /* clase de adminlte */
@@ -167,12 +165,9 @@ body main .content {
 /* sidebar */
 .sidebar {
   background-color: var(--white-color);
-  /* padding: 9px 20px 0px 20px; */
   overflow-y: scroll;
   box-shadow: 0 0 1px var(--grey-color-light);
-  /* transition: all 0.5s ease; */
 }
-
 
 .sidebar,
 ol,
@@ -187,9 +182,7 @@ ul {
 .sidebar:hover::-webkit-scrollbar {
   display: none;
   position: absolute;
-  /* Posiciona la barra de desplazamiento de forma absoluta */
   top: 0;
-  /* Posiciona la barra en la parte superior */
   right: 0;
   height: 7px !important;
   width: 7px;
@@ -277,8 +270,6 @@ ul {
   text-decoration: none;
   color: var(--grey-color);
   white-space: nowrap;
-  /* font-weight: 550;
-  font-size: 14px; */
 }
 
 .sidebar.close .navlink {
@@ -479,9 +470,8 @@ ul {
   border-radius: 0px 5px 5px 0px !important;
    box-shadow: none !important; 
 }
+
 /* CALENDARIO */
-
-
 .flatpickr-months .flatpickr-month {
   background: #1929bb !important;
 }

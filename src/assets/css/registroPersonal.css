@@ -4,17 +4,6 @@
   font-weight: 600;
 }
 
-main::-webkit-scrollbar {
-  display: none;
-}
-
-body::-webkit-scrollbar {
-  display: none;
-}
-
-form .titulo{
-  color: black !important;
-}
 .row {
   margin: 0px !important;
 }
@@ -31,6 +20,13 @@ form .titulo{
   border: 0px !important;
 }
 
+form .titulo{
+  color: black !important;
+}
+
+fieldset div .form-group {
+  font-weight: 300;
+}
 
 input::-moz-placeholder {
   /* Firefox 19+ */
@@ -67,6 +63,7 @@ input::-ms-input-placeholder {
   margin: 0 auto;
   background-color: rgba(255, 255, 255, 0.856);
 }
+
 .texto-cargando {
   font-family: "Montserrat", sans-serif;
   font-weight: 800;
@@ -93,7 +90,7 @@ input::-ms-input-placeholder {
 }
 
 .containerImg img {
-  border-radius: 10px 10px 0px 0px;
+  border-radius: 6px 6px 0px 0px;
 }
 
 #mostrar {

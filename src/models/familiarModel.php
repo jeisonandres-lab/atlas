@@ -11,21 +11,6 @@ class familiarModel extends Conexion
     private function registrarDatos(string $tabla, array $datos)
     {
         $sql = $this->guardarDatos($tabla, $datos);
-        // Ejecutar las consultas adicionales
-        // Reordenar IDs
-
-        // Obtener el nombre de la primera columna
-        // $primeraColumna = $this->obtenerPrimeraColumna($tabla);
-
-        // if ($primeraColumna) {
-        //     Reordenar IDs
-        //     $this->ejecutarConsulta("SET @row_number = 0;");
-        //     $this->ejecutarConsulta("UPDATE " . $tabla . " SET " . $primeraColumna . " = (@row_number:=@row_number + 1) ORDER BY " . $primeraColumna . ";");
-        //     $this->ejecutarConsulta("ALTER TABLE " . $tabla . " AUTO_INCREMENT = 1;");
-        // } else {
-        //     Manejar el caso en que no se pudo obtener el nombre de la primera columna
-        //     error_log("No se pudo obtener el nombre de la primera columna de la tabla: " . $tabla);
-        // }
         return $sql;
     }
 

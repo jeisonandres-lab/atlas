@@ -42,7 +42,7 @@
         <!-- foto de perfil -->
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <img src="./src/assets/img/icons/avtar_1.png" alt="" class="profile nav-item dropdown dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" />
+                <img loading="lazy" src="./src/assets/img/icons/avtar_1.webp" alt="" class="profile nav-item dropdown dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" />
                 <span class="ms-2 d-none d-md-inline"><?php echo $datosUser ?></span>
             </a>
             <ul class="dropdown-menu">
@@ -56,7 +56,7 @@
 <nav class="sidebar app-sidebar ">
     <div class="logo_item sidebar-brand">
         <a href="./inicio" class="brand-link">
-            <img src="./src/assets/img/icons/dasdad-transformed-removebg.png" alt="" class="brand-image ">
+            <img  src="./src/assets/img/icons/favicon.webp" alt="" class="brand-image ">
             <span class="ms-3 fw-bold">ATLAS</span>
         </a>
     </div>

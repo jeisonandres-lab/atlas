@@ -163,4 +163,4 @@ export async function setCargarNivelesAcademicos(input) {
         text: nivel.nombre,
       }));
     });
-  }
+}

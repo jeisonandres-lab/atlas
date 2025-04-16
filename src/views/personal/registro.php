@@ -25,15 +25,15 @@ use App\Atlas\config\App;
                 <div class="d-flex aling-items-center " style="position: absolute; ">
                     <span class="ms-4 fw-bold fs-4 mt-3 text-white">Registro Del Personal</span>
                 </div>
-                <img src="<?php echo App::URL_IMG . "top-header.png"; ?>" alt="" class="w-100 h-100" style="object-fit: cover; object-position:center;">
+                <img loading="lazy" src="<?php echo App::URL_IMG . "top-header.webp"; ?>" alt="" class="w-100 h-100" style="object-fit: cover; object-position:center;">
             </div>
             <!-- SUB MENU DEL SISTEMA -->
             <?php require_once App::URL_INC . "utils/menu_registro.php" ?>
-            <div class="container-fluid">
+            <div class="container-fluid px-3">
                 <div class="row">
-                    <div class="col-sm-12 col-md-12 col-lg-8 px-0 form-validate content" style="text-align: center;">
+                    <div class="col-sm-12 col-md-12 col-lg-8 px-0 form-validate " style="text-align: center;">
                         <!-- formulario de registro multi uso de los empleados -->
-                        <form role="form" action="" method="post" class="f1 pt-5 px-4 formValidar" id="formulario_registro" style="color: #888;">
+                        <form role="form " action="" method="post" class="f1 pt-5 px-4 formValidar content" id="formulario_registro" style="color: #888;">
                             <h3>Registrar Empleado</h3>
                             <div class="f1-steps pasos">
                                 <div class="f1-progress">
@@ -480,7 +480,7 @@ use App\Atlas\config\App;
                         </form>
                         <div style="background-color:#FE9001;" class="barra_naranja w-100"></div>
                     </div>
-                    <div class="container col-sm-12 col-md-5 col-lg-5 col-xl-5 col-xxl-4">
+                    <div class="container col-sm-12 col-md-5 col-lg-5 col-xl-5 col-xxl-4 pe-0">
                         <div class="w-100 bg-white containerImg col-12 mb-3" style="height: 400px;">
                             <div class="content d-flex justify-content-center align-items-center h-100 w-100" id="img-contener">
                                 <!-- Contenido aquí -->

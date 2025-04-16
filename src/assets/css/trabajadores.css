@@ -11,12 +11,11 @@ main::-webkit-scrollbar {
 body::-webkit-scrollbar {
   display: none;
 }
-/* .form-control[type="text"]:read-only { 
-  background-color: #e9ecef; 
-} */
+
 .formulario_empleado label{
   color: #888;
 }
+
 .parrafo{
   font-family: "Poppins", sans-serif;
   font-size: 0.9em !important;

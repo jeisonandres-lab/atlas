@@ -1,6 +1,6 @@
 <?php use App\Atlas\config\App;?>
 <!-- ICONO DE FAVICONS -->
-<link rel="icon"       href="<?php echo App::URL_ICONS."dasdad-transformed-removebg.png";?>" type="image/x-icon"/>
+<link rel="icon"       href="<?php echo App::URL_ICONS."favicon.webp";?>" type="image/x-icon"/>
 <!-- CSS DE ADMIN LTE -->
 <link rel="stylesheet" href="<?php echo App::URL_LIBRARY."adminLTE/css/adminlte.min.css"?>" />
 <!-- CSS DE BOOTSTRAP 5 -->
