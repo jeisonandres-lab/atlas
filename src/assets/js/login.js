@@ -1,6 +1,6 @@
-import { enviarDatos, enviarFormulario, generarHashContrasena, verificarContrasena } from "./ajax/formularioAjax.js";
-import { AlertDirection, AlertSW2 } from "./ajax/alerts.js";
-import { validarSelectoresSelec2, incluirSelec2 } from "./ajax/inputs.js";
+import { enviarDatos, enviarFormulario, generarHashContrasena, verificarContrasena } from "./utils/formularioAjax.js";
+import { AlertDirection, AlertSW2 } from "./utils/alerts.js";
+import { validarSelectoresSelec2, incluirSelec2 } from "./utils/inputs.js";
 
 let formulariosAJAX = document.querySelector(".formularioEnviar");
 let cerradura = document.getElementById("candado");

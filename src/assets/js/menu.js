@@ -1,4 +1,4 @@
-import { enviarDatos } from "./ajax/formularioAjax.js";
+import { enviarDatos } from "./utils/formularioAjax.js";
 
 const body = document.querySelector("body");
 const main = document.querySelector("main");

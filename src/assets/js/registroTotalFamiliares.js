@@ -1,6 +1,6 @@
 
-import { alertaNormalmix, AlertSW2, aletaCheck } from "./ajax/alerts.js";
-import { descargarArchivo, enviarFormulario, obtenerDatosJQuery, obtenerDatosPromise } from "./ajax/formularioAjax.js";
+import { alertaNormalmix, AlertSW2, aletaCheck } from "./utils/alerts.js";
+import { descargarArchivo, enviarFormulario, obtenerDatosJQuery, obtenerDatosPromise } from "./utils/formularioAjax.js";
 import {
   colocarMeses,
   colocarYear,
@@ -14,7 +14,7 @@ import {
   validarSelectoresSelec2,
   validarNumeroNumber,
   mesesDias,
-} from "./ajax/inputs.js";
+} from "./utils/inputs.js";
 
 $(function () {
 

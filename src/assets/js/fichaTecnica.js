@@ -1,4 +1,4 @@
-import { descargarArchivo } from "./ajax/formularioAjax.js";
+import { descargarArchivo } from "./utils/formularioAjax.js";
 
 
 $(function () {

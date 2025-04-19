@@ -1,5 +1,5 @@
-import { AlertSW2, aletaCheck } from "./ajax/alerts.js";
-import { enviarFormulario, obtenerDatos } from "./ajax/formularioAjax.js";
+import { AlertSW2, aletaCheck } from "./utils/alerts.js";
+import { enviarFormulario, obtenerDatos } from "./utils/formularioAjax.js";
 
 $(function () {
 

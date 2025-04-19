@@ -1,8 +1,8 @@
 // IMPORT DE VALIDACION DE INPUTS 
-import { alertaBasica, alertaNormalmix } from "./ajax/alerts.js";
-import { enviarFormulario, observarFormulario } from "./ajax/formularioAjax.js";
-import { calcularEdad, carculasDias } from "./ajax/funciones.js";
-import { configurarFlatpickrSinFinesDeSemana } from "./ajax/inputCalendar.js";
+import { alertaBasica, alertaNormalmix } from "./utils/alerts.js";
+import { enviarFormulario, observarFormulario } from "./utils/formularioAjax.js";
+import { calcularEdad, carculasDias } from "./utils/funciones.js";
+import { configurarFlatpickrSinFinesDeSemana } from "./utils/inputCalendar.js";
 import {
   colocarMeses,
   colocarYear,
@@ -22,10 +22,10 @@ import {
   clasesInputs,
   llenarSelect,
   buscarDataEmpledoSelect2,
-} from "./ajax/inputs.js";
-import { formulariomultiple } from "./ajax/multiForm.js";
-import { buscarMunicipioPorEstado, buscarParroquiaPorMunicipio } from "./ajax/peticiones.js";
-import { setCargarDiscapacidad, setCargarEstadoCivil, setCargarNivelesAcademicos, setCargarSexo, setCargarTipoVivienda } from "./ajax/variablesArray.js";
+} from "./utils/inputs.js";
+import { formulariomultiple } from "./utils/multiForm.js";
+import { buscarMunicipioPorEstado, buscarParroquiaPorMunicipio } from "./utils/peticiones.js";
+import { setCargarDiscapacidad, setCargarEstadoCivil, setCargarNivelesAcademicos, setCargarSexo, setCargarTipoVivienda } from "./utils/variablesArray.js";
 
 // Mantener otros imports...
 

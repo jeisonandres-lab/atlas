@@ -1,6 +1,6 @@
-import { todosCumplidos, habilitarBoton, debounce, observarFormulario } from "./ajax/formularioAjax.js";
-import { AlertDirection, AlertSW2 } from "./ajax/alerts.js";
-import { validarSelectoresSelec2, incluirSelec2, validarNumeroNumber, validarTexto } from "./ajax/inputs.js";
+import { todosCumplidos, habilitarBoton, debounce, observarFormulario } from "./utils/formularioAjax.js";
+import { AlertDirection, AlertSW2 } from "./utils/alerts.js";
+import { validarSelectoresSelec2, incluirSelec2, validarNumeroNumber, validarTexto } from "./utils/inputs.js";
 
 $(function () {
     incluirSelec2("#datosRecuperar");

@@ -1,6 +1,6 @@
-import { alertaNormalmix, AlertSW2, aletaCheck } from "./ajax/alerts.js";
-import { descargarArchivo, enviarFormulario, observarFormulario, obtenerDatosJQuery, obtenerDatosPromise } from "./ajax/formularioAjax.js";
-import { configurarFlatpickrSinFinesDeSemana } from "./ajax/inputCalendar.js";
+import { alertaNormalmix, AlertSW2, aletaCheck } from "./utils/alerts.js";
+import { descargarArchivo, enviarFormulario, observarFormulario, obtenerDatosJQuery, obtenerDatosPromise } from "./utils/formularioAjax.js";
+import { configurarFlatpickrSinFinesDeSemana } from "./utils/inputCalendar.js";
 import {
   colocarMeses,
   colocarYear,
@@ -20,9 +20,9 @@ import {
   validarDosDatos,
   validarInputFecha,
   mesesDias,
-} from "./ajax/inputs.js";
-import { setCargarDiscapacidad } from "./ajax/variablesArray.js";
-import { setVariableApellidoFamiliar, setVariableCedulaFamiliar, setVariableCheckboxInces, setVariableDocumentoFamiliar, setVariableNombreFamiliar } from "./ajax/variablesContenido.js";
+} from "./utils/inputs.js";
+import { setCargarDiscapacidad } from "./utils/variablesArray.js";
+import { setVariableApellidoFamiliar, setVariableCedulaFamiliar, setVariableCheckboxInces, setVariableDocumentoFamiliar, setVariableNombreFamiliar } from "./utils/variablesContenido.js";
 
 $(function () {
   $("#contenTomo").hide();

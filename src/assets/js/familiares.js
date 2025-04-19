@@ -10,18 +10,18 @@ import {
   incluirSelec2,
   validarSelectoresSelec2,
   clasesInputsError,
-} from "./ajax/inputs.js";
+} from "./utils/inputs.js";
 
-import { alertaNormalmix } from "./ajax/alerts.js";
-import { enviarFormulario, observarFormulario } from "./ajax/formularioAjax.js";
-import { setCargarDiscapacidad, setCargarParentesco } from "./ajax/variablesArray.js";
+import { alertaNormalmix } from "./utils/alerts.js";
+import { enviarFormulario, observarFormulario } from "./utils/formularioAjax.js";
+import { setCargarDiscapacidad, setCargarParentesco } from "./utils/variablesArray.js";
 import { 
   setVariableArchivo, 
   setVariableCarnetDiscapacidad, 
   setVariableDeAlertaBasica, 
   setVariableDiscapacidad 
-} from "./ajax/variablesContenido.js";
-import { calcularEdad, carculasDias } from "./ajax/funciones.js";
+} from "./utils/variablesContenido.js";
+import { calcularEdad, carculasDias } from "./utils/funciones.js";
 
 /**
  * Módulo Familiares: gestiona todas las funciones relacionadas con el registro de miembros de la familia.

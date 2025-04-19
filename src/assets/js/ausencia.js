@@ -1,6 +1,6 @@
-import { alertaNormalmix, AlertSW2, aletaCheck } from "./ajax/alerts.js";
-import { descargarArchivo, enviarFormulario } from "./ajax/formularioAjax.js";
-import { clasesInputs, incluirSelec2, validarNumeros, validarSelectores, validarSelectoresSelec2 } from "./ajax/inputs.js";
+import { alertaNormalmix, AlertSW2, aletaCheck } from "./utils/alerts.js";
+import { descargarArchivo, enviarFormulario } from "./utils/formularioAjax.js";
+import { clasesInputs, incluirSelec2, validarNumeros, validarSelectores, validarSelectoresSelec2 } from "./utils/inputs.js";
 
 $(function () {
   let boton = document.querySelector("#aceptar");

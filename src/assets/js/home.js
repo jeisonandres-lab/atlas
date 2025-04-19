@@ -1,6 +1,6 @@
 
-import { AlertSW2 } from "./ajax/alerts.js";
-import { obtenerDatosJQuery } from "./ajax/formularioAjax.js";
+import { AlertSW2 } from "./utils/alerts.js";
+import { obtenerDatosJQuery } from "./utils/formularioAjax.js";
 // Dependencias: jQuery, DataTables, Chart.js
 $(function () {
 

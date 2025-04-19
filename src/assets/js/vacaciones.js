@@ -1,6 +1,6 @@
-import { alertaNormalmix, AlertSW2, aletaCheck } from "./ajax/alerts.js";
-import { enviarFormulario } from "./ajax/formularioAjax.js";
-import { colocarYear, soloNumeros, validarNumeros, validarSelectores, validarSelectoresSelec2 } from "./ajax/inputs.js"
+import { alertaNormalmix, AlertSW2, aletaCheck } from "./utils/alerts.js";
+import { enviarFormulario } from "./utils/formularioAjax.js";
+import { colocarYear, soloNumeros, validarNumeros, validarSelectores, validarSelectoresSelec2 } from "./utils/inputs.js"
 
 $(function () {
     $(document).on("click", function () {

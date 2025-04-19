@@ -1,11 +1,11 @@
-import { AlertSW2 } from "./ajax/alerts.js";
-import { mostrarPDFenModal } from "./ajax/descargar.js";
+import { AlertSW2 } from "./utils/alerts.js";
+import { mostrarPDFenModal } from "./utils/descargar.js";
 
 import {
     obtenerDatos,
     obtenerDatosJQuery
-} from "./ajax/formularioAjax.js";
-import { configurarFlatpickrSinFinesDeSemana } from "./ajax/inputCalendar.js";
+} from "./utils/formularioAjax.js";
+import { configurarFlatpickrSinFinesDeSemana } from "./utils/inputCalendar.js";
 
 import {
     incluirSelec2,
@@ -13,14 +13,14 @@ import {
     validarNumeroNumber,
     validarInputFecha,
     llenarSelect,
-} from "./ajax/inputs.js";
+} from "./utils/inputs.js";
 
 import {
     setCargarEstadoCivil,
     setCargarNivelesAcademicos,
     setCargarSexo,
     setCargarTipoVivienda
-} from "./ajax/variablesArray.js";
+} from "./utils/variablesArray.js";
 
 import {
     setVariableAcademico,
@@ -36,7 +36,7 @@ import {
     setVariableParroquia,
     setVariableSexo,
     setVariableVivienda
-} from "./ajax/variablesContenido.js";
+} from "./utils/variablesContenido.js";
 $(function () {
     $("#datosReporte").removeAttr("hidden");
     $("#datosReporte").hide();

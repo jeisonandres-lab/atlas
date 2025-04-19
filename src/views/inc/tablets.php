@@ -21,6 +21,6 @@
 <script src="<?php echo App::URL_LIBRARY . "dataTablet/excelTemplade/buttons.html5.styles.min.js"; ?>" defer></script>
 <script src="<?php echo App::URL_LIBRARY . "dataTablet/excelTemplade/buttons.html5.styles.templates.min.js"; ?>" defer></script>
 <!-- JS DE CHARTJS PARA GRAFICAS -->
-<script src="./chart.js/dist/chart.js" defer></script>
-<script src="./chart.js/dist/chart.umd.js" defer></script>
-<script src="./chart.js/dist/helpers.js" defer></script>
+<script src="<?php echo App::URL_LIBRARY . "chart.js/dist/chart.js"; ?>" defer></script>
+<script src="<?php echo App::URL_LIBRARY . "chart.js/dist/chart.umd.js"; ?>" defer></script>
+<script src="<?php echo App::URL_LIBRARY . "chart.js/dist/helpers.js"; ?>" defer></script>

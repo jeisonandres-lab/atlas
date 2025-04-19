@@ -1,18 +1,18 @@
-import { AlertSW2 } from "./ajax/alerts.js";
-import { descargarArchivo } from "./ajax/formularioAjax.js";
+import { AlertSW2 } from "./utils/alerts.js";
+import { descargarArchivo } from "./utils/formularioAjax.js";
 import {
     incluirSelec2,
     validarSelectoresSelec2,
     validarNumeroNumber,
     validarInputFecha,
     fechasJQueyDataPikerPresente,
-} from "./ajax/inputs.js";
+} from "./utils/inputs.js";
 
 import { 
     setCargarDiscapacidad, 
     setCargarParentesco, 
     setCargarSexo 
-} from "./ajax/variablesArray.js";
+} from "./utils/variablesArray.js";
 
 import {
     setVariableDiscapacidad,
@@ -20,7 +20,7 @@ import {
     setVariableFechaRango,
     setVariableParentesco,
     setVariableSexo
-} from "./ajax/variablesContenido.js";
+} from "./utils/variablesContenido.js";
 
 $(function () {
     //CARGAR LOS SELECTORES

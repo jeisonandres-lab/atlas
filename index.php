@@ -1,5 +1,5 @@
 <?php
-session_start();
+// Inicialmente NO iniciamos la sesión automáticamente
 
 require_once './vendor/autoload.php';
 use App\Atlas\config\App;
@@ -10,39 +10,40 @@ $app = new App();
 $login = new userController();
 $viewsController = new viewController();
 
-if (isset($_GET['vista'])) {
-    $url = $_SERVER['REQUEST_URI']; // Obtener la URL completa
-    $datosURL = $app->analizarURL($url);
-    $vista = $datosURL['vista'];
-    // print_r($url);
-    $parametros = $datosURL['parametros'];
-    if ($parametros == "") {
-        $parametros = null;
-    }
-} else {
-    $vista = "login";
-}
+// Obtener y procesar la URL
+$vista = isset($_GET['vista']) ? $_GET['vista'] : 'login';
+$url = $_SERVER['REQUEST_URI'];
+$datosURL = $app->analizarURL($url);
+$parametros = !empty($datosURL['parametros']) ? $datosURL['parametros'] : null;
+
+// Array de rutas públicas que no requieren autenticación
+$rutasPublicas = [
+    'Identificarse',
+    'recuperarDatos',
+    'login'
+];
+
+// Obtener la vista correspondiente
 $vista2 = $viewsController->obtenerVistasControlador($vista);
-switch ($vista) {
-    // VISTAS SIN LOGIN
-    case 'Identificarse': // Pagina de login
-        require_once $vista2;
-        break;
-    case 'recuperarDatos': // Pagina de recuperar datos
-        require_once $vista2;
-        break;
-    default:
+
+// Verificar si la ruta actual es pública
+if (in_array($vista, $rutasPublicas)) {
+    require_once $vista2;
+} else {
+    // Solo iniciamos la sesión si estamos en una ruta protegida
+    session_start();
+    
+    // Verificar autenticación para rutas protegidas
     if (isset($_SESSION['usuario'])) {
-        // var_dump($_SESSION);
         $datosUser = $_SESSION['usuario'];
         $classActivo = $_SESSION['activado'] == '1' ? 'activado bg-success' : 'desactivado bg-danger';
         $act = $_SESSION['activado'] == '1' ? 'Activo' : 'Desactivado';
         $rol = $_SESSION['rol'];
         require_once $vista2;
     } else {
-        header('location: Identificarse');
+        // Si no hay sesión, redirigimos al login
+        header('Location: Identificarse');
+        exit();
     }
-        break;
 }
-
-
+?>

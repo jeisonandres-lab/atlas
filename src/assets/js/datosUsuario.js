@@ -1,4 +1,4 @@
-import { obtenerDatos } from "./ajax/formularioAjax.js";
+import { obtenerDatos } from "./utils/formularioAjax.js";
 
 
 $(function () {
