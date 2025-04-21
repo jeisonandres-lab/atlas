@@ -27,7 +27,7 @@
 <!-- CSS PERSONALIZADO  -->
 <link rel="stylesheet" href="<?php echo App::URL_CSS."menu.css"?>" />
 <link rel="stylesheet" href="<?php echo App::URL_CSS."subMenu.css"?>" />
-<link rel="stylesheet" href="<?php echo App::URL_CSS . "cssUtils/buttons.css"; ?>">
-<link rel="stylesheet" href="<?php echo App::URL_CSS . "cssUtils/inputs.css"; ?>">
+<link rel="stylesheet" href="<?php echo App::URL_CSS . "Utils/buttons.css"; ?>">
+<link rel="stylesheet" href="<?php echo App::URL_CSS . "Utils/inputs.css"; ?>">
 
 

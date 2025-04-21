@@ -1,4 +1,4 @@
-@import url(./cssUtils/colores.css);
+@import url(./Utils/colores.css);
 
 .avatar.avatar-md {
     width: 3.5rem !important;

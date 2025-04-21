@@ -1,0 +1,36 @@
+:root {
+
+    --white-color: #fff;
+    --white-color-content: #fff;
+    --blue-color: #1929bb;
+    --grey-color: #283c50;
+    /* #475e75 */
+    --grey-color-light: #aaa;
+    --backgroud: #f2f7fc;
+    --body-bg-rgb: #f9fafc;
+    --primary-rgb: #5c67f7;
+    --primary-tint1-rgb: #e354d4;
+    --primary-tint2-rgb: #ff5d9f;
+    --primary-tint3-rgb: #ff8e6f;
+    --primary-color: rgb(var(--primary-rgb));
+    --secondary-rgb: #9e5cf7;
+    --warning-rgb: #ffc658;
+    --info-rgb: #0ea5e8;
+    --success-rgb: #21ce9e;
+    --danger-rgb: #fb4242;
+    --light-rgb: #f9f9fa;
+    --dark-rgb: #0a0a0a;
+    --orange-rgb: #fe7c58;
+    --pink-rgb: #fe549b;
+    --teal-rgb: #00d8d8;
+    --purple-rgb: #7b76fe;
+    --green-rgb: #01ef8c;
+    --primary-tint1-color: rgb(var(--primary-tint1-rgb));
+    --primary-tint2-color: rgb(var(--primary-tint2-rgb));
+    --primary-tint3-color: rgb(var(--primary-tint3-rgb));
+    --primary-danger: rgb(var(--danger-rgb));
+    --primary-border: rgb(var(--primary-rgb));
+    --text-muted: #6e829f;
+    --custom-white: #ffffff;
+    --custom-black: #000000;
+}

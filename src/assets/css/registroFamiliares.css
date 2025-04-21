@@ -1,5 +1,5 @@
 
-@import url('cssUtils/colorTableButtons.css');
+@import url('Utils/colorTableButtons.css');
 
 .btn-hover:hover {
     transform: translateY(-3px); /* Mueve el botón 3px hacia arriba */

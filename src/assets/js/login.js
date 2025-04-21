@@ -1,78 +1,133 @@
 import { enviarDatos, enviarFormulario, generarHashContrasena, verificarContrasena } from "./utils/formularioAjax.js";
 import { AlertDirection, AlertSW2 } from "./utils/alerts.js";
-import { validarSelectoresSelec2, incluirSelec2 } from "./utils/inputs.js";
 
-let formulariosAJAX = document.querySelector(".formularioEnviar");
-let cerradura = document.getElementById("candado");
-let inputPassword = document.querySelector("#password");
-let inputPassword2 = document.querySelector(".password");
-let contentAlert = document.querySelector("#alert");
+/**
+ * Módulo Login: gestiona todas las funciones relacionadas con el inicio de sesión
+ */
+const ModuloLogin = (() => {
+  // Selectores del DOM
+  const Selectores = {
+    formulario: '.formularioEnviar',
+    candado: '#candado',
+    password: '#password',
+    passwordIcon: '.password',
+    alert: '#alert',
+    usuario: '#usuario',
+    cargando: '#cargando'
+  };
 
-$(function () {
+  // Constantes para mensajes
+  const Mensajes = {
+    CAMPOS_VACIOS: "Debes de llenar todos los campos.",
+    USUARIO_VACIO: "Por favor, ingresa su nombre de usuario.",
+    PASSWORD_VACIO: "Por favor, ingresa su contraseña.",
+    PASSWORD_INCORRECTO: "La contraseña es incorrecta"
+  };
 
-  //cambio de icono
-  cerradura.addEventListener('click', function () {
-    // Cambia el tipo de input y el icono
-    if (inputPassword.type === "text") {
-      inputPassword2.classList.add("fa-solid");
-      inputPassword2.classList.add("fa-lock");
-      inputPassword2.classList.remove("fa-key");
-    } else {
-      inputPassword2.classList.remove("fa-lock");
-      inputPassword2.classList.add("fa-key");
-    }
-    inputPassword.type = inputPassword.type === "password" ? "text" : "password";
-  });
+  // Endpoints de API
+  const Endpoints = {
+    login: './src/ajax/userAjax.php?modulo_usuario=login',
+    redireccion: './src/ajax/userAjax.php?modulo_usuario=redireccionar'
+  };
 
-  //verificar si los inputs tienen datos 
-  formulariosAJAX.addEventListener('submit', (e) => {
-    e.preventDefault();
-    // Obtener los elementos del formulario
-    let usuarioInput = document.getElementById('usuario');
-    let contrasenaInput = document.getElementById('password');
-    let passwordSinEncrip = contrasenaInput.value;
+  /**
+   * Maneja el cambio de visibilidad de la contraseña
+   */
+  const manejarVisibilidadPassword = () => {
+    const passwordIcon = $(Selectores.passwordIcon);
+    const password = $(Selectores.password);
 
-    // Validar los campos
-    if (usuarioInput.value.trim() === '' && contrasenaInput.value.trim() === '') {
-      AlertSW2("error", "Debes de llenar todos los campos.", "top", 4000);
-    } else if (usuarioInput.value.trim() === '') {
-      AlertSW2("warning", "Por favor, ingresa su nombre de usuario.", "top", 4000);
-    } else if (contrasenaInput.value.trim() === '') {
-      AlertSW2("warning", "Por favor, ingresa su contraseña.", "top", 4000);
-    } else {
-      const cargando = document.getElementById('cargando');
-      cargando.style.display = 'flex';
-      // let da = generarHashContrasena(passwordSinEncrip) 
-      // console.log(da);
-      function callbackExito(parsedData) {
-        if (parsedData.exito) {
-          
-          let hashAlmacenado = parsedData.password;
-          let saltAlmacenada = parsedData.salt; // Asegúrate de que la sal también se recupere de la base de datos
+    $(Selectores.candado).on('click', function() {
+      const isText = password.attr('type') === 'text';
+      
+      passwordIcon
+        .toggleClass('fa-solid fa-lock', !isText)
+        .toggleClass('fa-key', isText);
+      
+      password.attr('type', isText ? 'password' : 'text');
+    });
+  };
 
-          const esValida = verificarContrasena(passwordSinEncrip, hashAlmacenado, saltAlmacenada);
-          if (esValida) {
-            let redirecion = function () {
-              const url = "./src/ajax/userAjax.php?modulo_usuario=redireccionar";
-              let formData = new FormData();
-              formData.append('url', `inicio`);
-              enviarDatos(url, formData);
-            };
-            AlertDirection("success", "Inicio de sesión con éxito, Redireccionando", "top", 3000, redirecion);
-          } else {
-            AlertSW2("error", "La contraseña es incorrecta", "top", 4000);
-          }
-        } else {
-          AlertSW2("error", `${parsedData.mensaje}`, "top", 4000);
-        }
+  /**
+   * Maneja el envío del formulario de login
+   */
+  const manejarEnvioFormulario = () => {
+    $(Selectores.formulario).on('submit', function(e) {
+      e.preventDefault();
+      
+      const usuario = $(Selectores.usuario);
+      const password = $(Selectores.password);
+      const usuarioValor = usuario.val().trim();
+      const passwordValor = password.val().trim();
+
+      // Validaciones
+      if (!usuarioValor && !passwordValor) {
+        AlertSW2("error", Mensajes.CAMPOS_VACIOS, "top", 4000);
+        return;
+      }
+      
+      if (!usuarioValor) {
+        AlertSW2("warning", Mensajes.USUARIO_VACIO, "top", 4000);
+        return;
+      }
+      
+      if (!passwordValor) {
+        AlertSW2("warning", Mensajes.PASSWORD_VACIO, "top", 4000);
+        return;
       }
 
-      let url = "./src/ajax/userAjax.php?modulo_usuario=login";
-      const data = new FormData(formulariosAJAX);
-      data.append('modulo_usuario', 'login');
-      enviarFormulario(url, data, callbackExito, true);
-    }
-  });
+      // Mostrar cargando
+      $(Selectores.cargando).css('display', 'flex');
 
+      // Preparar datos del formulario
+      const formData = new FormData(this);
+      formData.append('modulo_usuario', 'login');
+
+      // Función de callback para el éxito
+      const callbackExito = (parsedData) => {
+        $(Selectores.cargando).hide();
+
+        if (parsedData.exito) {
+          const hashAlmacenado = parsedData.password;
+          const saltAlmacenada = parsedData.salt;
+
+          if (verificarContrasena(passwordValor, hashAlmacenado, saltAlmacenada)) {
+            const redireccion = () => {
+              const formData = new FormData();
+              formData.append('url', 'inicio');
+              enviarDatos(Endpoints.redireccion, formData);
+            };
+            
+            AlertDirection("success", "Inicio de sesión con éxito, Redireccionando", "top", 3000, redireccion);
+          } else {
+            AlertSW2("error", Mensajes.PASSWORD_INCORRECTO, "top", 4000);
+          }
+        } else {
+          AlertSW2("error", parsedData.mensaje, "top", 4000);
+        }
+      };
+
+      // Enviar formulario
+      enviarFormulario(Endpoints.login, formData, callbackExito, true);
+    });
+  };
+
+  /**
+   * Inicializa el módulo de login
+   */
+  const inicializar = () => {
+    manejarVisibilidadPassword();
+    manejarEnvioFormulario();
+  };
+
+  // Exponer métodos públicos
+  return {
+    inicializar
+  };
+})();
+
+// Inicializar cuando el DOM esté listo
+$(function() {
+  ModuloLogin.inicializar();
 });
 

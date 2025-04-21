@@ -25,8 +25,7 @@ class viewModel extends error
             'Identificarse' => __DIR__ . '/../views/start/login.php',
             'recuperarDatos' => __DIR__ . '/../views/start/recuperar.php',
             'inicio' => __DIR__ . '/../views/home/home.php',
-            'personal' => __DIR__ . '/../views/personal/registro.php',
-            'personal2' => __DIR__ . '/../views/personal/registro-respaldo.php',
+            'personal' => __DIR__ . '/../views/personal/registroPersonal.php',
             'registrosFamiliares' => __DIR__ . '/../views/personal/registrosFamiliares.php',
             'datosInces' => __DIR__ . '/../views/personal/DatosInces.php',
             'familiares' => __DIR__ . '/../views/personal/familiares.php',
@@ -38,7 +37,6 @@ class viewModel extends error
             'datosPersonal' => __DIR__ . '/../views/bienestarSocial/datosPersonal.php',
             'ficha' => __DIR__ . '/../views/bienestarSocial/fichaTecnica.php',
             'error' => __DIR__ . '/../error/error.html',
-            'prueba' => __DIR__ . '/../chart.html',
         ];
 
         // Obtener la ruta completa de la vista

@@ -12,7 +12,7 @@ use App\Atlas\config\App; ?>
     <link rel="icon" href="./src/assets/img/icons/dasdad-transformed-removebg.png" type="image/x-icon">
     <?php require_once App::URL_INC . "total_css.php"; ?>
     <link rel="stylesheet" href="<?php echo App::URL_CSS . "login.css"; ?>">
-    <link rel="stylesheet" href="<?php echo App::URL_CSS . "cssUtils/buttons.css"; ?>">
+    <link rel="stylesheet" href="<?php echo App::URL_CSS . "Utils/buttons.css"; ?>">
 
 </head>
 

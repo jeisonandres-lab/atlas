@@ -12,7 +12,7 @@ use App\Atlas\config\App;
     <!-- CSS DEL SISTEMA -->
     <?php require_once App::URL_INC . "total_css.php"; ?>
     <link rel="stylesheet" href="<?php echo App::URL_CSS . "registroPersonal.css"; ?>">
-    <link rel="stylesheet" href="<?php echo App::URL_CSS . "cssUtils/checkbox.css"; ?>">
+    <link rel="stylesheet" href="<?php echo App::URL_CSS . "Utils/checkbox.css"; ?>">
 </head>
 
 <body class="layout-fixed sidebar-expand-lg bg-body-tertiary">
@@ -31,7 +31,7 @@ use App\Atlas\config\App;
             <?php require_once App::URL_INC . "utils/menu_registro.php" ?>
             <div class="container-fluid px-3">
                 <div class="row">
-                    <div class="col-sm-12 col-md-12 col-lg-8 px-0 form-validate " style="text-align: center;">
+                    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-8 px-0 mb-2 form-validate " style="text-align: center;">
                         <!-- formulario de registro multi uso de los empleados -->
                         <form role="form " action="" method="post" class="f1 pt-5 px-4 formValidar content" id="formulario_registro" style="color: #888;">
                             <h3>Registrar Empleado</h3>
@@ -181,7 +181,7 @@ use App\Atlas\config\App;
                                         <hr class="mb-2">
 
                                         <!-- año -->
-                                        <div class="col-sm-4 mb-2 ">
+                                        <div class="col-sm-12 col-md-4 col-xl-4 mb-2 ">
                                             <div class="form-group">
                                                 <label class="-field" for="ano">Año</label>
                                                 <div class="input-group">
@@ -192,7 +192,7 @@ use App\Atlas\config\App;
                                         </div>
 
                                         <!-- mes -->
-                                        <div class="col-sm-4  mb-2">
+                                        <div class="col-sm-12 col-md-4 col-xl-4 mb-2">
                                             <div class="form-group">
                                                 <label class="-field" for="meses">Mes</label>
                                                 <div class="input-group">
@@ -203,7 +203,7 @@ use App\Atlas\config\App;
                                         </div>
 
                                         <!-- dia -->
-                                        <div class="col-sm-4  mb-2" id="contentDia">
+                                        <div class="col-sm-12 col-md-4 col-xl-4 mb-2" id="contentDia">
                                             <div class="form-group ">
                                                 <label class="-field" for="dia">Día</label>
                                                 <div class="input-group">
@@ -259,6 +259,9 @@ use App\Atlas\config\App;
                                         <i class="fa-solid fa-plus me-2"></i>
                                         Asignar Discapacidad
                                     </button>
+                                    <button type="button" class="btn btn-primary btn-hover-azul" id="buttonModalImagen">
+                                    <i class="fa-regular fa-images-user me-2"></i>
+                                    Ver Imagen</button>
                                     <button type="button" class="btn btn-next btn-warning text-white btn-hover-amarillo"><i class="fa-solid fa-arrow-right me-2"></i>Siguiente</button>
                                 </div>
                             </fieldset>

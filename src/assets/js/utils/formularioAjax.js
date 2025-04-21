@@ -288,26 +288,6 @@ export async function descargarArchivo2(url, nombreArchivo, formData = null) {
     }
 }
 
-// Abrebiar nombres de empelados
-export function abreviarNombre(nombreCompleto) {
-    const palabras = nombreCompleto.split(' ');
-    let nombreAbreviado = palabras[0]; // Primera palabra (nombre)
-
-    // Iniciales de las palabras intermedias del nombre
-    for (let i = 1; i < palabras.length - 2; i++) {
-        nombreAbreviado += ' ' + palabras[i].charAt(0) + '.';
-    }
-
-    // Primer apellido y iniciales de los apellidos
-    if (palabras.length > 2) {
-        nombreAbreviado += ' ' + palabras[palabras.length - 2] + ' ' + palabras[palabras.length - 1].charAt(0) + '.';
-    } else {
-        nombreAbreviado += ' ' + palabras[palabras.length - 1] + '.';
-    }
-
-    return nombreAbreviado;
-}
-
 // Función para verificar si todos los inputs y selects cumplen con las clases requeridas
 export function todosCumplidos(formulario) {
     const elementos = formulario.querySelectorAll('input, select');

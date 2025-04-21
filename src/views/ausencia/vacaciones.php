@@ -12,8 +12,8 @@ use App\Atlas\config\App; ?>
     <?php require_once App::URL_INC . "tablets_css.php"; ?>
 
     <link rel="stylesheet" href="<?php echo App::URL_CSS . "trabajadores.css"; ?>">
-    <link rel="stylesheet" href="<?php echo App::URL_CSS . "cssUtils/buttons.css"; ?>">
-    <link rel="stylesheet" href="<?php echo App::URL_CSS . "cssUtils/colorTableButtons.css"; ?>">
+    <link rel="stylesheet" href="<?php echo App::URL_CSS . "Utils/buttons.css"; ?>">
+    <link rel="stylesheet" href="<?php echo App::URL_CSS . "Utils/colorTableButtons.css"; ?>">
 </head>
 
 <body class="layout-fixed sidebar-expand-lg bg-body-tertiary">

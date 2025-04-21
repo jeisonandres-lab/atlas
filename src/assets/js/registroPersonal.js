@@ -1,40 +1,30 @@
 // IMPORT DE VALIDACION DE INPUTS 
-import { alertaBasica, alertaNormalmix } from "./utils/alerts.js";
-import { enviarFormulario, observarFormulario } from "./utils/formularioAjax.js";
-import { calcularEdad, carculasDias } from "./utils/funciones.js";
+import {  alertaNormalmix } from "./utils/alerts.js";
+import {  observarFormulario } from "./utils/formularioAjax.js";
+import {  carculasDias, crearManejadorEdad, validarBusquedaCedula } from "./utils/funciones.js";
 import { configurarFlatpickrSinFinesDeSemana } from "./utils/inputCalendar.js";
 import {
   colocarMeses,
   colocarYear,
-  validarBusquedaCedula,
   validarNombre,
   validarNumeros,
-  validarSelectores,
-  validarTelefono,
-  file,
   validarSelectoresSelec2,
   incluirSelec2,
-  clasesInputsError,
-  validarDosDatos,
   validarNombreConEspacios,
   validarNumeroNumber,
   validarInputFecha,
-  clasesInputs,
   llenarSelect,
-  buscarDataEmpledoSelect2,
 } from "./utils/inputs.js";
 import { formulariomultiple } from "./utils/multiForm.js";
 import { buscarMunicipioPorEstado, buscarParroquiaPorMunicipio } from "./utils/peticiones.js";
 import { setCargarDiscapacidad, setCargarEstadoCivil, setCargarNivelesAcademicos, setCargarSexo, setCargarTipoVivienda } from "./utils/variablesArray.js";
-
-// Mantener otros imports...
 
 /**
  * Módulo Personal: gestiona todas las funciones relacionadas con el registro de personal
  */
 const ModuloPersonal = (() => {
   // Selectores del DOM
-  const SELECTORES = {
+  const selectores = {
     cedula: '#cedula',
     primerNombre: '#primerNombre',
     segundoNombre: '#segundoNombre',
@@ -63,71 +53,16 @@ const ModuloPersonal = (() => {
   };
 
   // Constantes para mensajes y configuración
-  const MENSAJES = {
-    FALTA_ANO: "Seleccione un año.",
-    FALTA_MES: "Seleccione un mes.",
-    FALTA_DIA: "Seleccione un día.",
-    EDAD_ALTA: (edad) => `¡Wow! Tienes ${edad} años de edad, ¡felicitaciones! al empleado`,
-    EDAD_BAJA: (edad) => `Lamentablemente, no podemos permitir el acceso a esta persona. La edad mínima requerida es de 18 años, y esta persona tiene ${edad} años`
+  const mensajes = {};
+
+  // Configuración para el cálculo de edad
+  const configEdad = {
+    selectores
   };
 
-  /**
-   * Maneja el cálculo de edad cuando cambian los campos de fecha
-   */
-  const manejarCalculoEdad = () => {
-    const dia = $(SELECTORES.dia).val();
-    const mes = $(SELECTORES.meses).val();
-    const ano = $(SELECTORES.ano).val();
-    const $edad = $(SELECTORES.edad);
-
-    // Validar campos requeridos
-    if (!ano) {
-      alertaNormalmix(MENSAJES.FALTA_ANO, 2000, "warning", "top");
-      return;
-    }
-
-    if (!mes) {
-      alertaNormalmix(MENSAJES.FALTA_MES, 2000, "warning", "top");
-      return;
-    }
-
-    if (!dia) {
-      alertaNormalmix(MENSAJES.FALTA_DIA, 2000, "warning", "top");
-      return;
-    }
-
-    // Calcular edad
-    const fechaNacimiento = new Date(ano, mes - 1, dia);
-    if (isNaN(fechaNacimiento.getTime())) return;
-
-    const edadCalculada = calcularEdad(fechaNacimiento);
-
-    // Actualizar campo de edad
-    $edad.val(edadCalculada);
-    clasesInputs(SELECTORES.edad, ".span_edad");
-
-    // Validar edad
-    if (edadCalculada >= 100) {
-      alertaNormalmix(
-        MENSAJES.EDAD_ALTA(edadCalculada),
-        4000,
-        "info",
-        "top"
-      );
-    }
-
-    if (edadCalculada < 18) {
-      alertaBasica(
-        MENSAJES.EDAD_BAJA(edadCalculada),
-        7000,
-        "info",
-        "top-center",
-        "Edad no requerida"
-      );
-      clasesInputsError(SELECTORES.edad, ".span_edad");
-    }
-  };
-
+  // Crear el manejador de edad
+  
+  const manejarCalculoEdad = crearManejadorEdad(configEdad);
 
   // cargar alerta del formulario
   const contenidoAlerta = `
@@ -141,9 +76,8 @@ const ModuloPersonal = (() => {
     </div>
   `;
 
-  // Endpoints de API
-  const ENDPOINTS = {
-    //registrar: 'src/ajax/registroPersonal.php?modulo_personal=registrar',
+  // endpoints de API
+  const endpoints = {
     obtenerDependencias: 'src/ajax/registroPersonal.php?modulo_personal=obtenerDependencias',
     obtenerEstatus: 'src/ajax/registroPersonal.php?modulo_personal=obtenerEstatus',
     obtenerCargo: 'src/ajax/registroPersonal.php?modulo_personal=obtenerCargo',
@@ -152,16 +86,16 @@ const ModuloPersonal = (() => {
   };
 
   // Configuración de validaciones
-  const VALIDACIONES = {
+  const validaciones = {
     nombres: [
-      { selector: SELECTORES.primerNombre, span: '.span_nombre' },
-      { selector: SELECTORES.segundoNombre, span: '.span_nombre2' },
-      { selector: SELECTORES.primerApellido, span: '.span_apellido' },
-      { selector: SELECTORES.segundoApellido, span: '.span_apellido2' }
+      { selector: selectores.primerNombre, span: '.span_nombre' },
+      { selector: selectores.segundoNombre, span: '.span_nombre2' },
+      { selector: selectores.primerApellido, span: '.span_apellido' },
+      { selector: selectores.segundoApellido, span: '.span_apellido2' }
     ],
     direccion: [
-      { selector: SELECTORES.calle, span: '.span_calle' },
-      { selector: SELECTORES.urbanizacion, span: '.span_urbanizacion' }
+      { selector: selectores.calle, span: '.span_calle' },
+      { selector: selectores.urbanizacion, span: '.span_urbanizacion' }
     ],
     selectores: [
       { selector: '#estatus', span: '.span_estatus' },
@@ -172,7 +106,7 @@ const ModuloPersonal = (() => {
   };
 
   // Configuración de Select2
-  const SELECT2_CONFIG = [
+  const select2Config = [
     'estatus', 'cargo', 'departamento', 'dependencia',
     'estado', 'municipio', 'parroquia', 'ano', 'meses',
     'dia', 'civil', 'sexo', 'vivienda', 'academico'
@@ -183,36 +117,36 @@ const ModuloPersonal = (() => {
    */
   const inicializarValidadores = () => {
     // Validar nombres
-    VALIDACIONES.nombres.forEach(({ selector, span }) =>
+    validaciones.nombres.forEach(({ selector, span }) =>
       validarNombre(selector, span));
 
     // Validar dirección
-    VALIDACIONES.direccion.forEach(({ selector, span }) =>
+    validaciones.direccion.forEach(({ selector, span }) =>
       validarNombreConEspacios(selector, span));
 
     // Validar selectores
-    VALIDACIONES.selectores.forEach(({ selector, span }) =>
+    validaciones.selectores.forEach(({ selector, span }) =>
       validarSelectoresSelec2(selector, span));
 
     // Otras validaciones específicas
-    validarNumeros(SELECTORES.cedula, '.span_cedula');
-    validarNumeroNumber(SELECTORES.edad, '.span_edad', 2);
-    validarBusquedaCedula(SELECTORES.cedula, ["#img-modals", "#img-contener"]);
-    validarInputFecha(SELECTORES.fechaIngreso, '.span_fechaing');
+    validarNumeros(selectores.cedula, '.span_cedula');
+    validarNumeroNumber(selectores.edad, '.span_edad', 2);
+    validarBusquedaCedula(selectores.cedula, ["#img-modals", "#img-contener"]);
+    validarInputFecha(selectores.fechaIngreso, '.span_fechaing');
   };
 
   /**
    * Inicializa los componentes Select2
    */
   const inicializarSelect2 = () => {
-    SELECT2_CONFIG.forEach(selector => {
+    select2Config.forEach(selector => {
       incluirSelec2(`#${selector}`);
       validarSelectoresSelec2(`#${selector}`, `.span_${selector}`);
     });
 
     // Configuración inicial de fechas
-    colocarYear(SELECTORES.ano, "1900");
-    colocarMeses(SELECTORES.meses);
+    colocarYear(selectores.ano, "1900");
+    colocarMeses(selectores.meses);
   };
 
   /**
@@ -221,7 +155,7 @@ const ModuloPersonal = (() => {
   const manejarEnvioFormulario = async (enviarFormulario) => {
     enviarFormulario.preventDefault();
     const formData = new FormData(enviarFormulario.target);
-    const fechaIngreso = $(SELECTORES.fechaIngreso).val().split("-").reverse().join("-");
+    const fechaIngreso = $(selectores.fechaIngreso).val().split("-").reverse().join("-");
 
     formData.append("fechaing", fechaIngreso);
 
@@ -229,14 +163,14 @@ const ModuloPersonal = (() => {
       formData.append("FamiliarInces", "si");
     }
 
-    $(SELECTORES.btnAceptar).prop("disabled", true);
+    $(selectores.btnAceptar).prop("disabled", true);
 
     try {
       const response = await enviarFormulario(
-        ENDPOINTS.registrar,
+        endpoints.registrar,
         formData,
         async (parsedData) => {
-          $(SELECTORES.btnAceptar).prop("disabled", false);
+          $(selectores.btnAceptar).prop("disabled", false);
           if (parsedData.exito) {
             await AlertDirection("success", parsedData.mensaje, "top", 7000);
           } else {
@@ -247,71 +181,72 @@ const ModuloPersonal = (() => {
       );
     } catch (error) {
       console.error('Error en el envío:', error);
-      $(SELECTORES.btnAceptar).prop("disabled", false);
+      $(selectores.btnAceptar).prop("disabled", false);
     }
   };
 
   /**
-     * Maneja la visualización de los contenedores de discapacidad
-     * @param {jQuery} $boton - Elemento botón que disparó el evento
-     */
-  const manejarDiscapacidad = ($boton) => {
+    * Maneja la visualización de los contenedores de discapacidad
+    * @param {jQuery} $boton - Elemento botón que disparó el evento
+  */
+  const manejarDiscapacidad = (boton) => {
     const contenedor = $('#contentPartida');
     const tipoDiscapacidad = $('#contenTipoDiscapacidad');
     const tpDiscapacidad = $('#tpDiscapacidad');
     const archivoDis = $('#achivoDis');
-    const DURACION_ANIMACION = 500;
+    const duracionAnimacion = 500;
 
     const mostrarContenedores = () => {
-        incluirSelec2('#tpDiscapacidad');
-        tipoDiscapacidad.slideDown(DURACION_ANIMACION);
-        contenedor.slideDown(DURACION_ANIMACION);
-        
-        $boton
-            .attr('id', 'cargaDiscaEliminar')
-            .html('<i class="fa-solid fa-xmark me-2"></i> Eliminar Todo');
+      incluirSelec2('#tpDiscapacidad');
+      tipoDiscapacidad.slideDown(duracionAnimacion);
+      contenedor.slideDown(duracionAnimacion);
+
+      boton
+        .attr('id', 'cargaDiscaEliminar')
+        .html('<i class="fa-solid fa-xmark me-2"></i> Eliminar Todo');
     };
 
     const ocultarContenedores = () => {
-        tpDiscapacidad
-            .addClass('ignore-validation')
-            .select2('destroy')
-            .val('');
+      tpDiscapacidad
+        .addClass('ignore-validation')
+        .select2('destroy')
+        .val('');
 
-        archivoDis
-            .addClass('ignore-validation')
-            .val('');
+      archivoDis
+        .addClass('ignore-validation')
+        .val('');
 
-        tipoDiscapacidad.slideUp(DURACION_ANIMACION);
-        contenedor.slideUp(DURACION_ANIMACION);
-        
-        $boton
-            .attr('id', 'asignarDisca')
-            .html('<i class="fa-solid fa-plus me-2"></i> Asignar Discapacidad');
+      tipoDiscapacidad.slideUp(duracionAnimacion);
+      contenedor.slideUp(duracionAnimacion);
+
+      boton
+        .attr('id', 'asignarDisca')
+        .html('<i class="fa-solid fa-plus me-2"></i> Asignar Discapacidad');
     };
 
     // Ejecutar acción según el ID del botón
-    if ($boton.attr('id') === 'asignarDisca') {
-        mostrarContenedores();
-    } else if ($boton.attr('id') === 'cargaDiscaEliminar') {
-        ocultarContenedores();
+    if (boton.attr('id') === 'asignarDisca') {
+      mostrarContenedores();
+    } else if (boton.attr('id') === 'cargaDiscaEliminar') {
+      ocultarContenedores();
     }
-};
+  };
+
   /**
    * Configura los event listeners
    */
   const configurarEventListeners = () => {
-    $(SELECTORES.formulario).on('submit', manejarEnvioFormulario);
-    // $(SELECTORES.vivienda).on('change', manejarCambioVivienda);
-    //$(SELECTORES.civil).on('change', manejarCambioEstadoCivil);
-    $(SELECTORES.discapacidad).on('click', function() {
+    $(selectores.formulario).on('submit', manejarEnvioFormulario);
+    // $(selectores.vivienda).on('change', manejarCambioVivienda);
+    //$(selectores.civil).on('change', manejarCambioEstadoCivil);
+    $(selectores.discapacidad).on('click', function () {
       manejarDiscapacidad($(this));
-    }); 
+    });
 
     // calcular la edad por los días 
     // Evento para calcular edad con debounce
     const calcularEdadDebounced = manejarCalculoEdad;
-    $(document).on('change', `${SELECTORES.dia}, ${SELECTORES.meses}, ${SELECTORES.ano}`, calcularEdadDebounced);
+    $(document).on('change', `${selectores.dia}, ${selectores.meses}, ${selectores.ano}`, calcularEdadDebounced);
   };
 
   /**
@@ -319,7 +254,7 @@ const ModuloPersonal = (() => {
    */
   const cargarDatosIniciales = async () => {
     try {
-      const promesas = Object.values(ENDPOINTS).map(url =>
+      const promesas = Object.values(endpoints).map(url =>
         fetch(url).then(res => res.json())
       );
 
@@ -327,8 +262,8 @@ const ModuloPersonal = (() => {
 
       resultados.forEach((data, index) => {
         if (data.exito) {
-          const selectores = ['dependencia', 'estatus', 'cargo', 'departamento', 'estado'];
-          llenarSelect(data.data, selectores[index], "Seleccione una opción");
+          const selectores2 = ['dependencia', 'estatus', 'cargo', 'departamento', 'estado'];
+          llenarSelect(data.data, selectores2[index], "Seleccione una opción");
         }
       });
     } catch (error) {
@@ -341,7 +276,7 @@ const ModuloPersonal = (() => {
    */
   const inicializar = () => {
     // Ocultar elementos iniciales
-    Object.values(SELECTORES.contenedores).forEach(selector => $(selector).hide());
+    Object.values(selectores.contenedores).forEach(selector => $(selector).hide());
 
     inicializarValidadores();
     inicializarSelect2();
@@ -366,7 +301,7 @@ const ModuloPersonal = (() => {
     // Inicializar funcionalidades adicionales
     buscarMunicipioPorEstado('#estado', '#municipio');
     buscarParroquiaPorMunicipio('#municipio', '#parroquia');
-    observarFormulario($(SELECTORES.formulario)[0], $(SELECTORES.btnAceptar));
+    observarFormulario($(selectores.formulario)[0], $(selectores.btnAceptar));
   };
 
   // API pública

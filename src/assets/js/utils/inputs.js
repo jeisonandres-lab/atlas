@@ -439,44 +439,6 @@ export async function valdiarCorreos(input, cumplidospan) {
   });
 }
 
-// Funcion para buscar las fotos de los empleados mediante la cédula de identidad
-export async function validarBusquedaCedula(input, divContens) {
-  let temporizador;
-
-  $(input).on("input", function () {
-    clearTimeout(temporizador); // Cancela el temporizador anterior
-    const cedula = $(this).val();
-
-    if (cedula.length >= 7) {
-      realizarBusqueda(cedula, divContens); // Realiza la búsqueda si la longitud es 7 o más
-    } else {
-      temporizador = setTimeout(() => {
-        realizarBusqueda(cedula, divContens); // Realiza la búsqueda después del temporizador
-      }, 500); // Espera 500 milisegundos (0.5 segundos)
-    }
-  });
-
-  function realizarBusqueda(cedula, divContens) {
-    const imageUrl = `./src/global/photos/${cedula}.png`;
-
-    const img = new Image();
-    img.src = imageUrl;
-    img.classList.add("img-fluid", "imgFoto", "w-100", "h-100");
-
-    img.onload = () => {
-      divContens.forEach(div => {
-        $(div).html(img.cloneNode(true));
-      });
-    };
-
-    img.onerror = function () {
-      divContens.forEach(div => {
-        $(div).html("Imagen no encontrada");
-      });
-    };
-  }
-}
-
 // Objeto para colocar los meses
 export async function colocarMeses(input) {
   try {

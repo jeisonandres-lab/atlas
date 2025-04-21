@@ -12,7 +12,7 @@ use App\Atlas\config\App;
     <?php require_once App::URL_INC . "total_css.php"; ?>
     <?php require_once App::URL_INC . "tablets_css.php"; ?>
     <link rel="stylesheet" href="<?php echo App::URL_CSS . "registroFamiliares.css"; ?>">
-    <link rel="stylesheet" href="<?php echo App::URL_CSS . "cssUtils/switch.css"; ?>">
+    <link rel="stylesheet" href="<?php echo App::URL_CSS . "Utils/switch.css"; ?>">
 </head>
 
 <body class="layout-fixed sidebar-expand-lg bg-body-tertiary">
