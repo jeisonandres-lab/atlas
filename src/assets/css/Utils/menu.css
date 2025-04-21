@@ -14,15 +14,6 @@
   font-family: Inter, sans-serif;
   /*"Poppins", sans-serif*/
 }
-/* cambio de bootstrap */
-.btn-sm {
-  color: white !important;
-}
-
-.btn-success {
-  color: white !important;
-  /* Color del texto del botón de confirmación */
-}
 
 div:where(.swal2-icon).swal2-warning {
   border-color: #c71313 !important;
@@ -40,12 +31,12 @@ body.dark {
 }
 
 body.dark {
-  --white-color: #333;
-  --white-color-content: rgb(58, 56, 56);
-  --blue-color: #fff;
-  --grey-color: #f2f2f2;
-  --grey-color-light: #aaa;
-  --backgroud: #333;
+  --color-blanco: #333;
+  --color-blanco-contenido: rgb(58, 56, 56);
+  --color-azul: #fff;
+  --color-gris: #f2f2f2;
+  --color-gris-claro: #aaa;
+  --color-blanco-fondo: #333;
 }
 
 .dark {
@@ -57,11 +48,11 @@ body.dark {
 body.dark,
 main.dark,
 footer.dark {
-  background-color: var(--white-color) !important;
+  background-color: var(--color-blanco) !important;
 }
 
 body main .content {
-  background-color: var(--white-color-content) !important;
+  background-color: var(--color-blanco-contenido) !important;
   border: 1px solid white;
 }
 
@@ -70,20 +61,20 @@ body main .content {
   top: 0;
   width: 100%;
   left: 0;
-  background-color: var(--white-color);
+  background-color: var(--color-blanco);
   display: flex;
   align-items: center;
   justify-content: space-between;
   z-index: 1000;
-  box-shadow: 0 0 2px var(--grey-color-light);
+  box-shadow: 0 0 2px var(--color-gris-claro);
 }
 
 .atlas {
-  color: var(--grey-color);
+  color: var(--color-gris);
 }
 
 .conten-main {
-  background-color: var(--backgroud);
+  background-color: var(--color-blanco-fondo);
 }
 
 .logo_item {
@@ -92,7 +83,7 @@ body main .content {
   column-gap: 10px;
   font-size: 22px;
   font-weight: 500;
-  color: var(--blue-color);
+  color: var(--color-azul);
 }
 
 .navbar img {
@@ -111,9 +102,9 @@ body main .content {
   height: 100%;
   border-radius: 25px;
   outline: none;
-  background-color: var(--white-color);
-  color: var(--grey-color);
-  border: 1px solid var(--grey-color-light);
+  background-color: var(--color-blanco);
+  color: var(--color-gris);
+  border: 1px solid var(--color-gris-claro);
   padding: 0 20px;
 }
 
@@ -126,7 +117,7 @@ body main .content {
 .navbar_content i {
   cursor: pointer;
   font-size: 20px;
-  color: var(--grey-color);
+  color: var(--color-gris);
 }
 
 /* admin lte */
@@ -141,7 +132,7 @@ body main .content {
 
 /* clase de adminlte */
 .app-footer {
-  color: var(--grey-color) !important;
+  color: var(--color-gris) !important;
 }
 
 .nav-item {
@@ -164,9 +155,9 @@ body main .content {
 
 /* sidebar */
 .sidebar {
-  background-color: var(--white-color);
+  background-color: var(--color-blanco);
   overflow-y: scroll;
-  box-shadow: 0 0 1px var(--grey-color-light);
+  box-shadow: 0 0 1px var(--color-gris-claro);
 }
 
 .sidebar,
@@ -194,7 +185,7 @@ ul {
 }
 
 .sidebar::-webkit-scrollbar-thumb {
-  background-color: var(--blue-color);
+  background-color: var(--color-azul);
   border-radius: 6px;
 }
 
@@ -214,7 +205,7 @@ ul {
 }
 
 .menu_title::before {
-  color: var(--grey-color);
+  color: var(--color-gris);
   white-space: nowrap;
 }
 
@@ -229,7 +220,7 @@ ul {
   height: 2px;
   width: 18px;
   border-radius: 12px;
-  background: var(--grey-color-light);
+  background: var(--color-gris-claro);
 }
 
 .menu_items {
@@ -258,7 +249,7 @@ ul {
 }
 
 .navlink_icon:hover {
-  background: var(--blue-color);
+  background: var(--color-azul);
 }
 
 .sidebar .nav_link {
@@ -268,7 +259,7 @@ ul {
   padding: 4px 15px 7px 0px;
   border-radius: 8px;
   text-decoration: none;
-  color: var(--grey-color);
+  color: var(--color-gris);
   white-space: nowrap;
 }
 
@@ -277,12 +268,12 @@ ul {
 }
 
 .nav_link:hover {
-  color: var(--white-color);
-  background: var(--blue-color);
+  color: var(--color-blanco);
+  background: var(--color-azul);
 }
 
 .sidebar.close .nav_link:hover {
-  background: var(--white-color);
+  background: var(--color-blanco);
 }
 
 .submenu_item {
@@ -366,8 +357,8 @@ ul {
   left: 0;
   width: 200px;
   /* Ancho del menú */
-  background-color: #fff;
-  border: 1px solid #ccc;
+  background-color:var(--color-blanco);
+  border: 1px solid var(--color-gris-claro);
   border-radius: 4px;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
   z-index: 10;
@@ -433,7 +424,7 @@ ul {
 }
 
 .horafecha-nofi p {
-  color: var(--grey-color-light);
+  color: var(--color-gris-claro);
 }
 
 .horafecha-nofi p {
@@ -471,33 +462,3 @@ ul {
    box-shadow: none !important; 
 }
 
-/* CALENDARIO */
-.flatpickr-months .flatpickr-month {
-  background: #1929bb !important;
-}
-
-.flatpickr-weekdays {
-  background: #1929bb !important;
-}
-
-.flatpickr-current-month .flatpickr-monthDropdown-months {
-  background: #1929bb !important;
-
-}
-
-.flatpickr-weekdays .flatpickr-weekdaycontainer span.flatpickr-weekday {
-  background: #1929bb !important;
-  color: white !important;
-}
-
-.flatpickr-day.today {
-  border-color: #1929bb;
-}
-
-.flatpickr-day.selected, .flatpickr-day.startRange, .flatpickr-day.endRange, .flatpickr-day.selected.inRange, .flatpickr-day.startRange.inRange, .flatpickr-day.endRange.inRange, .flatpickr-day.selected:focus, .flatpickr-day.startRange:focus, .flatpickr-day.endRange:focus, .flatpickr-day.selected:hover, .flatpickr-day.startRange:hover, .flatpickr-day.endRange:hover, .flatpickr-day.selected.prevMonthDay, .flatpickr-day.startRange.prevMonthDay, .flatpickr-day.endRange.prevMonthDay, .flatpickr-day.selected.nextMonthDay, .flatpickr-day.startRange.nextMonthDay, .flatpickr-day.endRange.nextMonthDay {
-  background: #1929bb !important;
-  -webkit-box-shadow: none;
-  box-shadow: none;
-  color: #fff !important;
-  border-color: #1929bb;
-}

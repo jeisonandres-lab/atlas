@@ -11,10 +11,10 @@ use App\Atlas\config\App;
     <title>ATLAS | Registros</title>
     <?php require_once App::URL_INC . "total_css.php"; ?>
     <?php require_once App::URL_INC . "tablets_css.php"; ?>
-
-    <link rel="stylesheet" href="./src/libs/jQueryUI/jquery-ui.min.css">
+    <link rel="stylesheet" href="<?php echo App::URL_CSS . "Utils/checkbox.css"; ?>">
+    <!-- <link rel="stylesheet" href="./src/libs/jQueryUI/jquery-ui.min.css">
     <link rel="stylesheet" href="./src/libs/jQueryUI/jquery-ui.structure.min.css">
-    <link rel="stylesheet" href="./src/libs/jQueryUI/jquery-ui.theme.min.css">
+    <link rel="stylesheet" href="./src/libs/jQueryUI/jquery-ui.theme.min.css"> -->
 
     <link rel="stylesheet" href="<?php echo App::URL_CSS . "registroFamiliares.css"; ?>">
 

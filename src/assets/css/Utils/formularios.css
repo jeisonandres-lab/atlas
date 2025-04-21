@@ -1,0 +1,17 @@
+/* IMPORTAR COLORES */
+@import url(colores.css);
+
+.content {
+    border-width: 1px !important;
+    border-color: #dee2e6 rgba(0, 0, 0, 0.175) !important;
+    border-radius: 0.375rem 0.375rem 0px 0px;
+}
+
+form .titulo{
+    color: var(--color-negro) !important;
+}
+
+.barra_naranja {
+    border-radius: 0px 0px 5px 5px;
+    height: 10px;
+}

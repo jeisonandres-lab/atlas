@@ -10,10 +10,8 @@ use App\Atlas\config\App; ?>
     <title>Vacaciones | ATLAS</title>
     <?php require_once App::URL_INC . "total_css.php"; ?>
     <?php require_once App::URL_INC . "tablets_css.php"; ?>
-
     <link rel="stylesheet" href="<?php echo App::URL_CSS . "trabajadores.css"; ?>">
-    <link rel="stylesheet" href="<?php echo App::URL_CSS . "Utils/buttons.css"; ?>">
-    <link rel="stylesheet" href="<?php echo App::URL_CSS . "Utils/colorTableButtons.css"; ?>">
+    <link rel="stylesheet" href="<?php echo App::URL_CSS . "Utils/botonesTablas.css"; ?>">
 </head>
 
 <body class="layout-fixed sidebar-expand-lg bg-body-tertiary">

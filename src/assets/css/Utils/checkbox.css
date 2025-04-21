@@ -1,3 +1,5 @@
+/* IMPORTAR COLORES */
+@import url(colores.css);
 
 .checkbox-wrapper-7 .tgl {
     display: none;

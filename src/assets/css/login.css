@@ -1,4 +1,6 @@
- /* Coded with love by Mutiullah Samim */
+/* IMPOTAR COLORES */
+@import url(Utils/colores.css);
+
  body,
  html {
      margin: 0;
@@ -10,7 +12,7 @@
  .user_card {
      margin-top: auto;
      margin-bottom: auto;
-     background: whitesmoke;
+     background: var(--color-blanco);
      position: relative;
      display: flex;
      justify-content: center;
@@ -37,9 +39,9 @@
      height: 150px;
      width: 150px;
      border-radius: 50%;
-     border: 2px solid white;
-     background-color: whitesmoke;
-     border-color: #1929bb;
+     border: 2px solid var(--color-blanco);
+     background-color: var(--color-blanco);
+     border-color: var(--color-azul);
      border-width: 3px;
  }
 
@@ -54,8 +56,8 @@
 
  .login_btn {
      width: 100%;
-     background: #1929bb !important;
-     color: white !important;
+     background: var(--color-azul) !important;
+     color: var(--color-blanco) !important;
      border: 0px;
  }
 
@@ -70,8 +72,8 @@
  }
 
  .input-group-text {
-     background: #1929bb !important;
-     color: white !important;
+     background: var(--color-azul) !important;
+     color: var(--color-blanco) !important;
      border: 0 !important;
      border-radius: 0.25rem 0 0 0.25rem !important;
  }
@@ -109,53 +111,4 @@
 
  #candado {
      cursor: pointer;
- }
-
- .cargando1 {
-     width: 120px;
-     height: 30px;
-     display: flex;
-     flex-wrap: wrap;
-     align-items: flex-end;
-     justify-content: space-between;
-     margin: 0 auto;
- }
-
- .texto-cargando {
-     font-family: 'Montserrat', sans-serif;
-     font-weight: 800;
-     color: #00b8de;
-     padding-top: 20px
- }
-
- .cargando span {
-     font-size: 20px;
-     text-transform: uppercase;
- }
-
- .pelotas {
-     width: 30px;
-     height: 30px;
-     background-color: #00b8de;
-     animation: salto .5s alternate infinite;
-     border-radius: 50%
- }
-
- .pelotas:nth-child(2) {
-     animation-delay: .18s;
- }
-
- .pelotas:nth-child(3) {
-     animation-delay: .37s;
- }
-
- @keyframes salto {
-     from {
-         transform: scaleX(1.25);
-     }
-
-     to {
-         transform:
-             translateY(-50px) scaleX(1);
-     }
  }

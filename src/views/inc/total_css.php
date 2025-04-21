@@ -25,9 +25,10 @@
 <link rel="stylesheet" href="<?php echo App::URL_LIBRARY."flatpickr/css/flatpickr.min.css"?>"/>
 <link rel="stylesheet" href="<?php echo App::URL_LIBRARY."flatpickr/css/material_blue.css"?>"/>
 <!-- CSS PERSONALIZADO  -->
-<link rel="stylesheet" href="<?php echo App::URL_CSS."menu.css"?>" />
-<link rel="stylesheet" href="<?php echo App::URL_CSS."subMenu.css"?>" />
-<link rel="stylesheet" href="<?php echo App::URL_CSS . "Utils/buttons.css"; ?>">
+<link rel="stylesheet" href="<?php echo App::URL_CSS."Utils/menu.css"?>" />
+<link rel="stylesheet" href="<?php echo App::URL_CSS."Utils/subMenu.css"?>" />
+<link rel="stylesheet" href="<?php echo App::URL_CSS . "Utils/cargando.css"; ?>">
+<link rel="stylesheet" href="<?php echo App::URL_CSS . "Utils/botones-hover.css"; ?>">
 <link rel="stylesheet" href="<?php echo App::URL_CSS . "Utils/inputs.css"; ?>">
 
 

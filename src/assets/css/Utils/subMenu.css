@@ -1,0 +1,27 @@
+
+/* IMPORTAR COLORES */
+@import url(colores.css);
+/* sub menu */
+.nav-link {
+    color: var(--color-gris-medio) !important;
+}
+
+.card-header {
+    border: 0px !important;
+    background-color: transparent !important;
+    color: var(--color-blanco) !important;
+}
+
+.card-header a {
+    border: 0px !important;
+}
+
+.sidebar .active, .nav-tabs .active {
+    background-color: var(--color-azul) !important;
+    color: var(--color-blanco) !important;
+} 
+
+
+
+
+

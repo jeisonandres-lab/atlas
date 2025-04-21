@@ -1,17 +1,4 @@
 @import url('colores.css');
-:root{
-    --buttonVerde:#01bd0a;
-    --buttonVerdeHover: #019e08;
-    --buttonRojo:#FF0000;
-    --buttonRojoHover: #c71313;
-    --buttonAzul: #1929bb;
-    --buttonAzulHover: #0d1a8b;
-    --buttonAzulClaro: #2980b9 ;
-    --buttonAzulClaroHover: #1020ad;
-    --buttonAmarillo: #FE9001;
-    --buttonAmarilloHover: #f47e00;
-}
-
 
 .buttonVerde{
     background-color: var(--buttonVerde) !important;
@@ -128,8 +115,6 @@ div.dt-button-collection .dt-button-desactive:after {
 .small-emphasis-rosa {
     color: #72062b !important;
 }
-
-
 
 
 /* small border */

@@ -13,6 +13,8 @@ use App\Atlas\config\App;
     <?php require_once App::URL_INC . "total_css.php"; ?>
     <link rel="stylesheet" href="<?php echo App::URL_CSS . "registroPersonal.css"; ?>">
     <link rel="stylesheet" href="<?php echo App::URL_CSS . "Utils/checkbox.css"; ?>">
+    <link rel="stylesheet" href="<?php echo App::URL_CSS . "Utils/formularios.css"; ?>">
+    <link rel="stylesheet" href="<?php echo App::URL_CSS . "Utils/calendario.css"; ?>">
 </head>
 
 <body class="layout-fixed sidebar-expand-lg bg-body-tertiary">
@@ -259,7 +261,7 @@ use App\Atlas\config\App;
                                         <i class="fa-solid fa-plus me-2"></i>
                                         Asignar Discapacidad
                                     </button>
-                                    <button type="button" class="btn btn-primary btn-hover-azul" id="buttonModalImagen">
+                                    <button type="button" class="btn btn-primary btn-hover-azul mostrar-boton-imagen" id="buttonModalImagen">
                                     <i class="fa-regular fa-images-user me-2"></i>
                                     Ver Imagen</button>
                                     <button type="button" class="btn btn-next btn-warning text-white btn-hover-amarillo"><i class="fa-solid fa-arrow-right me-2"></i>Siguiente</button>

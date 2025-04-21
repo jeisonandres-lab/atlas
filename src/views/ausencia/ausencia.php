@@ -12,8 +12,7 @@ use App\Atlas\config\App; ?>
     <?php require_once App::URL_INC . "tablets_css.php"; ?>
 
     <link rel="stylesheet" href="<?php echo App::URL_CSS . "trabajadores.css"; ?>">
-    <link rel="stylesheet" href="<?php echo App::URL_CSS . "Utils/buttons.css"; ?>">
-    <link rel="stylesheet" href="<?php echo App::URL_CSS . "Utils/colorTableButtons.css"; ?>">
+    <link rel="stylesheet" href="<?php echo App::URL_CSS . "Utils/botonesTablas.css"; ?>">
     <link rel="stylesheet" href="./src/libs/jQueryUI/bootstrap-datepicker.css">
 </head>
 
