@@ -1,5 +1,5 @@
 import { formatState } from "./funciones.js";
-import { ARRAYMESES, niveles } from "./variablesArray.js";
+import { meses, nivelAcamedico } from "./objetos.js";
 // Funcion para vlaidar campos tipo text que tambien coloquen la primera letra en mayuscula
 export async function validarNombre(input, cumplidospan) {
   $(document).on("input", input, function () {
@@ -447,7 +447,7 @@ export async function colocarMeses(input) {
 
     // $(input).append(`<option value="">Seleccione un mes</option>`);
 
-    ARRAYMESES.forEach(mes => {
+    meses.forEach(mes => {
       $(input).append(`<option value="${mes.valor}">${mes.nombre}</option>`);
     });
   } catch (error) {
@@ -480,7 +480,7 @@ export async function colocarNivelesEducativos(input) {
     // Limpiar el select antes de agregar nuevas opciones
     $(input).empty();
     $(input).append(`<option value="">Seleccione un nivel academico</option>`);
-    niveles.forEach(nivel => {
+    nivelAcamedico.forEach(nivel => {
       $(input).append(`<option value="${nivel.valor}">${nivel.nombre}</option>`);
     });
   } catch (error) {

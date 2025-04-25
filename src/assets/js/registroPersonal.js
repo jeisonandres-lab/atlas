@@ -1,8 +1,23 @@
 // IMPORT DE VALIDACION DE INPUTS 
-import {  alertaNormalmix } from "./utils/alerts.js";
-import {  observarFormulario } from "./utils/formularioAjax.js";
-import {  carculasDias, crearManejadorEdad, validarBusquedaCedula } from "./utils/funciones.js";
-import { configurarFlatpickrSinFinesDeSemana } from "./utils/inputCalendar.js";
+import {
+  alertaNormalmix
+} from "./utils/alerts.js";
+
+import {
+  enviarFormulario,
+  observarFormulario
+} from "./utils/formularioAjax.js";
+
+import {
+  carculasDias,
+  crearManejadorEdad,
+  validarBusquedaCedula
+} from "./utils/funciones.js";
+
+import {
+  configurarFlatpickrSinFinesDeSemana
+} from "./utils/inputCalendar.js";
+
 import {
   colocarMeses,
   colocarYear,
@@ -14,42 +29,43 @@ import {
   validarNumeroNumber,
   validarInputFecha,
   llenarSelect,
+  file,
+  validarTelefono,
 } from "./utils/inputs.js";
-import { formulariomultiple } from "./utils/multiForm.js";
-import { buscarMunicipioPorEstado, buscarParroquiaPorMunicipio } from "./utils/peticiones.js";
-import { setCargarDiscapacidad, setCargarEstadoCivil, setCargarNivelesAcademicos, setCargarSexo, setCargarTipoVivienda } from "./utils/variablesArray.js";
 
+import {
+  formulariomultiple
+} from "./utils/multiForm.js";
+
+import {
+  buscarMunicipioPorEstado,
+  buscarParroquiaPorMunicipio
+} from "./utils/peticiones.js";
+
+import {
+  setCargarDiscapacidad,
+  setCargarEstadoCivil,
+  setCargarNivelesAcademicos,
+  setCargarSexo,
+  setCargarTipoVivienda
+} from "./utils/manejadoresObjetos.js";
+
+import { endpoints } from "./utils/endpoints.js";
+
+import { selectores } from "./utils/objetos.js";
 /**
  * Módulo Personal: gestiona todas las funciones relacionadas con el registro de personal
  */
 const ModuloPersonal = (() => {
-  // Selectores del DOM
-  const selectores = {
-    cedula: '#cedula',
-    primerNombre: '#primerNombre',
-    segundoNombre: '#segundoNombre',
-    primerApellido: '#primerApellido',
-    segundoApellido: '#segundoApellido',
-    calle: '#calle',
-    urbanizacion: '#urbanizacion',
-    edad: '#edad',
-    fechaIngreso: '#fechaing3',
-    ano: '#ano',
-    meses: '#meses',
-    dia: '#dia',
-    civil: '#civil',
-    sexo: '#sexo',
-    vivienda: '#vivienda',
-    academico: '#academico',
-    formulario: '#formulario_registro',
-    btnAceptar: '#aceptar',
-    discapacidad: '.buttonDisca',
-    contenedores: {
-      formularioEmpleado: '.formulario_empleado',
-      discapacidad: '#contenTipoDiscapacidad',
-      partida: '#contentPartida',
-      estadoDerecho: '#botonModalEstadoDerecho'
-    }
+
+
+  const endpoints = {
+    registrar: 'src/ajax/registroPersonal.php?modulo_personal=registrar',
+    obtenerDependencias: 'src/ajax/registroPersonal.php?modulo_personal=obtenerDependencias',
+    obtenerEstatus: 'src/ajax/registroPersonal.php?modulo_personal=obtenerEstatus',
+    obtenerCargo: 'src/ajax/registroPersonal.php?modulo_personal=obtenerCargo',
+    obtenerDepartamento: 'src/ajax/registroPersonal.php?modulo_personal=obtenerDepartamento',
+    obtenerEstados: 'src/ajax/registroPersonal.php?modulo_personal=obtenerEstados',
   };
 
   // Constantes para mensajes y configuración
@@ -61,7 +77,9 @@ const ModuloPersonal = (() => {
   };
 
   // Crear el manejador de edad
-  
+  /**
+   * @param {object} $configEdad - input donde se coloca la edad
+   */
   const manejarCalculoEdad = crearManejadorEdad(configEdad);
 
   // cargar alerta del formulario
@@ -76,32 +94,29 @@ const ModuloPersonal = (() => {
     </div>
   `;
 
-  // endpoints de API
-  const endpoints = {
-    obtenerDependencias: 'src/ajax/registroPersonal.php?modulo_personal=obtenerDependencias',
-    obtenerEstatus: 'src/ajax/registroPersonal.php?modulo_personal=obtenerEstatus',
-    obtenerCargo: 'src/ajax/registroPersonal.php?modulo_personal=obtenerCargo',
-    obtenerDepartamento: 'src/ajax/registroPersonal.php?modulo_personal=obtenerDepartamento',
-    obtenerEstados: 'src/ajax/registroPersonal.php?modulo_personal=obtenerEstados'
-  };
-
   // Configuración de validaciones
   const validaciones = {
     nombres: [
       { selector: selectores.primerNombre, span: '.span_nombre' },
       { selector: selectores.segundoNombre, span: '.span_nombre2' },
       { selector: selectores.primerApellido, span: '.span_apellido' },
-      { selector: selectores.segundoApellido, span: '.span_apellido2' }
+      { selector: selectores.segundoApellido, span: '.span_apellido2' },
     ],
     direccion: [
       { selector: selectores.calle, span: '.span_calle' },
       { selector: selectores.urbanizacion, span: '.span_urbanizacion' }
     ],
     selectores: [
-      { selector: '#estatus', span: '.span_estatus' },
-      { selector: '#cargo', span: '.span_cargo' },
-      { selector: '#departamento', span: '.span_departamento' },
-      { selector: '#dependencia', span: '.span_dependencia' }
+      { selector: selectores.estatus, span: '.span_estatus' },
+      { selector: selectores.cargos, span: '.span_cargo' },
+      { selector: selectores.departamentos, span: '.span_departamento' },
+      { selector: selectores.dependencias, span: '.span_dependencia' },
+      { selector: selectores.tipoDiscapacidad, span: '.span_tpDiscapacidad' }
+    ],
+    archivos: [
+      { selector: selectores.partidaDiscapacidad, span: '.span_docArchivoDis' },
+      { selector: selectores.contrato, span: '.span_contrato' },
+      { selector: selectores.notificacion, span: '.span_notificacion' },
     ]
   };
 
@@ -128,7 +143,11 @@ const ModuloPersonal = (() => {
     validaciones.selectores.forEach(({ selector, span }) =>
       validarSelectoresSelec2(selector, span));
 
+    validaciones.archivos.forEach(({ selector, span }) =>
+      file(selector, span));
+
     // Otras validaciones específicas
+    validarTelefono('#telefono', '.span_telefono', '#linea')
     validarNumeros(selectores.cedula, '.span_cedula');
     validarNumeroNumber(selectores.edad, '.span_edad', 2);
     validarBusquedaCedula(selectores.cedula, ["#img-modals", "#img-contener"]);
@@ -152,33 +171,30 @@ const ModuloPersonal = (() => {
   /**
    * Maneja el envío del formulario
    */
-  const manejarEnvioFormulario = async (enviarFormulario) => {
-    enviarFormulario.preventDefault();
-    const formData = new FormData(enviarFormulario.target);
+  const manejarEnvioFormulario = async (evento) => {
+    evento.preventDefault(); // Detener el comportamiento predeterminado del formulario
+    const formData = new FormData(evento.target); // Obtener los datos del formulario
     const fechaIngreso = $(selectores.fechaIngreso).val().split("-").reverse().join("-");
-
+  
     formData.append("fechaing", fechaIngreso);
-
+  
     if ($("#btnEDInces").prop('checked')) {
       formData.append("FamiliarInces", "si");
     }
-
+  
     $(selectores.btnAceptar).prop("disabled", true);
-
+  
     try {
-      const response = await enviarFormulario(
-        endpoints.registrar,
-        formData,
-        async (parsedData) => {
-          $(selectores.btnAceptar).prop("disabled", false);
-          if (parsedData.exito) {
-            await AlertDirection("success", parsedData.mensaje, "top", 7000);
-          } else {
-            await alertaNormalmix(parsedData.mensaje, 4000, "error", "top-end");
-          }
-        },
-        true
-      );
+      // Asegúrate de que `enviarFormulario` sea una función válida importada o definida
+      const response = await enviarFormulario(endpoints.registrar,formData,);
+      
+        $(selectores.btnAceptar).prop("disabled", false);
+        if (data.exito) {
+          await AlertDirection("success", data.mensaje, "top", 7000);
+        } else {
+          await alertaNormalmix(data.mensaje, 4000, "error", "top-end");
+        }
+  
     } catch (error) {
       console.error('Error en el envío:', error);
       $(selectores.btnAceptar).prop("disabled", false);
@@ -192,12 +208,10 @@ const ModuloPersonal = (() => {
   const manejarDiscapacidad = (boton) => {
     const contenedor = $('#contentPartida');
     const tipoDiscapacidad = $('#contenTipoDiscapacidad');
-    const tpDiscapacidad = $('#tpDiscapacidad');
-    const archivoDis = $('#achivoDis');
     const duracionAnimacion = 500;
 
     const mostrarContenedores = () => {
-      incluirSelec2('#tpDiscapacidad');
+      incluirSelec2(selectores.tipoDiscapacidad);
       tipoDiscapacidad.slideDown(duracionAnimacion);
       contenedor.slideDown(duracionAnimacion);
 
@@ -207,12 +221,12 @@ const ModuloPersonal = (() => {
     };
 
     const ocultarContenedores = () => {
-      tpDiscapacidad
+      selectores.tipoDiscapacidad
         .addClass('ignore-validation')
         .select2('destroy')
         .val('');
 
-      archivoDis
+      selectores.partidaDiscapacidad
         .addClass('ignore-validation')
         .val('');
 
@@ -254,15 +268,18 @@ const ModuloPersonal = (() => {
    */
   const cargarDatosIniciales = async () => {
     try {
-      const promesas = Object.values(endpoints).map(url =>
-        fetch(url).then(res => res.json())
+      // Filtrar los endpoints excluyendo 'registros'
+      const endpointsFiltrados = Object.values(endpoints).filter(url => !url.includes('registrar'));
+  
+      // Realizar las solicitudes a los endpoints filtrados
+      const resultados = await Promise.all(
+        endpointsFiltrados.map(url => fetch(url).then(res => res.json()))
       );
-
-      const resultados = await Promise.all(promesas);
-
+  
+      // Procesar los resultados
+      const selectores2 = ['dependencia', 'estatus', 'cargo', 'departamento', 'estado'];
       resultados.forEach((data, index) => {
         if (data.exito) {
-          const selectores2 = ['dependencia', 'estatus', 'cargo', 'departamento', 'estado'];
           llenarSelect(data.data, selectores2[index], "Seleccione una opción");
         }
       });
@@ -284,12 +301,12 @@ const ModuloPersonal = (() => {
     cargarDatosIniciales();
 
     // CARGAR VALIABLES DE HTML
-    setCargarEstadoCivil("#civil"); // Carga los estados civiles
-    setCargarSexo("#sexo"); // Carga los sexos
-    setCargarNivelesAcademicos("#academico"); // Carga los niveles académicos
-    setCargarTipoVivienda("#vivienda"); // Carga los tipos de vivienda
-    setCargarDiscapacidad("#tpDiscapacidad")
-    carculasDias("#meses", "#ano", "#dia", ".span_mes"); // funcion de calcular dias de los meses
+    setCargarEstadoCivil(selectores.civil); // Carga los estados civiles
+    setCargarSexo(selectores.sexo); // Carga los sexos
+    setCargarNivelesAcademicos(selectores.academico); // Carga los niveles académicos
+    setCargarTipoVivienda(selectores.vivienda); // Carga los tipos de vivienda
+    setCargarDiscapacidad(selectores.tipoDiscapacidad) // cargar las discapacidades
+    carculasDias(selectores.meses, selectores.ano, selectores.dia, ".span_mes"); // funcion de calcular dias de los meses
 
     //cargar calendario 
     configurarFlatpickrSinFinesDeSemana("#fechaing3");
@@ -299,12 +316,12 @@ const ModuloPersonal = (() => {
     formulariomultiple('.f1 .btn-next', "#alert", contenidoAlerta);
 
     // Inicializar funcionalidades adicionales
-    buscarMunicipioPorEstado('#estado', '#municipio');
-    buscarParroquiaPorMunicipio('#municipio', '#parroquia');
+    buscarMunicipioPorEstado(selectores.estado, selectores.municipio);
+    buscarParroquiaPorMunicipio(selectores.municipio, selectores.parroquia);
     observarFormulario($(selectores.formulario)[0], $(selectores.btnAceptar));
   };
 
-  // API pública
+  // retornar datos
   return {
     inicializar
   };

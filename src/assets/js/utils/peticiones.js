@@ -1,3 +1,4 @@
+import { endpoints } from "./endpoints.js";
 import { obtenerDatosJQuery } from "./formularioAjax.js";
 import { llenarSelect } from "./inputs.js";
 
@@ -7,7 +8,7 @@ export async function buscarMunicipioPorEstado(estadoSelector, municipioSelector
         try {
             if (idEstado !== undefined) {
                 try {
-                    let urls = ["src/ajax/registroPersonal.php?modulo_personal=obtenerMunicipio"];
+                    let urls = [endpoints.obtenerMunicipios];
                     let options = { idestado: idEstado };
                     let requests = urls.map((url, index) => {
                         if (index === 0) { // Suponiendo que quieres pasar `options` solo a la primera solicitud
@@ -40,7 +41,7 @@ export async function buscarParroquiaPorMunicipio(municipioSelector, parroquiaSe
         try {
             if (idmunicipio !== undefined) {
                 try {
-                    let urls = ["src/ajax/registroPersonal.php?modulo_personal=obtenerParroquia"];
+                    let urls = [endpoints.obtenerParroquias];
                     let options = { idmunicipio: idmunicipio };
                     let requests = urls.map((url, index) => {
                         if (index === 0) { // Suponiendo que quieres pasar `options` solo a la primera solicitud

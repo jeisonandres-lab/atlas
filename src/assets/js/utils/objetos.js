@@ -1,17 +1,6 @@
-// objeto de niveles academicos 
-export const niveles = [
-    { valor: 'Bachiller', nombre: "Bachiller" },
-    { valor: 'Tecnico', nombre: "Técnico" },
-    { valor: 'Tecnologo', nombre: "Tecnólogo" },
-    { valor: 'Pregrado', nombre: "Pregrado" },
-    { valor: 'Ingeniero', nombre: "Ingeniero" },
-    { valor: 'Especialista', nombre: "Especialista" },
-    { valor: 'Maestria', nombre: "Maestría" },
-    { valor: 'Doctorado', nombre: "Doctorado" },
-];
 
 // objeto de niveles academicos 
-export const VARIABLE_NIVEL_ACADEMICO = [
+export const nivelAcamedico = [
     { valor: 'Bachiller', nombre: "Bachiller" },
     { valor: 'Tecnico', nombre: "Técnico" },
     { valor: 'Tecnologo', nombre: "Tecnólogo" },
@@ -23,7 +12,7 @@ export const VARIABLE_NIVEL_ACADEMICO = [
 ];
 
 // objeto de meses
-export const ARRAYMESES = [
+export const meses = [
     { valor: '', nombre: "Meses" },
     { valor: '01', nombre: "Enero" },
     { valor: '02', nombre: "Febrero" },
@@ -40,7 +29,7 @@ export const ARRAYMESES = [
 ];
 
 // objeto de parentesco
-export const ARRAYPARENTESCO = [
+export const parentesco = [
     { valor: '', nombre: "Seleccione un parentesco" },
     { valor: 'Hijo', nombre: "Hijo" },
     { valor: 'Hija', nombre: "Hija" },
@@ -51,7 +40,7 @@ export const ARRAYPARENTESCO = [
 ];
 
 // objeto de discapacidades
-export const DISCAPACIDADES = [
+export const discapacidades = [
     { valor: '', nombre: "Seleccione una discapacidad" },
     { valor: 'Visual', nombre: "Discapacidad visual" },
     { valor: 'Auditiva', nombre: "Discapacidad auditiva" },
@@ -64,7 +53,7 @@ export const DISCAPACIDADES = [
 ];
 
 // objeto de tipo de vivienda
-const TIPO_VIVIENDA = [
+export const tipoVivienda = [
     { valor: "", nombre: "Seleccione una vivienda" },
     { valor: "Casa", nombre: "Casa" },
     { valor: "Departamento", nombre: "Departamento" },
@@ -78,7 +67,7 @@ export const sexo = [
 ];
 
 // objeto de estado civil
-const ESTADO_CIVIL = [
+export const estadoCivil = [
     { valor: "", nombre: "Estado civil" },
     { valor: "Soltero", nombre: "Soltero" },
     { valor: "Casado", nombre: "Casado" },
@@ -87,80 +76,45 @@ const ESTADO_CIVIL = [
     { valor: "EstadoDerecho", nombre: "Estado de derecho" },
 ];
 
-// exportar la funcion de parentesco 
-export async function setCargarParentesco(input) {
-    const Select = $(input);
-    Select.empty();
+// Objeto de selectores
+// Selectores del DOM
+export const selectores = {
+    cedula: '#cedula',
+    primerNombre: '#primerNombre',
+    segundoNombre: '#segundoNombre',
+    primerApellido: '#primerApellido',
+    segundoApellido: '#segundoApellido',
+    calle: '#calle',
+    urbanizacion: '#urbanizacion',
+    edad: '#edad',
+    fechaIngreso: '#fechaing3',
+    ano: '#ano',
+    meses: '#meses',
+    dia: '#dia',
+    civil: '#civil',
+    sexo: '#sexo',
+    vivienda: '#vivienda',
+    academico: '#academico',
+    formulario: '#formulario_registro',
+    btnAceptar: '#aceptar',
+    discapacidad: '.buttonDisca',
+    tipoDiscapacidad: '#tpDiscapacidad',
 
-    ARRAYPARENTESCO.forEach(parentesco => {
-        Select.append($("<option>", {
-            value: parentesco.valor,
-            text: parentesco.nombre
-        }));
-    });
-}
-
-// exportar la funcion de discapacidad
-export function setCargarDiscapacidad(selectId) {
-    const select = $(selectId);
-    select.empty();
-
-    DISCAPACIDADES.forEach(discapacidad => {
-        select.append($("<option>", {
-            value: discapacidad.valor,
-            text: discapacidad.nombre
-        }));
-    });
-}
-
-// exportar la funcion de sexo
-export async function setCargarSexo(selectId) {
-    const select = $(selectId);
-    select.empty();
-
-    sexo.forEach(sexo => {
-        select.append($("<option>", {
-            value: sexo.valor,
-            text: sexo.nombre
-        }));
-    });
-}
-
-// exportar la funcion de estado civil
-export async function setCargarEstadoCivil(input) {
-    const Select = $(input);
-    Select.empty();
-  
-    ESTADO_CIVIL.forEach(estadoCivil => {
-      Select.append($("<option>", {
-        value: estadoCivil.valor,
-        text: estadoCivil.nombre,
-      }));
-    });
-}
-
-// exportar la funcion de tipo de vivienda
-export async function setCargarTipoVivienda(input) {
-  const Select = $(input);
-  Select.empty();
-
-  TIPO_VIVIENDA.forEach(vivienda => {
-    Select.append($("<option>", {
-      value: vivienda.valor,
-      text: vivienda.nombre,
-    }));
-  });
-}
-
-// exportar la funcion de niveles academicos
-export async function setCargarNivelesAcademicos(input) {
-    const Select = $(input);
-    Select.empty();
-  
-    VARIABLE_NIVEL_ACADEMICO.forEach(nivel => {
-      Select.append($("<option>", {
-        value: nivel.valor,
-        text: nivel.nombre,
-      }));
-    });
-}
+    partidaDiscapacidad: '#achivoDis',
+    contrato: '#contrato',
+    notificacion: '#notificacion',
+    
+    estatus: '#estatus',
+    cargos: '#cargo',
+    departamentos: '#departamento',
+    dependencias: '#dependencia',
+    estado: '#estado',
+    municipio: '#municipio',
+    parroquia: '#parroquia',
+    contenedores: {
+        formularioEmpleado: '.formulario_empleado',
+        discapacidad: '#contenTipoDiscapacidad',
+        partida: '#contentPartida',
+        estadoDerecho: '#botonModalEstadoDerecho'
+    }
+};
