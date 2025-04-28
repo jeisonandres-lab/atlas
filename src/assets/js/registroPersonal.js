@@ -53,6 +53,8 @@ import {
 import { endpoints } from "./utils/endpoints.js";
 
 import { selectores } from "./utils/objetos.js";
+
+import { setContenedorNombreDepa, setContenedorNumDepa, setContenedorPiso, setVariableNumVivienda } from "./utils/variablesContenido.js"
 /**
  * Módulo Personal: gestiona todas las funciones relacionadas con el registro de personal
  */
@@ -175,26 +177,26 @@ const ModuloPersonal = (() => {
     evento.preventDefault(); // Detener el comportamiento predeterminado del formulario
     const formData = new FormData(evento.target); // Obtener los datos del formulario
     const fechaIngreso = $(selectores.fechaIngreso).val().split("-").reverse().join("-");
-  
+
     formData.append("fechaing", fechaIngreso);
-  
+
     if ($("#btnEDInces").prop('checked')) {
       formData.append("FamiliarInces", "si");
     }
-  
+
     $(selectores.btnAceptar).prop("disabled", true);
-  
+
     try {
       // Asegúrate de que `enviarFormulario` sea una función válida importada o definida
-      const response = await enviarFormulario(endpoints.registrar,formData,);
-      
-        $(selectores.btnAceptar).prop("disabled", false);
-        if (data.exito) {
-          await AlertDirection("success", data.mensaje, "top", 7000);
-        } else {
-          await alertaNormalmix(data.mensaje, 4000, "error", "top-end");
-        }
-  
+      const response = await enviarFormulario(endpoints.registrar, formData,);
+
+      $(selectores.btnAceptar).prop("disabled", false);
+      if (data.exito) {
+        await AlertDirection("success", data.mensaje, "top", 7000);
+      } else {
+        await alertaNormalmix(data.mensaje, 4000, "error", "top-end");
+      }
+
     } catch (error) {
       console.error('Error en el envío:', error);
       $(selectores.btnAceptar).prop("disabled", false);
@@ -247,6 +249,39 @@ const ModuloPersonal = (() => {
   };
 
   /**
+   * Configura el manejo de cambios en el tipo de vivienda y muestra/oculta los contenedores correspondientes
+   * según el tipo seleccionado (Departamento o Casa)
+   */
+  const cargarVivienda = () => {
+    // Configurar el evento para detectar cambios en el selector de vivienda
+    $(document).on("change", selectores.vivienda, function() {
+      const tipoVivienda = $(this).val();
+      
+      // Eliminar contenedores existentes para evitar duplicados
+      $("#contenPiso, #contenNombreDepa, #contenNumDepa, #contenNVivienda").remove();
+      
+      if (tipoVivienda === 'Departamento') {
+        // Crear contenedores para departamento
+        const pisoContenedor = setContenedorPiso('piso', 'piso');
+        const nombreDepaContenedor = setContenedorNombreDepa('urbanizacion', 'urbanizacion');
+        const numDepaContenedor = setContenedorNumDepa('numeroDepa', 'numeroDepa');
+        
+        // Usar template literals para una concatenación más eficiente
+        const nuevoHTML = `${pisoContenedor}${nombreDepaContenedor}${numDepaContenedor}`;
+        
+        // Insertar los contenedores después del elemento con ID "contenCalle"
+        $("#contenCalle").after(nuevoHTML);
+      } else if (tipoVivienda === 'Casa') {
+        // Crear contenedor para número de vivienda
+        const viviendaContenedor = setVariableNumVivienda('numeroVivienda', 'numeroVivienda');
+        
+        // Insertar el contenedor después del elemento con ID "contenCalle"
+        $("#contenCalle").after(viviendaContenedor);
+      }
+    });
+  };
+
+  /**
    * Configura los event listeners
    */
   const configurarEventListeners = () => {
@@ -270,12 +305,12 @@ const ModuloPersonal = (() => {
     try {
       // Filtrar los endpoints excluyendo 'registros'
       const endpointsFiltrados = Object.values(endpoints).filter(url => !url.includes('registrar'));
-  
+
       // Realizar las solicitudes a los endpoints filtrados
       const resultados = await Promise.all(
         endpointsFiltrados.map(url => fetch(url).then(res => res.json()))
       );
-  
+
       // Procesar los resultados
       const selectores2 = ['dependencia', 'estatus', 'cargo', 'departamento', 'estado'];
       resultados.forEach((data, index) => {
@@ -295,10 +330,11 @@ const ModuloPersonal = (() => {
     // Ocultar elementos iniciales
     Object.values(selectores.contenedores).forEach(selector => $(selector).hide());
 
-    inicializarValidadores();
-    inicializarSelect2();
-    configurarEventListeners();
-    cargarDatosIniciales();
+    inicializarValidadores(); // Inicializar validadores
+    inicializarSelect2(); // Inicializar Select2
+    configurarEventListeners(); // Configurar event listeners
+    cargarDatosIniciales(); // Cargar datos iniciales
+    cargarVivienda(); // Inicializar manejador de vivienda
 
     // CARGAR VALIABLES DE HTML
     setCargarEstadoCivil(selectores.civil); // Carga los estados civiles

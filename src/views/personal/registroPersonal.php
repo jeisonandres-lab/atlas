@@ -35,7 +35,7 @@ use App\Atlas\config\App;
                 <div class="row">
                     <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-8 px-0 mb-2 form-validate " style="text-align: center;">
                         <!-- formulario de registro multi uso de los empleados -->
-                        <form role="form " action="" method="post" class="f1 pt-5 px-4 formValidar content" id="formulario_registro" style="color: #888;">
+                        <form role="form " action="" method="post" class="f1 pt-5 px-4 formValidar content" id="formulario_registro" style="color: #888;" autocomplete="off">
                             <h3>Registrar Empleado</h3>
                             <div class="f1-steps pasos">
                                 <div class="f1-progress">

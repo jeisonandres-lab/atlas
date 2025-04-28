@@ -193,7 +193,12 @@ export function setVariableNumVivienda(id, name) {
                 <label for="${id}">N.Vivienda</label>
                 <div class="input-group">
                     <span class="input-group-text span_numeroVivienda"><i class="icons fa-regular fa-input-numeric"></i></span>
-                    <input type="number" class="form-control" id="${id}" name="${name}" placeholder="Numero Vivienda">
+                    <input type="text" 
+                    class="form-control" 
+                    id="${id}" 
+                    name="${name}" 
+                    placeholder="Vivienda"
+                    pattern="[0-9]*">
                 </div>
             </div>
         </div>
