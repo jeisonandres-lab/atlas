@@ -3,7 +3,7 @@ namespace App\Atlas\models;
 
 use App\Atlas\config\Conexion;
 
-class ubicacionModel extends Conexion {
+class UbicacionModel extends Conexion {
 
     public function estados(){
         return $this->ejecutarConsulta("SELECT * FROM estados");
@@ -27,5 +27,5 @@ class ubicacionModel extends Conexion {
         }
     }
 
-    
+
 }

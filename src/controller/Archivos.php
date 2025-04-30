@@ -2,7 +2,7 @@
 
 namespace App\Atlas\controller;
 
-class archivo
+class Archivos
 {
     public function datosArchivos()
     {

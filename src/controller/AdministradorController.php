@@ -2,14 +2,14 @@
 
 namespace App\Atlas\controller;
 
-use App\Atlas\models\administradorModel;
-use App\Atlas\controller\auditoriaController;
-use App\Atlas\models\personalModel;
+use App\Atlas\models\AdministradorModel;
+use App\Atlas\controller\AuditoriaController;
+use App\Atlas\models\PersonalModel;
 use App\Atlas\config\App;
 use App\Atlas\config\Conexion;
-use App\Atlas\config\server;
+use App\Atlas\config\Server;
 
-class administradorController extends administradorModel
+class AdministradorController extends AdministradorModel
 {
     private $auditoriaController;
     private $app;
@@ -22,8 +22,8 @@ class administradorController extends administradorModel
     {
         parent::__construct();
         $this->app = new App();
-        $this->personalModel = new personalModel();
-        $this->auditoriaController = new auditoriaController();
+        $this->personalModel = new PersonalModel();
+        $this->auditoriaController = new AuditoriaController();
         $this->conexion = new Conexion();
     }
 
@@ -176,5 +176,5 @@ class administradorController extends administradorModel
         // Devolver la respuesta en formato JSON
         header('Content-Type: application/json');
         echo json_encode($data_json);
-    }	
+    }
 }

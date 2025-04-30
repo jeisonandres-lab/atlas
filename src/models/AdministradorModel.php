@@ -5,7 +5,7 @@ namespace App\Atlas\models;
 use App\Atlas\config\Conexion;
 use App\Atlas\controller\report\generateExcelController;
 
-class administradorModel extends Conexion
+class AdministradorModel extends Conexion
 {
 
 
@@ -124,5 +124,5 @@ class administradorModel extends Conexion
         return $this->preguntasSeguridad($parametros);
     }
 
-    
+
 }

@@ -1,6 +1,6 @@
 <?php
 namespace App\Atlas\controller;
-use App\Atlas\models\auditoriaModel;
+use App\Atlas\models\AuditoriaModel;
 
 class AuditoriaController {
 
@@ -8,7 +8,7 @@ class AuditoriaController {
     private static $codigosGenerado; // Array para almacenar los códigos generados
 
     public function __construct() {
-        $this->auditoriaModel = new auditoriaModel();
+        $this->auditoriaModel = new AuditoriaModel();
     }
 
     public function registrarAuditoria($idUsuario, $accion, $descripcion) {

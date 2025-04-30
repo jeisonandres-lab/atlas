@@ -4,7 +4,7 @@ namespace App\Atlas\models;
 
 use App\Atlas\config\Conexion;
 
-class dependenciasModel extends Conexion
+class DependenciasModel extends Conexion
 {
     // Metodos de la Clase Privada
     private function datosDependencia()

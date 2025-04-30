@@ -2,14 +2,14 @@
 
 namespace App\Atlas\controller;
 
-use App\Atlas\models\totalDateModel;
+use App\Atlas\models\TotalDateModel;
 
 date_default_timezone_set("America/Caracas");
 
 
 
 
-class totalDateController extends totalDateModel
+class TotalDateController extends TotalDateModel
 {
     public function totalDatosCard()
     {

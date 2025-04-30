@@ -4,7 +4,7 @@ namespace App\Atlas\models;
 
 use App\Atlas\config\Conexion;
 
-class personalModel extends Conexion
+class PersonalModel extends Conexion
 {
 
     // REGISTRAR DATOS

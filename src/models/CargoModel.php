@@ -4,7 +4,7 @@ namespace App\Atlas\models;
 
 use App\Atlas\config\Conexion;
 
-class cargoModel extends Conexion
+class CargoModel extends Conexion
 {
     // Metodos de la Clase Privada
     private function datosCargo()

@@ -3,14 +3,14 @@
 namespace App\Atlas\controller;
 
 use App\Atlas\config\App;
-use App\Atlas\models\dependenciasModel;
-use App\Atlas\models\tablasModel;
-use App\Atlas\controller\auditoriaController;
+use App\Atlas\models\DependenciasModel;
+use App\Atlas\models\TablasModel;
+use App\Atlas\controller\AuditoriaController;
 
 date_default_timezone_set("America/Caracas");
 
 
-class dependenciasController extends dependenciasModel
+class DependenciasController extends DependenciasModel
 {
 
 
@@ -24,9 +24,9 @@ class dependenciasController extends dependenciasModel
     public function __construct()
     {
         parent::__construct();
-        $this->tablas = new tablasModel();
+        $this->tablas = new TablasModel();
         $this->app = new App();
-        $this->auditoriaController = new auditoriaController();
+        $this->auditoriaController = new AuditoriaController();
         $this->app->iniciarSession();
         $this->idUsuario = $_SESSION['id'];
         $this->nombreUsuario = $_SESSION['usuario'];

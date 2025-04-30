@@ -2,16 +2,16 @@
 
 namespace App\Atlas\controller;
 
-use App\Atlas\models\personalModel;
-use App\Atlas\controller\familiarController;
-use App\Atlas\controller\fileUploaderController;
-use App\Atlas\models\tablasModel;
+use App\Atlas\models\PersonalModel;
+use App\Atlas\controller\FamiliarController;
+use App\Atlas\controller\FileUploaderController;
+use App\Atlas\models\TablasModel;
 use App\Atlas\config\App;
-use App\Atlas\models\familiarModel;
+use App\Atlas\models\FamiliarModel;
 
 date_default_timezone_set("America/Caracas");
 
-class personalController extends personalModel
+class PersonalController extends personalModel
 {
 
 
@@ -27,12 +27,12 @@ class personalController extends personalModel
     public function __construct()
     {
         parent::__construct();
-        $this->fileUploader = new fileUploaderController(['pdf', 'jpg', 'png'], '../controller/');
-        $this->tablas = new tablasModel();
+        $this->fileUploader = new FileUploaderController(['pdf', 'jpg', 'png'], '../controller/');
+        $this->tablas = new TablasModel();
         $this->app = new App();
-        $this->auditoriaController = new auditoriaController();
-        $this->familiar = new familiarModel();
-        $this->familiarController = new familiarController();
+        $this->auditoriaController = new AuditoriaController();
+        $this->familiar = new FamiliarModel();
+        $this->familiarController = new FamiliarController();
         $this->app->iniciarSession();
         $this->idUsuario = $_SESSION['id'];
         $this->nombreUsuario = $_SESSION['usuario'];

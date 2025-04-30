@@ -4,7 +4,7 @@ namespace  App\Atlas\models;
 
 use App\Atlas\config\Conexion;
 
-class notificacionModel extends Conexion
+class NotificacionModel extends Conexion
 {
     public function __construct()
     {

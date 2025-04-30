@@ -2,11 +2,11 @@
 
 namespace App\Atlas\controller;
 
-use App\Atlas\models\notificacionModel;
+use App\Atlas\models\NotificacionModel;
 
 date_default_timezone_set("America/Caracas");
 
-class notificacionController extends notificacionModel
+class NotificacionController extends NotificacionModel
 {
     public function __construct()
     {

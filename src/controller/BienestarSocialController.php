@@ -2,12 +2,11 @@
 
 namespace App\Atlas\controller;
 
-use App\Atlas\config\Conexion;
-use App\Atlas\models\tablasModel;
-use App\Atlas\models\bienestarSocialModel;
+use App\Atlas\models\TablasModel;
+use App\Atlas\models\BienestarSocialModel;
 use App\Atlas\config\App;
 
-class bienestarSocialController extends bienestarSocialModel
+class BienestarSocialController extends BienestarSocialModel
 {
 
     private $tablas;
@@ -16,8 +15,8 @@ class bienestarSocialController extends bienestarSocialModel
     public function __construct()
     {
         parent::__construct();
-        $this->tablas = new tablasModel();
-        $this->App = new App ();
+        $this->tablas = new TablasModel();
+        $this->App = new App();
     }
 
     public function datosBienestar()

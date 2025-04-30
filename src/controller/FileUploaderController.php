@@ -2,12 +2,12 @@
 
 namespace App\Atlas\controller;
 
-use App\Atlas\models\personalModel;
+use App\Atlas\models\PersonalModel;
 use App\Atlas\config\Conexion;
-use App\Atlas\controller\auditoriaController;
+use App\Atlas\controller\AuditoriaController;
 use App\Atlas\config\App;
 
-class fileUploaderController extends Conexion
+class FileUploaderController extends Conexion
 {
     private $allowedExtensions;
     private $defaultUploadDir;
@@ -24,9 +24,9 @@ class fileUploaderController extends Conexion
         parent::__construct();
         $this->allowedExtensions = $allowedExtensions;
         $this->defaultUploadDir = $defaultUploadDir;
-        $this->subirDoc = new personalModel();
+        $this->subirDoc = new PersonalModel();
         $this->app = new App();
-        $this->auditoriaController = new auditoriaController();
+        $this->auditoriaController = new AuditoriaController();
         $this->app->iniciarSession();
         $this->idUsuario = $_SESSION['id'];
         $this->nombreUsuario = $_SESSION['usuario'];
@@ -325,7 +325,7 @@ class fileUploaderController extends Conexion
         return $resultados;
     }
 
-    // OBTENER NOMBRE DEL DOCUMENTO 
+    // OBTENER NOMBRE DEL DOCUMENTO
     public function getNombreArchivo(string $inputName, $estadoCivil = null)
     {
         switch ($inputName) {

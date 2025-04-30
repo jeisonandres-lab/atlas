@@ -4,7 +4,7 @@ namespace App\Atlas\models;
 
 use App\Atlas\config\Conexion;
 
-class totalDateModel extends Conexion
+class TotalDateModel extends Conexion
 {
     private function totalDatospersonal()
     {

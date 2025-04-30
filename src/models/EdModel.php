@@ -1,7 +1,7 @@
 <?php
 namespace App\Atlas\models;
 
-class edModel{
+class EdModel{
     private $data;
     private $key = 'tu_clave_secreta';
     public function encriptar(string $parametro){

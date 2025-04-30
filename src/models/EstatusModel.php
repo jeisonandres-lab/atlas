@@ -2,7 +2,7 @@
 namespace App\Atlas\models;
 use App\Atlas\config\Conexion;
 
-class estatusModel extends Conexion{
+class EstatusModel extends Conexion{
 
     // Metodos de la Clase Privada
     private function datosEstatus()

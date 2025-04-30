@@ -2,11 +2,11 @@
 
 namespace App\Atlas\controller;
 
-use App\Atlas\controller\auditoriaController;
+use App\Atlas\controller\AuditoriaController;
 use App\Atlas\config\App;
 use App\Atlas\models\ubicacionModel;
 
-class ubicacionController extends ubicacionModel
+class UbicacionController extends UbicacionModel
 {
     private $auditoriaController;
     private $app;
@@ -17,7 +17,7 @@ class ubicacionController extends ubicacionModel
     {
         parent::__construct();
         $this->app = new App();
-        $this->auditoriaController = new auditoriaController();
+        $this->auditoriaController = new AuditoriaController();
         $this->app->iniciarSession();
         $this->idUsuario = $_SESSION['id'];
         $this->nombreUsuario = $_SESSION['usuario'];

@@ -2,12 +2,12 @@
 
 namespace App\Atlas\controller;
 
-use App\Atlas\models\departamentoModel;
-use App\Atlas\models\tablasModel;
-use App\Atlas\controller\auditoriaController;
+use App\Atlas\models\DepartamentoModel;
+use App\Atlas\models\TablasModel;
+use App\Atlas\controller\AuditoriaController;
 use App\Atlas\config\App;
 
-class departamentoController extends departamentoModel
+class DepartamentoController extends DepartamentoModel
 {
     private $tablas;
     private $auditoriaController;
@@ -19,9 +19,9 @@ class departamentoController extends departamentoModel
     public function __construct()
     {
         parent::__construct();
-        $this->tablas = new tablasModel();
+        $this->tablas = new TablasModel();
         $this->app = new App();
-        $this->auditoriaController = new auditoriaController();
+        $this->auditoriaController = new AuditoriaController();
         $this->app->iniciarSession();
         $this->idUsuario = $_SESSION['id'];
         $this->nombreUsuario = $_SESSION['usuario'];

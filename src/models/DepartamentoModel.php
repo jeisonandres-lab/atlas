@@ -4,7 +4,7 @@ namespace App\Atlas\models;
 
 use App\Atlas\config\Conexion;
 
-class departamentoModel extends Conexion
+class DepartamentoModel extends Conexion
 {
     // Metodos de la Clase Privada
     private function datosDepartamento()
@@ -17,7 +17,7 @@ class departamentoModel extends Conexion
         $sql = $this->ejecutarConsulta("SELECT * FROM departamento depa WHERE depa.activo = 1");
         return $sql;
     }
-    
+
     private function actulizarDepartamento($tabla, $datos, $condicion)
     {
         $sql = $this->actualizarDatos($tabla, $datos, $condicion);

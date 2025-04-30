@@ -2,7 +2,7 @@
 namespace App\Atlas\models;
 use App\Atlas\config\Conexion;
 
-class vacacionesModel extends Conexion {
+class VacacionesModel extends Conexion {
 
     private function registrarAusencia($tabla, $datos){
         $sql = $this->guardarDatos($tabla, $datos);

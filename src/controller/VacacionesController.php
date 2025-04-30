@@ -2,17 +2,16 @@
 
 namespace App\Atlas\controller;
 
-use App\Atlas\config\Conexion;
-use App\Atlas\models\tablasModel;
-use App\Atlas\models\vacacionesModel;
+use App\Atlas\models\TablasModel;
+use App\Atlas\models\VacacionesModel;
 use App\Atlas\controller\AuditoriaController;
-use App\Atlas\models\personalModel;
+use App\Atlas\models\PersonalModel;
 use App\Atlas\config\App;
 
 date_default_timezone_set("America/Caracas");
 
 
-class vacacionesController extends vacacionesModel
+class VacacionesController extends VacacionesModel
 {
 
     private $tablas;
@@ -26,11 +25,11 @@ class vacacionesController extends vacacionesModel
     public function __construct()
     {
         parent::__construct();
-        $this->tablas = new tablasModel();
+        $this->tablas = new TablasModel();
         $this->auditoriaController = new AuditoriaController();
         $this->app = new App();
-        $this->personalModel = new personalModel();
-        $this->auditoriaController = new auditoriaController();
+        $this->personalModel = new PersonalModel();
+        $this->auditoriaController = new AuditoriaController();
         $this->app->iniciarSession();
         $this->idUsuario = $_SESSION['id'];
         $this->nombreUsuario = $_SESSION['usuario'];
@@ -281,7 +280,7 @@ class vacacionesController extends vacacionesModel
         ];
 
         $datosEmpleado = $this->getDatosAusenciaID([$id]);
-        foreach ($datosEmpleado as $row) {
+        foreach ($datosEmpleado as $row) {use App\Atlas\config\Conexion;
             $cedula = $row['cedula'];
             $nombre = $row['primerNombre'] . " " . $row['primerApellido'];
             $actualizarAusencia = $this->getActualizarAusencia('ausenciajustificada', $parametros, $condicion);
