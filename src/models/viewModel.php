@@ -2,10 +2,10 @@
 
 namespace App\Atlas\models;
 
-use App\Atlas\config\error;
+use App\Atlas\config\Error;
 use App\Atlas\config\App;
 
-class viewModel extends error
+class ViewModel extends Error
 {
     private $app;
 
@@ -15,13 +15,19 @@ class viewModel extends error
         // Aquí puedes inicializar propiedades o realizar configuraciones necesarias
         $this->app = new App();
     }
+
     /*---------- Modelo obtener vista ----------*/
+    /*
+    * @param string $vista - Obtener nombre de la vista
+    * @return string - Retorna la ruta de la vista
+    */
     protected function obtenerVistasModelo($vista)
     {
-        error::captureError();
+        Error::captureError();
 
         // Configuración de rutas absolutas de vistas
         $vistas = [
+            'horario' => __DIR__ . '/../views/start/horario.php',
             'Identificarse' => __DIR__ . '/../views/start/login.php',
             'recuperarDatos' => __DIR__ . '/../views/start/recuperar.php',
             'inicio' => __DIR__ . '/../views/home/home.php',
@@ -48,7 +54,7 @@ class viewModel extends error
         } elseif ($vista == "Identificarse" || $vista == "index") {
             return __DIR__ . '/../views/start/login.php'; // Ruta absoluta a Identificarse
         } else {
-            error::captureError("Vista no encontrada: $vista");
+            Error::captureError("Vista no encontrada: $vista");
             header("Location: " . App::APP_URL . "Identificarse");
             exit;
         }

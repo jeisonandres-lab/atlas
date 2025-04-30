@@ -3,7 +3,7 @@ namespace App\Atlas\config;
 
 use App\Atlas\config\Conexion;
 
-class peticiones extends Conexion {
+class Peticiones extends Conexion {
     public function __construct() {
         parent::__construct();
     }

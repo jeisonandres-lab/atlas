@@ -32,8 +32,8 @@ switch ($_GET['modulo_usuario']) {
         $url = $_POST['url'];
         echo $userLogin->cerrarSession_total($url);
         break;
-    case 'DatosUsuariosBasicos':
-        $usercontroller->DatosUsuariosBasicos();
+    case 'datosUsuariosBasicos':
+        $usercontroller->datosUsuariosBasicos();
         break;
 
     case 'DatosUsuarios':
@@ -48,9 +48,6 @@ switch ($_GET['modulo_usuario']) {
         $usercontroller->desactivarUsuario($id);
         break;
 
-    case 'verificarPin':
-        $usercontroller->CambiarUsuario($pin, $cedula, $nombre);
-        break;
     default:
         # code...
         break;

@@ -2,16 +2,16 @@
 
 namespace App\Atlas\controller;
 
-use App\Atlas\config\error;
-use App\Atlas\models\viewModel;
+use App\Atlas\config\Error;
+use App\Atlas\models\ViewModel;
 
-class viewController extends viewModel
+class ViewController extends ViewModel
 {
 
     /*---------- Controlador obtener vistas ----------*/
     public function obtenerVistasControlador(string $vista, string $query = null)
     {
-        error::captureError();
+        Error::captureError();
         // Procesar parámetros GET
     if ($query) {
         parse_str($query, $params);

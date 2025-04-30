@@ -54,7 +54,12 @@ import { endpoints } from "./utils/endpoints.js";
 
 import { selectores } from "./utils/objetos.js";
 
-import { setContenedorNombreDepa, setContenedorNumDepa, setContenedorPiso, setVariableNumVivienda } from "./utils/variablesContenido.js"
+import { 
+  setContenedorNombreDepa, 
+  setContenedorNumDepa, 
+  setContenedorPiso, 
+  setVariableNumVivienda 
+} from "./utils/variablesContenido.js"
 /**
  * Módulo Personal: gestiona todas las funciones relacionadas con el registro de personal
  */

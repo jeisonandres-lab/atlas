@@ -6,7 +6,7 @@
 <!-- CSS DE BOOTSTRAP 5 -->
 <link rel="stylesheet" href="<?php echo App::URL_NODE."bootstrap/dist/css/bootstrap.min.css";?>"/>
 <!-- CODIGO COMPILADO DE CSS DE BOOTSTRAP 5 -->
-<link rel="stylesheet" href="./style.css">
+<link rel="stylesheet" href="<?php echo App::URL_LIBRARY."bootstrap/style.css";?>" />
 <!-- ICONOS DE FONTAWESOME  -->
 <link rel="stylesheet" href="<?php echo App::URL_NODE."@fortawesome/fontawesome-free/css/all.css";?>"/>
 <!-- ICONOS DE BOOTSTRAP 5 -->

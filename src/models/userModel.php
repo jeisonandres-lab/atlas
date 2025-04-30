@@ -4,7 +4,7 @@ namespace App\Atlas\models;
 
 use App\Atlas\config\Conexion;
 
-class userModel extends Conexion
+class UserModel extends Conexion
 {
 
     private function existeUsuario(string $user)
@@ -44,6 +44,7 @@ class userModel extends Conexion
         $sql = $this->actualizarDatos($tabla, $datos, $condicion);
         return $sql;
     }
+
     public function getExisteUsuario($user)
     {
         return $this->existeUsuario($user);;
@@ -58,7 +59,6 @@ class userModel extends Conexion
     {
         return $this->actulizarDato($tabla, $datos, $condicion);
     }
-
 
     // valdiar el pin de seguridad del usuario
     public function getPinSeguridad(array $parametros)

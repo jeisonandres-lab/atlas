@@ -2,25 +2,33 @@
 
 namespace App\Atlas\controller;
 
-use App\Atlas\models\userModel;
+use App\Atlas\models\UserModel;
 use App\Atlas\config\App;
-use App\Atlas\models\tablasModel;
-use App\Atlas\controller\auditoriaController;
+use App\Atlas\models\TablasModel;
+use App\Atlas\controller\AuditoriaController;
 
-class  userController extends userModel
+class  UserController extends UserModel
 {
 
     private $app2;
     private $auditoriaController;
     private $app;
     private $tablas;
+
     public function __construct()
     {
         parent::__construct();
         $this->app = new App();
-        $this->tablas = new tablasModel();
-        $this->auditoriaController = new auditoriaController();
+        $this->tablas = new TablasModel();
+        $this->auditoriaController = new AuditoriaController();
     }
+
+    /**
+     * Inicia sesión
+     * @param string $user
+     * @param string $password
+     * @return array
+     */
     public function logearse(string $user, string $password)
     {
         $data_json = [
@@ -114,7 +122,7 @@ class  userController extends userModel
         echo json_encode($datos);
     }
 
-    public function DatosUsuariosBasicos()
+    public function datosUsuariosBasicos()
     {
         $data_json['data'] = []; // Array de datos para enviar
         $tabla = 'users INNER JOIN rol ON users.idRol = rol.id_rol'; // Tabla a consultar
@@ -273,33 +281,5 @@ class  userController extends userModel
         echo json_encode($data_json);
     }
 
-    public function CambiarUsuario(string $pin, string $cedula, string $nuevo)
-    {
-        $pin = $this->limpiarCadena($pin);
-        $cedula = $this->limpiarCadena($cedula);
-        $nuevo = $this->limpiarCadena($nuevo);
 
-        $data_json = [
-            'exito' => false, // Inicializamos a false por defecto
-            'mensaje' => ''
-        ];
-
-        $cambiar_usuario = [
-            [
-                "campo_nombre" => "nameUser",
-                "campo_marcador" => ":nameUser",
-                "campo_valor" => $nuevo
-            ]
-        ];
-
-        $pin = $this->getPinSeguridad([$pin, $cedula]);
-        if ($pin) {
-            $data_json['exito'] = true;
-            $data_json['mensaje'] = 'Usuario activado con exito';
-        } else {
-            $data_json['mensaje'] = 'Error al activar el usuario';
-        }
-        header('Content-Type: application/json');
-        echo json_encode($data_json);
-    }
 }

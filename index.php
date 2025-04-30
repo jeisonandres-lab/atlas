@@ -2,13 +2,16 @@
 // Inicialmente NO iniciamos la sesión automáticamente
 
 require_once './vendor/autoload.php';
-use App\Atlas\config\App;
-use App\Atlas\controller\viewController;
-use App\Atlas\controller\userController;
 
-$app = new App();
-$login = new userController();
-$viewsController = new viewController();
+use App\Atlas\config\App;
+use App\Atlas\config\HoraLocal;
+use App\Atlas\controller\ViewController;
+use App\Atlas\controller\UserController;
+
+$app = new App(); // Instancias de la clase App
+$login = new UserController(); // Instancias de la clase userController
+$viewsController = new ViewController(); // Instancias de la clase viewController
+$horaLocal = new HoraLocal(); // Instancia de la clase HoraLocal
 
 // Obtener y procesar la URL
 $vista = isset($_GET['vista']) ? $_GET['vista'] : 'login';
@@ -20,11 +23,25 @@ $parametros = !empty($datosURL['parametros']) ? $datosURL['parametros'] : null;
 $rutasPublicas = [
     'Identificarse',
     'recuperarDatos',
-    'login'
+    'login',
+    'horario'
 ];
 
 // Obtener la vista correspondiente
 $vista2 = $viewsController->obtenerVistasControlador($vista);
+
+// Validar horario de acceso (6 AM a 5 PM)
+$fechaHoraActual = $horaLocal->obtenerFechaHoraServidor();
+$horaActual = date('H', strtotime($fechaHoraActual));
+
+// Verificar si la hora actual está dentro del rango permitido (6 AM a 5 PM)
+//if ($horaActual < 6 || $horaActual >= 17) {
+    // Si está fuera del horario permitido, redirigir a la vista de horario
+    //if ($vista !== 'horario') {
+       // header('Location: horario');
+     //   exit();
+   // }
+//}
 
 // Verificar si la ruta actual es pública
 if (in_array($vista, $rutasPublicas)) {
@@ -32,7 +49,7 @@ if (in_array($vista, $rutasPublicas)) {
 } else {
     // Solo iniciamos la sesión si estamos en una ruta protegida
     session_start();
-    
+
     // Verificar autenticación para rutas protegidas
     if (isset($_SESSION['usuario'])) {
         $datosUser = $_SESSION['usuario'];
@@ -46,4 +63,3 @@ if (in_array($vista, $rutasPublicas)) {
         exit();
     }
 }
-?>

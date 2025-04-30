@@ -4,7 +4,7 @@ namespace App\Atlas\models;
 
 use App\Atlas\config\Conexion;
 
-class tablasModel extends conexion
+class TablasModel extends Conexion
 {
 
     private function obtenertodosDatos(

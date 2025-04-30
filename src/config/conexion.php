@@ -1,5 +1,4 @@
 <?php
-//require_once '../../vendor/autoload.php';
 namespace App\Atlas\config;
 
 use App\Atlas\config\Server;
@@ -15,15 +14,20 @@ class Conexion extends Error
     private $password;
     private $charset;
 
+
     public function __construct()
     {
-        $this->host = server::DB_SERVER;
-        $this->db = server::DB_NAME;
-        $this->user = server::DB_USER;
-        $this->password = server::DB_PASS;
-        $this->charset = server::DB_CHARSET;
+        $this->host = Server::DB_SERVER;
+        $this->db = Server::DB_NAME;
+        $this->user = Server::DB_USER;
+        $this->password = Server::DB_PASS;
+        $this->charset = Server::DB_CHARSET;
     }
 
+    /**
+     * Conecta a la base de datos
+     * @return PDO
+     */
     public function conectar()
     {
         try {
@@ -44,6 +48,10 @@ class Conexion extends Error
             print_r('Error connection: ' . $th->getMessage());
         }
     }
+
+    /**
+     * Valida la conexión a la base de datos
+     */
     public function validarConexion()
     {
         try {
@@ -65,6 +73,12 @@ class Conexion extends Error
         }
     }
 
+    /**
+     * Ejecuta una consulta SQL
+     * @param string $consulta
+     * @param array $parametros
+     * @return array|false
+     */
     public function ejecutarConsulta($consulta, array $parametros = [])
     {
         try {
@@ -84,6 +98,11 @@ class Conexion extends Error
         }
     }
 
+    /**
+     * Limpia una cadena de caracteres
+     * @param string $cadena
+     * @return string
+     */
     public function limpiarCadena($cadena)
     {
         $palabras = [
@@ -122,12 +141,24 @@ class Conexion extends Error
         return  $cadena;
     }
 
+    /**
+     * Verifica si los datos cumplen con el patrón
+     * @param string $filtro
+     * @param string $cadena
+     * @return bool
+     */
     protected function verificarDatos($filtro, $cadena)
     {
         $patron = "/^" . $filtro . "$/";
         return !preg_match($patron, $cadena);
     }
 
+    /**
+     * Guarda datos en una tabla
+     * @param string $tabla
+     * @param array $datos
+     * @return PDOStatement
+     */
     protected function guardarDatos($tabla, $datos)
     {
         $query = "INSERT INTO $tabla (";
@@ -158,6 +189,13 @@ class Conexion extends Error
         return $sql;
     }
 
+    /**
+     * Actualiza datos en una tabla
+     * @param string $tabla
+     * @param array $datos
+     * @param array $condicion
+     * @return PDOStatement
+     */
     protected function actualizarDatos($tabla, $datos, $condicion)
     {
         $query = "UPDATE $tabla SET ";
@@ -186,7 +224,13 @@ class Conexion extends Error
         return $sql;
     }
 
-    /*---------- Funcion eliminar registro ----------*/
+    /**
+     * Elimina un registro de una tabla
+     * @param string $tabla
+     * @param string $campo
+     * @param string $id
+     * @return PDOStatement
+     */
     protected function eliminarRegistro($tabla, $campo, $id)
     {
         $sql = $this->conectar()->prepare("DELETE FROM $tabla WHERE $campo=:id");
@@ -196,7 +240,14 @@ class Conexion extends Error
         return $sql;
     }
 
-    /*---------- Funcion seleccionar datos ----------*/
+    /**
+     * Selecciona datos de una tabla
+     * @param string $tipo
+     * @param string $tabla
+     * @param string $campo
+     * @param string $id
+     * @return PDOStatement
+     */
     public function seleccionarDatos($tipo, $tabla, $campo, $id)
     {
         $tipo = $this->limpiarCadena($tipo);
@@ -215,7 +266,11 @@ class Conexion extends Error
         return $sql;
     }
 
-    /*---------- funcion para obtener la primera columna de una tabala -------------*/
+    /**
+     * Obtiene la primera columna de una tabla
+     * @param string $tabla
+     * @return string|null
+     */
     protected function obtenerPrimeraColumna(string $tabla)
     {
         $consulta = "SELECT COLUMN_NAME

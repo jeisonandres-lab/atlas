@@ -9,10 +9,17 @@ class Error extends App
     private $ignoreRepeatedErrors = TRUE;
     private $displayErrors = FALSE;
     private $logErrors = TRUE;
-    private $errorLogFile = "./src/error/php-error.log";
+    private $errorLogFile = App::URL_ERROR . "php-error.log";
 
     public function __construct() {}
 
+    /**
+     * Registra un error
+     * @param string $tipoError
+     * @param string $mensaje
+     * @param string $archivo
+     * @param int $linea
+     */
     private function registrarError($tipoError, $mensaje, $archivo, $linea)
     {
         $mensajeError = "======================================================" . PHP_EOL;
@@ -25,6 +32,9 @@ class Error extends App
         // Aquí puedes agregar más acciones, como enviar un correo, notificar por Slack, etc.
     }
 
+    /**
+     * Configura la configuración de los errores
+     */
     private function configuracion()
     {
         App::zonaHoraria();
@@ -49,6 +59,10 @@ class Error extends App
             exit();
         });
     }
+
+    /**
+     * Captura un error
+     */
     public function captureError()
     {
         error::configuracion();

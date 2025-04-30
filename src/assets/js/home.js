@@ -7,7 +7,7 @@ $(function () {
     let table = new DataTable('#tableUsers', {
         responsive: true,
         ajax: {
-            url: "./src/ajax/userAjax.php?modulo_usuario=DatosUsuariosBasicos",
+            url: "./src/ajax/userAjax.php?modulo_usuario=datosUsuariosBasicos",
             type: "POST",
             dataSrc: function (json) {
                 // Verificar la estructura de los datos devueltos
