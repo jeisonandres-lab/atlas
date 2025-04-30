@@ -280,7 +280,8 @@ class VacacionesController extends VacacionesModel
         ];
 
         $datosEmpleado = $this->getDatosAusenciaID([$id]);
-        foreach ($datosEmpleado as $row) {use App\Atlas\config\Conexion;
+        foreach ($datosEmpleado as $row) {
+
             $cedula = $row['cedula'];
             $nombre = $row['primerNombre'] . " " . $row['primerApellido'];
             $actualizarAusencia = $this->getActualizarAusencia('ausenciajustificada', $parametros, $condicion);
@@ -305,80 +306,80 @@ class VacacionesController extends VacacionesModel
         echo json_encode($data_json);
     }
 
-    public function registrarVacaciones(string $id, string $cedula, string $ano, string $dias)
-    {
-        $ano = $this->limpiarCadena($ano);
-        $dias = $this->limpiarCadena($dias);
-        $id = $this->limpiarCadena($id);
-        $fecha = date("Y-m-d");
-        $parametros = [
-            [
-                "campo_nombre" => "idEmpleado",
-                "campo_marcador" => ":idEmpleado",
-                "campo_valor" => $id
-            ],
-            [
-                "campo_nombre" => "ano",
-                "campo_marcador" => ":ano",
-                "campo_valor" => $ano
-            ],
-            [
-                "campo_nombre" => "dias",
-                "campo_marcador" => ":dias",
-                "campo_valor" => $dias
-            ],
-            [
-                "campo_nombre" => "fecha",
-                "campo_marcador" => ":fecha",
-                "campo_valor" => $fecha
-            ],
-            [
-                "campo_nombre" => "hora",
-                "campo_marcador" => ":hora",
-                "campo_valor" => date("h:i:s A")
-            ]
-        ];
+    // public function registrarVacaciones(string $id, string $cedula, string $ano, string $dias)
+    // {
+    //     $ano = $this->limpiarCadena($ano);
+    //     $dias = $this->limpiarCadena($dias);
+    //     $id = $this->limpiarCadena($id);
+    //     $fecha = date("Y-m-d");
+    //     $parametros = [
+    //         [
+    //             "campo_nombre" => "idEmpleado",
+    //             "campo_marcador" => ":idEmpleado",
+    //             "campo_valor" => $id
+    //         ],
+    //         [
+    //             "campo_nombre" => "ano",
+    //             "campo_marcador" => ":ano",
+    //             "campo_valor" => $ano
+    //         ],
+    //         [
+    //             "campo_nombre" => "dias",
+    //             "campo_marcador" => ":dias",
+    //             "campo_valor" => $dias
+    //         ],
+    //         [
+    //             "campo_nombre" => "fecha",
+    //             "campo_marcador" => ":fecha",
+    //             "campo_valor" => $fecha
+    //         ],
+    //         [
+    //             "campo_nombre" => "hora",
+    //             "campo_marcador" => ":hora",
+    //             "campo_valor" => date("h:i:s A")
+    //         ]
+    //     ];
 
-        $data_json = [
-            "exito" => false,
-            "messenger" => "datos"
-        ];
+    //     $data_json = [
+    //         "exito" => false,
+    //         "messenger" => "datos"
+    //     ];
 
-        $validarVacionesAno = $this->getValidarVacionesAno([$id, $ano]);
-        if ($validarVacionesAno) {
-            $datosPersonales = $this->personalModel->getTotalDatosPersonal([$cedula]);
-            if ($datosPersonales) {
-                foreach ($datosPersonales as $row) {
-                    $nombre = $row['primerNombre'] . " " . $row['primerApellido'];
-                    $registroVacaciones = $this->getRegistrarAusencia('asignarvacaciones', $parametros);
-                    if ($registroVacaciones) {
-                        $registroAuditoria = $this->auditoriaController->registrarAuditoria($this->idUsuario, 'Registrar Vacaciones', 'El usuario ' . $this->nombreUsuario . ' registro vacaciones para el empleado' . " " . $nombre);
-                        if ($registroAuditoria) {
-                            $data_json["exitoAuditoria"] = true;
-                            $data_json['messengerAuditoria'] = "Auditoria registrada con exito.";
-                        } else {
-                            $data_json["exito"] = false;
-                            $data_json['messenger'] = "Error al registrar la auditoria.";
-                        }
-                        $data_json["exito"] = true;
-                        $data_json['messenger'] = "Vacaciones registradas con exito.";
-                    } else {
-                        $data_json["exito"] = false;
-                        $data_json['messenger'] = "Error al registrar las vacaciones.";
-                    }
-                }
-            } else {
-                $nombre = "Empleado";
-            }
-        } else {
-            $data_json["exito"] = false;
-            $data_json['messenger'] = "El empleado ya tiene asignado vacaciones para el año" . " " . $ano;
-        }
+    //     $validarVacionesAno = $this->getValidarVacionesAno([$id, $ano]);
+    //     if ($validarVacionesAno) {
+    //       $datosPersonales = $this->personalModel->getTotalDatosPersonal([$cedula]);
+    //         if ($datosPersonales) {
+    //             foreach ($datosPersonales as $row) {
+    //                 $nombre = $row['primerNombre'] . " " . $row['primerApellido'];
+    //                 $registroVacaciones = $this->getRegistrarAusencia('asignarvacaciones', $parametros);
+    //                 if ($registroVacaciones) {
+    //                     $registroAuditoria = $this->auditoriaController->registrarAuditoria($this->idUsuario, 'Registrar Vacaciones', 'El usuario ' . $this->nombreUsuario . ' registro vacaciones para el empleado' . " " . $nombre);
+    //                     if ($registroAuditoria) {
+    //                         $data_json["exitoAuditoria"] = true;
+    //                         $data_json['messengerAuditoria'] = "Auditoria registrada con exito.";
+    //                     } else {
+    //                         $data_json["exito"] = false;
+    //                         $data_json['messenger'] = "Error al registrar la auditoria.";
+    //                     }
+    //                     $data_json["exito"] = true;
+    //                     $data_json['messenger'] = "Vacaciones registradas con exito.";
+    //                 } else {
+    //                     $data_json["exito"] = false;
+    //                     $data_json['messenger'] = "Error al registrar las vacaciones.";
+    //                 }
+    //             }
+    //         } else {
+    //             $nombre = "Empleado";
+    //         }
+    //     } else {
+    //         $data_json["exito"] = false;
+    //         $data_json['messenger'] = "El empleado ya tiene asignado vacaciones para el año" . " " . $ano;
+    //     }
 
 
-        header('Content-Type: application/json');
-        echo json_encode($data_json);
-    }
+    //     header('Content-Type: application/json');
+    //     echo json_encode($data_json);
+    // }
 
     //tabla de vacaciones
     public function datosVacaciones()
@@ -462,116 +463,116 @@ class VacacionesController extends VacacionesModel
         echo json_encode($response);
     }
 
-    public function actualizarVacaciones(string $id, string $cedula, string $ano, string $dias, string $diadisfrute)
-    {
-        $id = $this->limpiarCadena($id);
-        $ano = $this->limpiarCadena($ano);
+    // public function actualizarVacaciones(string $id, string $cedula, string $ano, string $dias, string $diadisfrute)
+    // {
+    //     $id = $this->limpiarCadena($id);
+    //     $ano = $this->limpiarCadena($ano);
 
-        if (empty($diadisfrute)) {
-            $diasDescuento =  $dias;
-        } else {
-            $diasDescuento =  $dias - $diadisfrute;
-        }
-        // $dias = $this->limpiarCadena($dias);
-        $parametros = [
-            [
-                "campo_nombre" => "ano",
-                "campo_marcador" => ":ano",
-                "campo_valor" => $ano
-            ],
-            [
-                "campo_nombre" => "dias",
-                "campo_marcador" => ":dias",
-                "campo_valor" => $diasDescuento
-            ]
-        ];
+    //     if (empty($diadisfrute)) {
+    //         $diasDescuento =  $dias;
+    //     } else {
+    //         $diasDescuento =  $dias - $diadisfrute;
+    //     }
+    //     // $dias = $this->limpiarCadena($dias);
+    //     $parametros = [
+    //         [
+    //             "campo_nombre" => "ano",
+    //             "campo_marcador" => ":ano",
+    //             "campo_valor" => $ano
+    //         ],
+    //         [
+    //             "campo_nombre" => "dias",
+    //             "campo_marcador" => ":dias",
+    //             "campo_valor" => $diasDescuento
+    //         ]
+    //     ];
 
-        $condicion = [
-            "condicion_campo" => "id_vacaciones",
-            "condicion_marcador" => ":id_vacaciones",
-            "condicion_valor" => $id
-        ];
+    //     $condicion = [
+    //         "condicion_campo" => "id_vacaciones",
+    //         "condicion_marcador" => ":id_vacaciones",
+    //         "condicion_valor" => $id
+    //     ];
 
-        $data_json = [
-            "exito" => false,
-            "messenger" => "datos"
-        ];
+    //     $data_json = [
+    //         "exito" => false,
+    //         "messenger" => "datos"
+    //     ];
 
-        if (empty($diadisfrute)) {
-            $datosvacacionesViejos = $this->getExisVacaciones([$cedula, $ano]);
-
-
-            $datosVacaciones = $this->getDatosCedulaVacaciones([$cedula]);
-                foreach ($datosVacaciones as $row) {
-                    $diasViejos = $row['dias'];
-                    $anoViejos = $row['ano'];
-                }
-                $actualizarVacaciones = $this->getActualizarAusencia('asignarvacaciones', $parametros, $condicion);
-                if ($actualizarVacaciones) {
-                    $datosPersonales = $this->personalModel->getTotalDatosPersonal([$cedula]);
-                    if ($datosPersonales) {
-                        foreach ($datosPersonales as $row) {
-                            $nombre = $row['primerNombre'] . " " . $row['primerApellido'];
-                            $registroAuditoria = $this->auditoriaController->registrarAuditoria($this->idUsuario, 'Actualizar Vacaciones', 'El usuario ' . $this->nombreUsuario . ' actualizo vacaciones para el empleado' . " " . $nombre . " de los dias" . $diasViejos . " a " . $dias . " y" . " de los años " . $anoViejos . " a " . $ano);
-                            if ($registroAuditoria) {
-                                $data_json["exitoAuditoria"] = true;
-                                $data_json['messengerAuditoria'] = "Auditoria registrada con exito.";
-                            } else {
-                                $data_json["exito"] = false;
-                                $data_json['messenger'] = "Error al registrar la auditoria.";
-                            }
-                            $data_json["exito"] = true;
-                            $data_json['messenger'] = "Vacaciones actualizadas con exito.";
-                        }
-                    } else {
-                        $nombre = "Empleado";
-                    }
-                } else {
-                    $data_json["exito"] = false;
-                    $data_json['messenger'] = "Error al actualizar las vacaciones.";
-                }
-            // EN CASO QUE ESTEN LOS DIAS QUE SE DESCUENTEN
-        } else {
-            $datosVacaciones = $this->getDatosCedulaVacaciones([$cedula]);
-            foreach ($datosVacaciones as $row) {
-                $diasViejos = $row['dias'];
-                $anoViejos = $row['ano'];
-
-                $actualizarVacaciones = $this->getActualizarAusencia('asignarvacaciones', $parametros, $condicion);
-                if ($actualizarVacaciones) {
-                    $datosPersonales = $this->personalModel->getTotalDatosPersonal([$cedula]);
-                    if ($datosPersonales) {
-                        foreach ($datosPersonales as $row) {
-                            $nombre = $row['primerNombre'] . " " . $row['primerApellido'];
-                            $registroAuditoria = $this->auditoriaController->registrarAuditoria($this->idUsuario, 'Actualizar Vacaciones', 'El usuario ' . $this->nombreUsuario . ' actualizo vacaciones para el empleado' . " " . $nombre . " de los dias" . $diasViejos . " a " . $dias . " y" . " de los años " . $anoViejos . " a " . $ano);
-                            if ($registroAuditoria) {
-                                $data_json["exitoAuditoria"] = true;
-                                $data_json['messengerAuditoria'] = "Auditoria registrada con exito.";
-                            } else {
-                                $data_json["exito"] = false;
-                                $data_json['messenger'] = "Error al registrar la auditoria.";
-                            }
-                            $data_json["exito"] = true;
-                            $data_json['messenger'] = "Vacaciones actualizadas con exito.";
-                        }
-                    } else {
-                        $nombre = "Empleado";
-                    }
-                } else {
-                    $data_json["exito"] = false;
-                    $data_json['messenger'] = "Error al actualizar las vacaciones.";
-                }
-            }
-        }
+    //     if (empty($diadisfrute)) {
+    //         $datosvacacionesViejos = $this->getExisVacaciones([$cedula, $ano]);
 
 
+    //         $datosVacaciones = $this->getDatosCedulaVacaciones([$cedula]);
+    //             foreach ($datosVacaciones as $row) {
+    //                 $diasViejos = $row['dias'];
+    //                 $anoViejos = $row['ano'];
+    //             }
+    //             $actualizarVacaciones = $this->getActualizarAusencia('asignarvacaciones', $parametros, $condicion);
+    //             if ($actualizarVacaciones) {
+    //                 $datosPersonales = $this->personalModel->getTotalDatosPersonal([$cedula]);
+    //                 if ($datosPersonales) {
+    //                     foreach ($datosPersonales as $row) {
+    //                         $nombre = $row['primerNombre'] . " " . $row['primerApellido'];
+    //                         $registroAuditoria = $this->auditoriaController->registrarAuditoria($this->idUsuario, 'Actualizar Vacaciones', 'El usuario ' . $this->nombreUsuario . ' actualizo vacaciones para el empleado' . " " . $nombre . " de los dias" . $diasViejos . " a " . $dias . " y" . " de los años " . $anoViejos . " a " . $ano);
+    //                         if ($registroAuditoria) {
+    //                             $data_json["exitoAuditoria"] = true;
+    //                             $data_json['messengerAuditoria'] = "Auditoria registrada con exito.";
+    //                         } else {
+    //                             $data_json["exito"] = false;
+    //                             $data_json['messenger'] = "Error al registrar la auditoria.";
+    //                         }
+    //                         $data_json["exito"] = true;
+    //                         $data_json['messenger'] = "Vacaciones actualizadas con exito.";
+    //                     }
+    //                 } else {
+    //                     $nombre = "Empleado";
+    //                 }
+    //             } else {
+    //                 $data_json["exito"] = false;
+    //                 $data_json['messenger'] = "Error al actualizar las vacaciones.";
+    //             }
+    //         // EN CASO QUE ESTEN LOS DIAS QUE SE DESCUENTEN
+    //     } else {
+    //         $datosVacaciones = $this->getDatosCedulaVacaciones([$cedula]);
+    //         foreach ($datosVacaciones as $row) {
+    //             $diasViejos = $row['dias'];
+    //             $anoViejos = $row['ano'];
+
+    //             $actualizarVacaciones = $this->getActualizarAusencia('asignarvacaciones', $parametros, $condicion);
+    //             if ($actualizarVacaciones) {
+    //                 $datosPersonales = $this->personalModel->getTotalDatosPersonal([$cedula]);
+    //                 if ($datosPersonales) {
+    //                     foreach ($datosPersonales as $row) {
+    //                         $nombre = $row['primerNombre'] . " " . $row['primerApellido'];
+    //                         $registroAuditoria = $this->auditoriaController->registrarAuditoria($this->idUsuario, 'Actualizar Vacaciones', 'El usuario ' . $this->nombreUsuario . ' actualizo vacaciones para el empleado' . " " . $nombre . " de los dias" . $diasViejos . " a " . $dias . " y" . " de los años " . $anoViejos . " a " . $ano);
+    //                         if ($registroAuditoria) {
+    //                             $data_json["exitoAuditoria"] = true;
+    //                             $data_json['messengerAuditoria'] = "Auditoria registrada con exito.";
+    //                         } else {
+    //                             $data_json["exito"] = false;
+    //                             $data_json['messenger'] = "Error al registrar la auditoria.";
+    //                         }
+    //                         $data_json["exito"] = true;
+    //                         $data_json['messenger'] = "Vacaciones actualizadas con exito.";
+    //                     }
+    //                 } else {
+    //                     $nombre = "Empleado";
+    //                 }
+    //             } else {
+    //                 $data_json["exito"] = false;
+    //                 $data_json['messenger'] = "Error al actualizar las vacaciones.";
+    //             }
+    //         }
+    //     }
 
 
 
 
-        header('Content-Type: application/json');
-        echo json_encode($data_json);
-    }
+
+
+    //     header('Content-Type: application/json');
+    //     echo json_encode($data_json);
+    // }
 
     public function eliminarVacaciones($id)
     {

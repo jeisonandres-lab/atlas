@@ -26,8 +26,8 @@ const ModuloLogin = (() => {
 
   // Endpoints de API
   const Endpoints = {
-    login: './src/ajax/userAjax.php?modulo_usuario=login',
-    redireccion: './src/ajax/userAjax.php?modulo_usuario=redireccionar'
+    login: 'src/requests/Usuario.php',
+    redireccion: './src/requests/Usuario.php?modulo_usuario=redireccionar'
   };
 
   /**

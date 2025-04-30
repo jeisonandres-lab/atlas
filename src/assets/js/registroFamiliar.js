@@ -139,7 +139,7 @@ $(function () {
   let table = new DataTable('#myTable', {
     responsive: true,
     ajax: {
-      url: "./src/ajax/registroPersonal.php?modulo_personal=obtenerPersonal",
+      url: "./src/requests/registroPersonal.php?modulo_personal=obtenerPersonal",
       type: "POST",
       dataSrc: function (json) {
         // Verificar la estructura de los datos devueltos
@@ -433,7 +433,7 @@ $(function () {
     let table2 = new DataTable('#myTable2', {
       responsive: true,
       ajax: {
-        url: "./src/ajax/registroPersonal.php?modulo_personal=obtenerFamiliar",
+        url: "./src/requests/registroPersonal.php?modulo_personal=obtenerFamiliar",
         type: "POST",
         data: { id: idPersonal },
         dataSrc: function (json) {

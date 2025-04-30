@@ -1,25 +1,24 @@
 <?php
 
-namespace App\Atlas\ajax;
+namespace App\Atlas\requests;
 
 require_once '../../vendor/autoload.php';
 
 use App\Atlas\config\Conexion;
-use App\Atlas\controller\userController;
-use App\Atlas\controller\loginController;
-use App\Atlas\controller\notificacionController;
+use App\Atlas\controller\UsuarioController;
+use App\Atlas\controller\NotificacionController;
 
 $conexion = new Conexion();
-$usercontroller = new userController();
-$userLogin = new userController();
-$notificacion = new notificacionController();
+$usercontroller = new UsuarioController();
+$userLogin = new UsuarioController();
+$notificacion = new NotificacionController();
 $id = isset($_POST['id']) ? $conexion->limpiarCadena($_POST['id']) : "";
 $cedula = isset($_POST['cedula']) ? $conexion->limpiarCadena($_POST['cedula']) : "";
 $pin = isset($_POST['pin']) ? $conexion->limpiarCadena($_POST['pin']) : "";
 switch ($_GET['modulo_usuario']) {
     case 'login':
-        $user = $userLogin->limpiarCadena($_POST['usuario']);
-        $password = $userLogin->limpiarCadena($_POST['password']);
+        $user = $conexion->limpiarCadena($_POST['usuario']);
+        $password = $conexion->limpiarCadena($_POST['password']);
         $userLogin->logearse($user, $password);
         break;
 

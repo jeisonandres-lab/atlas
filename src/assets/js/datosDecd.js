@@ -121,7 +121,7 @@ $(function () {
                 processing: true,
                 serverSide: true,
                 ajax: {
-                    url: "src/ajax/datosDecd.php?modulo_datos=obtenerDatosDepe",
+                    url: "src/requests/datosDecd.php?modulo_datos=obtenerDatosDepe",
                     type: "POST",
                     dataSrc: function (json) {
                         // Verificar la estructura de los datos devueltos
@@ -189,7 +189,7 @@ $(function () {
                 processing: true,
                 serverSide: true,
                 ajax: {
-                    url: "src/ajax/datosDecd.php?modulo_datos=obtenerDatosCargo",
+                    url: "src/requests/datosDecd.php?modulo_datos=obtenerDatosCargo",
                     type: "POST",
                     dataSrc: function (json) {
                         // Verificar la estructura de los datos devueltos
@@ -249,7 +249,7 @@ $(function () {
                 processing: true,
                 serverSide: true,
                 ajax: {
-                    url: "src/ajax/datosDecd.php?modulo_datos=obtenerDatosEstatus",
+                    url: "src/requests/datosDecd.php?modulo_datos=obtenerDatosEstatus",
                     type: "POST",
                     dataSrc: function (json) {
                         // Verificar la estructura de los datos devueltos
@@ -309,7 +309,7 @@ $(function () {
                 processing: true,
                 serverSide: true,
                 ajax: {
-                    url: "src/ajax/datosDecd.php?modulo_datos=obtenerDatosDepartamento",
+                    url: "src/requests/datosDecd.php?modulo_datos=obtenerDatosDepartamento",
                     type: "POST",
                     dataSrc: function (json) {
                         // Verificar la estructura de los datos devueltos

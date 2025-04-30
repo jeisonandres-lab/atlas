@@ -7,7 +7,7 @@ $(function () {
     let table = new DataTable('#myTable', {
         responsive: true,
         ajax: {
-            url: "./src/ajax/bienestarSocial.php?modulo_datos=tablaEmpleado",
+            url: "./src/requests/bienestarSocial.php?modulo_datos=tablaEmpleado",
             type: "POST",
             dataSrc: function (json) {
                 // Verificar la estructura de los datos devueltos

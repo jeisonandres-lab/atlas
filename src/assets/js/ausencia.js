@@ -220,7 +220,7 @@ $(function () {
       table = new DataTable('#myTable', {
         responsive: true,
         ajax: {
-          url: "./src/ajax/vacaciones.php?modulo_datos=todasAusencias",
+          url: "./src/requests/vacaciones.php?modulo_datos=todasAusencias",
           type: "POST",
           dataSrc: function (json) {
             // Verificar la estructura de los datos devueltos

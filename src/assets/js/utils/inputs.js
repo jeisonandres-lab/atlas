@@ -378,7 +378,7 @@ export function buscarDataEmpledoSelect2(input) {
     width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
     placeholder: 'Coloque la cédula',
     ajax: {
-      url: 'src/ajax/registroPersonal.php?modulo_personal=obtenerDataEmpleados',
+      url: 'src/requests/registroPersonal.php?modulo_personal=obtenerDataEmpleados',
       dataType: 'json',
       type: 'POST',
       delay: 250,

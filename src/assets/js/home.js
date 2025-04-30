@@ -1,4 +1,3 @@
-
 import { AlertSW2 } from "./utils/alerts.js";
 import { obtenerDatosJQuery } from "./utils/formularioAjax.js";
 // Dependencias: jQuery, DataTables, Chart.js
@@ -7,7 +6,7 @@ $(function () {
     let table = new DataTable('#tableUsers', {
         responsive: true,
         ajax: {
-            url: "./src/ajax/userAjax.php?modulo_usuario=datosUsuariosBasicos",
+            url: "./src/requests/userAjax.php?modulo_usuario=datosUsuariosBasicos",
             type: "POST",
             dataSrc: function (json) {
                 // Verificar la estructura de los datos devueltos
@@ -163,7 +162,7 @@ $(function () {
     $('#fecha').text(fecha);
     $('.descargarBD').click(function () {
         $.ajax({
-            url: './src/ajax/administrador.php?modulo_datos=descargarBD', // Reemplaza con la URL de tu script de descarga
+            url: './src/requests/administrador.php?modulo_datos=descargarBD', // Reemplaza con la URL de tu script de descarga
             method: 'POST', // O 'POST' si es necesario
             success: function (response, data) {
                 // Si la descarga fue exitosa, muestra el mensaje

@@ -2,12 +2,13 @@
 
 namespace App\Atlas\controller;
 
-use App\Atlas\models\UserModel;
+use App\Atlas\models\UsuarioModel;
 use App\Atlas\config\App;
 use App\Atlas\models\TablasModel;
 use App\Atlas\controller\AuditoriaController;
+$user = $conexion->limpiarCadena($_POST['usuario']);
 
-class  UserController extends UserModel
+class  UsuarioController extends UsuarioModel
 {
 
     private $app2;
@@ -32,7 +33,7 @@ class  UserController extends UserModel
     public function logearse(string $user, string $password)
     {
         $data_json = [
-            'exito' => false, // Inicializamos a false por defecto
+            'exito' => false,
             'mensaje' => ''
         ];
 

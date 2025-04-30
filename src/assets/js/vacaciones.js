@@ -181,7 +181,7 @@ $(function () {
                 processing: true,
                 serverSide: true,
                 ajax: {
-                    url: "src/ajax/vacaciones.php?modulo_datos=todasVacaciones",
+                    url: "src/requests/vacaciones.php?modulo_datos=todasVacaciones",
                     type: "POST",
                     dataSrc: function (json) {
                         // Verificar la estructura de los datos devueltos

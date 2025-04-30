@@ -1,4 +1,3 @@
-
 import { alertaNormalmix, AlertSW2, aletaCheck } from "./utils/alerts.js";
 import { descargarArchivo, enviarFormulario, obtenerDatosJQuery, obtenerDatosPromise } from "./utils/formularioAjax.js";
 import {
@@ -70,7 +69,7 @@ $(function () {
   const baseConfig = {
     responsive: true,
     ajax: {
-      url: "./src/ajax/registroPersonal.php?modulo_personal=obtenerDatosFamiliarTotal",
+      url: "./src/requests/registroPersonal.php?modulo_personal=obtenerDatosFamiliarTotal",
       type: "POST",
       dataSrc: function (json) {
         // Verificar la estructura de los datos devueltos

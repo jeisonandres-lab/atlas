@@ -6,10 +6,8 @@ require_once './vendor/autoload.php';
 use App\Atlas\config\App;
 use App\Atlas\config\HoraLocal;
 use App\Atlas\controller\ViewController;
-use App\Atlas\controller\UserController;
 
 $app = new App(); // Instancias de la clase App
-$login = new UserController(); // Instancias de la clase userController
 $viewsController = new ViewController(); // Instancias de la clase viewController
 $horaLocal = new HoraLocal(); // Instancia de la clase HoraLocal
 

@@ -4,7 +4,7 @@ namespace App\Atlas\models;
 
 use App\Atlas\config\Conexion;
 
-class UserModel extends Conexion
+class UsuarioModel extends Conexion
 {
 
     private function existeUsuario(string $user)
