@@ -17,7 +17,7 @@ $url = $_SERVER['REQUEST_URI'];
 $datosURL = $app->analizarURL($url);
 $parametros = !empty($datosURL['parametros']) ? $datosURL['parametros'] : null;
 
-// Array de rutas públicas que no requieren autenticación
+// Array de rutas públicas que no requieren autenticaciónñ
 $rutasPublicas = [
     'Identificarse',
     'recuperarDatos',
