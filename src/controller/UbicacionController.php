@@ -4,20 +4,21 @@ namespace App\Atlas\controller;
 
 use App\Atlas\controller\AuditoriaController;
 use App\Atlas\config\App;
-use App\Atlas\models\ubicacionModel;
+use App\Atlas\models\UbicacionModel;
 
-class UbicacionController extends UbicacionModel
+class UbicacionController
 {
     private $auditoriaController;
     private $app;
     private $idUsuario;
     private $nombreUsuario;
+    private $ubicacionModel;
 
     public function __construct()
     {
-        parent::__construct();
         $this->app = new App();
         $this->auditoriaController = new AuditoriaController();
+        $this->ubicacionModel = new UbicacionModel();
         $this->app->iniciarSession();
         $this->idUsuario = $_SESSION['id'];
         $this->nombreUsuario = $_SESSION['usuario'];
@@ -30,7 +31,7 @@ class UbicacionController extends UbicacionModel
             'exito' => false
         ];
 
-        $obtenerEstados = $this->estados();
+        $obtenerEstados = $this->ubicacionModel->estados();
         if ($obtenerEstados) {
             foreach ($obtenerEstados as $row) {
                 $data_json['exito'] = true;
@@ -57,7 +58,7 @@ class UbicacionController extends UbicacionModel
             'exito' => false
         ];
 
-        $obtenerMunicipio = $this->municipio([$idEstado]);
+        $obtenerMunicipio = $this->ubicacionModel->municipio([$idEstado]);
         if ($obtenerMunicipio) {
             foreach ($obtenerMunicipio as $row) {
                 $data_json['exito'] = true;
@@ -83,7 +84,7 @@ class UbicacionController extends UbicacionModel
             'exito' => false
         ];
 
-        $obtenerMunicipio = $this->parroquia([$idMunicipio]);
+        $obtenerMunicipio = $this->ubicacionModel->parroquia([$idMunicipio]);
         if ($obtenerMunicipio) {
             foreach ($obtenerMunicipio as $row) {
                 $data_json['exito'] = true;

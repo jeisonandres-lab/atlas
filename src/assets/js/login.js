@@ -26,7 +26,7 @@ const ModuloLogin = (() => {
 
   // Endpoints de API
   const Endpoints = {
-    login: 'src/requests/Usuario.php',
+    login: 'src/routers/Usuario.php?modulo_usuario=login',
     redireccion: './src/requests/Usuario.php?modulo_usuario=redireccionar'
   };
 
@@ -93,9 +93,7 @@ const ModuloLogin = (() => {
 
           if (verificarContrasena(passwordValor, hashAlmacenado, saltAlmacenada)) {
             const redireccion = () => {
-              const formData = new FormData();
-              formData.append('url', 'inicio');
-              enviarDatos(Endpoints.redireccion, formData);
+              window.location.replace("inicio");
             };
             
             AlertDirection("success", "Inicio de sesión con éxito, Redireccionando", "top", 3000, redireccion);

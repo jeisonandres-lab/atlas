@@ -1,27 +1,28 @@
 <?php
 
-namespace App\Atlas\controller;
+namespace App\Atlas\controller\usuario;
 
-use App\Atlas\models\UsuarioModel;
-use App\Atlas\config\App;
+use App\Atlas\config\EjecutarSQL;
+use App\Atlas\models\public\UsuarioModelPublic;
 use App\Atlas\models\TablasModel;
-use App\Atlas\controller\AuditoriaController;
-$user = $conexion->limpiarCadena($_POST['usuario']);
+use App\Atlas\config\App;
+use App\Atlas\controller\audit\AuditoriaController;
 
-class  UsuarioController extends UsuarioModel
+class LoginController
 {
-
-    private $app2;
     private $auditoriaController;
     private $app;
     private $tablas;
+    private $usuarioPublico;
+    private $ejecutarSQL;
 
     public function __construct()
     {
-        parent::__construct();
         $this->app = new App();
         $this->tablas = new TablasModel();
         $this->auditoriaController = new AuditoriaController();
+        $this->usuarioPublico = new UsuarioModelPublic();
+        $this->ejecutarSQL = new EjecutarSQL();
     }
 
     /**
@@ -40,11 +41,11 @@ class  UsuarioController extends UsuarioModel
         if (empty($user) || empty($password)) {
             $data_json['mensaje'] = 'La contraseña o el usuario no fueron colocados.';
         } else {
-            if ($resputa = $this->verificarDatos("[a-zA-Z0-9]{8,20}", $user)) {
+            if ($resputa = $this->ejecutarSQL->verificarDatos("[a-zA-Z0-9]{8,20}", $user)) {
                 $data_json['mensaje'] = 'el usuario no cumple con lo solicitado, debe de tener minimo 8 caracteres.';
                 $data_json['usuario'] = $resputa;
             } else {
-                $check_user = $this->getExisteUsuario($user);
+                $check_user = $this->usuarioPublico->getExisteUsuario($user);
                 if ($check_user == true) {
 
                     session_start();
@@ -88,18 +89,6 @@ class  UsuarioController extends UsuarioModel
         echo json_encode($data_json);
     }
 
-    public function redireccionarUsuario($url)
-    {
-        if ($url) {
-            $datos = [
-                'url' => $url
-            ];
-            header('Content-Type: application/json');
-            echo json_encode($datos);
-        } else {
-        }
-    }
-
     public function cerrarSession_total($url)
     {
         $this->app->cerrarSession();
@@ -119,7 +108,7 @@ class  UsuarioController extends UsuarioModel
             ];
         } else {
         }
-        header('Content-Type: application/json');
+        header('Conzent-Type: application/json');
         echo json_encode($datos);
     }
 
@@ -165,25 +154,10 @@ class  UsuarioController extends UsuarioModel
         header('Content-Type: application/json');
         echo json_encode($response);
     }
-
-    public function getApp()
-    {
-        return $this->app2 = new App();
-    }
-
-    public function getIniciarSession()
-    {
-        $appuser = $this->getApp();
-        return $appuser->iniciarSession();
-    }
-
-    public function getIniciarName()
-    {
-        $appuser = $this->getApp();
-        return $appuser->iniciarName();
-    }
-
-
+    /**
+     * Obtiene los datos de los usuarios
+     * @return void
+     */
     public function datosUsuarios()
     {
         $data_json['data'] = []; // Array de datos para enviar
@@ -271,7 +245,7 @@ class  UsuarioController extends UsuarioModel
             "condicion_valor" => $id
         ];
 
-        $desactivar = $this->getActualizarDato('users', $parametros, $condicion);
+        $desactivar = $this->usuarioPublico->getActualizarDatos('users', $parametros, $condicion);
         if ($desactivar) {
             $data_json['exito'] = true;
             $data_json['mensaje'] = 'Usuario desactivado con exito';

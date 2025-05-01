@@ -5,7 +5,7 @@ require_once './vendor/autoload.php';
 
 use App\Atlas\config\App;
 use App\Atlas\config\HoraLocal;
-use App\Atlas\controller\ViewController;
+use App\Atlas\controller\sistema\ViewController;
 
 $app = new App(); // Instancias de la clase App
 $viewsController = new ViewController(); // Instancias de la clase viewController
@@ -17,7 +17,7 @@ $url = $_SERVER['REQUEST_URI'];
 $datosURL = $app->analizarURL($url);
 $parametros = !empty($datosURL['parametros']) ? $datosURL['parametros'] : null;
 
-// Array de rutas públicas que no requieren autenticaciónñ
+// Array de rutas públicas que no requieren autenticación
 $rutasPublicas = [
     'Identificarse',
     'recuperarDatos',

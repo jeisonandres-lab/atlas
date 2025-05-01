@@ -4,8 +4,9 @@ namespace App\Atlas\controller;
 
 use App\Atlas\models\PersonalModel;
 use App\Atlas\config\Conexion;
-use App\Atlas\controller\AuditoriaController;
 use App\Atlas\config\App;
+use App\Atlas\controller\AuditoriaController;
+
 
 class FileUploaderController extends Conexion
 {

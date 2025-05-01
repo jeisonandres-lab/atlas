@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Atlas\controller;
+namespace App\Atlas\controller\sistema;
 
 use App\Atlas\config\Error;
-use App\Atlas\models\ViewModel;
+use App\Atlas\models\private\ViewModel;
 
 class ViewController extends ViewModel
 {
@@ -13,15 +13,15 @@ class ViewController extends ViewModel
     {
         Error::captureError();
         // Procesar parámetros GET
-    if ($query) {
-        parse_str($query, $params);
-        // Utilizar los parámetros $params en tu lógica
-        // Ejemplo:
-        if (isset($params['usuario'])) {
-            $usuario = $params['usuario'];
-            // Hacer algo con el usuario
+        if ($query) {
+            parse_str($query, $params);
+            // Utilizar los parámetros $params en tu lógica
+            // Ejemplo:
+            if (isset($params['usuario'])) {
+                $usuario = $params['usuario'];
+                // Hacer algo con el usuario
+            }
         }
-    }
         if ($vista != "") {
             $respuesta = $this->obtenerVistasModelo($vista);
         } else {
@@ -29,5 +29,4 @@ class ViewController extends ViewModel
         }
         return $respuesta;
     }
-
 }

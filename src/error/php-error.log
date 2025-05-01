@@ -41212,3 +41212,33 @@ Archivo: C:\xampp\htdocs\atlas\index.php
 Línea: 35
 Fecha y hora: 2025-04-29 21:28:51
 ======================================================
+======================================================
+Error: require_once(C:\xampp\htdocs\atlas\src\models\private/../views/start/login.php): Failed to open stream: No such file or directory
+Archivo: C:\xampp\htdocs\atlas\index.php
+Línea: 46
+Fecha y hora: 2025-05-01 02:40:59
+======================================================
+======================================================
+Error: require_once(C:\xampp\htdocs\atlas\src\models\private/../views/start/login.php): Failed to open stream: No such file or directory
+Archivo: C:\xampp\htdocs\atlas\index.php
+Línea: 46
+Fecha y hora: 2025-05-01 02:41:02
+======================================================
+======================================================
+Error: require_once(C:\xampp\htdocs\atlas\src\models\private/../views/start/login.php): Failed to open stream: No such file or directory
+Archivo: C:\xampp\htdocs\atlas\index.php
+Línea: 46
+Fecha y hora: 2025-05-01 02:41:02
+======================================================
+======================================================
+Error: require_once(C:\xampp\htdocs\atlas\src\models\private/../views/start/login.php): Failed to open stream: No such file or directory
+Archivo: C:\xampp\htdocs\atlas\index.php
+Línea: 46
+Fecha y hora: 2025-05-01 02:41:03
+======================================================
+======================================================
+Error: require_once(C:\xampp\htdocs\atlas\src\models\private/../views/start/login.php): Failed to open stream: No such file or directory
+Archivo: C:\xampp\htdocs\atlas\index.php
+Línea: 46
+Fecha y hora: 2025-05-01 02:42:07
+======================================================

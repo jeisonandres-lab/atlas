@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Atlas\controller;
+namespace App\Atlas\controller\sistema;
 
 use App\Atlas\models\NotificacionModel;
 

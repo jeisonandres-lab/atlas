@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Atlas\models;
+namespace App\Atlas\models\private;
 
-use App\Atlas\config\Conexion;
+use App\Atlas\config\EjecutarSQL;
 
-class UsuarioModel extends Conexion
+class UsuarioModel extends EjecutarSQL
 {
 
-    private function existeUsuario(string $user)
+    protected function existeUsuario(string $user)
     {
         $sql = $this->ejecutarConsulta("SELECT
          us.id_user,
@@ -22,13 +22,13 @@ class UsuarioModel extends Conexion
         return $sql;
     }
 
-    private function datosUsuario($user): string
+    protected function datosUsuario($user): string
     {
         $sql = $this->ejecutarConsulta("SELECT * FROM users WHERE nameUser = '.$user.'");
         return $sql;
     }
 
-    private function pinSeguridad(array $parametros)
+    protected function pinSeguridad(array $parametros)
     {
         $sql = $this->ejecutarConsulta("SELECT us.pin, dtp.cedula FROM users us INNER JOIN datosempleados dte ON us.idEmpleado = id_empleados
         INNER JOIN datospersonales dtp ON dte.idPersonal = dtp.id_personal WHERE us.pin = ? AND dtp.cedula = ? ", $parametros);
@@ -39,30 +39,9 @@ class UsuarioModel extends Conexion
         }
     }
 
-    private function actulizarDato($tabla, $datos, $condicion)
+    protected function actulizarDato($tabla, $datos, $condicion)
     {
         $sql = $this->actualizarDatos($tabla, $datos, $condicion);
         return $sql;
-    }
-
-    public function getExisteUsuario($user)
-    {
-        return $this->existeUsuario($user);;
-    }
-
-    public function getDatosUsuario($user)
-    {
-        return $this->datosUsuario($user);
-    }
-
-    public function getActualizarDato($tabla, $datos, $condicion)
-    {
-        return $this->actulizarDato($tabla, $datos, $condicion);
-    }
-
-    // valdiar el pin de seguridad del usuario
-    public function getPinSeguridad(array $parametros)
-    {
-        return $this->pinSeguridad($parametros);
     }
 }

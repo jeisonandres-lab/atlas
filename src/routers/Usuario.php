@@ -1,30 +1,27 @@
 <?php
 
-namespace App\Atlas\requests;
+namespace App\Atlas\routers;
 
 require_once '../../vendor/autoload.php';
 
-use App\Atlas\config\Conexion;
-use App\Atlas\controller\UsuarioController;
-use App\Atlas\controller\NotificacionController;
+use App\Atlas\config\EjecutarSQL;
+use App\Atlas\controller\usuario\LoginController;
+use App\Atlas\controller\sistema\NotificacionController;
 
-$conexion = new Conexion();
-$usercontroller = new UsuarioController();
-$userLogin = new UsuarioController();
+$ejecutarSQL = new EjecutarSQL();
+// $usercontroller = new UsuarioController();
+$userLogin = new LoginController();
 $notificacion = new NotificacionController();
-$id = isset($_POST['id']) ? $conexion->limpiarCadena($_POST['id']) : "";
-$cedula = isset($_POST['cedula']) ? $conexion->limpiarCadena($_POST['cedula']) : "";
-$pin = isset($_POST['pin']) ? $conexion->limpiarCadena($_POST['pin']) : "";
+
+$id = isset($_POST['id']) ? $ejecutarSQL->limpiarCadena($_POST['id']) : "";
+$cedula = isset($_POST['cedula']) ? $ejecutarSQL->limpiarCadena($_POST['cedula']) : "";
+$pin = isset($_POST['pin']) ? $ejecutarSQL->limpiarCadena($_POST['pin']) : "";
+
 switch ($_GET['modulo_usuario']) {
     case 'login':
-        $user = $conexion->limpiarCadena($_POST['usuario']);
-        $password = $conexion->limpiarCadena($_POST['password']);
+        $user = $ejecutarSQL->limpiarCadena($_POST['usuario']);
+        $password = $ejecutarSQL->limpiarCadena($_POST['password']);
         $userLogin->logearse($user, $password);
-        break;
-
-    case 'redireccionar':
-        $url = $_POST['url'];
-        echo $userLogin->redireccionarUsuario($url);
         break;
 
     case 'cerrarSession':
