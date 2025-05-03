@@ -2,13 +2,16 @@
 
 namespace App\Atlas\controller\User;
 
-use App\Atlas\controller\Base\BaseController;
+use App\Atlas\models\TablasModel;
 
-class UserDataTableController extends BaseController
+class UserDataTableController
 {
+    protected $tablas;
+
     public function __construct()
     {
-        parent::__construct();
+
+        $this->tablas = new TablasModel();
     }
 
     /**

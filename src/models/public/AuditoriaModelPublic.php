@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Atlas\models\public;
+namespace App\Atlas\models;
 
-use App\Atlas\models\private\AuditoriaModel;
+use App\Atlas\config\EjecutarSQL;
 
-class AuditoriaModelPublic extends AuditoriaModel
+class AuditoriaModelPublic extends EjecutarSQL
 {
     public function __construct()
     {

@@ -6,7 +6,7 @@ use App\Atlas\config\EjecutarSQL;
 use App\Atlas\models\public\UsuarioModelPublic;
 use App\Atlas\models\TablasModel;
 use App\Atlas\config\App;
-use App\Atlas\controller\audit\AuditoriaController;
+use App\Atlas\controller\auditoria\AuditoriaController;
 
 class LoginController
 {

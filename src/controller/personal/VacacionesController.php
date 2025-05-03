@@ -4,9 +4,10 @@ namespace App\Atlas\controller;
 
 use App\Atlas\models\TablasModel;
 use App\Atlas\models\VacacionesModel;
-use App\Atlas\controller\AuditoriaController;
+use App\Atlas\controller\auditoria\AuditoriaController;
 use App\Atlas\models\PersonalModel;
 use App\Atlas\config\App;
+use App\Atlas\config\EjecutarSQL;
 
 date_default_timezone_set("America/Caracas");
 
@@ -21,7 +22,7 @@ class VacacionesController extends VacacionesModel
     private $idUsuario;
     private $nombreUsuario;
     private $personalModel;
-
+    private $consultas;
     public function __construct()
     {
         parent::__construct();
@@ -30,6 +31,7 @@ class VacacionesController extends VacacionesModel
         $this->app = new App();
         $this->personalModel = new PersonalModel();
         $this->auditoriaController = new AuditoriaController();
+        $this->consultas = new EjecutarSQL();
         $this->app->iniciarSession();
         $this->idUsuario = $_SESSION['id'];
         $this->nombreUsuario = $_SESSION['usuario'];
@@ -37,12 +39,12 @@ class VacacionesController extends VacacionesModel
 
     public function registrarAusencia(string $cedula, string $id, $fecha_ini, $fecha_fin, $primerNombre, $primerApellido, $permiso)
     {
-        $cedula = $this->limpiarCadena($cedula);
-        $id = $this->limpiarCadena($id);
+        $cedula = $this->consultas->limpiarCadena($cedula);
+        $id = $this->consultas->limpiarCadena($id);
         $fecha = date("Y-m-d");
-        $fecha_ini = $this->limpiarCadena($fecha_ini);
-        $fecha_fin = $this->limpiarCadena($fecha_fin);
-        $permiso = $this->limpiarCadena($permiso);
+        $fecha_ini = $this->consultas->limpiarCadena($fecha_ini);
+        $fecha_fin = $this->consultas->limpiarCadena($fecha_fin);
+        $permiso = $this->consultas->limpiarCadena($permiso);
         $nombre = $primerNombre . " " . $primerApellido;
         $data_json = [
             "exito" => false,
@@ -174,7 +176,7 @@ class VacacionesController extends VacacionesModel
 
     public function datosEmpleadoAusencia(string $id)
     {
-        $id = $this->limpiarCadena($id);
+        $id = $this->consultas->limpiarCadena($id);
         $data_json = [
             "exito" => false,
             "messenger" => "datos"

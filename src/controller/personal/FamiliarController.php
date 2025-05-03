@@ -7,6 +7,7 @@ use App\Atlas\models\personalModel;
 use App\Atlas\controller\fileUploaderController;
 use App\Atlas\models\tablasModel;
 use App\Atlas\config\App;
+use App\Atlas\controller\auditoria\AuditoriaController;
 
 date_default_timezone_set("America/Caracas");
 

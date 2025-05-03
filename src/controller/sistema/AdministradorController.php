@@ -3,11 +3,12 @@
 namespace App\Atlas\controller;
 
 use App\Atlas\models\AdministradorModel;
-use App\Atlas\controller\AuditoriaController;
+use App\Atlas\controller\auditoria\AuditoriaController;
 use App\Atlas\models\PersonalModel;
 use App\Atlas\config\App;
 use App\Atlas\config\Conexion;
 use App\Atlas\config\Server;
+use App\Atlas\config\EjecutarSQL;
 
 class AdministradorController extends AdministradorModel
 {
@@ -17,6 +18,7 @@ class AdministradorController extends AdministradorModel
     private $conexion;
     private $idUsuario;
     private $nombreUsuario;
+    private $consultas;
 
     public function __construct()
     {
@@ -25,6 +27,7 @@ class AdministradorController extends AdministradorModel
         $this->personalModel = new PersonalModel();
         $this->auditoriaController = new AuditoriaController();
         $this->conexion = new Conexion();
+        $this->consultas = new EjecutarSQL();
     }
 
     public function datosMasivosUsuario($nombreUser)
@@ -32,7 +35,7 @@ class AdministradorController extends AdministradorModel
         $this->app->iniciarSession();
         $this->idUsuario = $_SESSION['id'];
         $this->nombreUsuario = $_SESSION['usuario'];
-        $nombreUser = $this->limpiarCadena($nombreUser);
+        $nombreUser = $this->consultas->limpiarCadena($nombreUser);
         $data_json = [
             'exito' => false,
             'messenger' => 'No se pudo obtener los datos de la dependencia',
@@ -124,7 +127,7 @@ class AdministradorController extends AdministradorModel
 
     public function existeEmpleado(string $cedula)
     {
-        $cedula = $this->limpiarCadena($cedula);
+        $cedula = $this->consultas->limpiarCadena($cedula);
         $data_json = [
             'exito' => false,
             'mensaje' => 'No se pudo obtener los datos de la dependencia',
@@ -152,7 +155,7 @@ class AdministradorController extends AdministradorModel
 
     public function preguntasSeguridad(string $cedula)
     {
-        $cedula = $this->limpiarCadena($cedula);
+        $cedula = $this->consultas->limpiarCadena($cedula);
         $data_json = [
             'exito' => false,
             'mensaje' => 'No se pudo obtener los datos de la dependencia',

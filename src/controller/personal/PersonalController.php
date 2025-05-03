@@ -8,6 +8,8 @@ use App\Atlas\controller\FileUploaderController;
 use App\Atlas\models\TablasModel;
 use App\Atlas\config\App;
 use App\Atlas\models\FamiliarModel;
+use App\Atlas\controller\auditoria\AuditoriaController;
+use App\Atlas\config\EjecutarSQL;
 
 date_default_timezone_set("America/Caracas");
 
@@ -23,6 +25,7 @@ class PersonalController extends personalModel
     private $auditoriaController;
     private $idUsuario;
     private $nombreUsuario;
+    private $consultas;
 
     public function __construct()
     {
@@ -33,6 +36,7 @@ class PersonalController extends personalModel
         $this->auditoriaController = new AuditoriaController();
         $this->familiar = new FamiliarModel();
         $this->familiarController = new FamiliarController();
+        $this->consultas = new EjecutarSQL();
         $this->app->iniciarSession();
         $this->idUsuario = $_SESSION['id'];
         $this->nombreUsuario = $_SESSION['usuario'];
@@ -663,22 +667,22 @@ class PersonalController extends personalModel
         string $familiarInces
     ) {
         sleep(1);
-        $cedulaEmpleado = $this->limpiarCadena($cedulaEmpleado);
-        $primerNombre = $this->limpiarCadena($primerNombre);
-        $segundoNombre = $this->limpiarCadena($segundoNombre);
-        $primerApellido = $this->limpiarCadena($primerApellido);
-        $segundoApellido = $this->limpiarCadena($segundoApellido);
-        $cedula = $this->limpiarCadena($cedula);
-        $edad = $this->limpiarCadena($edad);
-        $ano = $this->limpiarCadena($ano);
-        $mes = $this->limpiarCadena($mes);
-        $dia = $this->limpiarCadena($dia);
-        $numeroCarnet = $this->limpiarCadena($numeroCarnet);
-        $tomo = $this->limpiarCadena($tomo);
-        $folio = $this->limpiarCadena($folio);
-        $parentesco = $this->limpiarCadena($parentesco);
-        $discapacidad = $this->limpiarCadena($discapacidad);
-        $sexo = $this->limpiarCadena($sexo);
+        $cedulaEmpleado = $this->consultas->limpiarCadena($cedulaEmpleado);
+        $primerNombre = $this->consultas->limpiarCadena($primerNombre);
+        $segundoNombre = $this->consultas->limpiarCadena($segundoNombre);
+        $primerApellido = $this->consultas->limpiarCadena($primerApellido);
+        $segundoApellido = $this->consultas->limpiarCadena($segundoApellido);
+        $cedula = $this->consultas->limpiarCadena($cedula);
+        $edad = $this->consultas->limpiarCadena($edad);
+        $ano = $this->consultas->limpiarCadena($ano);
+        $mes = $this->consultas->limpiarCadena($mes);
+        $dia = $this->consultas->limpiarCadena($dia);
+        $numeroCarnet = $this->consultas->limpiarCadena($numeroCarnet);
+        $tomo = $this->consultas->limpiarCadena($tomo);
+        $folio = $this->consultas->limpiarCadena($folio);
+        $parentesco = $this->consultas->limpiarCadena($parentesco);
+        $discapacidad = $this->consultas->limpiarCadena($discapacidad);
+        $sexo = $this->consultas->limpiarCadena($sexo);
 
         if ($numeroCarnet == "") {
             $numeroCarnet = null;
@@ -958,7 +962,7 @@ class PersonalController extends personalModel
     public function obtenerDatosPersonal(
         string $cedualEmpleado
     ) {
-        $cedualEmpleado = $this->limpiarCadena($cedualEmpleado);
+        $cedualEmpleado = $this->consultas->limpiarCadena($cedualEmpleado);
         $data_json = [
             'exito' => false, // Inicializamos a false por defecto
             'mensaje' => 'data del principio',
@@ -1055,7 +1059,7 @@ class PersonalController extends personalModel
     // Obtener datos del familiar
     public function obtenerDatosFamiliar(string $idPersonal)
     {
-        $idPersonal = $this->limpiarCadena($idPersonal);
+        $idPersonal = $this->consultas->limpiarCadena($idPersonal);
 
         $data_json = [
             'exito' => false,
@@ -1427,7 +1431,7 @@ class PersonalController extends personalModel
     //Eliminar personal empleado
     public function eliminarEmpleado($idEmpleado)
     {
-        $idEmpleado = $this->limpiarCadena($idEmpleado);
+        $idEmpleado = $this->consultas->limpiarCadena($idEmpleado);
         $parametro = [
             [
                 "campo_nombre" => "activo",
@@ -1463,7 +1467,7 @@ class PersonalController extends personalModel
     //Eliminar familiar del empleado
     public function eliminarFamiliar($idPersonal)
     {
-        $idPersonal = $this->limpiarCadena($idPersonal);
+        $idPersonal = $this->consultas->limpiarCadena($idPersonal);
         $parametro = [
             [
                 "campo_nombre" => "activo",
@@ -1817,22 +1821,22 @@ class PersonalController extends personalModel
         $sexo,
         $discapacidad
     ) {
-        $primerNombre = $this->limpiarCadena($primerNombre);
-        $segundoNombre = $this->limpiarCadena($segundoNombre);
-        $primerApellido = $this->limpiarCadena($primerApellido);
-        $segundoApellido = $this->limpiarCadena($segundoApellido);
-        $cedula = $this->limpiarCadena($cedula);
-        $cedulaEmpleado = $this->limpiarCadena($cedulaEmpleado);
-        $edad = $this->limpiarCadena($edad);
-        $ano = $this->limpiarCadena($ano);
-        $mes = $this->limpiarCadena($mes);
-        $dia = $this->limpiarCadena($dia);
-        $numeroCarnet = $this->limpiarCadena($numeroCarnet);
-        $tomo = $this->limpiarCadena($tomo);
-        $folio = $this->limpiarCadena($folio);
-        $parentesco = $this->limpiarCadena($parentesco);
-        $sexo = $this->limpiarCadena($sexo);
-        $discapacidad = $this->limpiarCadena($discapacidad);
+        $primerNombre = $this->consultas->limpiarCadena($primerNombre);
+        $segundoNombre = $this->consultas->limpiarCadena($segundoNombre);
+        $primerApellido = $this->consultas->limpiarCadena($primerApellido);
+        $segundoApellido = $this->consultas->limpiarCadena($segundoApellido);
+        $cedula = $this->consultas->limpiarCadena($cedula);
+        $cedulaEmpleado = $this->consultas->limpiarCadena($cedulaEmpleado);
+        $edad = $this->consultas->limpiarCadena($edad);
+        $ano = $this->consultas->limpiarCadena($ano);
+        $mes = $this->consultas->limpiarCadena($mes);
+        $dia = $this->consultas->limpiarCadena($dia);
+        $numeroCarnet = $this->consultas->limpiarCadena($numeroCarnet);
+        $tomo = $this->consultas->limpiarCadena($tomo);
+        $folio = $this->consultas->limpiarCadena($folio);
+        $parentesco = $this->consultas->limpiarCadena($parentesco);
+        $sexo = $this->consultas->limpiarCadena($sexo);
+        $discapacidad = $this->consultas->limpiarCadena($discapacidad);
 
         $fileInputName = 'docArchivo';
         $fileInputName2 = 'docArchivoDis';
