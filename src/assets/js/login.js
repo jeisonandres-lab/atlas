@@ -1,4 +1,4 @@
-import { enviarDatos, enviarFormulario, generarHashContrasena, verificarContrasena } from "./utils/formularioAjax.js";
+import { enviarFormulario, verificarContrasena } from "./utils/formularioAjax.js";
 import { AlertDirection, AlertSW2 } from "./utils/alerts.js";
 
 /**
@@ -27,7 +27,7 @@ const ModuloLogin = (() => {
   // Endpoints de API
   const Endpoints = {
     login: 'src/routers/Usuario.php?modulo_usuario=login',
-    redireccion: './src/requests/Usuario.php?modulo_usuario=redireccionar'
+    redireccion: './src/routers/Usuario.php?modulo_usuario=redireccionar'
   };
 
   /**
@@ -84,12 +84,12 @@ const ModuloLogin = (() => {
       formData.append('modulo_usuario', 'login');
 
       // Función de callback para el éxito
-      const callbackExito = (parsedData) => {
+      const callbackExito = (data) => {
         $(Selectores.cargando).hide();
 
-        if (parsedData.exito) {
-          const hashAlmacenado = parsedData.password;
-          const saltAlmacenada = parsedData.salt;
+        if (data.exito) {
+          const hashAlmacenado = data.password;
+          const saltAlmacenada = data.salt;
 
           if (verificarContrasena(passwordValor, hashAlmacenado, saltAlmacenada)) {
             const redireccion = () => {
@@ -101,7 +101,7 @@ const ModuloLogin = (() => {
             AlertSW2("error", Mensajes.PASSWORD_INCORRECTO, "top", 4000);
           }
         } else {
-          AlertSW2("error", parsedData.mensaje, "top", 4000);
+          AlertSW2("error", data.mensaje, "top", 4000);
         }
       };
 

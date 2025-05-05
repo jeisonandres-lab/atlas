@@ -1,6 +1,15 @@
+/**
+ * Envía un formulario de manera asíncrona usando AJAX
+ * @param {string} url - URL del endpoint
+ * @param {FormData} datos - Datos del formulario
+ * @param {Function} callbackExito - Función a ejecutar en caso de éxito
+ * @param {boolean} ejecutarCallback - Si se debe ejecutar el callback
+ * @param {string} metodo - Método HTTP (POST por defecto)
+ * @returns {Promise} Promesa que resuelve con la respuesta del servidor
+ */
 export async function enviarFormulario(url, datos, callbackExito, ejecutarCallback = false, metodo = 'POST') {
-    return new Promise((resolve, reject) => {
-        $.ajax({
+    try {
+        const response = await $.ajax({
             url: url,
             type: metodo,
             data: datos,
@@ -9,26 +18,28 @@ export async function enviarFormulario(url, datos, callbackExito, ejecutarCallba
             cache: false,
             beforeSend: function () {
                 cargando.style.display = 'flex';
-            },
-            success: function (data, status, response) {
-                try {
-                    // Intenta parsear los datos como JSON
-                    const parsedData = data;
-                    // console.table(parsedData)
-
-                    if (ejecutarCallback) {
-                        callbackExito(parsedData);
-                    }
-                    cargando.style.display = 'none';
-                } catch (error) {
-                    console.error('Error al parsear los datos JSON:', error);
-                }
-            },
-            error: function (jqXHR, textStatus, errorThrown) {
-                console.log(jqXHR, textStatus, errorThrown);
             }
         });
-    });
+
+        try {
+            // Intentar parsear la respuesta como JSON si es necesario
+            const data = typeof response === 'string' ? JSON.parse(response) : response;
+
+            if (ejecutarCallback && typeof callbackExito === 'function') {
+                callbackExito(data);
+            }
+
+            return data;
+        } catch (error) {
+            console.error('Error al procesar la respuesta:', error);
+            throw new Error('Error al procesar la respuesta del servidor');
+        }
+    } catch (error) {
+        console.error('Error en la petición AJAX:', error);
+        throw error;
+    } finally {
+        cargando.style.display = 'none';
+    }
 }
 
 export async function enviarDatos(url, datos, metodo = 'POST') {

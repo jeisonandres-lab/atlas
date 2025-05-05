@@ -1,15 +1,19 @@
 <?php
 namespace App\Atlas\config;
 
-use App\Atlas\config\Conexion;
+use App\Atlas\config\EjecutarSQL;
 
-class Peticiones extends Conexion {
+class Peticiones extends EjecutarSQL {
     public function __construct() {
         parent::__construct();
     }
 
     public function obtenerVariables() {
         return [
+            'id' => isset($_POST['id']) ? $this->limpiarCadena($_POST['id']) : "",
+            'pin' => isset($_POST['pin']) ? $this->limpiarCadena($_POST['pin']) : "",
+            'usuario' => isset($_POST['usuario']) ? $this->limpiarCadena($_POST['usuario']) : "",
+            'password' => isset($_POST['password']) ? $this->limpiarCadena($_POST['password']) : "",
             'primerNombre' => isset($_POST['primerNombre']) ? $this->limpiarCadena($_POST['primerNombre']) : "",
             'segundoNombre' => isset($_POST['segundoNombre']) ? $this->limpiarCadena($_POST['segundoNombre']) : "",
             'primerApellido' => isset($_POST['primerApellido']) ? $this->limpiarCadena($_POST['primerApellido']) : "",

@@ -10,7 +10,7 @@ class App
      */
     public const APP_URL = "http://localhost/atlas/";
     public const URL_NODE = "./node_modules/";
-    public const URL_INC = "./src/views/inc/";
+    public const URL_INC = "./src/views/incluir/";
     public const URL_SCRIPS = "./src/assets/js/";
     public const URL_LIBRARY = "./src/libs/";
     public const URL_CSS = "./src/assets/css/";

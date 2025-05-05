@@ -14,7 +14,7 @@ use App\Atlas\config\App; ?>
 </head>
 
 <body>
-    <?php require("./src/views/inc/load.php"); ?>
+    <?php require_once App::URL_INC . "load.php"; ?>
 
     <main class="principal container-fluid ">
         <div class="h-100 d-flex justify-content-center align-items-center">

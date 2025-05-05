@@ -27,9 +27,9 @@ class ViewModel extends Error
 
         // Configuración de rutas absolutas de vistas
         $vistas = [
-            'horario' => __DIR__ . '/../../views/start/horario.php',
-            'Identificarse' => __DIR__ . '/../../views/start/login.php',
-            'recuperarDatos' => __DIR__ . '/../../views/start/recuperar.php',
+            'horario' => __DIR__ . '/../../views/publico/horario.php',
+            'Identificarse' => __DIR__ . '/../../views/publico/login.php',
+            'recuperarDatos' => __DIR__ . '/../../views/publico/recuperar.php',
             'inicio' => __DIR__ . '/../../views/home/home.php',
             'personal' => __DIR__ . '/../../views/personal/registroPersonal.php',
             'registrosFamiliares' => __DIR__ . '/../../views/personal/registrosFamiliares.php',
@@ -52,7 +52,7 @@ class ViewModel extends Error
         if ($rutaVista && file_exists($rutaVista)) {
             return $rutaVista;
         } elseif ($vista == "Identificarse" || $vista == "index") {
-            return __DIR__ . '/../views/start/login.php'; // Ruta absoluta a Identificarse
+            return __DIR__ . '/../views/publico/login.php'; // Ruta absoluta a Identificarse
         } else {
             Error::captureError("Vista no encontrada: $vista");
             header("Location: " . App::APP_URL . "Identificarse");
