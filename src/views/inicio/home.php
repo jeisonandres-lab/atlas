@@ -1,8 +1,5 @@
 <?php
-
 use App\Atlas\config\App;
-
-
 ?>
 <!DOCTYPE html>
 <html lang="es">

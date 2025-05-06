@@ -87,7 +87,7 @@ class App
      */
     public function iniciarSession(): void
     {
-        if (session_status() == PHP_SESSION_NONE) {
+        if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
     }
@@ -98,7 +98,8 @@ class App
      */
     public function iniciarName(): string
     {
-        return session_name(App::APP_NAME);
+        
+        return session_name();
     }
 
     /**
@@ -107,7 +108,19 @@ class App
      */
     public function cerrarSession(): bool
     {
-        session_start();
-        return session_destroy();
+        if (session_status() === PHP_SESSION_ACTIVE) {
+            session_unset();
+            return session_destroy();
+        }
+        return true;
+    }
+
+    /**
+     * Redirige al usuario a la página de login
+     */
+    public function redirigirALogin(): void
+    {
+        header('Location: Identificarse');
+        exit();
     }
 }

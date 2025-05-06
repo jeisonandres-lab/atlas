@@ -30,7 +30,7 @@ class ViewModel extends Error
             'horario' => __DIR__ . '/../../views/publico/horario.php',
             'Identificarse' => __DIR__ . '/../../views/publico/login.php',
             'recuperarDatos' => __DIR__ . '/../../views/publico/recuperar.php',
-            'inicio' => __DIR__ . '/../../views/home/home.php',
+            'inicio' => __DIR__ . '/../../views/inicio/home.php',
             'personal' => __DIR__ . '/../../views/personal/registroPersonal.php',
             'registrosFamiliares' => __DIR__ . '/../../views/personal/registrosFamiliares.php',
             'datosInces' => __DIR__ . '/../../views/personal/DatosInces.php',
@@ -43,6 +43,7 @@ class ViewModel extends Error
             'datosPersonal' => __DIR__ . '/../../views/bienestarSocial/datosPersonal.php',
             'ficha' => __DIR__ . '/../../views/bienestarSocial/fichaTecnica.php',
             'error' => __DIR__ . '/../../error/error.html',
+            'test' => __DIR__ . '/../../views/test_session.php',
         ];
 
         // Obtener la ruta completa de la vista

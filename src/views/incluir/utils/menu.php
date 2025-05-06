@@ -7,8 +7,8 @@
             </a>
         </li>
         <li class="nav-item d-flex align-items-center">
-            <span class="<?php echo $classActivo ?> me-2"></span>
-            <span><?php echo $act ?> </span>
+            <span class="<?php $_SESSION['classActivo'] ?> me-2"></span>
+            <span><?php $_SESSION['act'] ?> </span>
         </li>
     </div>
     <div id="contenedor-buscar" class="search_bar">
@@ -43,7 +43,7 @@
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 <img loading="lazy" src="./src/assets/img/icons/avtar_1.webp" alt="" class="profile nav-item dropdown dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" />
-                <span class="ms-2 d-none d-md-inline"><?php echo $datosUser ?></span>
+                <span class="ms-2 d-none d-md-inline"><?php $_SESSION['usuario'] ?></span>
             </a>
             <ul class="dropdown-menu">
                 <li><a class="dropdown-item" href="#" id="cerrarSession">Cerrar Sesion</a></li>

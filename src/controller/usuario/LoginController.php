@@ -31,63 +31,72 @@ class LoginController
      * @param string $password
      * @return array
      */
-    public function logearse(string $user, string $password)
-    {
-        $data_json = [
-            'exito' => false,
-            'mensaje' => ''
-        ];
 
-        if (empty($user) || empty($password)) {
-            $data_json['mensaje'] = 'La contraseña o el usuario no fueron colocados.';
-        } else {
-            if ($resputa = $this->ejecutarSQL->verificarDatos("[a-zA-Z0-9]{8,20}", $user)) {
-                $data_json['mensaje'] = 'el usuario no cumple con lo solicitado, debe de tener minimo 8 caracteres.';
-                $data_json['usuario'] = $resputa;
-            } else {
-                $check_user = $this->usuarioPublico->getExisteUsuario($user);
-                if ($check_user == true) {
+     public function logearse(string $user, string $password)
+     {
+         $data_json = [
+             'exito' => false,
+             'mensaje' => ''
+         ];
 
-                    session_start();
-                    foreach ($check_user as $row) {
-                        if ($row['nameUser'] === $user) {
-                            $data_json['exito'] = true;
-                            $data_json['usuario'] = $row['nameUser'];
-                            $data_json['mensaje'] = 'Usuario encontrado con exito';
-                            $data_json['password'] = $row['userPassword'];
-                            $data_json['salt'] = $row['saltPass'];
-                            $data_json['activo'] = 'desactivado';
+         if (empty($user) || empty($password)) {
+             $data_json['mensaje'] = 'La contraseña o el usuario no fueron colocados.';
+         } else {
+             if ($resputa = $this->ejecutarSQL->verificarDatos("[a-zA-Z0-9]{8,20}", $user)) {
+                 $data_json['mensaje'] = 'El usuario no cumple con lo solicitado, debe de tener mínimo 8 caracteres.';
+                 $data_json['usuario'] = $resputa;
+             } else {
+                 $check_user = $this->usuarioPublico->getExisteUsuario($user);
+                 if ($check_user == true) {
 
-                            $_SESSION['usuario'] = $user;
-                            $_SESSION['id'] = $row['id_user'];
-                            $_SESSION['activado'] = $row['activo'];
-                            $_SESSION['idrol'] = $row['idrol'];
-                            $_SESSION['rol'] = $row['rol'];
-                            $_SESSION['permiso'] = $row['permiso'];
+                     $this->app->iniciarName();
+                     $this->app->iniciarSession();
 
-                            $id =  $_SESSION['id'];
-                            $usuario = $_SESSION['usuario'];
+                     foreach ($check_user as $row) {
+                         if ($row['nameUser'] === $user) {
+                             $data_json['exito'] = true;
+                             $data_json['usuario'] = $row['nameUser'];
+                             $data_json['mensaje'] = 'Usuario encontrado con éxito';
+                             $data_json['password'] = $row['userPassword'];
+                             $data_json['salt'] = $row['saltPass'];
+                             $data_json['activo'] = 'Activado';
 
-                            $registroAuditoria = $this->auditoriaController->registrarAuditoria($id, 'Inicio de sesion', 'el usuario' . ' ' . $usuario . ' a iniciado sesion en el sistema');
-                            if ($registroAuditoria) {
-                                $data_json["exitoAuditoria"] = true;
-                                $data_json['messengerAuditoria'] = "Auditoria registrada con exito.";
-                            } else {
-                                $data_json["exito"] = false;
-                                $data_json['messenger'] = "Error al registrar la auditoria.";
-                            }
-                        } else {
-                            $data_json['mensaje'] = 'Usuario no coincide';
-                        }
-                    }
-                } else {
-                    $data_json["mensaje"] = "El usuario no existe";
-                }
-            }
-        }
-        header('Content-Type: application/json');
-        echo json_encode($data_json);
-    }
+                             // Guardar datos en la sesión
+                             $_SESSION['usuario'] = $user;
+                             $_SESSION['id'] = $row['id_user'];
+                             $_SESSION['activado'] = $row['activo'];
+                             $_SESSION['idrol'] = $row['idrol'];
+                             $_SESSION['rol'] = $row['rol'];
+                             $_SESSION['permiso'] = $row['permiso'];
+
+                             // Guardar variables adicionales en la sesión
+                             $_SESSION['classActivo'] = $_SESSION['activado'] == '1' ? 'activado bg-success' : 'desactivado bg-danger';
+                             $_SESSION['act'] = $_SESSION['activado'] == '1' ? 'Activo' : 'Desactivado';
+                             $_SESSION['rol'] = $row['rol'];
+
+                             // Registrar auditoría
+                             $id = $_SESSION['id'];
+                             $usuario = $_SESSION['usuario'];
+                             $registroAuditoria = $this->auditoriaController->registrarAuditoria($id, 'Inicio de sesión', 'El usuario ' . $usuario . ' ha iniciado sesión en el sistema');
+                             if ($registroAuditoria) {
+                                 $data_json["exitoAuditoria"] = true;
+                                 $data_json['messengerAuditoria'] = "Auditoría registrada con éxito.";
+                             } else {
+                                 $data_json["exito"] = false;
+                                 $data_json['messenger'] = "Error al registrar la auditoría.";
+                             }
+                         } else {
+                             $data_json['mensaje'] = 'Usuario no coincide';
+                         }
+                     }
+                 } else {
+                     $data_json["mensaje"] = "El usuario no existe";
+                 }
+             }
+         }
+         header('Content-Type: application/json');
+         echo json_encode($data_json);
+     }
 
     public function cerrarSession_total($url)
     {
@@ -255,6 +264,4 @@ class LoginController
         header('Content-Type: application/json');
         echo json_encode($data_json);
     }
-
-
 }

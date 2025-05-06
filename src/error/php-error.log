@@ -41242,3 +41242,591 @@ Archivo: C:\xampp\htdocs\atlas\index.php
 Línea: 46
 Fecha y hora: 2025-05-01 02:42:07
 ======================================================
+======================================================
+Error: Undefined variable $classActivo
+Archivo: C:\xampp\htdocs\atlas\src\views\incluir\utils\menu.php
+Línea: 10
+Fecha y hora: 2025-05-05 23:14:55
+======================================================
+======================================================
+Error: Undefined variable $classActivo
+Archivo: C:\xampp\htdocs\atlas\src\views\incluir\utils\menu.php
+Línea: 10
+Fecha y hora: 2025-05-05 23:15:06
+======================================================
+======================================================
+Error: Undefined variable $classActivo
+Archivo: C:\xampp\htdocs\atlas\src\views\incluir\utils\menu.php
+Línea: 10
+Fecha y hora: 2025-05-05 23:16:20
+======================================================
+======================================================
+Error: Undefined variable $classActivo
+Archivo: C:\xampp\htdocs\atlas\src\views\incluir\utils\menu.php
+Línea: 10
+Fecha y hora: 2025-05-05 23:16:28
+======================================================
+======================================================
+Error: Undefined variable $act
+Archivo: C:\xampp\htdocs\atlas\src\views\incluir\utils\menu.php
+Línea: 11
+Fecha y hora: 2025-05-05 23:17:48
+======================================================
+======================================================
+Error: Undefined variable $datosUser
+Archivo: C:\xampp\htdocs\atlas\src\views\incluir\utils\menu.php
+Línea: 46
+Fecha y hora: 2025-05-05 23:17:54
+======================================================
+======================================================
+Error: Undefined variable $classActivo
+Archivo: C:\xampp\htdocs\atlas\src\views\incluir\utils\menu.php
+Línea: 10
+Fecha y hora: 2025-05-05 23:20:21
+======================================================
+======================================================
+Error: Undefined variable $classActivo
+Archivo: C:\xampp\htdocs\atlas\src\views\incluir\utils\menu.php
+Línea: 10
+Fecha y hora: 2025-05-05 23:20:22
+======================================================
+======================================================
+Error: Undefined variable $classActivo
+Archivo: C:\xampp\htdocs\atlas\src\views\incluir\utils\menu.php
+Línea: 10
+Fecha y hora: 2025-05-05 23:21:34
+======================================================
+======================================================
+Error: Undefined variable $classActivo
+Archivo: C:\xampp\htdocs\atlas\src\views\incluir\utils\menu.php
+Línea: 10
+Fecha y hora: 2025-05-05 23:23:27
+======================================================
+======================================================
+Error: Undefined variable $classActivo
+Archivo: C:\xampp\htdocs\atlas\src\views\incluir\utils\menu.php
+Línea: 10
+Fecha y hora: 2025-05-05 23:23:39
+======================================================
+======================================================
+Error: Undefined variable $classActivo
+Archivo: C:\xampp\htdocs\atlas\src\views\incluir\utils\menu.php
+Línea: 10
+Fecha y hora: 2025-05-05 23:23:47
+======================================================
+======================================================
+Error: Undefined variable $classActivo
+Archivo: C:\xampp\htdocs\atlas\src\views\incluir\utils\menu.php
+Línea: 10
+Fecha y hora: 2025-05-05 23:25:07
+======================================================
+======================================================
+Error: Undefined variable $respuesta
+Archivo: C:\xampp\htdocs\atlas\src\controller\sistema\ViewController.php
+Línea: 31
+Fecha y hora: 2025-05-05 23:26:56
+======================================================
+======================================================
+Error: Undefined variable $respuesta
+Archivo: C:\xampp\htdocs\atlas\src\controller\sistema\ViewController.php
+Línea: 31
+Fecha y hora: 2025-05-05 23:26:57
+======================================================
+======================================================
+Error: Undefined variable $respuesta
+Archivo: C:\xampp\htdocs\atlas\src\controller\sistema\ViewController.php
+Línea: 31
+Fecha y hora: 2025-05-05 23:27:02
+======================================================
+======================================================
+Error: Undefined variable $respuesta
+Archivo: C:\xampp\htdocs\atlas\src\controller\sistema\ViewController.php
+Línea: 31
+Fecha y hora: 2025-05-05 23:27:05
+======================================================
+======================================================
+Error: Undefined variable $classActivo
+Archivo: C:\xampp\htdocs\atlas\src\views\incluir\utils\menu.php
+Línea: 10
+Fecha y hora: 2025-05-05 23:27:10
+======================================================
+======================================================
+Error: Undefined variable $classActivo
+Archivo: C:\xampp\htdocs\atlas\src\views\incluir\utils\menu.php
+Línea: 10
+Fecha y hora: 2025-05-05 23:27:23
+======================================================
+======================================================
+Error: Undefined variable $classActivo
+Archivo: C:\xampp\htdocs\atlas\src\views\incluir\utils\menu.php
+Línea: 10
+Fecha y hora: 2025-05-06 00:43:08
+======================================================
+======================================================
+Error: session_start(): Ignoring session_start() because a session is already active
+Archivo: C:\xampp\htdocs\atlas\src\config\Aplicacion.php
+Línea: 52
+Fecha y hora: 2025-05-06 00:46:04
+======================================================
+======================================================
+Error: session_start(): Ignoring session_start() because a session is already active
+Archivo: C:\xampp\htdocs\atlas\src\config\Aplicacion.php
+Línea: 52
+Fecha y hora: 2025-05-06 00:46:06
+======================================================
+======================================================
+Error: session_start(): Ignoring session_start() because a session is already active
+Archivo: C:\xampp\htdocs\atlas\src\config\Aplicacion.php
+Línea: 52
+Fecha y hora: 2025-05-06 00:46:07
+======================================================
+======================================================
+Error: session_start(): Ignoring session_start() because a session is already active
+Archivo: C:\xampp\htdocs\atlas\src\config\Aplicacion.php
+Línea: 52
+Fecha y hora: 2025-05-06 00:46:08
+======================================================
+======================================================
+Error: session_start(): Ignoring session_start() because a session is already active
+Archivo: C:\xampp\htdocs\atlas\src\config\Aplicacion.php
+Línea: 52
+Fecha y hora: 2025-05-06 00:46:16
+======================================================
+======================================================
+Error: Undefined variable $classActivo
+Archivo: C:\xampp\htdocs\atlas\src\views\incluir\utils\menu.php
+Línea: 10
+Fecha y hora: 2025-05-06 01:10:24
+======================================================
+======================================================
+Error: Undefined variable $classActivo
+Archivo: C:\xampp\htdocs\atlas\src\views\incluir\utils\menu.php
+Línea: 10
+Fecha y hora: 2025-05-06 01:24:00
+======================================================
+======================================================
+Error: Undefined variable $classActivo
+Archivo: C:\xampp\htdocs\atlas\src\views\incluir\utils\menu.php
+Línea: 10
+Fecha y hora: 2025-05-06 01:24:12
+======================================================
+======================================================
+Error: Undefined variable $classActivo
+Archivo: C:\xampp\htdocs\atlas\src\views\incluir\utils\menu.php
+Línea: 10
+Fecha y hora: 2025-05-06 01:29:40
+======================================================
+======================================================
+Error: Undefined variable $classActivo
+Archivo: C:\xampp\htdocs\atlas\src\views\incluir\utils\menu.php
+Línea: 10
+Fecha y hora: 2025-05-06 01:29:43
+======================================================
+======================================================
+Error: Undefined variable $classActivo
+Archivo: C:\xampp\htdocs\atlas\src\views\incluir\utils\menu.php
+Línea: 10
+Fecha y hora: 2025-05-06 01:29:44
+======================================================
+======================================================
+Error: Undefined variable $classActivo
+Archivo: C:\xampp\htdocs\atlas\src\views\incluir\utils\menu.php
+Línea: 10
+Fecha y hora: 2025-05-06 01:29:51
+======================================================
+======================================================
+Error: Undefined variable $classActivo
+Archivo: C:\xampp\htdocs\atlas\src\views\incluir\utils\menu.php
+Línea: 10
+Fecha y hora: 2025-05-06 01:29:52
+======================================================
+======================================================
+Error: Undefined variable $classActivo
+Archivo: C:\xampp\htdocs\atlas\src\views\incluir\utils\menu.php
+Línea: 10
+Fecha y hora: 2025-05-06 01:30:02
+======================================================
+======================================================
+Error: Undefined variable $classActivo
+Archivo: C:\xampp\htdocs\atlas\src\views\incluir\utils\menu.php
+Línea: 10
+Fecha y hora: 2025-05-06 01:30:03
+======================================================
+======================================================
+Error: Undefined variable $classActivo
+Archivo: C:\xampp\htdocs\atlas\src\views\incluir\utils\menu.php
+Línea: 10
+Fecha y hora: 2025-05-06 01:30:03
+======================================================
+======================================================
+Error: Undefined variable $classActivo
+Archivo: C:\xampp\htdocs\atlas\src\views\incluir\utils\menu.php
+Línea: 10
+Fecha y hora: 2025-05-06 01:30:04
+======================================================
+======================================================
+Error: Undefined variable $classActivo
+Archivo: C:\xampp\htdocs\atlas\src\views\incluir\utils\menu.php
+Línea: 10
+Fecha y hora: 2025-05-06 01:30:04
+======================================================
+======================================================
+Error: Undefined variable $classActivo
+Archivo: C:\xampp\htdocs\atlas\src\views\incluir\utils\menu.php
+Línea: 10
+Fecha y hora: 2025-05-06 01:30:06
+======================================================
+======================================================
+Error: Undefined variable $classActivo
+Archivo: C:\xampp\htdocs\atlas\src\views\incluir\utils\menu.php
+Línea: 10
+Fecha y hora: 2025-05-06 01:30:06
+======================================================
+======================================================
+Error: Undefined variable $classActivo
+Archivo: C:\xampp\htdocs\atlas\src\views\incluir\utils\menu.php
+Línea: 10
+Fecha y hora: 2025-05-06 01:30:13
+======================================================
+======================================================
+Error: Undefined variable $classActivo
+Archivo: C:\xampp\htdocs\atlas\src\views\incluir\utils\menu.php
+Línea: 10
+Fecha y hora: 2025-05-06 01:30:14
+======================================================
+======================================================
+Error: Undefined variable $classActivo
+Archivo: C:\xampp\htdocs\atlas\src\views\incluir\utils\menu.php
+Línea: 10
+Fecha y hora: 2025-05-06 01:30:55
+======================================================
+======================================================
+Error: Undefined variable $classActivo
+Archivo: C:\xampp\htdocs\atlas\src\views\incluir\utils\menu.php
+Línea: 10
+Fecha y hora: 2025-05-06 01:31:11
+======================================================
+======================================================
+Error: Undefined variable $classActivo
+Archivo: C:\xampp\htdocs\atlas\src\views\incluir\utils\menu.php
+Línea: 10
+Fecha y hora: 2025-05-06 01:31:12
+======================================================
+======================================================
+Error: Undefined variable $classActivo
+Archivo: C:\xampp\htdocs\atlas\src\views\incluir\utils\menu.php
+Línea: 10
+Fecha y hora: 2025-05-06 01:31:13
+======================================================
+======================================================
+Error: Undefined variable $classActivo
+Archivo: C:\xampp\htdocs\atlas\src\views\incluir\utils\menu.php
+Línea: 10
+Fecha y hora: 2025-05-06 01:31:14
+======================================================
+======================================================
+Error: Undefined variable $classActivo
+Archivo: C:\xampp\htdocs\atlas\src\views\incluir\utils\menu.php
+Línea: 10
+Fecha y hora: 2025-05-06 01:31:46
+======================================================
+======================================================
+Error: require_once(inicio): Failed to open stream: No such file or directory
+Archivo: C:\xampp\htdocs\atlas\src\config\Aplicacion.php
+Línea: 82
+Fecha y hora: 2025-05-06 01:31:56
+======================================================
+======================================================
+Error: require_once(inicio): Failed to open stream: No such file or directory
+Archivo: C:\xampp\htdocs\atlas\src\config\Aplicacion.php
+Línea: 82
+Fecha y hora: 2025-05-06 01:31:57
+======================================================
+======================================================
+Error: require_once(inicio): Failed to open stream: No such file or directory
+Archivo: C:\xampp\htdocs\atlas\src\config\Aplicacion.php
+Línea: 82
+Fecha y hora: 2025-05-06 01:31:57
+======================================================
+======================================================
+Error: require_once(inicio): Failed to open stream: No such file or directory
+Archivo: C:\xampp\htdocs\atlas\src\config\Aplicacion.php
+Línea: 82
+Fecha y hora: 2025-05-06 01:31:57
+======================================================
+======================================================
+Error: require_once(inicio): Failed to open stream: No such file or directory
+Archivo: C:\xampp\htdocs\atlas\src\config\Aplicacion.php
+Línea: 82
+Fecha y hora: 2025-05-06 01:31:57
+======================================================
+======================================================
+Error: require_once(inicio): Failed to open stream: No such file or directory
+Archivo: C:\xampp\htdocs\atlas\src\config\Aplicacion.php
+Línea: 82
+Fecha y hora: 2025-05-06 01:31:58
+======================================================
+======================================================
+Error: require_once(inicio): Failed to open stream: No such file or directory
+Archivo: C:\xampp\htdocs\atlas\src\config\Aplicacion.php
+Línea: 82
+Fecha y hora: 2025-05-06 01:31:58
+======================================================
+======================================================
+Error: require_once(inicio): Failed to open stream: No such file or directory
+Archivo: C:\xampp\htdocs\atlas\src\config\Aplicacion.php
+Línea: 82
+Fecha y hora: 2025-05-06 01:31:58
+======================================================
+======================================================
+Error: require_once(inicio): Failed to open stream: No such file or directory
+Archivo: C:\xampp\htdocs\atlas\src\config\Aplicacion.php
+Línea: 82
+Fecha y hora: 2025-05-06 01:31:59
+======================================================
+======================================================
+Error: Undefined variable $classActivo
+Archivo: C:\xampp\htdocs\atlas\src\views\incluir\utils\menu.php
+Línea: 10
+Fecha y hora: 2025-05-06 01:32:23
+======================================================
+======================================================
+Error: Undefined variable $act
+Archivo: C:\xampp\htdocs\atlas\src\views\incluir\utils\menu.php
+Línea: 11
+Fecha y hora: 2025-05-06 01:33:00
+======================================================
+======================================================
+Error: Undefined variable $act
+Archivo: C:\xampp\htdocs\atlas\src\views\incluir\utils\menu.php
+Línea: 11
+Fecha y hora: 2025-05-06 01:33:02
+======================================================
+======================================================
+Error: Undefined variable $datosUser
+Archivo: C:\xampp\htdocs\atlas\src\views\incluir\utils\menu.php
+Línea: 46
+Fecha y hora: 2025-05-06 01:33:09
+======================================================
+======================================================
+Error: Undefined variable $datosUser
+Archivo: C:\xampp\htdocs\atlas\src\views\incluir\utils\menu.php
+Línea: 46
+Fecha y hora: 2025-05-06 01:33:10
+======================================================
+======================================================
+Error: require(./src/views/inc/load.php): Failed to open stream: No such file or directory
+Archivo: C:\xampp\htdocs\atlas\src\views\personal\registroPersonal.php
+Línea: 21
+Fecha y hora: 2025-05-06 01:36:59
+======================================================
+======================================================
+Error: Undefined variable $classActivo
+Archivo: C:\xampp\htdocs\atlas\src\views\incluir\utils\menu.php
+Línea: 10
+Fecha y hora: 2025-05-06 01:40:14
+======================================================
+======================================================
+Error: session_start(): Ignoring session_start() because a session is already active
+Archivo: C:\xampp\htdocs\atlas\src\config\Aplicacion.php
+Línea: 55
+Fecha y hora: 2025-05-06 01:41:10
+======================================================
+======================================================
+Error: session_start(): Ignoring session_start() because a session is already active
+Archivo: C:\xampp\htdocs\atlas\src\config\Aplicacion.php
+Línea: 55
+Fecha y hora: 2025-05-06 01:41:15
+======================================================
+======================================================
+Error: session_start(): Ignoring session_start() because a session is already active
+Archivo: C:\xampp\htdocs\atlas\src\config\Aplicacion.php
+Línea: 55
+Fecha y hora: 2025-05-06 01:41:15
+======================================================
+======================================================
+Error: session_start(): Ignoring session_start() because a session is already active
+Archivo: C:\xampp\htdocs\atlas\src\config\Aplicacion.php
+Línea: 55
+Fecha y hora: 2025-05-06 01:41:16
+======================================================
+======================================================
+Error: Undefined variable $classActivo
+Archivo: C:\xampp\htdocs\atlas\src\views\incluir\utils\menu.php
+Línea: 10
+Fecha y hora: 2025-05-06 01:41:45
+======================================================
+======================================================
+Error: Undefined variable $classActivo
+Archivo: C:\xampp\htdocs\atlas\src\views\incluir\utils\menu.php
+Línea: 10
+Fecha y hora: 2025-05-06 01:41:46
+======================================================
+======================================================
+Error: Undefined variable $classActivo
+Archivo: C:\xampp\htdocs\atlas\src\views\incluir\utils\menu.php
+Línea: 10
+Fecha y hora: 2025-05-06 01:41:47
+======================================================
+======================================================
+Error: Undefined variable $classActivo
+Archivo: C:\xampp\htdocs\atlas\src\views\incluir\utils\menu.php
+Línea: 10
+Fecha y hora: 2025-05-06 01:41:47
+======================================================
+======================================================
+Error: Undefined variable $classActivo
+Archivo: C:\xampp\htdocs\atlas\src\views\incluir\utils\menu.php
+Línea: 10
+Fecha y hora: 2025-05-06 01:41:48
+======================================================
+======================================================
+Error: Undefined variable $classActivo
+Archivo: C:\xampp\htdocs\atlas\src\views\incluir\utils\menu.php
+Línea: 10
+Fecha y hora: 2025-05-06 01:42:23
+======================================================
+======================================================
+Error: Undefined variable $classActivo
+Archivo: C:\xampp\htdocs\atlas\src\views\incluir\utils\menu.php
+Línea: 10
+Fecha y hora: 2025-05-06 01:42:56
+======================================================
+======================================================
+Error: Undefined variable $classActivo
+Archivo: C:\xampp\htdocs\atlas\src\views\incluir\utils\menu.php
+Línea: 10
+Fecha y hora: 2025-05-06 01:44:27
+======================================================
+======================================================
+Error: Undefined variable $classActivo
+Archivo: C:\xampp\htdocs\atlas\src\views\incluir\utils\menu.php
+Línea: 10
+Fecha y hora: 2025-05-06 01:44:53
+======================================================
+======================================================
+Error: Undefined variable $classActivo
+Archivo: C:\xampp\htdocs\atlas\src\views\incluir\utils\menu.php
+Línea: 10
+Fecha y hora: 2025-05-06 01:44:54
+======================================================
+======================================================
+Error: Undefined variable $classActivo
+Archivo: C:\xampp\htdocs\atlas\src\views\incluir\utils\menu.php
+Línea: 10
+Fecha y hora: 2025-05-06 01:44:55
+======================================================
+======================================================
+Error: Undefined variable $classActivo
+Archivo: C:\xampp\htdocs\atlas\src\views\incluir\utils\menu.php
+Línea: 10
+Fecha y hora: 2025-05-06 01:47:54
+======================================================
+======================================================
+Error: Undefined variable $classActivo
+Archivo: C:\xampp\htdocs\atlas\src\views\incluir\utils\menu.php
+Línea: 10
+Fecha y hora: 2025-05-06 01:48:03
+======================================================
+======================================================
+Error: Undefined variable $classActivo
+Archivo: C:\xampp\htdocs\atlas\src\views\incluir\utils\menu.php
+Línea: 10
+Fecha y hora: 2025-05-06 01:48:04
+======================================================
+======================================================
+Error: Undefined variable $classActivo
+Archivo: C:\xampp\htdocs\atlas\src\views\incluir\utils\menu.php
+Línea: 10
+Fecha y hora: 2025-05-06 01:49:19
+======================================================
+======================================================
+Error: Undefined variable $classActivo
+Archivo: C:\xampp\htdocs\atlas\src\views\incluir\utils\menu.php
+Línea: 10
+Fecha y hora: 2025-05-06 01:49:45
+======================================================
+======================================================
+Error: Undefined variable $classActivo
+Archivo: C:\xampp\htdocs\atlas\src\views\incluir\utils\menu.php
+Línea: 10
+Fecha y hora: 2025-05-06 01:49:46
+======================================================
+======================================================
+Error: Undefined variable $classActivo
+Archivo: C:\xampp\htdocs\atlas\src\views\incluir\utils\menu.php
+Línea: 10
+Fecha y hora: 2025-05-06 01:49:46
+======================================================
+======================================================
+Error: Undefined variable $classActivo
+Archivo: C:\xampp\htdocs\atlas\src\views\incluir\utils\menu.php
+Línea: 10
+Fecha y hora: 2025-05-06 01:51:04
+======================================================
+======================================================
+Error: Undefined variable $classActivo
+Archivo: C:\xampp\htdocs\atlas\src\views\incluir\utils\menu.php
+Línea: 10
+Fecha y hora: 2025-05-06 01:51:06
+======================================================
+======================================================
+Error: Undefined variable $classActivo
+Archivo: C:\xampp\htdocs\atlas\src\views\incluir\utils\menu.php
+Línea: 10
+Fecha y hora: 2025-05-06 01:51:23
+======================================================
+======================================================
+Error: Undefined variable $classActivo
+Archivo: C:\xampp\htdocs\atlas\src\views\incluir\utils\menu.php
+Línea: 10
+Fecha y hora: 2025-05-06 01:51:23
+======================================================
+======================================================
+Error: Undefined variable $classActivo
+Archivo: C:\xampp\htdocs\atlas\src\views\incluir\utils\menu.php
+Línea: 10
+Fecha y hora: 2025-05-06 01:51:24
+======================================================
+======================================================
+Error: Undefined variable $classActivo
+Archivo: C:\xampp\htdocs\atlas\src\views\incluir\utils\menu.php
+Línea: 10
+Fecha y hora: 2025-05-06 01:55:02
+======================================================
+======================================================
+Error: Undefined variable $classActivo
+Archivo: C:\xampp\htdocs\atlas\src\views\incluir\utils\menu.php
+Línea: 10
+Fecha y hora: 2025-05-06 01:58:52
+======================================================
+======================================================
+Error: Undefined variable $classActivo
+Archivo: C:\xampp\htdocs\atlas\src\views\incluir\utils\menu.php
+Línea: 10
+Fecha y hora: 2025-05-06 01:58:53
+======================================================
+======================================================
+Error: Undefined variable $classActivo
+Archivo: C:\xampp\htdocs\atlas\src\views\incluir\utils\menu.php
+Línea: 10
+Fecha y hora: 2025-05-06 02:00:10
+======================================================
+======================================================
+Error: Undefined variable $classActivo
+Archivo: C:\xampp\htdocs\atlas\src\views\incluir\utils\menu.php
+Línea: 10
+Fecha y hora: 2025-05-06 02:00:14
+======================================================
+======================================================
+Error: Undefined variable $classActivo
+Archivo: C:\xampp\htdocs\atlas\src\views\incluir\utils\menu.php
+Línea: 10
+Fecha y hora: 2025-05-06 02:00:26
+======================================================
+======================================================
+Error: require(./src/views/inc/load.php): Failed to open stream: No such file or directory
+Archivo: C:\xampp\htdocs\atlas\src\views\personal\registroPersonal.php
+Línea: 21
+Fecha y hora: 2025-05-06 02:02:55
+======================================================
