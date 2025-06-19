@@ -87,6 +87,7 @@ class TotalDateController extends TotalDateModel
             'messenger' => 'Error al obtener los datos'
         ];
 
+        
         $sql2 = $this->getTotalArchivosDia();
         $labels = [];
         $values = [];

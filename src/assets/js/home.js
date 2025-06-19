@@ -103,7 +103,7 @@ $(function () {
     });
 
     let urlsCard = [
-        "src/ajax/totalDate.php?modulo_Datos=totalDatos"
+        "./src/routers/totalDate.php?modulo_Datos=totalDatos"
     ];
 
     let requests = urlsCard.map((url, index) => {
@@ -192,7 +192,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     }
 
     async function loadChartDia() {
-        const dataDia = await fetchData('src/ajax/totalDate.php?modulo_Datos=totalArchivosDia');
+        const dataDia = await fetchData('./src/routers/totalDate.php?modulo_Datos=totalArchivosDia');
         if (dataDia && dataDia.exito) {
             console.table(dataDia);
             const chartDataDia = {
@@ -248,7 +248,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     }
 
     async function loadChartMes() {
-        const dataMes = await fetchData('src/ajax/totalDate.php?modulo_Datos=totalArchivosMes');
+        const dataMes = await fetchData('src/routers/totalDate.php?modulo_Datos=totalArchivosMes');
         if (dataMes && dataMes.exito) {
             console.table(dataMes);
             const chartDataMes = {

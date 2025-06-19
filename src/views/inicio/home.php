@@ -124,7 +124,8 @@ use App\Atlas\config\App;
                                 <div class="card-body">
                                     <div class="d-flex align-items-start justify-content-between mb-2">
                                         <div>
-                                            <span class="text-muted fs-13 d-block mb-1">
+                                        <script src="<?php echo App::URL_NODE."bootstrap/dist/js/bootstrap.bundle.min.js"; ?>" defer></script>
+    <span class="text-muted fs-13 d-block mb-1">
                                                 Total de achivos
                                             </span>
                                             <h4 class="fw-medium mb-0" id="totalArchivos">

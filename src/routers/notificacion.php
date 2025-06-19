@@ -15,9 +15,9 @@ $app = new App();
 $cedula = isset($_POST['cedula']) ? $conexion->limpiarCadena($_POST['cedula']) : "";
 
 
-switch ($_GET['modulo_noti']) {
+switch ($_GET['modulo_notificacion']) {
 
-    case 'obtenerNoti':
+    case 'obtenerNotificacion':
         $app->iniciarSession();
         $idRol = $_SESSION['idrol'];
         $notificacion->obtenerNotificacion($idRol);
