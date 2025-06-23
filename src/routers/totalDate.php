@@ -3,6 +3,10 @@
 require_once '../../vendor/autoload.php';
 
 use App\Atlas\controller\estadistica\TotalEstadisticaController;
+use App\Atlas\config\App;
+
+App::zonaHoraria(); // Establece la zona horaria
+
 // use App\Atlas\controller\notificacionController;
 
 // $notificacion = new notificacionController();

@@ -8,7 +8,7 @@ class TotalEstadisticaModel extends EjecutarSQL
 {
 
     // CONSULTA SQL QUE REGRESA LA CANTIDAD DE EMPLEADOS REGISTRADOS
-    protected function totalEmpleados()
+    protected function totalEmpleados(): array
     {
         $sql = $this->ejecutarConsulta(
             "SELECT count(id_empleados) AS totalEmpleados FROM datosempleados"
@@ -18,7 +18,7 @@ class TotalEstadisticaModel extends EjecutarSQL
 
     // CONSULTA SQL QUE REGRESA LA CANTIDAD DE ARCHIVOS REGISTRADOS
     // SI SE PASA UN PARAMETRO DE FECHA REGRESA LA CANTIDAD DE ARCHIVOS REGISTRADOS EN ESA FECHA
-    protected function totalArchivos($parametro)
+    protected function totalArchivos($parametro): array
     {
 
         if ($parametro == null) {
@@ -37,7 +37,7 @@ class TotalEstadisticaModel extends EjecutarSQL
     }
 
     // CONSULTA SQL QUE REGRESA LA CANTIDAD DE VACACIONES REGISTRADAS
-    protected function totalVacaciones()
+    protected function totalVacaciones(): array
     {
         $sql = $this->ejecutarConsulta(
             "SELECT count(id_vacaciones) AS totalVacaciones FROM vacaciones"
@@ -46,7 +46,7 @@ class TotalEstadisticaModel extends EjecutarSQL
     }
 
     // CONSULTA SQL QUE REGRESA LA CANTIDAD DE PERMISOS REGISTRADOS
-    protected function totalPermisos($parametro)
+    protected function totalPermisos($parametro): array
     {
         $sql = $this->ejecutarConsulta(
             "SELECT count(id_ausencia) AS totalPermisos FROM ausenciaJustificada WHERE fecha = ?",
@@ -56,7 +56,7 @@ class TotalEstadisticaModel extends EjecutarSQL
     }
 
     // CONSULTA SQL QUE REGRESA EL PORCENTAJE DE ARCHIVOS SUBIDOS
-    protected function porcentajeTotalArchivos()
+    protected function porcentajeTotalArchivos(): array
     {
         $sql = $this->ejecutarConsulta(
             "SELECT
@@ -69,7 +69,7 @@ class TotalEstadisticaModel extends EjecutarSQL
     }
 
     // CONSULTA SQL QUE REGRESA LA CANTIDAD DE ARCHIVOS REGISTRADOS POR MES
-    protected function totalArchivosMes()
+    protected function totalArchivosMes(): array
     {
         $sql = $this->ejecutarConsulta("SELECT
         DATE_FORMAT(fecha, '%Y-%m') AS mes,
@@ -90,7 +90,7 @@ class TotalEstadisticaModel extends EjecutarSQL
     }
 
     // CONSULTA SQL QUE REGRESA LA CANTIDAD DE ARCHIVOS REGISTRADOS POR DIA
-    protected function totalArchivosDia()
+    protected function totalArchivosDia(): array
     {
         $sql = $this->ejecutarConsulta("SELECT
         DATE_FORMAT(fecha, '%Y-%m-%d') AS dia,

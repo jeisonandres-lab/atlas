@@ -8,7 +8,7 @@ use App\Atlas\models\public\TotalEstadisticaPublic;
 class TotalEstadisticaController extends TotalEstadisticaPublic
 {
     private $app;
-    
+
     public function __construct()
     {
         parent::__construct();
@@ -16,7 +16,7 @@ class TotalEstadisticaController extends TotalEstadisticaPublic
     }
 
     // Funcion para obtener el todal de datos necesarios
-    public function totalDatosCard()
+    public function totalDatosCard():array
     {
         $fechaActual = date("Y-m-d");
         $parametro = [$fechaActual];
@@ -43,7 +43,7 @@ class TotalEstadisticaController extends TotalEstadisticaPublic
     }
 
     // Funcion para obtener el total de archivos por mes
-    public function totalArchivosMes()
+    public function totalArchivosMes():array
     {
         $data_json = [
             'exito' => false,
@@ -83,7 +83,7 @@ class TotalEstadisticaController extends TotalEstadisticaPublic
     }
 
     // Funcion para obtener el total de archivos por dia
-    public function totalArchivosDia()
+    public function totalArchivosDia():array
     {
         $data_json = [
             'exito' => false,
