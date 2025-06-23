@@ -1,16 +1,21 @@
 <?php
 
-namespace App\Atlas\controller;
+namespace App\Atlas\controller\estadistica;
 
-use App\Atlas\models\TotalDateModel;
+use App\Atlas\config\App;
+use App\Atlas\models\public\TotalEstadisticaPublic;
 
-date_default_timezone_set("America/Caracas");
-
-
-
-
-class TotalDateController extends TotalDateModel
+class TotalEstadisticaController extends TotalEstadisticaPublic
 {
+    private $app;
+    
+    public function __construct()
+    {
+        parent::__construct();
+        $this->app = new App();
+    }
+
+    // Funcion para obtener el todal de datos necesarios
     public function totalDatosCard()
     {
         $fechaActual = date("Y-m-d");
@@ -21,26 +26,23 @@ class TotalDateController extends TotalDateModel
             'messenger' => 'Error al obtener los datos'
         ];
 
-        $sql = $this->getTotalDatospersonal();
-        $sql2 = $this->getTotalMedicamentos();
+        $sql = $this->getTotalEmpleados();
         $sql3 = $this->getTotalArchivos($parametro2);
-        $sql4 = $this->getTotalatencionMedica($parametro);
         $sql5 = $this->getTotalPermisos($parametro);
         $sql6 = $this->getPorcentajeTotalArchivos();
         $data_json['exito'] = true;
         $data_json['messenger'] = 'Datos obtenidos correctamente';
         $data_json['empleado'] =  $sql;
-        $data_json['medicamentos'] =  $sql2;
         $data_json['archivos'] =  $sql3;
-        $data_json['atencionMedica'] =  $sql4;
         $data_json['ausencia'] =  $sql5;
         $data_json['porcentajeArchivos'] =  $sql6;
 
 
-        header('Content-Type: application/json');
-        echo json_encode($data_json);
+        // Envía la respuesta como JSON
+        return $this->app->imprimirRespuestaJSON($data_json);
     }
 
+    // Funcion para obtener el total de archivos por mes
     public function totalArchivosMes()
     {
         $data_json = [
@@ -76,10 +78,11 @@ class TotalDateController extends TotalDateModel
             error_log("Error en totalArchivosMes: Resultado de la consulta no es iterable. Valor de \$sql2: " . var_export($sql2, true));
         }
 
-        header('Content-Type: application/json');
-        echo json_encode($data_json);
+        // Envía la respuesta como JSON
+        return $this->app->imprimirRespuestaJSON($data_json);
     }
 
+    // Funcion para obtener el total de archivos por dia
     public function totalArchivosDia()
     {
         $data_json = [
@@ -116,7 +119,7 @@ class TotalDateController extends TotalDateModel
             error_log("Error en totalArchivosMes: Resultado de la consulta no es iterable. Valor de \$sql2: " . var_export($sql2, true));
         }
 
-        header('Content-Type: application/json');
-        echo json_encode($data_json);
+        // Envía la respuesta como JSON
+        return $this->app->imprimirRespuestaJSON($data_json);
     }
 }

@@ -44,6 +44,7 @@ class ViewModel extends Error
             'ficha' => __DIR__ . '/../../views/bienestarSocial/fichaTecnica.php',
             'error' => __DIR__ . '/../../error/error.html',
             'test' => __DIR__ . '/../../views/test_session.php',
+
         ];
 
         // Obtener la ruta completa de la vista
