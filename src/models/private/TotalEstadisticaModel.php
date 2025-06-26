@@ -6,6 +6,10 @@ use App\Atlas\config\EjecutarSQL;
 
 class TotalEstadisticaModel extends EjecutarSQL
 {
+    public function __construct()
+    {
+        parent::__construct();
+    }
 
     // CONSULTA SQL QUE REGRESA LA CANTIDAD DE EMPLEADOS REGISTRADOS
     protected function totalEmpleados(): array
@@ -69,7 +73,7 @@ class TotalEstadisticaModel extends EjecutarSQL
     }
 
     // CONSULTA SQL QUE REGRESA LA CANTIDAD DE ARCHIVOS REGISTRADOS POR MES
-    protected function totalArchivosMes(): array
+    public function totalArchivosMes(): array
     {
         $sql = $this->ejecutarConsulta("SELECT
         DATE_FORMAT(fecha, '%Y-%m') AS mes,

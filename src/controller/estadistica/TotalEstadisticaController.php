@@ -5,14 +5,15 @@ namespace App\Atlas\controller\estadistica;
 use App\Atlas\config\App;
 use App\Atlas\models\public\TotalEstadisticaPublic;
 
-class TotalEstadisticaController extends TotalEstadisticaPublic
+class TotalEstadisticaController
 {
     private $app;
+    private $estadisticaPublica;
 
     public function __construct()
     {
-        parent::__construct();
         $this->app = new App();
+        $this->estadisticaPublica = new TotalEstadisticaPublic();
     }
 
     // Funcion para obtener el todal de datos necesarios
@@ -26,10 +27,10 @@ class TotalEstadisticaController extends TotalEstadisticaPublic
             'messenger' => 'Error al obtener los datos'
         ];
 
-        $sql = $this->getTotalEmpleados();
-        $sql3 = $this->getTotalArchivos($parametro2);
-        $sql5 = $this->getTotalPermisos($parametro);
-        $sql6 = $this->getPorcentajeTotalArchivos();
+        $sql = $this->estadisticaPublica->getTotalEmpleados();
+        $sql3 = $this->estadisticaPublica->getTotalArchivos($parametro2);
+        $sql5 = $this->estadisticaPublica->getTotalPermisos($parametro);
+        $sql6 = $this->estadisticaPublica->getPorcentajeTotalArchivos();
         $data_json['exito'] = true;
         $data_json['messenger'] = 'Datos obtenidos correctamente';
         $data_json['empleado'] =  $sql;
@@ -50,7 +51,7 @@ class TotalEstadisticaController extends TotalEstadisticaPublic
             'messenger' => 'Error al obtener los datos'
         ];
 
-        $sql2 = $this->getTotalArchivosMes();
+        $sql2 = $this->estadisticaPublica->getTotalArchivosMes();
         $labels = [];
         $values = [];
 
@@ -91,7 +92,7 @@ class TotalEstadisticaController extends TotalEstadisticaPublic
         ];
 
         
-        $sql2 = $this->getTotalArchivosDia();
+        $sql2 = $this->estadisticaPublica->getTotalArchivosDia();
         $labels = [];
         $values = [];
 
