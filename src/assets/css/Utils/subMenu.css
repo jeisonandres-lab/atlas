@@ -1,6 +1,6 @@
 
 /* IMPORTAR COLORES */
-@import url(colores.css);
+@import url(variables.css);
 /* sub menu */
 .nav-link {
     color: var(--color-gris-medio) !important;

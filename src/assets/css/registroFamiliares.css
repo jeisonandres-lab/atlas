@@ -1,5 +1,5 @@
 /* IMPORTAR COLORES */
-@import url('Utils/colores.css');
+@import url('Utils/variables.css');
 
 .modal { /* O la clase correspondiente a tu modal */
   z-index: 10000 !important; /* Un valor menor que el del datepicker */

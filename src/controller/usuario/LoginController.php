@@ -121,7 +121,8 @@ class LoginController
         echo json_encode($datos);
     }
 
-    public function datosUsuariosBasicos()
+
+  public function datosUsuariosBasicos()
     {
         $data_json['data'] = []; // Array de datos para enviar
         $tabla = 'users INNER JOIN rol ON users.idRol = rol.id_rol'; // Tabla a consultar
@@ -162,14 +163,13 @@ class LoginController
         );
         header('Content-Type: application/json');
         echo json_encode($response);
-    }
-    /**
+    }  /**
      * Obtiene los datos de los usuarios
      * @return void
      */
     public function datosUsuarios()
     {
-        $data_json['data'] = []; // Array de datos para enviar
+            $data_json['data'] = []; // Array de datos para enviar
         $tabla = 'users us
         INNER JOIN datosempleados dp ON us.idEmpleado = dp.id_empleados
         INNER JOIN datospersonales dpe ON dp.idPersonal = dpe.id_personal INNER JOIN cargo ca ON dp.idCargo = ca.id_cargo

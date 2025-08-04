@@ -1,0 +1,95 @@
+:root {
+    --primary-color: #556ee6;
+    --success-color: #34c38f;
+    --warning-color: #f1b44c;
+    --danger-color: #f46a6a;
+    --info-color: #50a5f1;
+    --dark-color: #495057;
+    --light-color: #f8f9fa;
+    --border-color: #e9ecef;
+    --color-blanco: #FFFFFF;
+    --color-negro: #000000;
+
+    /* Menu lateral */
+    --color-bg: #EBECF2;
+    --color-bg-menu: #EBECF2;
+    --color-surface: #FFFFFF;
+    --color-border: #9A9EB2;
+    --color-text-primary: #000;
+    --color-text-secondary: #3F435D;
+    --color-tooltip-bg: #2A2E33;
+    --color-tooltip-text: #fff;
+    --body-bg: #f2f2f7;
+    --card-color: #fff;
+    
+    --shadow-border: rgba(0, 0, 0, 0.1);
+    --shadow: 0 0.75rem 1.5rem rgba(18, 38, 63, 0.03);
+    --shadow-lg: 0 0.75rem 1.5rem rgba(18, 38, 63, 0.1);
+
+    --user-bg-color: #FAFAFC;
+        /* Variables de tamaños de fuente */
+        --font-size-sm: 0.75rem;    /* 12px */
+        --font-size-md: 0.875rem;   /* 14px */
+        --font-size-lg: 1rem;       /* 16px */
+        --font-size-xl: 1.125rem;   /* 18px */
+        --font-size-2xl: 1.25rem;   /* 20px */
+    
+
+
+
+
+
+    --color-blanco: #fff;
+    --color-blanco-contenido: #fff;
+    --color-blanco-fondo: #f2f7fc;
+    --color-azul: #1929bb;
+    --color-azul-brillante: #5c67f7;
+    --color-gris: #283c50;
+    --color-gris-claro: #aaa;
+    --color-gris-medio: #707070;
+    --color-verde-fuerte: #0d6d0d;
+    --color-rojo-fuerte: #b40808;
+    --color-rosa-fuerte: #e354d4;
+    --color-rosa-brillante: #ff5d9f;
+    --color-naranja-coral: #ff8e6f;
+    --color-secundario: #9e5cf7;
+    --color-advertencia: #ffc658;
+    --color-azul-celeste: #0ea5e8;
+    --color-verde-claro: #21ce9e;
+    --color-rojo-claro: #fb4242;
+    --color-blanco-claro: #f9f9fa;
+    --color-negro: #0a0a0a;
+    --color-anaranjado-claro: #fe7c58;
+    --color-rosado: #fe549b;
+    --color-azul-claro: #00d8d8;
+    --color-morado-claro: #7b76fe;
+    --color-verde-claro-alternativo: #01ef8c;
+    --color-texto-gris-claro: #6e829f;
+
+    /* COLORES PARA LOS BOTONES DE LAS TABLAS */
+    --buttonVerde: #01bd0a;
+    --buttonVerdeHover: #019e08;
+    --buttonRojo: #FF0000;
+    --buttonRojoHover: #c71313;
+    --buttonAzul: #1929bb;
+    --buttonAzulHover: #0d1a8b;
+    --buttonAzulClaro: #2980b9;
+    --buttonAzulClaroHover: #1020ad;
+    --buttonAmarillo: #FE9001;
+    --buttonAmarilloHover: #f47e00;
+}
+
+/* :root {
+    --color-bg: #EBECF2;
+    --color-bg-menu: #EBECF2;
+    --color-surface: #FFFFFF;
+    --color-border: #9A9EB2;
+    --color-blanco: #FFFFFF;
+    --color-text-primary: #000;
+    --color-text-secondary: #3F435D;
+    --color-tooltip-bg: #2A2E33;
+    --color-tooltip-text: #fff;
+    --shadow-border: rgba(0, 0, 0, 0.1);
+    --user-bg-color: #FAFAFC;
+    --font-size-sm: 0.7rem;
+} */

@@ -390,3 +390,41 @@ export async function validarBusquedaCedula(input, divContens) {
     }
   }
 }
+
+// Funcion para animar numeros desde cero hasta el numero obtenido del elemento id
+/**
+ * 
+ * @param {id} id - Selector del elemento por ID
+ * @param {string} duration - Parametro de duracion de la animacion 
+ */
+export function animateNumberFromHTML(elementId, duration) {
+        const numberElement = document.getElementById(elementId);
+        if (!numberElement) {
+            console.error(`Elemento con ID "${elementId}" no encontrado.`);
+            return;
+        }
+
+        const finalNumber = parseInt(numberElement.innerText, 10);
+        if (isNaN(finalNumber)) {
+            console.error(`El contenido del elemento "${elementId}" no es un número válido.`);
+            return;
+        }
+
+        let currentNumber = 0;
+        const interval = 10;
+        const increment = (finalNumber / duration) * interval;
+
+        // Coloca el número a cero antes de iniciar la animación
+        numberElement.innerText = 0;
+
+        const counter = setInterval(() => {
+            currentNumber += increment;
+
+            if (currentNumber >= finalNumber) {
+                numberElement.innerText = finalNumber;
+                clearInterval(counter);
+            } else {
+                numberElement.innerText = Math.round(currentNumber);
+            }
+        }, interval);
+    }

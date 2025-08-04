@@ -17,14 +17,14 @@ class RouterEstadistica {
     }
 
     private function registerRoutes() {
-        $this->add('totalDatos', function() { 
-            $this->controllerEstadisticas->totalDatosCard(); 
+        $this->add('totalDatos', function() {
+            $this->controllerEstadisticas->totalDatosCard();
         });
-        $this->add('totalArchivosMes', function() { 
-            $this->controllerEstadisticas->totalArchivosMes(); 
+        $this->add('totalArchivosMes', function() {
+            $this->controllerEstadisticas->totalArchivosMes();
         });
-        $this->add('totalArchivosDia', function() { 
-            $this->controllerEstadisticas->totalArchivosDia(); 
+        $this->add('totalArchivosDia', function() {
+            $this->controllerEstadisticas->totalArchivosDia();
         });
     }
 
@@ -42,11 +42,6 @@ class RouterEstadistica {
     }
 }
 
-if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
-    http_response_code(405);
-    echo json_encode(['error' => 'Método no permitido']);
-    exit;
-}
 
 if (!isset($_GET['modulo_Datos'])) {
     http_response_code(400);

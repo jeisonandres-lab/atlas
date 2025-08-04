@@ -1,12 +1,13 @@
 import { AlertSW2 } from "./utils/alerts.js";
 import { obtenerDatosJQuery } from "./utils/formularioAjax.js";
+import { animateNumberFromHTML } from "./utils/funciones.js";
 // Dependencias: jQuery, DataTables, Chart.js
 $(function () {
 
     let table = new DataTable('#tableUsers', {
-        responsive: true,
+        // responsive: true,
         ajax: {
-            url: "./src/requests/userAjax.php?modulo_usuario=datosUsuariosBasicos",
+            url: "./src/routers/usuario.php?modulo_usuario=datosUsuariosBasicos",
             type: "POST",
             dataSrc: function (json) {
                 // Verificar la estructura de los datos devueltos
@@ -23,14 +24,35 @@ $(function () {
         serverSide: true,
         info: false,
         order: [[0, 'desc']],
-        paging: true,
+        paging: false,
         lengthMenu: [2, 10, 25],
         pageLength: 5,
         columnDefs: [
             {
+                targets: 4,
+                width: "25%",
+                render: function (data, type, row) {
+                    console.log(data)
+                    const dataTextoMap = {
+                        'Administrador': 'Administrador',
+                        'Medico': 'Medico',
+                        // Agrega más roles según sea necesario
+                    };
+
+                    const colores = [
+                        'badge text-bg-success ',
+                    ];
+
+                    const colorAleatorio = colores[Math.floor(Math.random() * colores.length)];
+
+                    return `<span class=' ${colorAleatorio}' style='color: white !important'>${dataTextoMap[data]}</span>`;
+                }
+            },
+            {
                 targets: 0,
-                className: 'text-center',
-                width: "10%",
+                className: '',
+                visible: false,
+                width: "20%",
                 render: function (data, type, row) {
                     let dataTexto = data;
                     const dataTextoMap = {
@@ -46,33 +68,10 @@ $(function () {
                     return dataTexto
                 }
             },
+
             {
-                targets: 1, // Ajusta el índice de la columna según sea necesario
-                width: "40%",
-            },
-            {
-                targets: 2,
-                width: "25%",
-                render: function (data, type, row) {
-                    const dataTextoMap = {
-                        'Administrador': 'Administrador',
-                        'Medico': 'Usuario',
-                        // Agrega más roles según sea necesario
-                    };
-
-                    const colores = [
-                        'badge text-bg-success ',
-
-                    ];
-
-                    const colorAleatorio = colores[Math.floor(Math.random() * colores.length)];
-
-                    return `<span class=' ${colorAleatorio}' style='color: white !important'>${dataTextoMap[data]}</span>`;
-                }
-            },
-            {
-                targets: 3,
-                width: "25%",
+                targets: 1,
+                width: "20%",
                 render: function (data, type, row) {
                     let dataTexto = data;
                     const dataTextoMap = {
@@ -96,9 +95,10 @@ $(function () {
         },
         columns: [
             { "data": 0 }, // EnUso
+            { "data": 3 }, // Activo
+            { "data": 4 },
             { "data": 1 }, // Usuario
-            { "data": 2 }, // Activo
-            { "data": 3 }, // Rol
+            { "data": 2 }, // Rol
         ]
     });
 
@@ -113,15 +113,15 @@ $(function () {
 
     async function obtenerDatosCards() {
         try {
-            const totalPersonal = await Promise.all(requests);
-            if (totalPersonal[0].exito) {
-                console.log(totalPersonal[0]);
-                $('#totalPersonal').text(totalPersonal[0].empleado[0].totalEmpleados);
-                $('#totalArchivos').text(totalPersonal[0].archivos[0].totalArchivos);
-                $('#atencionMedica').text(totalPersonal[0].atencionMedica[0].atencionMedica);
-                $('#totalMedicamentos').text(totalPersonal[0].medicamentos[0].totalMedicamentos);
-                $('#personalAusencia').text(totalPersonal[0].ausencia[0].totalPermisos);
-                $('#porcentajeArchivos').text(totalPersonal[0].porcentajeArchivos[0].porcentaje_documentos_subidos + '%');
+            const totalDatos = await Promise.all(requests);
+            if  (totalDatos[0].exito) {
+                console.log(typeof totalDatos);
+                // $('#totalPersonal').text(totalPersonal[0].empleado[0].totalEmpleados);
+                // $('#totalArchivos').text(totalPersonal[0].archivos[0].totalArchivos);
+                // $('#atencionMedica').text(totalPersonal[0].atencionMedica[0].atencionMedica);
+                // $('#totalMedicamentos').text(totalPersonal[0].medicamentos[0].totalMedicamentos);
+                // $('#personalAusencia').text(totalPersonal[0].ausencia[0].totalPermisos);
+                // $('#porcentajeArchivos').text(totalPersonal[0].porcentajeArchivos[0].porcentaje_documentos_subidos + '%');
             } else {
                 console.error('Error al obtener dependencias o la estructura de la respuesta es incorrecta');
             }
@@ -131,6 +131,9 @@ $(function () {
     }
 
     obtenerDatosCards();
+
+
+
 
     function obtenerFechaYDia(parametro) {
         const diasSemana = ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'];
@@ -177,6 +180,44 @@ $(function () {
 
 })
 document.addEventListener('DOMContentLoaded', async function () {
+
+    // Card de total de personal
+    animateNumberFromHTML('totalPersonal', 2000); // 2 segundos
+    // Card de total de archivos
+    animateNumberFromHTML('totalArchivos', 2000); // 3 segundos
+    // Card de personal de vacaciones
+    animateNumberFromHTML('personalVacaciones', 5000); // 3 segundos
+    // Card de personal de ausencias
+    animateNumberFromHTML('personalAusencia', 5000); // 3 segundos
+
+
+    const tbody = document.querySelector('.tbody-tabletUser');
+
+    // Ejemplo de cómo agregar una fila con animación
+    function addNewRow(userData) {
+        const newRow = document.createElement('tr');
+        newRow.innerHTML = `
+            <th scope="row">${userData.id}</th>
+            <td>${userData.estatus}</td>
+            <td>${userData.empleado}</td>
+            <td>${userData.usuario}</td>
+            <td>${userData.rol}</td>
+        `;
+
+        // Agregar la fila al tbody
+        tbody.appendChild(newRow);
+
+        // Con un pequeño retraso, añadir la clase 'visible' para activar la animación
+        setTimeout(() => {
+            newRow.classList.add('visible');
+        }, 10); // Un retraso de 10ms es suficiente para que funcione
+    }
+
+    // Ejemplo de uso: agregando 3 filas al cargar la página
+    addNewRow({ id: 1, estatus: 'Activo', empleado: 'Juan Pérez', usuario: 'jperez', rol: 'Admin' });
+    addNewRow({ id: 2, estatus: 'Inactivo', empleado: 'María Gómez', usuario: 'mgomez', rol: 'Usuario' });
+    addNewRow({ id: 3, estatus: 'Activo', empleado: 'Carlos Ruiz', usuario: 'cruiz', rol: 'Editor' });
+
     let chartInstanceMes = null;
     let chartInstanceForDate = null;
     let backButton = null;
@@ -194,7 +235,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     async function loadChartDia() {
         const dataDia = await fetchData('./src/routers/totalDate.php?modulo_Datos=totalArchivosDia');
         if (dataDia && dataDia.exito) {
-            console.table(dataDia);
+            // console.table(dataDia);
             const chartDataDia = {
                 labels: dataDia.values,
                 datasets: [{
@@ -250,7 +291,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     async function loadChartMes() {
         const dataMes = await fetchData('src/routers/totalDate.php?modulo_Datos=totalArchivosMes');
         if (dataMes && dataMes.exito) {
-            console.table(dataMes);
+            // console.table(dataMes);
             const chartDataMes = {
                 labels: dataMes.values,
                 datasets: [{

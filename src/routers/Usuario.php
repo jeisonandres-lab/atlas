@@ -15,11 +15,13 @@ require_once '../../vendor/autoload.php';
 
 use App\Atlas\controller\usuario\LoginController;
 use App\Atlas\config\Peticiones;
-use App\Atlas\controller\sistema\NotificacionController;
+use App\Atlas\controller\usuario\DatosUsuarios;
+// use App\Atlas\controller\sistema\NotificacionController;
 
 // Inicialización de controladores
 $userLogin = new LoginController();
 $peticion = new Peticiones();
+$DatosUsuario = new DatosUsuarios();
 
 // Extracción de variables de la petición
 $variables = $peticion->obtenerVariables();
@@ -47,7 +49,7 @@ switch ($_GET['modulo_usuario']) {
 
     case 'datosUsuariosBasicos':
         // Obtención de datos básicos del usuario
-        $usercontroller->datosUsuariosBasicos();
+        $DatosUsuario->datosUsuariosBasicos();
         break;
 
     case 'DatosUsuarios':

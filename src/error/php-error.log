@@ -41836,3 +41836,75 @@ Archivo: C:\xampp\htdocs\atlas\src\config\Aplicacion.php
 Línea: 81
 Fecha y hora: 2025-06-23 11:07:11
 ======================================================
+======================================================
+Error: require(./src/views/inc/load.php): Failed to open stream: No such file or directory
+Archivo: C:\xampp\htdocs\atlas\src\views\personal\familiares.php
+Línea: 21
+Fecha y hora: 2025-07-26 11:32:01
+======================================================
+======================================================
+Error: require(./src/views/inc/load.php): Failed to open stream: No such file or directory
+Archivo: C:\xampp\htdocs\atlas\src\views\personal\registrosFamiliares.php
+Línea: 24
+Fecha y hora: 2025-07-26 11:32:05
+======================================================
+======================================================
+Error: require(./src/views/inc/load.php): Failed to open stream: No such file or directory
+Archivo: C:\xampp\htdocs\atlas\src\views\bienestarSocial\fichaTecnica.php
+Línea: 18
+Fecha y hora: 2025-07-26 11:32:09
+======================================================
+======================================================
+Error: require(./src/views/inc/load.php): Failed to open stream: No such file or directory
+Archivo: C:\xampp\htdocs\atlas\src\views\personal\familiares.php
+Línea: 21
+Fecha y hora: 2025-08-03 18:11:27
+======================================================
+======================================================
+Error: require(./src/views/inc/load.php): Failed to open stream: No such file or directory
+Archivo: C:\xampp\htdocs\atlas\src\views\personal\familiares.php
+Línea: 21
+Fecha y hora: 2025-08-03 18:11:29
+======================================================
+======================================================
+Error: require(./src/views/inc/load.php): Failed to open stream: No such file or directory
+Archivo: C:\xampp\htdocs\atlas\src\views\personal\registrosFamiliares.php
+Línea: 24
+Fecha y hora: 2025-08-03 18:11:32
+======================================================
+======================================================
+Error: require_once(./src/views/incluir/utils/menuLateral2.php): Failed to open stream: No such file or directory
+Archivo: C:\xampp\htdocs\atlas\src\views\inicio\home.php
+Línea: 19
+Fecha y hora: 2025-08-03 18:14:45
+======================================================
+======================================================
+Error: require_once(./src/views/incluir/utils/menuLateral2.php): Failed to open stream: No such file or directory
+Archivo: C:\xampp\htdocs\atlas\src\views\inicio\home.php
+Línea: 19
+Fecha y hora: 2025-08-03 18:14:47
+======================================================
+======================================================
+Error: require_once(./src/views/incluir/utils/menuLateral2.php): Failed to open stream: No such file or directory
+Archivo: C:\xampp\htdocs\atlas\src\views\inicio\home.php
+Línea: 19
+Fecha y hora: 2025-08-03 18:14:56
+======================================================
+======================================================
+Error: require_once(./src/views/incluir/utils/menuLateral2.php): Failed to open stream: No such file or directory
+Archivo: C:\xampp\htdocs\atlas\src\views\inicio\home.php
+Línea: 19
+Fecha y hora: 2025-08-03 18:14:59
+======================================================
+======================================================
+Error: require(./src/views/inc/load.php): Failed to open stream: No such file or directory
+Archivo: C:\xampp\htdocs\atlas\src\views\personal\registrosFamiliares.php
+Línea: 24
+Fecha y hora: 2025-08-03 18:16:53
+======================================================
+======================================================
+Error: require(./src/views/inc/load.php): Failed to open stream: No such file or directory
+Archivo: C:\xampp\htdocs\atlas\src\views\bienestarSocial\fichaTecnica.php
+Línea: 18
+Fecha y hora: 2025-08-03 18:38:01
+======================================================

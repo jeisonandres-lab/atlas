@@ -15,7 +15,7 @@ use App\Atlas\config\App; ?>
 </head>
 
 <body class="layout-fixed sidebar-expand-lg bg-body-tertiary">
-    <?php require("./src/views/inc/load.php"); ?>
+    <?php require_once App::URL_INC . "load.php"; ?>
     <div class="app-wrapper conten-main" id="conten-main">
         <?php require_once App::URL_INC . "utils/menu.php"; ?>
 

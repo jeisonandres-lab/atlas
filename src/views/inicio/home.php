@@ -1,5 +1,13 @@
 <?php
 use App\Atlas\config\App;
+$fechaInicio = new DateTime('2025-01-01');
+$fechaFin = new DateTime('2025-01-31');
+
+$meses = [
+    1 => 'Enero', 2 => 'Febrero', 3 => 'Marzo', 4 => 'Abril',
+    5 => 'Mayo', 6 => 'Junio', 7 => 'Julio', 8 => 'Agosto',
+    9 => 'Septiembre', 10 => 'Octubre', 11 => 'Noviembre', 12 => 'Diciembre'
+];
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -15,52 +23,154 @@ use App\Atlas\config\App;
 
 <body class="layout-fixed sidebar-expand-lg bg-body-tertiary">
     <div class="app-wrapper conten-main" id="conten-main">
+        <!-- Menu lateral y superior -->
         <?php require_once App::URL_INC . "utils/menu.php"; ?>
-        <!-- MODAL RESPONSIVEk -->
+
         <!-- CUERPO DEL SISTEMA -->
-        <main class=" app-main p-0 pb-2">
-            <!-- <div class="container-fluid">
+        <main class="app-main p-0 pb-2 px-3">
+            <!-- Header del menu -->
+            <div class="container-fluid mt-4 ">
                 <div class="row">
-
-                </div>
-            </div> -->
-            <div class="container-fluid text-center  pb-4">
-                <div class="row">
-                    <div class="d-flex" style="background-color: white; box-shadow: 0 0 1px #aaa;">
-                        <div class="content-img-inces">
-                            <img class="img-inces" src="./src/assets/img/images/logoince2-removebg-preview.png" alt="logo del inces">
-                        </div>
-                        <!-- <div class="d-flex  align-items-center">
-                            <p class="m-0">INCES ROMANA</p>
-                        </div> -->
-
-                        <div class="col d-flex justify-content-start ">
-                            <div class="text-start d-flex align-items-center me-3 conten-panel">
-                                <p class="fw-medium m-0 ">Panel Principal</p>
+                    <div class="col-12">
+                        <div class="d-flex align-items-center justify-content-between mb-4 datos-header">
+                            <div>
+                                <h4 class="text-header mb-1 fw-semibold">¡Buenos días, <span class="rol-usuario-header">Administrador!</span></h4>
+                                <p class="parrafo-header text-muted mb-0">Aquí está lo que está sucediendo con tu sistema hoy.</p>
                             </div>
-                            <div class="panelHome d-flex aling-items-center">
-                                <span class="d-flex align-items-center">
-                                    <p class="mb-0 fw-medium me-3">Registros</p>
-                                    <i class="fa-regular fa-chevron-right me-3 sm"></i>
-                                    <a class="icon-link  align-items-center me-3" href="usuarios">
-                                        <i class="bi bi-box2"></i>
-                                        <p class="mb-0 ">Panel De Usuarios</p>
-                                    </a>
-                                </span>
-                            </div>
-
-
-                        </div>
-                        <div class="col d-flex justify-content-end ">
-                            <div class="d-flex align-items-center">
-                                <div class="form-group me-3">
-                                    <div class="input-group">
-                                        <span class="input-group-text" style="border-radius: 0px; background-color: white;"><i class="fa-light fa-calendar"></i></span>
-                                        <span type="text" class="form-control" id="fecha" style="border-radius: 0px;"> </span>
+                            <div class="d-flex gap-2 align-items-center">
+                                <div class="calendar-header">
+                                    <div class="calendar-display">
+                                        <span class="calendar-text">
+                                            <?php echo $fechaInicio->format('d') . ' ' . $meses[(int)$fechaInicio->format('n')] . ' ' . $fechaInicio->format('Y') ;?>
+                                        </span>
+                                        <div class="calendar-icon">
+                                            <i class="fa-regular fa-calendar"></i>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="buttonHome">
-                                    <button class="btn btn-primary btn-sm fw-semibold pe-3 ps-3 descargarBD" style="border-radius: 0px; "><i class="fa-light fa-arrows-turn-right me-3"></i>Descargar BD</button>
+                                <button class="btn btn-success">
+                                    <i class="fa-regular fa-plus me-2"></i>
+                                    Agregar Personal
+                                </button>
+                                <button class="btn btn-outline-primary btn-square">
+                                    <i class="fa-regular fa-chart-line"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Estadisticas cards -->
+            <div class="container-fluid">
+                <div class="row g-3">
+                    <!-- Card 1: Total Personal -->
+                    <div class="col-xl-3 col-md-6">
+                        <div class="card custom-card">
+                            <div class="card-body p-3">
+                                <div class="d-flex align-items-start justify-content-between mb-2">
+                                    <div>
+                                        <span class="text-muted fw-medium d-block mb-1 card-title-fixed">TOTAL DE PERSONAL</span>
+                                        <h4 class="fw-semibold mb-0 text-dark" id="totalPersonal">854</h4>
+                                        <div class="text-muted data-estatic mt-1">
+                                            <span class="text-success fw-medium">
+                                                <i class="fa-regular fa-arrow-up me-1"></i>+16.24%
+                                            </span>
+                                            desde el mes pasado
+                                        </div>
+                                    </div>
+                                    <div class="lh-1">
+                                        <div class="stat-icon bg-success">
+                                            <i class="fa-regular fa-user-tie text-white"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="text-end mt-2">
+                                    <a href="#" class="text-decoration-underline text-primary fw-medium">Ver personal total</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 2: Archivos -->
+                    <div class="col-xl-3 col-md-6">
+                        <div class="card custom-card">
+                            <div class="card-body p-3">
+                                <div class="d-flex align-items-start justify-content-between mb-2">
+                                    <div>
+                                        <span class="text-muted fw-medium d-block mb-1 card-title-fixed">TOTAL DE ARCHIVOS</span>
+                                        <h4 class="fw-semibold mb-0 text-dark" id="totalArchivos">860</h4>
+                                        <div class="text-muted data-estatic mt-1">
+                                            <span class="text-danger fw-medium">
+                                                <i class="fa-regular fa-arrow-down me-1"></i>-3.57%
+                                            </span>
+                                            desde el mes pasado
+                                        </div>
+                                    </div>
+                                    <div class="lh-1">
+                                        <div class="stat-icon bg-primary">
+                                            <i class="fa-regular fa-book text-white"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="text-end mt-2">
+                                    <a href="#" class="text-decoration-underline text-primary fw-medium">Ver todos los archivos</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 3: Vacaciones -->
+                    <div class="col-xl-3 col-md-6">
+                        <div class="card custom-card">
+                            <div class="card-body p-3">
+                                <div class="d-flex align-items-start justify-content-between mb-2">
+                                    <div>
+                                        <span class="text-muted fw-medium d-block mb-1 card-title-fixed">PERSONAL EN VACACIONES</span>
+                                        <h4 class="fw-semibold mb-0 text-dark" id="personalVacaciones">12</h4>
+                                        <div class="text-muted data-estatic mt-1">
+                                            <span class="text-success fw-medium">
+                                                <i class="fa-regular fa-arrow-up me-1"></i>+29.08%
+                                            </span>
+                                            desde el mes pasado
+                                        </div>
+                                    </div>
+                                    <div class="lh-1">
+                                        <div class="stat-icon bg-warning">
+                                            <i class="fa-light fa-island-tropical text-white"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="text-end mt-2">
+                                    <a href="#" class="text-decoration-underline text-primary fw-medium">Ver detalles</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 4: Ausencias -->
+                    <div class="col-xl-3 col-md-6">
+                        <div class="card custom-card">
+                            <div class="card-body p-3">
+                                <div class="d-flex align-items-start justify-content-between mb-2">
+                                    <div>
+                                        <span class="text-muted fw-medium d-block mb-1 card-title-fixed">PERSONAL EN AUSENCIAS</span>
+                                        <h4 class="fw-semibold mb-0 text-dark" id="personalAusencia">82</h4>
+                                        <div class="text-muted data-estatic mt-1">
+                                            <span class="text-muted fw-medium">
+                                                <i class="fa-regular fa-minus me-1"></i>+0.00%
+                                            </span>
+                                            desde el mes pasado
+                                        </div>
+                                    </div>
+                                    <div class="lh-1">
+                                        <div class="stat-icon bg-info">
+                                            <i class="fa-regular fa-users-gear text-white"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="text-end mt-2">
+                                    <a href="#" class="text-decoration-underline text-primary fw-medium">Ver ausencias</a>
                                 </div>
                             </div>
                         </div>
@@ -68,237 +178,131 @@ use App\Atlas\config\App;
                 </div>
             </div>
 
-            <!-- subMenu de la vista -->
-            <div class="container-fluid mb-3">
+            <!-- Charts Section -->
+            <div class="container-fluid mb-4">
                 <div class="row">
-                    <div class="col-sm-12 col-mb-6 col-xl-6">
-                        <div class="bg-white p-3">
-                            <table id="tableUsers" class="table table-hover">
-                                <thead>
-                                    <tr>
-                                        <th scope="col" class="text-center bg-primary">#</th>
-                                        <th scope="col" class="text-center bg-primary">Usuario</th>
-                                        <th scope="col" class="text-center bg-primary">Rol</th>
-                                        <th scope="col" class="text-center bg-primary">Activo</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                </tbody>
-                            </table>
+                    <div class="col-xl-8">
+                        <div class="card custom-card">
+                            <div class="card-header card-header-archivos-mes d-flex align-items-center justify-content-between">
+                                <h4 class="card-title mb-0">Estadísticas de archivos</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="chart-container">
+                                    <div id="contentbutton" class="position-absolute"></div>
+                                    <canvas id="scoreChart2"></canvas>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-sm-12 col-mb-6 col-xl-6">
-                        <div class="row d-flex flex-wrap position-relative h-100 ">
-                            <!-- PERSONAL REGISTRADO -->
-                            <div class="col-lg-4 col-md-4 col-sm-12 w-50 mb-2">
-                                <div class="card custom-card">
-                                    <div class="card-body">
-                                        <div class="d-flex align-items-start justify-content-between mb-2">
-                                            <div>
-                                                <span class="text-muted fs-13 d-block mb-1">
-                                                    Total de personal
-                                                </span>
-                                                <h4 class="fw-medium mb-0" id="totalPersonal">
-                                                    854
-                                                </h4>
-                                            </div>
-                                            <div class="lh-1">
-                                                <span class="avatar avatar-md avatar-rounded color-primary">
-                                                    <i class="fa-regular fa-user-tie fs-5 icon-menu"></i>
-                                                </span>
-                                            </div>
-                                        </div>
-                                        <!-- <div class="text-muted fs-13">
-                                            Aumentó un
-                                            <span class="text-success">
-                                                2,56% <i class="fa-regular fa-arrow-up"></i>
-                                            </span>
-                                        </div> -->
-                                    </div>
-                                </div>
+                    <!-- Actividades recientes -->
+                    <div class="col-xl-4">
+                        <div class="card custom-card">
+                            <div class="card-header">
+                                <h4 class="card-title fw-semibold mb-0">Actividad Reciente</h4>
                             </div>
-
-                            <!-- TOTAL DE ARCHIVOS SUBIDOS EN EL MES ACTUAL-->
-                            <div class="col-lg-4 col-md-4 col-sm-12 w-50  mb-2"">
-                                <div class=" card custom-card">
-                                <div class="card-body">
-                                    <div class="d-flex align-items-start justify-content-between mb-2">
-                                        <div>
-                                        <script src="<?php echo App::URL_NODE."bootstrap/dist/js/bootstrap.bundle.min.js"; ?>" defer></script>
-    <span class="text-muted fs-13 d-block mb-1">
-                                                Total de achivos
-                                            </span>
-                                            <h4 class="fw-medium mb-0" id="totalArchivos">
-                                                860
-                                            </h4>
+                            <div class="card-body">
+                                <div class="activities-container">
+                                    <div class="activity-item">
+                                        <div class="activity-icon bg-primary-subtle">
+                                            <i class="fa-regular fa-user-plus text-primary"></i>
                                         </div>
-                                        <div class="lh-1">
-                                            <span class="avatar avatar-md avatar-rounded color-primary-tint2">
-                                                <i class="fa-regular fa-book fs-5 icon-menu"></i>
-                                            </span>
+                                        <div class="activity-content">
+                                            <div class="activity-title">Nuevo personal registrado</div>
+                                            <div class="activity-description">Juan Pérez se registró en el sistema</div>
+                                            <div class="activity-time">Hace 2 horas</div>
                                         </div>
                                     </div>
-                                    <!-- <div class="text-muted fs-13">
-                                            Aumentó un
-                                            <span class="text-success">
-                                                <span id="porcentajeArchivos">2,56% </span><i class="fa-regular fa-arrow-up ms-1"></i>
-                                            </span>
-                                        </div> -->
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- ATENCION MEDICA -->
-                        <!-- <div class="col-lg-4 col-md-4 col-sm-12 w-50">
-                                <div class="card custom-card">
-                                    <div class="card-body">
-                                        <div class="d-flex align-items-start justify-content-between mb-2">
-                                            <div>
-                                                <span class="text-muted fs-13 d-block mb-1">
-                                                    Atención médica
-                                                </span>
-                                                <h4 class="fw-medium mb-0" id="atencionMedica">
-                                                    870
-                                                </h4>
-                                            </div>
-                                            <div class="lh-1">
-                                                <span class="avatar avatar-md avatar-rounded color-primary-tint1">
-                                                    <i class="fa-regular fa-user-doctor-hair fs-5 icon-menu"></i>
-                                                </span>
-                                            </div>
+                                    <div class="activity-item">
+                                        <div class="activity-icon bg-success-subtle">
+                                            <i class="fa-regular fa-file-arrow-up text-success"></i>
                                         </div>
-                                        <div class="text-muted fs-13">
-                                            Aumentó un
-                                            <span class="text-success">
-                                                <span id="porcentajeAtencionMedica">2,56% </span> <i class="fa-regular fa-arrow-up"></i>
-                                            </span>
+                                        <div class="activity-content">
+                                            <div class="activity-title">Archivo subido</div>
+                                            <div class="activity-description">Contrato de María García</div>
+                                            <div class="activity-time">Hace 4 horas</div>
                                         </div>
                                     </div>
-                                </div>
-                            </div> -->
-
-                        <!-- MEDICAMENTOS -->
-                        <!-- <div class="col-lg-4 col-md-4 col-sm-12 w-50">
-                                <div class="card custom-card">
-                                    <div class="card-body">
-                                        <div class="d-flex align-items-start justify-content-between mb-2">
-                                            <div>
-                                                <span class="text-muted fs-13 d-block mb-1">
-                                                    Total de medicamentos
-                                                </span>
-                                                <h4 class="fw-medium mb-0" id="totalMedicamentos">
-                                                    8980
-                                                </h4>
-                                            </div>
-                                            <div class="lh-1">
-                                                <span class="avatar avatar-md avatar-rounded color-primary-tint3">
-                                                    <i class="fa-solid fa-capsules fs-5 icon-menu"></i>
-                                                </span>
-                                            </div>
+                                    <div class="activity-item">
+                                        <div class="activity-icon bg-warning-subtle">
+                                            <i class="fa-regular fa-calendar-check text-warning"></i>
                                         </div>
-                                        <div class="text-muted fs-13">
-                                            Aumentó un
-                                            <span class="text-success">
-                                                2,56% <i class="fa-regular fa-arrow-up"></i>
-                                            </span>
+                                        <div class="activity-content">
+                                            <div class="activity-title">Solicitud de vacaciones</div>
+                                            <div class="activity-description">Carlos López solicitó vacaciones</div>
+                                            <div class="activity-time">Hace 6 horas</div>
                                         </div>
                                     </div>
-                                </div>
-                            </div> -->
-
-                        <!-- PERSONAL DE VACACIONES -->
-                        <div class="col-lg-4 col-md-4 col-sm-12 w-50">
-                            <div class="card custom-card">
-                                <div class="card-body">
-                                    <div class="d-flex align-items-start justify-content-between mb-2">
-                                        <div>
-                                            <span class="text-muted fs-13 d-block mb-1">
-                                                Personal de vacaciones
-                                            </span>
-                                            <h4 class="fw-medium mb-0" id="personalVacaciones">
-                                                12
-                                            </h4>
+                                    <div class="activity-item">
+                                        <div class="activity-icon bg-primary-subtle">
+                                            <i class="fa-regular fa-user-plus text-primary"></i>
                                         </div>
-                                        <div class="lh-1">
-                                            <span class="avatar avatar-md avatar-rounded color-primary">
-                                                <i class="fa-light fa-island-tropical fs-5 icon-menu"></i>
-                                            </span>
+                                        <div class="activity-content">
+                                            <div class="activity-title">Nuevo personal registrado</div>
+                                            <div class="activity-description">Jeison Balduz se registró en el sistema</div>
+                                            <div class="activity-time">Hace 1 horas</div>
                                         </div>
                                     </div>
-                                    <!-- <div class="text-muted fs-13">
-                                            Aumentó un
-                                            <span class="text-success">
-                                                2,56% <i class="fa-regular fa-arrow-up"></i>
-                                            </span>
-                                        </div> -->
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- PERSONAL EN AUSENCIA -->
-                        <div class="col-lg-4 col-md-4 col-sm-12 w-50">
-                            <div class="card custom-card">
-                                <div class="card-body">
-                                    <div class="d-flex align-items-start justify-content-between mb-2">
-                                        <div>
-                                            <span class="text-muted fs-13 d-block mb-1">
-                                                Personal en ausencia
-                                            </span>
-                                            <h4 class="fw-medium mb-0" id="personalAusencia">
-                                                82
-                                            </h4>
-                                        </div>
-                                        <div class="lh-1">
-                                            <span class="avatar avatar-md avatar-rounded color-primary">
-                                                <i class="fa-regular fa-users-gear fs-5 icon-menu"></i>
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <!-- <div class="text-muted fs-13">
-                                            Aumentó un
-                                            <span class="text-success">
-                                                2,56% <i class="fa-regular fa-arrow-up"></i>
-                                            </span>
-                                        </div> -->
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-    </div>
 
-
-    <!-- USUARIOS Y ESTADISTICAS DEL DATOS -->
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-sm-12 col-mb-12 col-xl-12 mb-4">
-                <div class="bg-white px-2 position-relative" style="height: 500px; width: 100%;">
-                    <div id="contentbutton" class="position-absolute"></div>
-                    <canvas id="scoreChart2"></canvas>
+            <!-- Tabla de usuarios -->
+            <div class="container-fluid mb-4">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card custom-card ">
+                            <div class="card-body p-0">
+                                <div class="">
+                                    <table id="tableUsers" class="tablet-user table table-hover ">
+                                        <thead>
+                                            <tr class="tablet-subHeader">
+                                                <th scope="col" class="tablet-header text-white">#</th>
+                                                <th scope="col" class="tablet-header text-white" >Estatus</th>
+                                                <th scope="col" class="tablet-header text-white" >Empleado</th>
+                                                <th scope="col" class="tablet-header text-white" >Usuario</th>
+                                                <th scope="col" class="tablet-header text-white" style="border-top-right-radius: 5px;">Rol</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="tbody-tabletUser">
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-        </div>
-    </div>
-
-    <!-- ARCHIVOS SUBIDOS -->
-    <div class="container-fluid mb-4">
-        <!-- ESTADISTICAS -->
-        <div class="col-sm-12 col-mb-12 col-xl-12 ">
-            <div class="bg-white px-2" style="height: 600px; width: 100%;">
-                <canvas id="scoreChart"></canvas>
+            <!-- Archivos Chart -->
+            <div class="container-fluid mb-4">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card custom-card">
+                            <div class="card-header">
+                                <h4 class="card-title mb-0">Archivos Subidos por Mes</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="chart-container">
+                                    <canvas id="scoreChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
 
-    </main>
-    <?php require_once App::URL_INC . "/footer.php"; ?>
+        </main>
+        <?php require_once App::URL_INC . "/footer.php"; ?>
     </div>
 
     <?php require_once App::URL_INC . "/scrips.php"; ?>
     <?php require_once App::URL_INC . "/tablets.php"; ?>
-    <script type="module" src="<?php echo App::URL_SCRIPS . "home.js" ?>" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script type="module" src="<?php echo App::URL_SCRIPS . "home.js" ?>" ></script>
+
 </body>
 
 </html>

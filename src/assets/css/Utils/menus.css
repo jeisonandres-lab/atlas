@@ -1,0 +1,593 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+/* cuando se observa la clase
+.sidebar.minimize significa que el menu esta minimizado, 
+por lo tanto se le aplica un ancho de 4.94rem y por eso 
+veras que cambian algunos parametros segun la siguiente 
+que se le adigne cuando esta minimizado*/
+
+/* Reset CSS */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: "Poppins", sans-serif;
+}
+
+/* Root Variables */
+/* :root {
+    --color-bg: #EBECF2;
+    --color-bg-menu:#151529;
+    --color-blanco: #FFFFFF;
+    --color-border: #9A9EB2;
+    --color-text-menu: #a3a6b7;
+    --color-text-primary: #000;
+    --color-text-secondary: #3F435D;
+    --color-tooltip-bg: #2A2E33;
+    --color-tooltip-text: #fff;
+    --shadow-border: rgba(0, 0, 0, 0.1);
+    --user-bg-color: #FAFAFC;
+    --font-size-sm: 0.7rem;
+} */
+
+
+
+body.dark-mode {
+    --color-bg: #3A3D4D;
+    --color-blanco: #12141A;
+    --color-border: #2B2D3B;
+    --color-text-primary: #FFFFFF;
+    --color-text-secondary: #9CA2B8;
+    --color-tooltip-bg: #fff;
+    --color-tooltip-text: #000;
+    --shadow-border: rgba(255, 255, 255, 0.1);
+    --user-bg-color: #FAFAFC;
+}
+
+/* Body */
+/* body {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    background-color: var(--color-bg);
+    transition: color 0.5s ease,
+    background-color 0.3s ease, left 0.5s ease;
+} */
+
+/* .app-sidebar {
+    width: 15rem ;
+    min-width: 3rem ;
+     transition: width 0.5s ease;
+} */
+
+/* narvar superior */
+/* navbar */
+.navbar {
+  top: 0;
+  width: 100%;
+  left: 0;
+  background-color: var(--color-blanco);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 1000;
+  box-shadow: 0 0 2px var(--color-gris-claro);
+}
+
+.conten-main {
+  background-color: var(--color-blanco-fondo);
+}
+
+.logo_item {
+  display: flex;
+  align-items: center;
+  column-gap: 10px;
+  font-size: 22px;
+  font-weight: 500;
+  color: var(--color-azul);
+}
+
+.navbar img {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+}
+
+
+.search_bar {
+  height: 47px;
+  max-width: 430px;
+  width: 100%;
+}
+
+.search_bar input {
+  height: 100%;
+  border-radius: 25px;
+  outline: none;
+  background-color: var(--color-blanco);
+  color: var(--color-gris);
+  border: 1px solid var(--color-gris-claro);
+  padding: 0 20px;
+}
+
+.navbar_content {
+  display: flex;
+  align-items: center;
+  column-gap: 25px;
+}
+
+.navbar_content i {
+  cursor: pointer;
+  font-size: 20px;
+  color: var(--color-gris);
+}
+
+.nav-item {
+  list-style: none;
+}
+
+.dropdown-sin-triangulo .dropdown-toggle::after {
+  display: none !important;
+}
+
+/* Numero de Notificaciones */
+.contarNoti {
+  position: absolute !important;
+  left: 8px !important;
+  top: -14px !important;
+}
+
+/* sidebar del menú */
+body .custom-sidebar.app-sidebar {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    width: 15rem;
+    height: 100vh;
+    min-width: 2rem !important;
+    padding: 1.4rem 1rem 0 1rem;
+    background-color: var(--color-surface);
+    box-shadow: 1px 0px 10px var(--shadow-border);
+    transition: width 0.5s ease !important;
+}
+
+
+body .custom-sidebar.minimize {
+    width: 4.94rem;
+}
+
+/* Header */
+.header {
+    width: 100%;
+}
+
+.menu {
+    padding-left: 0rem;
+}
+
+/*Menu button */
+.menu-btn {
+    position: absolute;
+    top: 3.5%;
+    right: -0.87rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.75rem;
+    height: 1.75rem;
+    border-radius: 50%;
+    background-color: #fff;
+    color: #757575;
+    box-shadow: 2px 2px 5px var(--shadow-border);
+    cursor: pointer;
+    transition: right 0.5s ease;
+}
+
+/* boton arrow*/
+.menu-btn i {
+    font-size: 1.5rem;
+}
+
+.custom-sidebar.minimize .menu-btn {
+    right: -2.2rem;
+}
+
+.custom-sidebar.minimize .menu-btn i {
+    transform: rotate(180deg);
+}
+
+/*menu*/
+.brand {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    justify-content: center;
+    /* padding-left: 0.455rem; */
+    margin-bottom: 1.8rem;
+    overflow: hidden;
+}
+
+/* logo y texto del menu*/
+.brand img {
+    width: 2rem;
+}
+
+.brand span {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--color-text-primary);
+}
+
+/* menu container*/
+.menu-container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* ATLAS */
+.custom-sidebar.minimize .name-logo {
+    display: none;
+
+}
+
+/* search bar */
+.search {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 0.55rem 0;
+    margin-bottom: 1.2rem;
+    border-radius: 0.3rem;
+    box-shadow: 0 0 0 1px var(--color-border);
+    cursor: pointer;
+    transition: box-shadow 0.5s ease;
+}
+
+.search:hover {
+    box-shadow: 0 0 0 1px var(--color-text-primary);
+}
+
+.custom-sidebar.minimize .search {
+    box-shadow: none;
+}
+
+.custom-sidebar.minimize .search:hover {
+    background-color: var(--color-bg);
+}
+
+.search i {
+    font-size: 1.35rem;
+    color: var(--color-text-secondary);
+    padding: 0 0.8rem;
+
+}
+
+.search:hover i {
+    transition: 1s ease;
+    color: var(--color-text-primary);
+}
+
+.search input {
+    width: 70%;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    color: var(--color-text-primary);
+}
+
+/* menu total*/
+
+.menu {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.menu .menu-item {
+    position: relative;
+    list-style: none;
+    overflow: hidden;
+}
+
+.menu .menu-link {
+    display: flex;
+    align-items: center;
+    padding: 0.55rem 0;
+    white-space: nowrap;
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    border-radius: 0.3rem;
+}
+
+.menu-item:hover .menu-link,
+.sub-menu .sub-menu-link:hover,
+.menu-item.active .menu-link {
+    background-color: var(--color-bg);
+    color: var(--color-text-primary);
+}
+
+/* Después */
+.menu-link i {
+    font-size: 1.35rem;
+    /* Define un ancho fijo para todos los íconos del menú */
+    width: 3rem;
+    /* Puedes ajustar este valor según necesites */
+    text-align: center;
+    /* Centra el ícono dentro del espacio fijo */
+    flex-shrink: 0;
+    /* Previene que el ícono se encoja */
+}
+
+.menu-link i:last-child {
+    margin-left: auto;
+    transition: transform 0.5s ease;
+    transform: rotate(-90deg);
+}
+
+.custom-sidebar.minimize .menu-link i:last-child {
+    display: none;
+}
+
+.menu-item.sub-menu-toggle .menu-link i:last-child {
+    transform: rotate(0deg);
+}
+
+.menu-link span {
+    font-size: 0.8em;
+    font-weight: 500;
+}
+
+.custom-sidebar.minimize .menu-item:hover,
+.custom-sidebar.minimize .menu-item.menu-item.sub-menu-toggle {
+    overflow: visible;
+}
+
+.custom-sidebar.minimize .menu-item:hover span,
+.custom-sidebar.minimize .menu-item.menu-item.sub-menu-toggle span {
+    position: absolute;
+    left: 4.2rem;
+    padding: 0.5rem;
+    background-color: var(--color-tooltip-bg);
+    border-radius: 0.4rem;
+    color: var(--color-tooltip-text);
+    transition: all 0.5s ease;
+
+}
+
+/* Sub Menu */
+.sub-menu {
+    height: 0;
+    transition: all 0.5s ease;
+    overflow: hidden;
+    left: 0;
+}
+
+.custom-sidebar.minimize .sub-menu {
+    position: absolute;
+    left: 4.2rem;
+    top: 3rem;
+    background-color: var(--color-surface);
+    border-radius: 0.2rem;
+    white-space: nowrap;
+    box-shadow: 1px 0px 10px var(--shadow-border);
+}
+
+.sub-menu .sub-menu-link {
+    display: flex;
+    margin-left: 2.5rem;
+    padding: 0.55rem 0.5rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    border-radius: 0.3rem;
+}
+
+/* Línea lateral del sub menu*/
+.sub-menu::before {
+    content: '';
+    position: absolute;
+    width: 0.09rem;
+    height: 100%;
+    margin-left: 1.4rem;
+    background-color: var(--color-border);
+    transition: width 0.5s ease;
+}
+
+.custom-sidebar.minimize .sub-menu::before {
+    width: 0;
+}
+
+.custom-sidebar.minimize .sub-menu a {
+    margin: 0 0.5rem;
+}
+
+/* Footer*/
+/* Footer*/
+.footer {
+    width: 100%;
+    padding: 1rem 0;
+    box-shadow: 0 -0.02rem 0 0 var(--color-border);
+}
+
+.user {
+    display: flex;
+    overflow: hidden;
+    margin-top: 1rem;
+}
+
+.user-img {
+    display: flex;
+    margin: 0 0.7rem 0 0.35rem;
+}
+
+/*Imagen del usuario footer*/
+.user-img img {
+    width: 2.2rem;
+    height: 2.2rem;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.user-data {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.user-data .user-name {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--color-text-primary);
+}
+
+.user-data .user-role {
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: var(--color-text-secondary);
+}
+
+.user-icon {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    font-size: 1.5rem;
+    color: var(--color-text-secondary);
+}
+
+
+/*Sidebar boton*/
+.sidebar-btn {
+    display: none;
+}
+
+/*Main*/
+/* main {
+    padding: 2rem 3rem 3rem 17rem;
+    transition: padding 0.5s ease;
+}
+
+main h1 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--color-text-primary);
+} */
+
+.custom-sidebar.minimize+main {
+    padding-left: 7.96rem;
+}
+
+/* Dark Mode */
+.brand-dark {
+    display: none;
+}
+
+body.dark-mode .brand-dark {
+    display: block;
+}
+
+body.dark-mode .brand-light {
+    display: none;
+}
+
+.dark-mode-btn {
+    position: absolute;
+    width: 2.4rem;
+    height: 2.4rem;
+    bottom: 2rem;
+    right: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    border-radius: 50%;
+    box-shadow: 0 0 10px 2px var(--shadow-border);
+    transition: right 0.5s ease;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.dark-mode-btn i {
+    font-size: 1.5rem;
+    position: absolute;
+    transition: transform 0.3s ease;
+}
+
+.dark-mode-btn i:last-child {
+    transform: translateY(150%);
+}
+
+body.dark-mode .dark-mode-btn i:last-child {
+    transform: translateY(0%);
+}
+
+body.dark-mode .dark-mode-btn i:first-child {
+    transform: translateY(-150%);
+}
+
+/* Responsive */
+/* @media (max-height: 683px){
+    .footer{
+        box-shadow: none;
+    }
+    .footer ul{
+        display: none;
+    }
+    .menu-container{
+        overflow-y: auto;
+    }
+    .search{
+        box-shadow: none;
+        border: 2px solid var(--color-border);
+    }
+    .search:hover{
+        box-shadow: none;
+    }
+    main{
+        padding: 2rem;
+    }
+}
+
+@media (max-width:700px) or (max-height:683px){
+    #menu-btn{
+        display: none;
+    }
+    .sidebar{
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+    }
+    .sidebar-btn {
+        display: flex;
+        right: 1rem;
+        padding: 1.2rem;
+    }
+    .sidebar-btn i:last-child{
+        display: none;
+    }
+
+    body.sidebar-hidden .sidebar{
+        transform: translateX(0);
+    }
+
+    body.sidebar-hidden .sidebar-btn i:last-child{
+        display: flex;
+    }
+
+    body.sidebar-hidden .sidebar-btn i:first-child{
+        display: none;
+    }
+
+    main{
+        padding: 2rem;
+    }
+} */

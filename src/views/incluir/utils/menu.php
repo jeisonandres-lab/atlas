@@ -1,33 +1,30 @@
 <!-- navbar -->
 <nav class="navbar app-header navbar " style=" box-shadow: none !important;" id="narvarPrincipal">
     <div class="navbar_content me-3 ms-2">
-        <li class="nav-item ms-3" style="list-style: none; ">
-            <a class="" data-lte-toggle="sidebar" href="#" role="button">
-                <i class="bi bi-list"></i>
-            </a>
-        </li>
-        <li class="nav-item d-flex align-items-center">
-            <span class="<?php $_SESSION['classActivo'] ?> me-2"></span>
-            <span><?php $_SESSION['act'] ?> </span>
+        <li class="nav-item d-flex align-items-center ps-3 activo-user">
+            <div class="conten-active-user d-flex align-items-center py-1 px-2 rounded">
+                <i class='bx bx-user-check me-2'></i>
+                <span><?php echo $_SESSION['act'] ?> </span>
+            </div>
         </li>
     </div>
     <div id="contenedor-buscar" class="search_bar">
         <input type="text" id="buscador" placeholder="Buscar" />
-
         <div id="resultadosBusqueda"></div>
     </div>
     <div class="navbar_content me-3">
         <li class="nav-item">
-            <a href="#" data-lte-toggle="fullscreen">
-                <i data-lte-icon="maximize" class="bi bi-arrows-fullscreen" style="display: block;"></i>
+            <a href="#" data-lte-toggle="fullscreen" class="conten-icons">
+                <i class='bx bx-fullscreen' data-lte-icon="maximize" class="bi bi-arrows-fullscreen"></i>
+                <!-- <i data-lte-icon="maximize" class="bi bi-arrows-fullscreen" style="display: block;"></i> -->
                 <i data-lte-icon="minimize" class="bi bi-fullscreen-exit" style="display: none;"></i>
             </a>
         </li>
-        <i class='bx bx-sun' id="darkLight"></i>
+        <!-- <i class='bx bx-sun' id="darkLight"></i> -->
 
         <!-- NOTIFICACIONES -->
         <li class="nav-item dropdown dropdown-sin-triangulo " id="contenNoti">
-            <a class="dropdown-toggle " href="#" data-bs-toggle="dropdown" aria-expanded="false">
+            <a class="dropdown-toggle conten-icons" href="#" data-bs-toggle="dropdown" aria-expanded="false">
                 <i class='bx bx-bell'></i>
                 <span class="badge badge-warning contarNoti bg-success" id="contadorNoti"></span>
             </a>
@@ -40,10 +37,10 @@
         </li>
 
         <!-- foto de perfil -->
-        <li class="nav-item dropdown">
+        <li class="nav-item user-img dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 <img loading="lazy" src="./src/assets/img/icons/avtar_1.webp" alt="" class="profile nav-item dropdown dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" />
-                <span class="ms-2 d-none d-md-inline"><?php $_SESSION['usuario'] ?></span>
+                <!-- <span class="ms-2 d-none d-md-inline"><?php echo $_SESSION['usuario'] ?></span> -->
             </a>
             <ul class="dropdown-menu">
                 <li><a class="dropdown-item" href="#" id="cerrarSession">Cerrar Sesion</a></li>
@@ -52,152 +49,156 @@
     </div>
 </nav>
 
-<!-- sidebar -->
-<nav class="sidebar app-sidebar ">
-    <div class="logo_item sidebar-brand">
-        <a href="./inicio" class="brand-link">
-            <img  src="./src/assets/img/icons/favicon.webp" alt="" class="brand-image ">
-            <span class="ms-3 fw-bold">ATLAS</span>
-        </a>
-    </div>
-    <div class="conten-subMenu" style="padding: 9px 20px 0px 20px;">
-        <div class="menu_content">
-            <!--INICIO -->
-            <ul class="menu_items">
-                <div class="menu_title menu_inicio"></div>
-                <!-- start -->
-                <li class="item">
-                    <a href="inicio" class="nav_link inicio">
-                        <span class="navlink_icon">
-                            <i class="icons_menu fa-regular fa-house me-2"></i>
-                        </span>
-                        <span class="navlink">Inicio</span>
-                    </a>
-                </li>
-            </ul>
-            <!-- PERSONAL -->
-            <ul class="menu_items">
-                <!-- <div class="menu_title"></div>  -->
-                <li class="item">
-                    <div href="#" class="nav_link submenu_item personal familiares registrosFamiliares ">
-                        <span class="navlink_icon">
-                            <i class="icons_menu fa-regular fa-user-group me-2"></i>
-                        </span>
-                        <span class="navlink ">Empleado</span>
-                        <i class="bx bx-chevron-right arrow-left"></i>
-                    </div>
-                    <ul class="menu_items submenu">
-                        <a href="personal" class="nav_link sublink personal"><i class="fa-regular fa-users-medical me-2"></i> Registrar Empleado</a>
-                        <a href="registrosFamiliares" class="nav_link sublink  familiares "> <i class="fa-regular fa-family  me-2"></i>Familiares</a>
-                    </ul>
-                </li>
-            </ul>
 
-            <!-- BIENESTAR SOCIAL -->
-            <ul class="menu_items">
-                <!-- <div class="menu_title"></div> -->
-                <li class="item">
-                    <div href="#" class="nav_link submenu_item">
-                        <span class="navlink_icon">
-                            <i class="icons_menu fa-regular fa-handshake me-2"></i>
-                        </span>
-                        <span class="navlink">Bienestar Social</span>
-                        <i class="bx bx-chevron-right arrow-left"></i>
-                    </div>
-                    <ul class="menu_items submenu">
-                        <a href="ficha" class="nav_link sublink"><i class="fa-regular fa-file-spreadsheet me-2"></i>Ficha Técnica</a>
-                        <a href="#" class="nav_link sublink"><i class="fa-regular fa-user-xmark me-2"></i>Renuncia</a>
-                    </ul>
-                </li>
-            </ul>
+<!-- Botón del menú hamburguesa-->
+<div class="menu-btn sidebar-btn" id="sidebar-btn">
+    <i class='bx bx-menu'></i>
+    <i class='bx bx-x'></i>
 
-            <!-- VACACIONES -->
-            <ul class="menu_items">
-                <!-- <div class="menu_title"></div> -->
-                <li class="item">
-                    <div href="#" class="nav_link submenu_item">
-                        <span class="navlink_icon">
-                            <i class="icons_menu fa-regular fa-plane me-2"></i>
-                        </span>
-                        <span class="navlink">Vacaciones</span>
-                        <i class="bx bx-chevron-right arrow-left"></i>
-                    </div>
-                    <ul class="menu_items submenu">
-                        <a href="ausencia" class="nav_link sublink ausencia"><i class="fa-regular fa-clock-two-thirty me-2"></i>Asignar ausento</a>
-                        <a href="vacaciones" class="nav_link sublink vacaciones"><i class="fa-regular fa-umbrella-beach me-2"></i>Vacaciones</a>
-                    </ul>
-                </li>
-            </ul>
-            <!-- LEGALIZACIONES
-            <ul class="menu_items">
-                <div class="menu_title"></div>
-                <li class="item">
-                    <div href="#" class="nav_link submenu_item">
-                        <span class="navlink_icon">
-                            <i class="icons_menu fa-regular fa-gavel me-2"></i>
-                        </span>
-                        <span class="navlink">Asesorias</span>
-                        <i class="bx bx-chevron-right arrow-left"></i>
-                    </div>
-                    <ul class="menu_items submenu">
-                        <a href="#" class="nav_link sublink">Jubilados</a>
-                        <a href="#" class="nav_link sublink">Renuncia</a>
-                        <a href="#" class="nav_link sublink">Reporte Legal</a>
-                        <a href="#" class="nav_link sublink">Generar Asesoria</a>
-                    </ul>
-                </li>
-            </ul>-->
+</div>
 
-            <!-- MEDICINA
-            <ul class="menu_items">
-                 <div class="menu_title"></div>
-                <li class="item">
-                    <div href="#" class="nav_link submenu_item">
-                        <span class="navlink_icon">
-                            <i class="icons_menu fa-regular fa-stethoscope me-2"></i>
-                        </span>
-                        <span class="navlink">Medicina</span>
-                        <i class="bx bx-chevron-right arrow-left"></i>
-                    </div>
-                    <ul class="menu_items submenu">
-                        <a href="#" class="nav_link sublink">Medicamentos</a>
-                        <a href="#" class="nav_link sublink">Consulta</a>
-                        <a href="#" class="nav_link sublink">Historial Medico</a>
-                        <a href="#" class="nav_link sublink">Reporte Legal</a>
-                        <a href="#" class="nav_link sublink">Consulta Generar</a>
-                        <a href="#" class="nav_link sublink">Consulta Personal</a>
-                    </ul>
-                </li>
-            </ul> -->
-
-            <!-- ADMINISTRADOR -->
-            <ul class="menu_items">
-                <!-- <div class="menu_title"></div> -->
-                <li class="item">
-                    <div href="#" class="nav_link submenu_item">
-                        <span class="navlink_icon">
-                            <i class="icons_menu fa-regular fa-user-gear me-2"></i>
-                        </span>
-                        <span class="navlink">Administración</span>
-                        <i class="bx bx-chevron-right arrow-left"></i>
-                    </div>
-                    <ul class="menu_items submenu">
-                        <a href="usuarios" class="nav_link sublink Usuarios"><i class="fa-regular fa-user-plus me-2"></i>Usuarios</a>
-                        <a href="historial" class="nav_link sublink HistorialUsuario"><i class="fa-regular fa-rectangle-history-circle-user me-2"></i></i>Historial</a>
-                        <!-- <a href="#" class="nav_link sublink InformeUsuario">Informe</a> -->
-                    </ul>
-                </li>
-            </ul>
+<div class="dark-mode-btn" id="dark-mode-btn">
+    <i class='bx bx-moon'></i>
+    <i class='bx bx-sun'></i>
+</div>
+<!-- Sidebar del menú -->
+<div class="custom-sidebar app-sidebar" id="sidebar">
+    <!-- Header del menú -->
+    <div class="header">
+        <!-- Botón del menú -->
+        <div class="menu-btn" id="menu-btn">
+            <i class='bx bx-chevron-left'></i>
         </div>
-
+        <!-- Logo de la marca -->
+        <div class="brand">
+            <img class="brand-light" src="./src/assets/img/icons/favicon.webp" alt="logo">
+            <img class="brand-dark" src="./src/assets/img/icons/favicon.webp" alt="logo">
+            <!-- Nombre de la marca -->
+            <span class="name-logo">ATLAS</span>
+        </div>
     </div>
-    <!-- <div class="content-version-black me-3 ms-3 mt-5 ">
-        <div class="card text-center">
-            <div class="card-body">
-            <i class="fa-light fs-4 fa-code-compare mt-3 text-black"></i>
-                <h6 class="mt-4 text-dark fw-bolder text-black" style="font-size: 14px;">Version 1.0 ATLAS</h6>
-                <p class="mt-1 text-dark  p-2 text-black" style="font-size: 12px;">Sistema Gestor de Recursos Humanos</p>
+
+    <div class="menu-container">
+        <!-- Barra de búsqueda -->
+        <div class="search">
+            <i class='bx bx-search'></i>
+            <input type="search">
+        </div>
+        <!-- Menú del navegador -->
+        <ul class="menu">
+            <!-- Inicio -->
+            <li class="menu-item menu-item-static active">
+                <a href="#" class="menu-link">
+                    <i class='menu-link-icon bx bx-home-alt-2'></i>
+                    <!-- Nombre del menú -->
+                    <span>Inicio</span>
+                </a>
+            </li>
+            <!-- Empleados -->
+            <li class="menu-item menu-item-dropdown">
+                <a href="#" class="menu-link">
+                    <i class="menu-link-icon fa-regular fa-user-tie"></i>
+                    <!-- Nombre del menú -->
+                    <span>Empleado</span>
+                    <i class='bx bx-chevron-down'></i>
+                </a>
+                <!-- Sub menu -->
+                <ul class="sub-menu">
+                    <li><a href="RegistrarEmpleado" class="sub-menu-link">Registrar Empleado</a></li>
+                    <li><a href="Empleados" class="sub-menu-link">Empleados</a></li>
+                </ul>
+            </li>
+            <!-- Familiares -->
+            <li class="menu-item menu-item-dropdown">
+                <a href="#" class="menu-link">
+                    <i class="menu-link-icon fa-regular fa-family"></i>
+                    <!-- Nombre del menú -->
+                    <span>Familiares</span>
+                    <i class='bx bx-chevron-down'></i>
+                </a>
+                <!-- Sub menu -->
+                <ul class="sub-menu">
+                    <li><a href="RegistrarFamiliares" class="sub-menu-link">Registrar Familiar</a></li>
+                    <li><a href="Familiares" class="sub-menu-link">Familiares</a></li>
+                </ul>
+            </li>
+
+            <li class="menu-item menu-item-dropdown">
+                <a href="#" class="menu-link">
+                    <i class="menu-link-icon fa-regular fa-handshake-angle"></i>
+                    <!-- Nombre del menú -->
+                    <span>Bienestar Social</span>
+                    <i class='bx bx-chevron-down'></i>
+                </a>
+                <ul class="sub-menu">
+                    <li><a href="ficha" class="sub-menu-link">Ficha Técnica</a></li>
+                    <li><a href="datosPersonal" class="sub-menu-link">Renuncia</a></li>
+                </ul>
+            </li>
+
+            <li class="menu-item menu-item-dropdown">
+                <a href="#" class="menu-link">
+                    <i class="menu-link-icon fa-regular fa-umbrella-simple"></i>
+                    <!-- Nombre del menú -->
+                    <span>Vacaciones</span>
+                    <i class='bx bx-chevron-down'></i>
+                </a>
+                <ul class="sub-menu">
+                    <li><a href="ausencia" class="sub-menu-link">Asignar Ausento</a></li>
+                    <li><a href="vacaciones" class="sub-menu-link">Asignar Vacaciones</a></li>
+                </ul>
+            </li>
+            <!-- Administrador -->
+            <li class="menu-item menu-item-dropdown">
+                <a href="#" class="menu-link">
+                    <i class="menu-link-icon  fa-regular fa-cube"></i>
+                    <!-- Nombre del menú -->
+                    <span>Administrador</span>
+                    <i class='bx bx-chevron-down'></i>
+                </a>
+                <ul class="sub-menu">
+                    <li><a href="HistorialUsuarios" class="sub-menu-link">Historial De Usuario</a></li>
+                    <li><a href="RegistrosUsuarios" class="sub-menu-link">Usuarios</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Footer del menú -->
+    <div class="footer">
+        <ul class="menu">
+            <!-- Notificaciones -->
+            <li class="menu-item menu-item-static">
+                <a href="#" class="menu-link">
+                    <i class='bx bx-bell'></i>
+                    <!-- Nombre del menú -->
+                    <span>Notificaciones</span>
+                </a>
+            </li>
+
+            <li class="menu-item menu-item-static">
+                <a href="#" class="menu-link">
+                    <i class='bx bx-cog'></i>
+                    <!-- Nombre del menú -->
+                    <span>Configuraciones</span>
+                </a>
+            </li>
+        </ul>
+
+        <div class="user-menu d-flex mt-3">
+            <div class="user-img">
+                <img src="./src/assets/img/icons/avtar_1.webp" alt="user">
             </div>
+            <div class="user-data">
+                <!-- <?php $_SESSION['usuario'] ?> -->
+                <span class="user-name"><?php echo $_SESSION['usuario'] ?></span>
+                <span class="user-role"><?php echo $_SESSION['rol'] ?></span>
+            </div>
+
+            <div class="user-icon">
+                <i class='bx bx-exit'></i>
+            </div>
+
         </div>
-    </div> -->
-</nav>
+    </div>
+</div>

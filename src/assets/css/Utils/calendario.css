@@ -1,5 +1,5 @@
 /* IMPORTAR COLORES */
-@import url(colores.css);
+@import url(variables.css);
 
 /* CALENDARIO */
 .flatpickr-months .flatpickr-month {

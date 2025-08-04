@@ -1,0 +1,452 @@
+/* Import Google font - Poppins */
+
+@import url('./variables.css');
+
+
+/* body {
+  background-color: #e7f2fd;
+  transition: all 0.5s ease;
+}
+
+body.dark {
+  background-color: #333;
+}
+
+body.dark {
+  --color-blanco: #333;
+  --color-blanco-contenido: rgb(58, 56, 56);
+  --color-azul: #fff;
+  --color-gris: #f2f2f2;
+  --color-gris-claro: #aaa;
+  --color-blanco-fondo: #333;
+}
+
+.dark {
+  background-color: #333;
+  color: #fff;
+  /* Agregamos color de texto blanco para mejor contraste 
+}
+
+body.dark,
+main.dark,
+footer.dark {
+  background-color: var(--color-blanco) !important;
+}
+
+body main .content {
+  background-color: var(--color-blanco-contenido) !important;
+  border: 1px solid white;
+} */
+
+/* iconos  de usuario activo */
+.navbar_content .activo-user i {
+  color: var(--color-verde-fuerte) !important; 
+  font-size: 1rem !important;
+  font-weight: 400 !important;
+}
+
+.navbar_content .conten-active-user{
+    background-color: #daf4f0;
+    width: 100%;
+}
+.navbar_content .activo-user{
+    font-size: var(--font-size-sm) !important;
+    font-weight: 400;
+    color: var(--color-verde-fuerte);
+}
+
+
+/* navbar */
+.navbar {
+  top: 0;
+  width: 100%;
+  left: 0;
+  background-color: var(--color-blanco);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 1000;
+  box-shadow: 0 0 2px var(--color-gris-claro);
+}
+
+
+
+
+.navbar img {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+}
+
+.search_bar {
+  height: 47px;
+  max-width: 430px;
+  width: 100%;
+}
+
+.search_bar input {
+  height: 100%;
+  border-radius: 25px;
+  outline: none;
+  background-color: var(--color-blanco);
+  color: var(--color-gris);
+  border: 1px solid var(--color-gris-claro);
+  padding: 0 20px;
+}
+
+.navbar_content {
+  display: flex;
+  align-items: center;
+  column-gap: 25px;
+}
+
+
+/* TOTAL DE ICONOS */
+.navbar_content .nav-item i {
+  cursor: pointer;
+  font-size: 20px;
+  color: var(--color-gris);
+} 
+
+/* admin lte */
+.sidebar-brand {
+  padding: 32px !important;
+}
+
+/* clase de adminlte */
+.app-main {
+  transition: none !important;
+}
+
+/* clase de adminlte */
+.app-footer {
+  color: var(--color-gris) !important;
+}
+
+.nav-item {
+  list-style: none;
+}
+
+.activado {
+  display: block;
+  width: 7px;
+  height: 7px;
+  border-radius: 2px;
+}
+
+.desactivado {
+  display: block;
+  width: 7px;
+  height: 7px;
+  border-radius: 2px;
+}
+
+/* sidebar */
+/* .sidebar {
+  background-color: var(--color-blanco);
+  overflow-y: scroll;
+  box-shadow: 0 0 1px var(--color-gris-claro);
+}
+
+.sidebar,
+ol,
+ul {
+  margin-bottom: 0rem !important;
+}
+
+.sidebar::-webkit-scrollbar {
+  display: none;
+}
+
+.sidebar:hover::-webkit-scrollbar {
+  display: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 7px !important;
+  width: 7px;
+  border-radius: 20px;
+}
+
+.sidebar::-webkit-scrollbar:window-inactive {
+  display: none;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+  background-color: var(--color-azul);
+  border-radius: 6px;
+} */
+
+.menu_content {
+  position: relative;
+}
+
+.menu_title {
+  /* margin: 15px 0;*/
+  padding: 25px 20px 15px 0px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+/* .sidebar.close .menu_title {
+  padding: 6px 30px;
+} */
+
+.menu_title::before {
+  color: var(--color-gris);
+  white-space: nowrap;
+}
+
+.menu_inicio::before {
+  content: "NAVEGACIÓN";
+
+}
+
+/* .sidebar.close .menu_title::before {
+  content: "";
+  position: absolute;
+  height: 2px;
+  width: 18px;
+  border-radius: 12px;
+  background: var(--color-gris-claro);
+} */
+
+.menu_items {
+  padding: 3px 5px 3px 0px;
+  list-style: none;
+
+}
+
+.navlink_icon {
+  position: relative;
+  font-size: 22px;
+  min-width: 40px;
+  /* line-height: 40px; */
+  display: inline-block;
+  text-align: center;
+  border-radius: 6px;
+  /* padding: 3px; */
+}
+
+.navlink_icon::before {
+  content: "";
+  position: absolute;
+  height: 100%;
+  width: calc(100% + 100px);
+  left: -20px;
+}
+
+.navlink_icon:hover {
+  background: var(--color-azul);
+}
+
+/* .sidebar .nav_link {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 4px 15px 7px 0px;
+  border-radius: 8px;
+  text-decoration: none;
+  color: var(--color-gris);
+  white-space: nowrap;
+}
+
+.sidebar.close .navlink {
+  display: none;
+} */
+
+.nav_link:hover {
+  color: var(--color-blanco);
+  background: var(--color-azul);
+}
+
+.sidebar.close .nav_link:hover {
+  background: var(--color-blanco);
+}
+
+.submenu_item {
+  cursor: pointer;
+}
+
+.submenu {
+  display: none;
+  transform: translateY(-10px); /* Posición inicial fuera de la vista */
+  opacity: 0;
+  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+.submenu_item .arrow-left {
+  position: absolute;
+  right: 0.5rem;
+  display: inline-block;
+  margin-right: auto;
+  transition: transform 0.3s ease-in-out;
+}
+
+.sidebar.close .submenu {
+  display: none;
+  transition: transform 0.3s ease-in-out;
+}
+
+.show_submenu~.submenu {
+  display: block;
+  transform: translateY(0); /* Posición final visible */
+  opacity: 1;
+  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+.show_submenu .arrow-left {
+  transform: rotate(90deg);
+  transition: transform 0.3s ease-in-out;
+}
+
+/* Ajuste para la transición del contenedor principal del menú */
+.sidebar {
+  transition: all 0.3s ease-in-out;
+}
+
+.sidebar.close {
+  width: 80px; /* Ajusta el ancho del menú cerrado */
+}
+
+.sidebar:not(.close) {
+  width: 250px; /* Ajusta el ancho del menú abierto */
+}
+
+.submenu .sublink {
+  padding: 10px 10px 10px 10px;
+  margin-left: 1rem !important;
+  margin-bottom: 0.3rem !important;
+
+}
+
+.sidebar.hoverable .collapse_sidebar {
+  display: none;
+}
+
+.icons_menu {
+  font-size: 17px;
+}
+
+@media (width <=768px) {
+  .search_bar {
+    display: none !important;
+  }
+}
+
+
+/* menus desplegable de de busqueda */
+
+.menu-desplegable {
+  position: absolute;
+  /* Para que se posicione debajo del buscador */
+  top: 40px;
+  /* Ajusta la distancia del menú al buscador */
+  left: 0;
+  width: 200px;
+  /* Ancho del menú */
+  background-color:var(--color-blanco);
+  border: 1px solid var(--color-gris-claro);
+  border-radius: 4px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+  z-index: 10;
+  /* Para que el menú se muestre sobre otros elementos */
+  display: none;
+  /* Ocultar el menú inicialmente */
+}
+
+.menu-desplegable ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.menu-desplegable li {
+  padding: 8px;
+  cursor: pointer;
+}
+
+.menu-desplegable li:hover {
+  background-color: #f0f0f0;
+}
+
+.subtitulo {
+  font-size: 0.8em;
+  color: #888;
+  display: block;
+  /* Convierte el subtítulo en un bloque */
+  margin-left: 0;
+  /* Elimina el margen a la izquierda */
+  margin-top: 5px;
+  /* Añade un pequeño margen en la parte superior */
+}
+
+#resultadosBusqueda {
+  position: absolute;
+  /* Para posicionar el menú */
+  top: 100%;
+  /* Colocar el menú debajo del contenedor */
+  left: 0;
+  /* Alinear el menú con el borde izquierdo del contenedor */
+  width: 100%;
+  /* Ocupar todo el ancho del contenedor */
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+  z-index: 10;
+  /* Para que el menú se muestre sobre otros elementos */
+  display: none;
+  /* Ocultar el menú inicialmente */
+}
+
+
+.dropdown-sin-triangulo .dropdown-toggle::after {
+  display: none !important;
+}
+
+.contarNoti {
+  position: absolute !important;
+  left: 8px !important;
+  top: -14px !important;
+}
+
+.horafecha-nofi p {
+  color: var(--color-gris-claro);
+}
+
+.horafecha-nofi p {
+  font-size: 12px;
+}
+
+.messengerNoti {
+  font-size: 13px;
+}
+
+.imgNoti {
+  width: 20px;
+  height: 20px;
+}
+
+/* INCES */
+.ocultarHidden {
+  display: none !important;
+}
+
+.content-img-inces .img-inces {
+  width: 110px;
+  height: 60px;
+}
+
+.content-version-black .card {
+  margin: 20px;
+  border-color: #283c50;
+  background: rgba(255, 255, 255, .05);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, .15);
+}
+
+.select2-selection {
+  border-radius: 0px 5px 5px 0px !important;
+   box-shadow: none !important; 
+}
+

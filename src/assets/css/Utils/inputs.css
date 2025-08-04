@@ -1,5 +1,5 @@
 /* IMPORTAR COLORES */
-@import url(colores.css);
+@import url(variables.css);
 
 /* verificación cumplida */
 body .conten-main .app-main form .cumplido {
