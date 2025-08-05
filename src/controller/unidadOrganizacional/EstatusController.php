@@ -1,34 +1,37 @@
 <?php
 
-namespace App\Atlas\controller;
+namespace App\Atlas\controller\unidadOrganizacional;
 
-use App\Atlas\models\EstatusModel;
-use App\Atlas\models\TablasModel;
+use App\Atlas\models\public\EstatusModelPublic;
+use App\Atlas\models\private\TablasModel;
 use App\Atlas\controller\auditoria\AuditoriaController;
 use App\Atlas\config\App;
 use App\Atlas\config\EjecutarSQL;
 
-class EstatusController extends EstatusModel
+class EstatusController
 {
     private $tablas;
     private $auditoriaController;
     private $app;
+    private $estatusModelPublic;
 
     private $idUsuario;
     private $nombreUsuario;
     private $consultas;
     public function __construct()
     {
-        parent::__construct();
+
         $this->tablas = new TablasModel();
         $this->app = new App();
         $this->auditoriaController = new AuditoriaController();
         $this->consultas = new EjecutarSQL();
+        $this->estatusModelPublic = new EstatusModelPublic();
         $this->app->iniciarSession();
         $this->idUsuario = $_SESSION['id'];
         $this->nombreUsuario = $_SESSION['usuario'];
     }
 
+    // Datos para las tablas
     public function datosEstatus()
     {
         $data_json['data'] = []; // Array de datos para enviar
@@ -84,29 +87,24 @@ class EstatusController extends EstatusModel
     }
 
     public function obtenerEstatusGeneral(){
+        $datosGeneralEstatus = $this->estatusModelPublic->getDatosEstatus($parametros = ['1']);
+
         $data_json = [
-            "exito" => false,
-            "mensaje" => ""
+            "exito" => !empty($datosGeneralEstatus),
+            "mensaje" => empty($datosGeneralEstatus) ? "No se lograron obtener los estatus" : "",
+            "data" => []
         ];
 
-        $datosGeneralEstatus = $this->getObtenerEstatusGeneral();
-        if (!empty($datosGeneralEstatus)) {
-            foreach($datosGeneralEstatus as $row){
-                $data_json["exito"] = true;
-                $data_json['data'][] = [
+        if ($data_json["exito"]) {
+            foreach ($datosGeneralEstatus as $row) {
+                $data_json["data"][] = [
                     'id' => $row['id_estatus'],
                     'value' => $row['estatus']
                 ];
             }
-        }else{
-
-            $data_json["exito"] = false;
-            $data_json["mensaje"] = "no se lograron obtener los estatus";
         }
 
-         // Devolver la respuesta en formato JSON
-         header('Content-Type: application/json');
-         echo json_encode($data_json);
+        echo json_encode($data_json);
     }
 
     public function regisEstatus(string $nombreEstatus)
@@ -130,9 +128,9 @@ class EstatusController extends EstatusModel
             ]
         ];
 
-        $validar = $this->getValidarEstatus('estatus',  $nombreEstatus);
+        $validar = $this->estatusModelPublic->getValidarEstatus('estatus',  $nombreEstatus);
         if (empty($validar)) {
-            $regisEstatus = $this->getRegistrarEstatus('estatus', $parametros);
+            $regisEstatus = $this->estatusModelPublic->getRegistrarEstatus('estatus', $parametros);
             if ($regisEstatus) {
                 $registroAuditoria = $this->auditoriaController->registrarAuditoria($this->idUsuario, 'Registrar estatus', 'El usuario ' . $this->nombreUsuario . ' ha registrado el ' . $nombreEstatus . ' en el sistema.');
                 if ($registroAuditoria) {
@@ -178,16 +176,16 @@ class EstatusController extends EstatusModel
             "condicion_valor" => $id
         ];
 
-        $buscarEstatus = $this->getDatosEstatusID([$id]);
+        $buscarEstatus = $this->estatusModelPublic->getDatosEstatusID([$id]);
         if (empty($buscarEstatus)) {
             $data_json['exito'] = false;
             $data_json['messenger'] = 'No se pudo obtener los datos del estatus';
         } else {
             foreach ($buscarEstatus as $row) {
                 $estatus = $row['estatus'];
-                $validar = $this->getValidarEstatus('estatus',  $Estatus);
+                $validar = $this->estatusModelPublic->getValidarEstatus('estatus',  $Estatus);
                 if (empty($validar)) {
-                    $actualizar = $this->getActulizarEstatus('estatus', $parametros, $condicion);
+                    $actualizar = $this->estatusModelPublic->getActulizarEstatus('estatus', $parametros, $condicion);
                     if ($actualizar) {
                         $data_json['exito'] = true;
 
@@ -241,14 +239,14 @@ class EstatusController extends EstatusModel
             "condicion_valor" => $id
         ];
 
-        $buscarEstatus = $this->getDatosEstatusID([$id]);
+        $buscarEstatus = $this->estatusModelPublic->getDatosEstatusID([$id]);
         if (empty($buscarEstatus)) {
             $data_json['exito'] = false;
             $data_json['messenger'] = 'No se pudo obtener los datos del estatus';
         } else {
             foreach ($buscarEstatus as $row) {
                 $estatus = $row['estatus'];
-                $actualizar = $this->getActulizarEstatus('estatus', $parametros, $condicion);
+                $actualizar = $this->estatusModelPublic->getActulizarEstatus('estatus', $parametros, $condicion);
                 if ($actualizar) {
                     $data_json['exito'] = true;
 

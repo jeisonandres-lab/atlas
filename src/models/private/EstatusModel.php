@@ -1,19 +1,19 @@
 <?php
-namespace App\Atlas\models;
+namespace App\Atlas\models\private;
+
 use App\Atlas\config\EjecutarSQL;
 
 class EstatusModel extends EjecutarSQL{
 
     // Metodos de la Clase Privada
-    protected function datosEstatus()
+    protected function datosEstatus($parametro = ['1'])
     {
-        $parametro = ['1'];
         $sql = $this->ejecutarConsulta("SELECT * FROM estatus WHERE activo = ? ", $parametro);
         return $sql;
     }
 
-    protected function obtenerEstatusGeneral(){
-        $sql = $this->ejecutarConsulta("SELECT * FROM estatus WHERE activo = 1 ");
+    public function obtenerEstatusGeneral(){
+        $sql = $this->ejecutarConsulta("SELECT id_estatus, estatus FROM estatus WHERE activo = 1 ");
         return $sql;
     }
 
@@ -42,35 +42,6 @@ class EstatusModel extends EjecutarSQL{
         $sql = $this->ejecutarConsulta("SELECT * FROM estatus WHERE id_estatus = ?", $parametro);
 
         return $sql;
-    }
-    // Getters Para Accder a los Metodos de la Clase
-    public function getDatosEstatus()
-    {
-        return $this->datosEstatus();
-    }
-
-    public function getActulizarEstatus($tabla, $datos, $condicion)
-    {
-        return $this->actulizarEstatus($tabla, $datos, $condicion);
-    }
-
-    public function getRegistrarEstatus($tabla, $datos)
-    {
-        return $this->registrarEstatus($tabla, $datos);
-    }
-
-    public function getValidarEstatus($tabla, $estatus)
-    {
-        return $this->verificarEstatus($tabla, $estatus);
-    }
-
-    public function getDatosEstatusID($parametro)
-    {
-        return $this->datosEstatusID($parametro);
-    }
-
-    public function getObtenerEstatusGeneral(){
-        return $this->obtenerEstatusGeneral();
     }
 
 }

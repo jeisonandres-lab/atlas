@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Atlas\controller;
+namespace App\Atlas\controller\ubicacion;
 
 use App\Atlas\controller\auditoria\AuditoriaController;
 use App\Atlas\config\App;
-use App\Atlas\models\UbicacionModel;
+use App\Atlas\models\private\UbicacionModel;
 
 class UbicacionController
 {

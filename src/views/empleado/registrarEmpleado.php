@@ -30,7 +30,7 @@ use App\Atlas\config\App;
                 <img loading="lazy" src="<?php echo App::URL_IMG . "top-header.webp"; ?>" alt="" class="w-100 h-100" style="object-fit: cover; object-position:center;">
             </div>
             <!-- SUB MENU DEL SISTEMA -->
-            <?php require_once App::URL_INC . "utils/menu_registro.php" ?>
+            <!-- <?php require_once App::URL_INC . "utils/menu_registro.php" ?> -->
             <div class="container-fluid px-3">
                 <div class="row">
                     <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-8 px-0 mb-2 form-validate " style="text-align: center;">
@@ -503,7 +503,7 @@ use App\Atlas\config\App;
 <!-- SCRIPS DEL SISTEMA JS  -->
 <?php require_once App::URL_INC . "/scrips.php"; ?>
 
-<script src="<?php echo App::URL_SCRIPS . "registroPersonal.js" ?>" type="module" defer></script>
+<script src="<?php echo App::URL_SCRIPS . "registraEmpleado.js" ?>" type="module" defer></script>
 </body>
 
 </html>

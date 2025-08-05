@@ -1,139 +1,6 @@
-import { AlertSW2 } from "./utils/alerts.js";
-import { obtenerDatosJQuery } from "./utils/formularioAjax.js";
-import { animateNumberFromHTML } from "./utils/funciones.js";
-// Dependencias: jQuery, DataTables, Chart.js
-$(function () {
+import { AlertSW2 } from "../utils/alerts.js";
 
-    let table = new DataTable('#tableUsers', {
-        // responsive: true,
-        ajax: {
-            url: "./src/routers/usuario.php?modulo_usuario=datosUsuariosBasicos",
-            type: "POST",
-            dataSrc: function (json) {
-                // Verificar la estructura de los datos devueltos
-                if (json.data) {
-                    return json.data; // Acceder al array de datos dentro de 'data'
-                } else {
-                    console.error('Estructura de datos incorrecta:', json);
-                    return [];
-                }
-            }
-        },
-        processing: true,
-        searching: false,
-        serverSide: true,
-        info: false,
-        order: [[0, 'desc']],
-        paging: false,
-        lengthMenu: [2, 10, 25],
-        pageLength: 5,
-        columnDefs: [
-            {
-                targets: 4,
-                width: "25%",
-                render: function (data, type, row) {
-                    console.log(data)
-                    const dataTextoMap = {
-                        'Administrador': 'Administrador',
-                        'Medico': 'Medico',
-                        // Agrega más roles según sea necesario
-                    };
-
-                    const colores = [
-                        'badge text-bg-success ',
-                    ];
-
-                    const colorAleatorio = colores[Math.floor(Math.random() * colores.length)];
-
-                    return `<span class=' ${colorAleatorio}' style='color: white !important'>${dataTextoMap[data]}</span>`;
-                }
-            },
-            {
-                targets: 0,
-                className: '',
-                visible: false,
-                width: "20%",
-                render: function (data, type, row) {
-                    let dataTexto = data;
-                    const dataTextoMap = {
-                        1: "1",
-                        0: "",
-                    };
-
-                    if (dataTextoMap[dataTexto] == '1') {
-                        dataTexto = `<div class='conten-circulo d-flex justify-content-center aling-items-center h-100'><span class='rounded circulo-success'></span></div>`;
-                    } else {
-                        dataTexto = `<div class='conten-circulo d-flex justify-content-center aling-items-center h-100'><span class='rounded circulo-danger'></span></div>`;
-                    }
-                    return dataTexto
-                }
-            },
-
-            {
-                targets: 1,
-                width: "20%",
-                render: function (data, type, row) {
-                    let dataTexto = data;
-                    const dataTextoMap = {
-                        1: "Activo",
-                        0: "Desactivado",
-                        2: "Inactivo",
-                    };
-
-                    if (dataTextoMap[dataTexto] == 'Activo') {
-                        dataTexto = `<span class="badge text-bg-success" style='color: white !important'>${dataTextoMap[dataTexto]}</span>`;
-                    } else {
-                        dataTexto = `<span class="badge text-bg-danger" style='color: white !important'>${dataTextoMap[dataTexto]}</span>`;
-                    }
-                    return dataTexto
-                }
-            },
-        ],
-
-        language: {
-            url: "./IdiomaEspañol.json"
-        },
-        columns: [
-            { "data": 0 }, // EnUso
-            { "data": 3 }, // Activo
-            { "data": 4 },
-            { "data": 1 }, // Usuario
-            { "data": 2 }, // Rol
-        ]
-    });
-
-    let urlsCard = [
-        "./src/routers/totalDate.php?modulo_Datos=totalDatos"
-    ];
-
-    let requests = urlsCard.map((url, index) => {
-        // Suponiendo que quieres pasar `options` solo a la primera solicitud
-        return obtenerDatosJQuery(url);
-    });
-
-    async function obtenerDatosCards() {
-        try {
-            const totalDatos = await Promise.all(requests);
-            if  (totalDatos[0].exito) {
-                console.log(typeof totalDatos);
-                // $('#totalPersonal').text(totalPersonal[0].empleado[0].totalEmpleados);
-                // $('#totalArchivos').text(totalPersonal[0].archivos[0].totalArchivos);
-                // $('#atencionMedica').text(totalPersonal[0].atencionMedica[0].atencionMedica);
-                // $('#totalMedicamentos').text(totalPersonal[0].medicamentos[0].totalMedicamentos);
-                // $('#personalAusencia').text(totalPersonal[0].ausencia[0].totalPermisos);
-                // $('#porcentajeArchivos').text(totalPersonal[0].porcentajeArchivos[0].porcentaje_documentos_subidos + '%');
-            } else {
-                console.error('Error al obtener dependencias o la estructura de la respuesta es incorrecta');
-            }
-        } catch (error) {
-            console.error('Error al obtener los datos:', error);
-        }
-    }
-
-    obtenerDatosCards();
-
-
-
+$(async function (){
 
     function obtenerFechaYDia(parametro) {
         const diasSemana = ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'];
@@ -181,14 +48,6 @@ $(function () {
 })
 document.addEventListener('DOMContentLoaded', async function () {
 
-    // Card de total de personal
-    animateNumberFromHTML('totalPersonal', 2000); // 2 segundos
-    // Card de total de archivos
-    animateNumberFromHTML('totalArchivos', 2000); // 3 segundos
-    // Card de personal de vacaciones
-    animateNumberFromHTML('personalVacaciones', 5000); // 3 segundos
-    // Card de personal de ausencias
-    animateNumberFromHTML('personalAusencia', 5000); // 3 segundos
 
 
     const tbody = document.querySelector('.tbody-tabletUser');
@@ -485,4 +344,4 @@ document.addEventListener('DOMContentLoaded', async function () {
     // Cargar las gráficas de manera asíncrona
     loadChartDia();
     loadChartMes();
-});
+})

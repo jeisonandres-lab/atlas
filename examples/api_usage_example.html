@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Estatus Optimizado - Ejemplo de Uso</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .controls {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+        
+        .control-group {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        label {
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #333;
+        }
+        
+        input, select, button {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        
+        button {
+            background: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        button:hover {
+            background: #0056b3;
+        }
+        
+        button:disabled {
+            background: #6c757d;
+            cursor: not-allowed;
+        }
+        
+        .results {
+            margin-top: 30px;
+        }
+        
+        .pagination-info {
+            background: #e9ecef;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+        
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        
+        .data-table th,
+        .data-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .data-table th {
+            background: #f8f9fa;
+            font-weight: 600;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+        
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        
+        .success {
+            background: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        
+        .pagination-controls {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .pagination-controls button {
+            padding: 8px 15px;
+            font-size: 12px;
+        }
+        
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .stat-card {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: #007bff;
+        }
+        
+        .stat-label {
+            font-size: 12px;
+            color: #666;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 API Estatus Optimizado</h1>
+        <p>Ejemplo de uso para grandes volúmenes de datos (100k - 1M+ registros)</p>
+        
+        <div class="controls">
+            <div class="control-group">
+                <label for="pagina">Página:</label>
+                <input type="number" id="pagina" value="1" min="1">
+            </div>
+            
+            <div class="control-group">
+                <label for="porPagina">Registros por página:</label>
+                <select id="porPagina">
+                    <option value="100">100</option>
+                    <option value="500">500</option>
+                    <option value="1000" selected>1,000</option>
+                    <option value="5000">5,000</option>
+                    <option value="10000">10,000</option>
+                </select>
+            </div>
+            
+            <div class="control-group">
+                <label for="buscar">Buscar:</label>
+                <input type="text" id="buscar" placeholder="Filtrar por texto...">
+            </div>
+            
+            <div class="control-group">
+                <label>&nbsp;</label>
+                <button onclick="cargarDatos()">Cargar Datos</button>
+            </div>
+        </div>
+        
+        <div id="loading" class="loading" style="display: none;">
+            <div>🔄 Cargando datos...</div>
+        </div>
+        
+        <div id="error" class="error" style="display: none;"></div>
+        <div id="success" class="success" style="display: none;"></div>
+        
+        <div id="stats" class="stats" style="display: none;">
+            <div class="stat-card">
+                <div class="stat-value" id="totalRegistros">0</div>
+                <div class="stat-label">Total Registros</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="tiempoRespuesta">0ms</div>
+                <div class="stat-label">Tiempo Respuesta</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="tamañoRespuesta">0KB</div>
+                <div class="stat-label">Tamaño Respuesta</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="registrosCargados">0</div>
+                <div class="stat-label">Registros Cargados</div>
+            </div>
+        </div>
+        
+        <div id="paginationInfo" class="pagination-info" style="display: none;"></div>
+        
+        <div id="results" class="results"></div>
+        
+        <div id="paginationControls" class="pagination-controls" style="display: none;">
+            <button onclick="cambiarPagina('anterior')" id="btnAnterior">← Anterior</button>
+            <button onclick="cambiarPagina('siguiente')" id="btnSiguiente">Siguiente →</button>
+        </div>
+    </div>
+
+    <script>
+        let datosActuales = null;
+        let paginaActual = 1;
+        
+        async function cargarDatos() {
+            const pagina = document.getElementById('pagina').value;
+            const porPagina = document.getElementById('porPagina').value;
+            const buscar = document.getElementById('buscar').value;
+            
+            mostrarLoading(true);
+            ocultarMensajes();
+            
+            const startTime = performance.now();
+            
+            try {
+                // Construir URL con parámetros
+                const params = new URLSearchParams({
+                    pagina: pagina,
+                    por_pagina: porPagina
+                });
+                
+                if (buscar.trim()) {
+                    params.append('buscar', buscar.trim());
+                }
+                
+                const url = `/estatus/obtenerEstatusGeneral?${params.toString()}`;
+                
+                console.log('🌐 Realizando petición a:', url);
+                
+                const response = await fetch(url);
+                const endTime = performance.now();
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+                
+                const data = await response.json();
+                const tiempoRespuesta = Math.round(endTime - startTime);
+                
+                // Calcular tamaño de respuesta
+                const responseSize = new Blob([JSON.stringify(data)]).size;
+                const responseSizeKB = (responseSize / 1024).toFixed(2);
+                
+                datosActuales = data;
+                paginaActual = parseInt(pagina);
+                
+                mostrarResultados(data, tiempoRespuesta, responseSizeKB);
+                mostrarEstadisticas(data, tiempoRespuesta, responseSizeKB);
+                
+                console.log('✅ Datos cargados exitosamente:', data);
+                
+            } catch (error) {
+                console.error('❌ Error al cargar datos:', error);
+                mostrarError(`Error al cargar datos: ${error.message}`);
+            } finally {
+                mostrarLoading(false);
+            }
+        }
+        
+        function mostrarResultados(data, tiempoRespuesta, tamañoRespuesta) {
+            const resultsDiv = document.getElementById('results');
+            
+            if (!data.exito) {
+                mostrarError(data.mensaje || 'Error desconocido');
+                return;
+            }
+            
+            // Mostrar información de paginación
+            if (data.paginacion) {
+                const paginationInfo = document.getElementById('paginationInfo');
+                paginationInfo.innerHTML = `
+                    <strong>📊 Información de Paginación:</strong><br>
+                    Página ${data.paginacion.pagina_actual} de ${data.paginacion.total_paginas} 
+                    (${data.paginacion.total_registros.toLocaleString()} registros totales)<br>
+                    Mostrando ${data.data.length} registros de ${data.paginacion.por_pagina} por página
+                `;
+                paginationInfo.style.display = 'block';
+                
+                // Actualizar controles de paginación
+                actualizarControlesPaginacion(data.paginacion);
+            }
+            
+            // Mostrar tabla de datos
+            if (data.data && data.data.length > 0) {
+                let tableHTML = `
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Estatus</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                `;
+                
+                data.data.forEach(item => {
+                    tableHTML += `
+                        <tr>
+                            <td>${item.id}</td>
+                            <td>${item.value}</td>
+                        </tr>
+                    `;
+                });
+                
+                tableHTML += '</tbody></table>';
+                resultsDiv.innerHTML = tableHTML;
+                
+                mostrarExito(`✅ Datos cargados exitosamente en ${tiempoRespuesta}ms`);
+            } else {
+                resultsDiv.innerHTML = '<p>No se encontraron registros.</p>';
+            }
+        }
+        
+        function mostrarEstadisticas(data, tiempoRespuesta, tamañoRespuesta) {
+            const statsDiv = document.getElementById('stats');
+            
+            document.getElementById('totalRegistros').textContent = 
+                data.paginacion ? data.paginacion.total_registros.toLocaleString() : '0';
+            document.getElementById('tiempoRespuesta').textContent = `${tiempoRespuesta}ms`;
+            document.getElementById('tamañoRespuesta').textContent = `${tamañoRespuesta}KB`;
+            document.getElementById('registrosCargados').textContent = data.data ? data.data.length : '0';
+            
+            statsDiv.style.display = 'grid';
+        }
+        
+        function actualizarControlesPaginacion(paginacion) {
+            const controlsDiv = document.getElementById('paginationControls');
+            const btnAnterior = document.getElementById('btnAnterior');
+            const btnSiguiente = document.getElementById('btnSiguiente');
+            
+            btnAnterior.disabled = !paginacion.hay_anterior;
+            btnSiguiente.disabled = !paginacion.hay_siguiente;
+            
+            controlsDiv.style.display = 'flex';
+        }
+        
+        function cambiarPagina(direccion) {
+            if (!datosActuales || !datosActuales.paginacion) return;
+            
+            let nuevaPagina = paginaActual;
+            
+            if (direccion === 'anterior' && datosActuales.paginacion.hay_anterior) {
+                nuevaPagina = paginaActual - 1;
+            } else if (direccion === 'siguiente' && datosActuales.paginacion.hay_siguiente) {
+                nuevaPagina = paginaActual + 1;
+            } else {
+                return;
+            }
+            
+            document.getElementById('pagina').value = nuevaPagina;
+            cargarDatos();
+        }
+        
+        function mostrarLoading(mostrar) {
+            document.getElementById('loading').style.display = mostrar ? 'block' : 'none';
+        }
+        
+        function mostrarError(mensaje) {
+            const errorDiv = document.getElementById('error');
+            errorDiv.textContent = mensaje;
+            errorDiv.style.display = 'block';
+        }
+        
+        function mostrarExito(mensaje) {
+            const successDiv = document.getElementById('success');
+            successDiv.textContent = mensaje;
+            successDiv.style.display = 'block';
+        }
+        
+        function ocultarMensajes() {
+            document.getElementById('error').style.display = 'none';
+            document.getElementById('success').style.display = 'none';
+        }
+        
+        // Cargar datos al iniciar
+        document.addEventListener('DOMContentLoaded', function() {
+            cargarDatos();
+        });
+        
+        // Event listeners para cambios automáticos
+        document.getElementById('porPagina').addEventListener('change', cargarDatos);
+        document.getElementById('buscar').addEventListener('input', function() {
+            // Debounce para búsquedas
+            clearTimeout(this.timeout);
+            this.timeout = setTimeout(cargarDatos, 500);
+        });
+    </script>
+</body>
+</html> 

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Atlas\models;
+namespace App\Atlas\models\private;
 
 use App\Atlas\config\EjecutarSQL;
 

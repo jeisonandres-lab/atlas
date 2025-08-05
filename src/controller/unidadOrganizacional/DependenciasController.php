@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Atlas\controller;
+namespace App\Atlas\controller\unidadOrganizacional;
 
 use App\Atlas\config\App;
-use App\Atlas\models\DependenciasModel;
-use App\Atlas\models\TablasModel;
+use App\Atlas\models\private\DependenciasModel;
+use App\Atlas\models\private\TablasModel;
 use App\Atlas\controller\auditoria\AuditoriaController;
 
 

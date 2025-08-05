@@ -1,30 +1,27 @@
 <?php
 
-namespace App\Atlas\ajax;
+namespace App\Atlas\routers;
 
 require_once '../../vendor/autoload.php';
 
-use App\Atlas\config\Conexion;
+use App\Atlas\config\EjecutarSQL;
 use App\Atlas\controller\personalController;
-use App\Atlas\controller\dependenciasController;
-use App\Atlas\controller\cargoController;
-use App\Atlas\controller\departamentoController;
-use App\Atlas\controller\estatusController;
+
+
+
+
 use App\Atlas\controller\notificacionController;
-use App\Atlas\controller\ubicacionController;
+use App\Atlas\controller\ubicacion\UbicacionController;
 use App\Atlas\config\peticiones;
 use App\Atlas\controller\familiarController;
-$conexion = new conexion();
-$dependencias = new dependenciasController();
-$estatus = new estatusController();
-$cargo = new cargoController();
-$departamento = new departamentoController();
-$personal = new personalController(true);
-$notificacion = new notificacionController();
-$ubicacion = new ubicacionController();
-$peticionHandler = new peticiones();
-$familiar = new familiarController();
 
+$conexion = new EjecutarSQL();
+
+// $notificacion = new notificacionController();
+// $personal = new personalController(true);
+ $ubicacion = new UbicacionController();
+// $familiar = new familiarController();
+$peticionHandler = new peticiones();
 // variables estraidas
 $variables = $peticionHandler->obtenerVariables();
 extract($variables);
@@ -72,18 +69,18 @@ switch ($_GET['modulo_personal']) {
             $cedulaFamiliar,
         );
         break;
-    case 'obtenerDependencias':
-        $dependencias->obtenerdependeciasGeneral();
-        break;
-    case 'obtenerEstatus':
-        $estatus->obtenerEstatusGeneral();
-        break;
-    case 'obtenerCargo':
-        $cargo->obtenerCargoGeneral();
-        break;
-    case 'obtenerDepartamento':
-        $departamento->obtenerDeparmatentoGeneral();
-        break;
+    // case 'obtenerDependencias':
+    //     $dependencias->obtenerdependeciasGeneral();
+    //     break;
+    // case 'obtenerEstatus':
+    //     $estatus->obtenerEstatusGeneral();
+    //     break;
+    // case 'obtenerCargo':
+    //     $cargo->obtenerCargoGeneral();
+    //     break;
+    // case 'obtenerDepartamento':
+    //     $departamento->obtenerDeparmatentoGeneral();
+    //     break;
     case 'obtenerDatosPersonal':
         $personal->obtenerDatosPersonal($cedulaEmpleado);
         break;

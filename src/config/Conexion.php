@@ -25,19 +25,25 @@ class Conexion extends Error
     }
 
     /**
-     * Conecta a la base de datos
+     * Conecta a la base de datos con optimizaciones para grandes volúmenes
      * @return PDO
      */
     public function conectar()
     {
         try {
             $conexion = "mysql:host=" . $this->host . ";dbname=" . $this->db . ";charset=" . $this->charset;
-            $options = [
-                PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
-                PDO::ATTR_EMULATE_PREPARES   => false,
-            ];
+
+            // Aplicar configuraciones optimizadas para grandes volúmenes
+            $options = DatabaseOptimization::getPDOOptions();
 
             $pdo = new PDO($conexion, $this->user, $this->password, $options);
+
+            // Configuraciones adicionales para optimización
+            $pdo->exec("SET SESSION sql_mode = 'STRICT_TRANS_TABLES,NO_ZERO_DATE,NO_ZERO_IN_DATE,ERROR_FOR_DIVISION_BY_ZERO'");
+            $pdo->exec("SET SESSION innodb_lock_wait_timeout = 50");
+            $pdo->exec("SET SESSION wait_timeout = 600");
+            $pdo->exec("SET SESSION interactive_timeout = 600");
+
             return $pdo;
         } catch (PDOException $th) {
             Error::captureError();

@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Atlas\controller;
+namespace App\Atlas\controller\unidadOrganizacional;
 
-use App\Atlas\models\CargoModel;
-use App\Atlas\models\TablasModel;
+use App\Atlas\models\private\CargoModel;
+use App\Atlas\models\private\TablasModel;
 use App\Atlas\controller\auditoria\AuditoriaController;
 use App\Atlas\config\App;
 

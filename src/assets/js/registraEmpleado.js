@@ -67,12 +67,12 @@ const ModuloPersonal = (() => {
 
 
   const endpoints = {
-    registrar: 'src/ajax/registroPersonal.php?modulo_personal=registrar',
-    obtenerDependencias: 'src/ajax/registroPersonal.php?modulo_personal=obtenerDependencias',
-    obtenerEstatus: 'src/ajax/registroPersonal.php?modulo_personal=obtenerEstatus',
-    obtenerCargo: 'src/ajax/registroPersonal.php?modulo_personal=obtenerCargo',
-    obtenerDepartamento: 'src/ajax/registroPersonal.php?modulo_personal=obtenerDepartamento',
-    obtenerEstados: 'src/ajax/registroPersonal.php?modulo_personal=obtenerEstados',
+    registrar: 'src/routers/registroPersonal.php?modulo_personal=registrar',
+    obtenerDependencias: 'src/routers/RouterUnidadOrganizacional.php?modulo_datos=obtenerDependenciaGeneral',
+    obtenerEstatus: 'src/routers/RouterUnidadOrganizacional.php?modulo_datos=obtenerEstatusGeneral',
+    // obtenerCargo: 'src/routers/RouterUnidadOrganizacional.php?modulo_datos=obtenerCargoGeneral',
+    obtenerDepartamento: 'src/routers/RouterUnidadOrganizacional.php?modulo_datos=obtenerDepartamentoGeneral',
+    obtenerEstados: 'src/routers/registroPersonal.php?modulo_personal=obtenerEstados',
   };
 
   // Constantes para mensajes y configuración

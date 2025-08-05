@@ -71,7 +71,7 @@ $meses = [
                                 <div class="d-flex align-items-start justify-content-between mb-2">
                                     <div>
                                         <span class="text-muted fw-medium d-block mb-1 card-title-fixed">TOTAL DE PERSONAL</span>
-                                        <h4 class="fw-semibold mb-0 text-dark" id="totalPersonal">854</h4>
+                                        <h4 class="fw-semibold mb-0 text-dark" id="totalPersonal">345</h4>
                                         <div class="text-muted data-estatic mt-1">
                                             <span class="text-success fw-medium">
                                                 <i class="fa-regular fa-arrow-up me-1"></i>+16.24%
@@ -256,7 +256,7 @@ $meses = [
                         <div class="card custom-card ">
                             <div class="card-body p-0">
                                 <div class="">
-                                    <table id="tableUsers" class="tablet-user table table-hover ">
+                                    <table id="tablaUsuarios" class="tablet-user table table-hover ">
                                         <thead>
                                             <tr class="tablet-subHeader">
                                                 <th scope="col" class="tablet-header text-white">#</th>
@@ -301,7 +301,10 @@ $meses = [
     <?php require_once App::URL_INC . "/scrips.php"; ?>
     <?php require_once App::URL_INC . "/tablets.php"; ?>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-    <script type="module" src="<?php echo App::URL_SCRIPS . "home.js" ?>" ></script>
+
+    <script type="module" src="<?php echo App::URL_SCRIPS . "home/tablaUsuario.js" ?>" ></script>
+    <script type="module" src="<?php echo App::URL_SCRIPS . "home/cards.js" ?>" ></script>
+    <script type="module" src="<?php echo App::URL_SCRIPS . "home/charts.js" ?>"></script>
 
 </body>
 

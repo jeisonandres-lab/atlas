@@ -127,6 +127,48 @@ export async function obtenerDatosPromise(url, data = {}) {
     });
 }
 
+// Función para obtener datos de manera asíncrona
+/**
+* Realiza una petición AJAX asíncrona usando jQuery.
+* @param {string} urlDestino - La URL a la que se enviará la petición.
+*/
+export async function funcionAsync(urlDestino) {
+   // Validar que la URL sea válida
+   if (!urlDestino || typeof urlDestino !== 'string') {
+       throw new Error('URL inválida');
+   }
+
+   // Mostrar loader
+   if (typeof cargando !== 'undefined') {
+       cargando.style.display = 'flex';
+   }
+
+   try {
+       // $.ajax() devuelve una promesa, por lo que podemos usar 'await' directamente.
+       const data = await $.ajax({
+           url: urlDestino,
+           type: "POST"
+       });
+
+       // Ocultar loader en caso de éxito
+       if (typeof cargando !== 'undefined') {
+           cargando.style.display = 'none';
+       }
+
+       // Devolver los datos de la respuesta
+       return data;
+
+   } catch (error) {
+       // Ocultar loader en caso de error
+       if (typeof cargando !== 'undefined') {
+           cargando.style.display = 'none';
+       }
+
+       // Lanzar el error para que pueda ser capturado por un bloque 'catch'
+       throw error;
+   }
+}
+
 export async function obtenerDatosJQuery(url, options = {}) {
     const formData = new FormData();
     for (const key in options) {
