@@ -70,7 +70,7 @@ const ModuloPersonal = (() => {
     registrar: 'src/routers/registroPersonal.php?modulo_personal=registrar',
     obtenerDependencias: 'src/routers/RouterUnidadOrganizacional.php?modulo_datos=obtenerDependenciaGeneral',
     obtenerEstatus: 'src/routers/RouterUnidadOrganizacional.php?modulo_datos=obtenerEstatusGeneral',
-    // obtenerCargo: 'src/routers/RouterUnidadOrganizacional.php?modulo_datos=obtenerCargoGeneral',
+    obtenerCargo: 'src/routers/RouterUnidadOrganizacional.php?modulo_datos=obtenerCargoGeneral',
     obtenerDepartamento: 'src/routers/RouterUnidadOrganizacional.php?modulo_datos=obtenerDepartamentoGeneral',
     obtenerEstados: 'src/routers/registroPersonal.php?modulo_personal=obtenerEstados',
   };

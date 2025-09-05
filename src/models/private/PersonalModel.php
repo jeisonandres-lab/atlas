@@ -164,6 +164,20 @@ class PersonalModel extends EjecutarSQL
             $parametro
         );
         return $sql;
+
+
+    //     SELECT de.id_empleados,
+    // dp.primerNombre,
+    // dp.primerApellido,
+    // dp.cedula,
+    // d.departamento,
+    // c.cargo
+    //     FROM datosEmpleados de
+    //     INNER JOIN datosPersonales dp ON de.idPersonal = dp.id_personal
+    //     INNER JOIN estatus e ON de.idEstatus = e.id_estatus
+    //     INNER JOIN cargo c ON de.idCargo = c.id_cargo
+    //     INNER JOIN dependencia depe ON de.idDependencia = depe.id_dependencia
+    //     INNER JOIN departamento d ON de.idDepartamento = d.id_departamento
     }
 
     // TOTAL DE DATOS DE EMPLEADO Y DATOS PERSONALES POR ID PERSONAL

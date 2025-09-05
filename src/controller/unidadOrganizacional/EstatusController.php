@@ -18,6 +18,7 @@ class EstatusController
     private $idUsuario;
     private $nombreUsuario;
     private $consultas;
+    
     public function __construct()
     {
 
@@ -86,6 +87,7 @@ class EstatusController
         echo json_encode($response);
     }
 
+    //Obtener los estatus
     public function obtenerEstatusGeneral(){
         $datosGeneralEstatus = $this->estatusModelPublic->getDatosEstatus($parametros = ['1']);
 
@@ -107,6 +109,7 @@ class EstatusController
         echo json_encode($data_json);
     }
 
+    // Registrar estatus
     public function regisEstatus(string $nombreEstatus)
     {
         $nombreEstatus =  $this->consultas->limpiarCadena($nombreEstatus);
@@ -155,6 +158,7 @@ class EstatusController
         echo json_encode($data_json);
     }
 
+    // Editar estatus
     public function editarEstatus($id, $Estatus)
     {
         $data_json = [
@@ -213,6 +217,7 @@ class EstatusController
         echo json_encode($data_json);
     }
 
+    // Eliminar estatus
     public function eliminarActivarEstatus(string $id, $activo)
     {
         $data_json = [

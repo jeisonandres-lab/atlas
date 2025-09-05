@@ -7,7 +7,7 @@ use App\Atlas\config\EjecutarSQL;
 class UsuarioModel extends EjecutarSQL
 {
 
-    protected function existeUsuario(string $user)
+    public function existeUsuario($user)
     {
         $sql = $this->ejecutarConsulta("SELECT
          us.id_user,
@@ -18,13 +18,13 @@ class UsuarioModel extends EjecutarSQL
          us.idRol as idrol,
          us.permiso as permiso,
          r.rol as rol
-         FROM users us INNER JOIN rol r ON us.idRol = r.id_rol WHERE us.nameUser = '$user'");
+         FROM users us INNER JOIN rol r ON us.idRol = r.id_rol WHERE us.nameUser = ?", [$user]);
         return $sql;
     }
 
     protected function datosUsuario($user): string
     {
-        $sql = $this->ejecutarConsulta("SELECT * FROM users WHERE nameUser = '.$user.'");
+        $sql = $this->ejecutarConsulta("SELECT * FROM users WHERE nameUser = ?", [$user]);
         return $sql;
     }
 

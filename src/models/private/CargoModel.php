@@ -44,33 +44,4 @@ class CargoModel extends EjecutarSQL
         return $sql;
     }
 
-    // Getters Para Accder a los Metodos de la Clase
-    public function getDatosCargo()
-    {
-        return $this->datosCargo();
-    }
-
-    public function getActulizarCargo($tabla, $datos, $condicion)
-    {
-        return $this->actulizarCargo($tabla, $datos, $condicion);
-    }
-
-    public function getRegistrarCargo($tabla, $datos)
-    {
-        return $this->registrarCargo($tabla, $datos);
-    }
-
-    public function getVerificarCargo($tabla, $cargo)
-    {
-        return $this->verificarCargo($tabla, $cargo);
-    }
-
-    public function getObtenerDatosCargo($parametros)
-    {
-        return $this->obtenerDatosCargo($parametros);
-    }
-
-    public function getObtenerCargoGeneral(){
-        return $this->obtenerCargoGeneral();
-    }
 }

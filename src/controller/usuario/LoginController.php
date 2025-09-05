@@ -16,6 +16,8 @@ class LoginController
     private $usuarioPublico;
     private $ejecutarSQL;
 
+
+
     public function __construct()
     {
         $this->app = new App();

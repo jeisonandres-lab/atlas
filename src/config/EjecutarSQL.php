@@ -24,13 +24,15 @@ class EjecutarSQL extends Conexion{
         try {
             $stmt = $this->conectar()->prepare($consulta);
             $stmt->execute($parametros);
-
             // Si la consulta devuelve resultados, los obtenemos
-            if ($stmt->rowCount() > 0) {
-                return $stmt->fetchAll(PDO::FETCH_ASSOC);
-            } else {
-                return [];
-            }
+            //  if ($stmt->rowCount() > 0) {
+            //     return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            // } else {
+            //     return [];
+            // }
+            // Para consultas SELECT, siempre intentamos obtener los resultados
+            $resultados = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $resultados;
         } catch (PDOException $e) {
             Error::captureError();
             echo "Error: " . $e->getMessage();

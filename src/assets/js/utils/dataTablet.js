@@ -9,6 +9,7 @@ export async function inicializarDataTable(selector, options, cantidadPaginas = 
     // Puedes definir opciones por defecto aquí si quieres
     const configuracionDefecto = {
         // responsive: true,
+        deferRender: true,
         processing: true,
         serverSide: true,
         info: false,

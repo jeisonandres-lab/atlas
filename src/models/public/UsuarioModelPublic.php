@@ -13,7 +13,7 @@ class UsuarioModelPublic extends UsuarioModel
 
     public function getExisteUsuario($user)
     {
-        return $this->existeUsuario($user);;
+        return $this->existeUsuario($user);
     }
 
     public function getDatosUsuario($user)
