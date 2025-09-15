@@ -20,12 +20,12 @@ $(async function () {
                     };
 
                     const colores = [
-                        'badge text-bg-success ',
+                        'badge status-active badge bg-success-subtle',
                     ];
 
                     const colorAleatorio = colores[Math.floor(Math.random() * colores.length)];
 
-                    return `<span class=' ${colorAleatorio}' style='color: white !important'>${dataTextoMap[data]}</span>`;
+                    return `<span class=' ${colorAleatorio}' !important'>${dataTextoMap[data]}</span>`;
                 }
             },
             {
@@ -61,9 +61,9 @@ $(async function () {
                     };
 
                     if (dataTextoMap[dataTexto] == 'Activo') {
-                        dataTexto = `<span class="badge text-bg-success" style='color: white !important'>${dataTextoMap[dataTexto]}</span>`;
+                        dataTexto = `<span class="status-active badge bg-success-subtle">${dataTextoMap[dataTexto]}</span>`;
                     } else {
-                        dataTexto = `<span class="badge text-bg-danger" style='color: white !important'>${dataTextoMap[dataTexto]}</span>`;
+                        dataTexto = `<span class="status-danger badge bg-danger-subtle">${dataTextoMap[dataTexto]}</span>`;
                     }
                     return dataTexto
                 }

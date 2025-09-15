@@ -1,114 +1,112 @@
 /* IMPOTAR COLORES */
-@import url(Utils/variables.css);
+@import url(./Utils/variables.css);
 
- body,
- html {
-     margin: 0;
-     padding: 0;
-     height: 100%;
+.user_card {
+    margin-top: auto;
+    margin-bottom: auto;
+    background: var(--color-blanco);
+    position: relative;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    -moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 5px;
 
- }
+}
 
- .user_card {
-     margin-top: auto;
-     margin-bottom: auto;
-     background: var(--color-blanco);
-     position: relative;
-     display: flex;
-     justify-content: center;
-     flex-direction: column;
-     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-     -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-     -moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-     border-radius: 5px;
+.brand_logo_container {
+    position: absolute;
+    height: 170px;
+    width: 170px;
+    top: -75px;
+    border-radius: 50%;
+    padding: 10px;
+    text-align: center;
+}
 
- }
+.brand_logo {
+    height: 150px;
+    width: 150px;
+    border-radius: 50%;
+    border: 2px solid var(--color-blanco);
+    background-color: var(--color-blanco);
+    border-color: var(--color-azul);
+    border-width: 3px;
+}
 
- .brand_logo_container {
-     position: absolute;
-     height: 170px;
-     width: 170px;
-     top: -75px;
-     border-radius: 50%;
+.brand_logo_img {
+    height: 110px;
+    width: 110px;
+}
 
-     padding: 10px;
-     text-align: center;
- }
+.form_container {
+    margin-top: 100px;
+}
 
- .brand_logo {
-     height: 150px;
-     width: 150px;
-     border-radius: 50%;
-     border: 2px solid var(--color-blanco);
-     background-color: var(--color-blanco);
-     border-color: var(--color-azul);
-     border-width: 3px;
- }
+.login_btn {
+    width: 80%;
+    background: var(--color-azul) !important;
+    color: var(--color-blanco) !important;
+    border: 0px;
+}
 
- .brand_logo_img {
-     height: 110px;
-     width: 110px;
- }
+.login_btn:focus {
+    box-shadow: none !important;
+    outline: 0px !important;
+    color: red;
+}
 
- .form_container {
-     margin-top: 100px;
- }
+.login_container {
+    padding: 0 2rem;
+}
 
- .login_btn {
-     width: 100%;
-     background: var(--color-azul) !important;
-     color: var(--color-blanco) !important;
-     border: 0px;
- }
+.input-group-text {
+    background: var(--color-azul) !important;
+    color: var(--color-blanco) !important;
+    border: 0 !important;
+    border-radius: 0.25rem 0 0 0.25rem !important;
+}
 
- .login_btn:focus {
-     box-shadow: none !important;
-     outline: 0px !important;
-     color: red;
- }
+.input_user,
+.input_pass:focus {
+    box-shadow: none !important;
+    outline: 0px !important;
+}
 
- .login_container {
-     padding: 0 2rem;
- }
+.principal {
+    z-index: 1;
+    height: 100vh;
+    width: 100%;
+}
 
- .input-group-text {
-     background: var(--color-azul) !important;
-     color: var(--color-blanco) !important;
-     border: 0 !important;
-     border-radius: 0.25rem 0 0 0.25rem !important;
- }
+.links {
+    font-size: var(--font-size-md);
+}
 
- .input_user,
- .input_pass:focus {
-     box-shadow: none !important;
-     outline: 0px !important;
- }
+.barraNaranja {
+    background-color: #FE9001;
+    color: transparent;
+    border-radius: 0px 0px 5px 5px;
+    height: 10px;
+}
 
- #particles-js {
-     position: fixed;
-     width: 100%;
-     height: 100%;
-     top: 0;
-     z-index: -1;
-     background: url(../../../src/assets/img/images/WorldMap.svg) !important;
-     background-position: center;
-     background-repeat: no-repeat;
-     background-position: -80px;
- }
+.candado {
+    cursor: pointer;
+}
 
- .principal {
-     z-index: 1;
-     height: 100vh;
-     width: 100%;
- }
 
- .barraNaranja {
-     background-color: #FE9001;
-     color: transparent;
-     border-radius: 0px 0px 5px 5px;
-     height: 10px;
- }
+/* PARTICULAS DE CSS */
 
- #candado {
-     cursor: pointer;
- }
+#particles-js {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    z-index: -1;
+    background: url(../../../src/assets/img/images/WorldMap.svg) !important;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-position: -80px;
+}

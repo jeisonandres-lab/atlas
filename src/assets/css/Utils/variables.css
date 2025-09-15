@@ -9,6 +9,9 @@
     --border-color: #e9ecef;
     --color-blanco: #FFFFFF;
     --color-negro: #000000;
+    --color-azul: #1929bb;
+    
+    --color-text:#3F435D;
 
     /* Menu lateral */
     --color-bg: #EBECF2;
@@ -21,19 +24,24 @@
     --color-tooltip-text: #fff;
     --body-bg: #f2f2f7;
     --card-color: #fff;
-    
+
     --shadow-border: rgba(0, 0, 0, 0.1);
     --shadow: 0 0.75rem 1.5rem rgba(18, 38, 63, 0.03);
     --shadow-lg: 0 0.75rem 1.5rem rgba(18, 38, 63, 0.1);
 
     --user-bg-color: #FAFAFC;
-        /* Variables de tamaños de fuente */
-        --font-size-sm: 0.75rem;    /* 12px */
-        --font-size-md: 0.875rem;   /* 14px */
-        --font-size-lg: 1rem;       /* 16px */
-        --font-size-xl: 1.125rem;   /* 18px */
-        --font-size-2xl: 1.25rem;   /* 20px */
-    
+    /* Variables de tamaños de fuente */
+    --font-size-sm: 0.75rem;
+    /* 12px */
+    --font-size-md: 0.875rem;
+    /* 14px */
+    --font-size-lg: 1rem;
+    /* 16px */
+    --font-size-xl: 1.125rem;
+    /* 18px */
+    --font-size-2xl: 1.25rem;
+    /* 20px */
+
 
 
 
@@ -42,7 +50,7 @@
     --color-blanco: #fff;
     --color-blanco-contenido: #fff;
     --color-blanco-fondo: #f2f7fc;
-    --color-azul: #1929bb;
+
     --color-azul-brillante: #5c67f7;
     --color-gris: #283c50;
     --color-gris-claro: #aaa;

@@ -61,9 +61,16 @@ menuItemsStatic.forEach((menuItem)=>{
     });
 });
 
-function checkWindowSize() {
-    sidebar.classList.remove('minimize');
-}
+// // 2. Verificar si el sidebar tiene la clase 'minimize'
+// if (sidebar.classList.contains('minimize')) {
+//   // Si la tiene, establece el padding del elemento del usuario
+//   document.getElementById("userActivo").style.padding = '80px';
+//   console.log('El sidebar está minimizado, se ha ajustado el padding del usuario.');
+// } 
 
-checkWindowSize();
-window.addEventListener('resize', checkWindowSize);
+// function checkWindowSize() {
+//     sidebar.classList.remove('minimize');
+// }
+
+// checkWindowSize();
+// window.addEventListener('resize', checkWindowSize);

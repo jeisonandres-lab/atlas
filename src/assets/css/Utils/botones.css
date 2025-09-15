@@ -1,0 +1,59 @@
+@import url('variables.css');
+
+ .btn {
+    font-size: var(--font-size-sm);
+    font-weight: 500;
+    padding: 0.375rem 0.75rem;
+    border-radius: 0.375rem;
+    transition: all 0.2s ease;
+    height: 2.25rem;
+    align-items: center;
+    gap: 0.375rem;
+    border: 1px solid transparent;
+}
+
+ .btn-light {
+    background-color: #fff;
+    border: 1px solid #e9ecef;
+    color: #495057;
+    font-size: var(--font-size-sm);
+    padding: 0.375rem 0.75rem;
+    min-width: 180px;
+}
+
+ .btn-light:hover {
+    background-color: #f8f9fa;
+    border-color: #dee2e6;
+}
+
+ .btn-success {
+    background-color: var(--success-color);
+    border-color: var(--success-color);
+    color: white;
+    font-size: var(--font-size-sm);
+    padding: 0.375rem 0.75rem;
+}
+
+ .btn-success:hover {
+    background-color: #2bb673;
+    border-color: #2bb673;
+}
+
+ .btn-outline-primary {
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+    background-color: transparent;
+    font-size: var(--font-size-sm);
+    padding: 0.375rem 0.75rem;
+    width: 2.25rem;
+    height: 2.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+ .btn-outline-primary:hover {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    color: white;
+}

@@ -28,7 +28,6 @@ fieldset div .form-group {
   display: none;
 }
 
-
 @media (width <= 768px) {
   .containerImg {
     display: none !important;

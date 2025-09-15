@@ -1,22 +1,22 @@
 // IMPORT DE VALIDACION DE INPUTS 
 import {
   alertaNormalmix
-} from "./utils/alerts.js";
+} from "../utils/alerts.js";
 
 import {
   enviarFormulario,
   observarFormulario
-} from "./utils/formularioAjax.js";
+} from "../utils/formularioAjax.js";
 
 import {
   carculasDias,
   crearManejadorEdad,
   validarBusquedaCedula
-} from "./utils/funciones.js";
+} from "../utils/funciones.js";
 
 import {
   configurarFlatpickrSinFinesDeSemana
-} from "./utils/inputCalendar.js";
+} from "../utils/inputCalendar.js";
 
 import {
   colocarMeses,
@@ -31,16 +31,12 @@ import {
   llenarSelect,
   file,
   validarTelefono,
-} from "./utils/inputs.js";
-
-import {
-  formulariomultiple
-} from "./utils/multiForm.js";
+} from "../utils/inputs.js";
 
 import {
   buscarMunicipioPorEstado,
   buscarParroquiaPorMunicipio
-} from "./utils/peticiones.js";
+} from "../utils/peticiones.js";
 
 import {
   setCargarDiscapacidad,
@@ -48,22 +44,20 @@ import {
   setCargarNivelesAcademicos,
   setCargarSexo,
   setCargarTipoVivienda
-} from "./utils/manejadoresObjetos.js";
+} from "../utils/manejadoresObjetos.js";
 
-import { endpoints } from "./utils/endpoints.js";
-
-import { selectores } from "./utils/objetos.js";
+import { selectores } from "../utils/objetos.js";
 
 import { 
   setContenedorNombreDepa, 
   setContenedorNumDepa, 
   setContenedorPiso, 
   setVariableNumVivienda 
-} from "./utils/variablesContenido.js"
+} from "../utils/variablesContenido.js"
 /**
  * Módulo Personal: gestiona todas las funciones relacionadas con el registro de personal
  */
-const ModuloPersonal = (() => {
+const registroEmpleado = (() => {
 
 
   const endpoints = {
@@ -291,8 +285,6 @@ const ModuloPersonal = (() => {
    */
   const configurarEventListeners = () => {
     $(selectores.formulario).on('submit', manejarEnvioFormulario);
-    // $(selectores.vivienda).on('change', manejarCambioVivienda);
-    //$(selectores.civil).on('change', manejarCambioEstadoCivil);
     $(selectores.discapacidad).on('click', function () {
       manejarDiscapacidad($(this));
     });
@@ -351,11 +343,6 @@ const ModuloPersonal = (() => {
 
     //cargar calendario 
     configurarFlatpickrSinFinesDeSemana("#fechaing3");
-
-
-    // cargar el alert en el contenedor de la alerta del formulario multiple
-    formulariomultiple('.f1 .btn-next', "#alert", contenidoAlerta);
-
     // Inicializar funcionalidades adicionales
     buscarMunicipioPorEstado(selectores.estado, selectores.municipio);
     buscarParroquiaPorMunicipio(selectores.municipio, selectores.parroquia);
@@ -370,5 +357,5 @@ const ModuloPersonal = (() => {
 
 // Inicializar cuando el documento esté listo
 $(function () {
-  ModuloPersonal.inicializar();
+  registroEmpleado.inicializar();
 });

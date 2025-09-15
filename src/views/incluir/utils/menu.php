@@ -1,8 +1,8 @@
 <!-- navbar -->
 <nav class="navbar app-header navbar " style=" box-shadow: none !important;" id="narvarPrincipal">
     <div class="navbar_content me-3 ms-2">
-        <li class="nav-item d-flex align-items-center ps-3 activo-user">
-            <div class="conten-active-user d-flex align-items-center py-1 px-2 rounded">
+        <li class="nav-item d-flex align-items-center ps-5 activo-user" id="userActivo">
+            <div class="d-flex align-items-center py-1 px-2 rounded status-active badge bg-success-subtle text-success">
                 <i class='bx bx-user-check me-2'></i>
                 <span><?php echo $_SESSION['act'] ?> </span>
             </div>
@@ -12,7 +12,7 @@
         <input type="text" id="buscador" placeholder="Buscar" />
         <div id="resultadosBusqueda"></div>
     </div>
-    <div class="navbar_content me-3">
+    <div class="navbar_content list-icons me-3">
         <li class="nav-item">
             <a href="#" data-lte-toggle="fullscreen" class="conten-icons">
                 <i class='bx bx-fullscreen' data-lte-icon="maximize" class="bi bi-arrows-fullscreen"></i>
@@ -62,7 +62,7 @@
     <i class='bx bx-sun'></i>
 </div>
 <!-- Sidebar del menú -->
-<div class="custom-sidebar app-sidebar" id="sidebar">
+<div class="custom-sidebar app-sidebar minimize" id="sidebar">
     <!-- Header del menú -->
     <div class="header">
         <!-- Botón del menú -->
@@ -88,7 +88,7 @@
         <ul class="menu">
             <!-- Inicio -->
             <li class="menu-item menu-item-static active">
-                <a href="#" class="menu-link">
+                <a href="inicio" class="menu-link">
                     <i class='menu-link-icon bx bx-home-alt-2'></i>
                     <!-- Nombre del menú -->
                     <span>Inicio</span>

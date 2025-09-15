@@ -27,84 +27,6 @@
 }
 
 /* Botones del header - Minimalistas como Velzon */
-.datos-header .btn {
-    font-size: var(--font-size-sm);
-    font-weight: 500;
-    padding: 0.375rem 0.75rem;
-    border-radius: 0.375rem;
-    transition: all 0.2s ease;
-    height: 2.25rem;
-    display: flex;
-    align-items: center;
-    gap: 0.375rem;
-    border: 1px solid transparent;
-}
-
-.datos-header .btn-light {
-    background-color: #fff;
-    border: 1px solid #e9ecef;
-    color: #495057;
-    font-size: var(--font-size-sm);
-    padding: 0.375rem 0.75rem;
-    min-width: 180px;
-}
-
-.datos-header .btn-light:hover {
-    background-color: #f8f9fa;
-    border-color: #dee2e6;
-}
-
-.datos-header .btn-success {
-    background-color: var(--success-color);
-    border-color: var(--success-color);
-    color: white;
-    font-size: var(--font-size-sm);
-    padding: 0.375rem 0.75rem;
-}
-
-.datos-header .btn-success:hover {
-    background-color: #2bb673;
-    border-color: #2bb673;
-}
-
-.datos-header .btn-outline-primary {
-    color: var(--primary-color);
-    border-color: var(--primary-color);
-    background-color: transparent;
-    font-size: var(--font-size-sm);
-    padding: 0.375rem 0.75rem;
-    width: 2.25rem;
-    height: 2.25rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.datos-header .btn-outline-primary:hover {
-    background-color: var(--primary-color);
-    border-color: var(--primary-color);
-    color: white;
-}
-
-/* Dropdown del calendario */
-.datos-header .dropdown-menu {
-    border: 1px solid #e9ecef;
-    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
-    border-radius: 0.375rem;
-    padding: 0.5rem 0;
-    min-width: 200px;
-}
-
-.datos-header .dropdown-item {
-    padding: 0.5rem 1rem;
-    color: var(--dark-color);
-    font-size: var(--font-size-sm);
-}
-
-.datos-header .dropdown-item:hover {
-    background-color: #f8f9fa;
-    color: var(--primary-color);
-}
 
 /* Iconos en botones */
 .datos-header .btn i {
@@ -127,10 +49,10 @@
     margin: 0;
 }
 
-/* Espaciado entre botones */
 .datos-header .d-flex.gap-2 {
     gap: 0.75rem !important;
 }
+
 
 /* Cards personalizadas - Minimalistas como Velzon */
 .custom-card {
@@ -164,10 +86,10 @@
 }
 
 .custom-card .card-header.card-header-archivos-mes{
-    background-color: var(--primary-color);
+    background-color: var(--color-azul);
     color: var(--color-blanco);
-    
 }
+
 /* Iconos de estadísticas */
 .stat-icon {
     width: 3rem;
@@ -299,9 +221,14 @@
 }
 
 /* Tablas de usuarios */
-.tablet-user .tablet-header{
-    background-color: var(--primary-color) !important;
-    color: var(--color-blanco);
+.status-active{
+    color: var(--color-verde-fuerte);
+    font-weight: 600;
+}
+
+.status-danger{
+    color: var(--color-rojo-fuerte);
+    font-weight: 600;
 }
 
 .tablet-user .tablet-header:nth-child(1){
@@ -341,6 +268,9 @@ div.dt-container>div.row{
     width: 30px;
     height: 30px;
 }
+
+
+
 /* Responsive design */
 @media (max-width: 768px) {
     .custom-card .card-body {

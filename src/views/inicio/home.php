@@ -1,7 +1,7 @@
 <?php
 use App\Atlas\config\App;
-$fechaInicio = new DateTime('2025-01-01');
-$fechaFin = new DateTime('2025-01-31');
+$fechaInicio = new DateTime();
+$fechaFin = new DateTime();
 
 $meses = [
     1 => 'Enero', 2 => 'Febrero', 3 => 'Marzo', 4 => 'Abril',
@@ -19,6 +19,7 @@ $meses = [
     <?php require_once App::URL_INC . "total_css.php"; ?>
     <?php require_once App::URL_INC . "tablets_css.php"; ?>
     <link rel="stylesheet" href="<?php echo App::URL_CSS . "home.css"; ?>">
+    <link rel="stylesheet" href="<?php echo App::URL_CSS . "Utils/botones.css"; ?>">
 </head>
 
 <body class="layout-fixed sidebar-expand-lg bg-body-tertiary">
@@ -259,11 +260,11 @@ $meses = [
                                     <table id="tablaUsuarios" class="tablet-user table table-hover ">
                                         <thead>
                                             <tr class="tablet-subHeader">
-                                                <th scope="col" class="tablet-header text-white">#</th>
-                                                <th scope="col" class="tablet-header text-white" >Estatus</th>
-                                                <th scope="col" class="tablet-header text-white" >Empleado</th>
-                                                <th scope="col" class="tablet-header text-white" >Usuario</th>
-                                                <th scope="col" class="tablet-header text-white" style="border-top-right-radius: 5px;">Rol</th>
+                                                <th scope="col" class="tablet-header text-black">#</th>
+                                                <th scope="col" class="tablet-header text-black" >Estatus</th>
+                                                <th scope="col" class="tablet-header text-black" >Empleado</th>
+                                                <th scope="col" class="tablet-header text-black" >Usuario</th>
+                                                <th scope="col" class="tablet-header text-black" style="border-top-right-radius: 5px;">Rol</th>
                                             </tr>
                                         </thead>
                                         <tbody class="tbody-tabletUser">
@@ -281,7 +282,7 @@ $meses = [
                 <div class="row">
                     <div class="col-12">
                         <div class="card custom-card">
-                            <div class="card-header">
+                            <div class="card-header card-header-archivos-mes">
                                 <h4 class="card-title mb-0">Archivos Subidos por Mes</h4>
                             </div>
                             <div class="card-body">

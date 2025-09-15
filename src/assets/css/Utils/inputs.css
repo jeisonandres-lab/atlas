@@ -1,39 +1,15 @@
 /* IMPORTAR COLORES */
-@import url(variables.css);
+@import url(./variables.css);
 
 /* verificación cumplida */
-body .conten-main .app-main form .cumplido {
-  border: 2px solid var(--color-verde-fuerte) !important;
+form .cumplido, .cumplido_span, .cumplido_segundario {
+  border: 1.8px solid var(--color-verde-fuerte) !important;
   color: var(--color-verde-fuerte) !important;
   border-radius: 6px;
-}
-
-/* .cumplido {
-  border: 2px solid var(--color-verde-fuerte) !important;
-   color:  !important; 
-  border-radius: 6px;
-} */
-
-/* .form-control {
-  box-shadow: none !important;
-} */
-
-.cumplido_span {
-  border-top: 2px solid var(--color-verde-fuerte) !important;
-  border-right: none !important;
-  border-bottom: 2px solid var(--color-verde-fuerte) !important;
-  border-left: 2px solid var(--color-verde-fuerte) !important;
 }
 
 .cumplido_span i {
   color: var(--color-verde-fuerte) !important;
-}
-
-.cumplido_segundario {
-  border-top: 2px solid var(--color-verde-fuerte) !important;
-  border-right: none !important;
-  border-bottom: 2px solid var(--color-verde-fuerte) !important;
-  border-left: 2px solid var(--color-verde-fuerte) !important;
 }
 
 .cumplido:focus {
@@ -43,8 +19,8 @@ body .conten-main .app-main form .cumplido {
 }
 
 /* verificacion negativa */
-.error_input {
-  border: 2px solid var(--color-rojo-fuerte) !important;
+form .error_input, .error_span {
+  border: 1.8px solid var(--color-rojo-fuerte) !important;
   color: var(--color-rojo-fuerte) !important;
 }
 
@@ -54,20 +30,9 @@ body .conten-main .app-main form .cumplido {
   box-shadow: none !important;
 }
 
-.error_span {
-  border-top: 2px solid var(--color-rojo-fuerte) !important;
-  border-right: none !important;
-  border-bottom: 2px solid var(--color-rojo-fuerte) !important;
-  border-left: 2px solid var(--color-rojo-fuerte) !important;
-}
 
 .error_span i {
   color: var(--color-rojo-fuerte) !important;
-}
-
-.barra_naranja {
-  border-radius: 0px 0px 5px 5px;
-  height: 10px;
 }
 
 
@@ -124,17 +89,9 @@ body .conten-main .app-main form .cumplido {
   display: flow;
 }
 
-.parrafo {
-  font-family: "Poppins", sans-serif;
-  font-size: 0.9em !important;
-  font-weight: 600;
-  color: #707070;
-} 
-
 form input {
   height: 40px !important;
   font-family: 'Roboto', sans-serif;
-
 }
 
 form input[type="file"] {

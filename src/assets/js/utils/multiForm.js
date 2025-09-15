@@ -87,7 +87,7 @@ $(function () {
   });
 
   // Mostrar el primer fieldset con un efecto de deslizamiento
-  $(".f1 fieldset:first").hide().slideDown(600); // Efecto de aparición en 600ms
+  $(".f1").hide().slideDown(1600); // Efecto de aparición en 600ms
 
   // Eliminar clase de error al enfocar un input
   $(".f1 input, .f1 textarea, .f1 select").on("focus", function () {

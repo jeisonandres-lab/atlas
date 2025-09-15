@@ -41908,3 +41908,9 @@ Archivo: C:\xampp\htdocs\atlas\src\views\bienestarSocial\fichaTecnica.php
 Línea: 18
 Fecha y hora: 2025-08-03 18:38:01
 ======================================================
+======================================================
+Error: require(./src/views/inc/load.php): Failed to open stream: No such file or directory
+Archivo: C:\xampp\htdocs\atlas\src\views\publico\recuperar.php
+Línea: 19
+Fecha y hora: 2025-09-12 17:02:52
+======================================================
