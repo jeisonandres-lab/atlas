@@ -1,0 +1,245 @@
+
+@import url('./cssUtils/colores.css');
+
+/* navbar */
+.navbar {
+  /* top: 0;
+  width: 100%;
+  left: 0; */
+  background-color: var(--white-color);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding:8px 30px;
+  border-bottom:var(--color-border)1px solid;
+
+}
+
+/* .conten-main {
+  background-color: var(--backgroud);
+} */
+
+.logo_item {
+  display: flex;
+  align-items: center;
+  column-gap: 10px;
+  font-size: 22px;
+  font-weight: 500;
+  color: var(--blue-color);
+}
+
+.nav-item {
+  list-style: none;
+}
+
+.navbar img {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+}
+
+.navbar_content {
+  display: flex;
+  align-items: center;
+  column-gap: 25px;
+}
+
+.navbar_content i {
+  cursor: pointer;
+  font-size: 20px;
+  color: var(--grey-color);
+}
+
+
+/* clase de adminlte */
+/* .app-footer {
+  color: var(--grey-color) !important;
+} */
+
+.icons_menu {
+  font-size: 17px;
+}
+
+.activado {
+  display: block;
+  width: 7px;
+  height: 7px;
+  border-radius: 2px;
+}
+
+.desactivado {
+  display: block;
+  width: 7px;
+  height: 7px;
+  border-radius: 2px;
+}
+
+.search_bar {
+  height: 47px;
+  max-width: 430px;
+  width: 100%;
+}
+
+.search_bar input {
+  height: 100%;
+  border-radius: 25px;
+  outline: none;
+  background-color: var(--white-color);
+  color: var(--grey-color);
+  border: 1px solid var(--grey-color-light);
+  padding: 0 20px;
+}
+
+@media (width <=768px) {
+  .search_bar {
+    display: none !important;
+  }
+}
+
+
+/* menus desplegable de de busqueda */
+
+.menu-desplegable {
+  position: absolute;
+  /* Para que se posicione debajo del buscador */
+  top: 40px;
+  /* Ajusta la distancia del menú al buscador */
+  left: 0;
+  width: 200px;
+  /* Ancho del menú */
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+  z-index: 10;
+  /* Para que el menú se muestre sobre otros elementos */
+  display: none;
+  /* Ocultar el menú inicialmente */
+}
+
+.menu-desplegable ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.menu-desplegable li {
+  padding: 8px;
+  cursor: pointer;
+}
+
+.menu-desplegable li:hover {
+  background-color: #f0f0f0;
+}
+
+.subtitulo {
+  font-size: 0.8em;
+  color: #888;
+  display: block;
+  /* Convierte el subtítulo en un bloque */
+  margin-left: 0;
+  /* Elimina el margen a la izquierda */
+  margin-top: 5px;
+  /* Añade un pequeño margen en la parte superior */
+}
+
+#resultadosBusqueda {
+  position: absolute;
+  /* Para posicionar el menú */
+  top: 100%;
+  /* Colocar el menú debajo del contenedor */
+  left: 0;
+  /* Alinear el menú con el borde izquierdo del contenedor */
+  width: 100%;
+  /* Ocupar todo el ancho del contenedor */
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+  z-index: 10;
+  /* Para que el menú se muestre sobre otros elementos */
+  display: none;
+  /* Ocultar el menú inicialmente */
+}
+
+
+.dropdown-sin-triangulo .dropdown-toggle::after {
+  display: none !important;
+}
+
+.contarNoti {
+  position: absolute !important;
+  left: 8px !important;
+  top: -14px !important;
+}
+
+.horafecha-nofi p {
+  color: var(--grey-color-light);
+}
+
+.horafecha-nofi p {
+  font-size: 12px;
+}
+
+.messengerNoti {
+  font-size: 13px;
+}
+
+.imgNoti {
+  width: 20px;
+  height: 20px;
+}
+
+/* INCES */
+.ocultarHidden {
+  display: none !important;
+}
+
+.content-img-inces .img-inces {
+  width: 110px;
+  height: 60px;
+}
+
+.content-version-black .card {
+  margin: 20px;
+  border-color: #283c50;
+  background: rgba(255, 255, 255, .05);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, .15);
+}
+
+.select2-selection {
+  border-radius: 0px 5px 5px 0px !important;
+   box-shadow: none !important; 
+}
+/* CALENDARIO */
+
+
+.flatpickr-months .flatpickr-month {
+  background: #1929bb !important;
+}
+
+.flatpickr-weekdays {
+  background: #1929bb !important;
+}
+
+.flatpickr-current-month .flatpickr-monthDropdown-months {
+  background: #1929bb !important;
+
+}
+
+.flatpickr-weekdays .flatpickr-weekdaycontainer span.flatpickr-weekday {
+  background: #1929bb !important;
+  color: white !important;
+}
+
+.flatpickr-day.today {
+  border-color: #1929bb;
+}
+
+.flatpickr-day.selected, .flatpickr-day.startRange, .flatpickr-day.endRange, .flatpickr-day.selected.inRange, .flatpickr-day.startRange.inRange, .flatpickr-day.endRange.inRange, .flatpickr-day.selected:focus, .flatpickr-day.startRange:focus, .flatpickr-day.endRange:focus, .flatpickr-day.selected:hover, .flatpickr-day.startRange:hover, .flatpickr-day.endRange:hover, .flatpickr-day.selected.prevMonthDay, .flatpickr-day.startRange.prevMonthDay, .flatpickr-day.endRange.prevMonthDay, .flatpickr-day.selected.nextMonthDay, .flatpickr-day.startRange.nextMonthDay, .flatpickr-day.endRange.nextMonthDay {
+  background: #1929bb !important;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  color: #fff !important;
+  border-color: #1929bb;
+}

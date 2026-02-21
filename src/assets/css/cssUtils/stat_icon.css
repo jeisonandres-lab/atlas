@@ -1,0 +1,41 @@
+
+/* Iconos: más color, coherentes con el borde de la card */
+.stat-icon {
+    padding: 10px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    box-shadow: none;
+}
+
+.stat-icon-primary {
+    background: #eef2ff;
+    color: #6366f1;
+}
+
+.stat-icon-success {
+    background: #ecfdf5;
+    color: #047857;
+}
+
+.stat-icon-warning {
+    background: #fffbeb;
+    color: #d97706;
+}
+
+.stat-icon-danger {
+    background: #fef2f2;
+    color: #dc2626;
+}
+
+.stat-icon-info {
+    background: #f0f9ff;
+    color: #0284c7;
+}
+
+.stat-icon-successClaro{
+    background: #ccfbf1;
+    color: #0d9488;
+}

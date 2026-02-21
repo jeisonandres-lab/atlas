@@ -1,0 +1,118 @@
+@import url('./cssUtils/colores.css');
+/* main::-webkit-scrollbar {
+  display: none;
+}
+
+body::-webkit-scrollbar {
+  display: none;
+} */
+
+form .titulo {
+  color: black !important;
+}
+form label {
+  font-size: 14px !important;
+}
+
+
+.card-header {
+  padding-bottom: 8.5px !important;
+  border: 0px !important;
+}
+
+.card-header a {
+  border: 0px !important;
+}
+
+
+input::-moz-placeholder {
+  /* Firefox 19+ */
+  color: #999;
+}
+
+input:-ms-input-placeholder {
+  /* Internet Explorer 10+ */
+  color: #999;
+}
+
+input::-ms-input-placeholder {
+  /* Microsoft Edge */
+  color: #999;
+}
+
+.barra_naranja {
+  border-radius: 0px 0px 5px 5px;
+  height: 10px;
+}
+
+.cargando1 {
+  width: 120px;
+  height: 30px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin: 0 auto;
+  background-color: rgba(255, 255, 255, 0.856);
+}
+
+.texto-cargando {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 800;
+  color: #00b8de;
+  padding-top: 20px;
+}
+
+.cargando span {
+  font-size: 20px;
+  text-transform: uppercase;
+}
+
+.pelotas {
+  width: 30px;
+  height: 30px;
+  background-color: #00b8de;
+  animation: salto 0.5s alternate infinite;
+  border-radius: 50%;
+}
+
+.pelotas:nth-child(2) {
+  animation-delay: 0.18s;
+}
+
+.pelotas:nth-child(3) {
+  animation-delay: 0.37s;
+}
+
+.containerImg img {
+  border-radius: 0.5rem;
+}
+
+#mostrar {
+  display: none;
+}
+
+@keyframes salto {
+  from {
+    transform: scaleX(1.25);
+  }
+
+  to {
+    transform: translateY(-50px) scaleX(1);
+  }
+}
+
+@media (width <=768px) {
+  .containerImg {
+    display: none !important;
+  }
+
+  #mostrar {
+    display: inline-block;
+    margin-top: 4px;
+  }
+
+  body .app-main {
+    margin-bottom: 15px;
+  }
+}

@@ -1,0 +1,32 @@
+$(function () {
+
+    const btn = $('#mainExportBtn');
+    const closeBtn = $('.close-trigger');
+    const actionIcons = $('.icon-action');
+
+    // 1. Abrir el menú (Subir texto)
+    btn.on('click', function (e) {
+        if (!btn.hasClass('is-active')) {
+            btn.addClass('is-active');
+        }
+    });
+
+    // 2. Cerrar el menú (Bajar texto)
+    closeBtn.on('click', function (e) {
+        e.stopPropagation();
+        btn.removeClass('is-active');
+    });
+
+    // 3. Manejo de clics en iconos (Acciones de exportación)
+    actionIcons.on('click', function (e) {
+        e.stopPropagation();
+        const type = $(this).data('type');
+        console.log(`Iniciando exportación a: ${type.toUpperCase()}`);
+
+        // Feedback visual moderno: agregar clase para animación CSS
+        $(this).addClass('clicked');
+        setTimeout(() => $(this).removeClass('clicked'), 200);
+    });
+
+
+});

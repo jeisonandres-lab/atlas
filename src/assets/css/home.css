@@ -1,0 +1,111 @@
+@import url(./cssUtils/colores.css);
+
+.contenedor-principal {
+    padding: 0 105px;
+}	
+.dashboard-header .stat-card-label {
+    color: var(--color-gris-oscuro);
+}
+.dashboard-header .fw-semibold {
+    color: var(--color-gris-oscuro) !important;
+}
+
+.dashboard-header-logo {
+    height: 80px;
+    width: 60px;
+    object-fit: cover;
+}
+
+/* Fila de estadísticas: centrada y sin crecer demasiado */
+.dashboard-stats-row {
+    max-width: 960px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Tarjetas de estadísticas: más cuadradas, con color e información */
+.dashboard-chart-card {
+    border-radius: 12px;
+    box-shadow: var(--shadow-card);
+    overflow: hidden;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.dashboard-stat-card {
+    overflow: hidden;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    min-height: 118px;
+}
+
+
+/* Títulos: 14px, negrita y más oscuros */
+.stat-card-label {
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--color-gris-simioscuro);
+    display: block;
+}
+.dashboard-stat-card .stat-card-value {
+    font-size: 14px;
+    letter-spacing: -0.02em;
+    color: var(--color-gris-oscuro);
+    font-weight: 700;
+}
+.dashboard-stat-card .stat-card-sub {
+    font-size: 14px;
+    color: var(--color-gris-color) !important;
+    display: block;
+    margin-top: 2px;
+}
+
+.chart-container {
+    position: relative;
+    width: 100%;
+    min-height: 280px;
+}
+
+/* Contenedores ApexCharts */
+#scoreChart2,
+#scoreChart {
+    width: 100% !important;
+    min-height: 280px !important;
+    max-height: 340px;
+}
+
+.chart-fixed-height {
+    min-height: 280px;
+    max-height: 340px;
+}
+
+/* Tooltips: estilo formal, texto gris */
+.apexcharts-tooltip {
+    border-radius: 8px !important;
+    box-shadow: 0 4px 16px var(--shadow-soft) !important;
+    border: 1px solid var(--border-light) !important;
+    padding: 8px 12px !important;
+}
+
+.apexcharts-tooltip-title {
+    font-weight: 600 !important;
+    color: var(--color-gris-oscuro) !important;
+    margin-bottom: 2px !important;
+    font-size: 12px;
+}
+
+.apexcharts-tooltip-text {
+    font-weight: 500 !important;
+    color: var(--color-gris-color) !important;
+    font-size: 12px;
+}
+
+@media (max-width: 1366px) {
+    .contenedor-principal {
+        padding: 0 40px;
+    }	
+}
+
+@media (min-width: 992px) {
+    .dashboard-stats-row .col-stat {
+        max-width: 220px;
+    }
+}

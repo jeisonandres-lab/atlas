@@ -1,0 +1,25 @@
+@import url('./colores.css');
+
+.text-bg-success{
+    background-color: #00ca4b33 !important ;
+    color: #00ca4b !important   ;
+    font-weight: 500;
+}
+
+/* Tamaño de texto */
+
+.f1-steps {
+    margin-top: 0 !important;
+}
+
+.fs-6 {
+    font-size: 14px !important;
+}
+
+.fs-5 {
+    font-size: 16px !important;
+}
+
+.fs-4 {
+    font-size: 20px !important;
+}
