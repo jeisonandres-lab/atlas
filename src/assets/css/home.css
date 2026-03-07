@@ -2,10 +2,12 @@
 
 .contenedor-principal {
     padding: 0 105px;
-}	
+}
+
 .dashboard-header .stat-card-label {
     color: var(--color-gris-oscuro);
 }
+
 .dashboard-header .fw-semibold {
     color: var(--color-gris-oscuro) !important;
 }
@@ -45,12 +47,14 @@
     color: var(--color-gris-simioscuro);
     display: block;
 }
+
 .dashboard-stat-card .stat-card-value {
     font-size: 14px;
     letter-spacing: -0.02em;
     color: var(--color-gris-oscuro);
     font-weight: 700;
 }
+
 .dashboard-stat-card .stat-card-sub {
     font-size: 14px;
     color: var(--color-gris-color) !important;
@@ -101,7 +105,7 @@
 @media (max-width: 1366px) {
     .contenedor-principal {
         padding: 0 40px;
-    }	
+    }
 }
 
 @media (min-width: 992px) {
@@ -109,3 +113,9 @@
         max-width: 220px;
     }
 }
+
+
+
+
+
+

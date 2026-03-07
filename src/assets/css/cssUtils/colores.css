@@ -35,6 +35,15 @@
     --custom-black: #000000;
 
 
+
+
+
+
+
+
+
+
+
     /* Nuevas variables de color */
     --color-primario: #1929bb;
     --azul-fondo-claro: #e8eafc;
@@ -44,13 +53,31 @@
     /* Ideal para botones secundarios o elementos de interfaz menos agresivos */
     --primary-soft: #5c6bc0;
     --color-segundario: #3B82F6;
-     --color-fondo: #eaecfa;/* #D8E6FD */
+    --color-fondo: #eaecfa;
+    --color-texto-claro: #3f404d80;
+    --color-texto-oscuro: #3f404d;
+    /* #D8E6FD */
     --color-border: #D9D9DB;
     --color-gris-claro: oklch(0.3757 0.022 281.8);
     --color-gris-color: #64748b;
     --color-gris-oscuro: #334155;
     --color-gris-simioscuro: #3f404d;
     --shadow-card: 0 2px 8px rgba(0, 0, 0, 0.06);
+
+    /* Success - Verde */
+    --bg-badge-success: #00ca4b1a;
+    --text-badge-success: #00ca4b;
+
+    /* Danger - Rojo */
+    --bg-badge-danger: #fadfdf;
+    --text-badge-danger: #ff385c;
+
+    /* Warning - Naranja */
+    --bg-badge-warning: #fcaa1e1a;
+    --text-badge-warning: #fcaa1e;
+
+    --btn-shadow: 0px 1px 3px 0px color-mix(in oklab, var(#433e40) 40%, #0000), 0px 1px 2px -1px color-mix(in oklab, var(#433e40) 40%, #0000);
+
     /* --text-muted: #64748b; */
 
     /* --color-gris-color: #77838f;

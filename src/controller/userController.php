@@ -22,7 +22,6 @@ class  userController extends userModel
         $this->app = new App();
         $this->tablas = new tablasModel();
         $this->auditoriaController = new auditoriaController();
-
     }
     public function logearse(string $user, string $password)
     {
@@ -187,7 +186,7 @@ class  userController extends userModel
         INNER JOIN datospersonales dpe ON dp.idPersonal = dpe.id_personal INNER JOIN cargo ca ON dp.idCargo = ca.id_cargo
         INNER JOIN rol r ON us.idRol = r.id_rol'; // Tabla a consultar
         $selectoresCantidad = 'COUNT(id_cargo) as cantidad'; // Selector para contar la cantidad de registros de la tabla
-        $datosBuscar = ['nameUser']; // Array de selectores para buscar en la tabla
+        $datosBuscar = ['nameUser', 'dpe.nombre', 'dpe.apellido', 'r.nombre_rol']; // Array de selectores para buscar en la tabla
         $campoOrden = 'id_user'; // Campo por el cual se ordenará la tabla
         $selectores = '*, us.activo AS activoUser'; // Selectores para obtener los datos de la tabla
         $conditions = []; // Condiciones para obtener los datos de la tabla
@@ -219,16 +218,22 @@ class  userController extends userModel
                 ";
             } else {
                 $buttons .= "
-                <button class='btn btn-danger btn-sm btn-hover-rojo btnEliminarUsuario' data-swal-toast-template='#my-template' data-id=" . $row['id_user'] .  "><i class='fa-solid fa-trash fa-sm me-2'></i>Desactivar</button>
+                <div class='action-icons'>
+                    <a href='#' title='Eliminar'  data-id=" . $row['id_user'] .  "><i class='fa-light fa-trash-can'></i></a>
+                    <a href='#' title='Editar'><i class='fa-light fa-user-pen'></i></a>
+                    <a href='#' title='opciones'><i class='fa-solid fa-ellipsis-vertical'></i></a>
+                </div>
                 ";
             }
             $data_json['data'][] = [
                 '0' => $row['activoUser'],
-                '1' => $row['cedula'],
-                '2' => $row['nameUser'],
-                '3' => $row['rol'],
-                '4' => $row['enUso'],
-                '5' => $buttons,
+                '1' => [
+                    "nombre" => $row['nameUser'],
+                    "cedula" => $row['cedula']
+                ], // Enviamos un array interno en el índice 1
+                '2' => $row['rol'],
+                '3' => $row['enUso'],
+                '4' => $row['id_user'],
             ];
             $data_json['mensaje'] = "todas las cargos de manera exitosa";
         }
@@ -275,9 +280,8 @@ class  userController extends userModel
             $registroAuditoria = $this->auditoriaController->registrarAuditoria(
                 $this->idUsuario,
                 'Desactivar usuario',
-                'El usuario ' . $this->nombreUsuario . ' desactivo un usuario del sistema'. ' el cual es: ' . $nombreUsuarioDesactivado
+                'El usuario ' . $this->nombreUsuario . ' desactivo un usuario del sistema' . ' el cual es: ' . $nombreUsuarioDesactivado
             );
-
         } else {
             $data_json['mensaje'] = 'Error al desactivar el usuario';
         }
@@ -315,10 +319,10 @@ class  userController extends userModel
         if ($activar) {
             $data_json['exito'] = true;
             $data_json['mensaje'] = 'Usuario activado con exito';
-             $registroAuditoria = $this->auditoriaController->registrarAuditoria(
+            $registroAuditoria = $this->auditoriaController->registrarAuditoria(
                 $this->idUsuario,
                 'Activar usuario',
-                'El usuario ' . $this->nombreUsuario . ' activo un usuario del sistema'. ' el cual es usuario: ' . $nombreUsuarioDesactivado
+                'El usuario ' . $this->nombreUsuario . ' activo un usuario del sistema' . ' el cual es usuario: ' . $nombreUsuarioDesactivado
             );
         } else {
             $data_json['mensaje'] = 'Error al Activar el usuario';

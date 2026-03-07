@@ -1,48 +1,91 @@
-.mitable{
-    padding: 0px 0px 10px 0px !important;
+@import url(./cssUtils/colores.css);
+
+.page-link.active,
+.active>.page-link {
+  background-color: var(--color-fondo) !important;
+  border-color: transparent !important;
+  color: var(--color-primario) !important;
 }
-.contenTable{
- border-radius: 0rem !important;
- border-radius: 0px 0px 5px 5px !important;
-}
-main::-webkit-scrollbar {
-    display: none;
-  }
+
+/* Botones de paginación */
+.page-link {
+  margin: 0 3px !important;
+  border-radius: 8px !important;
+  font-size: 1rem;
   
-  body::-webkit-scrollbar {
-    display: none;
-  }
+}
+
+table.dataTable thead>tr>th.dt-orderable-desc span.dt-column-order:after,
+table.dataTable thead>tr>th.dt-ordering-desc span.dt-column-order:after,
+table.dataTable thead>tr>td.dt-orderable-desc span.dt-column-order:after,
+table.dataTable thead>tr>td.dt-ordering-desc span.dt-column-order:after {
+  content: "↓" !important;
+  right: 80px !important;
+  top: 16px !important;
+  margin-left: 4px !important;
+  transform: rotate(180deg) !important;
+}
+
+table.dataTable thead>tr>th.dt-orderable-asc span.dt-column-order:before,
+table.dataTable thead>tr>th.dt-ordering-asc span.dt-column-order:before,
+table.dataTable thead>tr>td.dt-orderable-asc span.dt-column-order:before,
+table.dataTable thead>tr>td.dt-ordering-asc span.dt-column-order:before {
+  content: "↓" !important;
+  top: 16px !important;
+  margin-left: 4px !important;
+}
+
 /* parte superior de la tabla */
-table thead tr th{
-    
-    color: white !important;
+table thead th {
+  background-color: #fafaff !important;
+  color: var(--color-texto-oscuro) !important;
+  font-weight: 500;
+  font-size: 1rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  border-bottom: 1px solid #dbdade;
+  border-top: 1px solid #dbdade;
+  padding: 0.75rem 1.25rem !important;
+  /* Líneas divisorias verticales sutiles */
+  border-right: 1px solid #ebf0f3;
 }
 
-table.dataTable thead>tr>th.dt-orderable-desc span.dt-column-order:after, table.dataTable thead>tr>th.dt-ordering-desc span.dt-column-order:after, table.dataTable thead>tr>td.dt-orderable-desc span.dt-column-order:after, table.dataTable thead>tr>td.dt-ordering-desc span.dt-column-order:after{
-    content: "↓" !important;
-    right: 80px !important;
-    top: 16px !important;
-    margin-left: 4px !important;
-    transform: rotate(180deg) !important;
-}
-table.dataTable thead>tr>th.dt-orderable-asc span.dt-column-order:before, table.dataTable thead>tr>th.dt-ordering-asc span.dt-column-order:before, table.dataTable thead>tr>td.dt-orderable-asc span.dt-column-order:before, table.dataTable thead>tr>td.dt-ordering-asc span.dt-column-order:before {
-    content: "↓" !important;
-    top: 16px !important;
-    margin-left: 4px !important;
+table thead th:last-child {
+  border-right: none;
 }
 
-table.dataTable th.dt-type-numeric, table.dataTable th.dt-type-date, table.dataTable td.dt-type-numeric, table.dataTable td.dt-type-date {
+/* Estilo de las filas */
+table tbody td {
+  border-bottom: 1px solid #dbdade;
+  padding: 0.75rem 1.25rem;
+  vertical-align: middle;
+  color: #6f6b7d;
+}
+
+table.dataTable thead>tr>th.dt-orderable-asc:hover, table.dataTable thead>tr>th.dt-orderable-desc:hover, table.dataTable thead>tr>td.dt-orderable-asc:hover, table.dataTable thead>tr>td.dt-orderable-desc:hover {
+     outline: 0px solid rgba(0, 0, 0, 0.05) !important; 
+    outline-offset: 0px !important; 
+}
+
+/* Informacion del data table */
+.dt-info {
+    font-size: 16px;
+    color: var(--color-texto-claro) !important;
+    margin: 10px 40px;
+}
+/* tamaño de los botones de las tablas de paginacion */
+/* table.dataTable th.dt-type-numeric, table.dataTable th.dt-type-date, table.dataTable td.dt-type-numeric, table.dataTable td.dt-type-date {
   text-align: left !important;
-}
+} */
 /* parte inferior de la tabla */
-
+/* 
 table tfoot tr th{
     
     color: rgb(225, 225, 225) !important;
-}
+} */
 
 /* Boton switch */
-.togglewrapper {
+/* .togglewrapper {
     overflow: hidden;
   }
   
@@ -123,25 +166,78 @@ table tfoot tr th{
 
 .dt-middle {
   vertical-align: middle !important;
+} */
+
+
+/* Contenedor relativo para posicionar el menú del filtro de cantidad de registros mostrados*/
+.custom-select-container { position: relative; width: 100px; }
+
+/* El botón principal */
+.dropdown-trigger {
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    padding: 8px 12px;
+    background: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    width: 100%;
 }
 
+/* El menú flotante de la imagen */
+.dropdown-menu {
+    position: absolute;
+    top: 45px;
+    left: 0;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    list-style: none;
+    padding: 8px;
+    min-width: 100px !important;
+    display: none; /* Se muestra con JS */
+    z-index: 100;
+}
 
+/* Elementos de la lista */
+.dropdown-item {
+    padding: 10px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    transition: background 0.2s;
+}
+
+.dropdown-item:hover { background: #f3f4f6; }
+
+/* El item seleccionado (Fondo lila suave) */
+.dropdown-item.selected {
+    background-color: #f5f3ff;
+    color: var(--color-primario);
+    font-weight: bold;
+}
 #myTable::-webkit-scrollbar {
   display: none;
 }
 
 #myTable:hover::-webkit-scrollbar {
   display: none;
-  position: absolute; /* Posiciona la barra de desplazamiento de forma absoluta */
-  top: 0; /* Posiciona la barra en la parte superior */
+  position: absolute;
+  /* Posiciona la barra de desplazamiento de forma absoluta */
+  top: 0;
+  /* Posiciona la barra en la parte superior */
   right: 0;
   height: 7px !important;
   width: 7px;
   border-radius: 20px;
 }
+
 #myTable::-webkit-scrollbar:window-inactive {
   display: none;
 }
+
 #myTable::-webkit-scrollbar-thumb {
   background-color: red;
   border-radius: 6px;

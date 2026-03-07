@@ -32,9 +32,10 @@ body {
 
 /* mover arriba al hacer hover */
 
-.transform{
+.transform {
     transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
+
 .transform:hover {
     transform: translateY(-4px);
 
@@ -113,6 +114,66 @@ body {
 
 
 
+/* nombre de los botones de la tabla */
+/* Botones de acción alineados */
+.action-icons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.action-icons a {
+    color: #6f6b7d;
+    transition: 0.2s;
+    font-size: 0.8rem;
+}
+
+.action-icons a:hover {
+    /* color: var(--color-primario); */
+    background-color: #f1f1f1;
+    border-radius: 50%;
+    padding: 10px;
+}
+
+
+/* estilos para items de las tablas */
+.circulo-tablet {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+}
+
+.circulop {
+    width: 28px;
+    height: 28px;
+}
+
+/* badge de texto */
+.badge {
+    border: none;
+    font-weight: 400;
+    font-size: 0.75rem;
+}
+
+.badge.success {
+    background-color: var(--bg-badge-success);
+    color: var(--text-badge-success);
+}
+
+.badge.danger {
+    background-color: var(--bg-badge-danger);
+    color: var(--text-badge-danger);
+}
+
+.badge.warning {
+    background-color: var(--bg-badge-warning);
+    color: var(--text-badge-warning);
+}
+
+.titulo1 {
+    font-weight: 400;
+    color: #3f404dcc;
+}
 
 
 

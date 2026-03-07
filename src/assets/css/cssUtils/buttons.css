@@ -1,5 +1,5 @@
 @import url("colorTableButtons.css");
-
+@import url("colores.css");
 .btn-hover:hover {
     transform: translateY(-3px); /* Mueve el botón 3px hacia arriba */
     transition: transform 0.2s; /* Añade una transición suave */
@@ -72,3 +72,41 @@
 .transition-3d-hover {
     transition: all .2sease-in-out;
 }
+
+
+
+
+
+
+
+/* Efectos y colores de los botones */
+
+/* Azul */
+.btn-primary{
+    background-color: var(--color-primario);
+    color: #ffffff;
+    border: none;
+    width: auto;
+    height: 40px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    transition: all ease .5s !important;
+    box-shadow: 0 0.5px 0 0.5px oklch(100% 0 0 / calc(var(0) * 8%)) inset, var(--btn-shadow);
+}
+
+.btn-primary.box-shadow{
+    /* box-shadow: 0 10px 17px -8px rgb(96, 130, 255); */
+   
+}
+
+.btn-primary:hover {
+  transform: translateY(-3px);
+  /* Mueve el botón 3px hacia arriba */
+  transition: all ease .5s ease-in-out !important;
+  /* Sombra suave */
+}
+
+
+

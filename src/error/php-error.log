@@ -41824,3 +41824,27 @@ Archivo: C:\xampp\htdocs\atlas\index.php
 Línea: 41
 Fecha y hora: 2026-02-08 22:45:23
 ======================================================
+======================================================
+Error: require_once(./src/inc//scrips.php): Failed to open stream: No such file or directory
+Archivo: C:\xampp\htdocs\atlas\src\views\admin\totalusuarios.php
+Línea: 63
+Fecha y hora: 2026-02-21 17:25:08
+======================================================
+======================================================
+Error: require_once(C:\xampp\php\pear): Failed to open stream: Permission denied
+Archivo: C:\xampp\htdocs\atlas\index.php
+Línea: 41
+Fecha y hora: 2026-02-23 11:37:26
+======================================================
+======================================================
+Error: require_once(./src/inc//scrips.php): Failed to open stream: No such file or directory
+Archivo: C:\xampp\htdocs\atlas\src\views\admin\totalusuarios.php
+Línea: 63
+Fecha y hora: 2026-02-23 15:37:45
+======================================================
+======================================================
+Error: require_once(C:\xampp\php\pear): Failed to open stream: Permission denied
+Archivo: C:\xampp\htdocs\atlas\index.php
+Línea: 41
+Fecha y hora: 2026-03-07 17:20:41
+======================================================

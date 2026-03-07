@@ -45,8 +45,8 @@ use App\Atlas\config\App;
                                     </div>
                                     <div class="">
                                         <button class="btn btn-primary btn-md border-0 rounded-2 px-3">
-                                        <i class="fa-regular fa-database me-2"></i>
-                                        Descargar BD</button>
+                                            <i class="fa-regular fa-database me-2"></i>
+                                            Descargar BD</button>
                                     </div>
 
                                 </div>
@@ -132,43 +132,6 @@ use App\Atlas\config\App;
                                 </div>
                             </div>
                         </div>
-                        <!--
-                   //ausencia
-                    <div class="col-6 col-sm-6 col-md-4 col-lg-3 xl-2">
-                        <div class="card dashboard-stat-card stat-card-danger h-100 content border-0">
-                            <div class="card-body p-3">
-                                <div class="d-flex align-items-center justify-content-between mb-2">
-                                    <span class="stat-card-label">Ausencia</span>
-                                    <div class="stat-icon stat-icon-danger flex-shrink-0">
-                                        <i class="fa-regular fa-user-clock"></i>
-                                    </div>
-                                </div>
-                                <div class="d-flex align-items-center justify-content-start">
-                                    <h5 class="fw-bold mb-0 stat-card-value me-2"><span id="personalAusenciaSmall">0</span></h5>
-                                    <small class="text-muted stat-card-sub">Permisos registrados</small>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    //permisos
-                    <div class="col-6 col-sm-6 col-md-4 col-lg-3 xl-2">
-                        <div class="card dashboard-stat-card stat-card-info h-100 content border-0">
-                            <div class="card-body p-3">
-                                <div class="d-flex align-items-center justify-content-between mb-2">
-                                    <span class="stat-card-label">Permisos</span>
-                                    <div class="stat-icon stat-icon-info flex-shrink-0">
-                                        <i class="fa-sharp fa-regular fa-calendar-clock"></i>
-                                    </div>
-                                </div>
-
-                                <div class="d-flex align-items-center justify-content-start">
-                                    <h5 class="fw-bold mb-0 stat-card-value me-2"><span id="permisosPendientesSmall">0</span></h5>
-                                    <small class="text-muted stat-card-sub">Permisos pendientes</small>
-                                </div>
-                            </div>
-                        </div>
-                    </div> -->
                     </div>
 
 
@@ -207,29 +170,49 @@ use App\Atlas\config\App;
                     <div class="col-12">
                         <div class="home-users-table-card content border-0">
                             <div class="home-users-table-card-body">
-                                <h5 class="home-users-table-title mb-3 fw-semibold">Usuarios y permisos</h5>
                                 <div class="home-users-table-toolbar d-flex flex-wrap align-items-center justify-content-between gap-3 mb-3">
-                                    <div class="d-flex align-items-center gap-2 flex-wrap">
-                                        <div id="home-users-length-wrap"></div>
-                                        <button type="button" class="btn btn-home-users-primary" onclick="window.location.href='./usuarios'">
-                                            <i class="fa-solid fa-users me-1"></i> Ver movimientos
+                                    <div class="d-flex align-items-center gap-2 flex-wrap mt-3 ms-3">
+                                        <h5 class="fs-5 m-0 titulo1">Filtrar</h5>
+                                        <div class="custom-select-container select_customDropdown me-2">
+                                            <button id="dropdownBtn" class="dropdown-trigger ">
+                                                <span id="currentValue">5</span>
+                                                <i class="fa-regular fa-angle-down arrow-down"></i>
+                                            </button>
+
+                                            <ul id="customDropdown" class="dropdown-menu w-100 shadow-lg">
+                                                <li class="dropdown-item selected" data-value="5">5 <span class="check"><i class="fa-regular fa-check"></i></span></li>
+                                                <li class="dropdown-item" data-value="10">10</li>
+                                                <li class="dropdown-item" data-value="20">20</li>
+                                                <li class="dropdown-item" data-value="30">50</li>
+                                            </ul>
+                                        </div>
+
+                                        <button type="button" class="ms-2 btn btn-primary px-3 box-shadow" onclick="window.location.href='./usuarios'">
+                                            <i class="fa-light fa-users me-1"></i> Movimientos
                                         </button>
                                     </div>
-                                    <div class="home-users-table-search-wrap">
-                                        <div class="input-group input-group-sm home-users-table-search">
-                                            <span class="input-group-text bg-white border-end-0"><i class="fa-regular fa-magnifying-glass text-muted"></i></span>
-                                            <input type="text" id="homeUsersSearch" class="form-control border-start-0" placeholder="Buscar usuario..." aria-label="Buscar usuario" />
+
+                                    <div class="home-users-table-search-wrap me-3 mt-3">
+                                        <div class="input-group custom-search-group">
+                                            <span class="input-group-text search-icon-container">
+                                                <i class="fa-regular fa-magnifying-glass"></i>
+                                            </span>
+                                            <input type="text"
+                                                id="homeUsersSearch"
+                                                class="form-control custom-search-input"
+                                                placeholder="Buscar usuario..."
+                                                aria-label="Buscar usuario" />
                                         </div>
                                     </div>
                                 </div>
                                 <div class="home-users-table-wrap">
-                                    <table id="tableUsers" class="table home-users-table table-hover mb-0" width="100%">
+                                    <table id="tableUsers" class="table home-users-table  mb-0" width="100%">
                                         <thead>
                                             <tr>
-                                                <th scope="col">Conexión</th>
+                                                <th scope="col">Estatus</th>
                                                 <th scope="col">Usuario</th>
                                                 <th scope="col">Rol</th>
-                                                <th scope="col">Estado</th>
+                                                <!-- <th scope="col">Acción</th> -->
                                             </tr>
                                         </thead>
                                         <tbody></tbody>

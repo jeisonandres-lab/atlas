@@ -1,111 +1,100 @@
 
 import { AlertSW2 } from "./ajax/alerts.js";
 import { obtenerDatosJQuery } from "./ajax/formularioAjax.js";
+import { BaseDataTable } from "./class/BaseTablet.js";
 // Dependencias: jQuery, DataTables. Gráficos: homeCharts.js (ApexCharts)
 $(function () {
 
-    const homeUsersTableLang = {
-        lengthMenu: "Mostrar _MENU_ registros",
-        info: "Mostrando _START_ a _END_ de _TOTAL_ registros",
-        infoEmpty: "Mostrando 0 a 0 de 0 registros",
-        infoFiltered: "(filtrado de _MAX_ registros)",
-        search: "Buscar:",
-        paginate: { first: "<<", last: ">>", next: ">", previous: "<" },
-    };
-
-    let table = new DataTable('#tableUsers', {
-        responsive: true,
-        ajax: {
-            url: "./src/ajax/userAjax.php?modulo_usuario=DatosUsuariosBasicos",
-            type: "POST",
-            dataSrc: function (json) {
-                if (json.data) return json.data;
-                console.error('Estructura de datos incorrecta:', json);
-                return [];
-            }
-        },
-        processing: true,
-        searching: false,
-        serverSide: true,
-        info: false,
-        order: [[0, 'desc']],
-        paging: true,
-        lengthMenu: [2, 10, 25],
-        pageLength: 5,
+    const tableUsuarios = new BaseDataTable('#tableUsers', {
+        url: "./src/ajax/userAjax.php?modulo_usuario=DatosUsuarios",
         columnDefs: [
             {
-                targets: 0,
-                className: 'text-center',
-                width: "10%",
+                targets: 0, // Estado (Badge con icono)
+                className: 'dt-center',
                 render: function (data, type, row) {
-                    let dataTexto = data;
-                    const dataTextoMap = {
-                        1: "1",
-                        0: "",
+                    // Definimos la configuración según el valor de 'data'
+                    let config = {
+                        1: { clase: 'badge success', icono: 'fa-solid fa-check' },
+                        2: { clase: 'badge danger', icono: 'fa-solid fa-x' },
+                        3: { clase: 'badge warning', icono: 'fa-regular fa-triangle-exclamation' }
                     };
 
-                    if (dataTextoMap[dataTexto] == '1') {
-                        dataTexto = `<div class='conten-circulo d-flex justify-content-center aling-items-center h-100'><span class='rounded circulo-success'></span></div>`;
-                    } else {
-                        dataTexto = `<div class='conten-circulo d-flex justify-content-center aling-items-center h-100'><span class='rounded circulo-danger'></span></div>`;
-                    }
-                    return dataTexto
+                    // Obtenemos la configuración o valores por defecto por si llega un dato raro
+                    let res = config[data] || { clase: 'badge secondary', icono: 'fa-question' };
+
+                    return `<div class="d-flex align-items-center justify-content-center">
+                                 <span class="rounded-circle circulop ${res.clase} d-flex align-items-center justify-content-center">
+                                    <i class="fa-light ${res.icono}"></i>
+                                 </span>
+                            </div>
+                            `;
                 }
             },
             {
-                targets: 1, // Ajusta el índice de la columna según sea necesario
-                width: "40%",
+                targets: 1, // Cliente (Avatar + Datos)
+                render: (data, type, row) => `
+                <div class="container-fluid d-flex gap-3 align-items-center">
+                    <img src="./src/global/photos/${row[1].cedula}.png" class="circulo-tablet" onerror="this.src='./src/global/photos/default.png'"/>
+                    <div class="d-flex flex-column ">
+                        <span class="">${row[1].nombre}</span>
+                        <small class="user-email text-muted">jeisonandres12@gmail.com</small>
+                    </div>
+                </div>`
             },
             {
-                targets: 2,
-                width: "25%",
-                render: function (data, type, row) {
-                    const dataTextoMap = {
-                        'Administrador': 'Administrador',
-                        'Medico': 'Usuario',
-                        // Agrega más roles según sea necesario
-                    };
-
-                    const colores = [
-                        'badge text-bg-success ',
-
-                    ];
-
-                    const colorAleatorio = colores[Math.floor(Math.random() * colores.length)];
-
-                    return `<span class=' ${colorAleatorio}' style='color: white !important'>${dataTextoMap[data]}</span>`;
+                targets: 2, // Rol (Badge pastel)
+                render: function (data) {
+                    return `<span class="badge">${data}</span>`;
                 }
             },
-            {
-                targets: 3,
-                width: "25%",
-                render: function (data, type, row) {
-                    let dataTexto = data;
-                    const dataTextoMap = {
-                        1: "Activo",
-                        0: "Desactivado",
-                        2: "Inactivo",
-                    };
-
-                    if (dataTextoMap[dataTexto] == 'Activo') {
-                        dataTexto = `<span class="badge text-bg-success" style='color: white !important'>${dataTextoMap[dataTexto]}</span>`;
-                    } else {
-                        dataTexto = `<span class="badge text-bg-danger" style='color: white !important'>${dataTextoMap[dataTexto]}</span>`;
-                    }
-                    return dataTexto
-                }
-            },
+            // {
+            //     targets: 3, // Acciones (Iconos uno al lado del otro)
+            //     className: 'text-center',
+            //     render: function () {
+            //         return `
+            //     <div class="action-icons">
+            //         <a href="#" ><i class="fa-regular fa-trash-can"></i></a>
+            //         <a href="#" ><i class="fa-regular fa-user-pen"></i></a>
+            //     </div>`;
+            //     }
+            // }
         ],
+    });
 
-        language: {
-            url: "./IdiomaEspañol.json"
-        },
-        columns: [
-            { "data": 0 }, // EnUso
-            { "data": 1 }, // Usuario
-            { "data": 2 }, // Activo
-            { "data": 3 }, // Rol
-        ]
+    // Conectamos el buscador que ya tienes en el HTML
+    tableUsuarios.bindSearch('#homeUsersSearch');
+
+    // Abrir/Cerrar menú dropdown
+    $('#dropdownBtn').on('click', function(e) {
+        $('#customDropdown').toggle();
+    });
+
+    // Al hacer clic en una opción del dropdown
+    $('.dropdown-item').on('click', function(e) {
+        e.stopPropagation(); // Evitar que el evento llegue al document
+        console.log('Clic en item:', $(this).data('value')); // Para depurar
+        var valor = $(this).data('value');
+        
+        // 1. Actualizar texto del botón
+        $('#currentValue').text(valor);
+        
+        // 2. Cambiar clase seleccionada (el check visual)
+        $('.dropdown-item').removeClass('selected').find('.check').remove();
+        $(this).addClass('selected').append('<span class="check"><i class="fa-regular fa-check"></i></span>');
+        
+        // 3. Actualizar DataTable usando el método de la clase
+        tableUsuarios.pageLengthChange(valor);
+        
+        // 4. Cerrar menú
+        $('#customDropdown').hide();
+    });
+
+    // Cerrar si se hace clic fuera
+    $(document).click(function(e) {
+        if (!$(e.target).closest('.select_customDropdown').length) {
+            console.log('Clic fuera, cerrando menú'); // Para depurar
+            $('#customDropdown').hide();
+        }
     });
 
     let urlsCard = [
